@@ -16,8 +16,8 @@
   },
   "shots": [
     {"shot_id":"001","duration_target_s":5,"status":"COMPLETED","artifact":"media_staging/video_test_agnes-v2.0.mp4"},
-    {"shot_id":"002","duration_target_s":5,"status":"SUBMITTED_IN_PROGRESS","artifact":null,"diagnosis":"original runner stopped after ~75s without persisting video_id"},
-    {"shot_id":"003","duration_target_s":5,"status":"SUBMITTED_IN_PROGRESS","artifact":null,"diagnosis":"original runner stopped after ~75s without persisting video_id"}
+    {"shot_id":"002","duration_target_s":5,"status":"ORPHANED_UNRECOVERABLE","artifact":null,"diagnosis":"original runner stopped after ~75s without persisting video_id; no local manifest or artifact remains"},
+    {"shot_id":"003","duration_target_s":5,"status":"ORPHANED_UNRECOVERABLE","artifact":null,"diagnosis":"original runner stopped after ~75s without persisting video_id; no local manifest or artifact remains"}
   ],
-  "assembly": {"status":"WAITING_FOR_SHOTS_002_003","automatic_publishing":false,"production_integration":false,"note":"Root cause: task ids were not durably recorded and polling window was too short. New tools/run_short_clip.py persists video_id immediately and polls up to 360s with backoff."}
+  "assembly": {"status":"BLOCKED_ON_REGENERATING_002_003","automatic_publishing":false,"production_integration":false,"note":"旧任务无法恢复：创建 ID 未落盘且 Agnes 无可用列表接口。必须用可恢复执行器重新生成 002/003，先持久化 video_id。"}
 }
