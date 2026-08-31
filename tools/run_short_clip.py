@@ -52,21 +52,29 @@ def main() -> int:
     if not key:
         raise SystemExit("AGNES_API_KEY is not available")
     args.manifest.parent.mkdir(parents=True, exist_ok=True)
-    record = {"shot_id": args.shot_id, "model_id": "agnes-video-v2.0", "status": "CREATING"}
-    response = requests.post(
-        "https://apihub.agnes-ai.com/v1/videos",
-        headers={"Authorization": f"Bearer {key}", "Content-Type": "application/json"},
-        json={"model": "agnes-video-v2.0", "prompt": args.prompt, "seconds": "5", "size": "720P", "aspect_ratio": "16:9"},
-        timeout=90,
-    )
-    body = response.json()
-    video_id = body.get("video_id") or body.get("id") or body.get("task_id")
-    record.update({"create_http_status": response.status_code, "video_id": video_id, "created_status": body.get("status")})
-    _persist_record(args.manifest, record)
-    if response.status_code >= 300 or not video_id:
-        record["status"] = "CREATE_FAILED"
+    existing = next((row for row in _load_records(args.manifest) if row.get("shot_id") == args.shot_id), None)
+    if existing and existing.get("status") == "COMPLETED" and existing.get("artifact_path"):
+        artifact = Path(existing["artifact_path"])
+        if artifact.is_file():
+            print(json.dumps(existing, ensure_ascii=False))
+            return 0
+    record = existing or {"shot_id": args.shot_id, "model_id": "agnes-video-v2.0", "status": "CREATING"}
+    video_id = record.get("video_id")
+    if not video_id:
+        response = requests.post(
+            "https://apihub.agnes-ai.com/v1/videos",
+            headers={"Authorization": f"Bearer {key}", "Content-Type": "application/json"},
+            json={"model": "agnes-video-v2.0", "prompt": args.prompt, "seconds": "5", "size": "720P", "aspect_ratio": "16:9"},
+            timeout=90,
+        )
+        body = response.json()
+        video_id = body.get("video_id") or body.get("id") or body.get("task_id")
+        record.update({"create_http_status": response.status_code, "video_id": video_id, "created_status": body.get("status")})
         _persist_record(args.manifest, record)
-        return 1
+        if response.status_code >= 300 or not video_id:
+            record["status"] = "CREATE_FAILED"
+            _persist_record(args.manifest, record)
+            return 1
 
     deadline = time.time() + args.timeout
     delay = 5
