@@ -13,8 +13,8 @@
 
 ## 图片模型
 
-- `gpt-image-2` 目前只在无限画布配置中被观察到。
-- 尚无本地可复核的成功调用记录，因此状态为 `OBSERVED_CONFIGURATION_ONLY`，不可把配置当作可用 Provider。
+- 视频王国首选图片模型：`gpt-image-2`。
+- 当前证据仍是配置/用户选定，尚无本地可复核的成功调用记录，因此状态为 `USER_SELECTED_CONFIGURATION_ONLY`，不可把模型名当作可用 Provider 证明。
 
 ## 共同边界
 
