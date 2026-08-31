@@ -1,0 +1,33 @@
+{
+  "experiment_id": "vk_media_smoke_2026-08-31",
+  "created_at": "2026-08-31",
+  "scope": "FREE_ZONE_RESEARCH_ONLY",
+  "story": "原创：清晨酒馆里一盏灯短暂亮起",
+  "source_kind": "ORIGINAL_RESIDENT_WRITING",
+  "story_rights_note": "原创测试文本，无外部素材",
+  "trials": [
+    {
+      "media_type": "image",
+      "model_id": "gpt-image-2",
+      "provider": "OpenAI-compatible endpoint",
+      "result_status": "FAILED",
+      "failure_class": "INVALID_API_KEY",
+      "artifact_sha256": null,
+      "cleanup_class": "none",
+      "note": "环境中的 OPENAI_API_KEY 被上游判定为无效；未保存或记录密钥值。"
+    },
+    {
+      "media_type": "video",
+      "model_id": "agnes-video-v2.0",
+      "provider": "Agnes adapter",
+      "result_status": "FAILED",
+      "failure_class": "ENDPOINT_NOT_AVAILABLE_OR_RATE_LIMITED",
+      "artifact_sha256": null,
+      "cleanup_class": "none",
+      "note": "主站适配路径返回 404（当前仅提供图片端点），工作台域名返回 Cloudflare 429；未生成视频。历史成功证据仍保留在能力记录中。"
+    }
+  ],
+  "production_integration": false,
+  "automatic_publishing": false,
+  "follow_up": "修复或确认隔离渠道后再重试；不得把本次失败改写为成功。"
+}
