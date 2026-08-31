@@ -16,8 +16,8 @@
   },
   "shots": [
     {"shot_id":"001","duration_target_s":5,"status":"COMPLETED","artifact":"media_staging/video_test_agnes-v2.0.mp4"},
-    {"shot_id":"002","duration_target_s":5,"status":"READY_FOR_GENERATION","artifact":null},
-    {"shot_id":"003","duration_target_s":5,"status":"READY_FOR_GENERATION","artifact":null}
+    {"shot_id":"002","duration_target_s":5,"status":"SUBMITTED_IN_PROGRESS","artifact":null},
+    {"shot_id":"003","duration_target_s":5,"status":"SUBMITTED_IN_PROGRESS","artifact":null}
   ],
-  "assembly": {"status":"WAITING_FOR_SHOTS_002_003","automatic_publishing":false,"production_integration":false}
+  "assembly": {"status":"WAITING_FOR_SHOTS_002_003","automatic_publishing":false,"production_integration":false,"note":"Agnes accepted both creations; polling observed in_progress. Download only after completed state and URL verification."}
 }
