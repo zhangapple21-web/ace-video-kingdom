@@ -35,4 +35,13 @@
   "production_integration": false,
   "automatic_publishing": false,
   "follow_up": "修复或确认隔离渠道后再重试；不得把本次失败改写为成功。"
+  ,"duration_probe": {
+    "model_id": "agnes-video-v2.0",
+    "requested_seconds": "45",
+    "create_http_status": 200,
+    "initial_status": "queued",
+    "conclusion": "接口接受 45 秒请求；当前没有证据表明免费模型因 45 秒而在创建阶段拒绝。后续仍需以任务终态确认实际时长。",
+    "rate_limit_observed": "后续请求触发 1 request/minute 限流",
+    "official_docs_status": "public docs endpoint returned 403; live API response recorded as primary evidence"
+  }
 }
