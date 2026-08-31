@@ -10,21 +10,24 @@
       "media_type": "image",
       "model_id": "gpt-image-2",
       "provider": "OpenAI-compatible endpoint",
-      "result_status": "FAILED",
-      "failure_class": "INVALID_API_KEY",
-      "artifact_sha256": null,
+      "result_status": "SUCCEEDED",
+      "failure_class": null,
+      "artifact_sha256": "13a744e49149eebccb9a807a6f3d24fade357657daeb3ce35541d67b2135ebb5",
+      "artifact_path": "media_staging/image_test_gpt-image-2.png",
+      "bytes": 1721260,
       "cleanup_class": "none",
-      "note": "环境中的 OPENAI_API_KEY 被上游判定为无效；未保存或记录密钥值。"
+      "note": "通过神隐兼容端点 SHENWEN_IMAGE_API_KEY 完成真实调用，耗时约 28 秒；未保存或记录密钥值。"
     },
     {
       "media_type": "video",
       "model_id": "agnes-video-v2.0",
       "provider": "Agnes adapter",
-      "result_status": "FAILED",
-      "failure_class": "ENDPOINT_NOT_AVAILABLE_OR_RATE_LIMITED",
+      "result_status": "CREATE_SUCCEEDED_POLL_FAILED",
+      "failure_class": "POLL_ENDPOINT_404",
+      "create_http_status": 200,
       "artifact_sha256": null,
       "cleanup_class": "none",
-      "note": "主站适配路径返回 404（当前仅提供图片端点），工作台域名返回 Cloudflare 429；未生成视频。历史成功证据仍保留在能力记录中。"
+      "note": "使用用户级 AGNES_API_KEY 直连 Agnes 创建接口，创建返回 HTTP 200；当前查询接口连续返回 404，未能取得可下载 MP4。历史成功证据仍保留在能力记录中。"
     }
   ],
   "production_integration": false,
