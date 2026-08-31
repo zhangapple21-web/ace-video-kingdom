@@ -1,0 +1,12 @@
+{
+  "episode_id": "episode_002_the_last_guest",
+  "model_id": "agnes-video-v2.0",
+  "video_id": null,
+  "create_http_status": 503,
+  "status": "CREATE_RATE_LIMITED",
+  "error_code": "rate_limit_exceeded",
+  "error_summary": "Agnes 免费通道限制为每分钟 1 个视频请求；本次剧本提交需在窗口释放后重试。",
+  "prompt_sha256": "f3742dd2628892c46679495b79029a2e036af83f5bdb7df0b52787fb3cfa1595",
+  "last_poll_http_status": 400,
+  "last_state": ""
+}
