@@ -1,12 +1,13 @@
 {
-  "episode_id": "episode_002_the_last_guest",
+  "shot_id": "episode-002-full",
   "model_id": "agnes-video-v2.0",
-  "video_id": null,
-  "create_http_status": 503,
-  "status": "CREATE_RATE_LIMITED",
-  "error_code": "rate_limit_exceeded",
-  "error_summary": "Agnes 免费通道限制为每分钟 1 个视频请求；本次剧本提交需在窗口释放后重试。",
-  "prompt_sha256": "f3742dd2628892c46679495b79029a2e036af83f5bdb7df0b52787fb3cfa1595",
-  "last_poll_http_status": 400,
-  "last_state": ""
+  "status": "COMPLETED",
+  "create_http_status": 200,
+  "video_id": "video_bGl0ZWxsbTpjdXN0b21fbGxtX3Byb3ZpZGVyOm9wZW5haTttb2RlbF9pZDphZ25lcy12aWRlby12Mi4wO3ZpZGVvX2lkOnZpZGVvX2I0NGEyMjNhNDYyYTRhYThiNWVlNWM4MWE4ZDA0ODIy",
+  "created_status": "queued",
+  "last_poll_http_status": 200,
+  "last_state": "completed",
+  "artifact_sha256": "e8bd07221385a2fbf093ef148c8b6e8012c6893448a7b63db2a519ad9c9c2fd1",
+  "bytes": 854581,
+  "artifact_path": "C:\\tmp\\ace_video_kingdom_git\\media_staging\\episode_002_the_last_guest.mp4"
 }
