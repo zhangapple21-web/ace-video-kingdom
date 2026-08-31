@@ -22,12 +22,14 @@
       "media_type": "video",
       "model_id": "agnes-video-v2.0",
       "provider": "Agnes adapter",
-      "result_status": "CREATE_SUCCEEDED_POLL_FAILED",
-      "failure_class": "POLL_ENDPOINT_404",
+      "result_status": "SUCCEEDED",
+      "failure_class": null,
       "create_http_status": 200,
-      "artifact_sha256": null,
+      "artifact_sha256": "8e85093c6e399722552ab233c62982b19f03be9e63a7b3b9ef87ff5ed2a325b8",
+      "artifact_path": "media_staging/video_test_agnes-v2.0.mp4",
+      "bytes": 869279,
       "cleanup_class": "none",
-      "note": "使用用户级 AGNES_API_KEY 直连 Agnes 创建接口，创建返回 HTTP 200；当前查询接口连续返回 404，未能取得可下载 MP4。历史成功证据仍保留在能力记录中。"
+      "note": "使用用户级 AGNES_API_KEY 直连 Agnes 创建接口，创建返回 HTTP 200；任务在延迟后通过 video_id 查询完成，返回可下载 video/mp4。"
     }
   ],
   "production_integration": false,
