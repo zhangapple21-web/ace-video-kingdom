@@ -1,0 +1,23 @@
+{
+  "contract_version": "ace.video_kingdom.short_series_pipeline.v1",
+  "scope": "FREE_ZONE_RESEARCH_ONLY",
+  "pipeline_mode": "SHORT_CLIP_HANDOFF",
+  "episode_id": "episode_001_lantern_handoff",
+  "roles": ["SCRIPT", "STORYBOARD", "CONTINUITY", "VIDEO_GENERATION", "EDITING"],
+  "model_assignments": {
+    "image": "gpt-image-2",
+    "video": "agnes-video-v2.0"
+  },
+  "continuity_contract": {
+    "required_shared_anchors": 2,
+    "required_causal_rhythm_anchor": 1,
+    "allowed_imperfection": "brief human-like pause; no spatial teleportation",
+    "preserve_failed_branches": true
+  },
+  "shots": [
+    {"shot_id":"001","duration_target_s":5,"status":"COMPLETED","artifact":"media_staging/video_test_agnes-v2.0.mp4"},
+    {"shot_id":"002","duration_target_s":5,"status":"READY_FOR_GENERATION","artifact":null},
+    {"shot_id":"003","duration_target_s":5,"status":"READY_FOR_GENERATION","artifact":null}
+  ],
+  "assembly": {"status":"WAITING_FOR_SHOTS_002_003","automatic_publishing":false,"production_integration":false}
+}
