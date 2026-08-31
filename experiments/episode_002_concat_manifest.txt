@@ -1,0 +1,2 @@
+file '../media_staging/video_test_agnes-v2.0.mp4'
+file '../media_staging/episode_002_the_last_guest.mp4'
