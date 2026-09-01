@@ -1,0 +1,25 @@
+{
+  "contract_version": "ace.video_kingdom.street_visit_ledger.v1",
+  "scope": "FREE_ZONE_RESEARCH_ONLY",
+  "production_integration": false,
+  "visits": [
+    {
+      "visit_id": "street_20260901_open_street_library_genevolve",
+      "date": "2026-09-01",
+      "shop_id": "open_street_library",
+      "visit_reason": "public technical article supplied a possible remedy for reference and quality constraint loss before generation",
+      "trace_ids": ["psl_20260901_genevolve"],
+      "outcome": "FOUND",
+      "next_thread": "Translate the lightweight prompt-reference program into the episode_003 preflight; do not adopt training or privileged-runtime claims."
+    },
+    {
+      "visit_id": "street_20260901_character_wardrobe_anchor",
+      "date": "2026-09-01",
+      "shop_id": "character_wardrobe",
+      "visit_reason": "episode_002 failed identity and wardrobe continuity",
+      "trace_ids": ["episode_003_character_reference_v1.png"],
+      "outcome": "FOUND",
+      "next_thread": "Use the approved character asset only after the selected video provider proves reference-image support."
+    }
+  ]
+}

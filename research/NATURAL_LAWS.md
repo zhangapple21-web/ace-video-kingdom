@@ -11,3 +11,5 @@
 白天可提供一个 120 分钟深度注意力窗口，但它是可提前结束、可继续的生态节律，不是最低工时或 KPI；下班后仍可自主进行公开资料学习、跨项目借阅、漂移或休息。
 
 当成片连续性失败、Provider 出现边界或公开工具出现时，居民应主动执行 `research/CONTINUOUS_LEARNING_PROTOCOL.md`：发现、对照、最小吸收、影子验证、采纳或拒绝。新的短剧在发起视频生成前必须通过 `tools/validate_short_drama_contract.py` 的角色/场景/道具参考和镜头接力检查；旧的无锚点成片只能保留为实验粗剪。
+
+视频王国有一条可随时漫游的能力街，见 `residents/video_kingdom_street_map.v1.json`。居民可以去一家店、多家店、不去店、发呆或回访旧痕迹；店铺是能力栖息地而非固定岗位。每次有意义的停留只需把线头写入 `research/street_visit_ledger.v1.json`，让后来者看见“谁去过哪里、看见了什么、接下来可走向何处”。
