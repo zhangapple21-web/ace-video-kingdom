@@ -18,12 +18,41 @@ def _append_option(command: list[str], flag: str, value: object | None) -> None:
         command.extend([flag, str(value)])
 
 
+def _validate_asset_graph(shots: list[dict]) -> None:
+    """Prevent accidental reuse of a scene's start image across a cut.
+
+    Text-only episodes remain supported.  Once a plan chooses image-to-video,
+    though, every shot must name a scene asset and two shots cannot silently
+    share one unless the plan is explicitly a continuous action.
+    """
+    render_images: list[tuple[str, str, bool]] = []
+    for shot in shots:
+        render = shot.get("render", {}) if isinstance(shot.get("render"), dict) else {}
+        image = render.get("image")
+        if image:
+            render_images.append((str(shot.get("shot_id", "unknown")), str(image), bool(shot.get("continuous_action"))))
+    if not render_images:
+        return
+    if len(render_images) != len(shots):
+        raise SystemExit("asset-first episode mixes image-backed and unanchored shots")
+    seen: dict[str, tuple[str, bool]] = {}
+    for shot_id, image, continuous_action in render_images:
+        prior = seen.get(image)
+        if prior and not (continuous_action and prior[1]):
+            raise SystemExit(
+                f"asset graph reuses start image for {prior[0]} and {shot_id}; "
+                "set continuous_action=true on both only for one uninterrupted action"
+            )
+        seen[image] = (shot_id, continuous_action)
+
+
 def main() -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument("--episode", type=Path, required=True)
     parser.add_argument("--manifest", type=Path, required=True)
     parser.add_argument("--media-dir", type=Path, required=True)
     parser.add_argument("--output", type=Path, required=True)
+    parser.add_argument("--review-output", type=Path, help="optional local media-integrity review JSON")
     parser.add_argument("--timeout", type=int, default=480)
     args = parser.parse_args()
     episode = json.loads(args.episode.read_text(encoding="utf-8"))
@@ -33,6 +62,7 @@ def main() -> int:
         raise SystemExit("render_defaults must be an object when supplied")
     if not shots:
         raise SystemExit("episode has no shots")
+    _validate_asset_graph(shots)
     args.media_dir.mkdir(parents=True, exist_ok=True)
     shot_ids: list[str] = []
     for shot in shots:
@@ -61,11 +91,14 @@ def main() -> int:
             print(json.dumps({"status": "STOPPED", "failed_shot": shot_id}, ensure_ascii=False))
             return result.returncode
     duration_window = episode.get("acceptance", {}).get("duration_window_seconds", [45, 60])
-    result = subprocess.run([
+    assembly_command = [
         sys.executable, "tools/assemble_episode.py", "--manifest", str(args.manifest),
         "--shot-ids", *shot_ids, "--output", str(args.output), "--min-seconds",
         str(duration_window[0]), "--max-seconds", str(duration_window[1]),
-    ])
+    ]
+    if args.review_output:
+        assembly_command.extend(["--review-output", str(args.review_output)])
+    result = subprocess.run(assembly_command)
     return result.returncode
 
 

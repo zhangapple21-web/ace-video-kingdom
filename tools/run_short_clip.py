@@ -140,15 +140,31 @@ def main() -> int:
     video_id = record.get("video_id")
     if not video_id:
         create_deadline = time.time() + args.timeout
+        response: requests.Response | None = None
         for attempt in range(1, 5):
             record.update({"status": "CREATING", "create_attempt": attempt})
             _persist_record(args.manifest, record)
-            response = requests.post(
-                "https://apihub.agnes-ai.com/v1/videos",
-                headers={"Authorization": f"Bearer {key}", "Content-Type": "application/json"},
-                json=payload,
-                timeout=90,
-            )
+            try:
+                response = requests.post(
+                    "https://apihub.agnes-ai.com/v1/videos",
+                    headers={"Authorization": f"Bearer {key}", "Content-Type": "application/json"},
+                    json=payload,
+                    timeout=90,
+                )
+            except requests.RequestException as error:
+                wait = 60
+                record.update({
+                    "last_create_error_class": "NETWORK_CREATE_ERROR",
+                    "last_create_error": str(error)[:500],
+                    "next_retry_in_seconds": wait,
+                })
+                _persist_record(args.manifest, record)
+                if attempt >= 4 or time.time() + wait >= create_deadline:
+                    record["status"] = "CREATE_FAILED"
+                    _persist_record(args.manifest, record)
+                    return 1
+                time.sleep(wait)
+                continue
             if response.status_code in {429, 500, 502, 503, 504} and attempt < 4:
                 wait = _retry_seconds(response)
                 record.update({"last_create_http_status": response.status_code, "next_retry_in_seconds": wait})
@@ -158,11 +174,19 @@ def main() -> int:
                 time.sleep(wait)
                 continue
             break
+        if response is None:
+            record["status"] = "CREATE_FAILED"
+            _persist_record(args.manifest, record)
+            return 1
         try:
             body = response.json()
         except ValueError:
             body = {}
-        video_id = body.get("video_id") or body.get("id") or body.get("task_id")
+        # The documented polling endpoint accepts the provider's video_id.
+        # A task_id is not interchangeable: persisting it here would make a
+        # later resume repeatedly query an unrelated identifier and conceal a
+        # create-contract drift as a slow provider job.
+        video_id = body.get("video_id") or body.get("id")
         record.update({"create_http_status": response.status_code, "video_id": video_id, "created_status": body.get("status")})
         if response.status_code >= 300:
             record["error_class"] = "TRANSIENT_SERVICE_OR_GATEWAY" if response.status_code in {429, 500, 502, 503, 504} else "HTTP_CREATE_ERROR"
@@ -171,18 +195,28 @@ def main() -> int:
         _persist_record(args.manifest, record)
         if response.status_code >= 300 or not video_id:
             record["status"] = "CREATE_FAILED"
+            if response.status_code < 300 and not video_id:
+                record["error_class"] = "MISSING_VIDEO_ID"
+                record["error_body_excerpt"] = response.text[:500]
             _persist_record(args.manifest, record)
             return 1
 
     deadline = time.time() + args.timeout
     delay = 5
     while time.time() < deadline:
-        query = requests.get(
-            "https://apihub.agnes-ai.com/agnesapi",
-            params={"video_id": video_id},
-            headers={"Authorization": f"Bearer {key}"},
-            timeout=30,
-        )
+        try:
+            query = requests.get(
+                "https://apihub.agnes-ai.com/agnesapi",
+                params={"video_id": video_id},
+                headers={"Authorization": f"Bearer {key}"},
+                timeout=30,
+            )
+        except requests.RequestException as error:
+            record.update({"last_poll_error_class": "NETWORK_POLL_ERROR", "last_poll_error": str(error)[:500]})
+            _persist_record(args.manifest, record)
+            time.sleep(delay)
+            delay = min(delay * 2, 60)
+            continue
         try:
             data = query.json()
         except ValueError:
