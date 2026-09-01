@@ -39,6 +39,15 @@ def _persist_record(path: Path, record: dict) -> None:
     path.write_text(json.dumps(records, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
 
 
+def _retry_seconds(response: requests.Response, default: int = 60) -> int:
+    """Honor provider reset guidance; fall back to the observed free window."""
+    value = response.headers.get("Retry-After")
+    try:
+        return max(1, int(float(value))) if value is not None else default
+    except (TypeError, ValueError):
+        return default
+
+
 def main() -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument("--shot-id", required=True)
@@ -61,12 +70,25 @@ def main() -> int:
     record = existing or {"shot_id": args.shot_id, "model_id": "agnes-video-v2.0", "status": "CREATING"}
     video_id = record.get("video_id")
     if not video_id:
-        response = requests.post(
-            "https://apihub.agnes-ai.com/v1/videos",
-            headers={"Authorization": f"Bearer {key}", "Content-Type": "application/json"},
-            json={"model": "agnes-video-v2.0", "prompt": args.prompt, "seconds": "5", "size": "720P", "aspect_ratio": "16:9"},
-            timeout=90,
-        )
+        create_deadline = time.time() + args.timeout
+        for attempt in range(1, 5):
+            record.update({"status": "CREATING", "create_attempt": attempt})
+            _persist_record(args.manifest, record)
+            response = requests.post(
+                "https://apihub.agnes-ai.com/v1/videos",
+                headers={"Authorization": f"Bearer {key}", "Content-Type": "application/json"},
+                json={"model": "agnes-video-v2.0", "prompt": args.prompt, "seconds": "5", "size": "720P", "aspect_ratio": "16:9"},
+                timeout=90,
+            )
+            if response.status_code in {429, 500, 502, 503, 504} and attempt < 4:
+                wait = _retry_seconds(response)
+                record.update({"last_create_http_status": response.status_code, "next_retry_in_seconds": wait})
+                _persist_record(args.manifest, record)
+                if time.time() + wait >= create_deadline:
+                    break
+                time.sleep(wait)
+                continue
+            break
         try:
             body = response.json()
         except ValueError:
