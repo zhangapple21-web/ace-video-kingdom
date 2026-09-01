@@ -1,0 +1,29 @@
+{
+  "evaluation_version": "ace.video_kingdom.quality_evaluation.v1",
+  "project_id": "episode_004_yuanbao_rejected_courtship",
+  "scope": "FREE_ZONE_RESEARCH_ONLY",
+  "production_integration": false,
+  "render_evidence": {
+    "completed_shots": 10,
+    "assembled_duration_seconds": 50.458334,
+    "named_delivery_duration_seconds": 55.458333,
+    "named_delivery_sha256": "176682672cb466328a6e3fc3c2255be6adf7d2dfc42a567da6e71a5a43f0b2fb",
+    "delivery_class": "LOCAL_USER_MEDIA_NOT_GIT_SYNCED"
+  },
+  "narrative_result": {
+    "status": "COMPLETE_COMEDY_DRAFT",
+    "story_causality": "PASS",
+    "boundary_portrayal": "PASS",
+    "identity_recognition": "PASS_WITH_POSTPRODUCTION_ANCHOR",
+    "note": "The humor redirects Yuanbao's unwanted pitches into his own self-important embarrassment; women retain agency and clear refusal."
+  },
+  "continuity_result": {
+    "overall": "ROUGH_CUT_RETAINED_NOT_IDENTITY_LOCKED",
+    "passed": ["ancient-tavern comedy mood", "single-shot actions", "assembled duration", "local MP4 playback"],
+    "failed_or_partial": ["lead face consistency across shots", "lead body and wardrobe consistency across shots", "gold pendant shape and Chinese text reliability", "supporting-character continuity"],
+    "root_cause": "Agnes v2.0 has no verified reference-image, identity-lock, or Chinese text-rendering control in this workspace.",
+    "repair_applied": "A user-approved local opening identity anchor and persistent name bug were added in postproduction. This improves recognition but does not claim renderer-level identity control."
+  },
+  "next_learning_question": "Can an isolated static keyframe workflow using only a fictional/generated character reference reduce visual drift before a future video renderer test?",
+  "next_generation_rule": "Do not repeat an identity-dependent multi-shot comedy as a final-quality claim with Agnes alone. Use Agnes for leaf shots, or first evidence a reference-controlled renderer; retain a local identity anchor when textual name recognition is required."
+}

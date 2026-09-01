@@ -4,6 +4,15 @@
   "production_integration": false,
   "visits": [
     {
+      "visit_id": "street_20260901_video_weaving_episode004",
+      "date": "2026-09-01",
+      "shop_id": "video_weaving_house",
+      "visit_reason": "A real 10-shot comedy proved that assembly and local identity labeling can work while exposing renderer-level character and text drift.",
+      "trace_ids": ["episode_004_quality_evaluation.json", "psl_20260901_episode004_renderer_boundary"],
+      "outcome": "PARTIAL",
+      "next_thread": "Keep the episode as a local rough-cut evidence branch; turn its exact drift into the next renderer A/B question rather than pretending it is solved."
+    },
+    {
       "visit_id": "street_20260901_open_street_library_genevolve",
       "date": "2026-09-01",
       "shop_id": "open_street_library",

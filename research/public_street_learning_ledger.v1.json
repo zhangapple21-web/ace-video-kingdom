@@ -4,6 +4,19 @@
   "production_integration": false,
   "entries": [
     {
+      "entry_id": "psl_20260901_episode004_renderer_boundary",
+      "date": "2026-09-01",
+      "source_url": null,
+      "source_kind": "LOCAL_VERIFIED_EPISODE_EVIDENCE",
+      "linked_public_repositories": [],
+      "problem_observed": "A 10-shot, 50-second Agnes comedy assembled successfully but the lead's face, body, wardrobe and pendant drifted; Chinese name text could not be trusted as a generated in-scene control.",
+      "minimum_mechanism": "Separate renderer output from identity recognition. Preserve a hash-bound visual reference, use a local postproduction identity anchor/name layer when the user requests unmistakable naming, and treat it as a delivery aid rather than proof of identity-locked video.",
+      "local_fit": "Directly updates the role of Agnes: real short-clip production is viable, but character-continuous mainline drama still requires a separately evidenced reference-controlled renderer or a consciously local postproduction anchor.",
+      "not_adopted": ["No claim that Agnes accepts reference images, locks identity, or reliably renders Chinese text.", "No user-supplied image or rendered media is copied into the public-learning ledger or Git sync."],
+      "decision": "ADAPT_AS_LOCAL_IDENTITY_DELIVERY_PATTERN",
+      "next_verification": "Run an isolated, fictional/generated-character static-keyframe A/B only when an eligible local renderer has been installed and its license and resource fit are verified."
+    },
+    {
       "entry_id": "psl_20260901_genevolve",
       "date": "2026-09-01",
       "source_url": "https://cloud.tencent.com.cn/developer/article/2680286?policyId=1004",
