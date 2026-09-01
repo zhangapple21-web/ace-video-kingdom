@@ -1,0 +1,19 @@
+{
+  "contract_version": "ace.video_kingdom.agnes_v2_prompt_profile.v1",
+  "scope": "FREE_ZONE_RESEARCH_ONLY",
+  "model_id": "agnes-video-v2.0",
+  "evidence_status": "VERIFIED_SINGLE_SHOT_ONLY",
+  "preferred_shot": {
+    "duration_seconds": 5,
+    "locations": 1,
+    "moving_subjects_max": 1,
+    "visible_actions_max": 1,
+    "camera_instruction": "one continuous camera treatment",
+    "ending_state": "explicit reusable state for the next shot"
+  },
+  "strong_use_cases": ["atmosphere_establishing", "reaction_shot", "prop_detail", "quiet_transition", "aftermath", "environmental_change"],
+  "avoid_or_route_to_ab": ["identity_locked_mainline", "multi_person_dialogue", "precise_lip_sync", "text_in_frame", "complex_count_or_layout", "cross_scene_time_jump", "first_last_frame_control"],
+  "unverified_capabilities": ["image_reference_input", "first_frame_input", "last_frame_input", "image_to_video", "character_identity_lock", "audio_sync"],
+  "recovery": {"honor_retry_after": true, "fallback_retry_seconds": 60, "duplicate_submission_forbidden": true},
+  "production_integration": false
+}
