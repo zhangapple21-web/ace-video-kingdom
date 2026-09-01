@@ -9,7 +9,7 @@
 - 查询：`https://apihub.agnes-ai.com/agnesapi?video_id=...`
 - 历史证据：创建返回 HTTP 200，任务经历 `queued` → `completed`，结果为可访问的 `video/mp4`。
 - 凭据：仅使用环境变量名 `AGNES_API_KEY`；本仓库不保存密钥值。
-- 状态：`VERIFIED_HISTORICAL_ISOLATED`。这不是当前额度、健康或生产资格证明；每次实验需重新做最小健康检查，并将结果写入隔离媒体清单。
+- 状态：`VERIFIED_HISTORICAL_ISOLATED`。这不是当前额度、健康或生产资格证明；每次实验需重新做最小健康检查，并将结果写入隔离媒体清单。现场强弱与提示词约束见 `research/AGNES_V2_FIELD_PROFILE.md` 和 `experiments/agnes_v2_prompt_profile.v1.json`。
 
 ## 图片模型
 
