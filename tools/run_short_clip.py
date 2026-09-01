@@ -73,7 +73,40 @@ def _image_reference(value: str | None) -> str | None:
 
 
 def _build_payload(args: argparse.Namespace) -> dict:
-    """Build the documented V2.0 request while preserving text-to-video use."""
+    """Build a documented request for the selected Agnes video contract."""
+    if args.model == "agnes-video-2.5-flash":
+        if args.image or args.keyframe_image:
+            raise ValueError("2.5 Flash uses public URL fields; use --flash-first-frame-url or --flash-reference-image-url")
+        if not 4 <= args.seconds <= 12:
+            raise ValueError("2.5 Flash seconds must be between 4 and 12")
+        payload: dict = {
+            "model": args.model,
+            "prompt": args.prompt,
+            "mode": args.flash_mode,
+            "seconds": str(args.seconds),
+            "size": "720P",
+            "aspect_ratio": args.aspect_ratio,
+            "n": 1,
+        }
+        if args.seed is not None:
+            payload["seed"] = args.seed
+        if args.flash_mode == "keyframe":
+            if not args.flash_first_frame_url and not args.flash_last_frame_url:
+                raise ValueError("2.5 Flash keyframe mode requires a public --flash-first-frame-url or --flash-last-frame-url")
+            if args.flash_first_frame_url:
+                payload["first_frame"] = args.flash_first_frame_url
+            if args.flash_last_frame_url:
+                payload["last_frame"] = args.flash_last_frame_url
+        elif args.flash_mode == "reference":
+            if not args.flash_reference_image_url and not args.flash_reference_audio_url:
+                raise ValueError("2.5 Flash reference mode requires public image or audio URLs")
+            if len(args.flash_reference_image_url) > 5 or len(args.flash_reference_audio_url) > 3:
+                raise ValueError("2.5 Flash accepts at most 5 images and 3 audio references")
+            if args.flash_reference_image_url:
+                payload["images"] = args.flash_reference_image_url
+            if args.flash_reference_audio_url:
+                payload["audios"] = args.flash_reference_audio_url
+        return payload
     if args.num_frames > 441 or args.num_frames < 1 or (args.num_frames - 1) % 8:
         raise ValueError("num_frames must be <= 441 and follow the 8n + 1 rule")
     if not 1 <= args.frame_rate <= 60:
@@ -81,7 +114,7 @@ def _build_payload(args: argparse.Namespace) -> dict:
     if args.image and args.keyframe_image:
         raise ValueError("use either --image or --keyframe-image, not both")
     payload: dict = {
-        "model": "agnes-video-v2.0",
+        "model": args.model,
         "prompt": args.prompt,
         "width": args.width,
         "height": args.height,
@@ -112,6 +145,7 @@ def main() -> int:
     parser.add_argument("--manifest", type=Path, default=Path("experiments/agnes_tasks.json"))
     parser.add_argument("--output", type=Path, required=True)
     parser.add_argument("--timeout", type=int, default=360)
+    parser.add_argument("--model", choices=["agnes-video-v2.0", "agnes-video-2.5-flash"], default="agnes-video-v2.0")
     parser.add_argument("--image", help="Public URL, data URI, or authorized local PNG/JPEG/WEBP for image-to-video")
     parser.add_argument("--keyframe-image", action="append", help="Repeat for two or more keyframe references")
     parser.add_argument("--width", type=int, default=1152)
@@ -120,6 +154,13 @@ def main() -> int:
     parser.add_argument("--frame-rate", type=float, default=24)
     parser.add_argument("--seed", type=int)
     parser.add_argument("--negative-prompt")
+    parser.add_argument("--seconds", type=int, default=5, help="2.5 Flash duration, from 4 to 12 seconds")
+    parser.add_argument("--aspect-ratio", default="9:16", help="2.5 Flash aspect ratio")
+    parser.add_argument("--flash-mode", choices=["text", "keyframe", "reference"], default="text")
+    parser.add_argument("--flash-first-frame-url", help="2.5 Flash public first-frame URL")
+    parser.add_argument("--flash-last-frame-url", help="2.5 Flash public last-frame URL")
+    parser.add_argument("--flash-reference-image-url", action="append", default=[], help="2.5 Flash public image URL; repeat up to five")
+    parser.add_argument("--flash-reference-audio-url", action="append", default=[], help="2.5 Flash public audio URL; repeat up to three")
     args = parser.parse_args()
 
     key = os.environ.get("AGNES_API_KEY")
@@ -136,7 +177,7 @@ def main() -> int:
         if artifact.is_file():
             print(json.dumps(existing, ensure_ascii=False))
             return 0
-    record = existing or {"shot_id": args.shot_id, "model_id": "agnes-video-v2.0", "status": "CREATING"}
+    record = existing or {"shot_id": args.shot_id, "model_id": args.model, "status": "CREATING"}
     video_id = record.get("video_id")
     if not video_id:
         create_deadline = time.time() + args.timeout
@@ -202,12 +243,12 @@ def main() -> int:
             return 1
 
     deadline = time.time() + args.timeout
-    delay = 5
+    delay = 2 if args.model == "agnes-video-2.5-flash" else 5
     while time.time() < deadline:
         try:
             query = requests.get(
                 "https://apihub.agnes-ai.com/agnesapi",
-                params={"video_id": video_id},
+                params={"video_id": video_id, **({"model_name": args.model} if args.model == "agnes-video-2.5-flash" else {})},
                 headers={"Authorization": f"Bearer {key}"},
                 timeout=30,
             )
