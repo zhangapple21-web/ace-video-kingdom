@@ -19,6 +19,21 @@ def _append_option(command: list[str], flag: str, value: object | None) -> None:
         command.extend([flag, str(value)])
 
 
+def _append_repeated_option(command: list[str], flag: str, values: object | None) -> None:
+    """Forward plan-owned URL collections without accepting ambiguous strings.
+
+    Flash references are deliberately URL-only: this keeps the episode plan
+    auditable and prevents a local path from being silently uploaded by the
+    wrong renderer contract.
+    """
+    if values is None:
+        return
+    if not isinstance(values, list) or not all(isinstance(value, str) and value for value in values):
+        raise SystemExit(f"{flag} must be a non-empty-string list when supplied")
+    for value in values:
+        command.extend([flag, value])
+
+
 def _validate_asset_graph(shots: list[dict]) -> None:
     """Prevent accidental reuse of a scene's start image across a cut.
 
@@ -30,6 +45,13 @@ def _validate_asset_graph(shots: list[dict]) -> None:
     for shot in shots:
         render = shot.get("render", {}) if isinstance(shot.get("render"), dict) else {}
         image = render.get("image")
+        references = render.get("reference_image_urls")
+        if image and references:
+            raise SystemExit("a shot cannot mix local image and Flash reference_image_urls")
+        if references is not None:
+            if not isinstance(references, list) or len(references) != 1 or not isinstance(references[0], str) or not references[0]:
+                raise SystemExit("each Flash reference shot must declare exactly one scene-anchor URL")
+            image = references[0]
         if image:
             render_images.append((str(shot.get("shot_id", "unknown")), str(image), bool(shot.get("continuous_action"))))
     if not render_images:
@@ -69,6 +91,37 @@ def _replace_model(command: list[str], model: str) -> list[str]:
     else:
         updated[index + 1] = model
     return updated
+
+
+def _v2_fallback_command(command: list[str], render: dict) -> list[str]:
+    """Turn a failed Flash reference attempt into an explicit local v2.0 I2V retry.
+
+    The fallback never receives Flash's URL-only fields as its conditioning
+    input.  It must name the matching local anchor in ``fallback_image`` so
+    the two providers preserve the same scene boundary.
+    """
+    image = render.get("fallback_image")
+    if not isinstance(image, str) or not image:
+        raise SystemExit("Flash -> v2.0 fallback requires render.fallback_image")
+    filtered: list[str] = []
+    skip_next = False
+    flash_flags = {
+        "--flash-mode", "--flash-first-frame-url", "--flash-last-frame-url",
+        "--flash-reference-image-url", "--flash-reference-audio-url",
+        "--reference-video-url", "--reference-video-require-audio",
+        "--seconds", "--size", "--aspect-ratio",
+    }
+    for token in command:
+        if skip_next:
+            skip_next = False
+            continue
+        if token in flash_flags:
+            skip_next = token != "--reference-video-require-audio"
+            continue
+        filtered.append(token)
+    filtered = _replace_model(filtered, "agnes-video-v2.0")
+    filtered.extend(["--image", image])
+    return filtered
 
 
 def main() -> int:
@@ -124,16 +177,25 @@ def main() -> int:
             ("flash_mode", "--flash-mode"),
         ):
             _append_option(command, flag, render.get(field))
+        _append_option(command, "--flash-first-frame-url", render.get("flash_first_frame_url"))
+        _append_option(command, "--flash-last-frame-url", render.get("flash_last_frame_url"))
+        _append_repeated_option(command, "--flash-reference-image-url", render.get("reference_image_urls"))
+        _append_repeated_option(command, "--flash-reference-audio-url", render.get("reference_audio_urls"))
         result = subprocess.run(command)
         fallback_model = render.get("fallback_model")
-        if result.returncode and fallback_model and _quota_exhausted(args.manifest, shot_id):
+        fallback_reason = _quota_exhausted(args.manifest, shot_id)
+        fallback_on_failure = bool(render.get("fallback_on_failure"))
+        if result.returncode and fallback_model and (fallback_reason or fallback_on_failure):
             print(json.dumps({
-                "status": "FALLBACK_AFTER_QUOTA_EXHAUSTED",
+                "status": "FALLBACK_AFTER_PRIMARY_FAILURE",
                 "shot_id": shot_id,
                 "from_model": render.get("model", "agnes-video-v2.0"),
                 "to_model": fallback_model,
             }, ensure_ascii=False), flush=True)
-            command = _replace_model(command, str(fallback_model))
+            if render.get("model") == "agnes-video-2.5-flash" and fallback_model == "agnes-video-v2.0":
+                command = _v2_fallback_command(command, render)
+            else:
+                command = _replace_model(command, str(fallback_model))
             result = subprocess.run(command)
         for retry_round in range(1, args.shot_retry_rounds + 1):
             if not result.returncode:
