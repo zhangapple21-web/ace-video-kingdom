@@ -1,0 +1,63 @@
+{
+  "contract_version": "ace.video_kingdom.short_drama_project.v1",
+  "scope": "FREE_ZONE_RESEARCH_ONLY",
+  "production_integration": false,
+  "project_id": "episode_003_anchor_pilot",
+  "status": "PRE_PRODUCTION",
+  "source_policy": {
+    "allowed": ["ORIGINAL_WRITING", "PUBLIC_DOMAIN", "LICENSED_OR_PERMISSIONED"],
+    "disallowed": ["UNATTRIBUTED_COPY", "PRIVATE_MATERIAL"]
+  },
+  "story": {
+    "event_chain": [
+      "ordinary_routine",
+      "inciting_anomaly",
+      "character_choice",
+      "consequence",
+      "open_ending"
+    ],
+    "current_event": "character_choice"
+  },
+  "assets": {
+    "characters": [
+      {
+        "asset_id": "CHAR_001",
+        "status": "REQUIRED_REFERENCE_SHEET",
+        "required_invariants": ["face", "hair", "wardrobe", "body_proportion"]
+      }
+    ],
+    "scenes": [
+      {
+        "asset_id": "SCENE_001",
+        "status": "REQUIRED_REFERENCE_SHEET",
+        "required_invariants": ["layout", "main_light_source", "door_position", "table_position"]
+      }
+    ],
+    "props": [
+      {
+        "asset_id": "PROP_001",
+        "status": "REQUIRED_REFERENCE_SHEET",
+        "required_invariants": ["shape", "material", "position"]
+      }
+    ]
+  },
+  "shots": [
+    {
+      "shot_id": "S001",
+      "status": "BLOCKED_ON_ASSET_REFERENCES",
+      "duration_target_seconds": 5,
+      "required_asset_ids": ["CHAR_001", "SCENE_001", "PROP_001"],
+      "first_state": "character and prop positions match approved references",
+      "action": "one visible action only",
+      "last_state": "the action ends in a reusable next-shot state",
+      "continuity_bridge_to_next": "action_or_eyeline_or_sound",
+      "quality_gate": ["identity", "wardrobe", "space", "prop", "causal_action"]
+    }
+  ],
+  "acceptance": {
+    "minimum_passes": 5,
+    "rejection_rule": "Any two failed quality dimensions reject the shot from the main cut.",
+    "rough_cut_rule": "A continuity-rejected cut may be retained only as an experiment, never labeled final."
+  },
+  "learning_origin": "Toonflow-app public workflow reviewed 2026-09-01; adapted as an independent minimal contract."
+}
