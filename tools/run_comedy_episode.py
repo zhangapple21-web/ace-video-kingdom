@@ -47,6 +47,30 @@ def _validate_asset_graph(shots: list[dict]) -> None:
         seen[image] = (shot_id, continuous_action)
 
 
+def _quota_exhausted(manifest: Path, shot_id: str) -> bool:
+    try:
+        records = json.loads(manifest.read_text(encoding="utf-8"))
+    except (OSError, json.JSONDecodeError):
+        return False
+    rows = records if isinstance(records, list) else [records]
+    record = next((row for row in rows if isinstance(row, dict) and row.get("shot_id") == shot_id), {})
+    return (
+        record.get("error_class") == "HTTP_CREATE_ERROR"
+        and "insufficient_user_quota" in str(record.get("error_body_excerpt", ""))
+    )
+
+
+def _replace_model(command: list[str], model: str) -> list[str]:
+    updated = list(command)
+    try:
+        index = updated.index("--model")
+    except ValueError:
+        updated.extend(["--model", model])
+    else:
+        updated[index + 1] = model
+    return updated
+
+
 def main() -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument("--episode", type=Path, required=True)
@@ -87,6 +111,7 @@ def main() -> int:
             str(args.media_dir / f"{shot_id}.mp4"), "--timeout", str(args.timeout),
         ]
         render = {**defaults, **(shot.get("render", {}) if isinstance(shot.get("render"), dict) else {})}
+        _append_option(command, "--model", render.get("model"))
         image = render.get("image")
         if image:
             image_path = (args.episode.parent / image).resolve() if not str(image).startswith(("http://", "https://", "data:")) else image
@@ -94,10 +119,22 @@ def main() -> int:
         for field, flag in (
             ("width", "--width"), ("height", "--height"), ("num_frames", "--num-frames"),
             ("frame_rate", "--frame-rate"), ("seed", "--seed"),
-            ("negative_prompt", "--negative-prompt"),
+            ("negative_prompt", "--negative-prompt"), ("seconds", "--seconds"),
+            ("size", "--size"), ("aspect_ratio", "--aspect-ratio"),
+            ("flash_mode", "--flash-mode"),
         ):
             _append_option(command, flag, render.get(field))
         result = subprocess.run(command)
+        fallback_model = render.get("fallback_model")
+        if result.returncode and fallback_model and _quota_exhausted(args.manifest, shot_id):
+            print(json.dumps({
+                "status": "FALLBACK_AFTER_QUOTA_EXHAUSTED",
+                "shot_id": shot_id,
+                "from_model": render.get("model", "agnes-video-v2.0"),
+                "to_model": fallback_model,
+            }, ensure_ascii=False), flush=True)
+            command = _replace_model(command, str(fallback_model))
+            result = subprocess.run(command)
         for retry_round in range(1, args.shot_retry_rounds + 1):
             if not result.returncode:
                 break
