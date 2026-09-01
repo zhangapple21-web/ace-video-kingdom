@@ -2,6 +2,7 @@
 from __future__ import annotations
 
 import json
+import hashlib
 import sys
 from pathlib import Path
 
@@ -17,9 +18,24 @@ def main() -> int:
     if missing:
         failures.append("missing top-level keys: " + ", ".join(missing))
     assets = document.get("assets", {})
+    contract_dir = Path(sys.argv[1]).resolve().parent
     for group in ("characters", "scenes", "props"):
         if not assets.get(group):
             failures.append(f"missing {group} reference assets")
+            continue
+        for asset in assets[group]:
+            path_value = asset.get("reference_path")
+            expected_hash = asset.get("sha256")
+            if asset.get("status") != "APPROVED_REFERENCE_SHEET":
+                failures.append(f"{asset.get('asset_id', group)} is not an approved reference")
+            if not path_value or not expected_hash:
+                failures.append(f"{asset.get('asset_id', group)} missing reference_path or sha256")
+                continue
+            path = (contract_dir / path_value).resolve()
+            if not path.is_file():
+                failures.append(f"{asset.get('asset_id', group)} reference file missing")
+            elif hashlib.sha256(path.read_bytes()).hexdigest() != expected_hash:
+                failures.append(f"{asset.get('asset_id', group)} reference hash mismatch")
     for shot in document.get("shots", []):
         for field in ("required_asset_ids", "first_state", "action", "last_state", "continuity_bridge_to_next", "quality_gate"):
             if not shot.get(field):
