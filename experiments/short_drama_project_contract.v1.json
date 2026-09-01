@@ -22,21 +22,27 @@
     "characters": [
       {
         "asset_id": "CHAR_001",
-        "status": "REQUIRED_REFERENCE_SHEET",
+        "status": "APPROVED_REFERENCE_SHEET",
+        "reference_path": "../media_staging/anchors/episode_003_character_reference_v1.png",
+        "sha256": "583333322f1700609c45b6429475154b96685dc215178040405b58fae1261c5c",
         "required_invariants": ["face", "hair", "wardrobe", "body_proportion"]
       }
     ],
     "scenes": [
       {
         "asset_id": "SCENE_001",
-        "status": "REQUIRED_REFERENCE_SHEET",
+        "status": "APPROVED_REFERENCE_SHEET",
+        "reference_path": "../media_staging/anchors/episode_003_tavern_scene_reference_v1.png",
+        "sha256": "47547ba716f890dee8df013f79f928d523644b4b1aa258959fca3c500324b1f2",
         "required_invariants": ["layout", "main_light_source", "door_position", "table_position"]
       }
     ],
     "props": [
       {
         "asset_id": "PROP_001",
-        "status": "REQUIRED_REFERENCE_SHEET",
+        "status": "APPROVED_REFERENCE_SHEET",
+        "reference_path": "../media_staging/anchors/episode_003_two_glasses_prop_reference_v1.png",
+        "sha256": "59f9b36981400cdadc99d1f79184c251c6c776989d9caeaf62ecec2bd48afac8",
         "required_invariants": ["shape", "material", "position"]
       }
     ]
