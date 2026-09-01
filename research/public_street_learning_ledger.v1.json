@@ -1,0 +1,20 @@
+{
+  "contract_version": "ace.video_kingdom.public_street_learning_ledger.v1",
+  "scope": "FREE_ZONE_RESEARCH_ONLY",
+  "production_integration": false,
+  "entries": [
+    {
+      "entry_id": "psl_20260901_genevolve",
+      "date": "2026-09-01",
+      "source_url": "https://cloud.tencent.com.cn/developer/article/2680286?policyId=1004",
+      "source_kind": "PUBLIC_TECHNICAL_ARTICLE",
+      "linked_public_repositories": ["https://github.com/MeiGen-AI/GenEvolve"],
+      "problem_observed": "A one-shot natural-language prompt loses visual reference and quality constraints before rendering.",
+      "minimum_mechanism": "Before generation, classify missing inputs as knowledge, reference, or quality constraints; then create a prompt-reference program that binds evidence, asset references and checkable requirements to the renderer.",
+      "local_fit": "Directly reinforces the episode_003 character/scene/prop contract and pre-generation quality gate.",
+      "not_adopted": ["No training, RL, weight distillation or privileged teacher runtime is adopted.", "No external content body, credentials or private data is imported."],
+      "decision": "ADAPT_AS_LIGHTWEIGHT_PREFLIGHT",
+      "next_verification": "Create one renderer-agnostic prompt-reference program for episode_003, then test whether the chosen video provider accepts bound reference images; do not claim reference-driven video before that evidence exists."
+    }
+  ]
+}
