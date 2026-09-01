@@ -8,3 +8,12 @@ private/
 raw_chat/
 __pycache__/
 *.py[cod]
+# User-supplied references and rendered episode media remain local unless a
+# separate explicit publishing decision is recorded.
+media_staging/anchors/yuanbao_user_reference_2026-09-01.png
+media_staging/episode_004/
+media_staging/episode_004_*.mp4
+media_staging/episode_004_*.jpg
+experiments/episode_004_runner.*.log
+experiments/episode_004_agnes_tasks.json
+experiments/episode_004_yuanbao_rejected_courtship.v1.json
