@@ -6,3 +6,5 @@
 secrets/
 private/
 raw_chat/
+__pycache__/
+*.py[cod]

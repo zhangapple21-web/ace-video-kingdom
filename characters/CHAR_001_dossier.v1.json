@@ -1,0 +1,51 @@
+{
+  "dossier_version": "ace.video_kingdom.character_dossier.v1",
+  "scope": "FREE_ZONE_RESEARCH_ONLY",
+  "production_integration": false,
+  "character_id": "CHAR_001",
+  "fictional_character": true,
+  "name": "The Tavern Keeper",
+  "rights_and_provenance": {
+    "source_class": "ORIGINAL_RESIDENT_WRITING",
+    "source_facts": [
+      "The character is an original fictional tavern keeper in episode_003_anchor_pilot.",
+      "The approved reference sheet is generated project media, bound by SHA-256 in the short-drama contract."
+    ],
+    "intentional_design_choices": [
+      "A middle-aged Chinese woman with short dark hair, navy cardigan and dark apron.",
+      "Her quiet ritual of setting a second glass externalizes the conflict between waiting and continuing."
+    ],
+    "unverified_inferences": [],
+    "disallowed_sources": ["UNATTRIBUTED_COPY", "PRIVATE_MATERIAL", "UNAUTHORIZED_REAL_PERSON_LIKENESS"],
+    "rights_note": "Original project character. This dossier must not be used to construct or infer a real person's biometric identity."
+  },
+  "identity_invariants": {
+    "visual": ["short dark hair", "middle-aged adult silhouette", "navy cardigan", "dark apron"],
+    "negative_constraints": ["no unauthorized real-person likeness", "no unrecorded replacement of face, hair, or core wardrobe"],
+    "behavioral": ["observes before acting", "chooses care without pretending certainty", "returns to ordinary work after a rupture"],
+    "relational": ["keeps a ritual place for an unseen guest", "does not resolve the guest into a visible person without a new approved story event"]
+  },
+  "allowed_evolution": {
+    "may_change": ["emotion", "posture", "small wear on clothing", "time-of-day lighting", "story knowledge after a recorded event"],
+    "requires_new_dossier_version": ["face", "hair length or color", "core wardrobe", "age presentation", "relationship premise", "replacement of the approved reference asset"]
+  },
+  "visual_assets": [
+    {
+      "anchor_id": "CHAR_001_REF_V1",
+      "purpose": "identity_reference_sheet",
+      "path": "../media_staging/anchors/episode_003_character_reference_v1.png",
+      "sha256": "583333322f1700609c45b6429475154b96685dc215178040405b58fae1261c5c",
+      "status": "APPROVED_REFERENCE_SHEET"
+    }
+  ],
+  "versioning": {
+    "supersedes": null,
+    "change_trigger": "initial approved character identity anchor"
+  },
+  "renderer_boundary": {
+    "agnes_video_v2_0": "UNVERIFIED_FOR_REFERENCE_IMAGE_OR_IDENTITY_LOCK; use only for non-mainline leaf shots until a reference-controlled A/B experiment is evidenced.",
+    "ipadapter_comfyui": "ISOLATED_STATIC_IMAGE_EXPERIMENT_CANDIDATE; generated fictional assets only; GPL-3.0 component must not be embedded in this repository application.",
+    "iamflow": "RESEARCH_CANDIDATE_PENDING_ENVIRONMENT_PROBE; do not install, download weights, or claim capability before a reproducible local probe."
+  },
+  "review_rule": "A mainline shot must reject the asset when any identity invariant is visibly contradicted. Ambiguous cases remain REVIEW_REQUIRED rather than being silently accepted."
+}

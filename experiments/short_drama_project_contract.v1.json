@@ -45,6 +45,7 @@
     "characters": [
       {
         "asset_id": "CHAR_001",
+        "dossier_path": "../characters/CHAR_001_dossier.v1.json",
         "status": "APPROVED_REFERENCE_SHEET",
         "reference_path": "../media_staging/anchors/episode_003_character_reference_v1.png",
         "sha256": "583333322f1700609c45b6429475154b96685dc215178040405b58fae1261c5c",
@@ -88,6 +89,12 @@
     "minimum_passes": 5,
     "rejection_rule": "Any two failed quality dimensions reject the shot from the main cut.",
     "rough_cut_rule": "A continuity-rejected cut may be retained only as an experiment, never labeled final."
+  },
+  "renderer_routing": {
+    "mainline_identity_requires": "VERIFIED_REFERENCE_CONTROLLED_RENDERER",
+    "agnes_video_v2_0": "LEAF_SHOTS_ONLY_UNTIL_REFERENCE_CONTROL_IS_EVIDENCED",
+    "ipadapter_comfyui": "ISOLATED_STATIC_IMAGE_A_B_ONLY",
+    "iamflow": "PENDING_READ_ONLY_ENVIRONMENT_PROBE"
   },
   "learning_origin": "Toonflow-app public workflow reviewed 2026-09-01; adapted as an independent minimal contract."
 }

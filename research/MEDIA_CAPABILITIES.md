@@ -14,7 +14,8 @@
 ## 图片模型
 
 - 视频王国首选图片模型：`gpt-image-2`。
-- 当前证据仍是配置/用户选定，尚无本地可复核的成功调用记录，因此状态为 `USER_SELECTED_CONFIGURATION_ONLY`，不可把模型名当作可用 Provider 证明。
+- 历史隔离成功证据：`experiments/2026-08-31-media-smoke-test.json` 记录一次真实成功调用，输出 `media_staging/image_test_gpt-image-2.png`、SHA-256 `13a744e49149eebccb9a807a6f3d24fade357657daeb3ce35541d67b2135ebb5`；episode_003 的三张已绑定参考资产也来自已验证的图片调用链。
+- 状态：`VERIFIED_HISTORICAL_ISOLATED`。这不等于当前可用性、额度或生产资格；每次新实验仍须最小健康检查和结果哈希。
 
 ## 共同边界
 
