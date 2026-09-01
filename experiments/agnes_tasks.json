@@ -15,9 +15,15 @@
   {
     "shot_id": "episode_002_shot_003",
     "model_id": "agnes-video-v2.0",
-    "status": "CREATE_FAILED",
-    "create_http_status": 503,
-    "video_id": null,
-    "created_status": null
+    "status": "COMPLETED",
+    "create_http_status": 200,
+    "video_id": "video_bGl0ZWxsbTpjdXN0b21fbGxtX3Byb3ZpZGVyOm9wZW5haTttb2RlbF9pZDphZ25lcy12aWRlby12Mi4wO3ZpZGVvX2lkOnZpZGVvX2QwODk0NjRmZDhhMDRhMzc4OGQ5MzQzYzAxYmQ5NmIz",
+    "created_status": "queued",
+    "create_attempt": 1,
+    "last_poll_http_status": 200,
+    "last_state": "completed",
+    "artifact_sha256": "7ac2f1a01ef9c52ef3664fddd1d7b123590b4f2fcb21fc56cf83219587874137",
+    "bytes": 668906,
+    "artifact_path": "media_staging\\episode_002_shot_003.mp4"
   }
 ]
