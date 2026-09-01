@@ -31,3 +31,6 @@ media_staging/episode_005_*.srt
 media_staging/episode_006_wenji_110s/
 experiments/episode_006_wenji_110s.v1.json
 experiments/episode_006_wenji_110s_tasks.json
+experiments/episode_006_phase1_scene_renders.v1.json
+experiments/episode_006_phase1*.log
+experiments/episode_006_anchor_probe.*.log
