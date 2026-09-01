@@ -18,6 +18,14 @@ def main() -> int:
     if missing:
         failures.append("missing top-level keys: " + ", ".join(missing))
     assets = document.get("assets", {})
+    story = document.get("story", {})
+    root = story.get("root_brief", {})
+    for field in ("theme", "relationship_and_conflict", "mainline_events", "source_rights_note", "semantic_anchor_type"):
+        if not root.get(field):
+            failures.append(f"root_brief missing {field}")
+    scene_ids = {node.get("scene_id") for node in story.get("scene_nodes", []) if node.get("scene_id")}
+    if not scene_ids:
+        failures.append("missing scene_nodes")
     contract_dir = Path(sys.argv[1]).resolve().parent
     for group in ("characters", "scenes", "props"):
         if not assets.get(group):
@@ -40,6 +48,8 @@ def main() -> int:
         for field in ("required_asset_ids", "first_state", "action", "last_state", "continuity_bridge_to_next", "quality_gate"):
             if not shot.get(field):
                 failures.append(f"{shot.get('shot_id', 'unknown')} missing {field}")
+        if shot.get("scene_id") not in scene_ids:
+            failures.append(f"{shot.get('shot_id', 'unknown')} references an unknown scene_id")
     if document.get("production_integration") is not False:
         failures.append("production_integration must remain false")
     if failures:

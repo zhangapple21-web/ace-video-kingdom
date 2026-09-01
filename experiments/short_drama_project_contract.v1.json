@@ -9,6 +9,13 @@
     "disallowed": ["UNATTRIBUTED_COPY", "PRIVATE_MATERIAL"]
   },
   "story": {
+    "root_brief": {
+      "theme": "A person chooses to keep a place for an absence without letting that absence stop life.",
+      "relationship_and_conflict": "The tavern keeper and an unseen returning guest are connected by ritual; the conflict is between waiting and continuing to live.",
+      "mainline_events": ["ordinary_routine", "inciting_anomaly", "character_choice", "consequence", "open_ending"],
+      "source_rights_note": "Original resident writing; no external prose copied.",
+      "semantic_anchor_type": "HASHABLE_HUMAN_READABLE_BRIEF"
+    },
     "event_chain": [
       "ordinary_routine",
       "inciting_anomaly",
@@ -17,6 +24,22 @@
       "open_ending"
     ],
     "current_event": "character_choice"
+    ,"scene_nodes": [
+      {
+        "scene_id": "SCN_001",
+        "summary": "Before opening, the keeper notices an impossible response from the empty chair and chooses to treat it as a guest rather than a threat.",
+        "emotional_tone": "quiet unease turning into tenderness",
+        "character_states": [{"asset_id": "CHAR_001", "state": "tired, observant, then deliberately calm"}],
+        "hands_off_to": "SCN_002"
+      },
+      {
+        "scene_id": "SCN_002",
+        "summary": "The response fades; she preserves the ritual but reopens the tavern to the morning.",
+        "emotional_tone": "release without explanation",
+        "character_states": [{"asset_id": "CHAR_001", "state": "accepting and quietly active"}],
+        "hands_off_to": "OPEN_ENDING"
+      }
+    ]
   },
   "assets": {
     "characters": [
@@ -52,6 +75,7 @@
       "shot_id": "S001",
       "status": "BLOCKED_ON_ASSET_REFERENCES",
       "duration_target_seconds": 5,
+      "scene_id": "SCN_001",
       "required_asset_ids": ["CHAR_001", "SCENE_001", "PROP_001"],
       "first_state": "character and prop positions match approved references",
       "action": "one visible action only",
