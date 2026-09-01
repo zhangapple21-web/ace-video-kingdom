@@ -1,0 +1,62 @@
+{
+  "contract_version": "ace.video_kingdom.flash_reference_episode_extension.v1",
+  "scope": "FREE_ZONE_RESEARCH_ONLY",
+  "production_integration": false,
+  "project_id": "episode_006_wenji_110s_remaining",
+  "render_defaults": {
+    "model": "agnes-video-2.5-flash",
+    "flash_mode": "reference",
+    "seconds": 11,
+    "size": "720P",
+    "aspect_ratio": "9:16",
+    "fallback_model": "agnes-video-v2.0",
+    "fallback_on_failure": true,
+    "negative_prompt": "different person, face drift, changed hair, missing cooling patch, changed hoodie, extra people, distorted hands, readable text, logo, watermark, frozen title card"
+  },
+  "shots": [
+    {
+      "shot_id": "WJ704_FLASH_LOG",
+      "prompt": "Vertical cinematic social drama. Use the supplied evidence-log scene anchor. Wenji writes a short neutral work record beside the laptop, checks one blurred timestamp, then closes the notebook with quiet resolve. Preserve her exact identity, black hair clip, forehead cooling patch and charcoal-black hoodie. One person, close over-shoulder movement, no readable private data, no logos.",
+      "render": {
+        "reference_image_urls": ["https://raw.githubusercontent.com/zhangapple21-web/-/main/ace-video-kingdom/wenji-episode-006/SCENE_02_typing_log_anchor.png"],
+        "fallback_image": "../media_staging/episode_006_wenji_110s/anchors/SCENE_02_typing_log_anchor.png"
+      }
+    },
+    {
+      "shot_id": "WJ705_FLASH_WINDOW",
+      "prompt": "Vertical cinematic social drama. Use the supplied night-window scene anchor. Wenji stops typing, looks toward the rain-dark window, breathes once, then turns back to her desk with a clearer expression. Preserve her exact identity, black hair clip, forehead cooling patch and charcoal-black hoodie. Natural slow side pan, one person, no readable screen text, no logos.",
+      "render": {
+        "reference_image_urls": ["https://raw.githubusercontent.com/zhangapple21-web/-/main/ace-video-kingdom/wenji-episode-006/SCENE_03_window_pause_anchor.png"],
+        "fallback_image": "../media_staging/episode_006_wenji_110s/anchors/SCENE_03_window_pause_anchor.png"
+      }
+    },
+    {
+      "shot_id": "WJ706_FLASH_REMINDER",
+      "prompt": "Vertical cinematic social drama. Use the supplied phone-read scene anchor. Wenji records a calm settlement reminder, listens to the short message once, and sets the phone down without anger. Preserve her exact identity, black hair clip, forehead cooling patch and charcoal-black hoodie. Controlled hand motion, one person, phone screen abstract and unreadable, no logos.",
+      "render": {
+        "reference_image_urls": ["https://raw.githubusercontent.com/zhangapple21-web/-/main/ace-video-kingdom/wenji-episode-006/SCENE_04_phone_read_anchor.png"],
+        "fallback_image": "../media_staging/episode_006_wenji_110s/anchors/SCENE_04_phone_read_anchor.png"
+      }
+    },
+    {
+      "shot_id": "WJ707_FLASH_FOLDER",
+      "prompt": "Vertical cinematic social drama. Use the supplied folder scene anchor. Wenji clips blank evidence pages into a thin folder, labels the tab with an unreadable mark, and puts the folder into her bag. Preserve her exact identity, black hair clip, forehead cooling patch and charcoal-black hoodie. One person, purposeful medium movement, no readable text, no logos.",
+      "render": {
+        "reference_image_urls": ["https://raw.githubusercontent.com/zhangapple21-web/-/main/ace-video-kingdom/wenji-episode-006/SCENE_07_folder_close_anchor.png"],
+        "fallback_image": "../media_staging/episode_006_wenji_110s/anchors/SCENE_07_folder_close_anchor.png"
+      }
+    },
+    {
+      "shot_id": "WJ708_FLASH_COUNTER",
+      "prompt": "Vertical cinematic social drama. Use the supplied consultation-counter scene anchor. Wenji approaches the counter, places the thin folder down, and meets an unseen clerk with a steady, relieved look. Preserve her exact identity, black hair clip, forehead cooling patch and charcoal-black hoodie. One person visible, gentle tracking camera, no readable signage, no logos.",
+      "render": {
+        "reference_image_urls": ["https://raw.githubusercontent.com/zhangapple21-web/-/main/ace-video-kingdom/wenji-episode-006/SCENE_08_counter_approach_anchor.png"],
+        "fallback_image": "../media_staging/episode_006_wenji_110s/anchors/SCENE_08_counter_approach_anchor.png"
+      }
+    }
+  ],
+  "acceptance": {
+    "duration_window_seconds": [52, 60],
+    "rejection_rule": "Reject face, hair, cooling-patch, hoodie, hand, prop, background, text, logo or motion drift."
+  }
+}

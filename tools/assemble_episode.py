@@ -36,15 +36,24 @@ def probe_media(path: Path) -> dict:
 
 def main() -> int:
     parser = argparse.ArgumentParser()
-    parser.add_argument("--manifest", type=Path, required=True)
+    parser.add_argument("--manifest", type=Path, action="append", required=True, help="repeat to combine verified shot manifests")
     parser.add_argument("--shot-ids", nargs="+", required=True)
     parser.add_argument("--output", type=Path, required=True)
     parser.add_argument("--min-seconds", type=float, default=45)
     parser.add_argument("--max-seconds", type=float, default=60)
     parser.add_argument("--review-output", type=Path, help="optional local media-integrity review JSON")
+    parser.add_argument(
+        "--normalize-to",
+        help="optional WIDTHxHEIGHT portrait/landscape target; re-encodes each verified source before concat",
+    )
     args = parser.parse_args()
 
-    records = load_records(args.manifest)
+    records: dict[str, dict] = {}
+    for manifest in args.manifest:
+        overlap = set(records).intersection(load_records(manifest))
+        if overlap:
+            raise SystemExit(f"duplicate shot IDs across manifests: {', '.join(sorted(overlap))}")
+        records.update(load_records(manifest))
     clips: list[Path] = []
     source_review: list[dict] = []
     for shot_id in args.shot_ids:
@@ -61,14 +70,33 @@ def main() -> int:
         source_review.append({"shot_id": shot_id, "path": str(artifact), "sha256": actual_hash, **media})
         clips.append(artifact)
     dimensions = {(item["width"], item["height"]) for item in source_review}
+    target_width: int | None = None
+    target_height: int | None = None
     if len(dimensions) != 1:
-        raise SystemExit("cannot concatenate mixed-resolution source clips")
+        if not args.normalize_to or "x" not in args.normalize_to.lower():
+            raise SystemExit("cannot concatenate mixed-resolution source clips; use --normalize-to WIDTHxHEIGHT")
+        try:
+            target_width, target_height = (int(value) for value in args.normalize_to.lower().split("x", 1))
+        except ValueError as error:
+            raise SystemExit("--normalize-to must be WIDTHxHEIGHT") from error
+        if target_width <= 0 or target_height <= 0:
+            raise SystemExit("--normalize-to dimensions must be positive")
 
     args.output.parent.mkdir(parents=True, exist_ok=True)
+    temporary_clips: list[Path] = []
     with tempfile.NamedTemporaryFile("w", encoding="utf-8", suffix=".txt", delete=False) as handle:
         concat = Path(handle.name)
-        for clip in clips:
-            handle.write("file '" + str(clip).replace("'", r"'\\''") + "'\n")
+        for index, clip in enumerate(clips):
+            usable_clip = clip
+            if target_width and target_height:
+                usable_clip = concat.parent / f"ace_normalized_{index}.mp4"
+                subprocess.run([
+                    "ffmpeg", "-y", "-i", str(clip),
+                    "-vf", f"scale={target_width}:{target_height}:force_original_aspect_ratio=decrease,pad={target_width}:{target_height}:(ow-iw)/2:(oh-ih)/2,setsar=1",
+                    "-c:v", "libx264", "-pix_fmt", "yuv420p", "-c:a", "aac", "-ar", "48000", str(usable_clip),
+                ], check=True)
+                temporary_clips.append(usable_clip)
+            handle.write("file '" + str(usable_clip).replace("'", r"'\\''") + "'\n")
     try:
         subprocess.run([
             "ffmpeg", "-y", "-f", "concat", "-safe", "0", "-i", str(concat),
@@ -80,6 +108,8 @@ def main() -> int:
         ], check=True, capture_output=True, text=True)
     finally:
         concat.unlink(missing_ok=True)
+        for clip in temporary_clips:
+            clip.unlink(missing_ok=True)
     duration = float(probe.stdout.strip())
     if not args.min_seconds <= duration <= args.max_seconds:
         raise SystemExit(f"assembled duration {duration:.3f}s outside [{args.min_seconds}, {args.max_seconds}]")
@@ -92,6 +122,7 @@ def main() -> int:
         "sources": source_review,
         "output_media": output_media,
         "duration_window_seconds": [args.min_seconds, args.max_seconds],
+        "normalized_to": args.normalize_to,
     }
     if args.review_output:
         args.review_output.parent.mkdir(parents=True, exist_ok=True)
