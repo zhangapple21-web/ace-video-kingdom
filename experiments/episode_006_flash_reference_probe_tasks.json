@@ -1,0 +1,30 @@
+[
+  {
+    "shot_id": "WJ702_FLASH_REFERENCE",
+    "model_id": "agnes-video-2.5-flash",
+    "status": "COMPLETED",
+    "create_attempt": 1,
+    "create_http_status": 200,
+    "video_id": "task_WOMq8tJSC3f7Bv1gftPTEfcLqwD632BO",
+    "created_status": "queued",
+    "last_poll_http_status": 200,
+    "last_state": "completed",
+    "artifact_sha256": "7b00ac3c0ff3cb08a319ed36d46b51677dcabd1cb43f07ef5ea8f98fd5b3a77a",
+    "bytes": 1263846,
+    "artifact_path": "media_staging\\episode_006_wenji_110s\\video\\WJ702_FLASH_REFERENCE.mp4"
+  },
+  {
+    "shot_id": "WJ703_FLASH_REFERENCE",
+    "model_id": "agnes-video-2.5-flash",
+    "status": "COMPLETED",
+    "create_attempt": 1,
+    "create_http_status": 200,
+    "video_id": "task_QTaWYiA65Qxf1pOqRQKlcXH5oEOkzvxO",
+    "created_status": "queued",
+    "last_poll_http_status": 200,
+    "last_state": "completed",
+    "artifact_sha256": "4c625990cca1a233f8b8f0f48e307a185713cb7f7054d508ef88278fd5275059",
+    "bytes": 2025723,
+    "artifact_path": "media_staging\\episode_006_wenji_110s\\video\\WJ703_FLASH_REFERENCE.mp4"
+  }
+]
