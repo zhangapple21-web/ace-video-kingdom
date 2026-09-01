@@ -1,0 +1,36 @@
+{
+  "contract_version": "ace.video_kingdom.flash_reference_probe.v1",
+  "scope": "FREE_ZONE_RESEARCH_ONLY",
+  "production_integration": false,
+  "project_id": "episode_006_flash_reference_probe",
+  "render_defaults": {
+    "model": "agnes-video-2.5-flash",
+    "flash_mode": "reference",
+    "seconds": 11,
+    "size": "720P",
+    "aspect_ratio": "9:16",
+    "fallback_model": "agnes-video-v2.0",
+    "fallback_on_failure": true,
+    "fallback_image": "../media_staging/episode_006_wenji_110s/anchors/SCENE_05_phone_close_anchor.png",
+    "negative_prompt": "different person, face drift, changed hair, missing cooling patch, changed hoodie, extra people, distorted hands, readable text, logo, watermark"
+  },
+  "shots": [
+    {
+      "shot_id": "WJ702_FLASH_REFERENCE",
+      "prompt": "Vertical cinematic social drama. Use the supplied scene anchor. Wenji studies a plain phone, exhales, lowers it, then turns the phone face down with restrained resolve. Preserve the same woman, dark clipped hair, forehead cooling patch, charcoal hoodie, and exact room details. Natural close-shot motion, no readable text, no logos, no frozen opening.",
+      "render": {
+        "reference_image_urls": ["https://raw.githubusercontent.com/zhangapple21-web/-/main/ace-video-kingdom/wenji-episode-006/SCENE_05_phone_close_anchor.png"],
+        "fallback_image": "../media_staging/episode_006_wenji_110s/anchors/SCENE_05_phone_close_anchor.png"
+      }
+    },
+    {
+      "shot_id": "WJ703_FLASH_REFERENCE",
+      "prompt": "Vertical cinematic social drama. Use the supplied consultation-lobby scene anchor. Wenji adjusts a thin document folder, takes two measured steps toward the counter, and looks up with calm resolve. Preserve the same woman, dark clipped hair, forehead cooling patch, charcoal hoodie, and exact lobby layout. Natural tracking motion, no readable signage, no logos, no frozen opening.",
+      "render": {
+        "reference_image_urls": ["https://raw.githubusercontent.com/zhangapple21-web/-/main/ace-video-kingdom/wenji-episode-006/SCENE_06_consultation_lobby_anchor.png"],
+        "fallback_image": "../media_staging/episode_006_wenji_110s/anchors/SCENE_06_consultation_lobby_anchor.png"
+      }
+    }
+  ],
+  "acceptance": {"duration_window_seconds": [20, 24]}
+}
