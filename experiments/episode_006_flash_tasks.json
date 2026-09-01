@@ -1,0 +1,16 @@
+[
+  {
+    "shot_id": "WJ701_FLASH_REFERENCE",
+    "model_id": "agnes-video-2.5-flash",
+    "status": "COMPLETED",
+    "create_attempt": 1,
+    "create_http_status": 200,
+    "video_id": "task_8SFL8NiZzW0mFzBY9FFfDiZUh9A8NQtG",
+    "created_status": "queued",
+    "last_poll_http_status": 200,
+    "last_state": "completed",
+    "artifact_sha256": "2914ed5d890db569107d59e809d418fd4a744508a91afee053db1a330f4f259a",
+    "bytes": 1597906,
+    "artifact_path": "media_staging\\episode_006_wenji_110s\\video\\WJ701_FLASH_REFERENCE.mp4"
+  }
+]

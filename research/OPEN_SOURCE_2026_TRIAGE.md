@@ -28,3 +28,20 @@
 3. 只有某个候选在可复现实验中改善连续性，并能在现有账本中记录任务 ID、恢复点和许可证，才提交替换适配器提案。
 
 本文件是研究筛选，不是生产集成或模型资格证明。
+
+## 2026-09-01 公开项目复核与吸收边界
+
+本轮通过 GitHub 公开 API 逐项复核了用户提到的候选，而不是按宣传文案采信：
+
+| 项目 | 公开证据 | 能吸收的最小机制 | 不引入的部分 |
+|---|---|---|---|
+| [easyeye163/vimax-agnes](https://github.com/easyeye163/vimax-agnes) | MIT；24 stars；README 明确为 Idea→Story→Character Reference→Scene Video→Concat，并带缓存 | 角色/场景资产先行、缺失镜头续跑；本项目已有独立锚图、`video_id` 清单和 `run_comedy_episode.py` | 不复制其 Agnes v2.0 单一参考图策略；本线改用 Flash 每镜场景锚图 |
+| [lcy362/agnes-video-generator](https://github.com/lcy362/agnes-video-generator) | MIT；307 stars；README 声称多场景旁白/自动字幕，但具体效果依赖其平台配置 | 作为“脚本→多镜→配音/字幕”的对照样本；本项目已用 ffmpeg + SRT，先保留可核验的字幕链 | 不接入其平台账号、Docker、未知默认网关或另一套任务调度 |
+| [AlekseiUL/gpt-image-2-agent-kit](https://github.com/AlekseiUL/gpt-image-2-agent-kit) | MIT；16 stars；README 明确 dry-run、参考包和 receipt | 已吸收为确定性 preflight、引用图 URL/哈希、失败保留与可恢复收据 | 不引入第二套 Agent runtime；不把 dry-run 当作真实生成证明 |
+| [xiaosen2026/Reelvas](https://github.com/xiaosen2026/Reelvas) | 公开 README；13 stars；18 类节点，含脚本/分镜/图/视频/TTS | 借鉴“能力街/节点化”概念用于研究记录；视频王国仍以文件计划 + 单一现有 runner 为事实源 | 不安装桌面壳、不创建第二 Scheduler/Router，不把页面状态当作 provider receipt |
+
+### 实际裁决
+
+- **已落地**：Flash `reference` 模式、每镜一张公开场景锚图、GitHub raw 可达性校验、失败后 V2.0 明确回退、已有镜头与中间锚图复用、ffmpeg 统一拼接、SRT 内心独白。
+- **保持研究候选**：ComfyUI/IPAdapter、Wan/LTX/IAMFlow；当前机器只有 6 GiB 显存且未装目标栈，不能声称可运行。
+- **不制造新轮子**：剪辑继续使用现有 ffmpeg；任务恢复继续使用现有 manifest/`video_id`；外部项目只留下来源、机制、限制和下一验证条件。
