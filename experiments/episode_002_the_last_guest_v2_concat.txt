@@ -1,0 +1,2 @@
+file '../media_staging/episode_002_the_last_guest.mp4'
+file '../media_staging/episode_002_shot_003.mp4'
