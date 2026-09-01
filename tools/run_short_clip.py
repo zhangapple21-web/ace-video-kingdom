@@ -67,9 +67,16 @@ def main() -> int:
             json={"model": "agnes-video-v2.0", "prompt": args.prompt, "seconds": "5", "size": "720P", "aspect_ratio": "16:9"},
             timeout=90,
         )
-        body = response.json()
+        try:
+            body = response.json()
+        except ValueError:
+            body = {}
         video_id = body.get("video_id") or body.get("id") or body.get("task_id")
         record.update({"create_http_status": response.status_code, "video_id": video_id, "created_status": body.get("status")})
+        if response.status_code >= 300:
+            record["error_class"] = "TRANSIENT_SERVICE_OR_GATEWAY" if response.status_code in {429, 500, 502, 503, 504} else "HTTP_CREATE_ERROR"
+            record["retry_after"] = response.headers.get("Retry-After")
+            record["error_body_excerpt"] = response.text[:500]
         _persist_record(args.manifest, record)
         if response.status_code >= 300 or not video_id:
             record["status"] = "CREATE_FAILED"
