@@ -23,4 +23,6 @@ experiments/episode_005_agnes_tasks.json
 experiments/episode_005_i2v_probe_tasks.json
 experiments/episode_005_i2v_episode_tasks.json
 experiments/episode_005_i2v_episode_runner.*.log
+experiments/episode_005_runner.*.log
 media_staging/episode_005/
+media_staging/episode_005_*.jpg
