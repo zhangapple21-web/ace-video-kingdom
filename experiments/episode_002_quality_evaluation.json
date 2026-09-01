@@ -1,0 +1,12 @@
+{
+  "evaluation_version": "ace.video_kingdom.continuity_review.v1",
+  "episode_id": "episode_002_the_last_guest",
+  "artifact": "media_staging/episode_002_the_last_guest_45s.mp4",
+  "status": "ROUGH_CUT_REJECTED_FOR_CONTINUITY",
+  "evidence": "2026-09-01 contact sheet inspection",
+  "passes": ["narrative_causality", "mood", "clip_recovery", "media_integrity"],
+  "fails": ["character_identity", "wardrobe_consistency", "scene_layout", "prop_continuity"],
+  "decision": "Keep as an evidence-backed experiment. Do not label as final or use it as the reference asset for future shots.",
+  "next_required_action": "Create approved character, scene and prop reference sheets under short_drama_project_contract.v1 before generating the next main-line shot.",
+  "production_integration": false
+}
