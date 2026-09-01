@@ -1,0 +1,20 @@
+{
+  "contract_version": "ace.video_kingdom.review_policy.v1",
+  "scope": "FREE_ZONE_RESEARCH_ONLY",
+  "production_integration": false,
+  "review_order": ["deterministic_preflight", "5.6 Terra primary review", "Grok 4.6 red-team review when healthy", "5.6 Sol escalation only", "5.6 Luna packaging only"],
+  "roles": {
+    "5.6 Terra": "Primary narrative and production review: causal chain, character intent, emotional beat, shot objective, and prompt clarity.",
+    "Grok 4.6": "Optional adversarial review only: identify implausible motives, stale premises, viewer confusion, cliches, and missing causal bridges.",
+    "5.6 Sol": "Arbitrates only material disagreement between the primary and red-team reviews; it does not replace deterministic safety or asset gates.",
+    "5.6 Luna": "Formats approved packets and reports; it may not approve, reject, submit provider work, or publish assets."
+  },
+  "grok_activation": "Requires fresh scoped provider health evidence. If absent, omit the red-team pass and mark the report CONDITIONAL rather than fabricate a review.",
+  "verdicts": {
+    "READY": "All deterministic gates pass and any required reviewer verdict is supportive.",
+    "CONDITIONAL": "Hard gates pass but an optional reviewer, health receipt, or visual trial remains pending. One bounded test shot may proceed.",
+    "REWORK": "Narrative, continuity, asset assignment, or shot-state problem must be repaired before provider submission.",
+    "BLOCKED": "Missing asset/URL, unsupported renderer feature, unsafe scope, or invalid contract prevents submission."
+  },
+  "non_authority": ["No reviewer may publish a video.", "No reviewer may override an invalid asset hash, inaccessible URL, or production_integration=true.", "No reviewer output proves a completed provider call or visual quality."]
+}
