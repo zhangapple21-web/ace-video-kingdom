@@ -13,6 +13,11 @@ import sys
 from pathlib import Path
 
 
+def _append_option(command: list[str], flag: str, value: object | None) -> None:
+    if value is not None and value != "":
+        command.extend([flag, str(value)])
+
+
 def main() -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument("--episode", type=Path, required=True)
@@ -23,6 +28,9 @@ def main() -> int:
     args = parser.parse_args()
     episode = json.loads(args.episode.read_text(encoding="utf-8"))
     shots = episode.get("shots", [])
+    defaults = episode.get("render_defaults", {})
+    if not isinstance(defaults, dict):
+        raise SystemExit("render_defaults must be an object when supplied")
     if not shots:
         raise SystemExit("episode has no shots")
     args.media_dir.mkdir(parents=True, exist_ok=True)
@@ -37,6 +45,17 @@ def main() -> int:
             "--prompt", prompt, "--manifest", str(args.manifest), "--output",
             str(args.media_dir / f"{shot_id}.mp4"), "--timeout", str(args.timeout),
         ]
+        render = {**defaults, **(shot.get("render", {}) if isinstance(shot.get("render"), dict) else {})}
+        image = render.get("image")
+        if image:
+            image_path = (args.episode.parent / image).resolve() if not str(image).startswith(("http://", "https://", "data:")) else image
+            _append_option(command, "--image", image_path)
+        for field, flag in (
+            ("width", "--width"), ("height", "--height"), ("num_frames", "--num-frames"),
+            ("frame_rate", "--frame-rate"), ("seed", "--seed"),
+            ("negative_prompt", "--negative-prompt"),
+        ):
+            _append_option(command, flag, render.get(field))
         result = subprocess.run(command)
         if result.returncode:
             print(json.dumps({"status": "STOPPED", "failed_shot": shot_id}, ensure_ascii=False))
