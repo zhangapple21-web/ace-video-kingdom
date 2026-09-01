@@ -10,6 +10,7 @@ import argparse
 import json
 import subprocess
 import sys
+import time
 from pathlib import Path
 
 
@@ -54,6 +55,14 @@ def main() -> int:
     parser.add_argument("--output", type=Path, required=True)
     parser.add_argument("--review-output", type=Path, help="optional local media-integrity review JSON")
     parser.add_argument("--timeout", type=int, default=480)
+    parser.add_argument(
+        "--shot-retry-rounds", type=int, default=2,
+        help="additional durable resume rounds after a transient clip failure",
+    )
+    parser.add_argument(
+        "--shot-retry-delay", type=int, default=60,
+        help="seconds between durable resume rounds",
+    )
     args = parser.parse_args()
     episode = json.loads(args.episode.read_text(encoding="utf-8"))
     shots = episode.get("shots", [])
@@ -62,6 +71,8 @@ def main() -> int:
         raise SystemExit("render_defaults must be an object when supplied")
     if not shots:
         raise SystemExit("episode has no shots")
+    if args.shot_retry_rounds < 0 or args.shot_retry_delay < 1:
+        raise SystemExit("shot retry rounds must be >= 0 and retry delay must be >= 1")
     _validate_asset_graph(shots)
     args.media_dir.mkdir(parents=True, exist_ok=True)
     shot_ids: list[str] = []
@@ -87,6 +98,20 @@ def main() -> int:
         ):
             _append_option(command, flag, render.get(field))
         result = subprocess.run(command)
+        for retry_round in range(1, args.shot_retry_rounds + 1):
+            if not result.returncode:
+                break
+            print(json.dumps({
+                "status": "RETRYING_DURABLE_SHOT",
+                "shot_id": shot_id,
+                "retry_round": retry_round,
+                "retry_in_seconds": args.shot_retry_delay,
+            }, ensure_ascii=False), flush=True)
+            time.sleep(args.shot_retry_delay)
+            # run_short_clip reads the persisted manifest first: a task that
+            # received a video_id resumes polling instead of submitting a
+            # duplicate provider request.
+            result = subprocess.run(command)
         if result.returncode:
             print(json.dumps({"status": "STOPPED", "failed_shot": shot_id}, ensure_ascii=False))
             return result.returncode
