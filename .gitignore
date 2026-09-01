@@ -25,4 +25,9 @@ experiments/episode_005_i2v_episode_tasks.json
 experiments/episode_005_i2v_episode_runner.*.log
 experiments/episode_005_runner.*.log
 media_staging/episode_005/
+media_staging/episode_005_i2v/
 media_staging/episode_005_*.jpg
+media_staging/episode_005_*.srt
+media_staging/episode_006_wenji_110s/
+experiments/episode_006_wenji_110s.v1.json
+experiments/episode_006_wenji_110s_tasks.json
