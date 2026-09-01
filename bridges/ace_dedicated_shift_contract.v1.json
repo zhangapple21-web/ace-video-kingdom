@@ -1,0 +1,23 @@
+{
+  "contract_version": "ace.video_kingdom.dedicated_shift_bridge.v1",
+  "scope": "FREE_ZONE_RESEARCH_ONLY",
+  "production_integration": false,
+  "authority": "existing_ace_daemon_only",
+  "trigger": "EXPLICIT_DEDICATED_FREE_ZONE_SHIFT",
+  "runner": "tools/run_controlled_shift.py",
+  "rules": {
+    "max_work_units_per_shift": 1,
+    "resume_before_create": true,
+    "one_shot_retry_scope": true,
+    "retain_failures": true,
+    "automatic_external_publish": false,
+    "required_plan_fields": ["project_id", "scope", "production_integration", "shots", "acceptance"]
+  },
+  "rejection_reasons": [
+    "missing_or_invalid_episode_contract",
+    "missing_scene_anchor",
+    "production_integration_enabled",
+    "more_than_one_work_unit",
+    "runner_not_reproducible"
+  ]
+}
