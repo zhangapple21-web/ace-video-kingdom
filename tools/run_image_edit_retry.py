@@ -1,4 +1,4 @@
-"""Run the bundled image-edit CLI with bounded automatic retry.
+"""Run the bundled image-edit CLI with bounded, provider-aware retry.
 
 Retries only transport/server failures.  Argument validation and authentication
 failures stop immediately; every attempt is recorded in a JSON sidecar.
@@ -23,12 +23,28 @@ def _transient(text: str) -> bool:
     ))
 
 
+def _retry_after_seconds(text: str) -> float | None:
+    """Extract a provider cooldown when a wrapped CLI surfaced one.
+
+    The bundled image CLI normally does not expose response headers.  When a
+    provider does surface ``Retry-After: N``, however, that value must win over
+    a generic backoff interval rather than being ignored.
+    """
+    import re
+
+    match = re.search(r"retry-after\s*[:=]\s*([0-9]+(?:\.[0-9]+)?)", text, re.IGNORECASE)
+    return float(match.group(1)) if match else None
+
+
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--log", type=Path, required=True)
     parser.add_argument("--max-attempts", type=int, default=3)
-    parser.add_argument("--initial-delay", type=float, default=10)
-    parser.add_argument("--max-delay", type=float, default=120)
+    parser.add_argument(
+        "--initial-delay", type=float, default=60,
+        help="fallback cooldown when the provider does not return Retry-After (default: 60)",
+    )
+    parser.add_argument("--max-delay", type=float, default=900)
     parser.add_argument("command", nargs=argparse.REMAINDER)
     args = parser.parse_args()
     command = args.command[1:] if args.command[:1] == ["--"] else args.command
@@ -50,7 +66,9 @@ def main() -> int:
         if not row["transient"] or number == args.max_attempts:
             args.log.write_text(json.dumps({"command": command, "attempts": attempts, "status": "FAILED_FINAL"}, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
             return result.returncode or 1
-        delay = min(args.initial_delay * (2 ** (number - 1)), args.max_delay)
+        provider_delay = _retry_after_seconds(combined)
+        delay = min(provider_delay if provider_delay is not None else args.initial_delay * (2 ** (number - 1)), args.max_delay)
+        attempts[-1]["retry_delay_source"] = "provider_retry_after" if provider_delay is not None else "provider_profile_fallback"
         attempts[-1]["retry_in_seconds"] = delay
         args.log.write_text(json.dumps({"command": command, "attempts": attempts, "status": "RETRYING"}, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
         time.sleep(delay)
