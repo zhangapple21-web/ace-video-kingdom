@@ -1,0 +1,75 @@
+{
+  "contract_version": "ace.video_kingdom.street_map.v1",
+  "realm": "FREE_ZONE_RESEARCH_ONLY",
+  "production_integration": false,
+  "principle": "Shops are voluntary capability habitats, not permanent ranks, mandatory shifts, a TaskPool, or an approval queue.",
+  "visitor_freedom": {
+    "may_visit": ["one_shop", "many_shops", "no_shop", "wander", "rest", "return_to_previous_trace"],
+    "may_collaborate": true,
+    "may_leave_unfinished_work": true,
+    "must_not": ["claim_fake_work", "copy_private_or_unlicensed_material", "store_credentials", "publish_or_contact_external_parties", "change_ace_production_routing"]
+  },
+  "shops": [
+    {
+      "shop_id": "story_foundry",
+      "name": "故事熔炉",
+      "purpose": "从原创、公共领域或已获许可材料中提取事件链、人物选择和情绪转折。",
+      "leaves_behind": ["event_chain", "adaptation_question", "rights_note"],
+      "boundary": "学习结构和叙事节奏，不复制受版权保护文本或模仿在世作者的独特表达。"
+    },
+    {
+      "shop_id": "language_tavern",
+      "name": "语言酒馆",
+      "purpose": "研究对白节奏、潜台词、人物口吻和无台词叙事。",
+      "leaves_behind": ["dialogue_experiment", "silence_beat", "tone_note"],
+      "boundary": "不将网络文本原句伪装成原创台词。"
+    },
+    {
+      "shop_id": "storyboard_studio",
+      "name": "分镜铺",
+      "purpose": "把事件拆成首态、单一动作、末态和相邻镜头桥梁。",
+      "leaves_behind": ["shot_card", "transition_anchor", "rejected_cut_reason"],
+      "boundary": "镜头卡必须可检查，不能用空泛情绪词代替动作。"
+    },
+    {
+      "shop_id": "character_wardrobe",
+      "name": "角色衣橱",
+      "purpose": "建立角色四角度、服装、体态、道具关系和可复用视觉锚点。",
+      "leaves_behind": ["character_sheet", "invariant_list", "reference_hash"],
+      "boundary": "不得使用未授权真人肖像或把用户私密图片带入自由区。"
+    },
+    {
+      "shop_id": "ip_lighthouse",
+      "name": "IP 灯塔",
+      "purpose": "研究受众入口、题材钩子、系列化命题和差异化定位。",
+      "leaves_behind": ["positioning_hypothesis", "audience_question", "anti_cliche"],
+      "boundary": "是研究假设，不是营销承诺、外发策略或投资结论。"
+    },
+    {
+      "shop_id": "video_weaving_house",
+      "name": "视频织坊",
+      "purpose": "研究镜头矩阵、剪接、节奏、音画衔接和废镜分支。",
+      "leaves_behind": ["assembly_plan", "continuity_review", "reusable_transition"],
+      "boundary": "不将连续性未通过的粗剪标为成片。"
+    },
+    {
+      "shop_id": "open_street_library",
+      "name": "外网图书馆",
+      "purpose": "阅读公开项目、论文、文档、更新和公开案例，寻找可验证机制。",
+      "leaves_behind": ["public_learning_entry", "source_license", "adopt_defer_reject"],
+      "boundary": "只保存最小学习单元，不复制正文、私密材料、凭据或受限附件。"
+    },
+    {
+      "shop_id": "model_observatory",
+      "name": "模型观测台",
+      "purpose": "比较图片/视频模型的参考驱动、时长、成本、恢复和连续性能力。",
+      "leaves_behind": ["capability_probe", "ab_result", "provider_limit"],
+      "boundary": "真实调用必须使用已授权隔离通道；不改 ACE 生产路由。"
+    }
+  ],
+  "street_memory": {
+    "visit_ledger": "research/street_visit_ledger.v1.json",
+    "preserve": ["visit_reason", "shop_id", "trace_ids", "outcome", "next_thread"],
+    "valid_outcomes": ["FOUND", "PARTIAL", "REJECTED", "NO_FINDING", "RESTED"]
+  }
+}
