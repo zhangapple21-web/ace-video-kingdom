@@ -12,7 +12,10 @@ import json
 from pathlib import Path
 from urllib.parse import urlparse
 
-from validate_motion_diversity import validate as validate_motion
+try:
+    from validate_motion_diversity import validate as validate_motion
+except ImportError:  # support ``python -m tools.preflight_episode`` as well
+    from tools.validate_motion_diversity import validate as validate_motion
 
 
 def _load(path: Path) -> dict:

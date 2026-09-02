@@ -12,7 +12,10 @@ import json
 import subprocess
 from pathlib import Path
 
-from validate_subtitles import parse_srt, validate
+try:
+    from validate_subtitles import parse_srt, validate
+except ImportError:  # support ``python -m tools.burn_subtitles`` as well
+    from tools.validate_subtitles import parse_srt, validate
 
 
 def _filter_path(path: Path) -> str:
