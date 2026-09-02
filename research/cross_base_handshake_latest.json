@@ -1,0 +1,54 @@
+{
+  "contract_version": "ace.video_kingdom.cross_base_handshake.v1",
+  "at": "2026-09-02T14:55:56.181995+00:00",
+  "production_integration": false,
+  "bases": {
+    "video_kingdom": {
+      "exists": true,
+      "git_head": "7052559f86bb472bf9f860fff20e867a61e0ede6"
+    },
+    "ace_core": {
+      "exists": true,
+      "git_head": "0bf9a5a3c553dbe80301ad467042bca3128f729a"
+    },
+    "r1": {
+      "exists": true,
+      "git_head": "c852b6212e66725d0710836bfb2e5670a058764f"
+    },
+    "r1_archaeology": {
+      "exists": true,
+      "git_head": "a9f1198d28bbf8d5634ccc20eb539e87a2382508"
+    },
+    "mine_seed": {
+      "exists": true,
+      "git_head": "de6e2fa4d0fd7dd52cea2bbd06a866d9eed896ef"
+    }
+  },
+  "files": {
+    "video_kingdom_index": {
+      "exists": true,
+      "sha256": "d349bb4f6cee32a14553336ad0b7a4b2c4ffb86ffa85fe6b7fc8775703c55407"
+    },
+    "street_ledger": {
+      "exists": true,
+      "sha256": "db6661bb59187c3e7a61f8957f8c3743724305a3108aa0a8ab0c8e80d11ff55d"
+    },
+    "dispatch_receipts": {
+      "exists": true,
+      "sha256": "735859ad8ca97531d2d4a46010487636f33ae71cb135b018a0f2fbf61b5b3f8b"
+    },
+    "ace_registry": {
+      "exists": true,
+      "sha256": "85fe4886be35cb069f25c4d9d5546aed19fb8bc0409209175bca34ab5ac0b426"
+    }
+  },
+  "local_handshakes": {
+    "oneapi_127_0_0_1_3000": true,
+    "ace_proxy_127_0_0_1_3001": false
+  },
+  "status": "HANDSHAKE_OK",
+  "notes": [
+    "Reachability and hash continuity only; no provider call was made.",
+    "A closed local port is recorded as a failed live handshake, not hidden by historical registry metadata."
+  ]
+}
