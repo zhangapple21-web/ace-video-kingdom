@@ -75,3 +75,21 @@
    并记录下一镜的连续性桥梁。
 3. 生成阶段保持每镜独立锚图；动作弧通过后才调用 Flash。渲染后仍须抽帧复核，
    因为计划通过不能证明模型真的完成了动作。
+
+## 2026-09-02 全流程项目复核
+
+通过 GitHub API 和各仓库 README 核验了用户提供的候选：
+
+| 项目 | 公开证据 | 只吸收的机制 | 不直接迁移的部分 |
+|---|---|---|---|
+| [Forget-C/Jellyfish](https://github.com/Forget-C/Jellyfish) | Apache-2.0，约 6.3k stars；README 明确包含脚本、结构化分镜、一致性资产、异步任务状态/取消/恢复 | 统一任务状态模型、可复用 shot/asset/task 记录 | 不替换现有 manifest/runner，不引入第二任务系统 |
+| [waoAI/waoowaoo](https://github.com/waoAI/waoowaoo) | 约 13.9k stars；README 自称小说→角色/场景/分镜/配音，且明确标注测试早期、存在 bug；许可证未由仓库声明确认 | 小说解析阶段的角色/场景/事件抽取思路 | 不把未明确许可证和测试版稳定性当作可集成事实 |
+| [calesthio/OpenMontage](https://github.com/calesthio/OpenMontage) | AGPL-3.0，约 55.5k stars；README 定位为 agentic 视频生产系统 | 以 pipeline/tool/skill 形式拆分研究任务 | AGPL、外部 Provider 和另一套 Agent 控制面暂不接入 |
+| [univa-agent/univa](https://github.com/univa-agent/univa) | MIT，约 527 stars；README 描述 Plan-Act、多轮记忆和主动建议 | Plan/Act 分离、记录全局与用户记忆边界 | 宣传中的“通用视频 fabric”尚未在本机验证，不当作能力证明 |
+| [HITsz-TMG/VideoClaw](https://github.com/HITsz-TMG/VideoClaw) | MIT，约 1.7k stars；README 明确脚本→角色/场景→分镜→参考图→视频→后期，并允许中间节点人工介入 | 场记库、阶段性可继续、关键节点可修改 | 不引入其 OpenClaw/WebUI 控制面 |
+| [chatfire-AI/huobao-drama](https://github.com/chatfire-AI/huobao-drama) | CC BY-NC-SA 4.0，约 14.7k stars；README 明确 TypeScript 全栈短剧工作流 | 角色/分镜资产分离和 FFmpeg 后期边界 | 非商业许可限制，不作为 ACE 或可商业化依赖 |
+| [FireRedTeam/FireRed-OpenStoryline](https://github.com/FireRedTeam/FireRed-OpenStoryline) | Apache-2.0，约 3.4k stars；README 明确媒体检索、脚本、旁白、剪辑的一体化方向 | 将“素材检索”和“生成镜头”区分成两种来源 | 自动下载外部素材前必须另做版权、来源和本地缓存审查 |
+
+### 当前裁决
+
+这些项目说明成熟系统普遍具备四件事：可恢复任务、资产/场记账本、阶段性人工或规则质检、Plan 与执行分离。现有视频王国已经有其中的 manifest、哈希、锚图、preflight、巡逻和 ffmpeg；真正的缺口是将“剧本逻辑、连续性状态和观众信息”统一落到同一份 episode 计划中，而不是再安装一个黑盒平台。
