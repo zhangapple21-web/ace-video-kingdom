@@ -21,6 +21,11 @@
 `tools/validate_motion_diversity.py` 检查相邻镜头的动作签名不重复；
 `preflight_episode.py` 会在任何 Provider 提交前拒绝缺少动作弧的计划。
 
+正式短剧还可以设置 `quality_mode=FORMAL`，由
+`tools/validate_episode_quality.py` 检查因果链、信息增量、空间/道具/光线/时间
+连续性、摄影语法、行为表演、声音节拍、剪辑意图和观众知识节点。默认
+`EXPERIMENTAL` 只报告缺口，避免把自由区变成审批队列。
+
 ## 边界
 
 本仓库是研究用途，不连接 ACE 生产路由，不自动发布视频，不读取私密材料，不代表任何现实层结论。每次同步使用普通 Git 提交，保留历史，不覆盖旧实验。
