@@ -13,6 +13,8 @@
 - `characters/`：角色连续性与关系变化
 - `snapshots/`：阶段性只读切片
 
+字幕轨规则：只承载人物对白或第一人称内心独白；不把画面说明、镜头说明、音效标签或界面文字重复写入。竖屏字幕最多三行，并须满足可读的最小时长与镜头切换安全间隔。烧录使用 `python tools/burn_subtitles.py --input <video> --srt <track.srt> --output <subtitled.mp4>`；它会先运行 `tools/validate_subtitles.py` 的规则，失败时拒绝渲染，避免把叠字或场景说明带进成片。
+
 ## 边界
 
 本仓库是研究用途，不连接 ACE 生产路由，不自动发布视频，不读取私密材料，不代表任何现实层结论。每次同步使用普通 Git 提交，保留历史，不覆盖旧实验。

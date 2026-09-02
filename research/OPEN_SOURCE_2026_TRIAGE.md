@@ -45,3 +45,20 @@
 - **已落地**：Flash `reference` 模式、每镜一张公开场景锚图、GitHub raw 可达性校验、失败后 V2.0 明确回退、已有镜头与中间锚图复用、ffmpeg 统一拼接、SRT 内心独白。
 - **保持研究候选**：ComfyUI/IPAdapter、Wan/LTX/IAMFlow；当前机器只有 6 GiB 显存且未装目标栈，不能声称可运行。
 - **不制造新轮子**：剪辑继续使用现有 ffmpeg；任务恢复继续使用现有 manifest/`video_id`；外部项目只留下来源、机制、限制和下一验证条件。
+
+## 2026-09-02 字幕与成片节奏复核
+
+本轮直接读取公开规范页面和仓库 README，并把结论映射到现有链路：
+
+| 来源 | 已核验的公开事实 | 本项目的最小吸收 |
+|---|---|---|
+| [BBC Subtitle Guidelines](https://www.bbc.co.uk/accessibility/forproducts/guides/subtitles/) | 竖屏建议最多三行；建议在自然断句处换行；目标最低阅读时间约 0.3 秒/词（编辑判断仍优先） | `governance/subtitle_style_policy.v1.json` + `tools/validate_subtitles.py` |
+| [Netflix Timed Text Timing](https://partnerhelp.netflixstudios.com/hc/en-us/articles/360051554394-Timed-Text-Style-Guide-Subtitle-Timing-Guidelines) | 24fps 下字幕不短于 20 帧；镜头切换保留至少两帧间隔；避免提前泄露反转 | 同一校验器拒绝过短/重叠 cue；SRT 第 13/14 条重叠已修复 |
+| [W3C WebVTT](https://www.w3.org/TR/webvtt1/) | WebVTT 是标准时间文本轨道格式，定义 cue 时间和渲染区域 | 保留 SRT 作为本地烧录输入，同时记录可迁移到 WebVTT 的边界 |
+| [HBAI-Ltd/Toonflow-app](https://github.com/HBAI-Ltd/Toonflow-app) | GitHub API 公开元数据：Apache-2.0、约 15k stars；README 将其定位为文本/角色/分镜/视频的一站式短剧工作台 | 只借鉴“角色资产→分镜→镜头→剪辑”的阶段分离；不安装其桌面壳或引入第二控制面 |
+
+### 可执行结论
+
+- 字幕只显示对白或第一人称内心独白；场景说明、音效标签和界面文字不进入字幕轨。
+- 统一入口 `tools/burn_subtitles.py` 先调用字幕校验，再用 ffmpeg 渲染竖屏安全区；不再让每次实验手写不同的 `force_style`。
+- 研究片仍需保留“镜头动作重复/边缘人物”等视觉缺陷，不能用字幕变好看来冒充连续性通过。
