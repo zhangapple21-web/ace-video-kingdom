@@ -19,7 +19,9 @@
   "tg_and_exports": [
     {"path":"C:/Users/User/Downloads/Telegram Desktop/R1_Canonical_Structure_v1.md","sha256":"e0b29d0828eefc1688963869ba9dbb27ce6a776bb7519290e4e5064bc8fe66af","status":"SECONDARY_CANONICAL_SUMMARY","use":"cross-check claims; not original dialogue"},
     {"path":"C:/Users/User/Downloads/Telegram Desktop/ChatExport_2026-08-29/messages.html","sha256":"cafdeeb4c915aac1f9a9d298421432abcd2f2d52470e3885f9c00830c34399b7","status":"USER_AUTHORIZED_EXPORT_METADATA_ONLY","use":"candidate source for future fragment indexing; do not bulk-ingest"},
-    {"path":"C:/Users/User/Desktop/ChatExport_2026-08-23/messages.html","sha256":"11807b96d1368865549c16e5a1153259e2d5b46c0c9bf01ebefce86ff0c0a9b2","status":"USER_AUTHORIZED_EXPORT_METADATA_ONLY","use":"candidate source for future fragment indexing; do not bulk-ingest"}
+    {"path":"C:/Users/User/Desktop/ChatExport_2026-08-23/messages.html","sha256":"11807b96d1368865549c16e5a1153259e2d5b46c0c9bf01ebefce86ff0c0a9b2","status":"USER_AUTHORIZED_EXPORT_METADATA_ONLY","use":"candidate source for future fragment indexing; do not bulk-ingest"},
+    {"path":"C:/Users/User/Downloads/Telegram Desktop/R1_full_snapshot_v1.zip","status":"ARCHIVE_METADATA_ONLY","use":"candidate R1 source; inspect only selected non-sensitive members after boundary check"},
+    {"path":"C:/Users/User/Downloads/Telegram Desktop/R1_Core_Library_Pack_v11.zip","status":"ARCHIVE_METADATA_ONLY","use":"candidate persona/behavior library; do not extract wholesale or treat filenames as dialogue evidence"}
   ],
   "operating_rule": "电脑是分布式基座；窗口只是观察面；仓库是证据节点而非唯一真相。任何片段先定位、哈希、分级，再进入隔离索引。"
 }
