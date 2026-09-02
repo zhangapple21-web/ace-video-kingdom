@@ -178,6 +178,7 @@ def main() -> int:
     except ValueError as error:
         raise SystemExit(str(error)) from error
     args.manifest.parent.mkdir(parents=True, exist_ok=True)
+    payload_sha256 = hashlib.sha256(json.dumps(payload, ensure_ascii=False, sort_keys=True, separators=(",", ":")).encode("utf-8")).hexdigest()
     existing = next((row for row in _load_records(args.manifest) if row.get("shot_id") == args.shot_id), None)
     if existing and existing.get("status") == "COMPLETED" and existing.get("artifact_path"):
         artifact = Path(existing["artifact_path"])
@@ -194,6 +195,13 @@ def main() -> int:
         })
         existing = {"shot_id": args.shot_id, "model_id": args.model, "status": "CREATING", "fallback_history": history}
     record = existing or {"shot_id": args.shot_id, "model_id": args.model, "status": "CREATING"}
+    record.update({
+        "model_id": args.model,
+        "payload_sha256": payload_sha256,
+        "create_endpoint": "https://apihub.agnes-ai.com/v1/videos",
+        "poll_endpoint": "https://apihub.agnes-ai.com/agnesapi",
+        "poll_id_field": "video_id",
+    })
     video_id = record.get("video_id")
     if not video_id:
         create_deadline = time.time() + args.timeout
@@ -281,6 +289,13 @@ def main() -> int:
         state = str(data.get("status") or data.get("internal_status") or "").lower()
         record.update({"last_poll_http_status": query.status_code, "last_state": state or "unknown"})
         _persist_record(args.manifest, record)
+        if query.status_code in {429, 500, 502, 503, 504}:
+            wait = _retry_seconds(query, default=delay)
+            record.update({"next_poll_in_seconds": wait, "poll_retry_after": query.headers.get("Retry-After")})
+            _persist_record(args.manifest, record)
+            time.sleep(wait)
+            delay = min(max(delay * 2, wait), 60)
+            continue
         if query.status_code == 200 and state in {"completed", "succeeded", "success"}:
             metadata = data.get("metadata") if isinstance(data.get("metadata"), dict) else {}
             url = data.get("url") or data.get("video_url") or metadata.get("url")
