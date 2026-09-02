@@ -12,6 +12,8 @@ import json
 from pathlib import Path
 from urllib.parse import urlparse
 
+from validate_motion_diversity import validate as validate_motion
+
 
 def _load(path: Path) -> dict:
     value = json.loads(path.read_text(encoding="utf-8"))
@@ -44,6 +46,9 @@ def main() -> int:
     if not isinstance(shots, list) or not shots:
         hard_failures.append("episode must declare at least one shot")
         shots = []
+    motion_contract = validate_motion({"shots": shots})
+    hard_failures.extend(f"motion: {error}" for error in motion_contract.get("errors", []))
+    warnings.extend(f"motion: {warning}" for warning in motion_contract.get("warnings", []))
     defaults = plan.get("render_defaults") if isinstance(plan.get("render_defaults"), dict) else {}
     model = defaults.get("model")
     if model != "agnes-video-2.5-flash":
@@ -102,6 +107,7 @@ def main() -> int:
         "warnings": warnings,
         "planned_shot_count": len(shots),
         "planned_duration_seconds": estimate_seconds,
+        "motion_contract": motion_contract,
         "review_policy": policy.get("review_order"),
         "primary_review_packet": {"reviewer": "5.6 Terra", "shots": shot_packets, "questions": ["Does each shot advance the causal chain?", "Does the character state change visibly?", "Can the stated action be filmed in one short clip?", "Are the first three seconds and end state clear?"]},
         "red_team_packet": {"reviewer": "Grok 4.6", "enabled": args.grok_health == "verified", "questions": ["What would confuse a first-time viewer?", "Where is a motive or causal bridge missing?", "Which beat feels generic or repetitive?", "Which image/video constraint will make this shot look like a repeated cover?"]},

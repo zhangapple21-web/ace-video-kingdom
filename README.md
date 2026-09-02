@@ -15,6 +15,11 @@
 
 字幕轨规则：只承载人物对白或第一人称内心独白；不把画面说明、镜头说明、音效标签或界面文字重复写入。竖屏字幕最多三行，并须满足可读的最小时长与镜头切换安全间隔。烧录使用 `python tools/burn_subtitles.py --input <video> --srt <track.srt> --output <subtitled.mp4>`；它会先运行 `tools/validate_subtitles.py` 的规则，失败时拒绝渲染，避免把叠字或场景说明带进成片。
 
+镜头不能只写“叹气/看向镜头”这类情绪标签。每个镜头计划必须声明三个
+`action_beats`（首态、可拍的单一动作、末态），并通过
+`tools/validate_motion_diversity.py` 检查相邻镜头的动作签名不重复；
+`preflight_episode.py` 会在任何 Provider 提交前拒绝缺少动作弧的计划。
+
 ## 边界
 
 本仓库是研究用途，不连接 ACE 生产路由，不自动发布视频，不读取私密材料，不代表任何现实层结论。每次同步使用普通 Git 提交，保留历史，不覆盖旧实验。

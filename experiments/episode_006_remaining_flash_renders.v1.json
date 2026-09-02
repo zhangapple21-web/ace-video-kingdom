@@ -17,6 +17,7 @@
     {
       "shot_id": "WJ704_FLASH_LOG",
       "prompt": "Vertical cinematic social drama. Use the supplied evidence-log scene anchor. Wenji writes a short neutral work record beside the laptop, checks one blurred timestamp, then closes the notebook with quiet resolve. Preserve her exact identity, black hair clip, forehead cooling patch and charcoal-black hoodie. One person, close over-shoulder movement, no readable private data, no logos.",
+      "action_beats": ["pen enters frame beside the laptop", "she writes and checks one blurred timestamp", "she closes the notebook and holds still"],
       "render": {
         "reference_image_urls": ["https://raw.githubusercontent.com/zhangapple21-web/-/main/ace-video-kingdom/wenji-episode-006/SCENE_02_typing_log_anchor.png"],
         "fallback_image": "../media_staging/episode_006_wenji_110s/anchors/SCENE_02_typing_log_anchor.png"
@@ -25,6 +26,7 @@
     {
       "shot_id": "WJ705_FLASH_WINDOW",
       "prompt": "Vertical cinematic social drama. Use the supplied night-window scene anchor. Wenji stops typing, looks toward the rain-dark window, breathes once, then turns back to her desk with a clearer expression. Preserve her exact identity, black hair clip, forehead cooling patch and charcoal-black hoodie. Natural slow side pan, one person, no readable screen text, no logos.",
+      "action_beats": ["typing stops and her shoulders settle", "she crosses to the rain-dark window", "she returns to the desk with a firmer gaze"],
       "render": {
         "reference_image_urls": ["https://raw.githubusercontent.com/zhangapple21-web/-/main/ace-video-kingdom/wenji-episode-006/SCENE_03_window_pause_anchor.png"],
         "fallback_image": "../media_staging/episode_006_wenji_110s/anchors/SCENE_03_window_pause_anchor.png"
@@ -33,6 +35,7 @@
     {
       "shot_id": "WJ706_FLASH_REMINDER",
       "prompt": "Vertical cinematic social drama. Use the supplied phone-read scene anchor. Wenji records a calm settlement reminder, listens to the short message once, and sets the phone down without anger. Preserve her exact identity, black hair clip, forehead cooling patch and charcoal-black hoodie. Controlled hand motion, one person, phone screen abstract and unreadable, no logos.",
+      "action_beats": ["she raises the phone and records", "she listens once without reacting", "she places the phone down and releases her grip"],
       "render": {
         "reference_image_urls": ["https://raw.githubusercontent.com/zhangapple21-web/-/main/ace-video-kingdom/wenji-episode-006/SCENE_04_phone_read_anchor.png"],
         "fallback_image": "../media_staging/episode_006_wenji_110s/anchors/SCENE_04_phone_read_anchor.png"
@@ -41,6 +44,7 @@
     {
       "shot_id": "WJ707_FLASH_FOLDER",
       "prompt": "Vertical cinematic social drama. Use the supplied folder scene anchor. Wenji clips blank evidence pages into a thin folder, labels the tab with an unreadable mark, and puts the folder into her bag. Preserve her exact identity, black hair clip, forehead cooling patch and charcoal-black hoodie. One person, purposeful medium movement, no readable text, no logos.",
+      "action_beats": ["blank pages fan across the desk", "she clips them into a thin folder", "the folder goes into her bag"],
       "render": {
         "reference_image_urls": ["https://raw.githubusercontent.com/zhangapple21-web/-/main/ace-video-kingdom/wenji-episode-006/SCENE_07_folder_close_anchor.png"],
         "fallback_image": "../media_staging/episode_006_wenji_110s/anchors/SCENE_07_folder_close_anchor.png"
@@ -49,6 +53,7 @@
     {
       "shot_id": "WJ708_FLASH_COUNTER",
       "prompt": "Vertical cinematic social drama. Use the supplied consultation-counter scene anchor. Wenji approaches the counter, places the thin folder down, and meets an unseen clerk with a steady, relieved look. Preserve her exact identity, black hair clip, forehead cooling patch and charcoal-black hoodie. One person visible, gentle tracking camera, no readable signage, no logos.",
+      "action_beats": ["she crosses the last step to the counter", "the folder lands on the counter", "she looks up and receives the unseen clerk's attention"],
       "render": {
         "reference_image_urls": ["https://raw.githubusercontent.com/zhangapple21-web/-/main/ace-video-kingdom/wenji-episode-006/SCENE_08_counter_approach_anchor.png"],
         "fallback_image": "../media_staging/episode_006_wenji_110s/anchors/SCENE_08_counter_approach_anchor.png"
