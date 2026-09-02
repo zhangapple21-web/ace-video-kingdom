@@ -1,6 +1,6 @@
 # 每日消费闭环：从协议到真实收据
 
-视频王国可以采用“三段式”分工：智普做低成本整理，Grok 做独立反例审计，GPT 做最终判断。这个设计已经落成机器可读合同，但当前仍不能把它宣称为每日自动运行：本机当前 shell 没有 `ZHIPU_KEY`，Grok 只有历史 shadow 收据，尚无当天自动漫游的完整三段证据链。
+视频王国可以采用“三段式”分工：智普做低成本整理，Grok 做独立反例审计，GPT 做最终判断。OneAPI 矿池可作为现有 MinerPool 中的低成本统一文本回退，但必须先通过当天健康链。这个设计已经落成机器可读合同，但当前仍不能把它宣称为每日自动运行：本机当前 shell 没有 `ZHIPU_KEY`，OneAPI 本次现场端口不可达，Grok 只有历史 shadow 收据，尚无当天自动漫游的完整三段证据链。详见 `research/ONEAPI_MINERPOOL_FIT.v1.md`。
 
 ## 如何避免停留在协议层
 
@@ -13,4 +13,3 @@
 5. 每一阶段失败都要写 `FAILED_FINAL`/`BLOCKED`，下一次从收据恢复，不重复提交。
 
 这不是新的 Scheduler，而是现有自由区心跳里的一个可选、幂等步骤。真正完成接线前，系统状态保持 `PROTOCOL_WITH_PARTIAL_ACTIVITY`；出现第一条当天智普收据、第一条当天 Grok 审计和一条 GPT 判断后，才能升级为 `DAILY_CHAIN_VERIFIED`。
-
