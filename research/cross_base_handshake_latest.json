@@ -1,11 +1,11 @@
 {
   "contract_version": "ace.video_kingdom.cross_base_handshake.v1",
-  "at": "2026-09-02T14:55:56.181995+00:00",
+  "at": "2026-09-02T15:18:32.476692+00:00",
   "production_integration": false,
   "bases": {
     "video_kingdom": {
       "exists": true,
-      "git_head": "7052559f86bb472bf9f860fff20e867a61e0ede6"
+      "git_head": "6acb57a29044584a0a06aa582ee19e7647676d7a"
     },
     "ace_core": {
       "exists": true,
