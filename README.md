@@ -15,6 +15,7 @@
 - `characters/`：角色连续性与关系变化
 - `snapshots/`：阶段性只读切片
 - `research/FUTURE_RISK_REGISTER.v1.json`：按时间跨度记录未来故障信号、缓解和停止条件
+- `research/FUTURE_SELF_DIALOGUE.v1.md`：行动前/中/后的未来回声与防重复犯错协议
 
 字幕轨规则：只承载人物对白或第一人称内心独白；不把画面说明、镜头说明、音效标签或界面文字重复写入。竖屏字幕最多三行，并须满足可读的最小时长与镜头切换安全间隔。烧录使用 `python tools/burn_subtitles.py --input <video> --srt <track.srt> --output <subtitled.mp4>`；它会先运行 `tools/validate_subtitles.py` 的规则，失败时拒绝渲染，避免把叠字或场景说明带进成片。
 
