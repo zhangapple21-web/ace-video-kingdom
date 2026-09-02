@@ -2,7 +2,7 @@
 
 ## 2026-09-02 现场校正
 
-OneAPI 3000 端口已通过 `/v1/models` 与非敏感 chat probe；3001 ACE proxy 未监听。该握手只证明本地兼容网关可用，不证明当天三段消费链已运行。Codex Desktop Worker 仍受 Shenwen Responses HTTP 续接 400 影响，不能把 Worker 失败当作 OneAPI 失败。
+OneAPI 3000 端口已通过 `/v1/models` 与非敏感 chat probe；3001 ACE proxy 未监听。随后用现有 `tools/run_zhipu_chore.py` 完成了一次真实、只读的 `oneapi` 回退整理，收据见 `research/chores/oneapi_fallback_probe_20260902.json`。这证明回退入口可执行，但仍不等于当天智普→Grok→GPT 三段链已完整运行。Codex Desktop Worker 仍受 Shenwen Responses HTTP 续接 400 影响，不能把 Worker 失败当作 OneAPI 失败。
 
 视频王国可以采用“三段式”分工：智普做低成本整理，Grok 做独立反例审计，GPT 做最终判断。OneAPI 矿池可作为现有 MinerPool 中的低成本统一文本回退，但必须先通过当天健康链。这个设计已经落成机器可读合同，但当前仍不能把它宣称为每日自动运行：本机当前 shell 没有 `ZHIPU_KEY`，OneAPI 本次现场端口不可达，Grok 只有历史 shadow 收据，尚无当天自动漫游的完整三段证据链。详见 `research/ONEAPI_MINERPOOL_FIT.v1.md`。
 
