@@ -48,7 +48,11 @@ def inspect(root: Path) -> dict:
         "completed_jobs": [],
         "manifests": [],
     }
-    seen_shots: dict[str, str] = {}
+    # A shot ID is intentionally reused when a later render replaces a rejected
+    # take.  Historical completed takes are evidence, not concurrent work.  A
+    # collision is operationally dangerous only when two non-terminal jobs for
+    # the same shot can still submit or poll independently.
+    seen_nonterminal_shots: dict[str, str] = {}
     for manifest in sorted((root / "experiments").glob("*tasks*.json")):
         rows = _records(manifest)
         if not rows:
@@ -57,13 +61,14 @@ def inspect(root: Path) -> dict:
         for row in rows:
             shot_id = str(row["shot_id"])
             manifest_name = str(manifest.relative_to(root))
-            prior_manifest = seen_shots.get(shot_id)
-            if prior_manifest and prior_manifest != manifest_name:
-                report["warnings"].append({"shot_id": shot_id, "issue": "DUPLICATE_SHOT_ID_ACROSS_MANIFESTS", "manifests": [prior_manifest, manifest_name]})
-            else:
-                seen_shots[shot_id] = manifest_name
             status = str(row.get("status", "UNKNOWN")).upper()
             entry = {"manifest": manifest_name, "shot_id": shot_id, "status": status, "model_id": row.get("model_id")}
+            if status != "COMPLETED" and status not in TERMINAL:
+                prior_manifest = seen_nonterminal_shots.get(shot_id)
+                if prior_manifest and prior_manifest != manifest_name:
+                    report["warnings"].append({"shot_id": shot_id, "issue": "DUPLICATE_SHOT_ID_ACROSS_MANIFESTS", "manifests": [prior_manifest, manifest_name]})
+                else:
+                    seen_nonterminal_shots[shot_id] = manifest_name
             if status == "COMPLETED":
                 artifact = _artifact_path(root, row.get("artifact_path"))
                 expected = row.get("artifact_sha256")
