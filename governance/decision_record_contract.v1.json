@@ -1,0 +1,51 @@
+{
+  "contract_version": "ace.video_kingdom.decision_record.v1",
+  "scope": "FREE_ZONE_RESEARCH_ONLY",
+  "production_integration": false,
+  "purpose": "Bind opinions, inspectable evidence, a bounded director decision, and the later observed result. This is a record and validator contract, not a scheduler, router, provider call, or delivery approval.",
+  "lifecycle": ["DRAFT", "DECIDED", "RESULT_RECORDED"],
+  "required_fields": [
+    "record_id",
+    "episode_id",
+    "scope_ref",
+    "lifecycle",
+    "evidence",
+    "opinions",
+    "decision",
+    "result"
+  ],
+  "evidence": {
+    "required_per_item": ["evidence_id", "kind", "path", "sha256"],
+    "rule": "Each path must exist beneath the declared project root and its SHA-256 must match. An opinion is not evidence by itself."
+  },
+  "opinions": {
+    "required_per_item": ["opinion_id", "role", "model", "verdict", "evidence_refs", "findings", "uncertainties"],
+    "roles": {
+      "utility": "Low-cost structure, cataloguing, subtitle or receipt work.",
+      "director": "Story, action beats, camera and continuity proposal.",
+      "challenger": "Independent counterexample search; it must name defects rather than agree generically.",
+      "comparator": "Compare viable alternatives and tradeoffs.",
+      "final_decider": "Synthesizes evidence and disagreements; never supplies an unsupported sole opinion."
+    },
+    "allowed_verdicts": ["SUPPORT", "REWORK", "BLOCKED", "UNKNOWN"],
+    "rule": "Every evidence_refs entry must resolve to an evidence_id. UNKNOWN is required where the source packet cannot establish a claim."
+  },
+  "decision": {
+    "required_fields": ["verdict", "decider_opinion_id", "basis_evidence_refs", "reason", "repair_scope", "expected_gain", "cost_class"],
+    "allowed_verdicts": ["PASS", "REWORK", "BLOCKED", "CONDITIONAL"],
+    "pass_rule": "PASS requires at least one inspectable media/integrity evidence item and no opinion with verdict BLOCKED. PASS is not DELIVERY_APPROVED.",
+    "rework_rule": "REWORK must name a bounded repair_scope and an expected_gain; it cannot request a whole-episode rerun without a scope explanation.",
+    "final_decider_rule": "decider_opinion_id must refer to an opinion whose role is final_decider and whose evidence_refs overlap basis_evidence_refs."
+  },
+  "result": {
+    "required_fields": ["status", "observed_evidence_refs", "summary"],
+    "allowed_statuses": ["NOT_EXECUTED", "COMPLETED", "FAILED", "SUPERSEDED"],
+    "rule": "A decision becomes experience only after RESULT_RECORDED and observed evidence exists. A failed or inconclusive result remains evidence; it must not be discarded."
+  },
+  "non_authority": [
+    "No Decision Record may submit a video task.",
+    "No Decision Record may override deterministic preflight, hash, subtitle, audio, or delivery gates.",
+    "No Decision Record may claim visual quality from model opinion without artifact evidence.",
+    "No Decision Record creates a second scheduler or automatic retry loop."
+  ]
+}
