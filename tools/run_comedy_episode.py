@@ -131,6 +131,8 @@ def main() -> int:
     parser.add_argument("--media-dir", type=Path, required=True)
     parser.add_argument("--output", type=Path, required=True)
     parser.add_argument("--review-output", type=Path, help="optional local media-integrity review JSON")
+    parser.add_argument("--preflight-output", type=Path,
+                        help="where to persist the mandatory deterministic preflight receipt")
     parser.add_argument("--timeout", type=int, default=480)
     parser.add_argument(
         "--shot-retry-rounds", type=int, default=2,
@@ -141,6 +143,16 @@ def main() -> int:
         help="seconds between durable resume rounds",
     )
     args = parser.parse_args()
+    preflight_output = args.preflight_output or args.manifest.with_name(args.manifest.stem + ".preflight.json")
+    preflight = subprocess.run([
+        sys.executable, str(Path(__file__).with_name("preflight_episode.py")), "--episode", str(args.episode),
+        "--output", str(preflight_output), "--require-formal",
+    ], cwd=Path(__file__).resolve().parents[1])
+    if preflight.returncode:
+        raise SystemExit(
+            "episode preflight is BLOCKED/REWORK; no provider request submitted. "
+            f"See {preflight_output}"
+        )
     episode = json.loads(args.episode.read_text(encoding="utf-8"))
     shots = episode.get("shots", [])
     defaults = episode.get("render_defaults", {})

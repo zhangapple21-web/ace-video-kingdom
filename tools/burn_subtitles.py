@@ -32,12 +32,34 @@ def _filter_path(path: Path) -> str:
     return value.replace("'", r"'\\''")
 
 
+def _require_delivery_review(input_path: Path, output_path: Path, review_path: Path | None) -> None:
+    """Prevent a technically valid render from silently becoming a final cut.
+
+    A reviewer must approve the exact, hash-bound base cut before a filename
+    containing ``final`` may be emitted.  Rough/research cuts remain possible
+    without this gate.
+    """
+    if "final" not in output_path.name.lower():
+        return
+    if review_path is None or not review_path.is_file():
+        raise SystemExit("final packaging requires --delivery-review for the exact base cut")
+    try:
+        review = json.loads(review_path.read_text(encoding="utf-8"))
+    except json.JSONDecodeError as exc:
+        raise SystemExit("delivery review is invalid JSON") from exc
+    expected = hashlib.sha256(input_path.read_bytes()).hexdigest()
+    if review.get("status") != "DELIVERY_APPROVED" or review.get("source_sha256") != expected:
+        raise SystemExit("delivery review is not approved for this exact base cut")
+
+
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--input", type=Path, required=True)
     parser.add_argument("--srt", type=Path, required=True)
     parser.add_argument("--output", type=Path, required=True)
     parser.add_argument("--review-output", type=Path)
+    parser.add_argument("--delivery-review", type=Path,
+                        help="required for an output filename containing 'final'")
     parser.add_argument("--fps", type=float, default=24)
     parser.add_argument("--font-size", type=int, default=10)
     parser.add_argument("--margin-v", type=int, default=80)
@@ -45,6 +67,7 @@ def main() -> int:
     for path in (args.input, args.srt):
         if not path.is_file():
             raise SystemExit(f"missing input: {path}")
+    _require_delivery_review(args.input, args.output, args.delivery_review)
     validation = validate(parse_srt(args.srt), fps=args.fps)
     if validation["status"] != "VALID":
         if args.review_output:

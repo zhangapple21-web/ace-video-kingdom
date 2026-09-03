@@ -15,6 +15,7 @@ gate = subprocess.run([
     "--episode", str(episode_path),
     "--policy", str(root / "governance/short_drama_review_policy.v1.json"),
     "--output", str(preflight),
+    "--require-formal",
 ], cwd=root, check=False)
 if gate.returncode:
     raise SystemExit(

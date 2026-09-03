@@ -39,6 +39,8 @@ def main() -> int:
     parser.add_argument("--policy", type=Path, default=Path("governance/short_drama_review_policy.v1.json"))
     parser.add_argument("--output", type=Path, required=True)
     parser.add_argument("--grok-health", choices=["verified", "unavailable", "unknown"], default="unknown")
+    parser.add_argument("--require-formal", action="store_true",
+                        help="fail closed when the seven-layer quality plan is only experimental")
     args = parser.parse_args()
     plan = _load(args.episode)
     policy = _load(args.policy)
@@ -61,6 +63,8 @@ def main() -> int:
         hard_failures.extend(f"quality: {error}" for error in quality_contract.get("errors", []))
     else:
         warnings.extend(quality_contract.get("warnings", []))
+    if args.require_formal and quality_contract.get("status") != "VALID":
+        hard_failures.append("quality: a provider run requires a complete FORMAL seven-layer contract")
     defaults = plan.get("render_defaults") if isinstance(plan.get("render_defaults"), dict) else {}
     model = defaults.get("model")
     if model != "agnes-video-2.5-flash":
