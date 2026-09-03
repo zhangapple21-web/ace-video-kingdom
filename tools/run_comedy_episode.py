@@ -127,6 +127,8 @@ def _v2_fallback_command(command: list[str], render: dict) -> list[str]:
 def main() -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument("--episode", type=Path, required=True)
+    parser.add_argument("--identity-contract", type=Path, required=True,
+                        help="validated asset/identity contract bound to this formal episode")
     parser.add_argument("--manifest", type=Path, required=True)
     parser.add_argument("--media-dir", type=Path, required=True)
     parser.add_argument("--output", type=Path, required=True)
@@ -143,6 +145,16 @@ def main() -> int:
         help="seconds between durable resume rounds",
     )
     args = parser.parse_args()
+    contract_check = subprocess.run([
+        sys.executable, str(Path(__file__).with_name("validate_short_drama_contract.py")),
+        str(args.identity_contract),
+    ], cwd=Path(__file__).resolve().parents[1])
+    if contract_check.returncode:
+        raise SystemExit("identity contract is invalid; no provider request submitted")
+    episode_identity = json.loads(args.episode.read_text(encoding="utf-8"))
+    contract_identity = json.loads(args.identity_contract.read_text(encoding="utf-8"))
+    if episode_identity.get("project_id") != contract_identity.get("project_id"):
+        raise SystemExit("identity contract project_id does not match episode; no provider request submitted")
     preflight_output = args.preflight_output or args.manifest.with_name(args.manifest.stem + ".preflight.json")
     preflight = subprocess.run([
         sys.executable, str(Path(__file__).with_name("preflight_episode.py")), "--episode", str(args.episode),
@@ -153,7 +165,7 @@ def main() -> int:
             "episode preflight is BLOCKED/REWORK; no provider request submitted. "
             f"See {preflight_output}"
         )
-    episode = json.loads(args.episode.read_text(encoding="utf-8"))
+    episode = episode_identity
     shots = episode.get("shots", [])
     defaults = episode.get("render_defaults", {})
     if not isinstance(defaults, dict):

@@ -43,6 +43,7 @@ def _validate(plan: dict, bridge: dict) -> None:
 def main() -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument("--episode", type=Path, required=True)
+    parser.add_argument("--identity-contract", type=Path, required=True)
     parser.add_argument("--manifest", type=Path, required=True)
     parser.add_argument("--media-dir", type=Path, required=True)
     parser.add_argument("--output", type=Path, required=True)
@@ -56,7 +57,7 @@ def main() -> int:
     except (OSError, json.JSONDecodeError, ValueError) as error:
         print(json.dumps({"status": "SHIFT_REJECTED", "reason": str(error)}, ensure_ascii=False))
         return 2
-    command = [sys.executable, "tools/run_comedy_episode.py", "--episode", str(args.episode), "--manifest", str(args.manifest), "--media-dir", str(args.media_dir), "--output", str(args.output)]
+    command = [sys.executable, "tools/run_comedy_episode.py", "--episode", str(args.episode), "--identity-contract", str(args.identity_contract), "--manifest", str(args.manifest), "--media-dir", str(args.media_dir), "--output", str(args.output)]
     if args.review_output:
         command.extend(["--review-output", str(args.review_output)])
     result = subprocess.run(command)

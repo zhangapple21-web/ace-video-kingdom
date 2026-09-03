@@ -35,7 +35,13 @@ def test_final_packaging_requires_a_hash_bound_approved_review(tmp_path: Path):
         _require_delivery_review(base, tmp_path / "episode_final.mp4", None)
     review = tmp_path / "review.json"
     review.write_text(json.dumps({
+        "project_id": "test_project",
         "status": "DELIVERY_APPROVED",
         "source_sha256": hashlib.sha256(base.read_bytes()).hexdigest(),
+        "reviewed_shot_ids": ["S01"],
+        "identity_verdict": "PASS",
+        "narrative_verdict": "PASS",
+        "subtitle_sync_verdict": "PASS",
+        "audio_verdict": "NOT_REQUESTED",
     }), encoding="utf-8")
     _require_delivery_review(base, tmp_path / "episode_final.mp4", review)

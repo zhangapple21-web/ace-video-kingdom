@@ -48,7 +48,23 @@ def _require_delivery_review(input_path: Path, output_path: Path, review_path: P
     except json.JSONDecodeError as exc:
         raise SystemExit("delivery review is invalid JSON") from exc
     expected = hashlib.sha256(input_path.read_bytes()).hexdigest()
-    if review.get("status") != "DELIVERY_APPROVED" or review.get("source_sha256") != expected:
+    required = {
+        "project_id", "status", "source_sha256", "reviewed_shot_ids",
+        "identity_verdict", "narrative_verdict", "subtitle_sync_verdict", "audio_verdict",
+    }
+    missing = sorted(required - set(review))
+    if missing:
+        raise SystemExit("delivery review is incomplete: " + ", ".join(missing))
+    explicit_passes = ("identity_verdict", "narrative_verdict", "subtitle_sync_verdict")
+    if (
+        review.get("status") != "DELIVERY_APPROVED"
+        or review.get("source_sha256") != expected
+        or not isinstance(review.get("project_id"), str)
+        or not isinstance(review.get("reviewed_shot_ids"), list)
+        or not review.get("reviewed_shot_ids")
+        or any(review.get(field) != "PASS" for field in explicit_passes)
+        or review.get("audio_verdict") not in {"PASS", "NOT_REQUESTED"}
+    ):
         raise SystemExit("delivery review is not approved for this exact base cut")
 
 
