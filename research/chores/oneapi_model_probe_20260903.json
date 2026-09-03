@@ -20,6 +20,8 @@
     "status": "QUARANTINED_AFTER_GATEWAY_RESTART",
     "reason": "A prior 200 could not be reproduced after the local gateway restart."
   },
-  "decision": "Only grok-4.5 and grok-4.6 are retained in local_oneapi_config.yaml. A model listed by /v1/models is not treated as usable until a fresh minimal call succeeds after the current gateway launch.",
+  "active_routing_directory": ["grok-4.5", "grok-4.6"],
+  "directory_note": "The live LiteLLM configuration may list additional candidate models. Listing is discovery only; it does not lift a model from quarantine or authorize the chore fallback to select it.",
+  "decision": "The chore fallback selects grok-4.5 and the audit lane selects grok-4.6. A model listed by /v1/models is not treated as usable until a fresh minimal call succeeds after the current gateway launch.",
   "secrets_logged": false
 }
