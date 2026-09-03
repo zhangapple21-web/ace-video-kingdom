@@ -28,12 +28,22 @@ def _inside(root: Path, target: Path) -> bool:
 
 
 def validate(record: dict, root: Path) -> None:
-    required = {"record_id", "episode_id", "scope_ref", "lifecycle", "evidence", "opinions", "decision", "result"}
+    required = {"record_id", "episode_id", "scope_ref", "source_realm", "admission", "lifecycle", "evidence", "opinions", "decision", "result"}
     missing = required - set(record)
     if missing:
         _fail("missing root fields: " + ", ".join(sorted(missing)))
     if record["lifecycle"] not in {"DRAFT", "DECIDED", "RESULT_RECORDED"}:
         _fail("unknown lifecycle")
+    realm = record["source_realm"]
+    admission = record["admission"]
+    if realm not in {"CONTROLLED_ORIGIN", "FREE_ZONE_CANDIDATE"} or not isinstance(admission, dict):
+        _fail("source_realm or admission is invalid")
+    if realm == "CONTROLLED_ORIGIN" and admission.get("status") != "NOT_REQUIRED":
+        _fail("controlled origin requires NOT_REQUIRED admission")
+    if realm == "FREE_ZONE_CANDIDATE":
+        required_admission = {"status", "candidate_path", "candidate_sha256", "accepting_contract_ref"}
+        if admission.get("status") != "ACCEPTED" or required_admission - set(admission):
+            _fail("Free Zone candidate requires accepted hash-bound admission")
     if not isinstance(record["evidence"], list) or not record["evidence"]:
         _fail("evidence must be a non-empty list")
 
@@ -92,6 +102,8 @@ def validate(record: dict, root: Path) -> None:
     if decision["verdict"] == "PASS":
         if blocked or not evidence_kinds.intersection({"media_integrity", "visual_review", "subtitle_receipt"}):
             _fail("PASS requires media evidence and no BLOCKED opinion")
+    if decision["verdict"] == "PASS" and realm == "FREE_ZONE_CANDIDATE" and admission.get("status") != "ACCEPTED":
+        _fail("PASS cannot use an unadmitted Free Zone candidate")
     if decision["verdict"] == "REWORK" and (not decision["repair_scope"] or not decision["expected_gain"]):
         _fail("REWORK requires bounded repair_scope and expected_gain")
 

@@ -1,19 +1,33 @@
 {
   "contract_version": "ace.video_kingdom.decision_record.v1",
-  "scope": "FREE_ZONE_RESEARCH_ONLY",
+  "scope": "CONTROLLED_VIDEO_PRODUCTION_ONLY",
   "production_integration": false,
-  "purpose": "Bind opinions, inspectable evidence, a bounded director decision, and the later observed result. This is a record and validator contract, not a scheduler, router, provider call, or delivery approval.",
+  "purpose": "Bind opinions, inspectable evidence, a bounded director decision, and the later observed result for a formal video cut. This is a record and validator contract, not a scheduler, router, provider call, or delivery approval.",
   "lifecycle": ["DRAFT", "DECIDED", "RESULT_RECORDED"],
   "required_fields": [
     "record_id",
     "episode_id",
     "scope_ref",
+    "source_realm",
+    "admission",
     "lifecycle",
     "evidence",
     "opinions",
     "decision",
     "result"
   ],
+  "realm_boundary": {
+    "free_zone_research": "May explore scripts, prompts, visual hypotheses, experiments, failures and candidate media. Its outputs are not formal shots, delivery candidates, or approval evidence by default.",
+    "controlled_video_production": "Uses only admitted assets and a formal shot contract. Every provider call, retry, selected take, edit and review must remain traceable to the production record.",
+    "bridge_rule": "A Free Zone artifact may enter controlled production only as source_realm=FREE_ZONE_CANDIDATE with an admission object that binds the candidate path/hash, names the accepting formal contract, and records ACCEPTED or REJECTED. No implicit promotion is allowed.",
+    "forbidden": ["Treating a research render as a formal take", "Treating a research opinion as DELIVERY_APPROVED", "Copying a Free Zone candidate into a final cut without hash-bound admission"]
+  },
+  "admission": {
+    "source_realm_values": ["CONTROLLED_ORIGIN", "FREE_ZONE_CANDIDATE"],
+    "controlled_origin_rule": "source_realm=CONTROLLED_ORIGIN requires admission.status=NOT_REQUIRED.",
+    "free_zone_candidate_rule": "source_realm=FREE_ZONE_CANDIDATE requires admission.status=ACCEPTED, candidate_path, candidate_sha256, and accepting_contract_ref.",
+    "rejected_rule": "REJECTED candidates may remain research evidence but cannot be referenced by a PASS decision."
+  },
   "evidence": {
     "required_per_item": ["evidence_id", "kind", "path", "sha256"],
     "rule": "Each path must exist beneath the declared project root and its SHA-256 must match. An opinion is not evidence by itself."
