@@ -83,11 +83,10 @@ def main() -> int:
         if key:
             provider = "oneapi"
             endpoint = f"{base}/chat/completions"
-            # Only choose a model that is currently retained in the local
-            # gateway's verified directory.  gpt-5.4-mini was observed to
-            # depend on a stale launcher environment, whereas grok-4.5 is the
-            # lower-cost live text lane; grok-4.6 remains the audit lane.
-            model = os.environ.get("ONEAPI_MODEL", "grok-4.5")
+            # The local OneAPI policy keeps the small GPT lane for bounded
+            # low-cost chores.  Grok remains an explicitly selected audit
+            # lane; callers may override this only after a fresh health probe.
+            model = os.environ.get("ONEAPI_MODEL", "gpt-5.4-mini")
         else:
             raise SystemExit("ZHIPU_KEY and ONEAPI_LOCAL_MASTER_KEY/ONEAPI_KEY are not set")
     source = args.input.read_text(encoding="utf-8")
