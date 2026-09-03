@@ -1,0 +1,25 @@
+{
+  "contract_version": "ace.video_kingdom.oneapi_model_probe.v1",
+  "at": "2026-09-03T10:49:32+08:00",
+  "scope": "LOCAL_RESEARCH_ONLY",
+  "production_integration": false,
+  "endpoint": "http://127.0.0.1:3000/v1/chat/completions",
+  "method": "authenticated minimal Chat Completions probe",
+  "results": [
+    {"model": "gpt-5.4-mini", "http_status": 403, "status": "QUARANTINED_AFTER_GATEWAY_RESTART", "note": "A prior 200 before restart is historical only."},
+    {"model": "grok-4.6", "http_status": 200, "status": "VERIFIED_FRESH"},
+    {"model": "grok-4.5", "http_status": 200, "status": "VERIFIED_FRESH"},
+    {"model": "gpt-5.4", "http_status": 403, "status": "QUARANTINED_FROM_ACTIVE_DIRECTORY"},
+    {"model": "gpt-5.5", "http_status": 403, "status": "QUARANTINED_FROM_ACTIVE_DIRECTORY"},
+    {"model": "gpt-5.6-terra", "http_status": 403, "status": "QUARANTINED_FROM_ACTIVE_DIRECTORY"}
+  ],
+  "superseded_observation": {
+    "at": "2026-09-03T10:47:43+08:00",
+    "model": "gpt-5.4-mini",
+    "http_status": 403,
+    "status": "QUARANTINED_AFTER_GATEWAY_RESTART",
+    "reason": "A prior 200 could not be reproduced after the local gateway restart."
+  },
+  "decision": "Only grok-4.5 and grok-4.6 are retained in local_oneapi_config.yaml. A model listed by /v1/models is not treated as usable until a fresh minimal call succeeds after the current gateway launch.",
+  "secrets_logged": false
+}

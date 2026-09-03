@@ -1,0 +1,49 @@
+{
+  "provider": "oneapi",
+  "model": "grok-4.5",
+  "task": "continuity_issue_detection",
+  "input_sha256": "e8be7ebf32bf7adeefa960d3c9d1477d0ed4fb253c2a5e0c0ec5fa359b07568a",
+  "attempts": [
+    {
+      "attempt": 1,
+      "status_code": 200,
+      "ok": true
+    }
+  ],
+  "production_integration": false,
+  "started_at": "2026-09-03T02:47:43.843072+00:00",
+  "result": {
+    "id": "93580095-92f7-90d0-879b-efd2c04c674a",
+    "created": 1788403710,
+    "model": "grok-4.5",
+    "object": "chat.completion",
+    "choices": [
+      {
+        "finish_reason": "stop",
+        "index": 0,
+        "message": {
+          "content": "```json\n{\n  \"task_type\": \"continuity_issue_detection\",\n  \"contract_version\": \"ace.video_kingdom.episode_preflight.v1\",\n  \"scope\": \"FREE_ZONE_RESEARCH_ONLY\",\n  \"project_id\": \"episode_007_virtual_data\",\n  \"episode_ref\": \"C:\\\\tmp\\\\ace_video_kingdom_git\\\\episodes\\\\episode_007_virtual_data.v1.json\",\n  \"overall_verdict\": \"BLOCKED\",\n  \"detection_status\": \"INCOMPLETE_DATA\",\n  \"summary\": \"Preflight reports BLOCKED with systemic missing action_beats (required [start, action, end] for all 18 shots) and missing public scene-anchor URLs for every shot. Quality contract shows EXPERIMENTAL_WITH_GAPS (131 gaps) including universal absence of continuity_bridge fields. No shot-level content, visual descriptions, character states, props, or causal details are present in the provided packet, so specific visual/narrative continuity breaks cannot be verified. Motion contract is INVALID. Primary review packet has empty shots array.\",\n  \"hard_continuity_blockers\": [\n    {\n      \"id\": \"missing_action_beats_all_shots\",\n      \"severity\": \"all\",\n      \"shots\": [\"S01A\", \"S01B\", \"S01C\", \"S01D\", \"S02A\", \"S02B\", \"S02C\", \"S03A\", \"S03B\", \"S03C\", \"S04A\", \"S04B\", \"S05A\", \"S05B\", \"S05C\", \"S06A\", \"S06B\", \"S07A\"],\n      \"issue\": \"Each shot must declare exactly three action_beats [start, action, end]. Absence prevents verification of intra-shot start/end state continuity and motion bridging.\",\n      \"source\": \"hard_failures + motion_contract.errors\",\n      \"severity\": \"high\",\n      \"status\": \"confirmed_from_preflight\"\n    },\n    {\n      \"id\": \"missing_scene_anchor_urls_all_shots\",\n      \"severity\": \"all\",\n      \"shots\": [\"S01A\", \"S01B\", \"S01C\", \"S01D\", \"S02A\", \"S02B\", \"S02C\", \"S03A\", \"S03B\", \"S03C\", \"S04A\", \"S04B\", \"S05A\", \"S05B\", \"S05C\", \"S06A\", \"S06B\", \"S07A\"],\n      \"issue\": \"Exactly one public scene-anchor URL required per shot. Absence blocks visual reference continuity and cover/reference matching.\",\n      \"source\": \"hard_failures\",\n      \"severity\": \"high\",\n      \"status\": \"confirmed_from_preflight\"\n    },\n    {\n      \"id\": \"missing_continuity_bridge_fields\",\n      \"severity\": \"all\",\n      \"shots\": [\"S01A\", \"S01B\", \"S01C\", \"S01D\", \"S02A\", \"S02B\", \"S02C\", \"S03A\", \"S03B\", \"S03C\", \"S04A\", \"S04B\", \"S05A\", \"S05B\", \"S05C\", \"S06A\", \"S06B\", \"S07A\"],\n      \"issue\": \"quality contract gap: *.continuity_bridge for every shot. No declared bridges for inter-shot state, position, prop, lighting, or emotion continuity.\",\n      \"source\": \"warnings + quality_contract.warnings\",\n      \"severity\": \"high\",\n      \"status\": \"confirmed_from_preflight\"\n    }\n  ],\n  \"narrative_continuity_gaps\": [\n    {\n      \"id\": \"root_causal_chain_missing\",\n      \"issue\": \"quality contract gap: root.causal_chain\",\n      \"impact\": \"Cannot verify shot-to-shot causal progression or motive bridges.\",\n      \"status\": \"confirmed_gap\"\n    },\n    {\n      \"id\": \"root_premise_plants_payoffs_missing\",\n      \"issue\": \"quality contract gaps: root.premise, root.plants, root.payoffs, root.viewer_knowledge_checkpoints\",\n      \"impact\": \"No declared setup/payoff or knowledge checkpoints; risk of unexplained jumps or forgotten plants.\",\n      \"status\": \"confirmed_gap\"\n    },\n    {\n      \"id\": \"per_shot_dramatic_and_state_fields_missing\",\n      \"issue\": \"Universal gaps in dramatic_function, information_gain, emotion_change, camera, audio_beats across all shots\",\n      \"impact\": \"Cannot assess visible character state changes or emotional continuity.\",\n      \"status\": \"confirmed_gap\"\n    }\n  ],\n  \"potential_issues_requiring_content\": [\n    {\n      \"id\": \"inter_shot_visual_continuity\",\n      \"description\": \"Character position, costume, prop placement, lighting, eyeline, and spatial continuity across S01A→S07A cannot be checked without shot content or anchors.\",\n      \"status\": \"uncertain\",\n      \"reason\": \"Episode JSON content and any media/anchors not supplied in input packet; shots array empty.\"\n    },\n    {\n      \"id\": \"action_feasibility_and_end_state_clarity\",\n      \"description\": \"Whether stated actions (once declared) can be filmed in one short clip and whether first 3s / end states are clear.\",\n      \"status\": \"uncertain\",\n      \"reason\": \"No action_beats or descriptions present; primary_review_packet.shots is empty.\"\n    },\n    {\n      \"id\": \"generic_or_repetitive_beats\",\n      \"description\": \"Risk of repeated covers or generic motion (red-team style question).\",\n      \"status\": \"uncertain\",\n      \"reason\": \"No visual or motion details available; red_team_packet.enabled=false.\"\n    },\n    {\n      \"id\": \"viewer_confusion_points\",\n      \"description\": \"Missing motive/causal bridges that would confuse a first-time viewer.\",\n      \"status\": \"uncertain_but_high_risk\",\n      \"reason\": \"Causal_chain and continuity_bridge gaps confirmed, but specific missing bridges unknown without content.\"\n    }\n  ],\n  \"motion_contract_status\": {\n    \"status\": \"INVALID\",\n    \"shot_count\": 18,\n    \"planned_duration_seconds\": 108,\n    \"errors_count\": 18,\n    \"duplicate_threshold\": 0.7,\n    \"note\": \"All errors are missing [start, action, end] declarations.\"\n  },\n  \"quality_contract_status\": {\n    \"status\": \"EXPERIMENTAL_WITH_GAPS\",\n    \"mode\": \"EXPERIMENTAL\",\n    \"gap_count\": 131,\n    \"errors\": [],\n    \"note\": \"Gaps include all continuity_bridge and related dramatic/state fields.\"\n  },\n  \"review_packets_note\": {\n    \"primary_review_packet\": \"shots array empty; questions focus on causal advance, visible state change, filmable action, clear start/end.\",\n    \"red_team_packet\": \"enabled=false\",\n    \"escalation_and_packaging\": \"Conditional only; not triggered here.\"\n  },\n  \"uncertain_items\": [\n    \"Actual episode JSON contents (shots, descriptions, any partial action_beats or bridges that might exist despite preflight flags)\",\n    \"Any existing scene-anchor URLs or media references not reflected in hard_failures\",\n    \"Specific character/prop/lighting continuity breaks\",\n    \"Whether any shots already have partial [start/action/end] that failed exact-three validation\",\n    \"Runtime visual matches or cover duplication risk\",\n    \"Audio continuity (audio_beats gaps noted but no content)\"\n  ],\n  \"recommendations_for_rework\": [\n    \"Populate exactly three action_beats [start, action, end] for every shot (S01A–S07A).\",\n    \"Add exactly one public scene-anchor URL per shot.\",\n    \"Fill continuity_bridge for each shot (and root causal_chain / plants / payoffs).\",\n    \"Supply dramatic_function, information_gain, emotion_change, camera, audio_beats to enable state-change and bridge checks.\",\n    \"Re-run preflight after filling; then provide shot content for detailed visual continuity pass.\",\n    \"Do not fabricate missing fields; leave as gaps until source data available.\"\n  ],\n  \"fabricated_facts\": [],\n  \"detection_limitations\": \"Research-assist only. No tools called. No episode file loaded. No content published. All findings derived strictly from supplied preflight JSON. Specific continuity violations beyond declared gaps remain uncertain.\"\n}\n```",
+          "role": "assistant",
+          "reasoning_content": "The user is instructing me in Chinese: \"你是视频王国的低成本杂务工，只做研究辅助，不调用其他工具，不发布内容。\" Which means \"You are a low-cost handyman in the Video Kingdom, only do research assistance, do not call other tools, do not...",
+          "provider_specific_fields": {
+            "refusal": null
+          }
+        },
+        "provider_specific_fields": {}
+      }
+    ],
+    "usage": {
+      "completion_tokens": 2520,
+      "prompt_tokens": 7673,
+      "total_tokens": 10193,
+      "completion_tokens_details": {
+        "reasoning_tokens": 559
+      },
+      "prompt_tokens_details": {
+        "cached_tokens": 7552
+      }
+    },
+    "service_tier": "default"
+  },
+  "status": "COMPLETED"
+}

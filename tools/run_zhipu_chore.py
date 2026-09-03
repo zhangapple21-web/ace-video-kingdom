@@ -43,10 +43,23 @@ def _request(key: str, prompt: str, timeout: int, *, endpoint: str, model: str) 
     )
     try:
         with urllib.request.urlopen(request, timeout=timeout) as response:
-            return response.status, json.loads(response.read().decode("utf-8")), _retry_after(response.headers)
+            raw = response.read().decode("utf-8")
+            try:
+                payload = json.loads(raw)
+            except json.JSONDecodeError:
+                # A malformed successful HTTP response is not evidence of a
+                # completed chore.  Preserve it as a retryable protocol fault
+                # rather than letting the runner terminate without a receipt.
+                return 0, {"error": f"invalid_json_response: {raw[:1000]}"}, _retry_after(response.headers)
+            return response.status, payload, _retry_after(response.headers)
     except urllib.error.HTTPError as exc:
         raw = exc.read().decode("utf-8", errors="replace")[:1000]
         return exc.code, {"error": raw}, _retry_after(exc.headers)
+    except (urllib.error.URLError, OSError) as exc:
+        # Connection resets/timeouts can occur after a task reaches the local
+        # proxy.  They must become auditable retryable failures, never an
+        # unrecorded Python traceback.
+        return 0, {"error": f"transport_error: {exc}"}, None
 
 
 def main() -> int:
@@ -70,7 +83,11 @@ def main() -> int:
         if key:
             provider = "oneapi"
             endpoint = f"{base}/chat/completions"
-            model = os.environ.get("ONEAPI_MODEL", "gpt-5.4-mini")
+            # Only choose a model that is currently retained in the local
+            # gateway's verified directory.  gpt-5.4-mini was observed to
+            # depend on a stale launcher environment, whereas grok-4.5 is the
+            # lower-cost live text lane; grok-4.6 remains the audit lane.
+            model = os.environ.get("ONEAPI_MODEL", "grok-4.5")
         else:
             raise SystemExit("ZHIPU_KEY and ONEAPI_LOCAL_MASTER_KEY/ONEAPI_KEY are not set")
     source = args.input.read_text(encoding="utf-8")
@@ -90,7 +107,7 @@ def main() -> int:
             args.output.parent.mkdir(parents=True, exist_ok=True)
             args.output.write_text(json.dumps(receipt, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
             return 0
-        transient = status in {408, 425, 429, 500, 502, 503, 504}
+        transient = status in {0, 408, 425, 429, 500, 502, 503, 504}
         row["transient"] = transient
         row["error_summary"] = re.sub(r"\s+", " ", str(payload.get("error", "")))[:300]
         receipt["attempts"].append(row)
