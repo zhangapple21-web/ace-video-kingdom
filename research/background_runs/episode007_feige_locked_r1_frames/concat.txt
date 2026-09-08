@@ -1,0 +1,5 @@
+file 'C:\tmp\ace_video_kingdom_git\research\background_runs\episode007_feige_locked_r1_frames\0_4.png'
+file 'C:\tmp\ace_video_kingdom_git\research\background_runs\episode007_feige_locked_r1_frames\1_4.png'
+file 'C:\tmp\ace_video_kingdom_git\research\background_runs\episode007_feige_locked_r1_frames\2_4.png'
+file 'C:\tmp\ace_video_kingdom_git\research\background_runs\episode007_feige_locked_r1_frames\3_4.png'
+file 'C:\tmp\ace_video_kingdom_git\research\background_runs\episode007_feige_locked_r1_frames\4_4.png'

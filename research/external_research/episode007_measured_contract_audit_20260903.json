@@ -1,0 +1,24 @@
+{
+  "status": "CONDITIONAL_RESEARCH",
+  "measured_shots": 18,
+  "tts_over_current_6s_clip": [
+    "S01A",
+    "S01B",
+    "S01C",
+    "S02A",
+    "S03A",
+    "S03B",
+    "S03C",
+    "S05A",
+    "S07A"
+  ],
+  "short_tts_needing_hold": [
+    "S01D"
+  ],
+  "audio_first_total_seconds": 122.111,
+  "all_tts_nonzero": true,
+  "all_tts_within_max18": true,
+  "all_current_video_durations_within_2_5_18": true,
+  "resolution": "Use audio-first durations for a future rerender or split only at semantic pauses; do not stretch or truncate dialogue. For short lines, retain a 2.5s minimum shot with reaction/hold.",
+  "production_changed": false
+}

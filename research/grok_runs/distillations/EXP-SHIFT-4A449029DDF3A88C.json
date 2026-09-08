@@ -1,0 +1,25 @@
+{
+  "automatic_delivery": false,
+  "automatic_promotion": false,
+  "automatic_task_creation": false,
+  "contract_version": "ace.free_research_sandbox.v1",
+  "created_at": "2026-09-02T03:43:22.104954+00:00",
+  "distillation_hash": "349ec84d8f1906374a116519e80714905f612366f62f40a99aab7769321540c4",
+  "evidence_hash": "79463e2d005346828b63d55b40298781ae2343978eeea7b6837334b37ef4e483",
+  "experiment_id": "EXP-SHIFT-4A449029DDF3A88C",
+  "mode": "DISTILLATION_ONLY",
+  "outcome": "INCONCLUSIVE",
+  "pattern": "When grok_coding_shadow resident activity; source and response retained by hash only, investigate via Isolated shadow resident call; retain hashes for independent audit..",
+  "production_integration": false,
+  "realm_state": {
+    "authority": "SANDBOX_ONLY",
+    "contract_version": "ace.free_zone_realm.v1",
+    "outbound_rule": "REOBSERVE",
+    "production_integration": false,
+    "realm": "SHADOW",
+    "retention": "SEED"
+  },
+  "reason": "inconclusive_result_requires_new_observation",
+  "source_record_hash": "f6cad206260d46708f95c7a7b57205375371bd12103de53086498573c7461014",
+  "status": "OPEN_QUESTION"
+}

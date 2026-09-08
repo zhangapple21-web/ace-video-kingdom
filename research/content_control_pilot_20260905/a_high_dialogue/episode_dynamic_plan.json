@@ -1,0 +1,148 @@
+{
+  "episode_plan_version": "v1",
+  "source_word_count": 20,
+  "narrative_type": "DIALOGUE_LED",
+  "target_seconds": 30,
+  "acceptable_duration_range": [
+    26,
+    34
+  ],
+  "story_spine": {
+    "conflict": [
+      "行动者与规则受益者之间的验证冲突"
+    ],
+    "turning_points": [
+      "异常显现",
+      "验证行动",
+      "代价出现",
+      "选择"
+    ],
+    "relationship_changes": [
+      "由迟疑走向可验证的选择",
+      "由迟疑走向可验证的选择",
+      "由迟疑走向可验证的选择",
+      "由迟疑走向可验证的选择",
+      "由迟疑走向可验证的选择",
+      "由迟疑走向可验证的选择"
+    ],
+    "ending_hook": [
+      "证据留存"
+    ],
+    "causal_dependencies": [
+      "处境建立",
+      "异常显现",
+      "验证行动",
+      "代价出现",
+      "选择",
+      "证据留存"
+    ]
+  },
+  "pacing_profile": {
+    "dialogue": {
+      "expected": [
+        "先把事情记下来，别让它被一句话带走。",
+        "这里的数字，和刚才看到的不一样。",
+        "我只验证一件事：谁在获利，谁在承担代价。",
+        "你继续追问，就会失去现在的位置。",
+        "位置可以让，证据不能丢。",
+        "如果规则不能被复核，它就不该替我们做决定。"
+      ],
+      "role": "diagnostic"
+    },
+    "monologue": {
+      "expected": [],
+      "role": "diagnostic"
+    },
+    "action": {
+      "expected": [
+        "主角打开记录界面",
+        "主角停在矛盾数字上",
+        "主角拍下关键物件",
+        "对手遮住记录",
+        "主角标记证据为保留",
+        "主角按下第二设备的保存键"
+      ],
+      "role": "diagnostic"
+    }
+  },
+  "must_preserve": [
+    "BEAT-01",
+    "BEAT-02",
+    "BEAT-03",
+    "BEAT-04",
+    "BEAT-05",
+    "BEAT-06"
+  ],
+  "beats": [
+    {
+      "beat_id": "BEAT-01",
+      "purpose": "建立处境",
+      "must_keep": true,
+      "order": 1,
+      "dependencies": [],
+      "mapped_shots": [
+        "S01A"
+      ]
+    },
+    {
+      "beat_id": "BEAT-02",
+      "purpose": "发现异常",
+      "must_keep": true,
+      "order": 2,
+      "dependencies": [
+        "BEAT-01"
+      ],
+      "mapped_shots": [
+        "S02A"
+      ]
+    },
+    {
+      "beat_id": "BEAT-03",
+      "purpose": "尝试验证",
+      "must_keep": true,
+      "order": 3,
+      "dependencies": [
+        "BEAT-02"
+      ],
+      "mapped_shots": [
+        "S03A"
+      ]
+    },
+    {
+      "beat_id": "BEAT-04",
+      "purpose": "代价出现",
+      "must_keep": true,
+      "order": 4,
+      "dependencies": [
+        "BEAT-03"
+      ],
+      "mapped_shots": [
+        "S04A"
+      ]
+    },
+    {
+      "beat_id": "BEAT-05",
+      "purpose": "做出选择",
+      "must_keep": true,
+      "order": 5,
+      "dependencies": [
+        "BEAT-04"
+      ],
+      "mapped_shots": [
+        "S05A"
+      ]
+    },
+    {
+      "beat_id": "BEAT-06",
+      "purpose": "留下证据",
+      "must_keep": true,
+      "order": 6,
+      "dependencies": [
+        "BEAT-05"
+      ],
+      "mapped_shots": [
+        "S06A"
+      ]
+    }
+  ]
+}

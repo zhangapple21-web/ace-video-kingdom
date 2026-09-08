@@ -1,0 +1,44 @@
+{
+  "provider": "oneapi",
+  "model": "gpt-5.4-mini",
+  "task": "failed_attempt_digest",
+  "input_sha256": "3bce62778f7b97e657f5bd3e4a1bf949136ce7ea9036204275c1b45ec44dda82",
+  "attempts": [
+    {
+      "attempt": 1,
+      "status_code": 200,
+      "ok": true
+    }
+  ],
+  "production_integration": false,
+  "started_at": "2026-09-02T15:21:00.856710+00:00",
+  "result": {
+    "id": "resp_0eb6da64a7b24237016a983ee00abc87d1834582fecb367642",
+    "created": 1788362481,
+    "model": "gpt-5.4-mini",
+    "object": "chat.completion",
+    "choices": [
+      {
+        "finish_reason": "stop",
+        "index": 0,
+        "message": {
+          "content": "{\n  \"task_type\": \"failed_attempt_digest\",\n  \"status\": \"success\",\n  \"subject\": \"OneAPI 矿池接入核验\",\n  \"time_context\": {\n    \"verification_date\": \"2026-09-02\",\n    \"last_application_probe_utc\": \"15:18\",\n    \"read_only\": true\n  },\n  \"core_findings\": [\n    {\n      \"finding\": \"OneAPI 已存在于 ACE 的 MinerPool/Provider Registry，不是新增组件。\",\n      \"evidence_type\": \"registry_record\",\n      \"certainty\": \"high\"\n    },\n    {\n      \"finding\": \"现场应用层探针已通过：`127.0.0.1:3000/v1/models` 返回 200，非敏感 `gpt-5.4-mini` chat probe 返回 200。\",\n      \"evidence_type\": \"live_probe\",\n      \"certainty\": \"high\"\n    },\n    {\n      \"finding\": \"`127.0.0.1:3001` 仍未监听，因此不是全链路稳定状态。\",\n      \"evidence_type\": \"port_probe\",\n      \"certainty\": \"high\"\n    },\n    {\n      \"finding\": \"当前状态被定义为 `LIVE_ON_3000_PROXY_ONLY`，不代表 Codex Desktop 原生派单已修复。\",\n      \"evidence_type\": \"status_classification\",\n      \"certainty\": \"high\"\n    }\n  ],\n  \"registry_evidence\": {\n    \"path\": \"C:/tmp/ace_core/08_GOVERNANCE/provider_registry/registry.json\",\n    \"observations\": [\n      {\n        \"field\": \"base_url\",\n        \"value\": \"http://localhost:3000/v1\",\n        \"certainty\": \"high\"\n      },\n      {\n        \"field\": \"model_mapping\",\n        \"value\": \"gpt-5.4-mini\",\n        \"certainty\": \"high\"\n      },\n      {\n        \"field\": \"verified\",\n        \"value\": true,\n        \"certainty\": \"high\"\n      },\n      {\n        \"field\": \"production_eligible\",\n        \"value\": true,\n        \"certainty\": \"high\",\n        \"interpretation\": \"仅表示注册状态，不等同于当前健康可用。\"\n      }\n    ]\n  },\n  \"historical_evidence\": {\n    \"path\": \"C:/tmp/ace_core/08_ARCHAEOLOGY/ops/runtime_fitness_latest.md\",\n    \"observation\": \"旧的 2026-07-01 fitness 记录中 OneAPI 曾 PASS，约 18 秒。\",\n    \"certainty\": \"medium\",\n    \"note\": \"这是历史证据，不能替代当前健康检查。\"\n  },\n  \"runtime_state\": {\n    \"listener_3000\": \"LiteLLM listening\",\n    \"listener_3001\": \"not listening\",\n    \"scheduled_task\": {\n      \"name\": \"ACE-Local-OneAPI\",\n      \"state\": \"Running\",\n      \"last_task_result\": 267009,\n      \"interpretation\": \"运行中状态码，不是失败码\",\n      \"certainty\": \"medium\"\n    },\n    \"environment_keys\": {\n      \"ONEAPI_KEY\": \"not found\",\n      \"ONEAPI_LOCAL_MASTER_KEY\": \"used by local watchdog, not disclosed\",\n      \"certainty\": \"high\"\n    }\n  },\n  \"decision\": {\n    \"can_be_used_as\": \"low_cost_unified_text_channel_for_existing_MinerPool\",\n    \"priority_use\": [\n      \"智普整理的回退/替代路径\"\n    ],\n    \"excluded_uses\": [\n      \"作为视频王国的新 OneAPI Router\",\n      \"作为自由区的强制入口\"\n    ],\n    \"grok_path\": \"existing shadow audit path\",\n    \"gpt_role\": \"final judgment\"\n  },\n  \"required_health_chain\": [\n    \"service reachable\",\n    \"/v1/models succeeds\",\n    \"non-sensitive text chat probe succeeds\",\n    \"record response status / latency / model / source hash\",\n    \"only then allow handling of整理任务\"\n  ],\n  \"failure_handling\": {\n    \"health_failure_marker\": \"ONEAPI_UNAVAILABLE\",\n    \"fallback\": [\n      \"original verified Provider\",\n      \"RESTED\"\n    ],\n    \"forbidden_behaviors\": [\n      \"busy looping retries\",\n      \"fabricating completion\",\n      \"writing production facts\"\n    ]\n  },\n  \"uncertainties\": [\n    {\n      \"item\": \"`live_probe` 的具体响应体、耗时和来源哈希未提供。\",\n      \"certainty\": \"high\"\n    },\n    {\n      \"item\": \"`LIVE_ON_3000_PROXY_ONLY` 的判定标准未在输入中展开。\",\n      \"certainty\": \"medium\"\n    },\n    {\n      \"item\": \"`ACE-Local-OneAPI` 任务的更详细运行日志未提供。\",\n      \"certainty\": \"medium\"\n    }\n  ]\n}",
+          "role": "assistant",
+          "provider_specific_fields": {
+            "refusal": null
+          }
+        },
+        "provider_specific_fields": {}
+      }
+    ],
+    "usage": {
+      "completion_tokens": 1040,
+      "prompt_tokens": 5114,
+      "total_tokens": 6154,
+      "prompt_tokens_details": {
+        "cached_tokens": 3840
+      }
+    }
+  },
+  "status": "COMPLETED"
+}

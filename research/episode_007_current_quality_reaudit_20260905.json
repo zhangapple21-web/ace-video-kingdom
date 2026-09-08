@@ -1,0 +1,59 @@
+{
+  "schema": "ace.video_kingdom.episode_quality_reaudit.v1",
+  "at": "2026-09-05",
+  "project_id": "episode_007_virtual_data",
+  "scope": "FREE_ZONE_RESEARCH_ONLY",
+  "production_integration": false,
+  "candidate": {
+    "path": "media_staging/episode_007_virtual_data/video_camera_grammar_v2/episode_007_candidate_v7_subtitled.mp4",
+    "duration_seconds": 108.041667,
+    "dimensions": [704, 1280],
+    "audio": "AAC_PRESENT"
+  },
+  "preflight": {
+    "verdict": "CONDITIONAL",
+    "quality_contract": "VALID",
+    "six_module_contract": "VALID",
+    "measured_timing": "PASS",
+    "provider_admission": "CONDITIONAL"
+  },
+  "per_shot_pacing": {
+    "status": "FAIL",
+    "pass_count": 12,
+    "fail_count": 6,
+    "failed_shots": ["S01A", "S02A", "S02B", "S04B", "S05C", "S07A"],
+    "note": "The source directory also contains S01D_REPAIR; it passed pacing but is a non-baseline repair take and is excluded from the 18-shot baseline count."
+  },
+  "per_shot_continuity": {
+    "status": "REVIEW_REQUIRED",
+    "no_spikes_count": 3,
+    "review_required_count": 15,
+    "no_spike_shots": ["S04A", "S05A", "S05B"]
+  },
+  "full_cut_diagnostics": {
+    "pacing_status": "FAIL",
+    "internal_scene_cut_count": 26,
+    "continuity_status": "REVIEW_REQUIRED",
+    "continuity_spike_count": 355,
+    "interpretation": "Full-cut scene cuts include legitimate shot boundaries; delivery still keys on per-shot gates, while the high count confirms the assembly is not a single continuous shot."
+  },
+  "decision": {
+    "verdict": "NOT_DELIVERABLE",
+    "delivery_approved": false,
+    "reason": "The formal contract and measured timing are valid, but six baseline shots fail the zero-internal-cut pacing gate and fifteen shots remain continuity-review-required. Existing research candidate must not be promoted."
+  },
+  "next_action": {
+    "type": "BOUNDED_REPAIR_PACKET",
+    "provider_calls": 0,
+    "scope": ["S01A", "S02A", "S02B", "S04B", "S05C", "S07A", "S01D_REPAIR"],
+    "rule": "Reuse existing approved action probes where semantically compatible; otherwise submit only one representative replacement after director review. Do not rerun the whole episode."
+  },
+  "evidence": [
+    "research/episode_007_preflight_current_20260905.json",
+    "research/episode_007_pacing_current_20260905.json",
+    "research/episode_007_continuity_current_20260905.json",
+    "research/shot_pacing_current_20260905/",
+    "research/shot_continuity_current_20260905/",
+    "research/episode_007_delivery_gate_20260904.json"
+  ]
+}

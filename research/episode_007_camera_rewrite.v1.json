@@ -1,0 +1,25 @@
+{
+  "project_id":"episode_007_virtual_data",
+  "version":"camera_rewrite.v1",
+  "global_rules":[
+    "对白或内心独白镜头使用 locked-off 或极慢微推，必须覆盖完整台词和表情停顿",
+    "动作镜头只在准备、发力、冲击、回收节点运镜；单镜只允许一个主要运动方向",
+    "表演完成前不切镜，不用运镜制造虚假节奏",
+    "每镜首帧必须是场景动作状态，不得是孤立人物肖像"
+  ],
+  "shots":[
+    {"shot_id":"F01","camera":"locked close-up; hold hands and face while typing and rubbing eyes; no pan"},
+    {"shot_id":"F02","camera":"locked over-shoulder; only screen glow and hands move; no camera travel"},
+    {"shot_id":"F03","camera":"locked medium close-up until impact, one brief jolt at phone contact, then hold recovery"},
+    {"shot_id":"F04","camera":"locked medium shot; one short push-in only during desk strike, then hold Feige's finished expression"},
+    {"shot_id":"F05","camera":"locked two-shot for full dialogue; no orbit, no lateral move"},
+    {"shot_id":"F06","camera":"locked group composition; hold the coworker standing, tears and fist; cut only after sitting"},
+    {"shot_id":"F07","camera":"locked phone/face close-up; one slow tilt up only after notification appears"},
+    {"shot_id":"F08","camera":"locked over-shoulder while typing and sending; hold one beat after click"},
+    {"shot_id":"F09","camera":"locked medium shot for shout and group reaction; one short push-in on red warning only"},
+    {"shot_id":"F10","camera":"locked office frame for call; hold after hang-up, then slow two-second rack focus to doorway"},
+    {"shot_id":"F11","camera":"single continuous slow pull-back only after copy-paste rhythm is established; no additional movement"}
+  ],
+  "subtitle_policy":"dialogue_or_first_person_inner_voice_only_bottom_safe_area",
+  "production_integration":false
+}

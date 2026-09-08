@@ -28,6 +28,36 @@
       "not_adopted": ["No training, RL, weight distillation or privileged teacher runtime is adopted.", "No external content body, credentials or private data is imported."],
       "decision": "ADAPT_AS_LIGHTWEIGHT_PREFLIGHT",
       "next_verification": "Create one renderer-agnostic prompt-reference program for episode_003, then test whether the chosen video provider accepts bound reference images; do not claim reference-driven video before that evidence exists."
+    },
+    {
+      "entry_id": "psl_20260905_ffmpeg_timestamp_recovery",
+      "date": "2026-09-05",
+      "source_url": "https://ffmpeg.org/ffmpeg-formats.html#concat-1",
+      "source_kind": "OFFICIAL_PROJECT_DOCUMENTATION",
+      "license_or_availability": "Public documentation; FFmpeg project licensing varies by build (LGPL/GPL configuration must be checked before redistribution).",
+      "linked_public_repositories": ["https://ffmpeg.org/"],
+      "problem_observed": "Short-clip recovery and assembly can hide timestamp discontinuities or inaccurate cut boundaries, making a playable file look complete while temporal handoff is wrong.",
+      "minimum_mechanism": "Use FFmpeg concat/segment contracts as an audit aid: keep segment stream parameters compatible, preserve explicit segment ordering, and treat timestamp/seek-boundary behavior as evidence to validate after resume or re-assembly.",
+      "local_fit": "Adds a renderer-agnostic post-assembly check for the existing short-clip workflow; it complements, but does not replace, per-shot continuity audits and SHA-256 media receipts.",
+      "limitations": ["Concat does not repair identity, wardrobe, prop or spatial drift.", "Segment accuracy depends on keyframes and constant-frame-rate assumptions; a successful mux is not proof of narrative continuity.", "No FFmpeg binary, filter graph or second scheduler is adopted by this ledger entry."],
+      "not_adopted": ["No production route change or new runtime service.", "No claim that timestamp checks prove provider-side video correctness."],
+      "decision": "ADAPT_AS_RECOVERY_ASSEMBLY_CHECK",
+      "next_verification": "On an existing local, fictional clip set, compare pre/post-resume concat output for stream parameters, duration, monotonic timestamps and SHA-256; record only measurable failures or improvements."
+    },
+    {
+      "entry_id": "psl_20260905_pyscenedetect_boundary_audit",
+      "date": "2026-09-05",
+      "source_url": "https://github.com/Breakthrough/PySceneDetect",
+      "source_kind": "PUBLIC_OPEN_SOURCE_REPOSITORY",
+      "license_or_availability": "BSD-3-Clause (repository metadata verified 2026-09-05); public source and documentation.",
+      "linked_public_repositories": ["https://github.com/Breakthrough/PySceneDetect", "https://www.scenedetect.com/docs/latest/"],
+      "problem_observed": "When a short drama is assembled from many generated clips, accidental hard cuts, duplicate frames or overlong holds can be mistaken for intentional scene transitions and weaken continuity review.",
+      "minimum_mechanism": "Run scene-boundary detection as a read-only audit signal to enumerate likely cuts and compare them with the declared shot contract; use the result to target human/frame-level review rather than auto-accepting edits.",
+      "local_fit": "Provides a lightweight audit candidate for episode-level pacing and boundary checks already present in research artifacts; it does not become a required production dependency.",
+      "limitations": ["Cut detection is heuristic and can miss semantic continuity failures or flag intentional motion/lighting changes.", "Repository activity and model behavior can drift; re-check version and license before reuse.", "No copied model weights, media, private data or provider control plane is imported."],
+      "not_adopted": ["No automatic scene rewriting or second pipeline.", "No claim that boundary detection validates character identity, Chinese text, dialogue or causal plot logic."],
+      "decision": "DEFER_TO_SHADOW_AUDIT",
+      "next_verification": "Run one isolated comparison on an existing local episode assembly: declared shot boundaries vs detector output, measuring false positives/negatives before deciding whether to retain the audit hook."
     }
   ]
 }

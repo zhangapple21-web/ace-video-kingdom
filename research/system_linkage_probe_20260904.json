@@ -1,0 +1,23 @@
+{
+  "contract_version": "ace.video_kingdom.system_linkage_probe.v1",
+  "at": "2026-09-04T04:53:22Z",
+  "task_id": "VK-AUTO-b3e476fb2e1ad55f",
+  "ace_to_video_kingdom": {
+    "dispatch_status": "DISPATCHED",
+    "pending_observed": true,
+    "claimed_status": "HANDOFF_READY",
+    "claimed_at_observed": true,
+    "hash_verified_artifacts": 4
+  },
+  "provider_call_accounting": {
+    "card_provider_calls_before": 0,
+    "card_provider_calls_after": 0,
+    "manifest_completed_shots": 18,
+    "manifest_create_attempts_observed": 18,
+    "causal_linkage": "NOT_ESTABLISHED",
+    "reason": "The existing consumer records handoff evidence only; it does not execute or attribute provider calls."
+  },
+  "production_integration": false,
+  "delivery_approved": false,
+  "conclusion": "ACE card delivery and claim are proven; provider_calls attribution is not implemented and must not be inferred from unrelated completed shot manifests."
+}

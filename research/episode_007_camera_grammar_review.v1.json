@@ -1,0 +1,14 @@
+{
+  "project_id":"episode_007_virtual_data",
+  "source":"episode_007_full_scene_anchor_base.mp4",
+  "decision":"REWORK_CAMERA_GRAMMAR",
+  "finding":"新片多数提示词同时要求快速推拉/横移/跟拍，导致对白和表演未完成时镜头已改变构图；动态存在但缺少叙事触发条件。",
+  "required_rules":[
+    "对白镜头使用锁定机位或极慢微推，至少覆盖完整一句台词/一个表情变化",
+    "拍桌、摔手机、起身等动作只在准备—发力—冲击—回收节点运镜",
+    "同一镜头不得同时使用横移、环绕、快速推拉等多个运动指令",
+    "切镜必须发生在表演或动作完成后，不能把人物移出画面来制造节奏"
+  ],
+  "next_action":"重写F01-F11镜头提示词的camera字段并定向重跑；保留现有素材为对照，不直接覆盖",
+  "production_integration":false
+}

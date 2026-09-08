@@ -1,0 +1,10 @@
+{
+  "status": "FAILED_STAGING_NOT_FOR_REVIEW",
+  "output": "media_staging/episode_007_virtual_data/video_camera_grammar_v2/episode_007_candidate_feige_locked_r1_base.mp4",
+  "attempted_with": "experiments/episode_007_camera_grammar_tasks.v3.json",
+  "override": "experiments/episode_007_s03a_feige_locked_r1_override.v1.json",
+  "failure": "assembled duration 177.792s outside [100.0, 112.0]",
+  "reason": "baseline v3 clips are 10.041667s each; this attempt intentionally did not apply a global 6s trim because the repaired S03A dialogue slot is 7.05s",
+  "do_not_promote": true,
+  "next_action": "If full-episode override is approved, build a per-shot duration-aware assembly plan; do not use this staging output as a candidate."
+}

@@ -1,0 +1,22 @@
+{
+  "status": "SUBTITLED_MEDIA_INTEGRITY_PASSED",
+  "input": "C:\\tmp\\ace_video_kingdom_git\\media_staging\\episode_007_virtual_data\\video_camera_grammar_v2\\episode_007_camera_grammar_v3_base.mp4",
+  "subtitle": "C:\\tmp\\ace_video_kingdom_git\\media_staging\\episode_007_virtual_data\\subtitles\\episode_007_dialogue_aligned_v2.srt",
+  "output": "C:\\tmp\\ace_video_kingdom_git\\media_staging\\episode_007_virtual_data\\video_camera_grammar_v2\\episode_007_candidate_v4_subtitled.mp4",
+  "output_sha256": "ef5e2c9058fe62b6dcb2b27b3ce7d2327dc61edf4109368ff23df7f6f1cf60e1",
+  "subtitle_validation": {
+    "status": "VALID",
+    "cue_count": 18,
+    "fps": 24,
+    "minimum_duration_seconds": 0.8333333333333334,
+    "minimum_gap_seconds": 0.08333333333333333,
+    "errors": [],
+    "warnings": []
+  },
+  "render_style": {
+    "font": "Microsoft YaHei",
+    "font_size": 28,
+    "margin_v": 68,
+    "alignment": 2
+  }
+}

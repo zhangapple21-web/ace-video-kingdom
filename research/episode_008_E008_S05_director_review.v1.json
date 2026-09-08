@@ -1,0 +1,53 @@
+{
+  "schema": "episode008.shot_director_review.v1",
+  "project_id": "episode_008_rule_seat_system",
+  "shot_id": "E008_S05",
+  "script_status": "SCRIPT_LOCKED",
+  "reviewed_at": "2026-09-04",
+  "status": "PASS_WITH_LOCAL_CORRECTION",
+  "raw_artifact": {
+    "path": "media_staging/episode_008_rule_seat_system/E008_S05.mp4",
+    "sha256": "d9e50c8f52e420ae09eda23a0be71bdc4fb12ec1135019cedc38b6c71b642bca",
+    "media_integrity": "PASS",
+    "duration_seconds": 5.041667,
+    "video": "H.264 704x1280 24fps",
+    "audio": "AAC stereo 48kHz"
+  },
+  "visual_verdicts": {
+    "action_beat": "PASS",
+    "information": "PASS_WITH_SUBTITLE_CORRECTION",
+    "identity": "CONDITIONAL_PASS",
+    "setting_and_continuity": "PASS_WITH_MINOR_VARIANCE",
+    "cut_timing": "PASS",
+    "subtitle_position": "PASS",
+    "audio_stream_presence": "PASS",
+    "dialogue_audio_sync": "UNVERIFIED"
+  },
+  "observations": [
+    "俯拍中两人按日期整理资料，并在桌面四个区域放置中性标记，动作逻辑清楚。",
+    "生成纸面和桌面标签文字存在伪字，不作为事实；对白由本地字幕固定。",
+    "同一旧木桌、台灯和窗光连续性保持；首版字幕字号偏紧，v2 已收小并通过安全边缘复核。"
+  ],
+  "overall_verdict": "PASS_WITH_LOCAL_SUBTITLE_CORRECTION",
+  "next_gate": "SHOT_6_ALLOWED",
+  "corrected_artifact": {
+    "path": "media_staging/episode_008_rule_seat_system/E008_S05_subtitled_research_v2.mp4",
+    "sha256": "36833173410a3c8bd0e3613f3a765e28cfa8d24d20c2d73070830fa4b396a4ad",
+    "subtitle_track": "media_staging/episode_008_rule_seat_system/E008_S05_review.srt",
+    "subtitle_validation": "VALID",
+    "audio_preserved": true,
+    "render_note": "font_size_9_used_after_edge_review"
+  },
+  "table_lens": {
+    "need": "把证据按日期和关系标注为可核对或待核验，不替人物下法律结论。",
+    "capability_evidence": "video_id video_bGl0ZWxsbTpjdXN0b21fbGxtX3Byb3ZpZGVyOm9wZW5haTttb2RlbF9pZDphZ25lcy12aWRlby12Mi4wO3ZpZGVvX2lkOnZpZGVvXzA5MjZiNGVkNDUyMTQwOGFiNDE1Mjk2MDk2MDQzZTNh",
+    "verification_result": "桌面整理和四栏标记动作通过；字幕边缘修订后通过。",
+    "follow_up": "第六镜切入虚构公共求助中心通话界面，保持现实流程，不拍黑客或暴力。"
+  },
+  "evidence": [
+    "media_staging/episode_008_rule_seat_system/E008_S05_review/contact.jpg",
+    "media_staging/episode_008_rule_seat_system/E008_S05_subtitled_review_v2/contact.jpg",
+    "media_staging/episode_008_rule_seat_system/E008_S05_review.srt",
+    "media_staging/episode_008_rule_seat_system/E008_S05_subtitle_receipt_v2.json"
+  ]
+}

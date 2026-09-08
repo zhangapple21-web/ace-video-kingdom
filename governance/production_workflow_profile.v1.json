@@ -1,0 +1,86 @@
+{
+  "contract_version": "ace.video_kingdom.production_workflow_profile.v1",
+  "scope": "CONTROLLED_VIDEO_PRODUCTION_ONLY",
+  "production_integration": false,
+  "source_basis": {
+    "kind": "PUBLIC_ARTICLE",
+    "url": "https://www.163.com/dy/article/L5BM1FJ405568W0A.html",
+    "use": "mechanism_comparison_only",
+    "copyright_boundary": "Do not copy article media, prompts, scripts, or private project data. Extract workflow mechanisms only."
+  },
+  "workflow": [
+    {
+      "stage": "STORY_ROOT",
+      "input": "idea_or_user_authorized_source",
+      "outputs": ["premise", "causal_chain", "plants", "payoffs", "viewer_knowledge_checkpoints"]
+    },
+    {
+      "stage": "ASSET_LIBRARY",
+      "input": "story_root",
+      "outputs": ["character_bible", "wardrobe_variants", "scene_assets", "prop_assets", "style_reference_pack"],
+      "reuse_rule": "Every reused asset is referenced by asset_id and SHA-256; no silent regeneration of an already approved asset."
+    },
+    {
+      "stage": "EPISODE_STORYBOARD",
+      "input": "story_root_and_asset_library",
+      "outputs": ["scene_nodes", "shot_ids", "dramatic_function", "information_gain", "emotion_change", "action_beats", "camera", "audio_beats", "continuity_bridge"]
+    },
+    {
+      "stage": "BRANCHABLE_REHEARSAL",
+      "input": "episode_storyboard",
+      "outputs": ["branch_id", "parent_node_id", "candidate_prompt", "branch_reason"],
+      "rule": "Local repair creates a child branch and preserves the parent; it never clones an entire episode to repair one shot."
+    },
+    {
+      "stage": "SPATIAL_BLOCKING",
+      "input": "scene_nodes_and_character_assets",
+      "outputs": ["actor_positions", "camera_position", "lens_or_scale", "eyelines", "axis_notes"],
+      "rule": "Use explicit blocking for multi-actor or special-angle shots; text-only placement is marked UNKNOWN, not assumed correct."
+    },
+    {
+      "stage": "GENERATE_AND_REVIEW",
+      "input": "approved_scene_anchor_and_shot_contract",
+      "outputs": ["provider_job_receipt", "media_integrity", "multi_frame_review", "decision_record"],
+      "rule": "Agnes may be used for isolated trials or controlled takes; provider completion never equals director PASS."
+    },
+    {
+      "stage": "ASSEMBLY_AND_MEMORY",
+      "input": "selected_takes_and_decision_records",
+      "outputs": ["subtitle_receipt", "audio_status", "final_integrity", "experience_candidate"],
+      "rule": "Only repeated, hash-backed failure patterns become experience; a single opinion does not rewrite routing."
+    }
+  ],
+  "quality_invariants": [
+    "One shot has one primary dramatic action or dialogue beat.",
+    "Long actions are split at preparation, peak/impact, and recovery boundaries.",
+    "Character, wardrobe, scene, prop, spatial blocking, and camera references are explicit.",
+    "A failed child branch preserves the parent and its evidence.",
+    "Free Zone research renders remain candidates until explicit hash-bound admission.",
+    "Episode Dynamic Plan binds story spine and beats to Shot Core without adding a scheduler.",
+    "Content state R0-R5 is monotonic within one Production Run and independent from technical/provider route.",
+    "Pacing ratios are diagnostic evidence only; only CONTENT_FAILURE may authorize content degradation."
+  ],
+  "content_control": {
+    "contract": "governance/episode_dynamic_content_plan.v1.json",
+    "artifacts": ["episode_dynamic_plan.json", "content_control.v1.json", "research/post_production_diagnostics.v1.json"],
+    "validator": "tools/validate_content_plan.py",
+    "non_authority": ["does_not_create_scheduler", "does_not_create_second_router", "does_not_call_provider"]
+  },
+  "execution_surfaces": {
+    "principle": "The Infinite Canvas is the human-facing creative and review surface, never the sole execution dependency for an agent running on the local computer.",
+    "local_execution_first": [
+      "Use the existing local media runner for provider submission, durable video_id recovery, download, SHA-256 receipt and retry handling.",
+      "Use local asset paths, manifests, ffprobe and FFmpeg for media validation, assembly, subtitles and audio checks.",
+      "Use the browser only to inspect or verify the user-facing canvas, deployed configuration and visual result; do not require a browser button click to resume an already-defined local production task."
+    ],
+    "canvas_writeback": "After a local action has an artifact or a concrete blocked/error receipt, write a compact asset, take, evidence or Decision Record reference back to the existing canvas. The canvas remains the human-readable branch and choice surface.",
+    "fallback": "If the canvas website, browser session or local Canvas Agent is unavailable, continue only safe local execution and evidence collection. Do not pretend the canvas was updated; record CANVAS_WRITEBACK_PENDING and reconcile when the surface recovers.",
+    "free_zone": "Free Zone may use isolated browser sessions and local probes for discovery. Controlled production uses the same local substrate but keeps its existing asset, review and release gates."
+  },
+  "demand_entrypoint": {
+    "command": "python -m production_control auto",
+    "purpose": "route user demand through the existing state machine and invoke safe local stages automatically",
+    "provider_calls": "remain behind the admitted request boundary and reuse the existing provider runner"
+  },
+  "non_authority": ["does_not_create_scheduler", "does_not_create_second_router", "does_not_call_provider", "does_not_approve_delivery", "does_not_promote_free_zone_automatically"]
+}

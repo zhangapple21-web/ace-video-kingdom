@@ -1,0 +1,26 @@
+{
+  "contract_version": "ace.free_zone_factories.v1",
+  "experiment_id": "EXP-SHIFT-4A449029DDF3A88C",
+  "factory": "processing",
+  "mark_id": "MARK-THREAD-8A4801E07D5AD5DD",
+  "outcome": "INCONCLUSIVE",
+  "production_integration": false,
+  "realm_state": {
+    "authority": "SANDBOX_ONLY",
+    "contract_version": "ace.free_zone_realm.v1",
+    "outbound_rule": "NONE",
+    "production_integration": false,
+    "realm": "SHADOW",
+    "retention": "ACTIVE"
+  },
+  "receipt_hash": "545f6981fb70ef0403436bd9d32c7a5dfc55013db71cd7b8f3d20a0d48eb589c",
+  "receipt_id": "PROCESS-EXP-SHIFT-4A449029DDF3A88C",
+  "record_hash": "f6cad206260d46708f95c7a7b57205375371bd12103de53086498573c7461014",
+  "recorded_at": "2026-09-02T03:43:22.102594+00:00",
+  "selected_stance": "DIRECT_OBSERVATION",
+  "thread_id": "THREAD-8A4801E07D5AD5DD",
+  "unexecuted_rival_world_ids": [
+    "WORLD-THREAD-8A4801E07D5AD5DD-COUNTEREXAMPLE_SEARCH"
+  ],
+  "world_id": "WORLD-THREAD-8A4801E07D5AD5DD-DIRECT_OBSERVATION"
+}

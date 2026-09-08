@@ -1,0 +1,39 @@
+{
+  "schema": "episode008.role_activation_decision.v1",
+  "status": "RESEARCH_ONLY",
+  "production_integration": false,
+  "task": "重写《我被卖去东南亚居然觉醒了系统》并形成可拍镜头",
+  "signals": ["多镜头连续性", "现实性与伦理风险", "对白自然度", "provider queue failure requires evidence"],
+  "selected_roles": [
+    {"role_id": "draft_writer", "model_id": "gpt-5.4-mini", "reason": "低成本先出结构草案"},
+    {"role_id": "contrarian", "model_id": "grok-4.5", "reason": "任务明确要求现实性、伦理和连续性反例"},
+    {"role_id": "convergence_editor", "model_id": "gpt-5.4", "reason": "把草案与审稿冲突收敛为镜头合同"}
+  ],
+  "conditional_roles_not_called": [
+    {"role_id": "arbiter", "model_id": "gpt-5.6-sol", "condition": "只有出现材料级分歧或高成本返工决策才激活", "decision": "not_needed_in_this_round"},
+    {"role_id": "ideator", "model_id": "gpt-5.6-luna", "condition": "只有需要额外标题/结局发散才激活", "decision": "not_needed_in_this_round"},
+    {"role_id": "alternate", "model_id": "gpt-5.5", "condition": "只有主方案需要第二结构对照才激活", "decision": "not_needed_in_this_round"}
+  ],
+  "observed_result": {
+    "writer_returned": true,
+    "independent_critic_returned": true,
+    "director_returned": true,
+    "arbiter_called": false,
+    "provider_video_submitted": true,
+    "provider_video_completed": true,
+    "provider_block_reason": "initial_attempt_503_then_existing_video_id_queued_and_completed",
+    "shot_1_media_integrity": "PASS",
+    "shot_1_director_verdict": "PASS_WITH_LOCAL_SUBTITLE_CORRECTION",
+    "shot_1_review": "research/episode_008_E008_S01_director_review.v1.json",
+    "shot_2_provider_attempts": 3,
+    "shot_2_provider_status": "COMPLETED",
+    "shot_2_provider_model": "agnes-video-v2.0",
+    "shot_2_provider_video_id": "video_bGl0ZWxsbTpjdXN0b21fbGxtX3Byb3ZpZGVyOm9wZW5haTttb2RlbF9pZDphZ25lcy12aWRlby12Mi4wO3ZpZGVvX2lkOnZpZGVvX2M1ZGQ2YjQ3NjUzYzRkODlhMjgzYWRlOTMwNWFlOWRl",
+    "shot_2_media_integrity": "PASS",
+    "shot_2_director_verdict": "PASS_WITH_LOCAL_SUBTITLE_CORRECTION",
+    "shot_2_review": "research/episode_008_E008_S02_director_review.v1.json",
+    "shot_2_provider_review": "research/episode_008_E008_S02_provider_failure.v1.json",
+    "shot_2_corrected_artifact": "media_staging/episode_008_rule_seat_system/E008_S02_subtitled_research_v1.mp4"
+  },
+  "next_measurement": "Episode 008 research cut 已串接并完成整体抽帧复核；保持 RESEARCH_ONLY。下一轮若继续，优先验证角色/场景参考图锁定与逐镜音频同步，不新增剧情信息。"
+}

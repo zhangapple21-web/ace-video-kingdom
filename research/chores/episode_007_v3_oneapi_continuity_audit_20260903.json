@@ -1,0 +1,44 @@
+{
+  "provider": "oneapi",
+  "model": "gpt-5.4-mini",
+  "task": "continuity_issue_detection",
+  "input_sha256": "164c08bb70bceff536cb26d42a4325007d920e3dd44df0a59318662eb78343d8",
+  "attempts": [
+    {
+      "attempt": 1,
+      "status_code": 200,
+      "ok": true
+    }
+  ],
+  "production_integration": false,
+  "started_at": "2026-09-03T02:02:13.025088+00:00",
+  "result": {
+    "id": "resp_0cac650c3e752c53016a98d52bf89887d0977a98c03b650c7f",
+    "created": 1788400947,
+    "model": "gpt-5.4-mini",
+    "object": "chat.completion",
+    "choices": [
+      {
+        "finish_reason": "stop",
+        "index": 0,
+        "message": {
+          "content": "{\n  \"project_id\": \"episode_007_virtual_data\",\n  \"candidate\": \"media_staging/episode_007_virtual_data/video_camera_grammar_v2/episode_007_final_candidate_v3.mp4\",\n  \"at\": \"2026-09-03T09:40:00+08:00\",\n  \"status\": \"NOT_DELIVERABLE\",\n  \"production_integration\": false,\n  \"continuity_issue_detection\": {\n    \"result\": \"BLOCKED\",\n    \"confidence\": \"high\",\n    \"known_facts\": [\n      \"The MP4 contains valid H.264 video, AAC audio, 18 subtitle cues, and has a duration of 108.041667 seconds.\",\n      \"Episode runtime preflight is blocked by 36 hard failures and 131 quality-contract gaps.\",\n      \"The rendered cast is Alang and Feige, not the Wenji female-character asset set.\"\n    ],\n    \"blocking_reasons\": [\n      \"The storyboard is experimental and missing required causal, action-beat, camera, continuity, and audio fields.\",\n      \"All 18 shots are missing the required public scene-anchor URL in the active episode plan.\",\n      \"There is no fresh post-render director review, so narrative, performance, identity, and audio quality cannot be established from the candidate alone.\"\n    ],\n    \"continuity_risks\": [\n      \"Character identity mismatch relative to Wenji if Wenji was the intended request.\",\n      \"Shot-level continuity cannot be verified because the required storyboard fields are absent.\",\n      \"Scene anchoring cannot be validated because all shot anchors are missing.\",\n      \"Editorial approval state is unresolved because no explicit director delivery decision is present.\"\n    ],\n    \"required_before_delivery\": [\n      \"Create a formal approved storyboard for the intended character and story.\",\n      \"Pass deterministic preflight before any new provider submission.\",\n      \"Run a post-render director review and record an explicit delivery decision.\",\n      \"If the requested work is Wenji, render from the Wenji character asset set rather than reusing this candidate.\"\n    ],\n    \"uncertainties\": [\n      \"The intended character requirement is not explicitly confirmed in the input, only implied by the blocking note.\",\n      \"No direct visual or audio inspection data is provided beyond stream/container metadata and cast identification.\"\n    ]\n  }\n}",
+          "role": "assistant",
+          "provider_specific_fields": {
+            "refusal": null
+          }
+        },
+        "provider_specific_fields": {}
+      }
+    ],
+    "usage": {
+      "completion_tokens": 476,
+      "prompt_tokens": 5056,
+      "total_tokens": 5532,
+      "prompt_tokens_details": {
+        "cached_tokens": 4352
+      }
+    }
+  },
+  "status": "COMPLETED"
+}

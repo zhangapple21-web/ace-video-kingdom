@@ -1,0 +1,47 @@
+{
+  "schema": "ace.video_kingdom.content_control_pilot.v1",
+  "status": "PASS",
+  "cases": [
+    {
+      "case": "A_HIGH_DIALOGUE",
+      "planning_status": "PASS",
+      "mapping_status": "PASS",
+      "initial_content_state": "R0",
+      "narrative_type": "DIALOGUE_LED",
+      "diagnostic_classification": "CONTENT_VALID",
+      "provider_calls": 0
+    },
+    {
+      "case": "B_HIGH_ACTION",
+      "planning_status": "PASS",
+      "mapping_status": "PASS",
+      "initial_content_state": "R0",
+      "narrative_type": "ACTION_LED",
+      "diagnostic_classification": "CONTENT_VALID",
+      "provider_calls": 0
+    },
+    {
+      "case": "C_HIGH_INFORMATION",
+      "planning_status": "PASS",
+      "mapping_status": "PASS",
+      "initial_content_state": "R0",
+      "narrative_type": "DIALOGUE_LED",
+      "diagnostic_classification": "CONTENT_VALID",
+      "provider_calls": 0
+    },
+    {
+      "case": "D_OVERBUDGET",
+      "planning_status": "PASS",
+      "mapping_status": "PASS",
+      "initial_content_state": "R0",
+      "narrative_type": "DIALOGUE_LED",
+      "diagnostic_classification": "CONTENT_DEGRADED",
+      "provider_calls": 0
+    }
+  ],
+  "assertions": {
+    "all_start_at_R0": true,
+    "overbudget_requires_redundancy": true,
+    "no_provider_calls": true
+  }
+}

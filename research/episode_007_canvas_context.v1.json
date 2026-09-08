@@ -1,0 +1,24 @@
+{
+  "contract_version": "video_kingdom.canvas_context.v1",
+  "task_id": "episode_007_virtual_data",
+  "canvas_project_id": "MyQYvHr8bNzLPpUiYXCgJ",
+  "required_route": "/canvas/MyQYvHr8bNzLPpUiYXCgJ",
+  "required_state": "READY_FOR_EXECUTION",
+  "ownership": "CONTROLLED_VIDEO_PRODUCTION",
+  "recovery_policy": {
+    "known_binding": "navigate_to_bound_canvas_and_verify_project_id",
+    "missing_binding": "create_isolated_canvas_then_persist_binding",
+    "project_mismatch": "refuse_mutation_and_record_WORKSPACE_MISMATCH"
+  },
+  "current_generation": {
+    "shot_id": "S03A_ANNOUNCEMENT_R3",
+    "runner": "tools/run_short_clip.py",
+    "manifest": "experiments/episode_007_s03a_announcement_repair_tasks.v1.json",
+    "output": "media_staging/episode_007_virtual_data/video_camera_grammar_v2/S03A_ANNOUNCEMENT_R3.mp4",
+    "primary_model": "agnes-video-v2.0",
+    "primary_reason": "Canvas video workbench currently has no enabled video-model inventory; do not claim a canvas video task is running when it is idle.",
+    "recovery": "durable video_id polling; provider Retry-After honored; bounded create retries; no duplicate submit after video_id persistence"
+  },
+  "delivery_state": "NOT_REVIEWED",
+  "written_at": "2026-09-03T14:05:52+08:00"
+}

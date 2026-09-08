@@ -1,0 +1,45 @@
+{
+  "contract_version": "ace.video_kingdom.shot_review.v1",
+  "scope": "FREE_ZONE_RESEARCH_ONLY",
+  "production_integration": false,
+  "shot_id": "S03A",
+  "candidate": {
+    "provider_shot_id": "S03A_FEIGE_LOCKED_R1",
+    "path": "media_staging/episode_007_virtual_data/video_camera_grammar_v2/S03A_FEIGE_LOCKED_R1.mp4",
+    "sha256": "a6a2876b448c86924edc4642686ed440b8922602af9cec359da8cbcef17323b0",
+    "provider": "agnes-video-v2.0",
+    "video_id": "video_bGl0ZWxsbTpjdXN0b21fbGxtX3Byb3ZpZGVyOm9wZW5haTttb2RlbF9pZDphZ25lcy12aWRlby12Mi4wO3ZpZGVvXzJlNmRkYzEyNmQ1ZTQ3OTA4YjEwMzllMDAzYTgzMjY2",
+    "duration_seconds": 5.041667,
+    "dimensions": [704, 1280],
+    "audio": "AAC stereo 48kHz"
+  },
+  "technical_review": {
+    "raw_clip_status": "FAIL",
+    "raw_clip_failures": [
+      "leading reference-board intro around 0.3 seconds",
+      "duration shorter than measured S03A dialogue budget"
+    ],
+    "edited_clip": {
+      "path": "media_staging/episode_007_virtual_data/video_camera_grammar_v2/S03A_FEIGE_LOCKED_R1_EDITED.mp4",
+      "sha256": "ff13ed72111e46b8d8be250e20ecd5133141966d21d0b97f2e4f3ee89774d2e2",
+      "duration_seconds": 7.049333,
+      "operation": "trim 0.375-second reference-board intro; append terminal hold and synchronized audio padding",
+      "pacing_audit": "PASS",
+      "internal_scene_cut_count": 0,
+      "measured_tts_seconds": 6.45,
+      "expected_duration_seconds": 7.05
+    }
+  },
+  "creative_review": {
+    "identity": "PASS_WITH_LIMITS",
+    "camera_grammar": "PASS_WITH_LIMITS",
+    "audio_content": "UNKNOWN",
+    "lip_sync": "UNKNOWN",
+    "decision": "CANDIDATE_FOR_EPISODE_OVERRIDE",
+    "reason": "角色锚图已生效，肥哥身份和固定中景成立；对白内容、口型和表演音频仍需人工听审，且尚未合成进完整候选片。"
+  },
+  "delivery": {
+    "approved": false,
+    "next_step": "Only use the edited artifact through an explicit formal S03A override after full-episode review; do not overwrite baseline or claim Episode 007 delivery."
+  }
+}

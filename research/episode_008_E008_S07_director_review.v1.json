@@ -1,0 +1,53 @@
+{
+  "schema": "episode008.shot_director_review.v1",
+  "project_id": "episode_008_rule_seat_system",
+  "shot_id": "E008_S07",
+  "script_status": "SCRIPT_LOCKED",
+  "reviewed_at": "2026-09-04",
+  "status": "PASS_WITH_LOCAL_CORRECTION",
+  "raw_artifact": {
+    "path": "media_staging/episode_008_rule_seat_system/E008_S07.mp4",
+    "sha256": "a9e54a3ea2e4c7a936009e9738ed68b1c643570b7fee024dd82342186bc27a4a",
+    "media_integrity": "PASS",
+    "duration_seconds": 5.041667,
+    "video": "H.264 704x1280 24fps",
+    "audio": "AAC stereo 48kHz"
+  },
+  "visual_verdicts": {
+    "action_beat": "PASS",
+    "information": "PASS_WITH_SUBTITLE_CORRECTION",
+    "identity": "CONDITIONAL_PASS",
+    "setting_and_continuity": "PASS_WITH_MINOR_VARIANCE",
+    "cut_timing": "PASS",
+    "subtitle_position": "PASS",
+    "audio_stream_presence": "PASS",
+    "dialogue_audio_sync": "UNVERIFIED"
+  },
+  "observations": [
+    "核验人员检查资料、完成签收，开放门和离开动作构成清晰收束。",
+    "生成证件与文件文字不可靠；本地对白字幕固定信息。",
+    "场景与前镜同属暖色办公空间，但核验人员和两位主角的外观不是严格角色锁定，作为研究样片保留。"
+  ],
+  "overall_verdict": "PASS_WITH_LOCAL_SUBTITLE_CORRECTION",
+  "next_gate": "EPISODE_008_RESEARCH_CUT_ALLOWED",
+  "corrected_artifact": {
+    "path": "media_staging/episode_008_rule_seat_system/E008_S07_subtitled_research_v1.mp4",
+    "sha256": "5a040d85534702c0dc8534877d89901d8063297a98c95006a5f1e125a116bfe7",
+    "subtitle_track": "media_staging/episode_008_rule_seat_system/E008_S07_review.srt",
+    "subtitle_validation": "VALID",
+    "audio_preserved": true,
+    "render_note": "font_size_9_used_for_long_final_line"
+  },
+  "table_lens": {
+    "need": "身份核验、资料签收后依法离开，完成证据驱动的收束。",
+    "capability_evidence": "video_id video_bGl0ZWxsbTpjdXN0b21fbGxtX3Byb3ZpZGVyOm9wZW5haTttb2RlbF9pZDphZ25lcy12aWRlby12Mi4wO3ZpZGVvX2lkOnZpZGVvX2ZmY2M5ZDA4YjkxOTQ0NjBhMzU3NTA3NjllYzBkZmY0",
+    "verification_result": "核验、签收和离开动作通过；文本由本地字幕固定。",
+    "follow_up": "把七个研究镜头串成一条可播放的 Episode 008 research cut，并保留逐镜证据。"
+  },
+  "evidence": [
+    "media_staging/episode_008_rule_seat_system/E008_S07_review/contact.jpg",
+    "media_staging/episode_008_rule_seat_system/E008_S07_subtitled_review/contact.jpg",
+    "media_staging/episode_008_rule_seat_system/E008_S07_review.srt",
+    "media_staging/episode_008_rule_seat_system/E008_S07_subtitle_receipt.json"
+  ]
+}

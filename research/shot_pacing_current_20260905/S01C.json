@@ -1,0 +1,23 @@
+{
+  "contract_version": "ace.video_kingdom.video_pacing_audit.v1",
+  "video": "C:\\tmp\\ace_video_kingdom_git\\media_staging\\episode_007_virtual_data\\video_camera_grammar_v2\\S01C.mp4",
+  "status": "PASS",
+  "media": {
+    "duration_seconds": 10.041667,
+    "width": 704,
+    "height": 1280,
+    "has_audio": true
+  },
+  "internal_scene_cut_count": 0,
+  "internal_scene_cut_times_seconds": [],
+  "dialogue_gate": false,
+  "max_internal_cuts": 0,
+  "subtitle_seconds": null,
+  "subtitle_coverage_ratio": null,
+  "tts_duration_seconds": null,
+  "expected_duration_seconds": null,
+  "duration_tolerance_seconds": 2.0,
+  "duration_deviation_seconds": null,
+  "failures": [],
+  "note": "Scene detection is a conservative QC signal; it does not prove acting or lip-sync."
+}

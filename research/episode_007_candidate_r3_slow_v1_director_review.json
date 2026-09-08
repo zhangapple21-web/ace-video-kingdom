@@ -1,0 +1,93 @@
+{
+  "contract_version": "ace.video_kingdom.director_review.v1",
+  "scope": "FREE_ZONE_RESEARCH_ONLY",
+  "production_integration": false,
+  "read_only_review": true,
+  "candidate": {
+    "path": "media_staging/episode_007_virtual_data/video_camera_grammar_v2/episode_007_candidate_r3_slow_v1_subtitled.mp4",
+    "sha256": "80d3362f976915e2707e4c3ed1f615d8e08cd9c8da242f6ef5732dafa8d72605",
+    "duration_seconds": 121.0,
+    "video_duration_seconds": 120.958333,
+    "audio_duration_seconds": 120.976875,
+    "dimensions": [704, 1280],
+    "video_codec": "h264",
+    "audio_codec": "aac",
+    "audio_sample_rate": 48000,
+    "audio_channels": 2
+  },
+  "comparison": {
+    "r3_base": "media_staging/episode_007_virtual_data/video_camera_grammar_v2/episode_007_candidate_r3_base.mp4",
+    "r3_base_sha256": "5fb05f083d411b512398cd89bb9f462a9d45a3b19a969da5d5438fe1fa5f3f9d",
+    "slowdown_factor": 1.12,
+    "audio_tempo_factor": 0.8928571428571428,
+    "review_coverage": "逐秒全片抽帧覆盖0–121秒，另检查关键切点与首中尾部画面；音频做流级时长/静音扫描"
+  },
+  "evidence_files": [
+    "media_staging/episode_007_virtual_data/video_camera_grammar_v2/episode_007_candidate_r3_slow_v1_subtitled.mp4",
+    "media_staging/episode_007_virtual_data/video_camera_grammar_v2/episode_007_candidate_r3_slow_v1_base.retime_receipt.json",
+    "research/episode_007_slow_v1_subtitle_validation.json",
+    "research/episode_007_candidate_r3_assembly_integrity.json",
+    "research/episode_007_previous_cut_audit_latest.json"
+  ],
+  "findings": [
+    {
+      "area": "pace_and_readability",
+      "decision": "PASS_WITH_LIMITS",
+      "achieved": "整体放慢后，键盘、起身、拿手机、拍桌、撕纸等动作的准备和收束更容易看清；前半段不再像明显的两倍速。",
+      "missing": "慢放没有新增表演或叙事信息，部分近景仍像循环式肖像运动。"
+    },
+    {
+      "area": "camera_grammar_and_cuts",
+      "decision": "CONDITIONAL",
+      "achieved": "主要切换点落在约6.72秒节拍上，未发现编码层面的丢帧或画幅跳变；动作镜头多数能看到开始到结果。",
+      "missing": "对白段仍混有横移、模糊运动和近景/物件插入，尤其开场办公段与后半段阿浪对白，未达到对白固定机位的门槛。"
+    },
+    {
+      "area": "identity_and_scene_continuity",
+      "decision": "FAIL",
+      "achieved": "阿浪灰色旧衬衫、肥哥黑色上衣在大部分主段落保持可辨。",
+      "missing": "约47.04–53.76秒的S03A段出现未被前后镜头建立的年长灰色Polo人物；仍属S03A陌生人物/角色连续性阻塞。"
+    },
+    {
+      "area": "performance_quality",
+      "decision": "CONDITIONAL",
+      "achieved": "肥哥拍桌、纸张飞散/撕裂等冲击比R3更能读懂；阿浪起身、操作手机和深夜回到电脑的因果顺序清楚。",
+      "missing": "阿浪部分表情近景有重复循环和轻微形变；纸张/烟雾效果偏生成式，不能替代正式表演验收。"
+    },
+    {
+      "area": "subtitle_placement_and_timing",
+      "decision": "PASS",
+      "achieved": "18条字幕校验通过；底部位置统一且未见裁切，字幕时间轴随1.12倍慢放同步。",
+      "missing": "字幕只能证明烧录位置和时间，不证明存在可辨识对白。"
+    },
+    {
+      "area": "audio_content_and_sync",
+      "decision": "UNKNOWN_CONTENT_CONDITIONALLY_SYNCED",
+      "achieved": "视频/音频流级时长差约0.019秒，格式为H.264/AAC 704x1280、48kHz双声道；未见容器级不同步。",
+      "missing": "当前证据不能确认对白、口型或表演音频；静音扫描仍显示环境音/空段，不能把字幕当成已录对白。"
+    },
+    {
+      "area": "forbidden_or_unwanted_dialogue",
+      "decision": "PRESENT",
+      "achieved": "无新增文件覆盖R3，所有产物仍可回退。",
+      "missing": "第13条‘收益和安全都不能承诺。请先独立核实。’仍是安全提示式台词；应在返修时决定删除、改写或明确保留为剧情中的系统播报。"
+    }
+  ],
+  "decision": {
+    "overall": "CONDITIONAL_RESEARCH_CUT",
+    "retain_as_candidate": true,
+    "deliverable": false,
+    "reason": "慢放解决节奏问题并保留了可用动作基线，但S03A陌生人物、对白运镜/表演质量和台词内容阻塞仍在。"
+  },
+  "targeted_repair_order": [
+    "先替换或重剪约47.04–53.76秒的S03A，确保人物身份和场景锚点已建立。",
+    "再局部收紧开场与阿浪对白段的无叙事横移/模糊镜头，确保一句对白和一个动作完整后再切。",
+    "对第13条安全提示式台词做明确脚本决定，并重新校验字幕时间轴。",
+    "最后再做一次动作抽帧、字幕位置和音频内容复核；在对白/身份证据补齐前不提升为最终交付。"
+  ],
+  "verification": {
+    "pytest": "26 passed",
+    "provider_called": false,
+    "source_r3_overwritten": false
+  }
+}

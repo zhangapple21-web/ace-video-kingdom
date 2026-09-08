@@ -1,0 +1,457 @@
+{
+  "schema": "video_kingdom.shot_core_pilot.v1",
+  "shots": {
+    "PILOT_DIALOGUE": {
+      "shot_id": "PILOT_DIALOGUE",
+      "lifecycle": "SELECTED",
+      "stale": false,
+      "selected_take_id": "PILOT_DIALOGUE_T01",
+      "contract_fingerprint": "0c77b5c3ce7608aa271055287c29c36850cb37f98c998e834c9e1c9b88d7b3b8"
+    },
+    "PILOT_ACTION": {
+      "shot_id": "PILOT_ACTION",
+      "lifecycle": "REWORK",
+      "stale": true,
+      "selected_take_id": null,
+      "contract_fingerprint": "0bb32b19eded2700bd6fbf49356fff285d113167efbfe0937402f30025fc0fb9",
+      "stale_reasons": [
+        "first_frame_ref",
+        "last_frame_ref"
+      ]
+    },
+    "PILOT_IDENTITY": {
+      "shot_id": "PILOT_IDENTITY",
+      "lifecycle": "SELECTED",
+      "stale": false,
+      "selected_take_id": "PILOT_IDENTITY_T01",
+      "contract_fingerprint": "d662c1eca575460d732dd14509df26213817b10d663377d48e66ce8b7898fe9e"
+    },
+    "PILOT_REWORK": {
+      "shot_id": "PILOT_REWORK",
+      "lifecycle": "SELECTED",
+      "stale": false,
+      "selected_take_id": "PILOT_REWORK_T02",
+      "contract_fingerprint": "733b98a8dedb880ceeb1006a6c0003dca0ec606849c267fb1dda4db2987480a5"
+    }
+  },
+  "takes": [
+    {
+      "take_id": "PILOT_DIALOGUE_T01",
+      "shot_id": "PILOT_DIALOGUE",
+      "parent_take_id": null,
+      "branch_reason": null,
+      "provider": "agnes",
+      "model": "agnes-video-2.5-flash",
+      "generation_config": {
+        "model": "agnes-video-2.5-flash",
+        "prompt": "Wenji quietly finishes one short line in a dim desk room; a single continuous locked-off shot, no extra movement, no cut.\n[SHOT_CORE_CONTRACT]\n{\"action_state\": {\"camera\": \"locked\", \"character\": \"WENJI speaks\", \"lighting\": \"dim\", \"location\": \"desk\", \"props\": [\"phone\"], \"time\": \"night\", \"wardrobe\": \"unchanged\"}, \"allowed_behaviors\": [\"speak\", \"hold\"], \"asset_refs\": [{\"asset_id\": \"SCENE_02\", \"asset_type\": \"scene\", \"sha256\": \"e5015c19d9f75b3164aeace2542892f893914cd3c7cd630c4cd69db28c7473a3\", \"version\": 1}], \"camera\": {\"axis\": \"none\", \"internal_cuts\": 0, \"movement\": \"NONE\", \"position\": \"desk\", \"scale\": \"medium\"}, \"end_state\": {\"camera\": \"locked\", \"character\": \"WENJI holds gaze\", \"lighting\": \"dim\", \"location\": \"desk\", \"props\": [\"phone\"], \"time\": \"night\", \"wardrobe\": \"unchanged\"}, \"forbidden_behaviors\": [\"pan\", \"tilt\", \"zoom\", \"orbit\", \"internal cut\", \"new character\"], \"internal_cuts\": 0, \"primary_visual_event\": \"Wenji finishes one line and holds\", \"shot_id\": \"PILOT_DIALOGUE\", \"start_state\": {\"camera\": \"medium\", \"character\": \"WENJI\", \"lighting\": \"dim\", \"location\": \"desk\", \"props\": [\"phone\"], \"time\": \"night\", \"wardrobe\": \"unchanged\"}, \"visible_character_ids\": [\"WENJI\"], \"visible_prop_ids\": [\"PHONE\"]}",
+        "mode": "reference",
+        "seconds": "5",
+        "size": "720P",
+        "aspect_ratio": "9:16",
+        "n": 1,
+        "images": [
+          "https://raw.githubusercontent.com/zhangapple21-web/-/main/ace-video-kingdom/wenji-episode-006/SCENE_02_typing_log_anchor.png"
+        ]
+      },
+      "generation_fingerprint": "ff2b4add9fa1bde0d00cdc5e3698ed47f1bfadb7e3bf283da55bf2a58d1c72dc",
+      "asset_bindings": [
+        {
+          "asset_id": "SCENE_02",
+          "version": 1,
+          "sha256": "e5015c19d9f75b3164aeace2542892f893914cd3c7cd630c4cd69db28c7473a3"
+        }
+      ],
+      "provider_status": "SUCCESS",
+      "technical_status": "PASS",
+      "creative_status": "PASS",
+      "status": "SELECTED",
+      "selected": true,
+      "created_at": "2026-09-05T02:57:12Z",
+      "create_http_status": 200,
+      "video_id": "task_eTjnTWQXAOXy39V2DdZU2fBPaIoWBsJ1",
+      "created_status": "queued",
+      "last_poll_http_status": 200,
+      "last_state": "completed",
+      "artifact_path": "media_staging\\shot_core_pilot\\PILOT_DIALOGUE_T01.mp4",
+      "artifact_hash": "c6dd423794470dfe92e24d04e4563b2905e4e2855b08f00948923aa363a6a1da",
+      "bytes": 1293706,
+      "media": {
+        "duration_seconds": 5.184,
+        "width": 720,
+        "height": 1280,
+        "fps": "24/1"
+      },
+      "duration_mismatch": false,
+      "review": {
+        "machine": {
+          "technical_status": "PASS",
+          "internal_cuts": "UNKNOWN",
+          "freeze_tail": "UNKNOWN"
+        },
+        "vision_llm": "UNKNOWN",
+        "director": {
+          "decision": "PASS",
+          "reason": "decision retained"
+        },
+        "sampled_frames": "media_staging/shot_core_pilot/frames/PILOT_DIALOGUE_T01.jpg"
+      },
+      "decision_record": {
+        "decision": "PASS",
+        "reason": "decision retained"
+      },
+      "machine_qc": {
+        "file_integrity": "PASS",
+        "resolution": "PASS",
+        "fps": "PASS",
+        "audio_stream": "UNKNOWN",
+        "duration": "PASS",
+        "black_frames": "UNKNOWN",
+        "freeze_tail": "UNKNOWN",
+        "internal_cuts": "UNKNOWN",
+        "duration_tolerance_seconds": 0.75
+      },
+      "provider_actual_seconds": 5.184,
+      "duration_contract_seconds": 5.0
+    },
+    {
+      "take_id": "PILOT_ACTION_T01",
+      "shot_id": "PILOT_ACTION",
+      "parent_take_id": null,
+      "branch_reason": null,
+      "provider": "agnes",
+      "model": "agnes-video-2.5-flash",
+      "generation_config": {
+        "model": "agnes-video-2.5-flash",
+        "prompt": "A hand closes the folder once, then rests; one single readable action with natural recovery, no additional actions, no cut.\n[SHOT_CORE_CONTRACT]\n{\"action_state\": {\"camera\": \"close\", \"character\": \"hand closes folder\", \"lighting\": \"cool\", \"location\": \"desk\", \"props\": [\"folder closing\"], \"time\": \"night\", \"wardrobe\": \"unchanged\"}, \"allowed_behaviors\": [\"close folder\", \"recover\", \"hold\"], \"asset_refs\": [{\"asset_id\": \"SCENE_05\", \"asset_type\": \"scene\", \"sha256\": \"d509faba56cb114c4bb1a269f086bdfb97b3f9b65fe50c4cc96f1b067d421cac\", \"version\": 1}, {\"asset_id\": \"SCENE_06\", \"asset_type\": \"scene\", \"sha256\": \"d13a316f06984f8ff6b954fcc18bf2e44faa5abdbfbc0c1bce598a765cab38d2\", \"version\": 1}], \"camera\": {\"axis\": \"none\", \"internal_cuts\": 0, \"movement\": \"CONTROLLED\", \"position\": \"desk\", \"scale\": \"close\"}, \"end_state\": {\"camera\": \"close\", \"character\": \"hand leaves folder\", \"lighting\": \"cool\", \"location\": \"desk\", \"props\": [\"folder closed\"], \"time\": \"night\", \"wardrobe\": \"unchanged\"}, \"forbidden_behaviors\": [\"open folder again\", \"walk\", \"camera cut\", \"new character\"], \"internal_cuts\": 0, \"primary_visual_event\": \"hand closes the folder\", \"shot_id\": \"PILOT_ACTION\", \"start_state\": {\"camera\": \"close\", \"character\": \"WENJI\", \"lighting\": \"cool\", \"location\": \"desk\", \"props\": [\"folder open\"], \"time\": \"night\", \"wardrobe\": \"unchanged\"}, \"visible_character_ids\": [\"WENJI\"], \"visible_prop_ids\": [\"FOLDER\"]}",
+        "mode": "keyframe",
+        "seconds": "6",
+        "size": "720P",
+        "aspect_ratio": "9:16",
+        "n": 1,
+        "first_frame": "https://raw.githubusercontent.com/zhangapple21-web/-/main/ace-video-kingdom/wenji-episode-006/SCENE_05_phone_close_anchor.png",
+        "last_frame": "https://raw.githubusercontent.com/zhangapple21-web/-/main/ace-video-kingdom/wenji-episode-006/SCENE_06_consultation_lobby_anchor.png"
+      },
+      "generation_fingerprint": "c2afa8af07c97f9af858d9c2293f869fb8916c12d1d30f8e43a1e61ca812ab6e",
+      "asset_bindings": [
+        {
+          "asset_id": "SCENE_05",
+          "version": 1,
+          "sha256": "d509faba56cb114c4bb1a269f086bdfb97b3f9b65fe50c4cc96f1b067d421cac"
+        },
+        {
+          "asset_id": "SCENE_06",
+          "version": 1,
+          "sha256": "d13a316f06984f8ff6b954fcc18bf2e44faa5abdbfbc0c1bce598a765cab38d2"
+        }
+      ],
+      "provider_status": "SUCCESS",
+      "technical_status": "PASS",
+      "creative_status": "FAIL",
+      "status": "GENERATED",
+      "selected": false,
+      "created_at": "2026-09-05T03:03:16Z",
+      "create_http_status": 200,
+      "video_id": "task_7EebgEfDVDqCIKULYqxNmJDSoZ3wy6LJ",
+      "created_status": "queued",
+      "last_poll_http_status": 200,
+      "last_state": "completed",
+      "artifact_path": "media_staging\\shot_core_pilot\\PILOT_ACTION_T01.mp4",
+      "artifact_hash": "41553bac3836c3a0d6493c47b7012f46cf73df9bfa59d9281e4b0759f7a3bea0",
+      "bytes": 1077417,
+      "media": {
+        "duration_seconds": 6.583333,
+        "width": 704,
+        "height": 1280,
+        "fps": "24/1"
+      },
+      "duration_mismatch": false,
+      "review": {
+        "machine": {
+          "technical_status": "PASS",
+          "internal_cuts": "UNKNOWN",
+          "freeze_tail": "UNKNOWN"
+        },
+        "vision_llm": "FAIL_KEYFRAME_AND_ACTION",
+        "director": {
+          "decision": "REWORK",
+          "reason": "Visual review: generated subject/prop diverged from the folder close contract and keyframe endpoints; provider success and technical pass do not imply creative pass."
+        },
+        "sampled_frames": "media_staging/shot_core_pilot/frames/PILOT_ACTION_T01.jpg"
+      },
+      "decision_record": {
+        "decision": "REWORK",
+        "reason": "Visual review: generated subject/prop diverged from the folder close contract and keyframe endpoints; provider success and technical pass do not imply creative pass."
+      },
+      "stale": true,
+      "stale_reason": [
+        "first_frame_ref",
+        "last_frame_ref"
+      ],
+      "machine_qc": {
+        "file_integrity": "PASS",
+        "resolution": "PASS",
+        "fps": "PASS",
+        "audio_stream": "UNKNOWN",
+        "duration": "PASS",
+        "black_frames": "UNKNOWN",
+        "freeze_tail": "UNKNOWN",
+        "internal_cuts": "UNKNOWN",
+        "duration_tolerance_seconds": 0.75
+      },
+      "provider_actual_seconds": 6.583333,
+      "duration_contract_seconds": 6.0
+    },
+    {
+      "take_id": "PILOT_IDENTITY_T01",
+      "shot_id": "PILOT_IDENTITY",
+      "parent_take_id": null,
+      "branch_reason": null,
+      "provider": "agnes",
+      "model": "agnes-video-2.5-flash",
+      "generation_config": {
+        "model": "agnes-video-2.5-flash",
+        "prompt": "Wenji looks at the phone, remains the same person and wardrobe, then lowers her eyes; one restrained reaction, no new people, no cut.\n[SHOT_CORE_CONTRACT]\n{\"action_state\": {\"camera\": \"locked\", \"character\": \"WENJI reads phone\", \"lighting\": \"fluorescent\", \"location\": \"lobby\", \"props\": [\"phone\"], \"time\": \"day\", \"wardrobe\": \"unchanged\"}, \"allowed_behaviors\": [\"read phone\", \"lower eyes\", \"hold\"], \"asset_refs\": [{\"asset_id\": \"SCENE_06\", \"asset_type\": \"scene\", \"sha256\": \"d13a316f06984f8ff6b954fcc18bf2e44faa5abdbfbc0c1bce598a765cab38d2\", \"version\": 1}], \"camera\": {\"axis\": \"none\", \"internal_cuts\": 0, \"movement\": \"NONE\", \"position\": \"lobby\", \"scale\": \"medium\"}, \"end_state\": {\"camera\": \"locked\", \"character\": \"WENJI lowers eyes\", \"lighting\": \"fluorescent\", \"location\": \"lobby\", \"props\": [\"phone\"], \"time\": \"day\", \"wardrobe\": \"unchanged\"}, \"forbidden_behaviors\": [\"new person\", \"wardrobe change\", \"walk away\", \"camera movement\", \"internal cut\"], \"internal_cuts\": 0, \"primary_visual_event\": \"Wenji lowers her eyes after reading\", \"shot_id\": \"PILOT_IDENTITY\", \"start_state\": {\"camera\": \"medium\", \"character\": \"WENJI\", \"lighting\": \"fluorescent\", \"location\": \"lobby\", \"props\": [\"phone\"], \"time\": \"day\", \"wardrobe\": \"unchanged\"}, \"visible_character_ids\": [\"WENJI\"], \"visible_prop_ids\": [\"PHONE\"]}",
+        "mode": "reference",
+        "seconds": "5",
+        "size": "720P",
+        "aspect_ratio": "9:16",
+        "n": 1,
+        "images": [
+          "https://raw.githubusercontent.com/zhangapple21-web/-/main/ace-video-kingdom/wenji-episode-006/SCENE_06_consultation_lobby_anchor.png"
+        ]
+      },
+      "generation_fingerprint": "826bd4e73cb702eefd36384de6ee7947202c8b4632bf2b37e702ab474e507736",
+      "asset_bindings": [
+        {
+          "asset_id": "SCENE_06",
+          "version": 1,
+          "sha256": "d13a316f06984f8ff6b954fcc18bf2e44faa5abdbfbc0c1bce598a765cab38d2"
+        }
+      ],
+      "provider_status": "SUCCESS",
+      "technical_status": "PASS",
+      "creative_status": "PASS",
+      "status": "SELECTED",
+      "selected": true,
+      "created_at": "2026-09-05T03:09:25Z",
+      "create_http_status": 200,
+      "video_id": "task_o0g4xC6VkYT3Nqi14Kmo2FAkiMe4RcSV",
+      "created_status": "queued",
+      "last_poll_http_status": 200,
+      "last_state": "completed",
+      "artifact_path": "media_staging\\shot_core_pilot\\PILOT_IDENTITY_T01.mp4",
+      "artifact_hash": "6418c7d31d2cc32bafc25a2a0c518a475670c1689903b34888e9e4a6c50331de",
+      "bytes": 1646621,
+      "media": {
+        "duration_seconds": 5.184,
+        "width": 720,
+        "height": 1280,
+        "fps": "24/1"
+      },
+      "duration_mismatch": false,
+      "review": {
+        "machine": {
+          "technical_status": "PASS",
+          "internal_cuts": "UNKNOWN",
+          "freeze_tail": "UNKNOWN"
+        },
+        "vision_llm": "UNKNOWN",
+        "director": {
+          "decision": "PASS",
+          "reason": "decision retained"
+        },
+        "sampled_frames": "media_staging/shot_core_pilot/frames/PILOT_IDENTITY_T01.jpg"
+      },
+      "decision_record": {
+        "decision": "PASS",
+        "reason": "decision retained"
+      },
+      "machine_qc": {
+        "file_integrity": "PASS",
+        "resolution": "PASS",
+        "fps": "PASS",
+        "audio_stream": "UNKNOWN",
+        "duration": "PASS",
+        "black_frames": "UNKNOWN",
+        "freeze_tail": "UNKNOWN",
+        "internal_cuts": "UNKNOWN",
+        "duration_tolerance_seconds": 0.75
+      },
+      "provider_actual_seconds": 5.184,
+      "duration_contract_seconds": 5.0
+    },
+    {
+      "take_id": "PILOT_REWORK_T01",
+      "shot_id": "PILOT_REWORK",
+      "parent_take_id": null,
+      "branch_reason": null,
+      "provider": "agnes",
+      "model": "agnes-video-2.5-flash",
+      "generation_config": {
+        "model": "agnes-video-2.5-flash",
+        "prompt": "A hand moves the phone from the left side of the desk to the right side in one continuous motion and stops; deliberately ignore any extra movement, no cut.\n[SHOT_CORE_CONTRACT]\n{\"action_state\": {\"camera\": \"close\", \"character\": \"hand moves phone\", \"lighting\": \"cool\", \"location\": \"desk\", \"props\": [\"phone center\"], \"time\": \"night\", \"wardrobe\": \"unchanged\"}, \"allowed_behaviors\": [\"move phone once\", \"hold\"], \"asset_refs\": [{\"asset_id\": \"SCENE_02\", \"asset_type\": \"scene\", \"sha256\": \"e5015c19d9f75b3164aeace2542892f893914cd3c7cd630c4cd69db28c7473a3\", \"version\": 1}], \"camera\": {\"axis\": \"none\", \"internal_cuts\": 0, \"movement\": \"NONE\", \"position\": \"desk\", \"scale\": \"close\"}, \"end_state\": {\"camera\": \"close\", \"character\": \"hand leaves phone\", \"lighting\": \"cool\", \"location\": \"desk\", \"props\": [\"phone right\"], \"time\": \"night\", \"wardrobe\": \"unchanged\"}, \"forbidden_behaviors\": [\"pick up phone\", \"open screen\", \"new character\", \"internal cut\"], \"internal_cuts\": 0, \"primary_visual_event\": \"hand moves phone once\", \"shot_id\": \"PILOT_REWORK\", \"start_state\": {\"camera\": \"close\", \"character\": \"WENJI\", \"lighting\": \"cool\", \"location\": \"desk\", \"props\": [\"phone left\"], \"time\": \"night\", \"wardrobe\": \"unchanged\"}, \"visible_character_ids\": [\"WENJI\"], \"visible_prop_ids\": [\"PHONE\"]}",
+        "mode": "reference",
+        "seconds": "5",
+        "size": "720P",
+        "aspect_ratio": "9:16",
+        "n": 1,
+        "images": [
+          "https://raw.githubusercontent.com/zhangapple21-web/-/main/ace-video-kingdom/wenji-episode-006/SCENE_02_typing_log_anchor.png"
+        ]
+      },
+      "generation_fingerprint": "a5dc9e3998c57d959ab7f9576c0fbfeb785aeb2c63ec9cbce9fc89fc4f9e8c13",
+      "asset_bindings": [
+        {
+          "asset_id": "SCENE_02",
+          "version": 1,
+          "sha256": "e5015c19d9f75b3164aeace2542892f893914cd3c7cd630c4cd69db28c7473a3"
+        }
+      ],
+      "provider_status": "SUCCESS",
+      "technical_status": "PASS",
+      "creative_status": "FAIL",
+      "status": "GENERATED",
+      "selected": false,
+      "created_at": "2026-09-05T03:12:03Z",
+      "create_http_status": 200,
+      "video_id": "task_iILumtfuu2tmA8V1sCn9BgJpnzsLQD9O",
+      "created_status": "queued",
+      "last_poll_http_status": 200,
+      "last_state": "completed",
+      "artifact_path": "media_staging\\shot_core_pilot\\PILOT_REWORK_T01.mp4",
+      "artifact_hash": "830dfad0208bf3b5bc2f38d6e1711a2f6cd83a0889c2f77cfdd8c24c8d55164e",
+      "bytes": 1420661,
+      "media": {
+        "duration_seconds": 5.184,
+        "width": 720,
+        "height": 1280,
+        "fps": "24/1"
+      },
+      "duration_mismatch": false,
+      "review": {
+        "machine": {
+          "technical_status": "PASS",
+          "internal_cuts": "UNKNOWN",
+          "freeze_tail": "UNKNOWN"
+        },
+        "vision_llm": "FAIL_EXTRA_ACTION",
+        "director": {
+          "decision": "REWORK",
+          "reason": "Visual review: phone was picked up and returned, violating the single move contract; deliberate creative failure retained for lineage test."
+        },
+        "sampled_frames": "media_staging/shot_core_pilot/frames/PILOT_REWORK_T01.jpg"
+      },
+      "decision_record": {
+        "decision": "REWORK",
+        "reason": "Visual review: phone was picked up and returned, violating the single move contract; deliberate creative failure retained for lineage test."
+      },
+      "machine_qc": {
+        "file_integrity": "PASS",
+        "resolution": "PASS",
+        "fps": "PASS",
+        "audio_stream": "UNKNOWN",
+        "duration": "PASS",
+        "black_frames": "UNKNOWN",
+        "freeze_tail": "UNKNOWN",
+        "internal_cuts": "UNKNOWN",
+        "duration_tolerance_seconds": 0.75
+      },
+      "provider_actual_seconds": 5.184,
+      "duration_contract_seconds": 5.0
+    },
+    {
+      "take_id": "PILOT_REWORK_T02",
+      "shot_id": "PILOT_REWORK",
+      "parent_take_id": "PILOT_REWORK_T01",
+      "branch_reason": "EXTRA_ACTION",
+      "provider": "agnes",
+      "model": "agnes-video-2.5-flash",
+      "generation_config": {
+        "model": "agnes-video-2.5-flash",
+        "prompt": "A hand moves the phone from the left side of the desk to the right side in one continuous motion and stops; deliberately ignore any extra movement, no cut. Keep the phone flat on the desk throughout; do not pick it up.\n[SHOT_CORE_CONTRACT]\n{\"action_state\": {\"camera\": \"close\", \"character\": \"hand moves phone\", \"lighting\": \"cool\", \"location\": \"desk\", \"props\": [\"phone center\"], \"time\": \"night\", \"wardrobe\": \"unchanged\"}, \"allowed_behaviors\": [\"move phone once\", \"hold\"], \"asset_refs\": [{\"asset_id\": \"SCENE_02\", \"asset_type\": \"scene\", \"sha256\": \"e5015c19d9f75b3164aeace2542892f893914cd3c7cd630c4cd69db28c7473a3\", \"version\": 1}], \"camera\": {\"axis\": \"none\", \"internal_cuts\": 0, \"movement\": \"NONE\", \"position\": \"desk\", \"scale\": \"close\"}, \"end_state\": {\"camera\": \"close\", \"character\": \"hand leaves phone\", \"lighting\": \"cool\", \"location\": \"desk\", \"props\": [\"phone right\"], \"time\": \"night\", \"wardrobe\": \"unchanged\"}, \"forbidden_behaviors\": [\"pick up phone\", \"open screen\", \"new character\", \"internal cut\"], \"internal_cuts\": 0, \"primary_visual_event\": \"hand moves phone once\", \"shot_id\": \"PILOT_REWORK\", \"start_state\": {\"camera\": \"close\", \"character\": \"WENJI\", \"lighting\": \"cool\", \"location\": \"desk\", \"props\": [\"phone left\"], \"time\": \"night\", \"wardrobe\": \"unchanged\"}, \"visible_character_ids\": [\"WENJI\"], \"visible_prop_ids\": [\"PHONE\"]}",
+        "mode": "reference",
+        "seconds": "5",
+        "size": "720P",
+        "aspect_ratio": "9:16",
+        "n": 1,
+        "images": [
+          "https://raw.githubusercontent.com/zhangapple21-web/-/main/ace-video-kingdom/wenji-episode-006/SCENE_02_typing_log_anchor.png"
+        ]
+      },
+      "generation_fingerprint": "8f87c6fd3d33c0a6624a85b0e609bfb20942cdaa7bee74e044cac4af9c067772",
+      "asset_bindings": [
+        {
+          "asset_id": "SCENE_02",
+          "version": 1,
+          "sha256": "e5015c19d9f75b3164aeace2542892f893914cd3c7cd630c4cd69db28c7473a3"
+        }
+      ],
+      "provider_status": "SUCCESS",
+      "technical_status": "PASS",
+      "creative_status": "PASS",
+      "status": "SELECTED",
+      "selected": true,
+      "created_at": "2026-09-05T03:15:26Z",
+      "create_http_status": 200,
+      "video_id": "task_u7J4Ij4BozSZzWANc25tBG4pN1xnDtIH",
+      "created_status": "queued",
+      "last_poll_http_status": 200,
+      "last_state": "completed",
+      "artifact_path": "media_staging\\shot_core_pilot\\PILOT_REWORK_T02.mp4",
+      "artifact_hash": "b5496ee3ab9d4b2f8c835bf737369924301a68cfa73ea4af8a2314d083855779",
+      "bytes": 1138940,
+      "media": {
+        "duration_seconds": 5.184,
+        "width": 720,
+        "height": 1280,
+        "fps": "24/1"
+      },
+      "duration_mismatch": false,
+      "review": {
+        "machine": {
+          "technical_status": "PASS",
+          "internal_cuts": "UNKNOWN",
+          "freeze_tail": "UNKNOWN"
+        },
+        "vision_llm": "UNKNOWN",
+        "director": {
+          "decision": "PASS",
+          "reason": "decision retained"
+        },
+        "sampled_frames": "media_staging/shot_core_pilot/frames/PILOT_REWORK_T02.jpg"
+      },
+      "decision_record": {
+        "decision": "PASS",
+        "reason": "decision retained"
+      },
+      "machine_qc": {
+        "file_integrity": "PASS",
+        "resolution": "PASS",
+        "fps": "PASS",
+        "audio_stream": "UNKNOWN",
+        "duration": "PASS",
+        "black_frames": "UNKNOWN",
+        "freeze_tail": "UNKNOWN",
+        "internal_cuts": "UNKNOWN",
+        "duration_tolerance_seconds": 0.75
+      },
+      "provider_actual_seconds": 5.184,
+      "duration_contract_seconds": 5.0
+    }
+  ],
+  "events": [
+    {
+      "event": "STALE_PROPAGATED",
+      "shot_id": "PILOT_ACTION",
+      "changed": [
+        "first_frame_ref",
+        "last_frame_ref"
+      ],
+      "affected_takes": [
+        "PILOT_ACTION_T01"
+      ],
+      "independent_shots_affected": false
+    }
+  ]
+}

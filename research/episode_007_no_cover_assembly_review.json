@@ -1,0 +1,163 @@
+{
+  "status": "MEDIA_INTEGRITY_PASSED",
+  "output": "C:\\tmp\\ace_video_kingdom_git\\media_staging\\episode_007_virtual_data\\video\\episode_007_no_cover_rough.mp4",
+  "output_sha256": "0f88e21d3e3d3b3c6ba8ab1a65d456604d782733a815e9757fb66e81b5310b1f",
+  "clip_count": 18,
+  "sources": [
+    {
+      "shot_id": "S01A",
+      "path": "C:\\tmp\\ace_video_kingdom_git\\media_staging\\episode_007_virtual_data\\video\\S01A.mp4",
+      "sha256": "a4de51799ffcb99cc3a9d4dd022327804f12004a82df4312e472313a897691f4",
+      "duration_seconds": 5.041667,
+      "width": 704,
+      "height": 1280
+    },
+    {
+      "shot_id": "S01B",
+      "path": "C:\\tmp\\ace_video_kingdom_git\\media_staging\\episode_007_virtual_data\\video\\S01B.mp4",
+      "sha256": "0ec60516e77e454596e6af46b1d2d6a6059bb5341ed9dcf86a6a94918c172860",
+      "duration_seconds": 5.041667,
+      "width": 704,
+      "height": 1280
+    },
+    {
+      "shot_id": "S01C",
+      "path": "C:\\tmp\\ace_video_kingdom_git\\media_staging\\episode_007_virtual_data\\video\\S01C.mp4",
+      "sha256": "3a5661c4a9e400c967c397e13564f266c667cd5355d16f5851471334b11a6658",
+      "duration_seconds": 5.041667,
+      "width": 704,
+      "height": 1280
+    },
+    {
+      "shot_id": "S01D",
+      "path": "C:\\tmp\\ace_video_kingdom_git\\media_staging\\episode_007_virtual_data\\video\\S01D.mp4",
+      "sha256": "ca5441c9f800d8d080fbcdd563dfdc619caedd82f37e50b85d8b9db65a8a7340",
+      "duration_seconds": 5.041667,
+      "width": 704,
+      "height": 1280
+    },
+    {
+      "shot_id": "S02A",
+      "path": "C:\\tmp\\ace_video_kingdom_git\\media_staging\\episode_007_virtual_data\\video\\S02A.mp4",
+      "sha256": "a40ce1a7698891e1bf7d472cba5519979eb75cb476d23e53800ec77626a7eb92",
+      "duration_seconds": 5.041667,
+      "width": 704,
+      "height": 1280
+    },
+    {
+      "shot_id": "S02B",
+      "path": "C:\\tmp\\ace_video_kingdom_git\\media_staging\\episode_007_virtual_data\\video\\S02B.mp4",
+      "sha256": "ae12a4f33dcfe62088b28402c52103bd42b2eb2193531f728b616af76ad8085f",
+      "duration_seconds": 5.041667,
+      "width": 704,
+      "height": 1280
+    },
+    {
+      "shot_id": "S02C",
+      "path": "C:\\tmp\\ace_video_kingdom_git\\media_staging\\episode_007_virtual_data\\video\\S02C.mp4",
+      "sha256": "e7abba4f32b972f6e067763ba7911ca657ccab43bd3a8439274b4c25550a55de",
+      "duration_seconds": 5.041667,
+      "width": 704,
+      "height": 1280
+    },
+    {
+      "shot_id": "S03A",
+      "path": "C:\\tmp\\ace_video_kingdom_git\\media_staging\\episode_007_virtual_data\\video\\S03A.mp4",
+      "sha256": "84f0cfd0cdb96bda21190d5425ba93e36a046e7863177e2e166e7dc86b31653f",
+      "duration_seconds": 5.041667,
+      "width": 704,
+      "height": 1280
+    },
+    {
+      "shot_id": "S03B",
+      "path": "C:\\tmp\\ace_video_kingdom_git\\media_staging\\episode_007_virtual_data\\video\\S03B.mp4",
+      "sha256": "481f66c34555bf5cd7d85a07f725b39034d1095f8adbb7ab52bb5ea4f3fc5fa7",
+      "duration_seconds": 5.041667,
+      "width": 704,
+      "height": 1280
+    },
+    {
+      "shot_id": "S03C",
+      "path": "C:\\tmp\\ace_video_kingdom_git\\media_staging\\episode_007_virtual_data\\video\\S03C.mp4",
+      "sha256": "9c2167eaf7f9c2af596ee7395f2d10469be7f9d18858bf8d4082fb48cd9c9e2d",
+      "duration_seconds": 5.041667,
+      "width": 704,
+      "height": 1280
+    },
+    {
+      "shot_id": "S04A",
+      "path": "C:\\tmp\\ace_video_kingdom_git\\media_staging\\episode_007_virtual_data\\video\\S04A.mp4",
+      "sha256": "53301f18cb12f7e51e7b0682c6cfd93dc4be5905a9e523682a54a791cf1c5203",
+      "duration_seconds": 5.041667,
+      "width": 704,
+      "height": 1280
+    },
+    {
+      "shot_id": "S04B",
+      "path": "C:\\tmp\\ace_video_kingdom_git\\media_staging\\episode_007_virtual_data\\video\\S04B.mp4",
+      "sha256": "2ff75c572d2092f7259a0b1aa7badc4857085b79c69ead535188d069a62a85fc",
+      "duration_seconds": 5.041667,
+      "width": 704,
+      "height": 1280
+    },
+    {
+      "shot_id": "S05A",
+      "path": "C:\\tmp\\ace_video_kingdom_git\\media_staging\\episode_007_virtual_data\\video\\S05A.mp4",
+      "sha256": "47d0f864b3f9d6225bbe6dea5b50211f8e4c1fde6a2270ac2a53c7a6f44c6493",
+      "duration_seconds": 5.041667,
+      "width": 704,
+      "height": 1280
+    },
+    {
+      "shot_id": "S05B",
+      "path": "C:\\tmp\\ace_video_kingdom_git\\media_staging\\episode_007_virtual_data\\video\\S05B.mp4",
+      "sha256": "6b185729538294de4f879f5f1bc26b100446a7446df634f7814234ca4677842f",
+      "duration_seconds": 5.041667,
+      "width": 704,
+      "height": 1280
+    },
+    {
+      "shot_id": "S05C",
+      "path": "C:\\tmp\\ace_video_kingdom_git\\media_staging\\episode_007_virtual_data\\video\\S05C.mp4",
+      "sha256": "12d21486ce4285edc54fd4fd74d9f90d183f0b40ec34a69952d0d1db5e448068",
+      "duration_seconds": 5.041667,
+      "width": 704,
+      "height": 1280
+    },
+    {
+      "shot_id": "S06A",
+      "path": "C:\\tmp\\ace_video_kingdom_git\\media_staging\\episode_007_virtual_data\\video\\S06A.mp4",
+      "sha256": "f06481e921f190cf0baccfad4051be0e0320ef99c5f3c787ce04fe762ef7c521",
+      "duration_seconds": 5.041667,
+      "width": 704,
+      "height": 1280
+    },
+    {
+      "shot_id": "S06B",
+      "path": "C:\\tmp\\ace_video_kingdom_git\\media_staging\\episode_007_virtual_data\\video\\S06B.mp4",
+      "sha256": "fa8a3f97d5f4ce786b502c8aab0937ed239df2ccca7b31553eea75ba4744bdb6",
+      "duration_seconds": 5.041667,
+      "width": 704,
+      "height": 1280
+    },
+    {
+      "shot_id": "S07A",
+      "path": "C:\\tmp\\ace_video_kingdom_git\\media_staging\\episode_007_virtual_data\\video\\S07A.mp4",
+      "sha256": "cbb861ccdcc016bfbedbdae1c77a504de42f6ac2197fb4e1b89daaaf526b2a5a",
+      "duration_seconds": 5.041667,
+      "width": 704,
+      "height": 1280
+    }
+  ],
+  "output_media": {
+    "duration_seconds": 82.666667,
+    "width": 704,
+    "height": 1280
+  },
+  "duration_window_seconds": [
+    70.0,
+    100.0
+  ],
+  "normalized_to": null,
+  "trim_leading_seconds": 0.45
+}

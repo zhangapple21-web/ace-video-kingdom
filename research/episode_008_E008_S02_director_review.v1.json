@@ -1,0 +1,56 @@
+{
+  "schema": "episode008.shot_director_review.v1",
+  "project_id": "episode_008_rule_seat_system",
+  "shot_id": "E008_S02",
+  "script_status": "SCRIPT_LOCKED",
+  "reviewed_at": "2026-09-04",
+  "status": "PASS_WITH_LOCAL_CORRECTION",
+  "raw_artifact": {
+    "path": "media_staging/episode_008_rule_seat_system/E008_S02.mp4",
+    "sha256": "957d06e3d1892d95ac921a3250fa0ccb7cc07120503b742d1c2cf9c2760ea38d",
+    "media_integrity": "PASS",
+    "duration_seconds": 5.041667,
+    "video": "H.264 704x1280 24fps",
+    "audio": "AAC stereo 48kHz"
+  },
+  "visual_verdicts": {
+    "action_beat": "PASS",
+    "information": "PASS_WITH_SUBTITLE_CORRECTION",
+    "identity": "CONDITIONAL_PASS",
+    "setting_and_continuity": "CONDITIONAL_PASS",
+    "cut_timing": "PASS",
+    "subtitle_position": "PASS",
+    "audio_stream_presence": "PASS",
+    "dialogue_audio_sync": "UNVERIFIED"
+  },
+  "observations": [
+    "镜头内可见人物将资料放到桌面并完成圈线动作，末帧保留圈出的日期和便签。",
+    "生成纸面文字存在乱码/伪字，不作为事实；对白字幕负责表达‘同一天、扣费与记录对不上’。",
+    "桌面、冷暖光和办公空间与第一镜属于同一类虚构场景，但人物服装和外观存在轻微漂移，后续需继续观察。"
+  ],
+  "overall_verdict": "PASS_WITH_LOCAL_SUBTITLE_CORRECTION",
+  "next_gate": "SHOT_3_ALLOWED",
+  "corrected_artifact": {
+    "path": "media_staging/episode_008_rule_seat_system/E008_S02_subtitled_research_v1.mp4",
+    "sha256": "a439706d1e85c572adb828b4fa10300e733efa6e11be91fbdb700bd5722f938a",
+    "subtitle_track": "media_staging/episode_008_rule_seat_system/E008_S02_review.srt",
+    "subtitle_validation": "VALID",
+    "audio_preserved": true
+  },
+  "table_lens": {
+    "need": "把三类记录放在同一张桌面上，形成可核验的日期差异证据。",
+    "capability_evidence": "video_id video_bGl0ZWxsbTpjdXN0b21fbGxtX3Byb3ZpZGVyOm9wZW5haTttb2RlbF9pZDphZ25lcy12aWRlby12Mi4wO3ZpZGVvX2lkOnZpZGVvX2M1ZGQ2YjQ3NjUzYzRkODlhMjgzYWRlOTMwNWFlOWRl",
+    "verification_result": "圈线动作通过；信息需由本地字幕固定。",
+    "follow_up": "第三镜沿用桌面物件连续性，但收紧为单一资料摆放和圈线动作。"
+  },
+  "evidence": [
+    "media_staging/episode_008_rule_seat_system/E008_S02_review/contact.jpg",
+    "media_staging/episode_008_rule_seat_system/E008_S02_review/frame_1_0.jpg",
+    "media_staging/episode_008_rule_seat_system/E008_S02_review/frame_3_0.jpg",
+    "media_staging/episode_008_rule_seat_system/E008_S02_review/frame_4_8.jpg",
+    "media_staging/episode_008_rule_seat_system/E008_S02_subtitled_review/contact.jpg",
+    "media_staging/episode_008_rule_seat_system/E008_S02_subtitled_review/frame_1_0.jpg",
+    "media_staging/episode_008_rule_seat_system/E008_S02_subtitled_review/frame_3_0.jpg",
+    "media_staging/episode_008_rule_seat_system/E008_S02_subtitled_review/frame_4_8.jpg"
+  ]
+}

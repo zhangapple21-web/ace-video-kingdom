@@ -1,0 +1,13 @@
+{
+  "status": "FAILED_BEFORE_WORK",
+  "reason": "Codex Responses transport rejected function_call_output without call_id",
+  "error_type": "OpenAI Responses 400 invalid_request_error",
+  "workers": [
+    {"title": "短剧六模块合同审计", "thread_id": "01a064ea-5086-7680-b631-c50123ae1c8b", "model": "gpt-5.6-terra", "thinking": "xhigh"},
+    {"title": "外部短剧流水线交叉研究", "thread_id": "01a064ea-5424-7b31-863e-cb6c73feb9ac", "model": "gpt-5.6-terra", "thinking": "high"}
+  ],
+  "work_performed": false,
+  "files_written_by_workers": [],
+  "production_integration": false,
+  "lesson": "不要把后台线程失败当作研究完成；主任务接管，保留错误证据。"
+}

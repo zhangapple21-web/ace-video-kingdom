@@ -1,0 +1,189 @@
+{
+  "status": "PROVIDER_AUDIO_STREAM_MEASURED",
+  "source": "Agnes-generated shot artifacts",
+  "rows": [
+    {
+      "shot_id": "S01A",
+      "video_duration_seconds": 10.041667,
+      "audio_stream_present": true,
+      "audio_codec": "aac",
+      "audio_duration_seconds": 10.041,
+      "audio_sample_rate": 48000,
+      "audio_channels": 2,
+      "dialogue_alignment": "UNKNOWN"
+    },
+    {
+      "shot_id": "S01B",
+      "video_duration_seconds": 10.041667,
+      "audio_stream_present": true,
+      "audio_codec": "aac",
+      "audio_duration_seconds": 10.041,
+      "audio_sample_rate": 48000,
+      "audio_channels": 2,
+      "dialogue_alignment": "UNKNOWN"
+    },
+    {
+      "shot_id": "S01C",
+      "video_duration_seconds": 10.041667,
+      "audio_stream_present": true,
+      "audio_codec": "aac",
+      "audio_duration_seconds": 10.041,
+      "audio_sample_rate": 48000,
+      "audio_channels": 2,
+      "dialogue_alignment": "UNKNOWN"
+    },
+    {
+      "shot_id": "S01D",
+      "video_duration_seconds": 10.041667,
+      "audio_stream_present": true,
+      "audio_codec": "aac",
+      "audio_duration_seconds": 10.041,
+      "audio_sample_rate": 48000,
+      "audio_channels": 2,
+      "dialogue_alignment": "UNKNOWN"
+    },
+    {
+      "shot_id": "S02A",
+      "video_duration_seconds": 10.041667,
+      "audio_stream_present": true,
+      "audio_codec": "aac",
+      "audio_duration_seconds": 10.041,
+      "audio_sample_rate": 48000,
+      "audio_channels": 2,
+      "dialogue_alignment": "UNKNOWN"
+    },
+    {
+      "shot_id": "S02B",
+      "video_duration_seconds": 10.041667,
+      "audio_stream_present": true,
+      "audio_codec": "aac",
+      "audio_duration_seconds": 10.041,
+      "audio_sample_rate": 48000,
+      "audio_channels": 2,
+      "dialogue_alignment": "UNKNOWN"
+    },
+    {
+      "shot_id": "S02C",
+      "video_duration_seconds": 10.041667,
+      "audio_stream_present": true,
+      "audio_codec": "aac",
+      "audio_duration_seconds": 10.041,
+      "audio_sample_rate": 48000,
+      "audio_channels": 2,
+      "dialogue_alignment": "UNKNOWN"
+    },
+    {
+      "shot_id": "S03A",
+      "video_duration_seconds": 10.041667,
+      "audio_stream_present": true,
+      "audio_codec": "aac",
+      "audio_duration_seconds": 10.041,
+      "audio_sample_rate": 48000,
+      "audio_channels": 2,
+      "dialogue_alignment": "UNKNOWN"
+    },
+    {
+      "shot_id": "S03B",
+      "video_duration_seconds": 10.041667,
+      "audio_stream_present": true,
+      "audio_codec": "aac",
+      "audio_duration_seconds": 10.041,
+      "audio_sample_rate": 48000,
+      "audio_channels": 2,
+      "dialogue_alignment": "UNKNOWN"
+    },
+    {
+      "shot_id": "S03C",
+      "video_duration_seconds": 10.041667,
+      "audio_stream_present": true,
+      "audio_codec": "aac",
+      "audio_duration_seconds": 10.041,
+      "audio_sample_rate": 48000,
+      "audio_channels": 2,
+      "dialogue_alignment": "UNKNOWN"
+    },
+    {
+      "shot_id": "S04A",
+      "video_duration_seconds": 10.041667,
+      "audio_stream_present": true,
+      "audio_codec": "aac",
+      "audio_duration_seconds": 10.041,
+      "audio_sample_rate": 48000,
+      "audio_channels": 2,
+      "dialogue_alignment": "UNKNOWN"
+    },
+    {
+      "shot_id": "S04B",
+      "video_duration_seconds": 10.041667,
+      "audio_stream_present": true,
+      "audio_codec": "aac",
+      "audio_duration_seconds": 10.041,
+      "audio_sample_rate": 48000,
+      "audio_channels": 2,
+      "dialogue_alignment": "UNKNOWN"
+    },
+    {
+      "shot_id": "S05A",
+      "video_duration_seconds": 10.041667,
+      "audio_stream_present": true,
+      "audio_codec": "aac",
+      "audio_duration_seconds": 10.041,
+      "audio_sample_rate": 48000,
+      "audio_channels": 2,
+      "dialogue_alignment": "UNKNOWN"
+    },
+    {
+      "shot_id": "S05B",
+      "video_duration_seconds": 10.041667,
+      "audio_stream_present": true,
+      "audio_codec": "aac",
+      "audio_duration_seconds": 10.041,
+      "audio_sample_rate": 48000,
+      "audio_channels": 2,
+      "dialogue_alignment": "UNKNOWN"
+    },
+    {
+      "shot_id": "S05C",
+      "video_duration_seconds": 10.041667,
+      "audio_stream_present": true,
+      "audio_codec": "aac",
+      "audio_duration_seconds": 10.041,
+      "audio_sample_rate": 48000,
+      "audio_channels": 2,
+      "dialogue_alignment": "UNKNOWN"
+    },
+    {
+      "shot_id": "S06A",
+      "video_duration_seconds": 10.041667,
+      "audio_stream_present": true,
+      "audio_codec": "aac",
+      "audio_duration_seconds": 10.041,
+      "audio_sample_rate": 48000,
+      "audio_channels": 2,
+      "dialogue_alignment": "UNKNOWN"
+    },
+    {
+      "shot_id": "S06B",
+      "video_duration_seconds": 10.041667,
+      "audio_stream_present": true,
+      "audio_codec": "aac",
+      "audio_duration_seconds": 10.041,
+      "audio_sample_rate": 48000,
+      "audio_channels": 2,
+      "dialogue_alignment": "UNKNOWN"
+    },
+    {
+      "shot_id": "S07A",
+      "video_duration_seconds": 10.041667,
+      "audio_stream_present": true,
+      "audio_codec": "aac",
+      "audio_duration_seconds": 10.041,
+      "audio_sample_rate": 48000,
+      "audio_channels": 2,
+      "dialogue_alignment": "UNKNOWN"
+    }
+  ],
+  "count": 18,
+  "production_boundary": "RESEARCH_ONLY",
+  "note": "AAC presence and duration are measured; intelligible dialogue and lip-sync are not inferred from codec metadata."
+}

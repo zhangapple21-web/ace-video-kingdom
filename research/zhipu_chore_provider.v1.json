@@ -1,0 +1,30 @@
+{
+  "provider": "zhipu",
+  "model": "glm-4-flash",
+  "endpoint": "https://open.bigmodel.cn/api/paas/v4/chat/completions",
+  "status": "VERIFIED_TEXT_ONLY",
+  "role": "video_kingdom_low_cost_chore_worker",
+  "allowed_tasks": [
+    "render_output_cataloguing",
+    "subtitle_format_cleanup",
+    "continuity_issue_detection",
+    "public_source_summary",
+    "failed_attempt_digest",
+    "asset_hash_manifest_formatting"
+  ],
+  "forbidden_tasks": [
+    "video_rendering",
+    "provider_routing",
+    "publishing",
+    "production_write",
+    "private_data_ingestion"
+  ],
+  "retry": {
+    "max_attempts": 3,
+    "fallback_delay_seconds": 60,
+    "max_delay_seconds": 900,
+    "honor_retry_after": true
+  },
+  "credential_env": "ZHIPU_KEY",
+  "production_integration": false
+}

@@ -1,0 +1,202 @@
+{
+  "contract_version": "ace.video_kingdom.episode_preflight.v1",
+  "scope": "FREE_ZONE_RESEARCH_ONLY",
+  "production_integration": false,
+  "episode": "episodes\\episode_007_virtual_data.v1.json",
+  "project_id": "episode_007_virtual_data",
+  "verdict": "CONDITIONAL",
+  "hard_failures": [],
+  "rework": [],
+  "warnings": [
+    "Grok 4.6 red-team is not freshly health-verified; continue only with a bounded first shot after 5.6 Terra review"
+  ],
+  "planned_shot_count": 18,
+  "planned_duration_seconds": 108,
+  "motion_contract": {
+    "status": "VALID",
+    "shot_count": 18,
+    "errors": [],
+    "warnings": [],
+    "duplicate_threshold": 0.7
+  },
+  "quality_contract": {
+    "status": "VALID",
+    "mode": "FORMAL",
+    "errors": [],
+    "warnings": [],
+    "gap_count": 0
+  },
+  "six_module_contract": {
+    "status": "VALID",
+    "errors": [],
+    "shot_count": 18,
+    "contract_version": "video_kingdom.six_module_shot_contract.research.v3",
+    "path": "C:\\tmp\\ace_video_kingdom_git\\episodes\\episode_007_virtual_data.six_module.v1.json"
+  },
+  "timing_audit": {
+    "status": "NOT_PROVIDED",
+    "path": null
+  },
+  "review_policy": [
+    "deterministic_preflight",
+    "gpt-5.6-terra primary review",
+    "grok-4.6 high-cognition review when available",
+    "gpt-5.6-terra escalation only",
+    "gpt-5.6-terra packaging only"
+  ],
+  "primary_review_packet": {
+    "reviewer": "5.6 Terra",
+    "shots": [
+      {
+        "shot_id": "S01A",
+        "prompt": "handheld push-in, close-up fingers and tired eyes, no static cover; 阿浪与肥哥外观必须连续，冷峻压抑现实主义，竖屏9:16",
+        "scene_anchor_reference": "../media_staging/episode_007_virtual_data/anchors/scene_action/office_keyboard.png",
+        "scene_anchor_kind": "local_path",
+        "fallback_image": "../media_staging/episode_007_virtual_data/anchors/user/alang_user_reference.png"
+      },
+      {
+        "shot_id": "S01B",
+        "prompt": "fast lateral pan across screens, notification vibration, 阿浪 freezes; 阿浪与肥哥外观必须连续，冷峻压抑现实主义，竖屏9:16",
+        "scene_anchor_reference": "../media_staging/episode_007_virtual_data/anchors/scene_action/office_keyboard.png",
+        "scene_anchor_kind": "local_path",
+        "fallback_image": "../media_staging/episode_007_virtual_data/anchors/user/alang_user_reference.png"
+      },
+      {
+        "shot_id": "S01C",
+        "prompt": "over-shoulder phone call, 阿浪 pacing beside desk, smoke haze; 阿浪与肥哥外观必须连续，冷峻压抑现实主义，竖屏9:16",
+        "scene_anchor_reference": "../media_staging/episode_007_virtual_data/anchors/scene_action/office_keyboard.png",
+        "scene_anchor_kind": "local_path",
+        "fallback_image": "../media_staging/episode_007_virtual_data/anchors/user/alang_user_reference.png"
+      },
+      {
+        "shot_id": "S01D",
+        "prompt": "whip pan to impact, rack focus from phone to silent coworkers; 阿浪与肥哥外观必须连续，冷峻压抑现实主义，竖屏9:16",
+        "scene_anchor_reference": "../media_staging/episode_007_virtual_data/anchors/scene_action/office_phone_impact.png",
+        "scene_anchor_kind": "local_path",
+        "fallback_image": "../media_staging/episode_007_virtual_data/anchors/user/alang_user_reference.png"
+      },
+      {
+        "shot_id": "S02A",
+        "prompt": "macro ashtray, tilt up to 肥哥 at window, slow dolly; 阿浪与肥哥外观必须连续，冷峻压抑现实主义，竖屏9:16",
+        "scene_anchor_reference": "../media_staging/episode_007_virtual_data/anchors/scene_action/manager_desk_impact.png",
+        "scene_anchor_kind": "local_path",
+        "fallback_image": "../media_staging/episode_007_virtual_data/anchors/feige_character_anchor.png"
+      },
+      {
+        "shot_id": "S02B",
+        "prompt": "two-shot, 肥哥 turns sharply, smoke crossing frame; 阿浪与肥哥外观必须连续，冷峻压抑现实主义，竖屏9:16",
+        "scene_anchor_reference": "../media_staging/episode_007_virtual_data/anchors/scene_action/manager_desk_impact.png",
+        "scene_anchor_kind": "local_path",
+        "fallback_image": "../media_staging/episode_007_virtual_data/anchors/feige_character_anchor.png"
+      },
+      {
+        "shot_id": "S02C",
+        "prompt": "hard cut, desk impact close-up, camera jolt; 阿浪与肥哥外观必须连续，冷峻压抑现实主义，竖屏9:16",
+        "scene_anchor_reference": "../media_staging/episode_007_virtual_data/anchors/scene_action/manager_desk_impact.png",
+        "scene_anchor_kind": "local_path",
+        "fallback_image": "../media_staging/episode_007_virtual_data/anchors/feige_character_anchor.png"
+      },
+      {
+        "shot_id": "S03A",
+        "prompt": "low angle on 肥哥 walking, papers raised, fluorescent flicker; 阿浪与肥哥外观必须连续，冷峻压抑现实主义，竖屏9:16",
+        "scene_anchor_reference": "../media_staging/episode_007_virtual_data/anchors/scene_action/manager_desk_impact.png",
+        "scene_anchor_kind": "local_path",
+        "fallback_image": "../media_staging/episode_007_virtual_data/anchors/feige_character_anchor.png"
+      },
+      {
+        "shot_id": "S03B",
+        "prompt": "沉默脆弱的男同事站起，脸色苍白、瘦削、眼含泪光，眼泪落在键盘上；肥哥在旁边掐灭烟头，镜头慢推，冷峻压抑现实主义，竖屏9:16，男同事不能长得像阿浪或肥哥",
+        "scene_anchor_reference": "../media_staging/episode_007_virtual_data/anchors/scene_action/manager_desk_impact.png",
+        "scene_anchor_kind": "local_path",
+        "fallback_image": "../media_staging/episode_007_virtual_data/anchors/alang_character_anchor.png"
+      },
+      {
+        "shot_id": "S03C",
+        "prompt": "orbit around clenched fist, background typing becomes oppressive; 阿浪与肥哥外观必须连续，冷峻压抑现实主义，竖屏9:16",
+        "scene_anchor_reference": "../media_staging/episode_007_virtual_data/anchors/scene_action/office_keyboard.png",
+        "scene_anchor_kind": "local_path",
+        "fallback_image": "../media_staging/episode_007_virtual_data/anchors/alang_character_anchor.png"
+      },
+      {
+        "shot_id": "S04A",
+        "prompt": "tight stall close-up, phone glow, subtle handheld breathing; 阿浪与肥哥外观必须连续，冷峻压抑现实主义，竖屏9:16",
+        "scene_anchor_reference": "../media_staging/episode_007_virtual_data/anchors/scene_action/office_keyboard.png",
+        "scene_anchor_kind": "local_path",
+        "fallback_image": "../media_staging/episode_007_virtual_data/anchors/alang_character_anchor.png"
+      },
+      {
+        "shot_id": "S04B",
+        "prompt": "snap rack focus to phone, light shift, he stands abruptly; 阿浪与肥哥外观必须连续，冷峻压抑现实主义，竖屏9:16",
+        "scene_anchor_reference": "../media_staging/episode_007_virtual_data/anchors/scene_action/office_phone_impact.png",
+        "scene_anchor_kind": "local_path",
+        "fallback_image": "../media_staging/episode_007_virtual_data/anchors/alang_character_anchor.png"
+      },
+      {
+        "shot_id": "S05A",
+        "prompt": "screen reflection close-up, slow zoom, forced gentle smile; 阿浪与肥哥外观必须连续，冷峻压抑现实主义，竖屏9:16",
+        "scene_anchor_reference": "../media_staging/episode_007_virtual_data/anchors/scene_action/office_keyboard.png",
+        "scene_anchor_kind": "local_path",
+        "fallback_image": "../media_staging/episode_007_virtual_data/anchors/alang_character_anchor.png"
+      },
+      {
+        "shot_id": "S05B",
+        "prompt": "tracking shot through desks, coworkers surge in; 阿浪与肥哥外观必须连续，冷峻压抑现实主义，竖屏9:16",
+        "scene_anchor_reference": "../media_staging/episode_007_virtual_data/anchors/scene_action/office_phone_impact.png",
+        "scene_anchor_kind": "local_path",
+        "fallback_image": "../media_staging/episode_007_virtual_data/anchors/alang_character_anchor.png"
+      },
+      {
+        "shot_id": "S05C",
+        "prompt": "hard cut between messages, red warning reflection on faces; 阿浪与肥哥外观必须连续，冷峻压抑现实主义，竖屏9:16",
+        "scene_anchor_reference": "../media_staging/episode_007_virtual_data/anchors/scene_action/office_phone_impact.png",
+        "scene_anchor_kind": "local_path",
+        "fallback_image": "../media_staging/episode_007_virtual_data/anchors/alang_character_anchor.png"
+      },
+      {
+        "shot_id": "S06A",
+        "prompt": "static office frame broken by smoke and phone vibration; 阿浪与肥哥外观必须连续，冷峻压抑现实主义，竖屏9:16",
+        "scene_anchor_reference": "../media_staging/episode_007_virtual_data/anchors/scene_action/manager_desk_impact.png",
+        "scene_anchor_kind": "local_path",
+        "fallback_image": "../media_staging/episode_007_virtual_data/anchors/feige_character_anchor.png"
+      },
+      {
+        "shot_id": "S06B",
+        "prompt": "slow dolly from doorway, silence after call ends; 阿浪与肥哥外观必须连续，冷峻压抑现实主义，竖屏9:16",
+        "scene_anchor_reference": "../media_staging/episode_007_virtual_data/anchors/scene_action/office_keyboard.png",
+        "scene_anchor_kind": "local_path",
+        "fallback_image": "../media_staging/episode_007_virtual_data/anchors/alang_character_anchor.png"
+      },
+      {
+        "shot_id": "S07A",
+        "prompt": "long pull-back, fluorescent islands, no hopeful movement; 阿浪与肥哥外观必须连续，冷峻压抑现实主义，竖屏9:16",
+        "scene_anchor_reference": "../media_staging/episode_007_virtual_data/anchors/scene_action/night_copy_pullback.png",
+        "scene_anchor_kind": "local_path",
+        "fallback_image": "../media_staging/episode_007_virtual_data/anchors/alang_character_anchor.png"
+      }
+    ],
+    "questions": [
+      "Does each shot advance the causal chain?",
+      "Does the character state change visibly?",
+      "Can the stated action be filmed in one short clip?",
+      "Are the first three seconds and end state clear?"
+    ]
+  },
+  "red_team_packet": {
+    "reviewer": "Grok 4.6",
+    "enabled": false,
+    "questions": [
+      "What would confuse a first-time viewer?",
+      "Where is a motive or causal bridge missing?",
+      "Which beat feels generic or repetitive?",
+      "Which image/video constraint will make this shot look like a repeated cover?"
+    ]
+  },
+  "escalation": {
+    "reviewer": "5.6 Sol",
+    "only_if": "primary and red-team recommendations materially conflict"
+  },
+  "packaging": {
+    "reviewer": "5.6 Luna",
+    "only_after": "an approved review result; no approval or provider authority"
+  }
+}

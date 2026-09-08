@@ -1,0 +1,20 @@
+{
+  "schema": "yunhai.website_model_role_matrix.v1",
+  "source": "https://chat.zhangningjing.com/api/models",
+  "source_checked_at": "2026-09-04",
+  "source_http_status": 200,
+  "ui_layer_only": true,
+  "production_integration": false,
+  "models": [
+    {"model_id": "grok-4.5", "role_id": "contrarian", "profile": "independent_counterexample_reviewer", "round": "critique", "activation_condition": "任务包含现实性风险、动作重复、叙事断裂或需要独立反例时", "authority": "candidate_only"},
+    {"model_id": "gpt-5.6-terra", "role_id": "director", "profile": "primary_writer_and_director", "round": "write_and_converge", "activation_condition": "需要形成主方案、镜头因果链或最终收敛稿时", "authority": "research_packaging_only"},
+    {"model_id": "gpt-5.6-sol", "role_id": "arbiter", "profile": "high_stakes_arbiter", "round": "material_disagreement", "activation_condition": "两个候选在安全、连续性或高成本返工上出现真实分歧时", "authority": "arbitration_only"},
+    {"model_id": "gpt-5.6-luna", "role_id": "ideator", "profile": "fast_ideation_branch", "round": "optional_divergence", "activation_condition": "需要标题、钩子、对白或结局的低成本发散时", "authority": "candidate_only"},
+    {"model_id": "gpt-5.5", "role_id": "alternate", "profile": "alternate_structure_designer", "round": "independent_variant", "activation_condition": "主方案需要第二种结构或结局对照时", "authority": "candidate_only"},
+    {"model_id": "gpt-5.4", "role_id": "editor", "profile": "continuity_and_format_editor", "round": "edit", "activation_condition": "需要连续性、格式、对白长度或字幕清理时", "authority": "candidate_only"},
+    {"model_id": "gpt-5.4-mini", "role_id": "extractor", "profile": "low_cost_extractor", "round": "extraction_and_cleanup", "activation_condition": "任务仅涉及提取、整理、清单化或低风险格式转换时", "authority": "utility_only"}
+  ],
+  "execution_order": ["deterministic_preflight", "primary_writer", "independent_counterexample_reviewer", "optional_material_arbiter", "director_convergence", "subtitle_and_contract_validation", "human_watch"],
+  "local_call_boundary": "Use the existing OneAPI gateway/Provider Registry when a model is locally exposed; the public UI list is not local activation evidence.",
+  "never": ["create a second scheduler/router/runtime", "promote a model reply to a director PASS", "treat a timeout as a successful role", "write model personas into long-term identity memory"]
+}

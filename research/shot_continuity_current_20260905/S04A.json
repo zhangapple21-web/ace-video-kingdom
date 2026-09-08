@@ -1,0 +1,14 @@
+{
+  "contract_version": "ace.video_kingdom.frame_continuity_audit.v1",
+  "video": "C:\\tmp\\ace_video_kingdom_git\\media_staging\\episode_007_virtual_data\\video_camera_grammar_v2\\S04A.mp4",
+  "frame_count_decoded": 241,
+  "frame_count_reported": 241,
+  "fps": 24.0,
+  "median_adjacent_luma_diff": 1.3827,
+  "max_adjacent_luma_diff": 3.2994,
+  "spike_threshold": 4.1481,
+  "spike_count": 0,
+  "top_spikes": [],
+  "status": "NO_SPIKES_DETECTED",
+  "note": "Every decoded frame was scanned. Spikes are conservative QC signals and require visual review."
+}

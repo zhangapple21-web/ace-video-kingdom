@@ -1,0 +1,21 @@
+{
+  "schema": "episode008.multimodel_script_battle.v1",
+  "production": false,
+  "transport": "existing OneAPI local gateway",
+  "roles_selected": ["draft_writer", "contrarian", "convergence_editor"],
+  "activation_decision_ref": "research/episode_008_role_activation_decision.v1.json",
+  "probe": {"models_status": 200, "model_count": 6, "chat_status": 200, "chat_ok": true, "secret_values_emitted": false},
+  "rounds": [
+    {"role": "writer", "model": "gpt-5.4-mini", "result": "returned", "latency_ms": 74288},
+    {"role": "critic", "model": "grok-4.6", "result": "timeout_in_battle_round", "latency_ms": null},
+    {"role": "director", "model": "gpt-5.4", "result": "returned_without_critic_context", "latency_ms": 49463},
+    {"role": "independent_critic", "model": "grok-4.5", "result": "returned", "latency_ms": null}
+  ],
+  "adopted_corrections": [
+    "把顺利脱身改为进入依法核验流程，明确现实中不保证结果。",
+    "保留领班的施压和拒绝副本行为，不用‘不脸谱化’洗白责任。",
+    "每个关键镜头写出动作完成点，系统只做可见关系标注。"
+  ],
+  "status": "RESEARCH_ONLY",
+  "gaps": ["未建立 Codex App Worker：健康探针遇平台 call_id 错误；本轮采用 OneAPI 实链路。", "视频供应商队列返回 503 video_queue_full，未生成 provider footage。"]
+}

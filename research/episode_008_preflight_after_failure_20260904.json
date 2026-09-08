@@ -1,0 +1,82 @@
+{
+  "contract_version": "ace.video_kingdom.episode_preflight.v1",
+  "scope": "FREE_ZONE_RESEARCH_ONLY",
+  "production_integration": false,
+  "episode": "episodes\\episode_008_rule_seat_system.v1.json",
+  "project_id": "episode_008_rule_seat_system",
+  "verdict": "BLOCKED",
+  "hard_failures": [
+    "scope must be FREE_ZONE_RESEARCH_ONLY",
+    "episode must declare at least one shot"
+  ],
+  "rework": [
+    "Flash duration must be an integer from 4 through 12 seconds"
+  ],
+  "warnings": [
+    "quality contract gap: root.premise",
+    "quality contract gap: root.causal_chain",
+    "quality contract gap: root.plants",
+    "quality contract gap: root.payoffs",
+    "quality contract gap: root.viewer_knowledge_checkpoints",
+    "quality contract gap: root.shots",
+    "primary renderer is None; current default policy expects agnes-video-2.5-flash"
+  ],
+  "planned_shot_count": 0,
+  "planned_duration_seconds": null,
+  "motion_contract": {
+    "status": "VALID",
+    "shot_count": 0,
+    "errors": [],
+    "warnings": [],
+    "duplicate_threshold": 0.7
+  },
+  "quality_contract": {
+    "status": "EXPERIMENTAL_WITH_GAPS",
+    "mode": "EXPERIMENTAL",
+    "errors": [],
+    "warnings": [
+      "quality contract gap: root.premise",
+      "quality contract gap: root.causal_chain",
+      "quality contract gap: root.plants",
+      "quality contract gap: root.payoffs",
+      "quality contract gap: root.viewer_knowledge_checkpoints",
+      "quality contract gap: root.shots"
+    ],
+    "gap_count": 6
+  },
+  "review_policy": [
+    "deterministic_preflight",
+    "gpt-5.6-terra primary review",
+    "grok-4.6 high-cognition review when available",
+    "gpt-5.6-terra escalation only",
+    "gpt-5.6-terra packaging only"
+  ],
+  "primary_review_packet": {
+    "reviewer": "5.6 Terra",
+    "shots": [],
+    "questions": [
+      "Does each shot advance the causal chain?",
+      "Does the character state change visibly?",
+      "Can the stated action be filmed in one short clip?",
+      "Are the first three seconds and end state clear?"
+    ]
+  },
+  "red_team_packet": {
+    "reviewer": "Grok 4.6",
+    "enabled": false,
+    "questions": [
+      "What would confuse a first-time viewer?",
+      "Where is a motive or causal bridge missing?",
+      "Which beat feels generic or repetitive?",
+      "Which image/video constraint will make this shot look like a repeated cover?"
+    ]
+  },
+  "escalation": {
+    "reviewer": "5.6 Sol",
+    "only_if": "primary and red-team recommendations materially conflict"
+  },
+  "packaging": {
+    "reviewer": "5.6 Luna",
+    "only_after": "an approved review result; no approval or provider authority"
+  }
+}

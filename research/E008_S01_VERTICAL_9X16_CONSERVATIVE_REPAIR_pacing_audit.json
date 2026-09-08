@@ -1,0 +1,18 @@
+{
+  "contract_version": "ace.video_kingdom.video_pacing_audit.v1",
+  "video": "C:\\tmp\\ace_video_kingdom_git\\media_staging\\episode_008_rule_seat_system\\revision_pilot\\vertical_final_conservative\\E008_S01_VERTICAL_9X16_CONSERVATIVE_REPAIR_SUBAUDIO.mp4",
+  "status": "PASS",
+  "media": {
+    "duration_seconds": 10.0,
+    "width": 704,
+    "height": 1280,
+    "has_audio": true
+  },
+  "internal_scene_cut_count": 0,
+  "internal_scene_cut_times_seconds": [],
+  "dialogue_gate": true,
+  "max_internal_cuts": 0,
+  "subtitle_seconds": null,
+  "subtitle_coverage_ratio": null,
+  "note": "Scene detection is a conservative QC signal; it does not prove acting or lip-sync."
+}

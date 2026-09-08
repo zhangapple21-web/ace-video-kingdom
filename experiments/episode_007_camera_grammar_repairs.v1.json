@@ -1,0 +1,20 @@
+[
+  {
+    "shot_id": "S01D_REPAIR",
+    "model_id": "agnes-video-v2.0",
+    "status": "COMPLETED",
+    "payload_sha256": "049833e729f933e12e852f5b7beb84da448777ae2804c7ce2fbedde9f4fb31f7",
+    "create_endpoint": "https://apihub.agnes-ai.com/v1/videos",
+    "poll_endpoint": "https://apihub.agnes-ai.com/agnesapi",
+    "poll_id_field": "video_id",
+    "create_attempt": 1,
+    "create_http_status": 200,
+    "video_id": "video_bGl0ZWxsbTpjdXN0b21fbGxtX3Byb3ZpZGVyOm9wZW5haTttb2RlbF9pZDphZ25lcy12aWRlby12Mi4wO3ZpZGVvX2lkOnZpZGVvX2M4ZTk5ZGZkYzMwMjRmOGJiYmQ0NmFmMjg4MThlNzc3",
+    "created_status": "queued",
+    "last_poll_http_status": 200,
+    "last_state": "completed",
+    "artifact_sha256": "cf79b93dc4863ffac212c58935227787ede7a9772f9d5f039ebb01660a39b2c7",
+    "bytes": 2557472,
+    "artifact_path": "C:\\tmp\\ace_video_kingdom_git\\media_staging\\episode_007_virtual_data\\video_camera_grammar_v2\\S01D_REPAIR.mp4"
+  }
+]

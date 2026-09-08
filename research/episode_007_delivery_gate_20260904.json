@@ -1,0 +1,34 @@
+{
+  "contract_version": "ace.video_kingdom.delivery_gate.v1",
+  "project_id": "episode_007_virtual_data",
+  "candidate": "media_staging/episode_007_virtual_data/video_camera_grammar_v2/episode_007_candidate_r3_slow_v1_subtitled.mp4",
+  "status": "NOT_DELIVERABLE",
+  "production_integration": false,
+  "preflight": {
+    "verdict": "CONDITIONAL",
+    "hard_failures": 0,
+    "rework": 0,
+    "warnings": 1,
+    "contract_status": "FORMAL_SIX_MODULE_VALID"
+  },
+  "media_evidence": {
+    "candidate_duration_seconds": 121.0,
+    "candidate_dimensions": [704, 1280],
+    "codec": "h264/aac",
+    "subtitle_cues": 18,
+    "media_integrity": "PASSED"
+  },
+  "blocking_reasons": [
+    "S03A still contains an identity/continuity failure in the latest director review.",
+    "Dialogue segments still violate the locked-camera and completed-performance gate.",
+    "Audio evidence establishes stream integrity but not intelligible dialogue or final voice performance.",
+    "The latest review verdict is CONDITIONAL_RESEARCH_CUT, not delivery approval."
+  ],
+  "required_next": [
+    "Replace or re-render S03A with a scene anchor that establishes the intended character before the announcement beat.",
+    "Retake dialogue shots with locked framing and a post-line hold.",
+    "Add or verify intelligible dialogue/voice evidence, then rerun subtitle and audio-content review.",
+    "Create a new PASS Decision Record only after a fresh post-render director review."
+  ],
+  "delivery_approved": false
+}

@@ -3,6 +3,18 @@
   "realm": "FREE_ZONE_RESEARCH_ONLY",
   "production_integration": false,
   "principle": "Shops are voluntary capability habitats, not permanent ranks, mandatory shifts, a TaskPool, or an approval queue.",
+  "free_zone_natural_law": {
+    "id": "ALL_THINGS_ARE_CUTTABLE",
+    "statement": "目之所及皆可切；万物皆可观察、拆解、重组、改写、变形。",
+    "no_preapproval": true,
+    "no_fixed_topic": true,
+    "no_minimum_output": true,
+    "allowed_sources": ["public_web", "public_repositories", "public_media", "public_papers", "resident_originals", "prior_failures", "cross_shop_traces"],
+    "minimum_trace": ["trigger_or_source", "resident_transformation", "failure_or_uncertainty", "next_thread"],
+    "cut_means": "creative_transformation_not_silent_copying",
+    "boundary_recheck_on": ["ACE_BRIDGE", "PUBLIC_RELEASE", "COMMERCIAL_USE", "REAL_EXTERNAL_SUBJECT"],
+    "rest_and_drift_are_valid": true
+  },
   "visitor_freedom": {
     "may_visit": ["one_shop", "many_shops", "no_shop", "wander", "rest", "return_to_previous_trace"],
     "may_collaborate": true,

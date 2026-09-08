@@ -1,0 +1,51 @@
+{
+  "contract_version": "ace.video_kingdom.frame_continuity_audit.v1",
+  "video": "C:\\tmp\\ace_video_kingdom_git\\media_staging\\episode_007_virtual_data\\video_camera_grammar_v2\\S03A.mp4",
+  "frame_count_decoded": 241,
+  "frame_count_reported": 241,
+  "fps": 24.0,
+  "median_adjacent_luma_diff": 2.6473,
+  "max_adjacent_luma_diff": 10.8842,
+  "spike_threshold": 7.942,
+  "spike_count": 6,
+  "top_spikes": [
+    {
+      "frame": 10,
+      "time_seconds": 0.416667,
+      "mean_abs_luma_diff": 10.8842,
+      "histogram_jump": 0.0026
+    },
+    {
+      "frame": 9,
+      "time_seconds": 0.375,
+      "mean_abs_luma_diff": 10.3017,
+      "histogram_jump": 0.0021
+    },
+    {
+      "frame": 8,
+      "time_seconds": 0.333333,
+      "mean_abs_luma_diff": 9.8482,
+      "histogram_jump": 0.0022
+    },
+    {
+      "frame": 7,
+      "time_seconds": 0.291667,
+      "mean_abs_luma_diff": 9.1679,
+      "histogram_jump": 0.0048
+    },
+    {
+      "frame": 11,
+      "time_seconds": 0.458333,
+      "mean_abs_luma_diff": 9.0325,
+      "histogram_jump": 0.0018
+    },
+    {
+      "frame": 6,
+      "time_seconds": 0.25,
+      "mean_abs_luma_diff": 8.3531,
+      "histogram_jump": 0.0024
+    }
+  ],
+  "status": "REVIEW_REQUIRED",
+  "note": "Every decoded frame was scanned. Spikes are conservative QC signals and require visual review."
+}

@@ -1,0 +1,27 @@
+{
+  "contract_version": "ace.video_kingdom.frame_continuity_audit.v1",
+  "video": "C:\\tmp\\ace_video_kingdom_git\\media_staging\\episode_008_rule_seat_system\\revision_pilot\\vertical_final_conservative\\E008_S01_VERTICAL_9X16_CONSERVATIVE_REPAIR_FINAL.mp4",
+  "frame_count_decoded": 240,
+  "frame_count_reported": 240,
+  "fps": 24.0,
+  "median_adjacent_luma_diff": 0.0432,
+  "max_adjacent_luma_diff": 9.9375,
+  "spike_threshold": 2.0432,
+  "spike_count": 2,
+  "top_spikes": [
+    {
+      "frame": 118,
+      "time_seconds": 4.916667,
+      "mean_abs_luma_diff": 9.9375,
+      "histogram_jump": 0.5182
+    },
+    {
+      "frame": 120,
+      "time_seconds": 5.0,
+      "mean_abs_luma_diff": 9.8651,
+      "histogram_jump": 0.5144
+    }
+  ],
+  "status": "REVIEW_REQUIRED",
+  "note": "Every decoded frame was scanned. Spikes are conservative QC signals and require visual review."
+}

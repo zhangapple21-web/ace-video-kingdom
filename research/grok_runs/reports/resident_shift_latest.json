@@ -1,0 +1,111 @@
+{
+  "contract_version": "ace.free_zone.resident_shift.v1",
+  "generated_at": "2026-09-02T03:44:04.164427+00:00",
+  "event": "RESIDENT_SHIFT_COMPLETED",
+  "initialized": true,
+  "available_provider_names": [
+    "shenwen_grok"
+  ],
+  "shifts": [
+    {
+      "resident_id": "shenwen_grok_reviewer",
+      "native_name": "夜航审稿人",
+      "task_type": "grok_research_shadow",
+      "requested_model": "grok-4.6",
+      "status": "WORKED",
+      "provider": "shenwen_grok",
+      "resolved_model": "grok-4.6",
+      "response_sha256": "fac1cd6a803b15748227c47af03e83ecb43524e5e7054a2222a1ff7855af68ef",
+      "response_chars": 842,
+      "usage": {
+        "prompt_tokens": 2227,
+        "completion_tokens": 2683,
+        "total_tokens": 4910,
+        "prompt_tokens_details": {
+          "cached_tokens": 128
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 2191
+        }
+      },
+      "cost": {},
+      "latency_ms": 48411,
+      "error": "",
+      "experiment_id": "EXP-SHIFT-260C39BA83394B4E",
+      "audit_status": "PENDING_INDEPENDENT_GPT_REVIEW",
+      "tried_models": [],
+      "scope": "FREE_ZONE_RESEARCH_ONLY",
+      "production_integration": false,
+      "automatic_production_promotion": false,
+      "outbound_authority": false
+    },
+    {
+      "resident_id": "shenwen_grok_workshop",
+      "native_name": "夜航校验员",
+      "task_type": "grok_coding_shadow",
+      "requested_model": "grok-4.5",
+      "status": "WORKED",
+      "provider": "shenwen_grok",
+      "resolved_model": "grok-4.5",
+      "response_sha256": "cbf8aa59c22372c28b1debf951283676d8d99133d9e5313633bb83ab31af0172",
+      "response_chars": 738,
+      "usage": {
+        "prompt_tokens": 2195,
+        "completion_tokens": 1830,
+        "total_tokens": 4025,
+        "prompt_tokens_details": {
+          "cached_tokens": 2048
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 1439
+        }
+      },
+      "cost": {},
+      "latency_ms": 37217,
+      "error": "",
+      "experiment_id": "EXP-SHIFT-4A449029DDF3A88C",
+      "audit_status": "PENDING_INDEPENDENT_GPT_REVIEW",
+      "tried_models": [],
+      "scope": "FREE_ZONE_RESEARCH_ONLY",
+      "production_integration": false,
+      "automatic_production_promotion": false,
+      "outbound_authority": false
+    },
+    {
+      "resident_id": "video_kingdom_r1_narrator",
+      "native_name": "视频王国叙事游牧者",
+      "task_type": "video_kingdom_r1_archaeology_shadow",
+      "requested_model": "grok-4.6",
+      "status": "WORKED",
+      "provider": "shenwen_grok",
+      "resolved_model": "grok-4.6",
+      "response_sha256": "d4320c2cbdb595ecae6fdbdb66bfc9886da1e68c108ff264f96e7fdda050b306",
+      "response_chars": 704,
+      "usage": {
+        "prompt_tokens": 2291,
+        "completion_tokens": 1926,
+        "total_tokens": 4217,
+        "prompt_tokens_details": {
+          "cached_tokens": 2048
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 1466
+        }
+      },
+      "cost": {},
+      "latency_ms": 42020,
+      "error": "",
+      "experiment_id": "EXP-SHIFT-9F521CEEB7E83377",
+      "audit_status": "PENDING_INDEPENDENT_GPT_REVIEW",
+      "tried_models": [],
+      "scope": "FREE_ZONE_RESEARCH_ONLY",
+      "production_integration": false,
+      "automatic_production_promotion": false,
+      "outbound_authority": false
+    }
+  ],
+  "production_integration": false,
+  "automatic_model_invocation": true,
+  "automatic_production_promotion": false,
+  "boundary": "Responses are sandbox food; independent review is required before any reality deposit."
+}

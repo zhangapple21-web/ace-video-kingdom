@@ -13,7 +13,6 @@ import time
 from datetime import datetime, timezone
 from pathlib import Path
 
-
 def _transient(text: str) -> bool:
     lowered = text.lower()
     return any(token in lowered for token in (
@@ -45,11 +44,22 @@ def main() -> int:
         help="fallback cooldown when the provider does not return Retry-After (default: 60)",
     )
     parser.add_argument("--max-delay", type=float, default=900)
+    parser.add_argument("--admission-receipt", type=Path,
+                        help="hash-bound ADMITTED receipt required before invoking the wrapped Provider CLI")
     parser.add_argument("command", nargs=argparse.REMAINDER)
     args = parser.parse_args()
     command = args.command[1:] if args.command[:1] == ["--"] else args.command
     if not command:
         parser.error("a command is required after --")
+    # This legacy wrapper cannot inspect or bind the payload of an arbitrary
+    # child CLI to a canonical request.  A receipt by itself is therefore not
+    # sufficient authority: keep the path explicitly closed until a bounded
+    # adapter supplies the exact payload and asserts it immediately before the
+    # child Provider call.
+    raise SystemExit(
+        "provider admission blocked: wrapped Provider CLI has no canonical payload adapter; "
+        "no provider request submitted"
+    )
     if args.max_attempts < 1 or args.initial_delay < 0 or args.max_delay < args.initial_delay:
         parser.error("invalid retry bounds")
     attempts: list[dict] = []

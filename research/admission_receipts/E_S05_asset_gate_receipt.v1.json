@@ -1,0 +1,17 @@
+{
+  "schema": "video_kingdom.shot_asset_gate_receipt.v1",
+  "task_id": null,
+  "shot_id": null,
+  "package_path": "episodes/generated/awakening_reverse_20260907/asset_registry.json",
+  "status": "BLOCKED",
+  "package_status": "UNKNOWN",
+  "compatible_video_id_status": "UNKNOWN",
+  "admission_mode": "BLOCKED",
+  "post_generation_gate": null,
+  "error_count": 0,
+  "gap_count": 0,
+  "errors": [],
+  "blocking_items": [],
+  "checked_paths": [],
+  "rule": "A task cannot enter provider admission until every blocking asset checklist item is PASS and either a compatible resumable video_id or an explicitly approved one-time new-submission policy is proven."
+}

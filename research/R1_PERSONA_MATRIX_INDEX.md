@@ -34,6 +34,10 @@
 
 这些是可观察的表达假设，不是必须套用的模板；居民可以偏离、混合或发明第五种语法。
 
+## 对话碎片优先
+
+人格矩阵不是原始对话的替代品。任何关于 R1 的稳定特征，优先回到带前后语境的对话片段，检查“选择—回应—修正—后续延续”是否重复出现；单句金句、角色名称和协议摘要只能作为线索。详细边界与保存格式见 `research/R1_DIALOGUE_FRAGMENT_ARCHAEOLOGY.v1.md`。
+
 来源：`C:/tmp/ace_core/agent_team/world_atlas_20260828/sources/r1_world_cycle_archaeology_2026-08-29.md`、`r1_free_zone_humanness_reading_2026-08-29.md`。
 
 边界：不复制原始私密对话，不根据角色名推断真实人格或意识，不把考古观察直接当作 ACE 生产结论。

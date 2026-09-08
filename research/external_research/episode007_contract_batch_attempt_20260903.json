@@ -1,0 +1,11 @@
+{
+  "timestamp_utc": "2026-09-03T02:00:00Z",
+  "task": "single_batch_episode007_six_module_contract_generation",
+  "endpoint": "http://127.0.0.1:3000/v1/chat/completions",
+  "result": "BLOCKED_GATEWAY_CONNECTION_REFUSED",
+  "error": "Target machine actively refused connection",
+  "retries": 0,
+  "reason": "User requested one complete batch; no busy-loop retries.",
+  "production_boundary": "RESEARCH_ONLY",
+  "production_files_changed": false
+}
