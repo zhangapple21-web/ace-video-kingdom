@@ -1,0 +1,11 @@
+{
+  "schema": "episode008.provider_gate.v1",
+  "checked_at": "2026-09-04",
+  "provider": "Agnes Video 2.5 Flash",
+  "request_scope": "one isolated teaser shot",
+  "status": "BLOCKED_RESEARCH",
+  "http_status": 503,
+  "error_class": "video_queue_full",
+  "production": false,
+  "next_action": "Do not retry in a loop; reuse this script and local animatic when queue recovers."
+}

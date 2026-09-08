@@ -1,0 +1,28 @@
+{
+  "contract_version": "ace.video_kingdom.subtitle_style_policy.v1",
+  "scope": "FREE_ZONE_RESEARCH_ONLY",
+  "production_integration": false,
+  "format": "SRT_or_WebVTT",
+  "vertical_video": {
+    "max_lines": 3,
+    "safe_area": "keep burned text clear of the bottom UI zone; use explicit renderer margin",
+    "preferred_break": "natural Chinese phrase boundary; never split a name or short phrase"
+  },
+  "timing": {
+    "fps_reference": 24,
+    "minimum_duration_frames": 20,
+    "minimum_gap_frames": 2,
+    "avoid_crossing_shot_change": true,
+    "target_reading_rate": "about 0.3 seconds per word as an editorial floor; validate against actual Chinese text and action"
+  },
+  "content": {
+    "allowed": ["spoken_dialogue", "first_person_inner_monologue"],
+    "forbidden": ["scene_description", "camera_direction", "sound_effect_label", "system_ui_duplication"],
+    "speaker_labels": "optional; use only when they remove ambiguity"
+  },
+  "sources": [
+    "https://www.bbc.co.uk/accessibility/forproducts/guides/subtitles/",
+    "https://partnerhelp.netflixstudios.com/hc/en-us/articles/360051554394-Timed-Text-Style-Guide-Subtitle-Timing-Guidelines",
+    "https://www.w3.org/TR/webvtt1/"
+  ]
+}

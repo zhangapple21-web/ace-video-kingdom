@@ -1,0 +1,85 @@
+{
+  "schema": "video_kingdom.e_s05_asset_audit_ledger.v2",
+  "task_id": "E_S05_HARDENING",
+  "status": "READY_FOR_ONE_TIME_GENERATION",
+  "generated_at": "2026-09-06T12:24:38.987598+00:00",
+  "assets": {
+    "char_three_view": {
+      "path": "assets/library/task_assets/E_S05_HARDENING_20260906/CHAR_LUFAN_THREE_VIEW_V2.png",
+      "sha256": "06704d6607628b5d4263fc62de2fab35d34ad72c4d4f7c3efdcf3ca9245616ec",
+      "change_status": "🆕新建"
+    },
+    "char_face": {
+      "path": "assets/library/task_assets/E_S05_HARDENING_20260906/CHAR_LUFAN_FACE_EXPRESSION_V1.png",
+      "sha256": "774deb74c606c3ec740ec9e7c0fada9789dd49ce8470b96c53752d52512ae703",
+      "change_status": "🆕新建"
+    },
+    "char_hand": {
+      "path": "assets/library/task_assets/E_S05_HARDENING_20260906/CHAR_LUFAN_HAND_STANDARD_V1.png",
+      "sha256": "190c04d2e781993d58731d9e90d8a312305d6a160716bbfd9ae5b144c5a3c94b",
+      "change_status": "🆕新建"
+    },
+    "scene_views": {
+      "path": "assets/library/task_assets/E_S05_HARDENING_20260906/SCN_MOUNTAIN_GRAVE_MULTI_VIEW_V2.png",
+      "sha256": "ec7c407987ed438518ed45ece7bbcffc32c8737f8db2e4a9b03f25a48c0fc6b1",
+      "change_status": "🆕新建"
+    },
+    "scene_light": {
+      "path": "assets/library/task_assets/E_S05_HARDENING_20260906/SCN_MOUNTAIN_GRAVE_ENV_LIGHT_V1.png",
+      "sha256": "464c12eb0257ec3f45cdf0c67c51078d21010906ff9de5a17ed4adbdf3b070d5",
+      "change_status": "🆕新建"
+    },
+    "prop_single": {
+      "path": "assets/library/task_assets/E_S05_HARDENING_20260906/PROP_WINE_SINGLE_BOTTLE_V2.png",
+      "sha256": "47f2e0845d00111a3c494314521cf7a5cef1e58162491e465e22e7dc7bffe559",
+      "change_status": "🆕新建"
+    },
+    "bridge": {
+      "path": "assets/library/task_assets/E_S05_HARDENING_20260906/E_S05_CONTINUITY_BRIDGE_SPEC_V1.png",
+      "sha256": "4a1181f3c10300d15136e586faaf11b50d6c0512f3392018c04abfd40229e934",
+      "change_status": "🆕新建"
+    }
+  },
+  "reused_context": {
+    "char_reference": {
+      "path": "episodes/generated/novel-longmen-strict-30s-v3/assets/char_main_reference.png",
+      "sha256": "29221a08d406df9ebbfd7c49e93dfceced7ba8eb27278f9e72abfb3d31fee085",
+      "status": "CONTEXT_ONLY"
+    },
+    "scene_reference": {
+      "path": "episodes/generated/novel-longmen-shotcore-s01a-wide-reference-r3/assets/anchor_with_inscription.png",
+      "sha256": "c1aff1eb4edc02b77e91a44cec768d95269ac3ee68665adb8a3e6e4406679a46",
+      "status": "CONTEXT_ONLY"
+    },
+    "legacy_prop_rejected": {
+      "path": "episodes/generated/novel-longmen-strict-30s-v3/assets/prop_wine_anchor.png",
+      "sha256": "0fd36d6a481a0083432e1879c71d447ce2669abed2f760dcd9c10f8f64cf8227",
+      "status": "REJECTED"
+    }
+  },
+  "continuity": {
+    "bridge_asset": "assets/library/task_assets/E_S05_HARDENING_20260906/E_S05_CONTINUITY_BRIDGE_SPEC_V1.png",
+    "bridge_sha256": "4a1181f3c10300d15136e586faaf11b50d6c0512f3392018c04abfd40229e934",
+    "status": "DEFINED_HASH_BOUND",
+    "post_generation_proof": "PENDING"
+  },
+  "video_id": {
+    "status": "NO_COMPATIBLE_VIDEO_ID_FOUND",
+    "policy": "do not resume incompatible legacy video; create one new one-time S05 job only after admission"
+  },
+  "generation_status": {
+    "status": "CANDIDATE_FAILED",
+    "video_provider_calls": 1,
+    "asset_image_generation_calls": 1,
+    "new_artifact_path": "episodes/generated/E_S05_HARDENING_20260906/S05A_T01.mp4",
+    "video_id": "task_MpLnvT7Oebej5aZ5WHfcc99pb24aZsJs",
+    "artifact_sha256": "6b43d252f41fbb5fd905b42dc5e5e2281429ff9dd5fef41d50323495fd19ecdf",
+    "candidate_receipt": "research/admission_receipts/E_S05A_candidate_gate_receipt.v1.json"
+  },
+  "post_generation": {
+    "required": true,
+    "status": "FAILED",
+    "five_layer_receipt": "research/admission_receipts/E_S05A_candidate_gate_receipt.v1.json",
+    "delivery": "STOPPED_CANDIDATE_ONLY"
+  }
+}

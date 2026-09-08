@@ -1,0 +1,9 @@
+{
+  "shot_id": "S01A",
+  "script": {"scene_id":"S01","speaker":"阿浪","dialogue_text":"今天加了五十个……总该有一个活人吧。","emotion":"irritation","line_locked":true,"tts_duration_seconds":3.4,"audio_status":"MEASURED"},
+  "camera": {"shot_type":"dialogue","scale":"medium close-up","movement":"locked-off; only natural breathing micro-motion","axis":"screen-left facing screen-right","first_frame_kind":"scene_action_anchor","movement_count":0},
+  "edit": {"duration_seconds":4.2,"cut_after_performance":true,"transition_reason":"line ends, then cut to spam replies","rhythm_phase":"irritation"},
+  "performance": {"emotion_goal":"fatigue turning into irritation","action_beats":["preparation: fingers hover over keyboard","action: types while rubbing one eye","recovery: hands stop and stare at screen"],"sound_cues":["keyboard clatter","fluorescent hum"]},
+  "assets": {"identity_reference":"arang_identity_v1","scene_action_anchor":"office_action_anchor_S01_v1","costume":"faded light-gray shirt","props":["keyboard","phone","green chat windows"],"lighting":"dirty cool fluorescent plus green monitor spill"},
+  "recovery": {"max_attempts":2,"retry_delay_policy":"10s,20s; respect provider cooldown >=60s","degrade_order":["retry with seed offset","manual replacement marker"]}
+}

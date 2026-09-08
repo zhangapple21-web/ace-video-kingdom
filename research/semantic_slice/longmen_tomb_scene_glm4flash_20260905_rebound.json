@@ -1,0 +1,189 @@
+{
+  "schema": "video_kingdom.semantic_slice.v1",
+  "production_integration": false,
+  "source": {
+    "path": "C:\\tmp\\小说题材\\龙门战神.txt",
+    "sha256": "cc0eef87635f1fa5d93203d80ec4a7a4f52249eaea7dca9f1b8248677a7d132d",
+    "encoding": "utf-8",
+    "char_count": 6157154
+  },
+  "method": {
+    "provider_requested": "oneapi",
+    "model_status": "VERIFIED",
+    "chapter_count": 1,
+    "deterministic_fallback": true,
+    "source_preservation": "exact_excerpt_and_char_span"
+  },
+  "provider_receipts": [
+    {
+      "chunk_id": "WINDOW_001",
+      "status": "VERIFIED",
+      "provider": "zhipu",
+      "model": "glm-4-flash",
+      "http_status": 200,
+      "latency_ms": 47479,
+      "slice_count": 3
+    }
+  ],
+  "slices": [
+    {
+      "slice_id": "slice1",
+      "source_span": {
+        "char_start": 185,
+        "char_end": 238,
+        "chapter": null
+      },
+      "source_excerpt": "荒山上，孤坟前。\r\r\n    穿着迷彩服的陆凡，久跪不起，泛红的双眼，直直盯着眼前那由乱石砌成的简陋坟头。",
+      "causal_before": "UNKNOWN",
+      "primary_event": "陆凡在孤坟前久跪",
+      "causal_after": "UNKNOWN",
+      "characters": [
+        {
+          "name": "陆凡",
+          "role": "source-grounded",
+          "goal": "向父亲表达哀思和决心",
+          "relationship": "父子关系"
+        }
+      ],
+      "relationship_and_power": "父子关系，哀思",
+      "dialogue_and_subtext": [],
+      "emotion_change": "哀伤 -> 痛定思痛",
+      "props_and_state": [
+        "迷彩服",
+        "孤坟",
+        "简陋坟头"
+      ],
+      "continuity_start_state": "陆凡哀伤",
+      "continuity_end_state": "陆凡痛定思痛",
+      "candidate_shot_events": [
+        {
+          "event": "陆凡在孤坟前跪拜",
+          "allowed": [
+            "kneeling",
+            "looking at the tomb"
+          ],
+          "forbidden": [
+            "any additional actions"
+          ]
+        }
+      ],
+      "forbidden_additions": [
+        "any facts not in the source"
+      ],
+      "confidence": "HIGH",
+      "source_sha256": "cc0eef87635f1fa5d93203d80ec4a7a4f52249eaea7dca9f1b8248677a7d132d",
+      "source_binding_method": "normalized_excerpt_relocated",
+      "interpretation_status": "MODEL_ASSISTED_PENDING_DIRECTOR_REVIEW"
+    },
+    {
+      "slice_id": "slice2",
+      "source_span": {
+        "char_start": 245,
+        "char_end": 297,
+        "chapter": null
+      },
+      "source_excerpt": "坟前那块长满青苔的木板上，写着陆山河之墓。\r\r\n    谁也无法想象，躺在这座孤坟里的，会是林城前首富！",
+      "causal_before": "陆凡跪拜",
+      "primary_event": "陆凡看到墓碑上的名字和身份",
+      "causal_after": "陆凡的情感反应",
+      "characters": [
+        {
+          "name": "陆凡",
+          "role": "source-grounded",
+          "goal": "确认墓主身份",
+          "relationship": "父子关系"
+        }
+      ],
+      "relationship_and_power": "父子关系，震惊",
+      "dialogue_and_subtext": [],
+      "emotion_change": "痛定思痛 -> 震惊",
+      "props_and_state": [
+        "墓碑",
+        "青苔",
+        "陆山河之墓"
+      ],
+      "continuity_start_state": "陆凡痛定思痛",
+      "continuity_end_state": "陆凡震惊",
+      "candidate_shot_events": [
+        {
+          "event": "陆凡阅读墓碑",
+          "allowed": [
+            "reading",
+            "expression of shock"
+          ],
+          "forbidden": [
+            "any additional actions"
+          ]
+        }
+      ],
+      "forbidden_additions": [
+        "any facts not in the source"
+      ],
+      "confidence": "HIGH",
+      "source_sha256": "cc0eef87635f1fa5d93203d80ec4a7a4f52249eaea7dca9f1b8248677a7d132d",
+      "source_binding_method": "normalized_excerpt_relocated",
+      "interpretation_status": "MODEL_ASSISTED_PENDING_DIRECTOR_REVIEW"
+    },
+    {
+      "slice_id": "slice3",
+      "source_span": {
+        "char_start": 304,
+        "char_end": 376,
+        "chapter": null
+      },
+      "source_excerpt": "陆凡连磕三个响头，身体微微颤抖，“爸，儿子不孝，此仇不报，誓不为人！”\r\r\n    他做梦也没想到，在国外执行几年任务，回到国内，却是这种境况！",
+      "causal_before": "陆凡看到墓碑上的名字和身份",
+      "primary_event": "陆凡表达决心和哀伤",
+      "causal_after": "陆凡的情感反应",
+      "characters": [
+        {
+          "name": "陆凡",
+          "role": "source-grounded",
+          "goal": "向父亲表达哀思和决心",
+          "relationship": "父子关系"
+        }
+      ],
+      "relationship_and_power": "父子关系，哀伤和决心",
+      "dialogue_and_subtext": [
+        {
+          "speaker": "陆凡",
+          "text": "爸，儿子不孝，此仇不报，誓不为人！",
+          "subtext": "陆凡的哀伤和决心"
+        }
+      ],
+      "emotion_change": "震惊 -> 哀伤和决心",
+      "props_and_state": [
+        "响头",
+        "颤抖"
+      ],
+      "continuity_start_state": "陆凡震惊",
+      "continuity_end_state": "陆凡哀伤和决心",
+      "candidate_shot_events": [
+        {
+          "event": "陆凡磕头",
+          "allowed": [
+            "kneeling",
+            "kissing the ground",
+            "expression of sorrow and determination"
+          ],
+          "forbidden": [
+            "any additional actions"
+          ]
+        }
+      ],
+      "forbidden_additions": [
+        "any facts not in the source"
+      ],
+      "confidence": "HIGH",
+      "source_sha256": "cc0eef87635f1fa5d93203d80ec4a7a4f52249eaea7dca9f1b8248677a7d132d",
+      "source_binding_method": "normalized_excerpt_relocated",
+      "interpretation_status": "MODEL_ASSISTED_PENDING_DIRECTOR_REVIEW"
+    }
+  ],
+  "admission": {
+    "status": "RESEARCH_ONLY",
+    "next_gate": "director_review_then_shot_contract",
+    "provider_submission_allowed": false
+  },
+  "created_at": "2026-09-05T08:13:24.095757+00:00"
+}

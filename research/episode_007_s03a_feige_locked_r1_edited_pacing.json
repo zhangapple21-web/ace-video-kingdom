@@ -1,0 +1,23 @@
+{
+  "contract_version": "ace.video_kingdom.video_pacing_audit.v1",
+  "video": "media_staging\\episode_007_virtual_data\\video_camera_grammar_v2\\S03A_FEIGE_LOCKED_R1_EDITED.mp4",
+  "status": "PASS",
+  "media": {
+    "duration_seconds": 7.049333,
+    "width": 704,
+    "height": 1280,
+    "has_audio": true
+  },
+  "internal_scene_cut_count": 0,
+  "internal_scene_cut_times_seconds": [],
+  "dialogue_gate": true,
+  "max_internal_cuts": 0,
+  "subtitle_seconds": null,
+  "subtitle_coverage_ratio": null,
+  "tts_duration_seconds": 6.45,
+  "expected_duration_seconds": 7.05,
+  "duration_tolerance_seconds": 1.05,
+  "duration_deviation_seconds": -0.0006669999999999732,
+  "failures": [],
+  "note": "Scene detection is a conservative QC signal; it does not prove acting or lip-sync."
+}

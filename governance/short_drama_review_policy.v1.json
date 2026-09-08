@@ -2,14 +2,20 @@
   "contract_version": "ace.video_kingdom.review_policy.v1",
   "scope": "FREE_ZONE_RESEARCH_ONLY",
   "production_integration": false,
-  "review_order": ["deterministic_preflight", "5.6 Terra primary review", "Grok 4.6 red-team review when healthy", "5.6 Sol escalation only", "5.6 Luna packaging only"],
-  "roles": {
-    "5.6 Terra": "Primary narrative and production review: causal chain, character intent, emotional beat, shot objective, and prompt clarity.",
-    "Grok 4.6": "Optional adversarial review only: identify implausible motives, stale premises, viewer confusion, cliches, and missing causal bridges.",
-    "5.6 Sol": "Arbitrates only material disagreement between the primary and red-team reviews; it does not replace deterministic safety or asset gates.",
-    "5.6 Luna": "Formats approved packets and reports; it may not approve, reject, submit provider work, or publish assets."
+  "review_order": ["deterministic_preflight", "gpt-5.6-terra primary review", "grok-4.6 high-cognition review when available", "gpt-5.6-terra escalation only", "gpt-5.6-terra packaging only"],
+  "model_roles": {
+    "formal_primary_reviewer": {"model_id": "gpt-5.6-terra", "provider": "codex", "authority": "formal_review_only"},
+    "formal_escalation_reviewer": {"model_id": "gpt-5.6-terra", "provider": "codex", "authority": "disagreement_arbitration_only"},
+    "high_cognition_research": {"model_id": "grok-4.6", "provider": "shenwen_grok", "authority": "research_candidate_output"},
+    "utility_worker": {"model_id": "glm-4-flash", "provider": "zhipu", "authority": "free_zone_housekeeping"}
   },
-  "grok_activation": "Requires fresh scoped provider health evidence. If absent, omit the red-team pass and mark the report CONDITIONAL rather than fabricate a review.",
+  "roles": {
+    "gpt-5.6-terra_primary": "Formal primary narrative and production review: causal chain, character intent, emotional beat, shot objective, and prompt clarity.",
+    "grok-4.6": "High-cognition research review: script comprehension, director-level shot planning, continuity, motives, viewer confusion, cliches, and missing causal bridges. Output is a candidate packet, not a production write.",
+    "gpt-5.6-terra_escalation": "Arbitrates only material disagreement between Terra and Grok reviews; it does not replace deterministic safety or asset gates.",
+    "gpt-5.6-terra_packaging": "Formats approved packets and reports; it may not approve, reject, submit provider work, or publish assets."
+  },
+  "grok_activation": "May execute scoped research work whenever its configured provider channel is available; missing health evidence blocks only formal reliance, not isolated research work. Never fabricate a review.",
   "verdicts": {
     "READY": "All deterministic gates pass and any required reviewer verdict is supportive.",
     "CONDITIONAL": "Hard gates pass but an optional reviewer, health receipt, or visual trial remains pending. One bounded test shot may proceed.",

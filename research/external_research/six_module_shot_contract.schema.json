@@ -1,0 +1,73 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Video Kingdom six-module shot contract (research only)",
+  "type": "object",
+  "required": ["shot_id", "script", "camera", "edit", "performance", "assets", "recovery"],
+  "properties": {
+    "shot_id": {"type": "string", "minLength": 1},
+    "script": {
+      "type": "object",
+      "required": ["scene_id", "speaker", "dialogue_text", "emotion", "line_locked"],
+      "properties": {
+        "scene_id": {"type": "string"},
+        "speaker": {"type": "string"},
+        "dialogue_text": {"type": "string"},
+        "emotion": {"type": "string"},
+        "line_locked": {"const": true},
+        "tts_duration_seconds": {"type": ["number", "null"], "minimum": 0},
+        "audio_status": {"enum": ["MEASURED", "AUDIO_PENDING", "FAILED_DEGRADED"]}
+      }
+    },
+    "camera": {
+      "type": "object",
+      "required": ["shot_type", "scale", "movement", "axis", "first_frame_kind"],
+      "properties": {
+        "shot_type": {"enum": ["dialogue", "monologue", "reaction", "action", "establishing"]},
+        "scale": {"type": "string"},
+        "movement": {"type": "string"},
+        "axis": {"type": "string"},
+        "first_frame_kind": {"const": "scene_action_anchor"},
+        "movement_count": {"type": "integer", "minimum": 0, "maximum": 1}
+      }
+    },
+    "edit": {
+      "type": "object",
+      "required": ["duration_seconds", "cut_after_performance", "transition_reason"],
+      "properties": {
+        "duration_seconds": {"type": "number", "minimum": 2.5, "maximum": 18},
+        "cut_after_performance": {"const": true},
+        "transition_reason": {"type": "string", "minLength": 1},
+        "rhythm_phase": {"enum": ["irritation", "pressure", "hope", "collapse", "numbness"]}
+      }
+    },
+    "performance": {
+      "type": "object",
+      "required": ["emotion_goal", "action_beats", "sound_cues"],
+      "properties": {
+        "emotion_goal": {"type": "string"},
+        "action_beats": {"type": "array", "prefixItems": [{"type": "string"}, {"type": "string"}, {"type": "string"}], "minItems": 3, "maxItems": 3},
+        "sound_cues": {"type": "array", "items": {"type": "string"}}
+      }
+    },
+    "assets": {
+      "type": "object",
+      "required": ["identity_reference", "scene_action_anchor", "costume", "props", "lighting"],
+      "properties": {
+        "identity_reference": {"type": "string"},
+        "scene_action_anchor": {"type": "string"},
+        "costume": {"type": "string"},
+        "props": {"type": "array", "items": {"type": "string"}},
+        "lighting": {"type": "string"}
+      }
+    },
+    "recovery": {
+      "type": "object",
+      "required": ["max_attempts", "retry_delay_policy", "degrade_order"],
+      "properties": {
+        "max_attempts": {"const": 2},
+        "retry_delay_policy": {"type": "string"},
+        "degrade_order": {"type": "array", "minItems": 2, "items": {"type": "string"}}
+      }
+    }
+  }
+}

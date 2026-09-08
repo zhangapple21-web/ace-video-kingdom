@@ -1,0 +1,15 @@
+{
+  "contract_version": "ace.video_kingdom.action_probe_review.v3",
+  "project_id": "episode_007_virtual_data",
+  "evidence": "action_probe_v2 plus targeted repair artifacts P02_PHONE_SLAM_R1 and P05_COPY_PASTE_R1; contact strips inspected",
+  "shots": [
+    {"shot_id":"P01_KEYBOARD","decision":"CONDITIONAL","force":"PARTIAL","inertia":"PARTIAL","temporal_continuity":"PASS","risk":"敲击反馈仍偏轻","repair":"保留原片仅作参考，正式镜头增加键帽回弹与手腕回收"},
+    {"shot_id":"P02_PHONE_SLAM_R1","decision":"PASS","force":"PASS","inertia":"PASS","temporal_continuity":"PASS","evidence":"可见蓄力、快速下砸、桌面/同事反应、手机落桌后的自然停留"},
+    {"shot_id":"P03_DESK_SLAM","decision":"PASS","force":"PASS","inertia":"PASS","temporal_continuity":"PASS","evidence":"肥哥前倾拍桌，纸张与烟灰有冲击反馈"},
+    {"shot_id":"P04_RUN_OUT","decision":"CONDITIONAL","force":"PASS","inertia":"PARTIAL","temporal_continuity":"PARTIAL","risk":"推椅和连续脚步重量仍需正式镜头复核","repair":"保留为动作参考，补强重心和跟拍连续性"},
+    {"shot_id":"P05_COPY_PASTE_R1","decision":"CONDITIONAL","force":"PASS","inertia":"PARTIAL","temporal_continuity":"PASS","evidence":"复制粘贴和镜头拉远均可见，动作连续；结束回收和非均匀节奏仍需整镜复核","repair":"整集使用时加入鼠标/键盘声音与字幕节奏，并抽检末1秒"}
+  ],
+  "overall_decision":"CONDITIONAL_SCENE_GATE",
+  "next_action":"P01/P04各做一次定向修复或在正式镜头中加强；不得将旧版90秒片升级为最终片",
+  "production_integration":false
+}

@@ -1,0 +1,20 @@
+[
+  {
+    "shot_id": "E008_S01_V2_PILOT",
+    "model_id": "agnes-video-v2.0",
+    "status": "COMPLETED",
+    "payload_sha256": "6852dd1e79967e672d4bf1f7a6b2d6df167c0e414634758f386098f7e4987646",
+    "create_endpoint": "https://apihub.agnes-ai.com/v1/videos",
+    "poll_endpoint": "https://apihub.agnes-ai.com/agnesapi",
+    "poll_id_field": "video_id",
+    "create_attempt": 1,
+    "create_http_status": 200,
+    "video_id": "video_bGl0ZWxsbTpjdXN0b21fbGxtX3Byb3ZpZGVyOm9wZW5haTttb2RlbF9pZDphZ25lcy12aWRlby12Mi4wO3ZpZGVvX2lkOnZpZGVvXzNiMjAzMzAzYzg1NDQwN2FiMDY5YmRhODliZmZjMzE2",
+    "created_status": "queued",
+    "last_poll_http_status": 200,
+    "last_state": "completed",
+    "artifact_sha256": "edd63028d85e13a637f95dcdcb6c919ebd6530352632776e253ec904fb26429e",
+    "bytes": 2121555,
+    "artifact_path": "C:\\tmp\\ace_video_kingdom_git\\media_staging\\episode_008_rule_seat_system\\revision_pilot\\E008_S01_V2_PILOT.mp4"
+  }
+]

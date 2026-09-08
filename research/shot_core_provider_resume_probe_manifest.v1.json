@@ -1,0 +1,108 @@
+{
+  "schema": "video_kingdom.shot_core_provider_reality_probe.v1",
+  "shots": {
+    "PILOT_DIALOGUE": {
+      "shot_id": "PILOT_DIALOGUE",
+      "lifecycle": "RECONCILE",
+      "stale": false
+    }
+  },
+  "takes": [
+    {
+      "take_id": "PILOT_DIALOGUE_T01",
+      "shot_id": "PILOT_DIALOGUE",
+      "parent_take_id": null,
+      "branch_reason": null,
+      "provider": "agnes",
+      "model": "agnes-video-2.5-flash",
+      "generation_config": {
+        "model": "agnes-video-2.5-flash",
+        "prompt": "Wenji quietly finishes one short line in a dim desk room; a single continuous locked-off shot, no extra movement, no cut.\n[SHOT_CORE_CONTRACT]\n{\"action_state\": {\"camera\": \"locked\", \"character\": \"WENJI speaks\", \"lighting\": \"dim\", \"location\": \"desk\", \"props\": [\"phone\"], \"time\": \"night\", \"wardrobe\": \"unchanged\"}, \"allowed_behaviors\": [\"speak\", \"hold\"], \"asset_refs\": [{\"asset_id\": \"SCENE_02\", \"asset_type\": \"scene\", \"sha256\": \"e5015c19d9f75b3164aeace2542892f893914cd3c7cd630c4cd69db28c7473a3\", \"version\": 1}], \"camera\": {\"axis\": \"none\", \"internal_cuts\": 0, \"movement\": \"NONE\", \"position\": \"desk\", \"scale\": \"medium\"}, \"end_state\": {\"camera\": \"locked\", \"character\": \"WENJI holds gaze\", \"lighting\": \"dim\", \"location\": \"desk\", \"props\": [\"phone\"], \"time\": \"night\", \"wardrobe\": \"unchanged\"}, \"forbidden_behaviors\": [\"pan\", \"tilt\", \"zoom\", \"orbit\", \"internal cut\", \"new character\"], \"internal_cuts\": 0, \"primary_visual_event\": \"Wenji finishes one line and holds\", \"shot_id\": \"PILOT_DIALOGUE\", \"start_state\": {\"camera\": \"medium\", \"character\": \"WENJI\", \"lighting\": \"dim\", \"location\": \"desk\", \"props\": [\"phone\"], \"time\": \"night\", \"wardrobe\": \"unchanged\"}, \"visible_character_ids\": [\"WENJI\"], \"visible_prop_ids\": [\"PHONE\"]}",
+        "mode": "reference",
+        "seconds": "5",
+        "size": "720P",
+        "aspect_ratio": "9:16",
+        "n": 1,
+        "images": [
+          "https://raw.githubusercontent.com/zhangapple21-web/-/main/ace-video-kingdom/wenji-episode-006/SCENE_02_typing_log_anchor.png"
+        ]
+      },
+      "generation_fingerprint": "ff2b4add9fa1bde0d00cdc5e3698ed47f1bfadb7e3bf283da55bf2a58d1c72dc",
+      "asset_bindings": [
+        {
+          "asset_id": "SCENE_02",
+          "version": 1,
+          "sha256": "e5015c19d9f75b3164aeace2542892f893914cd3c7cd630c4cd69db28c7473a3"
+        }
+      ],
+      "provider_status": "SUCCESS",
+      "technical_status": "UNKNOWN",
+      "creative_status": "PASS",
+      "status": "GENERATED",
+      "selected": false,
+      "created_at": "2026-09-05T02:57:12Z",
+      "create_http_status": 200,
+      "video_id": "task_eTjnTWQXAOXy39V2DdZU2fBPaIoWBsJ1",
+      "created_status": "queued",
+      "last_poll_http_status": 200,
+      "last_state": "completed",
+      "artifact_path": "C:\\tmp\\ace_video_kingdom_git\\media_staging\\shot_core_provider_probe_v1\\RESUME_POLL_ONLY.mp4",
+      "artifact_hash": "c6dd423794470dfe92e24d04e4563b2905e4e2855b08f00948923aa363a6a1da",
+      "bytes": 1293706,
+      "media": {
+        "duration_seconds": 5.184,
+        "width": 720,
+        "height": 1280,
+        "fps": "24/1",
+        "video_codec": "h264",
+        "aspect_ratio": null,
+        "video_start_time": "0.000000",
+        "video_duration_seconds": "5.166667",
+        "has_audio": true,
+        "audio_codec": "aac",
+        "audio_duration_seconds": "5.184000",
+        "audio_sample_rate": "32000",
+        "audio_channels": 2
+      },
+      "duration_mismatch": false,
+      "review": {
+        "machine": {
+          "technical_status": "PASS",
+          "internal_cuts": "UNKNOWN",
+          "freeze_tail": "UNKNOWN"
+        },
+        "vision_llm": "UNKNOWN",
+        "director": {
+          "decision": "PASS",
+          "reason": "decision retained"
+        },
+        "sampled_frames": "media_staging/shot_core_pilot/frames/PILOT_DIALOGUE_T01.jpg"
+      },
+      "decision_record": {
+        "decision": "PASS",
+        "reason": "decision retained"
+      },
+      "machine_qc": {
+        "file_integrity": "PASS",
+        "resolution": "PASS",
+        "fps": "PASS",
+        "audio_stream": "PASS",
+        "duration": "PASS",
+        "black_frames": "PASS",
+        "freeze_tail": "PASS",
+        "internal_cuts": "UNKNOWN",
+        "duration_tolerance_seconds": 0.75,
+        "detector_errors": []
+      },
+      "provider_actual_seconds": 5.184,
+      "duration_contract_seconds": 5.0,
+      "reconcile_required": false,
+      "reconciled_at": "2026-09-05T08:21:20Z",
+      "artifact_url": "https://platform-outputs.agnes-ai.space/videos/agnes-video-2.5/task_eTjnTWQXAOXy39V2DdZU2fBPaIoWBsJ1.mp4",
+      "artifact_finalize_status": "PASS",
+      "artifact_finalized_at": "2026-09-05T08:21:22Z"
+    }
+  ],
+  "events": [],
+  "manifest_revision": 2
+}

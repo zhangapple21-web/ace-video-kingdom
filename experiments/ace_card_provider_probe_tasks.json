@@ -1,0 +1,20 @@
+[
+  {
+    "shot_id": "ACE_CARD_PROVIDER_PROBE_S01A",
+    "model_id": "agnes-video-v2.0",
+    "status": "COMPLETED",
+    "payload_sha256": "ae520ea385c5a212eddc526f52be82669a0a4ac92a5555747abe373f3e7f8266",
+    "create_endpoint": "https://apihub.agnes-ai.com/v1/videos",
+    "poll_endpoint": "https://apihub.agnes-ai.com/agnesapi",
+    "poll_id_field": "video_id",
+    "create_attempt": 1,
+    "create_http_status": 200,
+    "video_id": "video_bGl0ZWxsbTpjdXN0b21fbGxtX3Byb3ZpZGVyOm9wZW5haTttb2RlbF9pZDphZ25lcy12aWRlby12Mi4wO3ZpZGVvX2lkOnZpZGVvXzUwZDNiMjA2MzlhZjQ1M2Q4NjI3NWZkMGE0NjY2YTBl",
+    "created_status": "queued",
+    "last_poll_http_status": 200,
+    "last_state": "completed",
+    "artifact_sha256": "1ef49a34a840d82f85073fc990cfa0a4c3bac15db87f2ce281253908f39155f6",
+    "bytes": 835709,
+    "artifact_path": "C:\\tmp\\ace_video_kingdom_git\\media_staging\\episode_007_virtual_data\\video_camera_grammar_v2\\ACE_CARD_PROVIDER_PROBE_S01A.mp4"
+  }
+]

@@ -1,0 +1,49 @@
+{
+  "provider": "oneapi",
+  "model": "grok-4.5",
+  "task": "continuity_issue_detection",
+  "input_sha256": "d879719e668b5b101b249b61a5b079b83eb7204675c3a69471ceff452ddf36ae",
+  "attempts": [
+    {
+      "attempt": 1,
+      "status_code": 200,
+      "ok": true
+    }
+  ],
+  "production_integration": false,
+  "started_at": "2026-09-03T02:48:46.837629+00:00",
+  "result": {
+    "id": "1cb17717-7099-9735-b6f1-308f229422e8",
+    "created": 1788403749,
+    "model": "grok-4.5",
+    "object": "chat.completion",
+    "choices": [
+      {
+        "finish_reason": "stop",
+        "index": 0,
+        "message": {
+          "content": "```json\n{\n  \"task_type\": \"continuity_issue_detection\",\n  \"status\": \"probe_received\",\n  \"mode\": \"read-only\",\n  \"input_facts\": [\"read-only\"],\n  \"detected_issues\": [],\n  \"uncertain_items\": [\n    \"No narrative, script, video description, or continuity-relevant content provided for analysis\",\n    \"Unable to assess any potential continuity breaks, timeline inconsistencies, character state mismatches, prop/location discrepancies, or visual continuity problems without source material\"\n  ],\n  \"confidence\": \"low\",\n  \"notes\": \"Probe acknowledged. Operating strictly as research assistant in read-only mode. No tools invoked. No content published or fabricated. Awaiting actual material for continuity review.\"\n}\n```",
+          "role": "assistant",
+          "reasoning_content": "The user message is in Chinese: \"你是视频王国的低成本杂务工，只做研究辅助，不调用其他工具，不发布内容。任务类型：continuity_issue_detection 请输出结构化 JSON，保留不确定项，不编造事实。输入：{\"status\":\"probe\",\"facts\":[\"read-only\"]}\"\n",
+          "provider_specific_fields": {
+            "refusal": null
+          }
+        },
+        "provider_specific_fields": {}
+      }
+    ],
+    "usage": {
+      "completion_tokens": 890,
+      "prompt_tokens": 2210,
+      "total_tokens": 3100,
+      "completion_tokens_details": {
+        "reasoning_tokens": 720
+      },
+      "prompt_tokens_details": {
+        "cached_tokens": 1664
+      }
+    },
+    "service_tier": "default"
+  },
+  "status": "COMPLETED"
+}

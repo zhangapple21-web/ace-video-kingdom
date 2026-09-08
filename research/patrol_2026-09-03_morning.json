@@ -1,0 +1,1035 @@
+{
+  "contract_version": "ace.video_kingdom.patrol.v2",
+  "at": "2026-09-03T01:17:48.535108+00:00",
+  "status": "PATROL_OK",
+  "provider_calls": 0,
+  "repairs": [],
+  "warnings": [],
+  "active_jobs": [],
+  "resumable_jobs": [],
+  "terminal_failures": [
+    {
+      "manifest": "experiments\\agnes_25_paid_smoke_tasks.json",
+      "shot_id": "AGNES25_960P_TEXT_SMOKE_20260901",
+      "status": "CREATE_FAILED",
+      "model_id": "agnes-video-2.5",
+      "reason": "{\"code\":\"insufficient_user_quota\",\"message\":\"用户额度不足, 剩余额度: ＄0.000000\",\"data\":null}"
+    }
+  ],
+  "completed_jobs": [
+    {
+      "manifest": "experiments\\agnes_25_flash_smoke_tasks.json",
+      "shot_id": "AGNES25_FLASH_TEXT_SMOKE_20260901",
+      "status": "COMPLETED",
+      "model_id": "agnes-video-2.5-flash",
+      "artifact": "C:\\tmp\\ace_video_kingdom_git\\media_staging\\episode_006_wenji_110s\\video\\agnes25_flash_text_smoke.mp4",
+      "sha256": "8c6202913bcf637c9b06f434e52aff8909b7613f64920eee34da4fadfabc1153"
+    },
+    {
+      "manifest": "experiments\\agnes_25_smart_fallback_smoke_tasks.json",
+      "shot_id": "AGNES25_SMART_FALLBACK_SMOKE_20260901",
+      "status": "COMPLETED",
+      "model_id": "agnes-video-2.5-flash",
+      "artifact": "C:\\tmp\\ace_video_kingdom_git\\media_staging\\episode_006_wenji_110s\\video\\AGNES25_SMART_FALLBACK_SMOKE_20260901.mp4",
+      "sha256": "1e115b17149f9a8882f1a0c32d6561d49211a1fa63f684fa33536710d5413850"
+    },
+    {
+      "manifest": "experiments\\agnes_tasks.json",
+      "shot_id": "episode-002-full",
+      "status": "COMPLETED",
+      "model_id": "agnes-video-v2.0",
+      "artifact": "C:\\tmp\\ace_video_kingdom_git\\media_staging\\episode_002_the_last_guest.mp4",
+      "sha256": "e8bd07221385a2fbf093ef148c8b6e8012c6893448a7b63db2a519ad9c9c2fd1"
+    },
+    {
+      "manifest": "experiments\\agnes_tasks.json",
+      "shot_id": "episode_002_shot_003",
+      "status": "COMPLETED",
+      "model_id": "agnes-video-v2.0",
+      "artifact": "C:\\tmp\\ace_video_kingdom_git\\media_staging\\episode_002_shot_003.mp4",
+      "sha256": "7ac2f1a01ef9c52ef3664fddd1d7b123590b4f2fcb21fc56cf83219587874137"
+    },
+    {
+      "manifest": "experiments\\agnes_tasks.json",
+      "shot_id": "episode_002_shot_004",
+      "status": "COMPLETED",
+      "model_id": "agnes-video-v2.0",
+      "artifact": "C:\\tmp\\ace_video_kingdom_git\\media_staging\\episode_002_shot_004.mp4",
+      "sha256": "6266419411c81dd61197d8c3971aa84a7d63f69230d35f3c1471e0086073db1c"
+    },
+    {
+      "manifest": "experiments\\agnes_tasks.json",
+      "shot_id": "episode_002_shot_005",
+      "status": "COMPLETED",
+      "model_id": "agnes-video-v2.0",
+      "artifact": "C:\\tmp\\ace_video_kingdom_git\\media_staging\\episode_002_shot_005.mp4",
+      "sha256": "6945f7bbaf7e6fde30f5b8e9cc6c6b2827f93e721cc2dd7297e88a8af3cc747d"
+    },
+    {
+      "manifest": "experiments\\agnes_tasks.json",
+      "shot_id": "episode_002_shot_006",
+      "status": "COMPLETED",
+      "model_id": "agnes-video-v2.0",
+      "artifact": "C:\\tmp\\ace_video_kingdom_git\\media_staging\\episode_002_shot_006.mp4",
+      "sha256": "2e5bd5cb9bdc74b1c46993c845b2d728f7efc0ae5c0e9beaae7f3ec55643abc6"
+    },
+    {
+      "manifest": "experiments\\agnes_tasks.json",
+      "shot_id": "episode_002_shot_007",
+      "status": "COMPLETED",
+      "model_id": "agnes-video-v2.0",
+      "artifact": "C:\\tmp\\ace_video_kingdom_git\\media_staging\\episode_002_shot_007.mp4",
+      "sha256": "90032cf898e29b9971f40820d175a453dfea0c2e9c1c82e662f1aff1373ba839"
+    },
+    {
+      "manifest": "experiments\\agnes_tasks.json",
+      "shot_id": "episode_002_shot_008",
+      "status": "COMPLETED",
+      "model_id": "agnes-video-v2.0",
+      "artifact": "C:\\tmp\\ace_video_kingdom_git\\media_staging\\episode_002_shot_008.mp4",
+      "sha256": "60e8d8d6ad9810a79f59914066998fe051b4db0b32debdf4d2ecc509958c34a5"
+    },
+    {
+      "manifest": "experiments\\agnes_tasks.json",
+      "shot_id": "episode_002_shot_009",
+      "status": "COMPLETED",
+      "model_id": "agnes-video-v2.0",
+      "artifact": "C:\\tmp\\ace_video_kingdom_git\\media_staging\\episode_002_shot_009.mp4",
+      "sha256": "7cfce3634a19b4adb9a0f6ed3ee69b2169d8f81941f7bfb62e158261f7c94954"
+    },
+    {
+      "manifest": "experiments\\agnes_tasks.json",
+      "shot_id": "episode_002_shot_010",
+      "status": "COMPLETED",
+      "model_id": "agnes-video-v2.0",
+      "artifact": "C:\\tmp\\ace_video_kingdom_git\\media_staging\\episode_002_shot_010.mp4",
+      "sha256": "7a9e7da9bf911e411c4953d3e02803c987666fdc4277663e365c7436b25edcbd"
+    },
+    {
+      "manifest": "experiments\\episode_004_agnes_tasks.json",
+      "shot_id": "YB001",
+      "status": "COMPLETED",
+      "model_id": "agnes-video-v2.0",
+      "artifact": "C:\\tmp\\ace_video_kingdom_git\\media_staging\\episode_004\\YB001.mp4",
+      "sha256": "040c8858c618e0918bc06dba145ad523125c38cdec67ef70ac65008e99b535b7"
+    },
+    {
+      "manifest": "experiments\\episode_004_agnes_tasks.json",
+      "shot_id": "YB002",
+      "status": "COMPLETED",
+      "model_id": "agnes-video-v2.0",
+      "artifact": "C:\\tmp\\ace_video_kingdom_git\\media_staging\\episode_004\\YB002.mp4",
+      "sha256": "2f1cf8543b301245e2e347f8dbd608c96de6cfc93018de5b6e626f1a860f6db8"
+    },
+    {
+      "manifest": "experiments\\episode_004_agnes_tasks.json",
+      "shot_id": "YB003",
+      "status": "COMPLETED",
+      "model_id": "agnes-video-v2.0",
+      "artifact": "C:\\tmp\\ace_video_kingdom_git\\media_staging\\episode_004\\YB003.mp4",
+      "sha256": "b555d60a1d189e832fdad56291a210d37ecc2612972e43b2c55d9f081e3e039d"
+    },
+    {
+      "manifest": "experiments\\episode_004_agnes_tasks.json",
+      "shot_id": "YB004",
+      "status": "COMPLETED",
+      "model_id": "agnes-video-v2.0",
+      "artifact": "C:\\tmp\\ace_video_kingdom_git\\media_staging\\episode_004\\YB004.mp4",
+      "sha256": "d7c308dc9053d70a8e8551788604318186c8b0bb96b1cd67c0a6f28643b198aa"
+    },
+    {
+      "manifest": "experiments\\episode_004_agnes_tasks.json",
+      "shot_id": "YB005",
+      "status": "COMPLETED",
+      "model_id": "agnes-video-v2.0",
+      "artifact": "C:\\tmp\\ace_video_kingdom_git\\media_staging\\episode_004\\YB005.mp4",
+      "sha256": "c21b8306231f1181c0c92e4372f6390dedd41cc7b7e2912a11d68602cb5f47ba"
+    },
+    {
+      "manifest": "experiments\\episode_004_agnes_tasks.json",
+      "shot_id": "YB006",
+      "status": "COMPLETED",
+      "model_id": "agnes-video-v2.0",
+      "artifact": "C:\\tmp\\ace_video_kingdom_git\\media_staging\\episode_004\\YB006.mp4",
+      "sha256": "44eb217162f6692c254092d423375c3b5b945e47670b4bdf16580ca60f6827fc"
+    },
+    {
+      "manifest": "experiments\\episode_004_agnes_tasks.json",
+      "shot_id": "YB007",
+      "status": "COMPLETED",
+      "model_id": "agnes-video-v2.0",
+      "artifact": "C:\\tmp\\ace_video_kingdom_git\\media_staging\\episode_004\\YB007.mp4",
+      "sha256": "7e5b5f225cfad9a4fb3e2b424a5ddc7f4620ef1339e43093a1cd00b6bdeaa3b3"
+    },
+    {
+      "manifest": "experiments\\episode_004_agnes_tasks.json",
+      "shot_id": "YB008",
+      "status": "COMPLETED",
+      "model_id": "agnes-video-v2.0",
+      "artifact": "C:\\tmp\\ace_video_kingdom_git\\media_staging\\episode_004\\YB008.mp4",
+      "sha256": "eb22168dacbdc557d9b16750e89ad1b289cf34c2f198850c7cc1d71913ff7864"
+    },
+    {
+      "manifest": "experiments\\episode_004_agnes_tasks.json",
+      "shot_id": "YB009",
+      "status": "COMPLETED",
+      "model_id": "agnes-video-v2.0",
+      "artifact": "C:\\tmp\\ace_video_kingdom_git\\media_staging\\episode_004\\YB009.mp4",
+      "sha256": "b172192184c7a18b25d04db1dcccc7cb77d16993bd2d49628694a483b5b8d45b"
+    },
+    {
+      "manifest": "experiments\\episode_004_agnes_tasks.json",
+      "shot_id": "YB010",
+      "status": "COMPLETED",
+      "model_id": "agnes-video-v2.0",
+      "artifact": "C:\\tmp\\ace_video_kingdom_git\\media_staging\\episode_004\\YB010.mp4",
+      "sha256": "69408ee726469ad204f2b5f39aaa6b762136cc812da5d1f8067e1dc2a7569c5c"
+    },
+    {
+      "manifest": "experiments\\episode_005_agnes_tasks.json",
+      "shot_id": "WJ001",
+      "status": "COMPLETED",
+      "model_id": "agnes-video-v2.0",
+      "artifact": "C:\\tmp\\ace_video_kingdom_git\\media_staging\\episode_005\\WJ001.mp4",
+      "sha256": "e09f52eb10dcdc3a712d5331ce6c6a08ab0a8c13e52bb33314625311f5d53316"
+    },
+    {
+      "manifest": "experiments\\episode_005_agnes_tasks.json",
+      "shot_id": "WJ002",
+      "status": "COMPLETED",
+      "model_id": "agnes-video-v2.0",
+      "artifact": "C:\\tmp\\ace_video_kingdom_git\\media_staging\\episode_005\\WJ002.mp4",
+      "sha256": "88943c1babd173d376f5921a397cba75e9bbc05c464de97772577c053362a013"
+    },
+    {
+      "manifest": "experiments\\episode_005_i2v_episode_tasks.json",
+      "shot_id": "WJ101",
+      "status": "COMPLETED",
+      "model_id": "agnes-video-v2.0",
+      "artifact": "C:\\tmp\\ace_video_kingdom_git\\media_staging\\episode_005_i2v\\WJ101.mp4",
+      "sha256": "943a6d721ce21b5f64e7feb5b0de79489b0f571047750ce935033facbe382343"
+    },
+    {
+      "manifest": "experiments\\episode_005_i2v_episode_tasks.json",
+      "shot_id": "WJ102",
+      "status": "COMPLETED",
+      "model_id": "agnes-video-v2.0",
+      "artifact": "C:\\tmp\\ace_video_kingdom_git\\media_staging\\episode_005_i2v\\WJ102.mp4",
+      "sha256": "9d80d0163484509435d834f32d1690e475953d70a87dc5db24898af45be47ead"
+    },
+    {
+      "manifest": "experiments\\episode_005_i2v_episode_tasks.json",
+      "shot_id": "WJ103",
+      "status": "COMPLETED",
+      "model_id": "agnes-video-v2.0",
+      "artifact": "C:\\tmp\\ace_video_kingdom_git\\media_staging\\episode_005_i2v\\WJ103.mp4",
+      "sha256": "c77f05e732712caf76c35af2b3707b83cf71927435cd1689bb568875dddb2064"
+    },
+    {
+      "manifest": "experiments\\episode_005_i2v_episode_tasks.json",
+      "shot_id": "WJ104",
+      "status": "COMPLETED",
+      "model_id": "agnes-video-v2.0",
+      "artifact": "C:\\tmp\\ace_video_kingdom_git\\media_staging\\episode_005_i2v\\WJ104.mp4",
+      "sha256": "8af06c66978cc85ac84f25b0d77065415ae1bf2b5347df5d20e090a2c57417ff"
+    },
+    {
+      "manifest": "experiments\\episode_005_i2v_episode_tasks.json",
+      "shot_id": "WJ105",
+      "status": "COMPLETED",
+      "model_id": "agnes-video-v2.0",
+      "artifact": "C:\\tmp\\ace_video_kingdom_git\\media_staging\\episode_005_i2v\\WJ105.mp4",
+      "sha256": "1151d2139609ec3e3b7d8552c4b455a65b4bf11fa17acb329cc4a6e268d2a09a"
+    },
+    {
+      "manifest": "experiments\\episode_005_i2v_probe_tasks.json",
+      "shot_id": "WJ_I2V_PROBE_001",
+      "status": "COMPLETED",
+      "model_id": "agnes-video-v2.0",
+      "artifact": "C:\\tmp\\ace_video_kingdom_git\\media_staging\\episode_005\\WJ_I2V_PROBE_001.mp4",
+      "sha256": "a57ebed39175e07d949292e958bd16226ca9fb7f30076cc7fafc43bdeeb4b60f"
+    },
+    {
+      "manifest": "experiments\\episode_006_flash_reference_probe_tasks.json",
+      "shot_id": "WJ702_FLASH_REFERENCE",
+      "status": "COMPLETED",
+      "model_id": "agnes-video-2.5-flash",
+      "artifact": "C:\\tmp\\ace_video_kingdom_git\\media_staging\\episode_006_wenji_110s\\video\\WJ702_FLASH_REFERENCE.mp4",
+      "sha256": "7b00ac3c0ff3cb08a319ed36d46b51677dcabd1cb43f07ef5ea8f98fd5b3a77a"
+    },
+    {
+      "manifest": "experiments\\episode_006_flash_reference_probe_tasks.json",
+      "shot_id": "WJ703_FLASH_REFERENCE",
+      "status": "COMPLETED",
+      "model_id": "agnes-video-2.5-flash",
+      "artifact": "C:\\tmp\\ace_video_kingdom_git\\media_staging\\episode_006_wenji_110s\\video\\WJ703_FLASH_REFERENCE.mp4",
+      "sha256": "4c625990cca1a233f8b8f0f48e307a185713cb7f7054d508ef88278fd5275059"
+    },
+    {
+      "manifest": "experiments\\episode_006_flash_tasks.json",
+      "shot_id": "WJ701_FLASH_REFERENCE",
+      "status": "COMPLETED",
+      "model_id": "agnes-video-2.5-flash",
+      "artifact": "C:\\tmp\\ace_video_kingdom_git\\media_staging\\episode_006_wenji_110s\\video\\WJ701_FLASH_REFERENCE.mp4",
+      "sha256": "2914ed5d890db569107d59e809d418fd4a744508a91afee053db1a330f4f259a"
+    },
+    {
+      "manifest": "experiments\\episode_006_remaining_flash_tasks.json",
+      "shot_id": "WJ704_FLASH_LOG",
+      "status": "COMPLETED",
+      "model_id": "agnes-video-2.5-flash",
+      "artifact": "C:\\tmp\\ace_video_kingdom_git\\media_staging\\episode_006_wenji_110s\\video\\WJ704_FLASH_LOG.mp4",
+      "sha256": "261b205561a85cec86db7e8fa85332d4e48a206e33afb1c152dae27183199fe9"
+    },
+    {
+      "manifest": "experiments\\episode_006_remaining_flash_tasks.json",
+      "shot_id": "WJ705_FLASH_WINDOW",
+      "status": "COMPLETED",
+      "model_id": "agnes-video-2.5-flash",
+      "artifact": "C:\\tmp\\ace_video_kingdom_git\\media_staging\\episode_006_wenji_110s\\video\\WJ705_FLASH_WINDOW.mp4",
+      "sha256": "e699fd82ba36f7d1be25016624e236ad92be62a1ce32ed8f46b13184b0fac29e"
+    },
+    {
+      "manifest": "experiments\\episode_006_remaining_flash_tasks.json",
+      "shot_id": "WJ706_FLASH_REMINDER",
+      "status": "COMPLETED",
+      "model_id": "agnes-video-2.5-flash",
+      "artifact": "C:\\tmp\\ace_video_kingdom_git\\media_staging\\episode_006_wenji_110s\\video\\WJ706_FLASH_REMINDER.mp4",
+      "sha256": "bb59f7ffd6141706a79c6737668a92aaf01e4fdc4ff805f8ccd29effa0ce877a"
+    },
+    {
+      "manifest": "experiments\\episode_006_remaining_flash_tasks.json",
+      "shot_id": "WJ707_FLASH_FOLDER",
+      "status": "COMPLETED",
+      "model_id": "agnes-video-2.5-flash",
+      "artifact": "C:\\tmp\\ace_video_kingdom_git\\media_staging\\episode_006_wenji_110s\\video\\WJ707_FLASH_FOLDER.mp4",
+      "sha256": "81c4671e703aab70a0bea508ce1238cf07f5e4f346416df476f117e0c233556c"
+    },
+    {
+      "manifest": "experiments\\episode_006_remaining_flash_tasks.json",
+      "shot_id": "WJ708_FLASH_COUNTER",
+      "status": "COMPLETED",
+      "model_id": "agnes-video-2.5-flash",
+      "artifact": "C:\\tmp\\ace_video_kingdom_git\\media_staging\\episode_006_wenji_110s\\video\\WJ708_FLASH_COUNTER.mp4",
+      "sha256": "26ed3b41205454d9486ceaa7cbf5e2a1d26cd4f75586f88671d4883664ff8915"
+    },
+    {
+      "manifest": "experiments\\episode_006_wenji_110s_tasks.json",
+      "shot_id": "WJ206_I2V_PROBE",
+      "status": "COMPLETED",
+      "model_id": "agnes-video-v2.0",
+      "artifact": "C:\\tmp\\ace_video_kingdom_git\\media_staging\\episode_006_wenji_110s\\video\\WJ206_I2V_PROBE.mp4",
+      "sha256": "b1200fdfd49187b6ec286ba58f4350a43bc9db99393f50451b64c2b15beb6710"
+    },
+    {
+      "manifest": "experiments\\episode_006_wenji_110s_tasks.json",
+      "shot_id": "WJ601",
+      "status": "COMPLETED",
+      "model_id": "agnes-video-v2.0",
+      "artifact": "C:\\tmp\\ace_video_kingdom_git\\media_staging\\episode_006_wenji_110s\\video\\WJ601.mp4",
+      "sha256": "d395407a1f4dfed3c88f0471b9d07265a244da561cbdce3655bca4653307bd69"
+    },
+    {
+      "manifest": "experiments\\episode_006_wenji_110s_tasks.json",
+      "shot_id": "WJ602",
+      "status": "COMPLETED",
+      "model_id": "agnes-video-v2.0",
+      "artifact": "C:\\tmp\\ace_video_kingdom_git\\media_staging\\episode_006_wenji_110s\\video\\WJ602.mp4",
+      "sha256": "fa84df894a0fdea2b0874a1850e72c4ffd2e6f6251579c039c1ff91bde4ead38"
+    },
+    {
+      "manifest": "experiments\\episode_006_wenji_110s_tasks.json",
+      "shot_id": "WJ603",
+      "status": "COMPLETED",
+      "model_id": "agnes-video-v2.0",
+      "artifact": "C:\\tmp\\ace_video_kingdom_git\\media_staging\\episode_006_wenji_110s\\video\\WJ603.mp4",
+      "sha256": "9cfb0ca007a41b34f73ef2a6ea47a0a64b31a715c559b90685fbe4cd8cf954e4"
+    },
+    {
+      "manifest": "experiments\\episode_007_action_probe_tasks_v2.json",
+      "shot_id": "P01_KEYBOARD",
+      "status": "COMPLETED",
+      "model_id": "agnes-video-v2.0",
+      "artifact": "C:\\tmp\\ace_video_kingdom_git\\media_staging\\episode_007_virtual_data\\action_probe_v2\\P01_KEYBOARD.mp4",
+      "sha256": "64c74f78e3f5ae5204e52f108754e0557c93c668e3c1cf0d81af831442a49f70"
+    },
+    {
+      "manifest": "experiments\\episode_007_action_probe_tasks_v2.json",
+      "shot_id": "P02_PHONE_SLAM",
+      "status": "COMPLETED",
+      "model_id": "agnes-video-v2.0",
+      "artifact": "C:\\tmp\\ace_video_kingdom_git\\media_staging\\episode_007_virtual_data\\action_probe_v2\\P02_PHONE_SLAM.mp4",
+      "sha256": "7f4a71873e8e7c547e7c052cd4d99458c569ce4560d72ef0c86805bc18c40517"
+    },
+    {
+      "manifest": "experiments\\episode_007_action_probe_tasks_v2.json",
+      "shot_id": "P03_DESK_SLAM",
+      "status": "COMPLETED",
+      "model_id": "agnes-video-v2.0",
+      "artifact": "C:\\tmp\\ace_video_kingdom_git\\media_staging\\episode_007_virtual_data\\action_probe_v2\\P03_DESK_SLAM.mp4",
+      "sha256": "26110245daa29869fdd8307db65f62c6889c5fb128e603a74aad5bb5408e28d1"
+    },
+    {
+      "manifest": "experiments\\episode_007_action_probe_tasks_v2.json",
+      "shot_id": "P04_RUN_OUT",
+      "status": "COMPLETED",
+      "model_id": "agnes-video-v2.0",
+      "artifact": "C:\\tmp\\ace_video_kingdom_git\\media_staging\\episode_007_virtual_data\\action_probe_v2\\P04_RUN_OUT.mp4",
+      "sha256": "42e89624d6739a42d2fd1fa7b981d58501bcb558c00c243b643268e7d33a20c8"
+    },
+    {
+      "manifest": "experiments\\episode_007_action_probe_tasks_v2.json",
+      "shot_id": "P05_COPY_PASTE",
+      "status": "COMPLETED",
+      "model_id": "agnes-video-v2.0",
+      "artifact": "C:\\tmp\\ace_video_kingdom_git\\media_staging\\episode_007_virtual_data\\action_probe_v2\\P05_COPY_PASTE.mp4",
+      "sha256": "9d290ef230533792ee4a1482058d1f619ac3e0eef3be0b0188f3f481f9ec7c42"
+    },
+    {
+      "manifest": "experiments\\episode_007_action_probe_tasks_v2.json",
+      "shot_id": "P02_PHONE_SLAM_R1",
+      "status": "COMPLETED",
+      "model_id": "agnes-video-v2.0",
+      "artifact": "C:\\tmp\\ace_video_kingdom_git\\media_staging\\episode_007_virtual_data\\action_probe_v2\\P02_PHONE_SLAM_R1.mp4",
+      "sha256": "6b5181d5ec8220bfbd7aee7503328a8747d634b071eaf7de658d407966fd49cc"
+    },
+    {
+      "manifest": "experiments\\episode_007_action_probe_tasks_v2.json",
+      "shot_id": "P05_COPY_PASTE_R1",
+      "status": "COMPLETED",
+      "model_id": "agnes-video-v2.0",
+      "artifact": "C:\\tmp\\ace_video_kingdom_git\\media_staging\\episode_007_virtual_data\\action_probe_v2\\P05_COPY_PASTE_R1.mp4",
+      "sha256": "132d79d2fb8357e23ca2bcb363bd53e96de85d8cba4aaf2cb88b90cb712394ab"
+    },
+    {
+      "manifest": "experiments\\episode_007_camera_grammar_tasks.v2.json",
+      "shot_id": "S01A",
+      "status": "COMPLETED",
+      "model_id": "agnes-video-v2.0",
+      "artifact": "C:\\tmp\\ace_video_kingdom_git\\media_staging\\episode_007_virtual_data\\video_camera_grammar_v2\\S01A.mp4",
+      "sha256": "deffc2334005da52987c31fbd22e73c2e4d14e3e6c04ce5471d1ca3c23e598ec"
+    },
+    {
+      "manifest": "experiments\\episode_007_camera_grammar_tasks.v2.json",
+      "shot_id": "S01B",
+      "status": "COMPLETED",
+      "model_id": "agnes-video-v2.0",
+      "artifact": "C:\\tmp\\ace_video_kingdom_git\\media_staging\\episode_007_virtual_data\\video_camera_grammar_v2\\S01B.mp4",
+      "sha256": "215d23932588b304672b72006487b1aa4455b5dba17f02c1877b1cf77db5c216"
+    },
+    {
+      "manifest": "experiments\\episode_007_camera_grammar_tasks.v2.json",
+      "shot_id": "S01C",
+      "status": "COMPLETED",
+      "model_id": "agnes-video-v2.0",
+      "artifact": "C:\\tmp\\ace_video_kingdom_git\\media_staging\\episode_007_virtual_data\\video_camera_grammar_v2\\S01C.mp4",
+      "sha256": "7b06b01fce2e5992679696017ea359069b109038fbb92e8f4052ae93a678f1b7"
+    },
+    {
+      "manifest": "experiments\\episode_007_camera_grammar_tasks.v2.json",
+      "shot_id": "S01D",
+      "status": "COMPLETED",
+      "model_id": "agnes-video-v2.0",
+      "artifact": "C:\\tmp\\ace_video_kingdom_git\\media_staging\\episode_007_virtual_data\\video_camera_grammar_v2\\S01D.mp4",
+      "sha256": "46d8c0a0f109a7427601981b4244b8125c84524c54a447d6830151f8a136d78f"
+    },
+    {
+      "manifest": "experiments\\episode_007_camera_grammar_tasks.v2.json",
+      "shot_id": "S02A",
+      "status": "COMPLETED",
+      "model_id": "agnes-video-v2.0",
+      "artifact": "C:\\tmp\\ace_video_kingdom_git\\media_staging\\episode_007_virtual_data\\video_camera_grammar_v2\\S02A.mp4",
+      "sha256": "0cdb1c2711e4087ec6347e784cc2459cf61199973bddb12ba1322d8d5671fe45"
+    },
+    {
+      "manifest": "experiments\\episode_007_camera_grammar_tasks.v2.json",
+      "shot_id": "S02B",
+      "status": "COMPLETED",
+      "model_id": "agnes-video-v2.0",
+      "artifact": "C:\\tmp\\ace_video_kingdom_git\\media_staging\\episode_007_virtual_data\\video_camera_grammar_v2\\S02B.mp4",
+      "sha256": "904911d72741156168d82316e964d6ccd024ab84366e2fca3722b239daae601d"
+    },
+    {
+      "manifest": "experiments\\episode_007_camera_grammar_tasks.v2.json",
+      "shot_id": "S02C",
+      "status": "COMPLETED",
+      "model_id": "agnes-video-v2.0",
+      "artifact": "C:\\tmp\\ace_video_kingdom_git\\media_staging\\episode_007_virtual_data\\video_camera_grammar_v2\\S02C.mp4",
+      "sha256": "aa6dffe7dae8f3966f7d837546f51beba8f2e6050182342a30682e4363ead286"
+    },
+    {
+      "manifest": "experiments\\episode_007_camera_grammar_tasks.v2.json",
+      "shot_id": "S03A",
+      "status": "COMPLETED",
+      "model_id": "agnes-video-v2.0",
+      "artifact": "C:\\tmp\\ace_video_kingdom_git\\media_staging\\episode_007_virtual_data\\video_camera_grammar_v2\\S03A.mp4",
+      "sha256": "42e87d9a958390f4ce37c783954afce1f1398eb2d34bf9194c35689804d4883b"
+    },
+    {
+      "manifest": "experiments\\episode_007_camera_grammar_tasks.v2.json",
+      "shot_id": "S03B",
+      "status": "COMPLETED",
+      "model_id": "agnes-video-v2.0",
+      "artifact": "C:\\tmp\\ace_video_kingdom_git\\media_staging\\episode_007_virtual_data\\video_camera_grammar_v2\\S03B.mp4",
+      "sha256": "3a92b2bfeb53a46ab91e4ae7f8d9455aa645ad6f22698eaf23498362aedb5837"
+    },
+    {
+      "manifest": "experiments\\episode_007_camera_grammar_tasks.v2.json",
+      "shot_id": "S03C",
+      "status": "COMPLETED",
+      "model_id": "agnes-video-v2.0",
+      "artifact": "C:\\tmp\\ace_video_kingdom_git\\media_staging\\episode_007_virtual_data\\video_camera_grammar_v2\\S03C.mp4",
+      "sha256": "3aca0bb56313befba1cfeb0cb8c8e5a42092a5e7b7ca634295689c90f95542d6"
+    },
+    {
+      "manifest": "experiments\\episode_007_camera_grammar_tasks.v2.json",
+      "shot_id": "S04A",
+      "status": "COMPLETED",
+      "model_id": "agnes-video-v2.0",
+      "artifact": "C:\\tmp\\ace_video_kingdom_git\\media_staging\\episode_007_virtual_data\\video_camera_grammar_v2\\S04A.mp4",
+      "sha256": "6eec732baa52d98e4daa206bfd9a17eb1567571c24dcc03d7a37fd4f7cee9fb4"
+    },
+    {
+      "manifest": "experiments\\episode_007_camera_grammar_tasks.v2.json",
+      "shot_id": "S04B",
+      "status": "COMPLETED",
+      "model_id": "agnes-video-v2.0",
+      "artifact": "C:\\tmp\\ace_video_kingdom_git\\media_staging\\episode_007_virtual_data\\video_camera_grammar_v2\\S04B.mp4",
+      "sha256": "14caaac53298f3b3b94a76ecc2c306b0a625a0c7fde253744ea622936d691a24"
+    },
+    {
+      "manifest": "experiments\\episode_007_camera_grammar_tasks.v2.json",
+      "shot_id": "S05A",
+      "status": "COMPLETED",
+      "model_id": "agnes-video-v2.0",
+      "artifact": "C:\\tmp\\ace_video_kingdom_git\\media_staging\\episode_007_virtual_data\\video_camera_grammar_v2\\S05A.mp4",
+      "sha256": "8fcb00a779e8b8c147f2480ae3462d33ae4f80ab75cd5469ceac1a618d779c92"
+    },
+    {
+      "manifest": "experiments\\episode_007_camera_grammar_tasks.v2.json",
+      "shot_id": "S05B",
+      "status": "COMPLETED",
+      "model_id": "agnes-video-v2.0",
+      "artifact": "C:\\tmp\\ace_video_kingdom_git\\media_staging\\episode_007_virtual_data\\video_camera_grammar_v2\\S05B.mp4",
+      "sha256": "ed87507f4ce46bec71ce0a46b5c0f3546ba03b81ab6daeff388a7868e56e0d63"
+    },
+    {
+      "manifest": "experiments\\episode_007_camera_grammar_tasks.v2.json",
+      "shot_id": "S05C",
+      "status": "COMPLETED",
+      "model_id": "agnes-video-v2.0",
+      "artifact": "C:\\tmp\\ace_video_kingdom_git\\media_staging\\episode_007_virtual_data\\video_camera_grammar_v2\\S05C.mp4",
+      "sha256": "8b357b8f9c406f0890fa0433b01b52f4b66488b36af9b682eeefbf9ce66bce33"
+    },
+    {
+      "manifest": "experiments\\episode_007_camera_grammar_tasks.v2.json",
+      "shot_id": "S06A",
+      "status": "COMPLETED",
+      "model_id": "agnes-video-v2.0",
+      "artifact": "C:\\tmp\\ace_video_kingdom_git\\media_staging\\episode_007_virtual_data\\video_camera_grammar_v2\\S06A.mp4",
+      "sha256": "8acea710713822a7282ac8a05a1a74ed99a5de8f5724f3b21e170743aac391ec"
+    },
+    {
+      "manifest": "experiments\\episode_007_camera_grammar_tasks.v2.json",
+      "shot_id": "S06B",
+      "status": "COMPLETED",
+      "model_id": "agnes-video-v2.0",
+      "artifact": "C:\\tmp\\ace_video_kingdom_git\\media_staging\\episode_007_virtual_data\\video_camera_grammar_v2\\S06B.mp4",
+      "sha256": "597acb44e304516dcaf22619fd006c9e65a564a3b315d47cc7e59b9fa25ccf05"
+    },
+    {
+      "manifest": "experiments\\episode_007_camera_grammar_tasks.v2.json",
+      "shot_id": "S07A",
+      "status": "COMPLETED",
+      "model_id": "agnes-video-v2.0",
+      "artifact": "C:\\tmp\\ace_video_kingdom_git\\media_staging\\episode_007_virtual_data\\video_camera_grammar_v2\\S07A.mp4",
+      "sha256": "f9cdc7f8c78730fb15d6666890486471531275068f2bbe3dbf4e4d8d0068c041"
+    },
+    {
+      "manifest": "experiments\\episode_007_camera_grammar_tasks.v3.json",
+      "shot_id": "S01A",
+      "status": "COMPLETED",
+      "model_id": "agnes-video-v2.0",
+      "artifact": "C:\\tmp\\ace_video_kingdom_git\\media_staging\\episode_007_virtual_data\\video_camera_grammar_v2\\S01A.mp4",
+      "sha256": "deffc2334005da52987c31fbd22e73c2e4d14e3e6c04ce5471d1ca3c23e598ec"
+    },
+    {
+      "manifest": "experiments\\episode_007_camera_grammar_tasks.v3.json",
+      "shot_id": "S01B",
+      "status": "COMPLETED",
+      "model_id": "agnes-video-v2.0",
+      "artifact": "C:\\tmp\\ace_video_kingdom_git\\media_staging\\episode_007_virtual_data\\video_camera_grammar_v2\\S01B.mp4",
+      "sha256": "215d23932588b304672b72006487b1aa4455b5dba17f02c1877b1cf77db5c216"
+    },
+    {
+      "manifest": "experiments\\episode_007_camera_grammar_tasks.v3.json",
+      "shot_id": "S01C",
+      "status": "COMPLETED",
+      "model_id": "agnes-video-v2.0",
+      "artifact": "C:\\tmp\\ace_video_kingdom_git\\media_staging\\episode_007_virtual_data\\video_camera_grammar_v2\\S01C.mp4",
+      "sha256": "7b06b01fce2e5992679696017ea359069b109038fbb92e8f4052ae93a678f1b7"
+    },
+    {
+      "manifest": "experiments\\episode_007_camera_grammar_tasks.v3.json",
+      "shot_id": "S01D_REPAIR",
+      "status": "COMPLETED",
+      "model_id": "agnes-video-v2.0",
+      "artifact": "C:\\tmp\\ace_video_kingdom_git\\media_staging\\episode_007_virtual_data\\video_camera_grammar_v2\\S01D_REPAIR.mp4",
+      "sha256": "cf79b93dc4863ffac212c58935227787ede7a9772f9d5f039ebb01660a39b2c7"
+    },
+    {
+      "manifest": "experiments\\episode_007_camera_grammar_tasks.v3.json",
+      "shot_id": "S02A",
+      "status": "COMPLETED",
+      "model_id": "agnes-video-v2.0",
+      "artifact": "C:\\tmp\\ace_video_kingdom_git\\media_staging\\episode_007_virtual_data\\video_camera_grammar_v2\\S02A.mp4",
+      "sha256": "0cdb1c2711e4087ec6347e784cc2459cf61199973bddb12ba1322d8d5671fe45"
+    },
+    {
+      "manifest": "experiments\\episode_007_camera_grammar_tasks.v3.json",
+      "shot_id": "S02B",
+      "status": "COMPLETED",
+      "model_id": "agnes-video-v2.0",
+      "artifact": "C:\\tmp\\ace_video_kingdom_git\\media_staging\\episode_007_virtual_data\\video_camera_grammar_v2\\S02B.mp4",
+      "sha256": "904911d72741156168d82316e964d6ccd024ab84366e2fca3722b239daae601d"
+    },
+    {
+      "manifest": "experiments\\episode_007_camera_grammar_tasks.v3.json",
+      "shot_id": "S02C",
+      "status": "COMPLETED",
+      "model_id": "agnes-video-v2.0",
+      "artifact": "C:\\tmp\\ace_video_kingdom_git\\media_staging\\episode_007_virtual_data\\video_camera_grammar_v2\\S02C.mp4",
+      "sha256": "aa6dffe7dae8f3966f7d837546f51beba8f2e6050182342a30682e4363ead286"
+    },
+    {
+      "manifest": "experiments\\episode_007_camera_grammar_tasks.v3.json",
+      "shot_id": "S03A",
+      "status": "COMPLETED",
+      "model_id": "agnes-video-v2.0",
+      "artifact": "C:\\tmp\\ace_video_kingdom_git\\media_staging\\episode_007_virtual_data\\video_camera_grammar_v2\\S03A.mp4",
+      "sha256": "42e87d9a958390f4ce37c783954afce1f1398eb2d34bf9194c35689804d4883b"
+    },
+    {
+      "manifest": "experiments\\episode_007_camera_grammar_tasks.v3.json",
+      "shot_id": "S03B",
+      "status": "COMPLETED",
+      "model_id": "agnes-video-v2.0",
+      "artifact": "C:\\tmp\\ace_video_kingdom_git\\media_staging\\episode_007_virtual_data\\video_camera_grammar_v2\\S03B.mp4",
+      "sha256": "3a92b2bfeb53a46ab91e4ae7f8d9455aa645ad6f22698eaf23498362aedb5837"
+    },
+    {
+      "manifest": "experiments\\episode_007_camera_grammar_tasks.v3.json",
+      "shot_id": "S03C",
+      "status": "COMPLETED",
+      "model_id": "agnes-video-v2.0",
+      "artifact": "C:\\tmp\\ace_video_kingdom_git\\media_staging\\episode_007_virtual_data\\video_camera_grammar_v2\\S03C.mp4",
+      "sha256": "3aca0bb56313befba1cfeb0cb8c8e5a42092a5e7b7ca634295689c90f95542d6"
+    },
+    {
+      "manifest": "experiments\\episode_007_camera_grammar_tasks.v3.json",
+      "shot_id": "S04A",
+      "status": "COMPLETED",
+      "model_id": "agnes-video-v2.0",
+      "artifact": "C:\\tmp\\ace_video_kingdom_git\\media_staging\\episode_007_virtual_data\\video_camera_grammar_v2\\S04A.mp4",
+      "sha256": "6eec732baa52d98e4daa206bfd9a17eb1567571c24dcc03d7a37fd4f7cee9fb4"
+    },
+    {
+      "manifest": "experiments\\episode_007_camera_grammar_tasks.v3.json",
+      "shot_id": "S04B",
+      "status": "COMPLETED",
+      "model_id": "agnes-video-v2.0",
+      "artifact": "C:\\tmp\\ace_video_kingdom_git\\media_staging\\episode_007_virtual_data\\video_camera_grammar_v2\\S04B.mp4",
+      "sha256": "14caaac53298f3b3b94a76ecc2c306b0a625a0c7fde253744ea622936d691a24"
+    },
+    {
+      "manifest": "experiments\\episode_007_camera_grammar_tasks.v3.json",
+      "shot_id": "S05A",
+      "status": "COMPLETED",
+      "model_id": "agnes-video-v2.0",
+      "artifact": "C:\\tmp\\ace_video_kingdom_git\\media_staging\\episode_007_virtual_data\\video_camera_grammar_v2\\S05A.mp4",
+      "sha256": "8fcb00a779e8b8c147f2480ae3462d33ae4f80ab75cd5469ceac1a618d779c92"
+    },
+    {
+      "manifest": "experiments\\episode_007_camera_grammar_tasks.v3.json",
+      "shot_id": "S05B",
+      "status": "COMPLETED",
+      "model_id": "agnes-video-v2.0",
+      "artifact": "C:\\tmp\\ace_video_kingdom_git\\media_staging\\episode_007_virtual_data\\video_camera_grammar_v2\\S05B.mp4",
+      "sha256": "ed87507f4ce46bec71ce0a46b5c0f3546ba03b81ab6daeff388a7868e56e0d63"
+    },
+    {
+      "manifest": "experiments\\episode_007_camera_grammar_tasks.v3.json",
+      "shot_id": "S05C",
+      "status": "COMPLETED",
+      "model_id": "agnes-video-v2.0",
+      "artifact": "C:\\tmp\\ace_video_kingdom_git\\media_staging\\episode_007_virtual_data\\video_camera_grammar_v2\\S05C.mp4",
+      "sha256": "8b357b8f9c406f0890fa0433b01b52f4b66488b36af9b682eeefbf9ce66bce33"
+    },
+    {
+      "manifest": "experiments\\episode_007_camera_grammar_tasks.v3.json",
+      "shot_id": "S06A",
+      "status": "COMPLETED",
+      "model_id": "agnes-video-v2.0",
+      "artifact": "C:\\tmp\\ace_video_kingdom_git\\media_staging\\episode_007_virtual_data\\video_camera_grammar_v2\\S06A.mp4",
+      "sha256": "8acea710713822a7282ac8a05a1a74ed99a5de8f5724f3b21e170743aac391ec"
+    },
+    {
+      "manifest": "experiments\\episode_007_camera_grammar_tasks.v3.json",
+      "shot_id": "S06B",
+      "status": "COMPLETED",
+      "model_id": "agnes-video-v2.0",
+      "artifact": "C:\\tmp\\ace_video_kingdom_git\\media_staging\\episode_007_virtual_data\\video_camera_grammar_v2\\S06B.mp4",
+      "sha256": "597acb44e304516dcaf22619fd006c9e65a564a3b315d47cc7e59b9fa25ccf05"
+    },
+    {
+      "manifest": "experiments\\episode_007_camera_grammar_tasks.v3.json",
+      "shot_id": "S07A",
+      "status": "COMPLETED",
+      "model_id": "agnes-video-v2.0",
+      "artifact": "C:\\tmp\\ace_video_kingdom_git\\media_staging\\episode_007_virtual_data\\video_camera_grammar_v2\\S07A.mp4",
+      "sha256": "f9cdc7f8c78730fb15d6666890486471531275068f2bbe3dbf4e4d8d0068c041"
+    },
+    {
+      "manifest": "experiments\\episode_007_camera_probe_v2_repair_tasks.json",
+      "shot_id": "C01_DIALOGUE_LOCKED_R2",
+      "status": "COMPLETED",
+      "model_id": "agnes-video-v2.0",
+      "artifact": "C:\\tmp\\ace_video_kingdom_git\\media_staging\\episode_007_virtual_data\\camera_probe_v2\\C01_DIALOGUE_LOCKED_R2.mp4",
+      "sha256": "1fb6d3cedb78f8c4296d2b128af7a9297e370f84497bd59aad979841bf3fd848"
+    },
+    {
+      "manifest": "experiments\\episode_007_camera_probe_v2_repair_tasks.json",
+      "shot_id": "C02_PHONE_SINGLE_JOLT_R2",
+      "status": "COMPLETED",
+      "model_id": "agnes-video-v2.0",
+      "artifact": "C:\\tmp\\ace_video_kingdom_git\\media_staging\\episode_007_virtual_data\\camera_probe_v2\\C02_PHONE_SINGLE_JOLT_R2.mp4",
+      "sha256": "9e4be5d6be86a9a301862257bb960a0f5f362980b2b54053a52021cc44766ec6"
+    },
+    {
+      "manifest": "experiments\\episode_007_camera_probe_v2_repair_tasks.json",
+      "shot_id": "C02_PHONE_SINGLE_JOLT_R3",
+      "status": "COMPLETED",
+      "model_id": "agnes-video-v2.0",
+      "artifact": "C:\\tmp\\ace_video_kingdom_git\\media_staging\\episode_007_virtual_data\\camera_probe_v2\\C02_PHONE_SINGLE_JOLT_R3.mp4",
+      "sha256": "1fbcfe23141a8f4573ca4f32851bf80f739b76797654ddbde6211f7abf6da74e"
+    },
+    {
+      "manifest": "experiments\\episode_007_camera_probe_v2_tasks.json",
+      "shot_id": "C01_DIALOGUE_LOCKED",
+      "status": "COMPLETED",
+      "model_id": "agnes-video-v2.0",
+      "artifact": "C:\\tmp\\ace_video_kingdom_git\\media_staging\\episode_007_virtual_data\\camera_probe_v2\\C01_DIALOGUE_LOCKED.mp4",
+      "sha256": "b4fd683d0d3bcf500dae44f08762a3266adfba75a5c370e780552925295ae464"
+    },
+    {
+      "manifest": "experiments\\episode_007_camera_probe_v2_tasks.json",
+      "shot_id": "C02_PHONE_SINGLE_JOLT",
+      "status": "COMPLETED",
+      "model_id": "agnes-video-v2.0",
+      "artifact": "C:\\tmp\\ace_video_kingdom_git\\media_staging\\episode_007_virtual_data\\camera_probe_v2\\C02_PHONE_SINGLE_JOLT.mp4",
+      "sha256": "b741d0f4edcb0332f0b6c686cd80663b1d172b09d09fd322fd2fe015e48fda18"
+    },
+    {
+      "manifest": "experiments\\episode_007_camera_probe_v2_tasks.json",
+      "shot_id": "C03_DESK_SINGLE_PUSH",
+      "status": "COMPLETED",
+      "model_id": "agnes-video-v2.0",
+      "artifact": "C:\\tmp\\ace_video_kingdom_git\\media_staging\\episode_007_virtual_data\\camera_probe_v2\\C03_DESK_SINGLE_PUSH.mp4",
+      "sha256": "fd3925aa071747444622983375d96f41a80f90998e2127a74debe6f8bc5e9e5a"
+    },
+    {
+      "manifest": "experiments\\episode_007_camera_probe_v2_tasks.json",
+      "shot_id": "C04_DIALOGUE_PULLBACK_LATE",
+      "status": "COMPLETED",
+      "model_id": "agnes-video-v2.0",
+      "artifact": "C:\\tmp\\ace_video_kingdom_git\\media_staging\\episode_007_virtual_data\\camera_probe_v2\\C04_DIALOGUE_PULLBACK_LATE.mp4",
+      "sha256": "f1d7efb9fef316871650f3010abb1def6c4d5227c1a6ffb68d981011578f61bc"
+    },
+    {
+      "manifest": "experiments\\episode_007_full_scene_anchor_tasks.json",
+      "shot_id": "F01",
+      "status": "COMPLETED",
+      "model_id": "agnes-video-v2.0",
+      "artifact": "C:\\tmp\\ace_video_kingdom_git\\media_staging\\episode_007_virtual_data\\full_scene_anchor\\F01.mp4",
+      "sha256": "2cd0705a3eb3d5c26b5764a4f18d7f16301c24e08616bcfc1483c6c9a05510e0"
+    },
+    {
+      "manifest": "experiments\\episode_007_full_scene_anchor_tasks.json",
+      "shot_id": "F02",
+      "status": "COMPLETED",
+      "model_id": "agnes-video-v2.0",
+      "artifact": "C:\\tmp\\ace_video_kingdom_git\\media_staging\\episode_007_virtual_data\\full_scene_anchor\\F02.mp4",
+      "sha256": "aacd07da694c34a3143aba0f407ba2bdc553e20e61eb42be391f19eb67e9f543"
+    },
+    {
+      "manifest": "experiments\\episode_007_full_scene_anchor_tasks.json",
+      "shot_id": "F03",
+      "status": "COMPLETED",
+      "model_id": "agnes-video-v2.0",
+      "artifact": "C:\\tmp\\ace_video_kingdom_git\\media_staging\\episode_007_virtual_data\\full_scene_anchor\\F03.mp4",
+      "sha256": "45f8db22c48a057491dc2529a7a9d1eccc24598e6b13eed7573b277abf71b4c8"
+    },
+    {
+      "manifest": "experiments\\episode_007_full_scene_anchor_tasks.json",
+      "shot_id": "F04",
+      "status": "COMPLETED",
+      "model_id": "agnes-video-v2.0",
+      "artifact": "C:\\tmp\\ace_video_kingdom_git\\media_staging\\episode_007_virtual_data\\full_scene_anchor\\F04.mp4",
+      "sha256": "3c5f21203953392fe63e50d72584a9b7bbe2b9502b0720ed3795bb6ce6a48a66"
+    },
+    {
+      "manifest": "experiments\\episode_007_full_scene_anchor_tasks.json",
+      "shot_id": "F05",
+      "status": "COMPLETED",
+      "model_id": "agnes-video-v2.0",
+      "artifact": "C:\\tmp\\ace_video_kingdom_git\\media_staging\\episode_007_virtual_data\\full_scene_anchor\\F05.mp4",
+      "sha256": "cfcf97230dc8999620c16a15f9e51668a87c2b78cc1188b826b9b4a85d613886"
+    },
+    {
+      "manifest": "experiments\\episode_007_full_scene_anchor_tasks.json",
+      "shot_id": "F06",
+      "status": "COMPLETED",
+      "model_id": "agnes-video-v2.0",
+      "artifact": "C:\\tmp\\ace_video_kingdom_git\\media_staging\\episode_007_virtual_data\\full_scene_anchor\\F06.mp4",
+      "sha256": "499ad14a14fef1c8435bad03a16d41751dcbcd74e731d699f7ba4d012dc7acf2"
+    },
+    {
+      "manifest": "experiments\\episode_007_full_scene_anchor_tasks.json",
+      "shot_id": "F07",
+      "status": "COMPLETED",
+      "model_id": "agnes-video-v2.0",
+      "artifact": "C:\\tmp\\ace_video_kingdom_git\\media_staging\\episode_007_virtual_data\\full_scene_anchor\\F07.mp4",
+      "sha256": "3dec4b7345bcf7b99494ddda91c5ea764204dc75eb9e1238b4b9371709111d9b"
+    },
+    {
+      "manifest": "experiments\\episode_007_full_scene_anchor_tasks.json",
+      "shot_id": "F08",
+      "status": "COMPLETED",
+      "model_id": "agnes-video-v2.0",
+      "artifact": "C:\\tmp\\ace_video_kingdom_git\\media_staging\\episode_007_virtual_data\\full_scene_anchor\\F08.mp4",
+      "sha256": "5d4200d5c45d32183ea23c755bf1617a84cf3adbe5109678643c0050d27f49ff"
+    },
+    {
+      "manifest": "experiments\\episode_007_full_scene_anchor_tasks.json",
+      "shot_id": "F09",
+      "status": "COMPLETED",
+      "model_id": "agnes-video-v2.0",
+      "artifact": "C:\\tmp\\ace_video_kingdom_git\\media_staging\\episode_007_virtual_data\\full_scene_anchor\\F09.mp4",
+      "sha256": "89879aa164742118b730e5816b2d1eea7812339a4b99cd98bfc7e426a90cd66c"
+    },
+    {
+      "manifest": "experiments\\episode_007_full_scene_anchor_tasks.json",
+      "shot_id": "F10",
+      "status": "COMPLETED",
+      "model_id": "agnes-video-v2.0",
+      "artifact": "C:\\tmp\\ace_video_kingdom_git\\media_staging\\episode_007_virtual_data\\full_scene_anchor\\F10.mp4",
+      "sha256": "abb22a3fef1fe5e7effa2d6b84e8cb442a0c02e202fdd3490fc487e0baa13fb8"
+    },
+    {
+      "manifest": "experiments\\episode_007_full_scene_anchor_tasks.json",
+      "shot_id": "F11",
+      "status": "COMPLETED",
+      "model_id": "agnes-video-v2.0",
+      "artifact": "C:\\tmp\\ace_video_kingdom_git\\media_staging\\episode_007_virtual_data\\full_scene_anchor\\F11.mp4",
+      "sha256": "595ce5543c7437cbee4f5e149dd71b4c90cb7987996dd08eed7da1d90c6304d3"
+    },
+    {
+      "manifest": "experiments\\episode_007_scene_anchor_probe_tasks.json",
+      "shot_id": "A01_KEYBOARD_SCENE",
+      "status": "COMPLETED",
+      "model_id": "agnes-video-v2.0",
+      "artifact": "C:\\tmp\\ace_video_kingdom_git\\media_staging\\episode_007_virtual_data\\scene_anchor_probe\\A01_KEYBOARD_SCENE.mp4",
+      "sha256": "6b5c49556c4c0ed080ae031869f87f8d075a5c67736f1a92e02ab31cfa225549"
+    },
+    {
+      "manifest": "experiments\\episode_007_scene_anchor_probe_tasks.json",
+      "shot_id": "A02_PHONE_IMPACT_SCENE",
+      "status": "COMPLETED",
+      "model_id": "agnes-video-v2.0",
+      "artifact": "C:\\tmp\\ace_video_kingdom_git\\media_staging\\episode_007_virtual_data\\scene_anchor_probe\\A02_PHONE_IMPACT_SCENE.mp4",
+      "sha256": "c9a9e9c38058880368a53579e923d6c0388e15435ff6dff25c1ad09ff833ea81"
+    },
+    {
+      "manifest": "experiments\\episode_007_scene_anchor_probe_tasks.json",
+      "shot_id": "A03_DESK_IMPACT_SCENE",
+      "status": "COMPLETED",
+      "model_id": "agnes-video-v2.0",
+      "artifact": "C:\\tmp\\ace_video_kingdom_git\\media_staging\\episode_007_virtual_data\\scene_anchor_probe\\A03_DESK_IMPACT_SCENE.mp4",
+      "sha256": "d125ae629c07396b3b63c0e1f4d3d67283d697a2bee695e429028d50b9067580"
+    },
+    {
+      "manifest": "experiments\\episode_007_scene_anchor_probe_tasks.json",
+      "shot_id": "A04_NIGHT_COPY_SCENE",
+      "status": "COMPLETED",
+      "model_id": "agnes-video-v2.0",
+      "artifact": "C:\\tmp\\ace_video_kingdom_git\\media_staging\\episode_007_virtual_data\\scene_anchor_probe\\A04_NIGHT_COPY_SCENE.mp4",
+      "sha256": "a9a8ebec92f046ca6fbcc53a22f9d441e574657dd80b31731518ec45a9f276cc"
+    },
+    {
+      "manifest": "experiments\\episode_007_tasks.json",
+      "shot_id": "S01A",
+      "status": "COMPLETED",
+      "model_id": "agnes-video-v2.0",
+      "artifact": "C:\\tmp\\ace_video_kingdom_git\\media_staging\\episode_007_virtual_data\\video\\S01A.mp4",
+      "sha256": "a4de51799ffcb99cc3a9d4dd022327804f12004a82df4312e472313a897691f4"
+    },
+    {
+      "manifest": "experiments\\episode_007_tasks.json",
+      "shot_id": "S01B",
+      "status": "COMPLETED",
+      "model_id": "agnes-video-v2.0",
+      "artifact": "C:\\tmp\\ace_video_kingdom_git\\media_staging\\episode_007_virtual_data\\video\\S01B.mp4",
+      "sha256": "0ec60516e77e454596e6af46b1d2d6a6059bb5341ed9dcf86a6a94918c172860"
+    },
+    {
+      "manifest": "experiments\\episode_007_tasks.json",
+      "shot_id": "S01C",
+      "status": "COMPLETED",
+      "model_id": "agnes-video-v2.0",
+      "artifact": "C:\\tmp\\ace_video_kingdom_git\\media_staging\\episode_007_virtual_data\\video\\S01C.mp4",
+      "sha256": "3a5661c4a9e400c967c397e13564f266c667cd5355d16f5851471334b11a6658"
+    },
+    {
+      "manifest": "experiments\\episode_007_tasks.json",
+      "shot_id": "S01D",
+      "status": "COMPLETED",
+      "model_id": "agnes-video-v2.0",
+      "artifact": "C:\\tmp\\ace_video_kingdom_git\\media_staging\\episode_007_virtual_data\\video\\S01D.mp4",
+      "sha256": "ca5441c9f800d8d080fbcdd563dfdc619caedd82f37e50b85d8b9db65a8a7340"
+    },
+    {
+      "manifest": "experiments\\episode_007_tasks.json",
+      "shot_id": "S02A",
+      "status": "COMPLETED",
+      "model_id": "agnes-video-v2.0",
+      "artifact": "C:\\tmp\\ace_video_kingdom_git\\media_staging\\episode_007_virtual_data\\video\\S02A.mp4",
+      "sha256": "a40ce1a7698891e1bf7d472cba5519979eb75cb476d23e53800ec77626a7eb92"
+    },
+    {
+      "manifest": "experiments\\episode_007_tasks.json",
+      "shot_id": "S02B",
+      "status": "COMPLETED",
+      "model_id": "agnes-video-v2.0",
+      "artifact": "C:\\tmp\\ace_video_kingdom_git\\media_staging\\episode_007_virtual_data\\video\\S02B.mp4",
+      "sha256": "ae12a4f33dcfe62088b28402c52103bd42b2eb2193531f728b616af76ad8085f"
+    },
+    {
+      "manifest": "experiments\\episode_007_tasks.json",
+      "shot_id": "S02C",
+      "status": "COMPLETED",
+      "model_id": "agnes-video-v2.0",
+      "artifact": "C:\\tmp\\ace_video_kingdom_git\\media_staging\\episode_007_virtual_data\\video\\S02C.mp4",
+      "sha256": "e7abba4f32b972f6e067763ba7911ca657ccab43bd3a8439274b4c25550a55de"
+    },
+    {
+      "manifest": "experiments\\episode_007_tasks.json",
+      "shot_id": "S03A",
+      "status": "COMPLETED",
+      "model_id": "agnes-video-v2.0",
+      "artifact": "C:\\tmp\\ace_video_kingdom_git\\media_staging\\episode_007_virtual_data\\video\\S03A.mp4",
+      "sha256": "84f0cfd0cdb96bda21190d5425ba93e36a046e7863177e2e166e7dc86b31653f"
+    },
+    {
+      "manifest": "experiments\\episode_007_tasks.json",
+      "shot_id": "S03B",
+      "status": "COMPLETED",
+      "model_id": "agnes-video-v2.0",
+      "artifact": "C:\\tmp\\ace_video_kingdom_git\\media_staging\\episode_007_virtual_data\\video\\S03B.mp4",
+      "sha256": "481f66c34555bf5cd7d85a07f725b39034d1095f8adbb7ab52bb5ea4f3fc5fa7"
+    },
+    {
+      "manifest": "experiments\\episode_007_tasks.json",
+      "shot_id": "S03C",
+      "status": "COMPLETED",
+      "model_id": "agnes-video-v2.0",
+      "artifact": "C:\\tmp\\ace_video_kingdom_git\\media_staging\\episode_007_virtual_data\\video\\S03C.mp4",
+      "sha256": "9c2167eaf7f9c2af596ee7395f2d10469be7f9d18858bf8d4082fb48cd9c9e2d"
+    },
+    {
+      "manifest": "experiments\\episode_007_tasks.json",
+      "shot_id": "S04A",
+      "status": "COMPLETED",
+      "model_id": "agnes-video-v2.0",
+      "artifact": "C:\\tmp\\ace_video_kingdom_git\\media_staging\\episode_007_virtual_data\\video\\S04A.mp4",
+      "sha256": "53301f18cb12f7e51e7b0682c6cfd93dc4be5905a9e523682a54a791cf1c5203"
+    },
+    {
+      "manifest": "experiments\\episode_007_tasks.json",
+      "shot_id": "S04B",
+      "status": "COMPLETED",
+      "model_id": "agnes-video-v2.0",
+      "artifact": "C:\\tmp\\ace_video_kingdom_git\\media_staging\\episode_007_virtual_data\\video\\S04B.mp4",
+      "sha256": "2ff75c572d2092f7259a0b1aa7badc4857085b79c69ead535188d069a62a85fc"
+    },
+    {
+      "manifest": "experiments\\episode_007_tasks.json",
+      "shot_id": "S05A",
+      "status": "COMPLETED",
+      "model_id": "agnes-video-v2.0",
+      "artifact": "C:\\tmp\\ace_video_kingdom_git\\media_staging\\episode_007_virtual_data\\video\\S05A.mp4",
+      "sha256": "47d0f864b3f9d6225bbe6dea5b50211f8e4c1fde6a2270ac2a53c7a6f44c6493"
+    },
+    {
+      "manifest": "experiments\\episode_007_tasks.json",
+      "shot_id": "S05B",
+      "status": "COMPLETED",
+      "model_id": "agnes-video-v2.0",
+      "artifact": "C:\\tmp\\ace_video_kingdom_git\\media_staging\\episode_007_virtual_data\\video\\S05B.mp4",
+      "sha256": "6b185729538294de4f879f5f1bc26b100446a7446df634f7814234ca4677842f"
+    },
+    {
+      "manifest": "experiments\\episode_007_tasks.json",
+      "shot_id": "S05C",
+      "status": "COMPLETED",
+      "model_id": "agnes-video-v2.0",
+      "artifact": "C:\\tmp\\ace_video_kingdom_git\\media_staging\\episode_007_virtual_data\\video\\S05C.mp4",
+      "sha256": "12d21486ce4285edc54fd4fd74d9f90d183f0b40ec34a69952d0d1db5e448068"
+    },
+    {
+      "manifest": "experiments\\episode_007_tasks.json",
+      "shot_id": "S06A",
+      "status": "COMPLETED",
+      "model_id": "agnes-video-v2.0",
+      "artifact": "C:\\tmp\\ace_video_kingdom_git\\media_staging\\episode_007_virtual_data\\video\\S06A.mp4",
+      "sha256": "f06481e921f190cf0baccfad4051be0e0320ef99c5f3c787ce04fe762ef7c521"
+    },
+    {
+      "manifest": "experiments\\episode_007_tasks.json",
+      "shot_id": "S06B",
+      "status": "COMPLETED",
+      "model_id": "agnes-video-v2.0",
+      "artifact": "C:\\tmp\\ace_video_kingdom_git\\media_staging\\episode_007_virtual_data\\video\\S06B.mp4",
+      "sha256": "fa8a3f97d5f4ce786b502c8aab0937ed239df2ccca7b31553eea75ba4744bdb6"
+    },
+    {
+      "manifest": "experiments\\episode_007_tasks.json",
+      "shot_id": "S07A",
+      "status": "COMPLETED",
+      "model_id": "agnes-video-v2.0",
+      "artifact": "C:\\tmp\\ace_video_kingdom_git\\media_staging\\episode_007_virtual_data\\video\\S07A.mp4",
+      "sha256": "cbb861ccdcc016bfbedbdae1c77a504de42f6ac2197fb4e1b89daaaf526b2a5a"
+    }
+  ],
+  "manifests": [
+    "experiments\\agnes_25_flash_smoke_tasks.json",
+    "experiments\\agnes_25_paid_smoke_tasks.json",
+    "experiments\\agnes_25_smart_fallback_smoke_tasks.json",
+    "experiments\\agnes_tasks.json",
+    "experiments\\episode_004_agnes_tasks.json",
+    "experiments\\episode_005_agnes_tasks.json",
+    "experiments\\episode_005_i2v_episode_tasks.json",
+    "experiments\\episode_005_i2v_probe_tasks.json",
+    "experiments\\episode_006_flash_reference_probe_tasks.json",
+    "experiments\\episode_006_flash_tasks.json",
+    "experiments\\episode_006_remaining_flash_tasks.json",
+    "experiments\\episode_006_wenji_110s_tasks.json",
+    "experiments\\episode_007_action_probe_tasks_v2.json",
+    "experiments\\episode_007_camera_grammar_tasks.v2.json",
+    "experiments\\episode_007_camera_grammar_tasks.v3.json",
+    "experiments\\episode_007_camera_probe_v2_repair_tasks.json",
+    "experiments\\episode_007_camera_probe_v2_tasks.json",
+    "experiments\\episode_007_full_scene_anchor_tasks.json",
+    "experiments\\episode_007_scene_anchor_probe_tasks.json",
+    "experiments\\episode_007_tasks.json"
+  ]
+}

@@ -1,0 +1,63 @@
+{
+  "contract_version": "ace.video_kingdom.director_review.v1",
+  "purpose": "将类脑架构落成镜头级可执行审查，不承担调度或发布权限",
+  "required_fields": [
+    "shot_id",
+    "evidence_files",
+    "core_task",
+    "completion",
+    "constraint_comparison",
+    "consistency_check",
+    "consequence_forecast",
+    "decision"
+  ],
+  "completion": {
+    "level": ["HIGH", "MEDIUM", "LOW"],
+    "must_describe": ["achieved", "missing"]
+  },
+  "constraint_comparison": {
+    "identity": ["PASS", "FAIL", "UNKNOWN"],
+    "force": ["PASS", "PARTIAL", "FAIL", "UNKNOWN"],
+    "inertia": ["PASS", "PARTIAL", "FAIL", "UNKNOWN"],
+    "temporal_continuity": ["PASS", "PARTIAL", "FAIL", "UNKNOWN"],
+    "emotion": ["PASS", "FAIL", "UNKNOWN"],
+    "forbidden_items": ["NONE", "PRESENT", "UNKNOWN"]
+  },
+  "decision": {
+    "allowed": ["PASS", "CONDITIONAL", "REJECT"],
+    "conditional_requires": ["named_correction", "recheck_evidence"],
+    "reject_requires": ["failure_class", "shot_id", "actionable_repair_prompt"]
+  },
+  "multi_frame_probe": {
+    "required_points": ["preparation", "acceleration_or_peak", "impact_or_displacement", "recovery"],
+    "evidence_rule": "每个点必须绑定时间戳或抽帧文件；缺证据不得判 PASS"
+  },
+  "anchor_rule": {
+    "identity_reference": "人物肖像只用于身份校验",
+    "motion_reference": "动作镜头必须使用包含场景、道具和动作状态的镜头锚图",
+    "reject_if": "仅使用孤立人物肖像作为动作镜头首帧且首0.5秒无可见动作"
+  },
+  "camera_grammar": {
+    "dialogue": "说话/内心独白时优先锁定或极慢微推，保证表演完整；不得无目的横移、环绕或快速变焦",
+    "action": "只有动作需要强调方向、冲击、揭示信息或转场时才移动镜头",
+    "beat_protection": "人物一句话或一个关键动作未完成前不得切镜或改变主要构图",
+    "reject_if": "运镜速度掩盖表演、人物尚未完成动作即被移出画面、连续镜头无叙事运镜理由"
+  },
+  "dialogue_action_segmentation": {
+    "dialogue": "每镜最多一句核心台词；中文建议不超过15字或约4秒，超限按语义单元拆镜",
+    "long_action": "连续动作超过8秒必须拆为铺垫、主体、收束等2-5秒单动作段",
+    "mutual_exclusion": "对白镜头不得同时承担快速动作运镜；动作镜头不得用长台词遮盖动作缺失",
+    "axis_continuity": "拆镜后保持30度规则、180度轴线、视线方向和道具位置连续",
+    "reject_if": "一句台词未完成即切镜，或一个镜头承载多个核心戏剧动作"
+  },
+  "memory_writeback": {
+    "L1": "更新本集角色状态、情绪节点和阻塞镜头",
+    "L2": "写入镜头证据、时间点和决定",
+    "L3": "只有重复出现且可复核的失败模式才升级为经验",
+    "L0": "不得由单个镜头审查自动修改"
+  },
+  "authority": {
+    "can": ["review", "reject", "emit_targeted_repair"],
+    "cannot": ["publish", "override_hard_gate", "create_second_scheduler"]
+  }
+}

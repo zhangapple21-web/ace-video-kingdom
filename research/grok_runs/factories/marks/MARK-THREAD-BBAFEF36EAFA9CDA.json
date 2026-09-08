@@ -1,0 +1,24 @@
+{
+  "contract_version": "ace.free_zone_factories.v1",
+  "evidence_posture": "HYPOTHESIS_NOT_PRODUCTION_FACT",
+  "factory": "marking",
+  "labels": [
+    "FREE_RESEARCH_ONLY",
+    "PRODUCTION_FORBIDDEN",
+    "SOURCE:RESIDENT_SHIFT"
+  ],
+  "lineage_observable": true,
+  "mark_hash": "972f03b141ee53c9b1d495f167aa752295ccaf83471143e367adcaa464cebf9a",
+  "mark_id": "MARK-THREAD-BBAFEF36EAFA9CDA",
+  "production_integration": false,
+  "realm_state": {
+    "authority": "SANDBOX_ONLY",
+    "contract_version": "ace.free_zone_realm.v1",
+    "outbound_rule": "NONE",
+    "production_integration": false,
+    "realm": "SHADOW",
+    "retention": "ACTIVE"
+  },
+  "recorded_at": "2026-09-02T03:42:44.847223+00:00",
+  "thread_id": "THREAD-BBAFEF36EAFA9CDA"
+}

@@ -1,0 +1,15 @@
+{
+  "checked_at": "2026-09-03",
+  "endpoint": "http://localhost:3000/v1/models",
+  "process_reachable": true,
+  "unauthenticated_root": {"status": 200, "content_type": "text/html; charset=utf-8"},
+  "authorized_models_probe": {
+    "status": "FAILED",
+    "error_type": "no_db_connection",
+    "error_message": "No connected db.",
+    "http_status": 500
+  },
+  "secrets": "not_read_or_recorded",
+  "production_integration": false,
+  "conclusion": "One-API frontend is reachable but model gateway is not currently usable until its database connection is restored. No worker or production routing was switched to it."
+}

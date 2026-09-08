@@ -1,0 +1,22 @@
+[
+  {
+    "shot_id": "E008_S01_VERTICAL_9X16_KEYFRAME_REPAIR",
+    "model_id": "agnes-video-v2.0",
+    "status": "COMPLETED",
+    "payload_sha256": "cede8d35d12e59d8bc40a93bdf6477b492c172fbdc68c129a5d4270e13233e2f",
+    "create_endpoint": "https://apihub.agnes-ai.com/v1/videos",
+    "poll_endpoint": "https://apihub.agnes-ai.com/agnesapi",
+    "poll_id_field": "video_id",
+    "create_attempt": 4,
+    "last_create_http_status": 503,
+    "next_retry_in_seconds": 60,
+    "create_http_status": 200,
+    "video_id": "video_bGl0ZWxsbTpjdXN0b21fbGxtX3Byb3ZpZGVyOm9wZW5haTttb2RlbF9pZDphZ25lcy12aWRlby12Mi4wO3ZpZGVvX2lkOnZpZGVvXzJkYjk1NDYzMDQxMjQ5MGI4NTlhNGZmOWI3MWRiOGI5",
+    "created_status": "queued",
+    "last_poll_http_status": 200,
+    "last_state": "completed",
+    "artifact_sha256": "d90398dd24f6b922a608f2b2f02aee673b16f723efcd046cd732899cc4a7ac09",
+    "bytes": 815140,
+    "artifact_path": "C:\\tmp\\ace_video_kingdom_git\\media_staging\\episode_008_rule_seat_system\\revision_pilot\\vertical_keyframe_repair\\E008_S01_VERTICAL_9X16_KEYFRAME_REPAIR.mp4"
+  }
+]

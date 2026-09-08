@@ -1,0 +1,560 @@
+{
+  "contract_version": "ace.video_kingdom.episode_preflight.v1",
+  "scope": "FREE_ZONE_RESEARCH_ONLY",
+  "production_integration": false,
+  "episode": "episodes\\episode_007_virtual_data.v1.json",
+  "project_id": "episode_007_virtual_data",
+  "verdict": "CONDITIONAL",
+  "hard_failures": [],
+  "rework": [],
+  "warnings": [
+    "Grok 4.6 red-team is not freshly health-verified; continue only with a bounded first shot after 5.6 Terra review"
+  ],
+  "planned_shot_count": 18,
+  "planned_duration_seconds": 108,
+  "motion_contract": {
+    "status": "VALID",
+    "shot_count": 18,
+    "errors": [],
+    "warnings": [],
+    "duplicate_threshold": 0.7
+  },
+  "quality_contract": {
+    "status": "VALID",
+    "mode": "FORMAL",
+    "errors": [],
+    "warnings": [],
+    "gap_count": 0
+  },
+  "six_module_contract": {
+    "status": "VALID",
+    "errors": [],
+    "shot_count": 18,
+    "contract_version": "video_kingdom.six_module_shot_contract.research.v3",
+    "path": "C:\\tmp\\ace_video_kingdom_git\\episodes\\episode_007_virtual_data.six_module.v1.json"
+  },
+  "timing_audit": {
+    "contract_version": "ace.video_kingdom.shot_timing_audit.v1",
+    "status": "PASS",
+    "contract": "C:\\tmp\\ace_video_kingdom_git\\episodes\\episode_007_virtual_data.six_module.v1.json",
+    "manifest": [
+      "C:\\tmp\\ace_video_kingdom_git\\research\\episode_007_camera_grammar_v3_integrity.json"
+    ],
+    "shot_count": 18,
+    "coverage": {
+      "tts_measured": 18,
+      "tts_missing": 0,
+      "actual_media_duration_measured": 18,
+      "actual_media_duration_missing": 0
+    },
+    "missing_tts_shots": [],
+    "missing_actual_duration_shots": [],
+    "duration_failures": [],
+    "stale_manifest": [],
+    "hash_mismatches": [],
+    "expected_hash_overrides": [
+      "S01C"
+    ],
+    "orphan_manifest_shot_ids": [],
+    "explicit_id_aliases": {
+      "S01D": "S01D_REPAIR"
+    },
+    "explicit_path_overrides": {
+      "S01C": "C:\\tmp\\ace_video_kingdom_git\\media_staging\\episode_007_virtual_data\\video_camera_grammar_v2\\S01C_TIMING_HOLD_V1.mp4"
+    },
+    "rows": [
+      {
+        "shot_id": "S01A",
+        "manifest_shot_id": "S01A",
+        "manifest_id_alias_applied": false,
+        "dialogue_text": "今天加了五十个…… 总该有一个活人吧。",
+        "audio_status": "MEASURED",
+        "tts_duration_seconds": 6.145,
+        "contract_duration_seconds": 6.745,
+        "actual_media_duration_seconds": 10.041667,
+        "actual_duration_source": "ffprobe",
+        "tts_fits_actual_media": true,
+        "contract_covers_tts": true,
+        "actual_minus_contract_seconds": 3.296667,
+        "media_path": "C:\\tmp\\ace_video_kingdom_git\\media_staging\\episode_007_virtual_data\\video_camera_grammar_v2\\S01A.mp4",
+        "path_override_applied": false,
+        "media_sha256_declared": "deffc2334005da52987c31fbd22e73c2e4d14e3e6c04ce5471d1ca3c23e598ec",
+        "media_sha256_actual": "deffc2334005da52987c31fbd22e73c2e4d14e3e6c04ce5471d1ca3c23e598ec"
+      },
+      {
+        "shot_id": "S01B",
+        "manifest_shot_id": "S01B",
+        "manifest_id_alias_applied": false,
+        "dialogue_text": "“美女，这个理财平台回报率很高， 你可以先投50试试。”",
+        "audio_status": "MEASURED",
+        "tts_duration_seconds": 8.359,
+        "contract_duration_seconds": 8.959,
+        "actual_media_duration_seconds": 10.041667,
+        "actual_duration_source": "ffprobe",
+        "tts_fits_actual_media": true,
+        "contract_covers_tts": true,
+        "actual_minus_contract_seconds": 1.082667,
+        "media_path": "C:\\tmp\\ace_video_kingdom_git\\media_staging\\episode_007_virtual_data\\video_camera_grammar_v2\\S01B.mp4",
+        "path_override_applied": false,
+        "media_sha256_declared": "215d23932588b304672b72006487b1aa4455b5dba17f02c1877b1cf77db5c216",
+        "media_sha256_actual": "215d23932588b304672b72006487b1aa4455b5dba17f02c1877b1cf77db5c216"
+      },
+      {
+        "shot_id": "S01C",
+        "manifest_shot_id": "S01C",
+        "manifest_id_alias_applied": false,
+        "dialogue_text": "兄弟，你这批粉全是假的！ 机器人、挂机号，一个活人都没有！",
+        "audio_status": "MEASURED",
+        "tts_duration_seconds": 10.088,
+        "contract_duration_seconds": 10.688,
+        "actual_media_duration_seconds": 10.708333,
+        "actual_duration_source": "ffprobe",
+        "tts_fits_actual_media": true,
+        "contract_covers_tts": true,
+        "actual_minus_contract_seconds": 0.020333,
+        "media_path": "C:\\tmp\\ace_video_kingdom_git\\media_staging\\episode_007_virtual_data\\video_camera_grammar_v2\\S01C_TIMING_HOLD_V1.mp4",
+        "path_override_applied": true,
+        "media_sha256_declared": "7b06b01fce2e5992679696017ea359069b109038fbb92e8f4052ae93a678f1b7",
+        "media_sha256_actual": "8f5db02bf8393ca679b5cd109f551f0350c3993b4c37e97e38ed87cb4546701c"
+      },
+      {
+        "shot_id": "S01D",
+        "manifest_shot_id": "S01D_REPAIR",
+        "manifest_id_alias_applied": true,
+        "dialogue_text": "这是诈骗！",
+        "audio_status": "MEASURED",
+        "tts_duration_seconds": 2.133,
+        "contract_duration_seconds": 2.733,
+        "actual_media_duration_seconds": 10.041667,
+        "actual_duration_source": "ffprobe",
+        "tts_fits_actual_media": true,
+        "contract_covers_tts": true,
+        "actual_minus_contract_seconds": 7.308667,
+        "media_path": "C:\\tmp\\ace_video_kingdom_git\\media_staging\\episode_007_virtual_data\\video_camera_grammar_v2\\S01D_REPAIR.mp4",
+        "path_override_applied": false,
+        "media_sha256_declared": "cf79b93dc4863ffac212c58935227787ede7a9772f9d5f039ebb01660a39b2c7",
+        "media_sha256_actual": "cf79b93dc4863ffac212c58935227787ede7a9772f9d5f039ebb01660a39b2c7"
+      },
+      {
+        "shot_id": "S02A",
+        "manifest_shot_id": "S02A",
+        "manifest_id_alias_applied": false,
+        "dialogue_text": "肥哥，粉商给的全是假粉。 这两周我们组一个人都没开发出来。",
+        "audio_status": "MEASURED",
+        "tts_duration_seconds": 9.891,
+        "contract_duration_seconds": 10.491,
+        "actual_media_duration_seconds": 10.041667,
+        "actual_duration_source": "ffprobe",
+        "tts_fits_actual_media": true,
+        "contract_covers_tts": true,
+        "actual_minus_contract_seconds": -0.449333,
+        "media_path": "C:\\tmp\\ace_video_kingdom_git\\media_staging\\episode_007_virtual_data\\video_camera_grammar_v2\\S02A.mp4",
+        "path_override_applied": false,
+        "media_sha256_declared": "0cdb1c2711e4087ec6347e784cc2459cf61199973bddb12ba1322d8d5671fe45",
+        "media_sha256_actual": "0cdb1c2711e4087ec6347e784cc2459cf61199973bddb12ba1322d8d5671fe45"
+      },
+      {
+        "shot_id": "S02B",
+        "manifest_shot_id": "S02B",
+        "manifest_id_alias_applied": false,
+        "dialogue_text": "停？停了我们连假数据都没有了。",
+        "audio_status": "MEASURED",
+        "tts_duration_seconds": 5.667,
+        "contract_duration_seconds": 6.267,
+        "actual_media_duration_seconds": 10.041667,
+        "actual_duration_source": "ffprobe",
+        "tts_fits_actual_media": true,
+        "contract_covers_tts": true,
+        "actual_minus_contract_seconds": 3.774667,
+        "media_path": "C:\\tmp\\ace_video_kingdom_git\\media_staging\\episode_007_virtual_data\\video_camera_grammar_v2\\S02B.mp4",
+        "path_override_applied": false,
+        "media_sha256_declared": "904911d72741156168d82316e964d6ccd024ab84366e2fca3722b239daae601d",
+        "media_sha256_actual": "904911d72741156168d82316e964d6ccd024ab84366e2fca3722b239daae601d"
+      },
+      {
+        "shot_id": "S02C",
+        "manifest_shot_id": "S02C",
+        "manifest_id_alias_applied": false,
+        "dialogue_text": "上个月工资和提成什么时候发？",
+        "audio_status": "MEASURED",
+        "tts_duration_seconds": 4.768,
+        "contract_duration_seconds": 5.368,
+        "actual_media_duration_seconds": 10.041667,
+        "actual_duration_source": "ffprobe",
+        "tts_fits_actual_media": true,
+        "contract_covers_tts": true,
+        "actual_minus_contract_seconds": 4.673667,
+        "media_path": "C:\\tmp\\ace_video_kingdom_git\\media_staging\\episode_007_virtual_data\\video_camera_grammar_v2\\S02C.mp4",
+        "path_override_applied": false,
+        "media_sha256_declared": "aa6dffe7dae8f3966f7d837546f51beba8f2e6050182342a30682e4363ead286",
+        "media_sha256_actual": "aa6dffe7dae8f3966f7d837546f51beba8f2e6050182342a30682e4363ead286"
+      },
+      {
+        "shot_id": "S03A",
+        "manifest_shot_id": "S03A",
+        "manifest_id_alias_applied": false,
+        "dialogue_text": "那你让我怎么办？！ 我也三个月没拿工资了！",
+        "audio_status": "MEASURED",
+        "tts_duration_seconds": 6.45,
+        "contract_duration_seconds": 7.05,
+        "actual_media_duration_seconds": 10.041667,
+        "actual_duration_source": "ffprobe",
+        "tts_fits_actual_media": true,
+        "contract_covers_tts": true,
+        "actual_minus_contract_seconds": 2.991667,
+        "media_path": "C:\\tmp\\ace_video_kingdom_git\\media_staging\\episode_007_virtual_data\\video_camera_grammar_v2\\S03A.mp4",
+        "path_override_applied": false,
+        "media_sha256_declared": "42e87d9a958390f4ce37c783954afce1f1398eb2d34bf9194c35689804d4883b",
+        "media_sha256_actual": "42e87d9a958390f4ce37c783954afce1f1398eb2d34bf9194c35689804d4883b"
+      },
+      {
+        "shot_id": "S03B",
+        "manifest_shot_id": "S03B",
+        "manifest_id_alias_applied": false,
+        "dialogue_text": "从今天开始，每人必须额外买 两千块的“精准粉”！",
+        "audio_status": "MEASURED",
+        "tts_duration_seconds": 7.129,
+        "contract_duration_seconds": 7.729,
+        "actual_media_duration_seconds": 10.041667,
+        "actual_duration_source": "ffprobe",
+        "tts_fits_actual_media": true,
+        "contract_covers_tts": true,
+        "actual_minus_contract_seconds": 2.312667,
+        "media_path": "C:\\tmp\\ace_video_kingdom_git\\media_staging\\episode_007_virtual_data\\video_camera_grammar_v2\\S03B.mp4",
+        "path_override_applied": false,
+        "media_sha256_declared": "3a92b2bfeb53a46ab91e4ae7f8d9455aa645ad6f22698eaf23498362aedb5837",
+        "media_sha256_actual": "3a92b2bfeb53a46ab91e4ae7f8d9455aa645ad6f22698eaf23498362aedb5837"
+      },
+      {
+        "shot_id": "S03C",
+        "manifest_shot_id": "S03C",
+        "manifest_id_alias_applied": false,
+        "dialogue_text": "肥哥……我真的没钱了。 昨天我妈住院……",
+        "audio_status": "MEASURED",
+        "tts_duration_seconds": 6.44,
+        "contract_duration_seconds": 7.04,
+        "actual_media_duration_seconds": 10.041667,
+        "actual_duration_source": "ffprobe",
+        "tts_fits_actual_media": true,
+        "contract_covers_tts": true,
+        "actual_minus_contract_seconds": 3.001667,
+        "media_path": "C:\\tmp\\ace_video_kingdom_git\\media_staging\\episode_007_virtual_data\\video_camera_grammar_v2\\S03C.mp4",
+        "path_override_applied": false,
+        "media_sha256_declared": "3aca0bb56313befba1cfeb0cb8c8e5a42092a5e7b7ca634295689c90f95542d6",
+        "media_sha256_actual": "3aca0bb56313befba1cfeb0cb8c8e5a42092a5e7b7ca634295689c90f95542d6"
+      },
+      {
+        "shot_id": "S04A",
+        "manifest_shot_id": "S04A",
+        "manifest_id_alias_applied": false,
+        "dialogue_text": "妈……我回不去了。",
+        "audio_status": "MEASURED",
+        "tts_duration_seconds": 3.322,
+        "contract_duration_seconds": 3.922,
+        "actual_media_duration_seconds": 10.041667,
+        "actual_duration_source": "ffprobe",
+        "tts_fits_actual_media": true,
+        "contract_covers_tts": true,
+        "actual_minus_contract_seconds": 6.119667,
+        "media_path": "C:\\tmp\\ace_video_kingdom_git\\media_staging\\episode_007_virtual_data\\video_camera_grammar_v2\\S04A.mp4",
+        "path_override_applied": false,
+        "media_sha256_declared": "6eec732baa52d98e4daa206bfd9a17eb1567571c24dcc03d7a37fd4f7cee9fb4",
+        "media_sha256_actual": "6eec732baa52d98e4daa206bfd9a17eb1567571c24dcc03d7a37fd4f7cee9fb4"
+      },
+      {
+        "shot_id": "S04B",
+        "manifest_shot_id": "S04B",
+        "manifest_id_alias_applied": false,
+        "dialogue_text": "朋友推荐的理财平台，靠谱吗？",
+        "audio_status": "MEASURED",
+        "tts_duration_seconds": 5.025,
+        "contract_duration_seconds": 5.625,
+        "actual_media_duration_seconds": 10.041667,
+        "actual_duration_source": "ffprobe",
+        "tts_fits_actual_media": true,
+        "contract_covers_tts": true,
+        "actual_minus_contract_seconds": 4.416667,
+        "media_path": "C:\\tmp\\ace_video_kingdom_git\\media_staging\\episode_007_virtual_data\\video_camera_grammar_v2\\S04B.mp4",
+        "path_override_applied": false,
+        "media_sha256_declared": "14caaac53298f3b3b94a76ecc2c306b0a625a0c7fde253744ea622936d691a24",
+        "media_sha256_actual": "14caaac53298f3b3b94a76ecc2c306b0a625a0c7fde253744ea622936d691a24"
+      },
+      {
+        "shot_id": "S05A",
+        "manifest_shot_id": "S05A",
+        "manifest_id_alias_applied": false,
+        "dialogue_text": "姐姐，我们平台是内部量化团队， 收益比较稳定。",
+        "audio_status": "MEASURED",
+        "tts_duration_seconds": 7.499,
+        "contract_duration_seconds": 8.099,
+        "actual_media_duration_seconds": 10.041667,
+        "actual_duration_source": "ffprobe",
+        "tts_fits_actual_media": true,
+        "contract_covers_tts": true,
+        "actual_minus_contract_seconds": 1.942667,
+        "media_path": "C:\\tmp\\ace_video_kingdom_git\\media_staging\\episode_007_virtual_data\\video_camera_grammar_v2\\S05A.mp4",
+        "path_override_applied": false,
+        "media_sha256_declared": "8fcb00a779e8b8c147f2480ae3462d33ae4f80ab75cd5469ceac1a618d779c92",
+        "media_sha256_actual": "8fcb00a779e8b8c147f2480ae3462d33ae4f80ab75cd5469ceac1a618d779c92"
+      },
+      {
+        "shot_id": "S05B",
+        "manifest_shot_id": "S05B",
+        "manifest_id_alias_applied": false,
+        "dialogue_text": "肥哥！出单了！五万美金！",
+        "audio_status": "MEASURED",
+        "tts_duration_seconds": 5.654,
+        "contract_duration_seconds": 6.254,
+        "actual_media_duration_seconds": 10.041667,
+        "actual_duration_source": "ffprobe",
+        "tts_fits_actual_media": true,
+        "contract_covers_tts": true,
+        "actual_minus_contract_seconds": 3.787667,
+        "media_path": "C:\\tmp\\ace_video_kingdom_git\\media_staging\\episode_007_virtual_data\\video_camera_grammar_v2\\S05B.mp4",
+        "path_override_applied": false,
+        "media_sha256_declared": "ed87507f4ce46bec71ce0a46b5c0f3546ba03b81ab6daeff388a7868e56e0d63",
+        "media_sha256_actual": "ed87507f4ce46bec71ce0a46b5c0f3546ba03b81ab6daeff388a7868e56e0d63"
+      },
+      {
+        "shot_id": "S05C",
+        "manifest_shot_id": "S05C",
+        "manifest_id_alias_applied": false,
+        "dialogue_text": "这个平台……是不是假的？",
+        "audio_status": "MEASURED",
+        "tts_duration_seconds": 3.99,
+        "contract_duration_seconds": 4.59,
+        "actual_media_duration_seconds": 10.041667,
+        "actual_duration_source": "ffprobe",
+        "tts_fits_actual_media": true,
+        "contract_covers_tts": true,
+        "actual_minus_contract_seconds": 5.451667,
+        "media_path": "C:\\tmp\\ace_video_kingdom_git\\media_staging\\episode_007_virtual_data\\video_camera_grammar_v2\\S05C.mp4",
+        "path_override_applied": false,
+        "media_sha256_declared": "8b357b8f9c406f0890fa0433b01b52f4b66488b36af9b682eeefbf9ce66bce33",
+        "media_sha256_actual": "8b357b8f9c406f0890fa0433b01b52f4b66488b36af9b682eeefbf9ce66bce33"
+      },
+      {
+        "shot_id": "S06A",
+        "manifest_shot_id": "S06A",
+        "manifest_id_alias_applied": false,
+        "dialogue_text": "连这一单……都是假的吗？",
+        "audio_status": "MEASURED",
+        "tts_duration_seconds": 3.864,
+        "contract_duration_seconds": 4.464,
+        "actual_media_duration_seconds": 10.041667,
+        "actual_duration_source": "ffprobe",
+        "tts_fits_actual_media": true,
+        "contract_covers_tts": true,
+        "actual_minus_contract_seconds": 5.577667,
+        "media_path": "C:\\tmp\\ace_video_kingdom_git\\media_staging\\episode_007_virtual_data\\video_camera_grammar_v2\\S06A.mp4",
+        "path_override_applied": false,
+        "media_sha256_declared": "8acea710713822a7282ac8a05a1a74ed99a5de8f5724f3b21e170743aac391ec",
+        "media_sha256_actual": "8acea710713822a7282ac8a05a1a74ed99a5de8f5724f3b21e170743aac391ec"
+      },
+      {
+        "shot_id": "S06B",
+        "manifest_shot_id": "S06B",
+        "manifest_id_alias_applied": false,
+        "dialogue_text": "我们可能根本不是在等工资。",
+        "audio_status": "MEASURED",
+        "tts_duration_seconds": 4.223,
+        "contract_duration_seconds": 4.823,
+        "actual_media_duration_seconds": 10.041667,
+        "actual_duration_source": "ffprobe",
+        "tts_fits_actual_media": true,
+        "contract_covers_tts": true,
+        "actual_minus_contract_seconds": 5.218667,
+        "media_path": "C:\\tmp\\ace_video_kingdom_git\\media_staging\\episode_007_virtual_data\\video_camera_grammar_v2\\S06B.mp4",
+        "path_override_applied": false,
+        "media_sha256_declared": "597acb44e304516dcaf22619fd006c9e65a564a3b315d47cc7e59b9fa25ccf05",
+        "media_sha256_actual": "597acb44e304516dcaf22619fd006c9e65a564a3b315d47cc7e59b9fa25ccf05"
+      },
+      {
+        "shot_id": "S07A",
+        "manifest_shot_id": "S07A",
+        "manifest_id_alias_applied": false,
+        "dialogue_text": "在数据为王的世界里， 最廉价的，是人。",
+        "audio_status": "MEASURED",
+        "tts_duration_seconds": 6.11,
+        "contract_duration_seconds": 6.71,
+        "actual_media_duration_seconds": 10.041667,
+        "actual_duration_source": "ffprobe",
+        "tts_fits_actual_media": true,
+        "contract_covers_tts": true,
+        "actual_minus_contract_seconds": 3.331667,
+        "media_path": "C:\\tmp\\ace_video_kingdom_git\\media_staging\\episode_007_virtual_data\\video_camera_grammar_v2\\S07A.mp4",
+        "path_override_applied": false,
+        "media_sha256_declared": "f9cdc7f8c78730fb15d6666890486471531275068f2bbe3dbf4e4d8d0068c041",
+        "media_sha256_actual": "f9cdc7f8c78730fb15d6666890486471531275068f2bbe3dbf4e4d8d0068c041"
+      }
+    ],
+    "evidence_boundary": {
+      "tts": "contract script.tts_duration_seconds; must be positive measured value",
+      "actual_media_duration": "ffprobe of existing manifest path; manifest declaration alone is not promoted",
+      "provider_audio_content": "not established by this structural timing audit"
+    },
+    "path": "research\\episode_007_shot_timing_audit_20260904_repaired.json"
+  },
+  "review_policy": [
+    "deterministic_preflight",
+    "gpt-5.6-terra primary review",
+    "grok-4.6 high-cognition review when available",
+    "gpt-5.6-terra escalation only",
+    "gpt-5.6-terra packaging only"
+  ],
+  "primary_review_packet": {
+    "reviewer": "5.6 Terra",
+    "shots": [
+      {
+        "shot_id": "S01A",
+        "prompt": "handheld push-in, close-up fingers and tired eyes, no static cover; 阿浪与肥哥外观必须连续，冷峻压抑现实主义，竖屏9:16",
+        "scene_anchor_reference": "../media_staging/episode_007_virtual_data/anchors/scene_action/office_keyboard.png",
+        "scene_anchor_kind": "local_path",
+        "fallback_image": "../media_staging/episode_007_virtual_data/anchors/user/alang_user_reference.png"
+      },
+      {
+        "shot_id": "S01B",
+        "prompt": "fast lateral pan across screens, notification vibration, 阿浪 freezes; 阿浪与肥哥外观必须连续，冷峻压抑现实主义，竖屏9:16",
+        "scene_anchor_reference": "../media_staging/episode_007_virtual_data/anchors/scene_action/office_keyboard.png",
+        "scene_anchor_kind": "local_path",
+        "fallback_image": "../media_staging/episode_007_virtual_data/anchors/user/alang_user_reference.png"
+      },
+      {
+        "shot_id": "S01C",
+        "prompt": "over-shoulder phone call, 阿浪 pacing beside desk, smoke haze; 阿浪与肥哥外观必须连续，冷峻压抑现实主义，竖屏9:16",
+        "scene_anchor_reference": "../media_staging/episode_007_virtual_data/anchors/scene_action/office_keyboard.png",
+        "scene_anchor_kind": "local_path",
+        "fallback_image": "../media_staging/episode_007_virtual_data/anchors/user/alang_user_reference.png"
+      },
+      {
+        "shot_id": "S01D",
+        "prompt": "whip pan to impact, rack focus from phone to silent coworkers; 阿浪与肥哥外观必须连续，冷峻压抑现实主义，竖屏9:16",
+        "scene_anchor_reference": "../media_staging/episode_007_virtual_data/anchors/scene_action/office_phone_impact.png",
+        "scene_anchor_kind": "local_path",
+        "fallback_image": "../media_staging/episode_007_virtual_data/anchors/user/alang_user_reference.png"
+      },
+      {
+        "shot_id": "S02A",
+        "prompt": "macro ashtray, tilt up to 肥哥 at window, slow dolly; 阿浪与肥哥外观必须连续，冷峻压抑现实主义，竖屏9:16",
+        "scene_anchor_reference": "../media_staging/episode_007_virtual_data/anchors/scene_action/manager_desk_impact.png",
+        "scene_anchor_kind": "local_path",
+        "fallback_image": "../media_staging/episode_007_virtual_data/anchors/feige_character_anchor.png"
+      },
+      {
+        "shot_id": "S02B",
+        "prompt": "two-shot, 肥哥 turns sharply, smoke crossing frame; 阿浪与肥哥外观必须连续，冷峻压抑现实主义，竖屏9:16",
+        "scene_anchor_reference": "../media_staging/episode_007_virtual_data/anchors/scene_action/manager_desk_impact.png",
+        "scene_anchor_kind": "local_path",
+        "fallback_image": "../media_staging/episode_007_virtual_data/anchors/feige_character_anchor.png"
+      },
+      {
+        "shot_id": "S02C",
+        "prompt": "hard cut, desk impact close-up, camera jolt; 阿浪与肥哥外观必须连续，冷峻压抑现实主义，竖屏9:16",
+        "scene_anchor_reference": "../media_staging/episode_007_virtual_data/anchors/scene_action/manager_desk_impact.png",
+        "scene_anchor_kind": "local_path",
+        "fallback_image": "../media_staging/episode_007_virtual_data/anchors/feige_character_anchor.png"
+      },
+      {
+        "shot_id": "S03A",
+        "prompt": "low angle on 肥哥 walking, papers raised, fluorescent flicker; 阿浪与肥哥外观必须连续，冷峻压抑现实主义，竖屏9:16",
+        "scene_anchor_reference": "../media_staging/episode_007_virtual_data/anchors/scene_action/manager_desk_impact.png",
+        "scene_anchor_kind": "local_path",
+        "fallback_image": "../media_staging/episode_007_virtual_data/anchors/feige_character_anchor.png"
+      },
+      {
+        "shot_id": "S03B",
+        "prompt": "沉默脆弱的男同事站起，脸色苍白、瘦削、眼含泪光，眼泪落在键盘上；肥哥在旁边掐灭烟头，镜头慢推，冷峻压抑现实主义，竖屏9:16，男同事不能长得像阿浪或肥哥",
+        "scene_anchor_reference": "../media_staging/episode_007_virtual_data/anchors/scene_action/manager_desk_impact.png",
+        "scene_anchor_kind": "local_path",
+        "fallback_image": "../media_staging/episode_007_virtual_data/anchors/alang_character_anchor.png"
+      },
+      {
+        "shot_id": "S03C",
+        "prompt": "orbit around clenched fist, background typing becomes oppressive; 阿浪与肥哥外观必须连续，冷峻压抑现实主义，竖屏9:16",
+        "scene_anchor_reference": "../media_staging/episode_007_virtual_data/anchors/scene_action/office_keyboard.png",
+        "scene_anchor_kind": "local_path",
+        "fallback_image": "../media_staging/episode_007_virtual_data/anchors/alang_character_anchor.png"
+      },
+      {
+        "shot_id": "S04A",
+        "prompt": "tight stall close-up, phone glow, subtle handheld breathing; 阿浪与肥哥外观必须连续，冷峻压抑现实主义，竖屏9:16",
+        "scene_anchor_reference": "../media_staging/episode_007_virtual_data/anchors/scene_action/office_keyboard.png",
+        "scene_anchor_kind": "local_path",
+        "fallback_image": "../media_staging/episode_007_virtual_data/anchors/alang_character_anchor.png"
+      },
+      {
+        "shot_id": "S04B",
+        "prompt": "snap rack focus to phone, light shift, he stands abruptly; 阿浪与肥哥外观必须连续，冷峻压抑现实主义，竖屏9:16",
+        "scene_anchor_reference": "../media_staging/episode_007_virtual_data/anchors/scene_action/office_phone_impact.png",
+        "scene_anchor_kind": "local_path",
+        "fallback_image": "../media_staging/episode_007_virtual_data/anchors/alang_character_anchor.png"
+      },
+      {
+        "shot_id": "S05A",
+        "prompt": "screen reflection close-up, slow zoom, forced gentle smile; 阿浪与肥哥外观必须连续，冷峻压抑现实主义，竖屏9:16",
+        "scene_anchor_reference": "../media_staging/episode_007_virtual_data/anchors/scene_action/office_keyboard.png",
+        "scene_anchor_kind": "local_path",
+        "fallback_image": "../media_staging/episode_007_virtual_data/anchors/alang_character_anchor.png"
+      },
+      {
+        "shot_id": "S05B",
+        "prompt": "tracking shot through desks, coworkers surge in; 阿浪与肥哥外观必须连续，冷峻压抑现实主义，竖屏9:16",
+        "scene_anchor_reference": "../media_staging/episode_007_virtual_data/anchors/scene_action/office_phone_impact.png",
+        "scene_anchor_kind": "local_path",
+        "fallback_image": "../media_staging/episode_007_virtual_data/anchors/alang_character_anchor.png"
+      },
+      {
+        "shot_id": "S05C",
+        "prompt": "hard cut between messages, red warning reflection on faces; 阿浪与肥哥外观必须连续，冷峻压抑现实主义，竖屏9:16",
+        "scene_anchor_reference": "../media_staging/episode_007_virtual_data/anchors/scene_action/office_phone_impact.png",
+        "scene_anchor_kind": "local_path",
+        "fallback_image": "../media_staging/episode_007_virtual_data/anchors/alang_character_anchor.png"
+      },
+      {
+        "shot_id": "S06A",
+        "prompt": "static office frame broken by smoke and phone vibration; 阿浪与肥哥外观必须连续，冷峻压抑现实主义，竖屏9:16",
+        "scene_anchor_reference": "../media_staging/episode_007_virtual_data/anchors/scene_action/manager_desk_impact.png",
+        "scene_anchor_kind": "local_path",
+        "fallback_image": "../media_staging/episode_007_virtual_data/anchors/feige_character_anchor.png"
+      },
+      {
+        "shot_id": "S06B",
+        "prompt": "slow dolly from doorway, silence after call ends; 阿浪与肥哥外观必须连续，冷峻压抑现实主义，竖屏9:16",
+        "scene_anchor_reference": "../media_staging/episode_007_virtual_data/anchors/scene_action/office_keyboard.png",
+        "scene_anchor_kind": "local_path",
+        "fallback_image": "../media_staging/episode_007_virtual_data/anchors/alang_character_anchor.png"
+      },
+      {
+        "shot_id": "S07A",
+        "prompt": "long pull-back, fluorescent islands, no hopeful movement; 阿浪与肥哥外观必须连续，冷峻压抑现实主义，竖屏9:16",
+        "scene_anchor_reference": "../media_staging/episode_007_virtual_data/anchors/scene_action/night_copy_pullback.png",
+        "scene_anchor_kind": "local_path",
+        "fallback_image": "../media_staging/episode_007_virtual_data/anchors/alang_character_anchor.png"
+      }
+    ],
+    "questions": [
+      "Does each shot advance the causal chain?",
+      "Does the character state change visibly?",
+      "Can the stated action be filmed in one short clip?",
+      "Are the first three seconds and end state clear?"
+    ]
+  },
+  "red_team_packet": {
+    "reviewer": "Grok 4.6",
+    "enabled": false,
+    "questions": [
+      "What would confuse a first-time viewer?",
+      "Where is a motive or causal bridge missing?",
+      "Which beat feels generic or repetitive?",
+      "Which image/video constraint will make this shot look like a repeated cover?"
+    ]
+  },
+  "escalation": {
+    "reviewer": "5.6 Sol",
+    "only_if": "primary and red-team recommendations materially conflict"
+  },
+  "packaging": {
+    "reviewer": "5.6 Luna",
+    "only_after": "an approved review result; no approval or provider authority"
+  }
+}

@@ -1,0 +1,26 @@
+{
+  "status": "REPAIRED_CANDIDATE",
+  "cause": {
+    "timing": "old SRT used 18 cues over 90 seconds while the base cut is 108.041667 seconds; cues drifted across shot boundaries and the final 18 seconds had no subtitle",
+    "style": "previous render used a subtitle margin that placed text too high and a larger test size clipped long lines"
+  },
+  "fix": {
+    "subtitle_source": "media_staging/episode_007_virtual_data/subtitles/episode_007_dialogue_aligned_v2.srt",
+    "cue_count": 18,
+    "timing_rule": "one cue per 6-second shot, 0.25-second head/tail safety gap",
+    "line_break_rule": "manual two-line breaks for long Chinese dialogue",
+    "font_size": 10,
+    "margin_v": 10,
+    "alignment": 2,
+    "position": "bottom center"
+  },
+  "output": "media_staging/episode_007_virtual_data/video_camera_grammar_v2/episode_007_candidate_v7_subtitled.mp4",
+  "output_sha256": "d535bae788f3b08d2de7b2ba539ecb4de5016d57cc48e2994314a5da1fc0204a",
+  "media": {"duration_seconds": 108.041667, "width": 704, "height": 1280, "video_codec": "h264", "audio_codec": "aac"},
+  "visual_checks": [
+    {"time_seconds": 0.8, "result": "subtitle visible, centered, bottom safe area"},
+    {"time_seconds": 6.5, "result": "cue 2 aligned to second shot, no clipping"},
+    {"time_seconds": 102.5, "result": "final cue visible in final shot, bottom safe area"}
+  ],
+  "production_boundary": "candidate_only; not final director approval"
+}

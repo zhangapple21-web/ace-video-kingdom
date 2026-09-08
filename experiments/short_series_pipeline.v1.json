@@ -6,7 +6,8 @@
   "roles": ["SCRIPT", "STORYBOARD", "CONTINUITY", "VIDEO_GENERATION", "EDITING"],
   "model_assignments": {
     "image": "gpt-image-2",
-    "video": "agnes-video-v2.0"
+    "video": "agnes-video-2.5-flash",
+    "video_fallback": "agnes-video-v2.0"
   },
   "continuity_contract": {
     "required_shared_anchors": 2,

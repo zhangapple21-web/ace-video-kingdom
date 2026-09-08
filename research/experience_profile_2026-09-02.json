@@ -1,0 +1,22 @@
+{
+  "contract_version": "ace.video_kingdom.experience_profile.v1",
+  "scope": "FREE_ZONE_RESEARCH_ONLY",
+  "production_integration": false,
+  "evidence_basis": "existing task manifests only",
+  "shot_receipt_count": 42,
+  "model_summary": {
+    "agnes-video-2.5": {
+      "non_completed": 1
+    },
+    "agnes-video-2.5-flash": {
+      "completed": 10
+    },
+    "agnes-video-v2.0": {
+      "completed": 31
+    }
+  },
+  "failure_attribution": {
+    "unknown": 1
+  },
+  "promotion": "NONE_AUTOMATIC"
+}

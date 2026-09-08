@@ -1,0 +1,7 @@
+file 'C:\tmp\ace_video_kingdom_git\research\background_runs\episode007_slow_s03a_frames\45_5.png'
+file 'C:\tmp\ace_video_kingdom_git\research\background_runs\episode007_slow_s03a_frames\47_0.png'
+file 'C:\tmp\ace_video_kingdom_git\research\background_runs\episode007_slow_s03a_frames\48_5.png'
+file 'C:\tmp\ace_video_kingdom_git\research\background_runs\episode007_slow_s03a_frames\50_0.png'
+file 'C:\tmp\ace_video_kingdom_git\research\background_runs\episode007_slow_s03a_frames\51_5.png'
+file 'C:\tmp\ace_video_kingdom_git\research\background_runs\episode007_slow_s03a_frames\53_0.png'
+file 'C:\tmp\ace_video_kingdom_git\research\background_runs\episode007_slow_s03a_frames\54_5.png'

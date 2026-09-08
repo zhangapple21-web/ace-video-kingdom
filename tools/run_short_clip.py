@@ -7,14 +7,45 @@ interrupted process can resume without submitting a duplicate clip.
 from __future__ import annotations
 
 import argparse
-import base64
 import hashlib
+import io
 import json
 import os
+import tempfile
 import time
 from pathlib import Path
+import sys
+
+if str(Path(__file__).resolve().parents[1]) not in sys.path:
+    sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
 import requests
+from PIL import Image
+
+try:
+    from runtime.provider_admission import admit_provider_request, assert_admission, build_canonical_generation_request
+except ModuleNotFoundError:  # pragma: no cover - direct invocation from repo root
+    from tools.runtime.provider_admission import admit_provider_request, assert_admission, build_canonical_generation_request  # type: ignore
+
+
+CREATE_ENDPOINT = "https://apihub.agnes-ai.com/v1/videos"
+POLL_ENDPOINT = "https://apihub.agnes-ai.com/agnesapi"
+
+
+def _load_shot_contract(path: Path, shot_id: str) -> dict:
+    """Load the canonical episode/shot contract for a legacy CLI invocation."""
+    try:
+        document = json.loads(path.read_text(encoding="utf-8"))
+    except (OSError, json.JSONDecodeError) as exc:
+        raise ValueError(f"canonical shot contract is unreadable: {path}") from exc
+    if isinstance(document, dict) and document.get("shot_id") == shot_id:
+        return document
+    rows = document.get("shots") if isinstance(document, dict) else None
+    if isinstance(rows, list):
+        for row in rows:
+            if isinstance(row, dict) and str(row.get("shot_id")) == str(shot_id):
+                return row
+    raise ValueError(f"canonical shot contract missing shot_id:{shot_id}")
 
 
 def _load_records(path: Path) -> list[dict]:
@@ -37,7 +68,17 @@ def _persist_record(path: Path, record: dict) -> None:
             break
     else:
         records.append(record)
-    path.write_text(json.dumps(records, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    path.parent.mkdir(parents=True, exist_ok=True)
+    fd, temp_name = tempfile.mkstemp(prefix=f".{path.name}.", suffix=".tmp", dir=str(path.parent))
+    try:
+        with os.fdopen(fd, "w", encoding="utf-8") as handle:
+            json.dump(records, handle, ensure_ascii=False, indent=2)
+            handle.write("\n")
+            handle.flush()
+            os.fsync(handle.fileno())
+        os.replace(temp_name, path)
+    finally:
+        Path(temp_name).unlink(missing_ok=True)
 
 
 def _retry_seconds(response: requests.Response, default: int = 60) -> int:
@@ -49,27 +90,49 @@ def _retry_seconds(response: requests.Response, default: int = 60) -> int:
         return default
 
 
-def _image_reference(value: str | None) -> str | None:
-    """Return an API-ready image reference without publishing local media.
+IMAGE_MAX_BYTES = 500 * 1024
 
-    Agnes documents public URLs for image conditioning.  For an authorized local
-    reference, this utility can instead send a bounded data URI directly to the
-    provider for a one-shot probe.  It never writes that data URI to a manifest.
-    """
+
+def _webp_path(path: Path) -> Path:
+    target = path.with_suffix(".webp")
+    with Image.open(path) as source:
+        image = source.convert("RGB")
+        for scale in (1.0, 0.85, 0.7, 0.55, 0.4):
+            candidate = image.copy()
+            if scale != 1.0:
+                candidate.thumbnail((max(1, int(image.width * scale)), max(1, int(image.height * scale))))
+            for quality in (82, 70, 58, 46, 34):
+                buffer = io.BytesIO()
+                candidate.save(buffer, format="WEBP", quality=quality, method=6)
+                if buffer.tell() < IMAGE_MAX_BYTES:
+                    fd, temp_name = tempfile.mkstemp(prefix=f".{target.name}.", suffix=".tmp", dir=str(target.parent))
+                    try:
+                        with os.fdopen(fd, "wb") as handle:
+                            handle.write(buffer.getvalue())
+                            handle.flush()
+                            os.fsync(handle.fileno())
+                        os.replace(temp_name, target)
+                    finally:
+                        Path(temp_name).unlink(missing_ok=True)
+                    return target
+        raise ValueError("local image could not be compressed below 500KB as WebP")
+
+
+def _image_reference(value: str | None) -> dict[str, object] | str | None:
     if not value:
         return None
-    if value.startswith(("https://", "http://", "data:")):
+    if value.startswith("data:"):
+        raise ValueError("data URI image references are forbidden")
+    if value.startswith(("https://", "http://")):
         return value
-    path = Path(value)
+    path = Path(value).expanduser().resolve()
     if not path.is_file():
-        raise ValueError(f"image reference is neither a URL/data URI nor a file: {value}")
-    mime_by_suffix = {".png": "image/png", ".jpg": "image/jpeg", ".jpeg": "image/jpeg", ".webp": "image/webp"}
-    mime = mime_by_suffix.get(path.suffix.lower())
-    if not mime:
-        raise ValueError("local image reference must be PNG, JPEG, or WEBP")
-    if path.stat().st_size > 4 * 1024 * 1024:
-        raise ValueError("local image reference exceeds 4 MiB safety limit")
-    return f"data:{mime};base64," + base64.b64encode(path.read_bytes()).decode("ascii")
+        raise ValueError(f"image reference is neither a public URL nor a file: {value}")
+    # Agnes' legacy video endpoint accepts a public URL/string (or an array of
+    # strings), not the local path/hash metadata object used by our audit log.
+    # Refuse locally before POST rather than sending an invalid JSON shape and
+    # spending a real Provider attempt on a predictable transport error.
+    raise ValueError("local image references are not Provider-compatible for Agnes v2.0; supply a public URL or omit --image")
 
 
 def _build_payload(args: argparse.Namespace) -> dict:
@@ -147,10 +210,14 @@ def main() -> int:
     parser.add_argument("--shot-id", required=True)
     parser.add_argument("--prompt", required=True)
     parser.add_argument("--manifest", type=Path, default=Path("experiments/agnes_tasks.json"))
+    parser.add_argument("--episode-contract", type=Path,
+                        help="canonical episode JSON containing this shot; required before any Provider POST")
+    parser.add_argument("--shot-contract", type=Path,
+                        help="canonical one-shot JSON; required before any Provider POST")
     parser.add_argument("--output", type=Path, required=True)
     parser.add_argument("--timeout", type=int, default=360)
     parser.add_argument("--model", choices=["agnes-video-v2.0", "agnes-video-2.5", "agnes-video-2.5-flash"], default="agnes-video-v2.0")
-    parser.add_argument("--image", help="Public URL, data URI, or authorized local PNG/JPEG/WEBP for image-to-video")
+    parser.add_argument("--image", help="Public URL or local image; local files are converted to WebP under 500KB and sent as path/hash metadata")
     parser.add_argument("--keyframe-image", action="append", help="Repeat for two or more keyframe references")
     parser.add_argument("--width", type=int, default=1152)
     parser.add_argument("--height", type=int, default=768)
@@ -168,19 +235,49 @@ def main() -> int:
     parser.add_argument("--flash-reference-audio-url", action="append", default=[], help="2.5 Flash public audio URL; repeat up to three")
     parser.add_argument("--reference-video-url", action="append", default=[], help="Agnes 2.5 public video URL; not supported by Flash")
     parser.add_argument("--reference-video-require-audio", action="store_true", help="require audio on Agnes 2.5 reference videos")
+    parser.add_argument("--admission-scope", choices=["legacy", "research", "production"], default="legacy",
+                        help="scope recorded in the canonical admission receipt")
     args = parser.parse_args()
 
-    key = os.environ.get("AGNES_API_KEY")
-    if not key:
-        raise SystemExit("AGNES_API_KEY is not available")
+    if args.timeout <= 0:
+        raise SystemExit("timeout must be positive")
+
     try:
         payload = _build_payload(args)
     except ValueError as error:
         raise SystemExit(str(error)) from error
+    contract_path = args.shot_contract or args.episode_contract
+    if contract_path is None:
+        raise SystemExit("provider admission blocked: --episode-contract or --shot-contract is required; no provider request submitted")
+    try:
+        canonical_shot = _load_shot_contract(contract_path, args.shot_id)
+    except ValueError as error:
+        raise SystemExit(f"provider admission blocked: {error}; no provider request submitted") from error
     args.manifest.parent.mkdir(parents=True, exist_ok=True)
+    payload_sha256 = hashlib.sha256(json.dumps(payload, ensure_ascii=False, sort_keys=True, separators=(",", ":")).encode("utf-8")).hexdigest()
     existing = next((row for row in _load_records(args.manifest) if row.get("shot_id") == args.shot_id), None)
+    admission_path = args.manifest.with_name(f"{args.manifest.stem}.{args.shot_id}.admission.json")
+    request = build_canonical_generation_request(
+        canonical_shot, payload, provider="agnes", endpoint=CREATE_ENDPOINT,
+        payload_schema="agnes-video-cli.v1", model=args.model, scope=args.admission_scope,
+    )
+    prior_hash = None
+    if existing and existing.get("status") not in {"CREATE_FAILED", "PROVIDER_FAILED", "DOWNLOAD_FAILED", "POLL_TIMEOUT"}:
+        prior_hash = existing.get("request_hash")
+    admission = admit_provider_request(
+        request, contract_status="CONTRACT_VALID", receipt_path=admission_path,
+        existing_request_hash=prior_hash,
+    )
+    if admission["status"] != "ADMITTED":
+        raise SystemExit("provider admission blocked: " + ";".join(admission["preflight"]["errors"]))
+    assert_admission(admission, admission["request_hash"], provider_payload=payload)
+    key = os.environ.get("AGNES_API_KEY")
+    if not key:
+        raise SystemExit("AGNES_API_KEY is not available")
     if existing and existing.get("status") == "COMPLETED" and existing.get("artifact_path"):
         artifact = Path(existing["artifact_path"])
+        if not artifact.is_absolute():
+            artifact = (args.manifest.parent / artifact).resolve()
         if artifact.is_file():
             print(json.dumps(existing, ensure_ascii=False))
             return 0
@@ -194,6 +291,17 @@ def main() -> int:
         })
         existing = {"shot_id": args.shot_id, "model_id": args.model, "status": "CREATING", "fallback_history": history}
     record = existing or {"shot_id": args.shot_id, "model_id": args.model, "status": "CREATING"}
+    if args.output.exists() and not (existing and existing.get("artifact_path") == str(args.output)):
+        raise SystemExit(f"refusing to overwrite existing output: {args.output}")
+    record.update({
+        "model_id": args.model,
+        "payload_sha256": payload_sha256,
+        "create_endpoint": CREATE_ENDPOINT,
+        "poll_endpoint": POLL_ENDPOINT,
+        "poll_id_field": "video_id",
+        "request_hash": admission["request_hash"],
+        "admission_receipt_path": str(admission_path),
+    })
     video_id = record.get("video_id")
     if not video_id:
         create_deadline = time.time() + args.timeout
@@ -202,8 +310,9 @@ def main() -> int:
             record.update({"status": "CREATING", "create_attempt": attempt})
             _persist_record(args.manifest, record)
             try:
+                assert_admission(admission, admission["request_hash"], provider_payload=payload)
                 response = requests.post(
-                    "https://apihub.agnes-ai.com/v1/videos",
+                    CREATE_ENDPOINT,
                     headers={"Authorization": f"Bearer {key}", "Content-Type": "application/json"},
                     json=payload,
                     timeout=90,
@@ -239,6 +348,8 @@ def main() -> int:
             body = response.json()
         except ValueError:
             body = {}
+        if not isinstance(body, dict):
+            body = {}
         # The documented polling endpoint accepts the provider's video_id.
         # A task_id is not interchangeable: persisting it here would make a
         # later resume repeatedly query an unrelated identifier and conceal a
@@ -263,7 +374,7 @@ def main() -> int:
     while time.time() < deadline:
         try:
             query = requests.get(
-                "https://apihub.agnes-ai.com/agnesapi",
+                POLL_ENDPOINT,
                 params={"video_id": video_id, **({"model_name": args.model} if args.model in {"agnes-video-2.5", "agnes-video-2.5-flash"} else {})},
                 headers={"Authorization": f"Bearer {key}"},
                 timeout=30,
@@ -278,26 +389,59 @@ def main() -> int:
             data = query.json()
         except ValueError:
             data = {}
+        if not isinstance(data, dict):
+            data = {}
         state = str(data.get("status") or data.get("internal_status") or "").lower()
         record.update({"last_poll_http_status": query.status_code, "last_state": state or "unknown"})
         _persist_record(args.manifest, record)
+        if query.status_code in {429, 500, 502, 503, 504}:
+            wait = _retry_seconds(query, default=delay)
+            record.update({"next_poll_in_seconds": wait, "poll_retry_after": query.headers.get("Retry-After")})
+            _persist_record(args.manifest, record)
+            time.sleep(wait)
+            delay = min(max(delay * 2, wait), 60)
+            continue
+        if query.status_code >= 300:
+            record.update({"status": "PROVIDER_FAILED", "error_class": "HTTP_POLL_ERROR", "error_body_excerpt": str(getattr(query, "text", ""))[:500]})
+            break
         if query.status_code == 200 and state in {"completed", "succeeded", "success"}:
             metadata = data.get("metadata") if isinstance(data.get("metadata"), dict) else {}
             url = data.get("url") or data.get("video_url") or metadata.get("url")
             if not url:
+                record.update({"status": "DOWNLOAD_FAILED", "error_class": "MISSING_ARTIFACT_URL"})
                 break
-            artifact = requests.get(url, timeout=120)
-            if artifact.status_code == 200 and artifact.headers.get("content-type", "").split(";")[0] == "video/mp4":
+            try:
+                artifact = requests.get(url, timeout=120)
+            except requests.RequestException as error:
+                record.update({"status": "DOWNLOAD_FAILED", "error_class": "DOWNLOAD_NETWORK_ERROR", "error_body_excerpt": str(error)[:500]})
+                break
+            if artifact.status_code == 200 and artifact.headers.get("content-type", "").split(";")[0] == "video/mp4" and artifact.content:
                 args.output.parent.mkdir(parents=True, exist_ok=True)
-                args.output.write_bytes(artifact.content)
+                fd, temp_name = tempfile.mkstemp(prefix=f".{args.output.name}.", suffix=".tmp", dir=str(args.output.parent))
+                try:
+                    with os.fdopen(fd, "wb") as handle:
+                        handle.write(artifact.content)
+                        handle.flush()
+                        os.fsync(handle.fileno())
+                    os.replace(temp_name, args.output)
+                finally:
+                    Path(temp_name).unlink(missing_ok=True)
                 record.update({"status": "COMPLETED", "artifact_sha256": hashlib.sha256(artifact.content).hexdigest(), "bytes": len(artifact.content), "artifact_path": str(args.output)})
+                # Do not carry a stale error from an earlier failed attempt
+                # into a terminally completed receipt.
+                for key in ("error_class", "error_body_excerpt", "retry_after", "last_create_error_class", "last_create_error"):
+                    record.pop(key, None)
                 _persist_record(args.manifest, record)
                 return 0
-            record["status"] = "DOWNLOAD_FAILED"
+            record.update({"status": "DOWNLOAD_FAILED", "error_class": "DOWNLOAD_HTTP_OR_CONTENT_TYPE", "download_http_status": artifact.status_code, "download_content_type": artifact.headers.get("content-type", "")})
+            break
+        if query.status_code == 200 and state in {"failed", "error", "cancelled", "canceled", "rejected", "expired"}:
+            record.update({"status": "PROVIDER_FAILED", "error_class": "PROVIDER_TERMINAL", "error_body_excerpt": str(data.get("error") or data.get("message") or state)[:500]})
             break
         time.sleep(delay)
         delay = min(delay * 2, 60)
-    record["status"] = "POLL_TIMEOUT" if record.get("status") != "DOWNLOAD_FAILED" else record["status"]
+    if record.get("status") not in {"DOWNLOAD_FAILED", "PROVIDER_FAILED"}:
+        record["status"] = "POLL_TIMEOUT"
     _persist_record(args.manifest, record)
     return 1
 

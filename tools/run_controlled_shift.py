@@ -20,7 +20,7 @@ def _load(path: Path) -> dict:
     return value
 
 
-def _validate(plan: dict, bridge: dict) -> None:
+def _validate(plan: dict, bridge: dict, plan_path: Path) -> None:
     if plan.get("scope") != "FREE_ZONE_RESEARCH_ONLY":
         raise ValueError("shift rejected: plan scope is not FREE_ZONE_RESEARCH_ONLY")
     if plan.get("production_integration") is not False:
@@ -36,13 +36,30 @@ def _validate(plan: dict, bridge: dict) -> None:
         if not isinstance(render, dict):
             raise ValueError(f"shift rejected: shot lacks render contract: {shot}")
         refs = render.get("reference_image_urls")
-        if not isinstance(refs, list) or len(refs) != 1 or not str(refs[0]).startswith(("https://", "http://")):
-            raise ValueError(f"shift rejected: shot lacks one public scene anchor: {shot.get('shot_id')}")
+        local_image = render.get("image")
+        if isinstance(refs, list) and len(refs) == 1 and isinstance(refs[0], str) and refs[0].strip():
+            reference = refs[0]
+        elif isinstance(local_image, str) and local_image.strip():
+            reference = local_image
+        else:
+            raise ValueError(f"shift rejected: shot lacks one HTTPS or existing local scene anchor: {shot.get('shot_id')}")
+        if reference.startswith("https://"):
+            continue
+        if reference.startswith(("http://", "data:")):
+            raise ValueError(f"shift rejected: scene anchor must be HTTPS or an existing local file: {shot.get('shot_id')}")
+        anchor = (plan_path.parent / reference).resolve()
+        try:
+            anchor.relative_to(plan_path.parent.resolve())
+        except ValueError as exc:
+            raise ValueError(f"shift rejected: local scene anchor escapes episode root: {shot.get('shot_id')}") from exc
+        if not anchor.is_file():
+            raise ValueError(f"shift rejected: local scene anchor is missing: {shot.get('shot_id')}")
 
 
 def main() -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument("--episode", type=Path, required=True)
+    parser.add_argument("--identity-contract", type=Path, required=True)
     parser.add_argument("--manifest", type=Path, required=True)
     parser.add_argument("--media-dir", type=Path, required=True)
     parser.add_argument("--output", type=Path, required=True)
@@ -52,11 +69,11 @@ def main() -> int:
     try:
         plan = _load(args.episode)
         bridge = _load(args.bridge)
-        _validate(plan, bridge)
+        _validate(plan, bridge, args.episode.resolve())
     except (OSError, json.JSONDecodeError, ValueError) as error:
         print(json.dumps({"status": "SHIFT_REJECTED", "reason": str(error)}, ensure_ascii=False))
         return 2
-    command = [sys.executable, "tools/run_comedy_episode.py", "--episode", str(args.episode), "--manifest", str(args.manifest), "--media-dir", str(args.media_dir), "--output", str(args.output)]
+    command = [sys.executable, "tools/run_comedy_episode.py", "--episode", str(args.episode), "--identity-contract", str(args.identity_contract), "--manifest", str(args.manifest), "--media-dir", str(args.media_dir), "--output", str(args.output)]
     if args.review_output:
         command.extend(["--review-output", str(args.review_output)])
     result = subprocess.run(command)

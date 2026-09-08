@@ -1,0 +1,954 @@
+{
+  "contract_version": "video_kingdom.six_module_shot_contract.idea_compiler.v2",
+  "production_boundary": "RESEARCH_ONLY",
+  "project_id": "b_high_action",
+  "quality_mode": "FORMAL",
+  "premise": "暴雨夜快递员冲进仓库抢回被夺走的证据并撞开铁门",
+  "causal_chain": [
+    "处境建立",
+    "异常显现",
+    "验证行动",
+    "代价出现",
+    "选择",
+    "证据留存"
+  ],
+  "plants": [
+    "矛盾记录",
+    "关键物件"
+  ],
+  "payoffs": [
+    "规则被复核",
+    "证据脱离单一席位"
+  ],
+  "viewer_knowledge_checkpoints": [
+    "观众知道记录存在矛盾",
+    "观众看到验证动作",
+    "结尾保留可复核证据"
+  ],
+  "shots": [
+    {
+      "shot_id": "S01A",
+      "source_scene": "建立处境：主角打开记录界面",
+      "anchor_reuse_allowed": false,
+      "shot_contract": {
+        "version": "ace.video_kingdom.single_action_shot_contract.v1",
+        "single_action": true,
+        "action_unit": "主角打开记录界面",
+        "max_primary_actions": 1,
+        "internal_cuts_allowed": 0,
+        "camera_autonomy": "OFF",
+        "scene_transition_autonomy": "OFF",
+        "secondary_action_autonomy": "OFF",
+        "cut_policy": "cut only after action completion and recovery hold"
+      },
+      "generation_request": {
+        "main_generation_instruction": "严格还原可核对的故事场景：暴雨夜快递员冲进仓库抢回被夺走的证据并撞开铁门；地点为深夜室内记录台。只执行当前镜头的一个主要视觉事件，保持自然表演和中国短剧电影质感。",
+        "character_identity_lock": {
+          "characters": [
+            {
+              "asset_id": "CHAR_MAIN",
+              "identity": "主角；年龄、脸型、发型、服装固定",
+              "role": "观察者与行动者"
+            },
+            {
+              "asset_id": "CHAR_COUNTER",
+              "identity": "对手；仅在剧本明确要求时出现",
+              "role": "关系中的另一方"
+            }
+          ],
+          "visual_invariants": [
+            "中国审美写实短剧摄影",
+            "东亚面部比例自然，五官、发型、服装在镜头间保持一致",
+            "服装无品牌、无文字、无现实人物肖像"
+          ],
+          "relationship_invariants": "人物关系、视线方向和空间位置不得被模型重写"
+        },
+        "allowed_characters": [
+          "CHAR_MAIN"
+        ],
+        "required_on_screen_text": [],
+        "shot_contract_constraints": {
+          "single_action": true,
+          "max_primary_actions": 1,
+          "internal_cuts_allowed": 0,
+          "camera_autonomy": "OFF",
+          "scene_transition_autonomy": "OFF",
+          "secondary_action_autonomy": "OFF",
+          "requires_first_state": true,
+          "requires_last_state": true,
+          "allowed_characters_required": true,
+          "screen_text_policy": "source_bound"
+        },
+        "shot_contract": {
+          "version": "ace.video_kingdom.single_action_shot_contract.v1",
+          "single_action": true,
+          "action_unit": "主角打开记录界面",
+          "max_primary_actions": 1,
+          "internal_cuts_allowed": 0,
+          "camera_autonomy": "OFF",
+          "scene_transition_autonomy": "OFF",
+          "secondary_action_autonomy": "OFF",
+          "cut_policy": "cut only after action completion and recovery hold",
+          "first_state": "建立处境前的稳定构图与角色身份",
+          "primary_visual_event": "主角打开记录界面",
+          "last_state": "动作完成后保留反应与留白"
+        },
+        "forbidden_behavior": [
+          "不得新增人物、改变人物关系或替换角色身份",
+          "不得改变地点、时间、天气、服装、道具状态或屏幕轴线",
+          "不得推拉摇移、自动转场、内部切镜或插入第二个主要动作",
+          "不得生成可读字幕、logo、品牌、现实机构标识或宣传/MV画面",
+          "不得美化、补写小说未给出的动作、对白、因果或情绪"
+        ],
+        "acceptance_standard": [
+          "audit_video_pacing status=PASS",
+          "internal_scene_cut_count=0",
+          "TTS 时长 + 0.6 秒 recovery hold 被覆盖",
+          "shot contract single_action=true, max_primary_actions=1",
+          "首态/动作/末态可在抽帧中复核，人物身份与关系连续"
+        ]
+      },
+      "script": {
+        "scene_id": "SC01",
+        "speaker": "CHAR_MAIN",
+        "dialogue_text": "先把事情记下来，别让它被一句话带走。",
+        "emotion": "focused",
+        "line_locked": true,
+        "tts_duration_seconds": null,
+        "audio_status": "AUDIO_PENDING"
+      },
+      "camera": {
+        "shot_type": "dialogue",
+        "scale": "medium close-up",
+        "movement": "FIXED_DIALOGUE",
+        "axis": "screen-left facing screen-right",
+        "movement_count": 0,
+        "first_frame_kind": "scene_action_anchor"
+      },
+      "edit": {
+        "duration_seconds": null,
+        "render_seconds": 5,
+        "duration_source": "PENDING_TTS",
+        "cut_after_performance": true,
+        "transition_reason": "cut after performance and 0.6s reaction hold",
+        "rhythm_phase": "investigation"
+      },
+      "performance": {
+        "emotion_goal": "由迟疑走向可验证的选择",
+        "action_beats": [
+          "首态：建立处境前的稳定构图",
+          "动作：主角打开记录界面",
+          "末态：动作完成后保留反应与留白"
+        ],
+        "sound_cues": [
+          "dialogue or room tone",
+          "single prop foley"
+        ]
+      },
+      "assets": {
+        "identity_reference": "assets/char_main_reference.png",
+        "scene_action_anchor": "assets/sc01_anchor.png",
+        "costume": "project identity invariant",
+        "props": [
+          "PROP_PHONE",
+          "PROP_TOKEN"
+        ],
+        "lighting": "restrained cinematic practical light",
+        "space": "same night-shift coding room"
+      },
+      "recovery": {
+        "max_attempts": 2,
+        "retry_delay_policy": "Retry-After first; otherwise >=60s provider cooldown",
+        "degrade_order": [
+          "retry with seed offset",
+          "manual replacement marker retaining failure evidence"
+        ]
+      },
+      "beat_ids": [
+        "BEAT-01"
+      ],
+      "content_state": "R0",
+      "content_lineage_ref": "content_control.v1.json"
+    },
+    {
+      "shot_id": "S02A",
+      "source_scene": "发现异常：主角停在矛盾数字上",
+      "anchor_reuse_allowed": false,
+      "shot_contract": {
+        "version": "ace.video_kingdom.single_action_shot_contract.v1",
+        "single_action": true,
+        "action_unit": "主角停在矛盾数字上",
+        "max_primary_actions": 1,
+        "internal_cuts_allowed": 0,
+        "camera_autonomy": "OFF",
+        "scene_transition_autonomy": "OFF",
+        "secondary_action_autonomy": "OFF",
+        "cut_policy": "cut only after action completion and recovery hold"
+      },
+      "generation_request": {
+        "main_generation_instruction": "严格还原可核对的故事场景：暴雨夜快递员冲进仓库抢回被夺走的证据并撞开铁门；地点为深夜室内记录台。只执行当前镜头的一个主要视觉事件，保持自然表演和中国短剧电影质感。",
+        "character_identity_lock": {
+          "characters": [
+            {
+              "asset_id": "CHAR_MAIN",
+              "identity": "主角；年龄、脸型、发型、服装固定",
+              "role": "观察者与行动者"
+            },
+            {
+              "asset_id": "CHAR_COUNTER",
+              "identity": "对手；仅在剧本明确要求时出现",
+              "role": "关系中的另一方"
+            }
+          ],
+          "visual_invariants": [
+            "中国审美写实短剧摄影",
+            "东亚面部比例自然，五官、发型、服装在镜头间保持一致",
+            "服装无品牌、无文字、无现实人物肖像"
+          ],
+          "relationship_invariants": "人物关系、视线方向和空间位置不得被模型重写"
+        },
+        "allowed_characters": [
+          "CHAR_MAIN"
+        ],
+        "required_on_screen_text": [],
+        "shot_contract_constraints": {
+          "single_action": true,
+          "max_primary_actions": 1,
+          "internal_cuts_allowed": 0,
+          "camera_autonomy": "OFF",
+          "scene_transition_autonomy": "OFF",
+          "secondary_action_autonomy": "OFF",
+          "requires_first_state": true,
+          "requires_last_state": true,
+          "allowed_characters_required": true,
+          "screen_text_policy": "source_bound"
+        },
+        "shot_contract": {
+          "version": "ace.video_kingdom.single_action_shot_contract.v1",
+          "single_action": true,
+          "action_unit": "主角停在矛盾数字上",
+          "max_primary_actions": 1,
+          "internal_cuts_allowed": 0,
+          "camera_autonomy": "OFF",
+          "scene_transition_autonomy": "OFF",
+          "secondary_action_autonomy": "OFF",
+          "cut_policy": "cut only after action completion and recovery hold",
+          "first_state": "发现异常前的稳定构图与角色身份",
+          "primary_visual_event": "主角停在矛盾数字上",
+          "last_state": "动作完成后保留反应与留白"
+        },
+        "forbidden_behavior": [
+          "不得新增人物、改变人物关系或替换角色身份",
+          "不得改变地点、时间、天气、服装、道具状态或屏幕轴线",
+          "不得推拉摇移、自动转场、内部切镜或插入第二个主要动作",
+          "不得生成可读字幕、logo、品牌、现实机构标识或宣传/MV画面",
+          "不得美化、补写小说未给出的动作、对白、因果或情绪"
+        ],
+        "acceptance_standard": [
+          "audit_video_pacing status=PASS",
+          "internal_scene_cut_count=0",
+          "TTS 时长 + 0.6 秒 recovery hold 被覆盖",
+          "shot contract single_action=true, max_primary_actions=1",
+          "首态/动作/末态可在抽帧中复核，人物身份与关系连续"
+        ]
+      },
+      "script": {
+        "scene_id": "SC02",
+        "speaker": "CHAR_MAIN",
+        "dialogue_text": "这里的数字，和刚才看到的不一样。",
+        "emotion": "focused",
+        "line_locked": true,
+        "tts_duration_seconds": null,
+        "audio_status": "AUDIO_PENDING"
+      },
+      "camera": {
+        "shot_type": "dialogue",
+        "scale": "medium close-up",
+        "movement": "FIXED_DIALOGUE",
+        "axis": "screen-left facing screen-right",
+        "movement_count": 0,
+        "first_frame_kind": "scene_action_anchor"
+      },
+      "edit": {
+        "duration_seconds": null,
+        "render_seconds": 5,
+        "duration_source": "PENDING_TTS",
+        "cut_after_performance": true,
+        "transition_reason": "cut after performance and 0.6s reaction hold",
+        "rhythm_phase": "investigation"
+      },
+      "performance": {
+        "emotion_goal": "由迟疑走向可验证的选择",
+        "action_beats": [
+          "首态：发现异常前的稳定构图",
+          "动作：主角停在矛盾数字上",
+          "末态：动作完成后保留反应与留白"
+        ],
+        "sound_cues": [
+          "dialogue or room tone",
+          "single prop foley"
+        ]
+      },
+      "assets": {
+        "identity_reference": "assets/char_main_reference.png",
+        "scene_action_anchor": "assets/sc02_anchor.png",
+        "costume": "project identity invariant",
+        "props": [
+          "PROP_PHONE",
+          "PROP_TOKEN"
+        ],
+        "lighting": "restrained cinematic practical light",
+        "space": "same night-shift coding room"
+      },
+      "recovery": {
+        "max_attempts": 2,
+        "retry_delay_policy": "Retry-After first; otherwise >=60s provider cooldown",
+        "degrade_order": [
+          "retry with seed offset",
+          "manual replacement marker retaining failure evidence"
+        ]
+      },
+      "beat_ids": [
+        "BEAT-02"
+      ],
+      "content_state": "R0",
+      "content_lineage_ref": "content_control.v1.json"
+    },
+    {
+      "shot_id": "S03A",
+      "source_scene": "尝试验证：主角拍下关键物件",
+      "anchor_reuse_allowed": false,
+      "shot_contract": {
+        "version": "ace.video_kingdom.single_action_shot_contract.v1",
+        "single_action": true,
+        "action_unit": "主角拍下关键物件",
+        "max_primary_actions": 1,
+        "internal_cuts_allowed": 0,
+        "camera_autonomy": "OFF",
+        "scene_transition_autonomy": "OFF",
+        "secondary_action_autonomy": "OFF",
+        "cut_policy": "cut only after action completion and recovery hold"
+      },
+      "generation_request": {
+        "main_generation_instruction": "严格还原可核对的故事场景：暴雨夜快递员冲进仓库抢回被夺走的证据并撞开铁门；地点为深夜室内记录台。只执行当前镜头的一个主要视觉事件，保持自然表演和中国短剧电影质感。",
+        "character_identity_lock": {
+          "characters": [
+            {
+              "asset_id": "CHAR_MAIN",
+              "identity": "主角；年龄、脸型、发型、服装固定",
+              "role": "观察者与行动者"
+            },
+            {
+              "asset_id": "CHAR_COUNTER",
+              "identity": "对手；仅在剧本明确要求时出现",
+              "role": "关系中的另一方"
+            }
+          ],
+          "visual_invariants": [
+            "中国审美写实短剧摄影",
+            "东亚面部比例自然，五官、发型、服装在镜头间保持一致",
+            "服装无品牌、无文字、无现实人物肖像"
+          ],
+          "relationship_invariants": "人物关系、视线方向和空间位置不得被模型重写"
+        },
+        "allowed_characters": [
+          "CHAR_MAIN"
+        ],
+        "required_on_screen_text": [],
+        "shot_contract_constraints": {
+          "single_action": true,
+          "max_primary_actions": 1,
+          "internal_cuts_allowed": 0,
+          "camera_autonomy": "OFF",
+          "scene_transition_autonomy": "OFF",
+          "secondary_action_autonomy": "OFF",
+          "requires_first_state": true,
+          "requires_last_state": true,
+          "allowed_characters_required": true,
+          "screen_text_policy": "source_bound"
+        },
+        "shot_contract": {
+          "version": "ace.video_kingdom.single_action_shot_contract.v1",
+          "single_action": true,
+          "action_unit": "主角拍下关键物件",
+          "max_primary_actions": 1,
+          "internal_cuts_allowed": 0,
+          "camera_autonomy": "OFF",
+          "scene_transition_autonomy": "OFF",
+          "secondary_action_autonomy": "OFF",
+          "cut_policy": "cut only after action completion and recovery hold",
+          "first_state": "尝试验证前的稳定构图与角色身份",
+          "primary_visual_event": "主角拍下关键物件",
+          "last_state": "动作完成后保留反应与留白"
+        },
+        "forbidden_behavior": [
+          "不得新增人物、改变人物关系或替换角色身份",
+          "不得改变地点、时间、天气、服装、道具状态或屏幕轴线",
+          "不得推拉摇移、自动转场、内部切镜或插入第二个主要动作",
+          "不得生成可读字幕、logo、品牌、现实机构标识或宣传/MV画面",
+          "不得美化、补写小说未给出的动作、对白、因果或情绪"
+        ],
+        "acceptance_standard": [
+          "audit_video_pacing status=PASS",
+          "internal_scene_cut_count=0",
+          "TTS 时长 + 0.6 秒 recovery hold 被覆盖",
+          "shot contract single_action=true, max_primary_actions=1",
+          "首态/动作/末态可在抽帧中复核，人物身份与关系连续"
+        ]
+      },
+      "script": {
+        "scene_id": "SC03",
+        "speaker": "CHAR_MAIN",
+        "dialogue_text": "我只验证一件事：谁在获利，谁在承担代价。",
+        "emotion": "focused",
+        "line_locked": true,
+        "tts_duration_seconds": null,
+        "audio_status": "AUDIO_PENDING"
+      },
+      "camera": {
+        "shot_type": "action",
+        "scale": "medium close-up",
+        "movement": "ONE_PURPOSEFUL_MOVE",
+        "axis": "screen-left facing screen-right",
+        "movement_count": 1,
+        "first_frame_kind": "scene_action_anchor"
+      },
+      "edit": {
+        "duration_seconds": null,
+        "render_seconds": 5,
+        "duration_source": "PENDING_TTS",
+        "cut_after_performance": true,
+        "transition_reason": "cut after performance and 0.6s reaction hold",
+        "rhythm_phase": "investigation"
+      },
+      "performance": {
+        "emotion_goal": "由迟疑走向可验证的选择",
+        "action_beats": [
+          "首态：尝试验证前的稳定构图",
+          "动作：主角拍下关键物件",
+          "末态：动作完成后保留反应与留白"
+        ],
+        "sound_cues": [
+          "dialogue or room tone",
+          "single prop foley"
+        ]
+      },
+      "assets": {
+        "identity_reference": "assets/char_main_reference.png",
+        "scene_action_anchor": "assets/sc03_anchor.png",
+        "costume": "project identity invariant",
+        "props": [
+          "PROP_PHONE",
+          "PROP_TOKEN"
+        ],
+        "lighting": "restrained cinematic practical light",
+        "space": "same night-shift coding room"
+      },
+      "recovery": {
+        "max_attempts": 2,
+        "retry_delay_policy": "Retry-After first; otherwise >=60s provider cooldown",
+        "degrade_order": [
+          "retry with seed offset",
+          "manual replacement marker retaining failure evidence"
+        ]
+      },
+      "beat_ids": [
+        "BEAT-03"
+      ],
+      "content_state": "R0",
+      "content_lineage_ref": "content_control.v1.json"
+    },
+    {
+      "shot_id": "S04A",
+      "source_scene": "代价出现：对手遮住记录",
+      "anchor_reuse_allowed": false,
+      "shot_contract": {
+        "version": "ace.video_kingdom.single_action_shot_contract.v1",
+        "single_action": true,
+        "action_unit": "对手遮住记录",
+        "max_primary_actions": 1,
+        "internal_cuts_allowed": 0,
+        "camera_autonomy": "OFF",
+        "scene_transition_autonomy": "OFF",
+        "secondary_action_autonomy": "OFF",
+        "cut_policy": "cut only after action completion and recovery hold"
+      },
+      "generation_request": {
+        "main_generation_instruction": "严格还原可核对的故事场景：暴雨夜快递员冲进仓库抢回被夺走的证据并撞开铁门；地点为深夜室内记录台。只执行当前镜头的一个主要视觉事件，保持自然表演和中国短剧电影质感。",
+        "character_identity_lock": {
+          "characters": [
+            {
+              "asset_id": "CHAR_MAIN",
+              "identity": "主角；年龄、脸型、发型、服装固定",
+              "role": "观察者与行动者"
+            },
+            {
+              "asset_id": "CHAR_COUNTER",
+              "identity": "对手；仅在剧本明确要求时出现",
+              "role": "关系中的另一方"
+            }
+          ],
+          "visual_invariants": [
+            "中国审美写实短剧摄影",
+            "东亚面部比例自然，五官、发型、服装在镜头间保持一致",
+            "服装无品牌、无文字、无现实人物肖像"
+          ],
+          "relationship_invariants": "人物关系、视线方向和空间位置不得被模型重写"
+        },
+        "allowed_characters": [
+          "CHAR_MAIN"
+        ],
+        "required_on_screen_text": [],
+        "shot_contract_constraints": {
+          "single_action": true,
+          "max_primary_actions": 1,
+          "internal_cuts_allowed": 0,
+          "camera_autonomy": "OFF",
+          "scene_transition_autonomy": "OFF",
+          "secondary_action_autonomy": "OFF",
+          "requires_first_state": true,
+          "requires_last_state": true,
+          "allowed_characters_required": true,
+          "screen_text_policy": "source_bound"
+        },
+        "shot_contract": {
+          "version": "ace.video_kingdom.single_action_shot_contract.v1",
+          "single_action": true,
+          "action_unit": "对手遮住记录",
+          "max_primary_actions": 1,
+          "internal_cuts_allowed": 0,
+          "camera_autonomy": "OFF",
+          "scene_transition_autonomy": "OFF",
+          "secondary_action_autonomy": "OFF",
+          "cut_policy": "cut only after action completion and recovery hold",
+          "first_state": "代价出现前的稳定构图与角色身份",
+          "primary_visual_event": "对手遮住记录",
+          "last_state": "动作完成后保留反应与留白"
+        },
+        "forbidden_behavior": [
+          "不得新增人物、改变人物关系或替换角色身份",
+          "不得改变地点、时间、天气、服装、道具状态或屏幕轴线",
+          "不得推拉摇移、自动转场、内部切镜或插入第二个主要动作",
+          "不得生成可读字幕、logo、品牌、现实机构标识或宣传/MV画面",
+          "不得美化、补写小说未给出的动作、对白、因果或情绪"
+        ],
+        "acceptance_standard": [
+          "audit_video_pacing status=PASS",
+          "internal_scene_cut_count=0",
+          "TTS 时长 + 0.6 秒 recovery hold 被覆盖",
+          "shot contract single_action=true, max_primary_actions=1",
+          "首态/动作/末态可在抽帧中复核，人物身份与关系连续"
+        ]
+      },
+      "script": {
+        "scene_id": "SC04",
+        "speaker": "CHAR_MAIN",
+        "dialogue_text": "你继续追问，就会失去现在的位置。",
+        "emotion": "focused",
+        "line_locked": true,
+        "tts_duration_seconds": null,
+        "audio_status": "AUDIO_PENDING"
+      },
+      "camera": {
+        "shot_type": "action",
+        "scale": "medium close-up",
+        "movement": "ONE_PURPOSEFUL_MOVE",
+        "axis": "screen-left facing screen-right",
+        "movement_count": 1,
+        "first_frame_kind": "scene_action_anchor"
+      },
+      "edit": {
+        "duration_seconds": null,
+        "render_seconds": 5,
+        "duration_source": "PENDING_TTS",
+        "cut_after_performance": true,
+        "transition_reason": "cut after performance and 0.6s reaction hold",
+        "rhythm_phase": "investigation"
+      },
+      "performance": {
+        "emotion_goal": "由迟疑走向可验证的选择",
+        "action_beats": [
+          "首态：代价出现前的稳定构图",
+          "动作：对手遮住记录",
+          "末态：动作完成后保留反应与留白"
+        ],
+        "sound_cues": [
+          "dialogue or room tone",
+          "single prop foley"
+        ]
+      },
+      "assets": {
+        "identity_reference": "assets/char_main_reference.png",
+        "scene_action_anchor": "assets/sc04_anchor.png",
+        "costume": "project identity invariant",
+        "props": [
+          "PROP_PHONE",
+          "PROP_TOKEN"
+        ],
+        "lighting": "restrained cinematic practical light",
+        "space": "same night-shift coding room"
+      },
+      "recovery": {
+        "max_attempts": 2,
+        "retry_delay_policy": "Retry-After first; otherwise >=60s provider cooldown",
+        "degrade_order": [
+          "retry with seed offset",
+          "manual replacement marker retaining failure evidence"
+        ]
+      },
+      "beat_ids": [
+        "BEAT-04"
+      ],
+      "content_state": "R0",
+      "content_lineage_ref": "content_control.v1.json"
+    },
+    {
+      "shot_id": "S05A",
+      "source_scene": "做出选择：主角标记证据为保留",
+      "anchor_reuse_allowed": false,
+      "shot_contract": {
+        "version": "ace.video_kingdom.single_action_shot_contract.v1",
+        "single_action": true,
+        "action_unit": "主角标记证据为保留",
+        "max_primary_actions": 1,
+        "internal_cuts_allowed": 0,
+        "camera_autonomy": "OFF",
+        "scene_transition_autonomy": "OFF",
+        "secondary_action_autonomy": "OFF",
+        "cut_policy": "cut only after action completion and recovery hold"
+      },
+      "generation_request": {
+        "main_generation_instruction": "严格还原可核对的故事场景：暴雨夜快递员冲进仓库抢回被夺走的证据并撞开铁门；地点为深夜室内记录台。只执行当前镜头的一个主要视觉事件，保持自然表演和中国短剧电影质感。",
+        "character_identity_lock": {
+          "characters": [
+            {
+              "asset_id": "CHAR_MAIN",
+              "identity": "主角；年龄、脸型、发型、服装固定",
+              "role": "观察者与行动者"
+            },
+            {
+              "asset_id": "CHAR_COUNTER",
+              "identity": "对手；仅在剧本明确要求时出现",
+              "role": "关系中的另一方"
+            }
+          ],
+          "visual_invariants": [
+            "中国审美写实短剧摄影",
+            "东亚面部比例自然，五官、发型、服装在镜头间保持一致",
+            "服装无品牌、无文字、无现实人物肖像"
+          ],
+          "relationship_invariants": "人物关系、视线方向和空间位置不得被模型重写"
+        },
+        "allowed_characters": [
+          "CHAR_MAIN"
+        ],
+        "required_on_screen_text": [],
+        "shot_contract_constraints": {
+          "single_action": true,
+          "max_primary_actions": 1,
+          "internal_cuts_allowed": 0,
+          "camera_autonomy": "OFF",
+          "scene_transition_autonomy": "OFF",
+          "secondary_action_autonomy": "OFF",
+          "requires_first_state": true,
+          "requires_last_state": true,
+          "allowed_characters_required": true,
+          "screen_text_policy": "source_bound"
+        },
+        "shot_contract": {
+          "version": "ace.video_kingdom.single_action_shot_contract.v1",
+          "single_action": true,
+          "action_unit": "主角标记证据为保留",
+          "max_primary_actions": 1,
+          "internal_cuts_allowed": 0,
+          "camera_autonomy": "OFF",
+          "scene_transition_autonomy": "OFF",
+          "secondary_action_autonomy": "OFF",
+          "cut_policy": "cut only after action completion and recovery hold",
+          "first_state": "做出选择前的稳定构图与角色身份",
+          "primary_visual_event": "主角标记证据为保留",
+          "last_state": "动作完成后保留反应与留白"
+        },
+        "forbidden_behavior": [
+          "不得新增人物、改变人物关系或替换角色身份",
+          "不得改变地点、时间、天气、服装、道具状态或屏幕轴线",
+          "不得推拉摇移、自动转场、内部切镜或插入第二个主要动作",
+          "不得生成可读字幕、logo、品牌、现实机构标识或宣传/MV画面",
+          "不得美化、补写小说未给出的动作、对白、因果或情绪"
+        ],
+        "acceptance_standard": [
+          "audit_video_pacing status=PASS",
+          "internal_scene_cut_count=0",
+          "TTS 时长 + 0.6 秒 recovery hold 被覆盖",
+          "shot contract single_action=true, max_primary_actions=1",
+          "首态/动作/末态可在抽帧中复核，人物身份与关系连续"
+        ]
+      },
+      "script": {
+        "scene_id": "SC05",
+        "speaker": "CHAR_MAIN",
+        "dialogue_text": "位置可以让，证据不能丢。",
+        "emotion": "focused",
+        "line_locked": true,
+        "tts_duration_seconds": null,
+        "audio_status": "AUDIO_PENDING"
+      },
+      "camera": {
+        "shot_type": "action",
+        "scale": "medium close-up",
+        "movement": "ONE_PURPOSEFUL_MOVE",
+        "axis": "screen-left facing screen-right",
+        "movement_count": 1,
+        "first_frame_kind": "scene_action_anchor"
+      },
+      "edit": {
+        "duration_seconds": null,
+        "render_seconds": 5,
+        "duration_source": "PENDING_TTS",
+        "cut_after_performance": true,
+        "transition_reason": "cut after performance and 0.6s reaction hold",
+        "rhythm_phase": "investigation"
+      },
+      "performance": {
+        "emotion_goal": "由迟疑走向可验证的选择",
+        "action_beats": [
+          "首态：做出选择前的稳定构图",
+          "动作：主角标记证据为保留",
+          "末态：动作完成后保留反应与留白"
+        ],
+        "sound_cues": [
+          "dialogue or room tone",
+          "single prop foley"
+        ]
+      },
+      "assets": {
+        "identity_reference": "assets/char_main_reference.png",
+        "scene_action_anchor": "assets/sc05_anchor.png",
+        "costume": "project identity invariant",
+        "props": [
+          "PROP_PHONE",
+          "PROP_TOKEN"
+        ],
+        "lighting": "restrained cinematic practical light",
+        "space": "same night-shift coding room"
+      },
+      "recovery": {
+        "max_attempts": 2,
+        "retry_delay_policy": "Retry-After first; otherwise >=60s provider cooldown",
+        "degrade_order": [
+          "retry with seed offset",
+          "manual replacement marker retaining failure evidence"
+        ]
+      },
+      "beat_ids": [
+        "BEAT-05"
+      ],
+      "content_state": "R0",
+      "content_lineage_ref": "content_control.v1.json"
+    },
+    {
+      "shot_id": "S06A",
+      "source_scene": "留下证据：主角按下第二设备的保存键",
+      "anchor_reuse_allowed": false,
+      "shot_contract": {
+        "version": "ace.video_kingdom.single_action_shot_contract.v1",
+        "single_action": true,
+        "action_unit": "主角按下第二设备的保存键",
+        "max_primary_actions": 1,
+        "internal_cuts_allowed": 0,
+        "camera_autonomy": "OFF",
+        "scene_transition_autonomy": "OFF",
+        "secondary_action_autonomy": "OFF",
+        "cut_policy": "cut only after action completion and recovery hold"
+      },
+      "generation_request": {
+        "main_generation_instruction": "严格还原可核对的故事场景：暴雨夜快递员冲进仓库抢回被夺走的证据并撞开铁门；地点为深夜室内记录台。只执行当前镜头的一个主要视觉事件，保持自然表演和中国短剧电影质感。",
+        "character_identity_lock": {
+          "characters": [
+            {
+              "asset_id": "CHAR_MAIN",
+              "identity": "主角；年龄、脸型、发型、服装固定",
+              "role": "观察者与行动者"
+            },
+            {
+              "asset_id": "CHAR_COUNTER",
+              "identity": "对手；仅在剧本明确要求时出现",
+              "role": "关系中的另一方"
+            }
+          ],
+          "visual_invariants": [
+            "中国审美写实短剧摄影",
+            "东亚面部比例自然，五官、发型、服装在镜头间保持一致",
+            "服装无品牌、无文字、无现实人物肖像"
+          ],
+          "relationship_invariants": "人物关系、视线方向和空间位置不得被模型重写"
+        },
+        "allowed_characters": [
+          "CHAR_MAIN"
+        ],
+        "required_on_screen_text": [],
+        "shot_contract_constraints": {
+          "single_action": true,
+          "max_primary_actions": 1,
+          "internal_cuts_allowed": 0,
+          "camera_autonomy": "OFF",
+          "scene_transition_autonomy": "OFF",
+          "secondary_action_autonomy": "OFF",
+          "requires_first_state": true,
+          "requires_last_state": true,
+          "allowed_characters_required": true,
+          "screen_text_policy": "source_bound"
+        },
+        "shot_contract": {
+          "version": "ace.video_kingdom.single_action_shot_contract.v1",
+          "single_action": true,
+          "action_unit": "主角按下第二设备的保存键",
+          "max_primary_actions": 1,
+          "internal_cuts_allowed": 0,
+          "camera_autonomy": "OFF",
+          "scene_transition_autonomy": "OFF",
+          "secondary_action_autonomy": "OFF",
+          "cut_policy": "cut only after action completion and recovery hold",
+          "first_state": "留下证据前的稳定构图与角色身份",
+          "primary_visual_event": "主角按下第二设备的保存键",
+          "last_state": "动作完成后保留反应与留白"
+        },
+        "forbidden_behavior": [
+          "不得新增人物、改变人物关系或替换角色身份",
+          "不得改变地点、时间、天气、服装、道具状态或屏幕轴线",
+          "不得推拉摇移、自动转场、内部切镜或插入第二个主要动作",
+          "不得生成可读字幕、logo、品牌、现实机构标识或宣传/MV画面",
+          "不得美化、补写小说未给出的动作、对白、因果或情绪"
+        ],
+        "acceptance_standard": [
+          "audit_video_pacing status=PASS",
+          "internal_scene_cut_count=0",
+          "TTS 时长 + 0.6 秒 recovery hold 被覆盖",
+          "shot contract single_action=true, max_primary_actions=1",
+          "首态/动作/末态可在抽帧中复核，人物身份与关系连续"
+        ]
+      },
+      "script": {
+        "scene_id": "SC06",
+        "speaker": "CHAR_MAIN",
+        "dialogue_text": "如果规则不能被复核，它就不该替我们做决定。",
+        "emotion": "focused",
+        "line_locked": true,
+        "tts_duration_seconds": null,
+        "audio_status": "AUDIO_PENDING"
+      },
+      "camera": {
+        "shot_type": "dialogue",
+        "scale": "medium close-up",
+        "movement": "FIXED_DIALOGUE",
+        "axis": "screen-left facing screen-right",
+        "movement_count": 0,
+        "first_frame_kind": "scene_action_anchor"
+      },
+      "edit": {
+        "duration_seconds": null,
+        "render_seconds": 5,
+        "duration_source": "PENDING_TTS",
+        "cut_after_performance": true,
+        "transition_reason": "cut after performance and 0.6s reaction hold",
+        "rhythm_phase": "investigation"
+      },
+      "performance": {
+        "emotion_goal": "由迟疑走向可验证的选择",
+        "action_beats": [
+          "首态：留下证据前的稳定构图",
+          "动作：主角按下第二设备的保存键",
+          "末态：动作完成后保留反应与留白"
+        ],
+        "sound_cues": [
+          "dialogue or room tone",
+          "single prop foley"
+        ]
+      },
+      "assets": {
+        "identity_reference": "assets/char_main_reference.png",
+        "scene_action_anchor": "assets/sc06_anchor.png",
+        "costume": "project identity invariant",
+        "props": [
+          "PROP_PHONE",
+          "PROP_TOKEN"
+        ],
+        "lighting": "restrained cinematic practical light",
+        "space": "same night-shift coding room"
+      },
+      "recovery": {
+        "max_attempts": 2,
+        "retry_delay_policy": "Retry-After first; otherwise >=60s provider cooldown",
+        "degrade_order": [
+          "retry with seed offset",
+          "manual replacement marker retaining failure evidence"
+        ]
+      },
+      "beat_ids": [
+        "BEAT-06"
+      ],
+      "content_state": "R0",
+      "content_lineage_ref": "content_control.v1.json"
+    }
+  ],
+  "timing_policy": "tts_first; measured dialogue plus 0.6s recovery hold; no character-count timing",
+  "generation_contract": {
+    "schema": "ace.video_kingdom.generation_contract.v1",
+    "main_generation_instruction": "严格还原可核对的故事场景：暴雨夜快递员冲进仓库抢回被夺走的证据并撞开铁门；地点为深夜室内记录台。只执行当前镜头的一个主要视觉事件，保持自然表演和中国短剧电影质感。",
+    "character_identity_lock": {
+      "characters": [
+        {
+          "asset_id": "CHAR_MAIN",
+          "identity": "主角；年龄、脸型、发型、服装固定",
+          "role": "观察者与行动者"
+        },
+        {
+          "asset_id": "CHAR_COUNTER",
+          "identity": "对手；仅在剧本明确要求时出现",
+          "role": "关系中的另一方"
+        }
+      ],
+      "visual_invariants": [
+        "中国审美写实短剧摄影",
+        "东亚面部比例自然，五官、发型、服装在镜头间保持一致",
+        "服装无品牌、无文字、无现实人物肖像"
+      ],
+      "relationship_invariants": "人物关系、视线方向和空间位置不得被模型重写"
+    },
+    "shot_contract_constraints": {
+      "single_action": true,
+      "max_primary_actions": 1,
+      "internal_cuts_allowed": 0,
+      "camera_autonomy": "OFF",
+      "scene_transition_autonomy": "OFF",
+      "secondary_action_autonomy": "OFF",
+      "requires_first_state": true,
+      "requires_last_state": true,
+      "allowed_characters_required": true,
+      "screen_text_policy": "source_bound"
+    },
+    "forbidden_behavior": [
+      "不得新增人物、改变人物关系或替换角色身份",
+      "不得改变地点、时间、天气、服装、道具状态或屏幕轴线",
+      "不得推拉摇移、自动转场、内部切镜或插入第二个主要动作",
+      "不得生成可读字幕、logo、品牌、现实机构标识或宣传/MV画面",
+      "不得美化、补写小说未给出的动作、对白、因果或情绪"
+    ],
+    "acceptance_standard": {
+      "per_shot": [
+        "audit_video_pacing status=PASS",
+        "internal_scene_cut_count=0",
+        "TTS 时长 + 0.6 秒 recovery hold 被覆盖",
+        "shot contract single_action=true, max_primary_actions=1",
+        "首态/动作/末态可在抽帧中复核，人物身份与关系连续"
+      ],
+      "episode": [
+        "全部镜头逐镜 PASS 后才允许合成",
+        "媒体完整性、连续性和导演语义审阅同时通过",
+        "技术 PASS 不得覆盖 REWORK/REVIEW_REQUIRED"
+      ]
+    }
+  },
+  "dynamic_content_plan_ref": "episode_dynamic_plan.json",
+  "content_control_ref": "content_control.v1.json"
+}

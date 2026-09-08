@@ -1,0 +1,171 @@
+﻿{
+    "timestamp_utc":  "2026-09-03T04:27:46.2073466Z",
+    "source_srt":  "C:\\tmp\\ace_video_kingdom_git\\media_staging\\episode_007_virtual_data\\subtitles\\episode_007_dialogue_aligned_v2.srt",
+    "voice":  "Microsoft Huihui Desktop",
+    "count":  18,
+    "rows":  [
+                 {
+                     "cue":  1,
+                     "time":  "00:00:00,250 --\u003e 00:00:05,750",
+                     "text":  "今天加了五十个…… 总该有一个活人吧。",
+                     "voice":  "Microsoft Huihui Desktop",
+                     "wav":  "C:\\tmp\\ace_video_kingdom_git\\research\\external_research\\tts_probe_episode007_20260903\\01.wav",
+                     "duration_seconds":  6.145,
+                     "status":  "MEASURED"
+                 },
+                 {
+                     "cue":  2,
+                     "time":  "00:00:06,250 --\u003e 00:00:11,750",
+                     "text":  "“美女，这个理财平台回报率很高， 你可以先投50试试。”",
+                     "voice":  "Microsoft Huihui Desktop",
+                     "wav":  "C:\\tmp\\ace_video_kingdom_git\\research\\external_research\\tts_probe_episode007_20260903\\02.wav",
+                     "duration_seconds":  8.359,
+                     "status":  "MEASURED"
+                 },
+                 {
+                     "cue":  3,
+                     "time":  "00:00:12,250 --\u003e 00:00:17,750",
+                     "text":  "兄弟，你这批粉全是假的！ 机器人、挂机号，一个活人都没有！",
+                     "voice":  "Microsoft Huihui Desktop",
+                     "wav":  "C:\\tmp\\ace_video_kingdom_git\\research\\external_research\\tts_probe_episode007_20260903\\03.wav",
+                     "duration_seconds":  10.088,
+                     "status":  "MEASURED"
+                 },
+                 {
+                     "cue":  4,
+                     "time":  "00:00:18,250 --\u003e 00:00:23,750",
+                     "text":  "这是诈骗！",
+                     "voice":  "Microsoft Huihui Desktop",
+                     "wav":  "C:\\tmp\\ace_video_kingdom_git\\research\\external_research\\tts_probe_episode007_20260903\\04.wav",
+                     "duration_seconds":  2.133,
+                     "status":  "MEASURED"
+                 },
+                 {
+                     "cue":  5,
+                     "time":  "00:00:24,250 --\u003e 00:00:29,750",
+                     "text":  "肥哥，粉商给的全是假粉。 这两周我们组一个人都没开发出来。",
+                     "voice":  "Microsoft Huihui Desktop",
+                     "wav":  "C:\\tmp\\ace_video_kingdom_git\\research\\external_research\\tts_probe_episode007_20260903\\05.wav",
+                     "duration_seconds":  9.891,
+                     "status":  "MEASURED"
+                 },
+                 {
+                     "cue":  6,
+                     "time":  "00:00:30,250 --\u003e 00:00:35,750",
+                     "text":  "停？停了我们连假数据都没有了。",
+                     "voice":  "Microsoft Huihui Desktop",
+                     "wav":  "C:\\tmp\\ace_video_kingdom_git\\research\\external_research\\tts_probe_episode007_20260903\\06.wav",
+                     "duration_seconds":  5.667,
+                     "status":  "MEASURED"
+                 },
+                 {
+                     "cue":  7,
+                     "time":  "00:00:36,250 --\u003e 00:00:41,750",
+                     "text":  "上个月工资和提成什么时候发？",
+                     "voice":  "Microsoft Huihui Desktop",
+                     "wav":  "C:\\tmp\\ace_video_kingdom_git\\research\\external_research\\tts_probe_episode007_20260903\\07.wav",
+                     "duration_seconds":  4.768,
+                     "status":  "MEASURED"
+                 },
+                 {
+                     "cue":  8,
+                     "time":  "00:00:42,250 --\u003e 00:00:47,750",
+                     "text":  "那你让我怎么办？！ 我也三个月没拿工资了！",
+                     "voice":  "Microsoft Huihui Desktop",
+                     "wav":  "C:\\tmp\\ace_video_kingdom_git\\research\\external_research\\tts_probe_episode007_20260903\\08.wav",
+                     "duration_seconds":  6.45,
+                     "status":  "MEASURED"
+                 },
+                 {
+                     "cue":  9,
+                     "time":  "00:00:48,250 --\u003e 00:00:53,750",
+                     "text":  "从今天开始，每人必须额外买 两千块的“精准粉”！",
+                     "voice":  "Microsoft Huihui Desktop",
+                     "wav":  "C:\\tmp\\ace_video_kingdom_git\\research\\external_research\\tts_probe_episode007_20260903\\09.wav",
+                     "duration_seconds":  7.129,
+                     "status":  "MEASURED"
+                 },
+                 {
+                     "cue":  10,
+                     "time":  "00:00:54,250 --\u003e 00:00:59,750",
+                     "text":  "肥哥……我真的没钱了。 昨天我妈住院……",
+                     "voice":  "Microsoft Huihui Desktop",
+                     "wav":  "C:\\tmp\\ace_video_kingdom_git\\research\\external_research\\tts_probe_episode007_20260903\\10.wav",
+                     "duration_seconds":  6.44,
+                     "status":  "MEASURED"
+                 },
+                 {
+                     "cue":  11,
+                     "time":  "00:01:00,250 --\u003e 00:01:05,750",
+                     "text":  "妈……我回不去了。",
+                     "voice":  "Microsoft Huihui Desktop",
+                     "wav":  "C:\\tmp\\ace_video_kingdom_git\\research\\external_research\\tts_probe_episode007_20260903\\11.wav",
+                     "duration_seconds":  3.322,
+                     "status":  "MEASURED"
+                 },
+                 {
+                     "cue":  12,
+                     "time":  "00:01:06,250 --\u003e 00:01:11,750",
+                     "text":  "朋友推荐的理财平台，靠谱吗？",
+                     "voice":  "Microsoft Huihui Desktop",
+                     "wav":  "C:\\tmp\\ace_video_kingdom_git\\research\\external_research\\tts_probe_episode007_20260903\\12.wav",
+                     "duration_seconds":  5.025,
+                     "status":  "MEASURED"
+                 },
+                 {
+                     "cue":  13,
+                     "time":  "00:01:12,250 --\u003e 00:01:17,750",
+                     "text":  "姐姐，我们平台是内部量化团队， 收益比较稳定。",
+                     "voice":  "Microsoft Huihui Desktop",
+                     "wav":  "C:\\tmp\\ace_video_kingdom_git\\research\\external_research\\tts_probe_episode007_20260903\\13.wav",
+                     "duration_seconds":  7.499,
+                     "status":  "MEASURED"
+                 },
+                 {
+                     "cue":  14,
+                     "time":  "00:01:18,250 --\u003e 00:01:23,750",
+                     "text":  "肥哥！出单了！五万美金！",
+                     "voice":  "Microsoft Huihui Desktop",
+                     "wav":  "C:\\tmp\\ace_video_kingdom_git\\research\\external_research\\tts_probe_episode007_20260903\\14.wav",
+                     "duration_seconds":  5.654,
+                     "status":  "MEASURED"
+                 },
+                 {
+                     "cue":  15,
+                     "time":  "00:01:24,250 --\u003e 00:01:29,750",
+                     "text":  "这个平台……是不是假的？",
+                     "voice":  "Microsoft Huihui Desktop",
+                     "wav":  "C:\\tmp\\ace_video_kingdom_git\\research\\external_research\\tts_probe_episode007_20260903\\15.wav",
+                     "duration_seconds":  3.99,
+                     "status":  "MEASURED"
+                 },
+                 {
+                     "cue":  16,
+                     "time":  "00:01:30,250 --\u003e 00:01:35,750",
+                     "text":  "连这一单……都是假的吗？",
+                     "voice":  "Microsoft Huihui Desktop",
+                     "wav":  "C:\\tmp\\ace_video_kingdom_git\\research\\external_research\\tts_probe_episode007_20260903\\16.wav",
+                     "duration_seconds":  3.864,
+                     "status":  "MEASURED"
+                 },
+                 {
+                     "cue":  17,
+                     "time":  "00:01:36,250 --\u003e 00:01:41,750",
+                     "text":  "我们可能根本不是在等工资。",
+                     "voice":  "Microsoft Huihui Desktop",
+                     "wav":  "C:\\tmp\\ace_video_kingdom_git\\research\\external_research\\tts_probe_episode007_20260903\\17.wav",
+                     "duration_seconds":  4.223,
+                     "status":  "MEASURED"
+                 },
+                 {
+                     "cue":  18,
+                     "time":  "00:01:42,250 --\u003e 00:01:47,750",
+                     "text":  "在数据为王的世界里， 最廉价的，是人。",
+                     "voice":  "Microsoft Huihui Desktop",
+                     "wav":  "C:\\tmp\\ace_video_kingdom_git\\research\\external_research\\tts_probe_episode007_20260903\\18.wav",
+                     "duration_seconds":  6.11,
+                     "status":  "MEASURED"
+                 }
+             ],
+    "production_boundary":  "RESEARCH_ONLY"
+}

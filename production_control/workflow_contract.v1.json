@@ -1,0 +1,58 @@
+{
+  "schema": "video_kingdom.production_control_contract.v1",
+  "principle": "sandbox may fail; reality receives only READY evidence packages",
+  "entrypoint": "python -m production_control auto",
+  "demand_routing": {
+    "input": "structured request or short natural-language demand",
+    "automatic_local_actions": ["discover_latest_run", "compile_plan", "preflight_plan", "bootstrap_run", "evaluate_asset_gate", "lock_shots", "admit_hash_bound_requests", "ingest_existing_receipts"],
+    "production_order": "preflight assets and continuity before materializing a production run",
+    "provider_boundary": "emit the next provider action only after READY evidence; never duplicate an admitted request",
+    "delivery_boundary": "never mark delivered without an authorized destination"
+  },
+  "stages": [
+    "DRAFT",
+    "ASSETS_BLOCKED",
+    "ASSETS_READY",
+    "SHOT_LOCKED",
+    "GENERATION_ADMITTED",
+    "GENERATED",
+    "QC_BLOCKED",
+    "QC_READY",
+    "ASSEMBLED",
+    "DELIVERY_READY",
+    "DELIVERED",
+    "FAILED"
+  ],
+  "asset_gate": {
+    "required": ["source_exists", "sha256_matches", "non_placeholder", "continuity_evidence"],
+    "failure_state": "ASSETS_BLOCKED",
+    "admission_rule": "asset_gate.status == READY"
+  },
+  "shot_gate": {
+    "required": ["duration_range", "one_primary_action", "explicit_contract"],
+    "failure_state": "ASSETS_BLOCKED"
+  },
+  "generation_gate": {
+    "provider_boundary": "external_provider_calls_are_outside_this_package",
+    "idempotency": "same_shot_and_request_hash_is_replayable; conflicting_request_is_blocked unless an explicit revision_of hash is supplied",
+    "request_lineage": "changed requests create a new revision with supersedes_request_hash; they are never labeled as a transparent retry",
+    "legacy_video_id": "resume_only_when_explicitly_supplied_and_compatible",
+    "execution_identity": "production manifest and acceptance receipt must carry the current run_id"
+  },
+  "qc_gate": {
+    "layers": ["picture", "motion", "camera", "continuity", "director"],
+    "pass_rule": "all five layers == PASS",
+    "unknown_rule": "UNKNOWN is blocked, never promoted"
+  },
+  "delivery_gate": {
+    "required": ["assembled_artifact", "hash_verified", "selected_takes_qc_ready", "asset_gate_ready", "authorized_destination"],
+    "continuity_review": "every REVIEW_REQUIRED shot must have PASS_REVIEWED_NO_INTERNAL_CUTS before promotion",
+    "authorization": "production delivery confirmation requires an explicit authorized=true acknowledgement",
+    "reality_rule": "only DELIVERY_READY or DELIVERED may cross the reality boundary"
+  },
+  "evidence": {
+    "format": "single persistent JSON run with append-only hash-chained events",
+  "recovery": "re-open the run file; never repeat a conflicting submission",
+  "handoff": "execution owner and action_id are recorded in the same run; handoff changes owner, never run_id"
+}
+}

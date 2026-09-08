@@ -1,0 +1,25 @@
+{
+  "status": "SUBTITLED_MEDIA_INTEGRITY_PASSED",
+  "input": "C:\\tmp\\ace_video_kingdom_git\\media_staging\\episode_007_virtual_data\\video\\episode_007_full_scene_anchor_base.mp4",
+  "subtitle": "C:\\tmp\\ace_video_kingdom_git\\media_staging\\episode_007_virtual_data\\subtitles\\episode_007_full_scene_anchor_v2.srt",
+  "output": "C:\\tmp\\ace_video_kingdom_git\\media_staging\\episode_007_virtual_data\\video\\episode_007_full_scene_anchor_subtitled_v2.mp4",
+  "output_sha256": "3996ee783e04ec878d925f4bed8ce9c0f7e7234bb5b9f27b4aab1c61fd1bc4b3",
+  "subtitle_validation": {
+    "status": "VALID",
+    "cue_count": 14,
+    "fps": 24,
+    "minimum_duration_seconds": 0.8333333333333334,
+    "minimum_gap_seconds": 0.08333333333333333,
+    "errors": [],
+    "warnings": [
+      "cue 2: line has 23 CJK characters; consider a natural break",
+      "cue 5: line has 23 CJK characters; consider a natural break"
+    ]
+  },
+  "render_style": {
+    "font": "Microsoft YaHei",
+    "font_size": 10,
+    "margin_v": 80,
+    "alignment": 2
+  }
+}

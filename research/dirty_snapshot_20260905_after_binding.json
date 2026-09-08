@@ -1,0 +1,34 @@
+{
+  "schema": "video_kingdom.dirty_snapshot.v1",
+  "captured_at": "2026-09-05T15:26:26+08:00",
+  "workspace": "C:/tmp/ace_video_kingdom_git",
+  "head": "e5b21a6",
+  "status_command": "git status --porcelain=v1",
+  "status_lines": 344,
+  "tracked_modified_count": 15,
+  "untracked_status_entries": 329,
+  "new_entries_from_this_turn": [
+    "research/shot_core_adversarial_gap_audit.v1.md",
+    "research/dirty_snapshot_20260905_after_binding.json",
+    "tests/test_semantic_slice_novel.py",
+    "tools/semantic_slice_novel.py"
+  ],
+  "historical_inventory": "research/dirty_state_inventory_20260905.json",
+  "protected_parallel_scope": [
+    "runtime/shot_core.py",
+    "tools/run_shot_core_pilot.py",
+    "tools/assemble_shot_core.py",
+    "tests/test_shot_core_runtime.py",
+    "tests/test_shot_core_hardening.py",
+    "research/shot_core_pilot_*.json",
+    "media_staging/shot_core_pilot/"
+  ],
+  "actions": {
+    "provider_calls": false,
+    "whole_episode_rerun": false,
+    "deletions_or_reset": false,
+    "commit_created": false,
+    "cleaning_authorized": false
+  },
+  "interpretation": "Point-in-time status receipt only; directories may collapse many files into one porcelain entry. Existing user and parallel-window changes remain preserved."
+}

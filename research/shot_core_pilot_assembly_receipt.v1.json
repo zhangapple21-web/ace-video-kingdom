@@ -1,0 +1,20 @@
+{
+  "schema": "video_kingdom.shot_core.assembly_receipt.v1",
+  "status": "ASSEMBLY_SELECTED_ONLY",
+  "output": "media_staging\\shot_core_pilot\\selected_assembly.mp4",
+  "output_hash": "754d72804447f84e03ffabe5ff80a9c88aa539b53a2685264c49f65fdfe69464",
+  "shots": [
+    {
+      "shot_id": "PILOT_DIALOGUE",
+      "take_id": "PILOT_DIALOGUE_T01",
+      "path": "C:\\tmp\\ace_video_kingdom_git\\media_staging\\shot_core_pilot\\PILOT_DIALOGUE_T01.mp4",
+      "artifact_hash": "c6dd423794470dfe92e24d04e4563b2905e4e2855b08f00948923aa363a6a1da"
+    },
+    {
+      "shot_id": "PILOT_IDENTITY",
+      "take_id": "PILOT_IDENTITY_T01",
+      "path": "C:\\tmp\\ace_video_kingdom_git\\media_staging\\shot_core_pilot\\PILOT_IDENTITY_T01.mp4",
+      "artifact_hash": "6418c7d31d2cc32bafc25a2a0c518a475670c1689903b34888e9e4a6c50331de"
+    }
+  ]
+}

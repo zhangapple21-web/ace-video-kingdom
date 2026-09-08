@@ -1,0 +1,22 @@
+[
+  {
+    "shot_id": "E008_CAMERA_HOLD_FLASH_PILOT",
+    "model_id": "agnes-video-2.5-flash",
+    "status": "COMPLETED",
+    "payload_sha256": "13b7d69b36171ea221fc63101878184b63f6fe451b53adbdedf8916e3c2f2ee6",
+    "create_endpoint": "https://apihub.agnes-ai.com/v1/videos",
+    "poll_endpoint": "https://apihub.agnes-ai.com/agnesapi",
+    "poll_id_field": "video_id",
+    "create_attempt": 3,
+    "last_create_http_status": 503,
+    "next_retry_in_seconds": 60,
+    "create_http_status": 200,
+    "video_id": "task_hx7YVXoTkpNULItu8xfpHaBpJ1RHdYIn",
+    "created_status": "queued",
+    "last_poll_http_status": 200,
+    "last_state": "completed",
+    "artifact_sha256": "5fe780ccfef0859e2920e140a2eae766fd9d83786db7eda7f8b8ef51dd74e80d",
+    "bytes": 3692049,
+    "artifact_path": "C:\\tmp\\ace_video_kingdom_git\\media_staging\\episode_008_rule_seat_system\\revision_pilot\\E008_CAMERA_HOLD_FLASH_PILOT.mp4"
+  }
+]

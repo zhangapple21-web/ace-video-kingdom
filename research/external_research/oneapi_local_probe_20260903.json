@@ -1,0 +1,10 @@
+{
+  "timestamp_utc": "2026-09-03T01:47:56.4404158Z",
+  "endpoint": "http://127.0.0.1:3000/v1",
+  "models_status": 500,
+  "models_error": "Internal Server Error (response body not retained)",
+  "chat_status": 500,
+  "chat_error": "Internal Server Error (response body not retained)",
+  "result": "ONEAPI_LOCAL_GATEWAY_UNAVAILABLE",
+  "safety": {"secrets_logged": false, "production_files_changed": false, "video_api_called": false}
+}

@@ -1,0 +1,14 @@
+# Secret-free provider profile for the research capability router.
+# This is intentionally not the user's global Codex config and does not
+# change the Terra default. The executor must supply SHENWEN_API_KEY from its
+# secret manager and must keep calls outside the production video Run.
+profile_version = "1"
+provider_id = "shenwen"
+model_id = "gpt-6-astra"
+base_url = "https://api.shenwenai.com/v1"
+wire_api = "responses"
+requires_openai_auth = true
+api_key_env = "SHENWEN_API_KEY"
+scope = "remote_shenwen"
+production_eligible = false
+continuation = "responses_http_minimal_probe_verified; desktop_tool_continuation_not_proven"

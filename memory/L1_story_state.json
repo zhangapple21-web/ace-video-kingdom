@@ -1,0 +1,15 @@
+{
+  "version": "video_kingdom.memory.l1.v1",
+  "project_id": "episode_007_virtual_data",
+  "title": "虚假的数据",
+  "state": "ACTION_PROBE_GATE",
+  "emotion_arc": ["烦躁", "压迫", "短暂希望", "彻底幻灭", "麻木"],
+  "formal_anchor_paths": {
+    "阿浪": "media_staging/episode_007_virtual_data/anchors/user/alang_user_reference.png",
+    "肥哥": "media_staging/episode_007_virtual_data/anchors/user/feige_user_reference.png"
+  },
+  "completed_assets": ["S01A","S01B","S01C","S01D","S02A","S02B","S02C","S03A","S03B","S03C","S04A","S04B","S05A","S05B","S05C","S06A","S06B","S07A"],
+  "blocked_by": ["P02_PHONE_SLAM force/inertia", "P05_COPY_PASTE force/inertia"],
+  "next_transition": "targeted_probe_repair_before_batch_promotion",
+  "production_integration": false
+}

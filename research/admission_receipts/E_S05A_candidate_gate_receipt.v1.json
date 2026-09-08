@@ -1,0 +1,132 @@
+{
+  "schema": "video_kingdom.e_s05_five_layer_gate_receipt.v1",
+  "task_id": "E_S05_HARDENING",
+  "shot_id": "E/S05",
+  "take_id": "S05A_T01",
+  "video_id": "task_MpLnvT7Oebej5aZ5WHfcc99pb24aZsJs",
+  "status": "CANDIDATE_FAILED",
+  "artifact": {
+    "path": "episodes/generated/E_S05_HARDENING_20260906/S05A_T01.mp4",
+    "sha256": "6b43d252f41fbb5fd905b42dc5e5e2281429ff9dd5fef41d50323495fd19ecdf",
+    "duration_seconds": 9.44,
+    "resolution": "720x1280"
+  },
+  "submission": {
+    "mode": "NEW_ONE_TIME_SUBMISSION",
+    "post_count": 1,
+    "duplicate_submission": false
+  },
+  "gates": {
+    "picture": {
+      "status": "FAIL",
+      "reason": "pseudo_text_on_tombstone",
+      "evidence": "episodes/generated/E_S05_HARDENING_20260906/qc/picture_gate_fail_evidence.png"
+    },
+    "action": {
+      "status": "PASS_OBSERVED",
+      "reason": "single slow bottle raise; no drink/pour/spill/turn observed in contact sheet review",
+      "evidence": "episodes/generated/E_S05_HARDENING_20260906/qc/contact_sheet.png"
+    },
+    "camera": {
+      "status": "PASS",
+      "reason": "0 internal cuts; no continuity spikes; fixed framing",
+      "evidence": [
+        "episodes/generated/E_S05_HARDENING_20260906/qc/pacing.json",
+        "episodes/generated/E_S05_HARDENING_20260906/qc/frame_continuity.json"
+      ]
+    },
+    "continuity": {
+      "status": "UNPROVEN_FAIL_CLOSED",
+      "reason": "asset bridge is hash-bound, but S04/S06 frame-to-frame proof is not available for this new take",
+      "evidence": "assets/library/task_assets/E_S05_HARDENING_20260906/E_S05_CONTINUITY_BRIDGE_SPEC_V1.png"
+    },
+    "director": {
+      "status": "REVIEW_REQUIRED",
+      "reason": "restrained staging is present, but pseudo text breaks realistic memorial treatment",
+      "evidence": "episodes/generated/E_S05_HARDENING_20260906/qc/contact_sheet.png"
+    }
+  },
+  "mechanical_qc": {
+    "file_integrity": "PASS",
+    "resolution": "PASS",
+    "fps": "PASS",
+    "audio_stream": "PASS",
+    "duration": "PASS",
+    "black_frames": "PASS",
+    "freeze_tail": "PASS",
+    "internal_cuts": "PASS",
+    "observed_internal_cuts": 0
+  },
+  "supporting_reports": {
+    "frame_continuity": {
+      "contract_version": "ace.video_kingdom.frame_continuity_audit.v1",
+      "video": "episodes\\generated\\E_S05_HARDENING_20260906\\S05A_T01.mp4",
+      "frame_count_decoded": 226,
+      "frame_count_reported": 226,
+      "fps": 24.0,
+      "median_adjacent_luma_diff": 0.1991,
+      "max_adjacent_luma_diff": 0.7915,
+      "spike_threshold": 2.1991,
+      "spike_count": 0,
+      "top_spikes": [],
+      "status": "NO_SPIKES_DETECTED",
+      "note": "Every decoded frame was scanned. Spikes are conservative QC signals and require visual review."
+    },
+    "pacing": {
+      "contract_version": "ace.video_kingdom.video_pacing_audit.v1",
+      "video": "episodes\\generated\\E_S05_HARDENING_20260906\\S05A_T01.mp4",
+      "status": "PASS",
+      "media": {
+        "duration_seconds": 9.44,
+        "width": 720,
+        "height": 1280,
+        "has_audio": true
+      },
+      "internal_scene_cut_count": 0,
+      "internal_scene_cut_times_seconds": [],
+      "dialogue_gate": false,
+      "max_internal_cuts": 0,
+      "subtitle_seconds": null,
+      "subtitle_coverage_ratio": null,
+      "tts_duration_seconds": null,
+      "expected_duration_seconds": 9.0,
+      "duration_tolerance_seconds": 2.0,
+      "duration_deviation_seconds": 0.4399999999999995,
+      "failures": [],
+      "note": "Scene detection is a conservative QC signal; it does not prove acting or lip-sync."
+    },
+    "shot_core": {
+      "status": "PASS",
+      "errors": [],
+      "warnings": [],
+      "take_count": 1,
+      "shot_count": 1
+    }
+  },
+  "decision": {
+    "deliverable_created": false,
+    "delivery_path": null,
+    "candidate_retained": true,
+    "stop_after_failure": true,
+    "retry_or_second_submission": false,
+    "reason": "picture gate failed and continuity gate is not proven; do not rename candidate to S05A.mp4"
+  },
+  "recorded_at": "2026-09-06T12:46:10.158969+00:00",
+  "quality_delta_vs_legacy": {
+    "legacy_artifact": "episodes/generated/novel-longmen-strict-30s-v3/media/S05A.mp4",
+    "legacy_sha256": "951fd558a03d0aae3013ca21055c2e26a956c544582073c8c032080f0a3e8814",
+    "legacy_contract_mismatch": "3.125s / rain / flowers / glass / cough action / medium-close; not comparable as a valid S05 candidate",
+    "candidate_improvements": [
+      "9.44s within 8-10s contract",
+      "fixed side-back medium-long framing",
+      "single visible bottle and one slow raise",
+      "0 internal cuts",
+      "audio stream present",
+      "no extra person observed"
+    ],
+    "remaining_defects": [
+      "pseudo text on tombstone",
+      "S04/S06 frame-level bridge still unproven"
+    ]
+  }
+}

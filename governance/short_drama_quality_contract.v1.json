@@ -1,0 +1,19 @@
+{
+  "contract_version": "ace.video_kingdom.short_drama_quality_contract.v1",
+  "scope": "FREE_ZONE_RESEARCH_ONLY",
+  "production_integration": false,
+  "modes": {
+    "EXPERIMENTAL": "允许缺字段；只报告缺口，不得把结果称为最终母版",
+    "FORMAL": "七层都必须有可检查记录，缺失即拒绝进入 Provider"
+  },
+  "layers": {
+    "story": ["premise", "causal_chain", "plants", "payoffs"],
+    "shot": ["dramatic_function", "information_gain", "emotion_change", "action_beats", "camera", "continuity_bridge"],
+    "continuity": ["character_state", "space_state", "prop_state", "lighting_state", "time_state"],
+    "acting": ["behavioral_choice", "not_face_only"],
+    "audio": ["audio_beats", "dialogue_or_inner_voice"],
+    "edit": ["shot_order", "transition_reason", "subtitle_track"],
+    "viewer": ["viewer_knowledge_checkpoints"]
+  },
+  "principle": "创作自由，结构不自由；实验可以失败，但失败必须留下证据。"
+}

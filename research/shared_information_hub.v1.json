@@ -1,0 +1,30 @@
+{
+  "schema": "ace.video_kingdom.shared_information_hub.v1",
+  "purpose": "跨窗口协作的唯一共享研究上下文和证据索引",
+  "scope": "FREE_ZONE_RESEARCH_ONLY",
+  "source_of_truth": "仓库根目录 research/；项目运行收据位于 episodes/generated/<project_id>/research/",
+  "default_roles": {
+    "planner": {
+      "contract": "roles/planner.md",
+      "writes": ["计划快照", "假设", "研究引用", "未决风险"],
+      "forbidden": ["Provider提交", "交付批准", "静默改写执行结果"]
+    },
+    "executor": {
+      "contract": "roles/executor.md",
+      "reads": ["计划快照", "研究引用", "资产哈希"],
+      "writes": ["执行收据", "媒体验收", "失败证据"],
+      "forbidden": ["改变规划标准", "计划外镜头", "伪造成功"]
+    }
+  },
+  "record_requirements": {
+    "minimum_fields": ["schema", "project_id", "recorded_at", "status", "evidence"],
+    "evidence_rule": "事实必须带路径或收据引用；媒体引用必须带 SHA-256；UNKNOWN 不得写成 PASS",
+    "append_only": true,
+    "private_materials_allowed": false
+  },
+  "handoff": {
+    "sequence": ["planner", "research", "executor", "research"],
+    "execution_gate": "tools/run_idea_pipeline.py::execution_conformance_check",
+    "plan_mutation": "new_version_required"
+  }
+}

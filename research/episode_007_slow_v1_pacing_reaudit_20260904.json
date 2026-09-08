@@ -1,0 +1,53 @@
+{
+  "contract_version": "ace.video_kingdom.video_pacing_audit.v1",
+  "video": "media_staging\\episode_007_virtual_data\\video_camera_grammar_v2\\episode_007_candidate_r3_slow_v1_subtitled.mp4",
+  "status": "FAIL",
+  "media": {
+    "duration_seconds": 121.0,
+    "width": 704,
+    "height": 1280,
+    "has_audio": true
+  },
+  "internal_scene_cut_count": 27,
+  "internal_scene_cut_times_seconds": [
+    1.0,
+    2.583333,
+    5.041667,
+    5.375,
+    6.75,
+    13.5,
+    20.208333,
+    26.916667,
+    27.25,
+    33.666667,
+    34.583333,
+    40.375,
+    47.083333,
+    47.166667,
+    53.791667,
+    60.541667,
+    67.25,
+    73.958333,
+    75.833333,
+    80.666667,
+    87.416667,
+    94.125,
+    96.5,
+    100.833333,
+    107.583333,
+    114.291667,
+    120.875
+  ],
+  "dialogue_gate": false,
+  "max_internal_cuts": 0,
+  "subtitle_seconds": 110.87999999999998,
+  "subtitle_coverage_ratio": 0.9163636363636362,
+  "tts_duration_seconds": null,
+  "expected_duration_seconds": null,
+  "duration_tolerance_seconds": 1.05,
+  "duration_deviation_seconds": null,
+  "failures": [
+    "internal scene cuts 27 exceed allowed 0"
+  ],
+  "note": "Scene detection is a conservative QC signal; it does not prove acting or lip-sync."
+}

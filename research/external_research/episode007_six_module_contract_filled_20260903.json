@@ -1,0 +1,1096 @@
+{
+  "contract_version": "video_kingdom.six_module_shot_contract.research.v2",
+  "production_boundary": "RESEARCH_ONLY",
+  "shots": [
+    {
+      "shot_id": "S01A",
+      "script": {
+        "scene_id": "S01",
+        "speaker": "UNKNOWN",
+        "dialogue_text": "UNKNOWN",
+        "emotion": "UNKNOWN",
+        "line_locked": null,
+        "tts_duration_seconds": null,
+        "audio_status": "AUDIO_PENDING"
+      },
+      "camera": {
+        "shot_type": "action",
+        "scale": "UNKNOWN",
+        "movement": "FIXED",
+        "axis": "UNKNOWN",
+        "first_frame_kind": "scene_action_anchor",
+        "movement_count": 0
+      },
+      "edit": {
+        "duration_seconds": null,
+        "cut_after_performance": true,
+        "transition_reason": "cut after performance completion",
+        "rhythm_phase": "UNKNOWN"
+      },
+      "performance": {
+        "emotion_goal": "UNKNOWN",
+        "action_beats": [
+          "准备/起始状态：场景1·密闭大厅，键盘如雨；阿浪揉眼后猛敲键盘。",
+          "主体动作：场景1·密闭大厅，键盘如雨；阿浪揉眼后猛敲键盘。",
+          "回收/反应：动作完成后停留并切镜"
+        ],
+        "sound_cues": [
+          "UNKNOWN"
+        ]
+      },
+      "assets": {
+        "identity_reference": "../media_staging/episode_007_virtual_data/anchors/user/alang_user_reference.png",
+        "scene_action_anchor": "UNKNOWN",
+        "costume": "BOUND_BY_EPISODE_ASSET_RULE",
+        "props": [
+          "UNKNOWN"
+        ],
+        "lighting": "BOUND_BY_EPISODE_VISUAL_STYLE"
+      },
+      "recovery": {
+        "max_attempts": 2,
+        "retry_delay_policy": "minimum 60s cooldown before retry",
+        "degrade_order": [
+          "retry with seed offset",
+          "manual replacement marker"
+        ]
+      },
+      "gaps": [
+        "tts_duration_seconds:UNKNOWN",
+        "audio_status:UNKNOWN",
+        "subtitle_position:UNKNOWN",
+        "scene_action_anchor_url:UNKNOWN"
+      ]
+    },
+    {
+      "shot_id": "S01B",
+      "script": {
+        "scene_id": "S01",
+        "speaker": "UNKNOWN",
+        "dialogue_text": "UNKNOWN",
+        "emotion": "UNKNOWN",
+        "line_locked": null,
+        "tts_duration_seconds": null,
+        "audio_status": "AUDIO_PENDING"
+      },
+      "camera": {
+        "shot_type": "action",
+        "scale": "UNKNOWN",
+        "movement": "ONE_CONTINUOUS_ACTION",
+        "axis": "UNKNOWN",
+        "first_frame_kind": "scene_action_anchor",
+        "movement_count": 1
+      },
+      "edit": {
+        "duration_seconds": null,
+        "cut_after_performance": true,
+        "transition_reason": "cut after performance completion",
+        "rhythm_phase": "UNKNOWN"
+      },
+      "performance": {
+        "emotion_goal": "UNKNOWN",
+        "action_beats": [
+          "准备/起始状态：场景1·手机好友申请刷屏，聊天窗口暴露机器人与同行。",
+          "主体动作：场景1·手机好友申请刷屏，聊天窗口暴露机器人与同行。",
+          "回收/反应：动作完成后停留并切镜"
+        ],
+        "sound_cues": [
+          "UNKNOWN"
+        ]
+      },
+      "assets": {
+        "identity_reference": "../media_staging/episode_007_virtual_data/anchors/user/alang_user_reference.png",
+        "scene_action_anchor": "UNKNOWN",
+        "costume": "BOUND_BY_EPISODE_ASSET_RULE",
+        "props": [
+          "UNKNOWN"
+        ],
+        "lighting": "BOUND_BY_EPISODE_VISUAL_STYLE"
+      },
+      "recovery": {
+        "max_attempts": 2,
+        "retry_delay_policy": "minimum 60s cooldown before retry",
+        "degrade_order": [
+          "retry with seed offset",
+          "manual replacement marker"
+        ]
+      },
+      "gaps": [
+        "tts_duration_seconds:UNKNOWN",
+        "audio_status:UNKNOWN",
+        "subtitle_position:UNKNOWN",
+        "scene_action_anchor_url:UNKNOWN"
+      ]
+    },
+    {
+      "shot_id": "S01C",
+      "script": {
+        "scene_id": "S01",
+        "speaker": "UNKNOWN",
+        "dialogue_text": "UNKNOWN",
+        "emotion": "UNKNOWN",
+        "line_locked": null,
+        "tts_duration_seconds": null,
+        "audio_status": "AUDIO_PENDING"
+      },
+      "camera": {
+        "shot_type": "dialogue",
+        "scale": "UNKNOWN",
+        "movement": "ONE_CONTINUOUS_ACTION",
+        "axis": "UNKNOWN",
+        "first_frame_kind": "scene_action_anchor",
+        "movement_count": 1
+      },
+      "edit": {
+        "duration_seconds": null,
+        "cut_after_performance": true,
+        "transition_reason": "cut after performance completion",
+        "rhythm_phase": "UNKNOWN"
+      },
+      "performance": {
+        "emotion_goal": "UNKNOWN",
+        "action_beats": [
+          "准备/起始状态：场景1·阿浪拨通粉商，压低声音质问假粉。",
+          "主体动作：场景1·阿浪拨通粉商，压低声音质问假粉。",
+          "回收/反应：动作完成后停留并切镜"
+        ],
+        "sound_cues": [
+          "UNKNOWN"
+        ]
+      },
+      "assets": {
+        "identity_reference": "../media_staging/episode_007_virtual_data/anchors/user/alang_user_reference.png",
+        "scene_action_anchor": "UNKNOWN",
+        "costume": "BOUND_BY_EPISODE_ASSET_RULE",
+        "props": [
+          "UNKNOWN"
+        ],
+        "lighting": "BOUND_BY_EPISODE_VISUAL_STYLE"
+      },
+      "recovery": {
+        "max_attempts": 2,
+        "retry_delay_policy": "minimum 60s cooldown before retry",
+        "degrade_order": [
+          "retry with seed offset",
+          "manual replacement marker"
+        ]
+      },
+      "gaps": [
+        "tts_duration_seconds:UNKNOWN",
+        "audio_status:UNKNOWN",
+        "subtitle_position:UNKNOWN",
+        "scene_action_anchor_url:UNKNOWN"
+      ]
+    },
+    {
+      "shot_id": "S01D",
+      "script": {
+        "scene_id": "S01",
+        "speaker": "UNKNOWN",
+        "dialogue_text": "UNKNOWN",
+        "emotion": "UNKNOWN",
+        "line_locked": null,
+        "tts_duration_seconds": null,
+        "audio_status": "AUDIO_PENDING"
+      },
+      "camera": {
+        "shot_type": "dialogue",
+        "scale": "UNKNOWN",
+        "movement": "ONE_CONTINUOUS_ACTION",
+        "axis": "UNKNOWN",
+        "first_frame_kind": "scene_action_anchor",
+        "movement_count": 1
+      },
+      "edit": {
+        "duration_seconds": null,
+        "cut_after_performance": true,
+        "transition_reason": "cut after performance completion",
+        "rhythm_phase": "UNKNOWN"
+      },
+      "performance": {
+        "emotion_goal": "UNKNOWN",
+        "action_beats": [
+          "准备/起始状态：场景1·电话挂断，手机砸桌，周围人抬头又低头。",
+          "主体动作：场景1·电话挂断，手机砸桌，周围人抬头又低头。",
+          "回收/反应：动作完成后停留并切镜"
+        ],
+        "sound_cues": [
+          "UNKNOWN"
+        ]
+      },
+      "assets": {
+        "identity_reference": "../media_staging/episode_007_virtual_data/anchors/user/alang_user_reference.png",
+        "scene_action_anchor": "UNKNOWN",
+        "costume": "BOUND_BY_EPISODE_ASSET_RULE",
+        "props": [
+          "UNKNOWN"
+        ],
+        "lighting": "BOUND_BY_EPISODE_VISUAL_STYLE"
+      },
+      "recovery": {
+        "max_attempts": 2,
+        "retry_delay_policy": "minimum 60s cooldown before retry",
+        "degrade_order": [
+          "retry with seed offset",
+          "manual replacement marker"
+        ]
+      },
+      "gaps": [
+        "tts_duration_seconds:UNKNOWN",
+        "audio_status:UNKNOWN",
+        "subtitle_position:UNKNOWN",
+        "scene_action_anchor_url:UNKNOWN"
+      ]
+    },
+    {
+      "shot_id": "S02A",
+      "script": {
+        "scene_id": "S02",
+        "speaker": "UNKNOWN",
+        "dialogue_text": "UNKNOWN",
+        "emotion": "UNKNOWN",
+        "line_locked": null,
+        "tts_duration_seconds": null,
+        "audio_status": "AUDIO_PENDING"
+      },
+      "camera": {
+        "shot_type": "action",
+        "scale": "UNKNOWN",
+        "movement": "FIXED",
+        "axis": "UNKNOWN",
+        "first_frame_kind": "scene_action_anchor",
+        "movement_count": 0
+      },
+      "edit": {
+        "duration_seconds": null,
+        "cut_after_performance": true,
+        "transition_reason": "cut after performance completion",
+        "rhythm_phase": "UNKNOWN"
+      },
+      "performance": {
+        "emotion_goal": "UNKNOWN",
+        "action_beats": [
+          "准备/起始状态：场景2·肥哥办公室烟灰缸特写，报表红笔划满。",
+          "主体动作：场景2·肥哥办公室烟灰缸特写，报表红笔划满。",
+          "回收/反应：动作完成后停留并切镜"
+        ],
+        "sound_cues": [
+          "UNKNOWN"
+        ]
+      },
+      "assets": {
+        "identity_reference": "../media_staging/episode_007_virtual_data/anchors/feige_character_anchor.png",
+        "scene_action_anchor": "UNKNOWN",
+        "costume": "BOUND_BY_EPISODE_ASSET_RULE",
+        "props": [
+          "UNKNOWN"
+        ],
+        "lighting": "BOUND_BY_EPISODE_VISUAL_STYLE"
+      },
+      "recovery": {
+        "max_attempts": 2,
+        "retry_delay_policy": "minimum 60s cooldown before retry",
+        "degrade_order": [
+          "retry with seed offset",
+          "manual replacement marker"
+        ]
+      },
+      "gaps": [
+        "tts_duration_seconds:UNKNOWN",
+        "audio_status:UNKNOWN",
+        "subtitle_position:UNKNOWN",
+        "scene_action_anchor_url:UNKNOWN"
+      ]
+    },
+    {
+      "shot_id": "S02B",
+      "script": {
+        "scene_id": "S02",
+        "speaker": "UNKNOWN",
+        "dialogue_text": "UNKNOWN",
+        "emotion": "UNKNOWN",
+        "line_locked": null,
+        "tts_duration_seconds": null,
+        "audio_status": "AUDIO_PENDING"
+      },
+      "camera": {
+        "shot_type": "dialogue",
+        "scale": "UNKNOWN",
+        "movement": "ONE_CONTINUOUS_ACTION",
+        "axis": "UNKNOWN",
+        "first_frame_kind": "scene_action_anchor",
+        "movement_count": 1
+      },
+      "edit": {
+        "duration_seconds": null,
+        "cut_after_performance": true,
+        "transition_reason": "cut after performance completion",
+        "rhythm_phase": "UNKNOWN"
+      },
+      "performance": {
+        "emotion_goal": "UNKNOWN",
+        "action_beats": [
+          "准备/起始状态：场景2·阿浪质问停买假粉，肥哥吐烟冷笑。",
+          "主体动作：场景2·阿浪质问停买假粉，肥哥吐烟冷笑。",
+          "回收/反应：动作完成后停留并切镜"
+        ],
+        "sound_cues": [
+          "UNKNOWN"
+        ]
+      },
+      "assets": {
+        "identity_reference": "../media_staging/episode_007_virtual_data/anchors/feige_character_anchor.png",
+        "scene_action_anchor": "UNKNOWN",
+        "costume": "BOUND_BY_EPISODE_ASSET_RULE",
+        "props": [
+          "UNKNOWN"
+        ],
+        "lighting": "BOUND_BY_EPISODE_VISUAL_STYLE"
+      },
+      "recovery": {
+        "max_attempts": 2,
+        "retry_delay_policy": "minimum 60s cooldown before retry",
+        "degrade_order": [
+          "retry with seed offset",
+          "manual replacement marker"
+        ]
+      },
+      "gaps": [
+        "tts_duration_seconds:UNKNOWN",
+        "audio_status:UNKNOWN",
+        "subtitle_position:UNKNOWN",
+        "scene_action_anchor_url:UNKNOWN"
+      ]
+    },
+    {
+      "shot_id": "S02C",
+      "script": {
+        "scene_id": "S02",
+        "speaker": "UNKNOWN",
+        "dialogue_text": "UNKNOWN",
+        "emotion": "UNKNOWN",
+        "line_locked": null,
+        "tts_duration_seconds": null,
+        "audio_status": "AUDIO_PENDING"
+      },
+      "camera": {
+        "shot_type": "action",
+        "scale": "UNKNOWN",
+        "movement": "ONE_CONTINUOUS_ACTION",
+        "axis": "UNKNOWN",
+        "first_frame_kind": "scene_action_anchor",
+        "movement_count": 1
+      },
+      "edit": {
+        "duration_seconds": null,
+        "cut_after_performance": true,
+        "transition_reason": "cut after performance completion",
+        "rhythm_phase": "UNKNOWN"
+      },
+      "performance": {
+        "emotion_goal": "UNKNOWN",
+        "action_beats": [
+          "准备/起始状态：场景2·工资与护照争执，肥哥猛拍桌。",
+          "主体动作：场景2·工资与护照争执，肥哥猛拍桌。",
+          "回收/反应：动作完成后停留并切镜"
+        ],
+        "sound_cues": [
+          "UNKNOWN"
+        ]
+      },
+      "assets": {
+        "identity_reference": "../media_staging/episode_007_virtual_data/anchors/feige_character_anchor.png",
+        "scene_action_anchor": "UNKNOWN",
+        "costume": "BOUND_BY_EPISODE_ASSET_RULE",
+        "props": [
+          "UNKNOWN"
+        ],
+        "lighting": "BOUND_BY_EPISODE_VISUAL_STYLE"
+      },
+      "recovery": {
+        "max_attempts": 2,
+        "retry_delay_policy": "minimum 60s cooldown before retry",
+        "degrade_order": [
+          "retry with seed offset",
+          "manual replacement marker"
+        ]
+      },
+      "gaps": [
+        "tts_duration_seconds:UNKNOWN",
+        "audio_status:UNKNOWN",
+        "subtitle_position:UNKNOWN",
+        "scene_action_anchor_url:UNKNOWN"
+      ]
+    },
+    {
+      "shot_id": "S03A",
+      "script": {
+        "scene_id": "S03",
+        "speaker": "UNKNOWN",
+        "dialogue_text": "UNKNOWN",
+        "emotion": "UNKNOWN",
+        "line_locked": null,
+        "tts_duration_seconds": null,
+        "audio_status": "AUDIO_PENDING"
+      },
+      "camera": {
+        "shot_type": "dialogue",
+        "scale": "UNKNOWN",
+        "movement": "FIXED_DIALOGUE",
+        "axis": "UNKNOWN",
+        "first_frame_kind": "scene_action_anchor",
+        "movement_count": 0
+      },
+      "edit": {
+        "duration_seconds": null,
+        "cut_after_performance": true,
+        "transition_reason": "cut after performance completion",
+        "rhythm_phase": "UNKNOWN"
+      },
+      "performance": {
+        "emotion_goal": "UNKNOWN",
+        "action_beats": [
+          "准备/起始状态：场景3·次日上午大厅，肥哥宣布每人再买两千精准粉。",
+          "主体动作：场景3·次日上午大厅，肥哥宣布每人再买两千精准粉。",
+          "回收/反应：动作完成后停留并切镜"
+        ],
+        "sound_cues": [
+          "UNKNOWN"
+        ]
+      },
+      "assets": {
+        "identity_reference": "../media_staging/episode_007_virtual_data/anchors/feige_character_anchor.png",
+        "scene_action_anchor": "UNKNOWN",
+        "costume": "BOUND_BY_EPISODE_ASSET_RULE",
+        "props": [
+          "UNKNOWN"
+        ],
+        "lighting": "BOUND_BY_EPISODE_VISUAL_STYLE"
+      },
+      "recovery": {
+        "max_attempts": 2,
+        "retry_delay_policy": "minimum 60s cooldown before retry",
+        "degrade_order": [
+          "retry with seed offset",
+          "manual replacement marker"
+        ]
+      },
+      "gaps": [
+        "tts_duration_seconds:UNKNOWN",
+        "audio_status:UNKNOWN",
+        "subtitle_position:UNKNOWN",
+        "scene_action_anchor_url:UNKNOWN"
+      ]
+    },
+    {
+      "shot_id": "S03B",
+      "script": {
+        "scene_id": "S03",
+        "speaker": "UNKNOWN",
+        "dialogue_text": "UNKNOWN",
+        "emotion": "UNKNOWN",
+        "line_locked": null,
+        "tts_duration_seconds": null,
+        "audio_status": "AUDIO_PENDING"
+      },
+      "camera": {
+        "shot_type": "dialogue",
+        "scale": "UNKNOWN",
+        "movement": "ONE_CONTINUOUS_ACTION",
+        "axis": "UNKNOWN",
+        "first_frame_kind": "scene_action_anchor",
+        "movement_count": 1
+      },
+      "edit": {
+        "duration_seconds": null,
+        "cut_after_performance": true,
+        "transition_reason": "cut after performance completion",
+        "rhythm_phase": "UNKNOWN"
+      },
+      "performance": {
+        "emotion_goal": "UNKNOWN",
+        "action_beats": [
+          "准备/起始状态：场景3·男同事站起说母亲住院，肥哥掐灭烟头。",
+          "主体动作：场景3·男同事站起说母亲住院，肥哥掐灭烟头。",
+          "回收/反应：动作完成后停留并切镜"
+        ],
+        "sound_cues": [
+          "UNKNOWN"
+        ]
+      },
+      "assets": {
+        "identity_reference": "../media_staging/episode_007_virtual_data/anchors/alang_character_anchor.png",
+        "scene_action_anchor": "UNKNOWN",
+        "costume": "BOUND_BY_EPISODE_ASSET_RULE",
+        "props": [
+          "UNKNOWN"
+        ],
+        "lighting": "BOUND_BY_EPISODE_VISUAL_STYLE"
+      },
+      "recovery": {
+        "max_attempts": 2,
+        "retry_delay_policy": "minimum 60s cooldown before retry",
+        "degrade_order": [
+          "retry with seed offset",
+          "manual replacement marker"
+        ]
+      },
+      "gaps": [
+        "tts_duration_seconds:UNKNOWN",
+        "audio_status:UNKNOWN",
+        "subtitle_position:UNKNOWN",
+        "scene_action_anchor_url:UNKNOWN"
+      ]
+    },
+    {
+      "shot_id": "S03C",
+      "script": {
+        "scene_id": "S03",
+        "speaker": "UNKNOWN",
+        "dialogue_text": "UNKNOWN",
+        "emotion": "UNKNOWN",
+        "line_locked": null,
+        "tts_duration_seconds": null,
+        "audio_status": "AUDIO_PENDING"
+      },
+      "camera": {
+        "shot_type": "action",
+        "scale": "UNKNOWN",
+        "movement": "ONE_CONTINUOUS_ACTION",
+        "axis": "UNKNOWN",
+        "first_frame_kind": "scene_action_anchor",
+        "movement_count": 1
+      },
+      "edit": {
+        "duration_seconds": null,
+        "cut_after_performance": true,
+        "transition_reason": "cut after performance completion",
+        "rhythm_phase": "UNKNOWN"
+      },
+      "performance": {
+        "emotion_goal": "UNKNOWN",
+        "action_beats": [
+          "准备/起始状态：场景3·阿浪握拳却沉默，集体继续敲键盘。",
+          "主体动作：场景3·阿浪握拳却沉默，集体继续敲键盘。",
+          "回收/反应：动作完成后停留并切镜"
+        ],
+        "sound_cues": [
+          "UNKNOWN"
+        ]
+      },
+      "assets": {
+        "identity_reference": "../media_staging/episode_007_virtual_data/anchors/alang_character_anchor.png",
+        "scene_action_anchor": "UNKNOWN",
+        "costume": "BOUND_BY_EPISODE_ASSET_RULE",
+        "props": [
+          "UNKNOWN"
+        ],
+        "lighting": "BOUND_BY_EPISODE_VISUAL_STYLE"
+      },
+      "recovery": {
+        "max_attempts": 2,
+        "retry_delay_policy": "minimum 60s cooldown before retry",
+        "degrade_order": [
+          "retry with seed offset",
+          "manual replacement marker"
+        ]
+      },
+      "gaps": [
+        "tts_duration_seconds:UNKNOWN",
+        "audio_status:UNKNOWN",
+        "subtitle_position:UNKNOWN",
+        "scene_action_anchor_url:UNKNOWN"
+      ]
+    },
+    {
+      "shot_id": "S04A",
+      "script": {
+        "scene_id": "S04",
+        "speaker": "UNKNOWN",
+        "dialogue_text": "UNKNOWN",
+        "emotion": "UNKNOWN",
+        "line_locked": null,
+        "tts_duration_seconds": null,
+        "audio_status": "AUDIO_PENDING"
+      },
+      "camera": {
+        "shot_type": "action",
+        "scale": "UNKNOWN",
+        "movement": "FIXED",
+        "axis": "UNKNOWN",
+        "first_frame_kind": "scene_action_anchor",
+        "movement_count": 0
+      },
+      "edit": {
+        "duration_seconds": null,
+        "cut_after_performance": true,
+        "transition_reason": "cut after performance completion",
+        "rhythm_phase": "UNKNOWN"
+      },
+      "performance": {
+        "emotion_goal": "UNKNOWN",
+        "action_beats": [
+          "准备/起始状态：场景4·厕所隔间，妈妈语音播放，阿浪删掉回复。",
+          "主体动作：场景4·厕所隔间，妈妈语音播放，阿浪删掉回复。",
+          "回收/反应：动作完成后停留并切镜"
+        ],
+        "sound_cues": [
+          "UNKNOWN"
+        ]
+      },
+      "assets": {
+        "identity_reference": "../media_staging/episode_007_virtual_data/anchors/alang_character_anchor.png",
+        "scene_action_anchor": "UNKNOWN",
+        "costume": "BOUND_BY_EPISODE_ASSET_RULE",
+        "props": [
+          "UNKNOWN"
+        ],
+        "lighting": "BOUND_BY_EPISODE_VISUAL_STYLE"
+      },
+      "recovery": {
+        "max_attempts": 2,
+        "retry_delay_policy": "minimum 60s cooldown before retry",
+        "degrade_order": [
+          "retry with seed offset",
+          "manual replacement marker"
+        ]
+      },
+      "gaps": [
+        "tts_duration_seconds:UNKNOWN",
+        "audio_status:UNKNOWN",
+        "subtitle_position:UNKNOWN",
+        "scene_action_anchor_url:UNKNOWN"
+      ]
+    },
+    {
+      "shot_id": "S04B",
+      "script": {
+        "scene_id": "S04",
+        "speaker": "UNKNOWN",
+        "dialogue_text": "UNKNOWN",
+        "emotion": "UNKNOWN",
+        "line_locked": null,
+        "tts_duration_seconds": null,
+        "audio_status": "AUDIO_PENDING"
+      },
+      "camera": {
+        "shot_type": "action",
+        "scale": "UNKNOWN",
+        "movement": "ONE_CONTINUOUS_ACTION",
+        "axis": "UNKNOWN",
+        "first_frame_kind": "scene_action_anchor",
+        "movement_count": 1
+      },
+      "edit": {
+        "duration_seconds": null,
+        "cut_after_performance": true,
+        "transition_reason": "cut after performance completion",
+        "rhythm_phase": "UNKNOWN"
+      },
+      "performance": {
+        "emotion_goal": "UNKNOWN",
+        "action_beats": [
+          "准备/起始状态：场景4·新好友申请出现，阿浪眼神第一次亮。",
+          "主体动作：场景4·新好友申请出现，阿浪眼神第一次亮。",
+          "回收/反应：动作完成后停留并切镜"
+        ],
+        "sound_cues": [
+          "UNKNOWN"
+        ]
+      },
+      "assets": {
+        "identity_reference": "../media_staging/episode_007_virtual_data/anchors/alang_character_anchor.png",
+        "scene_action_anchor": "UNKNOWN",
+        "costume": "BOUND_BY_EPISODE_ASSET_RULE",
+        "props": [
+          "UNKNOWN"
+        ],
+        "lighting": "BOUND_BY_EPISODE_VISUAL_STYLE"
+      },
+      "recovery": {
+        "max_attempts": 2,
+        "retry_delay_policy": "minimum 60s cooldown before retry",
+        "degrade_order": [
+          "retry with seed offset",
+          "manual replacement marker"
+        ]
+      },
+      "gaps": [
+        "tts_duration_seconds:UNKNOWN",
+        "audio_status:UNKNOWN",
+        "subtitle_position:UNKNOWN",
+        "scene_action_anchor_url:UNKNOWN"
+      ]
+    },
+    {
+      "shot_id": "S05A",
+      "script": {
+        "scene_id": "S05",
+        "speaker": "UNKNOWN",
+        "dialogue_text": "UNKNOWN",
+        "emotion": "UNKNOWN",
+        "line_locked": null,
+        "tts_duration_seconds": null,
+        "audio_status": "AUDIO_PENDING"
+      },
+      "camera": {
+        "shot_type": "dialogue",
+        "scale": "UNKNOWN",
+        "movement": "FIXED_DIALOGUE",
+        "axis": "UNKNOWN",
+        "first_frame_kind": "scene_action_anchor",
+        "movement_count": 0
+      },
+      "edit": {
+        "duration_seconds": null,
+        "cut_after_performance": true,
+        "transition_reason": "cut after performance completion",
+        "rhythm_phase": "UNKNOWN"
+      },
+      "performance": {
+        "emotion_goal": "UNKNOWN",
+        "action_beats": [
+          "准备/起始状态：场景5·阿浪温柔发送话术，对方称先转五万。",
+          "主体动作：场景5·阿浪温柔发送话术，对方称先转五万。",
+          "回收/反应：动作完成后停留并切镜"
+        ],
+        "sound_cues": [
+          "UNKNOWN"
+        ]
+      },
+      "assets": {
+        "identity_reference": "../media_staging/episode_007_virtual_data/anchors/alang_character_anchor.png",
+        "scene_action_anchor": "UNKNOWN",
+        "costume": "BOUND_BY_EPISODE_ASSET_RULE",
+        "props": [
+          "UNKNOWN"
+        ],
+        "lighting": "BOUND_BY_EPISODE_VISUAL_STYLE"
+      },
+      "recovery": {
+        "max_attempts": 2,
+        "retry_delay_policy": "minimum 60s cooldown before retry",
+        "degrade_order": [
+          "retry with seed offset",
+          "manual replacement marker"
+        ]
+      },
+      "gaps": [
+        "tts_duration_seconds:UNKNOWN",
+        "audio_status:UNKNOWN",
+        "subtitle_position:UNKNOWN",
+        "scene_action_anchor_url:UNKNOWN"
+      ]
+    },
+    {
+      "shot_id": "S05B",
+      "script": {
+        "scene_id": "S05",
+        "speaker": "UNKNOWN",
+        "dialogue_text": "UNKNOWN",
+        "emotion": "UNKNOWN",
+        "line_locked": null,
+        "tts_duration_seconds": null,
+        "audio_status": "AUDIO_PENDING"
+      },
+      "camera": {
+        "shot_type": "action",
+        "scale": "UNKNOWN",
+        "movement": "ONE_CONTINUOUS_ACTION",
+        "axis": "UNKNOWN",
+        "first_frame_kind": "scene_action_anchor",
+        "movement_count": 1
+      },
+      "edit": {
+        "duration_seconds": null,
+        "cut_after_performance": true,
+        "transition_reason": "cut after performance completion",
+        "rhythm_phase": "UNKNOWN"
+      },
+      "performance": {
+        "emotion_goal": "UNKNOWN",
+        "action_beats": [
+          "准备/起始状态：场景5·到账提示，阿浪冲出座位大喊出单。",
+          "主体动作：场景5·到账提示，阿浪冲出座位大喊出单。",
+          "回收/反应：动作完成后停留并切镜"
+        ],
+        "sound_cues": [
+          "UNKNOWN"
+        ]
+      },
+      "assets": {
+        "identity_reference": "../media_staging/episode_007_virtual_data/anchors/alang_character_anchor.png",
+        "scene_action_anchor": "UNKNOWN",
+        "costume": "BOUND_BY_EPISODE_ASSET_RULE",
+        "props": [
+          "UNKNOWN"
+        ],
+        "lighting": "BOUND_BY_EPISODE_VISUAL_STYLE"
+      },
+      "recovery": {
+        "max_attempts": 2,
+        "retry_delay_policy": "minimum 60s cooldown before retry",
+        "degrade_order": [
+          "retry with seed offset",
+          "manual replacement marker"
+        ]
+      },
+      "gaps": [
+        "tts_duration_seconds:UNKNOWN",
+        "audio_status:UNKNOWN",
+        "subtitle_position:UNKNOWN",
+        "scene_action_anchor_url:UNKNOWN"
+      ]
+    },
+    {
+      "shot_id": "S05C",
+      "script": {
+        "scene_id": "S05",
+        "speaker": "UNKNOWN",
+        "dialogue_text": "UNKNOWN",
+        "emotion": "UNKNOWN",
+        "line_locked": null,
+        "tts_duration_seconds": null,
+        "audio_status": "AUDIO_PENDING"
+      },
+      "camera": {
+        "shot_type": "action",
+        "scale": "UNKNOWN",
+        "movement": "ONE_CONTINUOUS_ACTION",
+        "axis": "UNKNOWN",
+        "first_frame_kind": "scene_action_anchor",
+        "movement_count": 1
+      },
+      "edit": {
+        "duration_seconds": null,
+        "cut_after_performance": true,
+        "transition_reason": "cut after performance completion",
+        "rhythm_phase": "UNKNOWN"
+      },
+      "performance": {
+        "emotion_goal": "UNKNOWN",
+        "action_beats": [
+          "准备/起始状态：场景5·对方质疑平台跑路，系统提示冻结原路退回。",
+          "主体动作：场景5·对方质疑平台跑路，系统提示冻结原路退回。",
+          "回收/反应：动作完成后停留并切镜"
+        ],
+        "sound_cues": [
+          "UNKNOWN"
+        ]
+      },
+      "assets": {
+        "identity_reference": "../media_staging/episode_007_virtual_data/anchors/alang_character_anchor.png",
+        "scene_action_anchor": "UNKNOWN",
+        "costume": "BOUND_BY_EPISODE_ASSET_RULE",
+        "props": [
+          "UNKNOWN"
+        ],
+        "lighting": "BOUND_BY_EPISODE_VISUAL_STYLE"
+      },
+      "recovery": {
+        "max_attempts": 2,
+        "retry_delay_policy": "minimum 60s cooldown before retry",
+        "degrade_order": [
+          "retry with seed offset",
+          "manual replacement marker"
+        ]
+      },
+      "gaps": [
+        "tts_duration_seconds:UNKNOWN",
+        "audio_status:UNKNOWN",
+        "subtitle_position:UNKNOWN",
+        "scene_action_anchor_url:UNKNOWN"
+      ]
+    },
+    {
+      "shot_id": "S06A",
+      "script": {
+        "scene_id": "S06",
+        "speaker": "UNKNOWN",
+        "dialogue_text": "UNKNOWN",
+        "emotion": "UNKNOWN",
+        "line_locked": null,
+        "tts_duration_seconds": null,
+        "audio_status": "AUDIO_PENDING"
+      },
+      "camera": {
+        "shot_type": "dialogue",
+        "scale": "UNKNOWN",
+        "movement": "FIXED_DIALOGUE",
+        "axis": "UNKNOWN",
+        "first_frame_kind": "scene_action_anchor",
+        "movement_count": 0
+      },
+      "edit": {
+        "duration_seconds": null,
+        "cut_after_performance": true,
+        "transition_reason": "cut after performance completion",
+        "rhythm_phase": "UNKNOWN"
+      },
+      "performance": {
+        "emotion_goal": "UNKNOWN",
+        "action_beats": [
+          "准备/起始状态：场景6·肥哥接老板电话，只看日报不看理由。",
+          "主体动作：场景6·肥哥接老板电话，只看日报不看理由。",
+          "回收/反应：动作完成后停留并切镜"
+        ],
+        "sound_cues": [
+          "UNKNOWN"
+        ]
+      },
+      "assets": {
+        "identity_reference": "../media_staging/episode_007_virtual_data/anchors/feige_character_anchor.png",
+        "scene_action_anchor": "UNKNOWN",
+        "costume": "BOUND_BY_EPISODE_ASSET_RULE",
+        "props": [
+          "UNKNOWN"
+        ],
+        "lighting": "BOUND_BY_EPISODE_VISUAL_STYLE"
+      },
+      "recovery": {
+        "max_attempts": 2,
+        "retry_delay_policy": "minimum 60s cooldown before retry",
+        "degrade_order": [
+          "retry with seed offset",
+          "manual replacement marker"
+        ]
+      },
+      "gaps": [
+        "tts_duration_seconds:UNKNOWN",
+        "audio_status:UNKNOWN",
+        "subtitle_position:UNKNOWN",
+        "scene_action_anchor_url:UNKNOWN"
+      ]
+    },
+    {
+      "shot_id": "S06B",
+      "script": {
+        "scene_id": "S06",
+        "speaker": "UNKNOWN",
+        "dialogue_text": "UNKNOWN",
+        "emotion": "UNKNOWN",
+        "line_locked": null,
+        "tts_duration_seconds": null,
+        "audio_status": "AUDIO_PENDING"
+      },
+      "camera": {
+        "shot_type": "dialogue",
+        "scale": "UNKNOWN",
+        "movement": "ONE_CONTINUOUS_ACTION",
+        "axis": "UNKNOWN",
+        "first_frame_kind": "scene_action_anchor",
+        "movement_count": 1
+      },
+      "edit": {
+        "duration_seconds": null,
+        "cut_after_performance": true,
+        "transition_reason": "cut after performance completion",
+        "rhythm_phase": "UNKNOWN"
+      },
+      "performance": {
+        "emotion_goal": "UNKNOWN",
+        "action_beats": [
+          "准备/起始状态：场景6·阿浪门口听见，问“我们在等什么”。",
+          "主体动作：场景6·阿浪门口听见，问“我们在等什么”。",
+          "回收/反应：动作完成后停留并切镜"
+        ],
+        "sound_cues": [
+          "UNKNOWN"
+        ]
+      },
+      "assets": {
+        "identity_reference": "../media_staging/episode_007_virtual_data/anchors/alang_character_anchor.png",
+        "scene_action_anchor": "UNKNOWN",
+        "costume": "BOUND_BY_EPISODE_ASSET_RULE",
+        "props": [
+          "UNKNOWN"
+        ],
+        "lighting": "BOUND_BY_EPISODE_VISUAL_STYLE"
+      },
+      "recovery": {
+        "max_attempts": 2,
+        "retry_delay_policy": "minimum 60s cooldown before retry",
+        "degrade_order": [
+          "retry with seed offset",
+          "manual replacement marker"
+        ]
+      },
+      "gaps": [
+        "tts_duration_seconds:UNKNOWN",
+        "audio_status:UNKNOWN",
+        "subtitle_position:UNKNOWN",
+        "scene_action_anchor_url:UNKNOWN"
+      ]
+    },
+    {
+      "shot_id": "S07A",
+      "script": {
+        "scene_id": "S07",
+        "speaker": "UNKNOWN",
+        "dialogue_text": "UNKNOWN",
+        "emotion": "UNKNOWN",
+        "line_locked": null,
+        "tts_duration_seconds": null,
+        "audio_status": "AUDIO_PENDING"
+      },
+      "camera": {
+        "shot_type": "action",
+        "scale": "UNKNOWN",
+        "movement": "FIXED",
+        "axis": "UNKNOWN",
+        "first_frame_kind": "scene_action_anchor",
+        "movement_count": 0
+      },
+      "edit": {
+        "duration_seconds": null,
+        "cut_after_performance": true,
+        "transition_reason": "cut after performance completion",
+        "rhythm_phase": "UNKNOWN"
+      },
+      "performance": {
+        "emotion_goal": "UNKNOWN",
+        "action_beats": [
+          "准备/起始状态：场景7·深夜大厅，阿浪机械复制粘贴，镜头拉远。",
+          "主体动作：场景7·深夜大厅，阿浪机械复制粘贴，镜头拉远。",
+          "回收/反应：动作完成后停留并切镜"
+        ],
+        "sound_cues": [
+          "UNKNOWN"
+        ]
+      },
+      "assets": {
+        "identity_reference": "../media_staging/episode_007_virtual_data/anchors/alang_character_anchor.png",
+        "scene_action_anchor": "UNKNOWN",
+        "costume": "BOUND_BY_EPISODE_ASSET_RULE",
+        "props": [
+          "UNKNOWN"
+        ],
+        "lighting": "BOUND_BY_EPISODE_VISUAL_STYLE"
+      },
+      "recovery": {
+        "max_attempts": 2,
+        "retry_delay_policy": "minimum 60s cooldown before retry",
+        "degrade_order": [
+          "retry with seed offset",
+          "manual replacement marker"
+        ]
+      },
+      "gaps": [
+        "tts_duration_seconds:UNKNOWN",
+        "audio_status:UNKNOWN",
+        "subtitle_position:UNKNOWN",
+        "scene_action_anchor_url:UNKNOWN"
+      ]
+    }
+  ],
+  "summary": {
+    "total_shots": 18,
+    "blocked_shots": 18,
+    "gap_counts": {
+      "unknown_tts": 18,
+      "unknown_duration": 18,
+      "unknown_scene_anchor": 18
+    }
+  },
+  "source": "episodes/episode_007_virtual_data.v1.json"
+}

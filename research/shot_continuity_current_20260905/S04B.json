@@ -1,0 +1,69 @@
+{
+  "contract_version": "ace.video_kingdom.frame_continuity_audit.v1",
+  "video": "C:\\tmp\\ace_video_kingdom_git\\media_staging\\episode_007_virtual_data\\video_camera_grammar_v2\\S04B.mp4",
+  "frame_count_decoded": 241,
+  "frame_count_reported": 241,
+  "fps": 24.0,
+  "median_adjacent_luma_diff": 8.5664,
+  "max_adjacent_luma_diff": 57.8626,
+  "spike_threshold": 25.6992,
+  "spike_count": 9,
+  "top_spikes": [
+    {
+      "frame": 40,
+      "time_seconds": 1.666667,
+      "mean_abs_luma_diff": 57.8626,
+      "histogram_jump": 0.2542
+    },
+    {
+      "frame": 120,
+      "time_seconds": 5.0,
+      "mean_abs_luma_diff": 54.1738,
+      "histogram_jump": 0.0824
+    },
+    {
+      "frame": 121,
+      "time_seconds": 5.041667,
+      "mean_abs_luma_diff": 40.353,
+      "histogram_jump": 0.0604
+    },
+    {
+      "frame": 122,
+      "time_seconds": 5.083333,
+      "mean_abs_luma_diff": 38.3485,
+      "histogram_jump": 0.0108
+    },
+    {
+      "frame": 119,
+      "time_seconds": 4.958333,
+      "mean_abs_luma_diff": 36.5739,
+      "histogram_jump": 0.0308
+    },
+    {
+      "frame": 118,
+      "time_seconds": 4.916667,
+      "mean_abs_luma_diff": 33.2455,
+      "histogram_jump": 0.0071
+    },
+    {
+      "frame": 123,
+      "time_seconds": 5.125,
+      "mean_abs_luma_diff": 32.9057,
+      "histogram_jump": 0.0126
+    },
+    {
+      "frame": 124,
+      "time_seconds": 5.166667,
+      "mean_abs_luma_diff": 29.7054,
+      "histogram_jump": 0.0054
+    },
+    {
+      "frame": 125,
+      "time_seconds": 5.208333,
+      "mean_abs_luma_diff": 27.616,
+      "histogram_jump": 0.008
+    }
+  ],
+  "status": "REVIEW_REQUIRED",
+  "note": "Every decoded frame was scanned. Spikes are conservative QC signals and require visual review."
+}

@@ -1,0 +1,382 @@
+{
+  "schema": "video_kingdom.shot_core_provider_reality_probe.v1",
+  "created_at": "2026-09-05T08:20:31Z",
+  "provider": "agnes",
+  "model": "agnes-video-2.5-flash",
+  "create_endpoint": "https://apihub.agnes-ai.com/v1/videos",
+  "poll_endpoint": "https://apihub.agnes-ai.com/agnesapi",
+  "samples": [
+    {
+      "shot_id": "PROBE_DIALOGUE",
+      "shot_type": "DIALOGUE",
+      "generation_fingerprint": "bceb5df51aff94ba6851110dd7a7f38d77d103b2e2280dfba3b2d24cde00a641",
+      "provider": "agnes",
+      "model": "agnes-video-2.5-flash",
+      "endpoint": {
+        "create": "https://apihub.agnes-ai.com/v1/videos",
+        "poll": "https://apihub.agnes-ai.com/agnesapi"
+      },
+      "payload_schema": "agnes-shot-core.v1",
+      "sanitized_payload": {
+        "model": "agnes-video-2.5-flash",
+        "prompt": {
+          "sha256": "f04d1ce5bfd534d0314ff7b96f38aac1b6e30973d2e604af454d17a3f6fa0bab",
+          "chars": 1576,
+          "contains_shot_core_contract": true
+        },
+        "mode": "reference",
+        "seconds": "5",
+        "size": "720P",
+        "aspect_ratio": "9:16",
+        "n": 1,
+        "images": [
+          "https://raw.githubusercontent.com/zhangapple21-web/-/main/ace-video-kingdom/wenji-episode-006/SCENE_02_typing_log_anchor.png"
+        ]
+      },
+      "camera": {
+        "scale": "medium",
+        "position": "desk",
+        "movement": "NONE",
+        "axis": "none",
+        "internal_cuts": 0
+      },
+      "action": {
+        "character": "WENJI speaks",
+        "location": "desk",
+        "wardrobe": "unchanged",
+        "props": [
+          "phone"
+        ],
+        "lighting": "dim",
+        "time": "night",
+        "camera": "locked"
+      },
+      "first_frame": null,
+      "last_frame": null,
+      "visible_entities": {
+        "character_ids": [
+          "WENJI"
+        ],
+        "prop_ids": [
+          "PHONE"
+        ]
+      },
+      "request_field_presence": {
+        "camera_in_prompt_contract": true,
+        "action_in_prompt_contract": true,
+        "first_frame_payload": false,
+        "last_frame_payload": false,
+        "visible_entities_in_prompt_contract": true
+      },
+      "status": "GENERATED",
+      "provider_status": "SUCCESS",
+      "remote_video_id": "task_WsMLdnJGn2MOjuWwkPKX4XitEo3GFs60",
+      "remote_status": "completed",
+      "artifact": "C:\\tmp\\ace_video_kingdom_git\\media_staging\\shot_core_provider_probe_v1\\PROBE_DIALOGUE_T01.mp4",
+      "artifact_hash": "4e30b8f639371ffacfb8035bbaab76698b94e4accffbcf80ac307b906f810c9b",
+      "machine_qc": {
+        "file_integrity": "PASS",
+        "resolution": "PASS",
+        "fps": "PASS",
+        "audio_stream": "PASS",
+        "duration": "PASS",
+        "black_frames": "PASS",
+        "freeze_tail": "PASS",
+        "internal_cuts": "PASS",
+        "duration_tolerance_seconds": 0.75,
+        "detector_errors": [],
+        "observed_internal_cuts": 0
+      },
+      "http_calls": [
+        {
+          "method": "POST",
+          "url": "https://apihub.agnes-ai.com/v1/videos"
+        },
+        {
+          "method": "GET",
+          "url": "https://apihub.agnes-ai.com/agnesapi",
+          "has_video_id": true
+        },
+        {
+          "method": "GET",
+          "url": "https://apihub.agnes-ai.com/agnesapi",
+          "has_video_id": true
+        },
+        {
+          "method": "GET",
+          "url": "https://apihub.agnes-ai.com/agnesapi",
+          "has_video_id": true
+        },
+        {
+          "method": "GET",
+          "url": "https://apihub.agnes-ai.com/agnesapi",
+          "has_video_id": true
+        },
+        {
+          "method": "GET",
+          "url": "https://apihub.agnes-ai.com/agnesapi",
+          "has_video_id": true
+        },
+        {
+          "method": "GET",
+          "url": "https://apihub.agnes-ai.com/agnesapi",
+          "has_video_id": true
+        },
+        {
+          "method": "GET",
+          "url": "https://platform-outputs.agnes-ai.space/videos/agnes-video-2.5/task_WsMLdnJGn2MOjuWwkPKX4XitEo3GFs60.mp4",
+          "has_video_id": false
+        }
+      ],
+      "lineage": {
+        "shot_to_request": true,
+        "request_to_video_id": true,
+        "video_id_to_artifact": true
+      }
+    },
+    {
+      "shot_id": "PROBE_ACTION",
+      "shot_type": "ACTION",
+      "generation_fingerprint": "c1400e9b9bf35744d72f01d6d5da6edead5199582ed378e4875638f7b199ecde",
+      "provider": "agnes",
+      "model": "agnes-video-2.5-flash",
+      "endpoint": {
+        "create": "https://apihub.agnes-ai.com/v1/videos",
+        "poll": "https://apihub.agnes-ai.com/agnesapi"
+      },
+      "payload_schema": "agnes-shot-core.v1",
+      "sanitized_payload": {
+        "model": "agnes-video-2.5-flash",
+        "prompt": {
+          "sha256": "789c3ecce47eff500db536f1b248afb624b6030c6595e557f44fe9a9e20c6e40",
+          "chars": 1447,
+          "contains_shot_core_contract": true
+        },
+        "mode": "reference",
+        "seconds": "5",
+        "size": "720P",
+        "aspect_ratio": "9:16",
+        "n": 1,
+        "images": [
+          "https://raw.githubusercontent.com/zhangapple21-web/-/main/ace-video-kingdom/wenji-episode-006/SCENE_02_typing_log_anchor.png"
+        ]
+      },
+      "camera": {
+        "scale": "close",
+        "position": "desk",
+        "movement": "NONE",
+        "axis": "none",
+        "internal_cuts": 0
+      },
+      "action": {
+        "character": "hand moves phone",
+        "location": "desk",
+        "wardrobe": "unchanged",
+        "props": [
+          "phone center"
+        ],
+        "lighting": "cool",
+        "time": "night",
+        "camera": "close"
+      },
+      "first_frame": null,
+      "last_frame": null,
+      "visible_entities": {
+        "character_ids": [
+          "WENJI"
+        ],
+        "prop_ids": [
+          "PHONE"
+        ]
+      },
+      "request_field_presence": {
+        "camera_in_prompt_contract": true,
+        "action_in_prompt_contract": true,
+        "first_frame_payload": false,
+        "last_frame_payload": false,
+        "visible_entities_in_prompt_contract": true
+      },
+      "status": "FAILED",
+      "provider_status": "FAILED",
+      "remote_video_id": null,
+      "remote_status": null,
+      "artifact": null,
+      "artifact_hash": null,
+      "machine_qc": null,
+      "http_calls": [
+        {
+          "method": "POST",
+          "url": "https://apihub.agnes-ai.com/v1/videos"
+        }
+      ],
+      "lineage": {
+        "shot_to_request": true,
+        "request_to_video_id": false,
+        "video_id_to_artifact": false
+      }
+    },
+    {
+      "shot_id": "PROBE_FIRST_LAST",
+      "shot_type": "ACTION",
+      "generation_fingerprint": "6b03bbfcf2c0775a79cd34d65752dfa4ecc5cadde122ee9ab5cf1e557154508b",
+      "provider": "agnes",
+      "model": "agnes-video-2.5-flash",
+      "endpoint": {
+        "create": "https://apihub.agnes-ai.com/v1/videos",
+        "poll": "https://apihub.agnes-ai.com/agnesapi"
+      },
+      "payload_schema": "agnes-shot-core.v1",
+      "sanitized_payload": {
+        "model": "agnes-video-2.5-flash",
+        "prompt": {
+          "sha256": "f57310a953e4b5e054c5c28c7ddea32f0a3f16404093db64e556f196b25bc505",
+          "chars": 1451,
+          "contains_shot_core_contract": true
+        },
+        "mode": "keyframe",
+        "seconds": "5",
+        "size": "720P",
+        "aspect_ratio": "9:16",
+        "n": 1
+      },
+      "camera": {
+        "scale": "close",
+        "position": "desk",
+        "movement": "NONE",
+        "axis": "none",
+        "internal_cuts": 0
+      },
+      "action": {
+        "character": "hand moves phone",
+        "location": "desk",
+        "wardrobe": "unchanged",
+        "props": [
+          "phone center"
+        ],
+        "lighting": "cool",
+        "time": "night",
+        "camera": "close"
+      },
+      "first_frame": null,
+      "last_frame": null,
+      "visible_entities": {
+        "character_ids": [
+          "WENJI"
+        ],
+        "prop_ids": [
+          "PHONE"
+        ]
+      },
+      "request_field_presence": {
+        "camera_in_prompt_contract": true,
+        "action_in_prompt_contract": true,
+        "first_frame_payload": false,
+        "last_frame_payload": false,
+        "visible_entities_in_prompt_contract": true
+      },
+      "status": "NOT_SENT",
+      "reason": "STOPPED_AFTER_PROVIDER_GATE_BLOCK"
+    },
+    {
+      "shot_id": "PROBE_VISIBLE_ENTITIES",
+      "shot_type": "REACTION",
+      "generation_fingerprint": "58bb93b2dc39edc6e20cdc6858fd24064dfb072040e2abfcef3c3bdb9f8391fa",
+      "provider": "agnes",
+      "model": "agnes-video-2.5-flash",
+      "endpoint": {
+        "create": "https://apihub.agnes-ai.com/v1/videos",
+        "poll": "https://apihub.agnes-ai.com/agnesapi"
+      },
+      "payload_schema": "agnes-shot-core.v1",
+      "sanitized_payload": {
+        "model": "agnes-video-2.5-flash",
+        "prompt": {
+          "sha256": "c5d6e090b9dc654752c8d6c08dac7816fde656eb20da7768574410b626822357",
+          "chars": 1498,
+          "contains_shot_core_contract": true
+        },
+        "mode": "reference",
+        "seconds": "5",
+        "size": "720P",
+        "aspect_ratio": "9:16",
+        "n": 1,
+        "images": [
+          "https://raw.githubusercontent.com/zhangapple21-web/-/main/ace-video-kingdom/wenji-episode-006/SCENE_06_consultation_lobby_anchor.png"
+        ]
+      },
+      "camera": {
+        "scale": "medium",
+        "position": "lobby",
+        "movement": "NONE",
+        "axis": "none",
+        "internal_cuts": 0
+      },
+      "action": {
+        "character": "WENJI reads phone",
+        "location": "lobby",
+        "wardrobe": "unchanged",
+        "props": [
+          "phone"
+        ],
+        "lighting": "fluorescent",
+        "time": "day",
+        "camera": "locked"
+      },
+      "first_frame": null,
+      "last_frame": null,
+      "visible_entities": {
+        "character_ids": [
+          "WENJI"
+        ],
+        "prop_ids": [
+          "PHONE"
+        ]
+      },
+      "request_field_presence": {
+        "camera_in_prompt_contract": true,
+        "action_in_prompt_contract": true,
+        "first_frame_payload": false,
+        "last_frame_payload": false,
+        "visible_entities_in_prompt_contract": true
+      },
+      "status": "NOT_SENT",
+      "reason": "STOPPED_AFTER_PROVIDER_GATE_BLOCK"
+    }
+  ],
+  "resume_probe": {
+    "take_id": "PILOT_DIALOGUE_T01",
+    "video_id": "task_eTjnTWQXAOXy39V2DdZU2fBPaIoWBsJ1",
+    "result_status": "GENERATED",
+    "provider_status": "SUCCESS",
+    "artifact": "C:\\tmp\\ace_video_kingdom_git\\media_staging\\shot_core_provider_probe_v1\\RESUME_POLL_ONLY.mp4",
+    "artifact_hash": "c6dd423794470dfe92e24d04e4563b2905e4e2855b08f00948923aa363a6a1da",
+    "machine_qc": {
+      "file_integrity": "PASS",
+      "resolution": "PASS",
+      "fps": "PASS",
+      "audio_stream": "PASS",
+      "duration": "PASS",
+      "black_frames": "PASS",
+      "freeze_tail": "PASS",
+      "internal_cuts": "UNKNOWN",
+      "duration_tolerance_seconds": 0.75,
+      "detector_errors": []
+    },
+    "http_calls": [
+      {
+        "method": "GET",
+        "url": "https://apihub.agnes-ai.com/agnesapi",
+        "has_video_id": true
+      },
+      {
+        "method": "GET",
+        "url": "https://platform-outputs.agnes-ai.space/videos/agnes-video-2.5/task_eTjnTWQXAOXy39V2DdZU2fBPaIoWBsJ1.mp4",
+        "has_video_id": false
+      }
+    ],
+    "post_count": 0,
+    "poll_only": true
+  },
+  "boundary": "No audio/lip-sync or creative-quality claim is made.",
+  "global_status": "PARTIAL_PROVIDER_BLOCK"
+}

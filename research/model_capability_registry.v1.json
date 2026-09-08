@@ -1,0 +1,143 @@
+{
+  "schema": "ace.video_kingdom.model_capability_registry.v1",
+  "scope": "AUTONOMOUS_CAPABILITY_ROUTING_POC",
+  "principle": "任务只声明能力；模型 ID 只在内部作为可替换劳动力引用。",
+  "metrics_policy": "评分是受限 POC 的相对选路启发式；不是供应商定价、SLA 或长期质量承诺。成本未知时必须标记 NOT_RECORDED。",
+  "evidence_policy": {
+    "VERIFIED": "独立、可复核的能力级证据；允许在声明的作用域内选路。",
+    "VERIFIED_SCOPED": "任务形状探针通过，但只在 verification_limits 声明的边界内选路。",
+    "LIVE_HTTP_200": "一次真实请求完成；仅能证明该请求/接口，不自动扩张到其他能力。",
+    "OBSERVED_ROUTE": "看到过路由或配置，不是能力证明。",
+    "NOT_PROVEN": "禁止作为满足能力要求的依据。"
+  },
+  "capabilities": [
+    "reasoning",
+    "planning",
+    "long_context",
+    "vision",
+    "coding",
+    "speed",
+    "cost",
+    "reliability",
+    "provider_stability"
+  ],
+  "usable_evidence_states": [
+    "VERIFIED",
+    "LIVE_HTTP_200"
+  ],
+  "models": [
+    {
+      "id": "shenwen:gpt-6-astra",
+      "provider": "shenwen",
+      "model": "gpt-6-astra",
+      "status": "RESEARCH_ACTIVE",
+      "eligible_scopes": ["remote_shenwen", "auto"],
+      "execution_profile": "research/provider_profiles/shenwen_astra.v1.toml",
+      "capability_states": {
+        "reasoning": "VERIFIED_SCOPED",
+        "planning": "VERIFIED_SCOPED",
+        "long_context": "VERIFIED_SCOPED",
+        "vision": "VERIFIED_SCOPED",
+        "coding": "NOT_PROVEN"
+      },
+      "verification_limits": {
+        "max_input_chars": 12000,
+        "long_context_probe": "900 repeated markers; does not claim the provider maximum window",
+        "vision_probe": "one user-supplied PNG via data URI"
+      },
+      "metrics": {
+        "quality": 0.95,
+        "cost": 0.45,
+        "latency": 0.30,
+        "reliability": 0.50,
+        "provider_stability": 0.50
+      },
+      "evidence": [
+        {"ref": "shenwen_codex_docs", "state": "REMOTE_CATALOG_OBSERVED"},
+        {"ref": "research/model_capability_probes/astra_20260908.json", "state": "SCOPED_PROBES_PASS"}
+      ],
+      "capability_evidence": {
+        "reasoning": {"ref": "research/model_capability_probes/astra_20260908.json", "state": "VERIFIED_SCOPED"},
+        "planning": {"ref": "research/model_capability_probes/astra_20260908.json", "state": "VERIFIED_SCOPED"},
+        "long_context": {"ref": "research/model_capability_probes/astra_20260908.json", "state": "VERIFIED_SCOPED"},
+        "vision": {"ref": "research/model_capability_probes/astra_20260908.json", "state": "VERIFIED_SCOPED"}
+      },
+      "notes": "远端与本地 3000/3002 传输均已通过最小 Astra 调用；当前仍是受限 auto POC 候选，不得写成 Terra 默认替代或生产晋级。现场收据：C:/tmp/ace_core/research/model_pool_transport_closure_20260908.json。"
+    },
+    {
+      "id": "codex:gpt-5.6-terra",
+      "provider": "codex",
+      "model": "gpt-5.6-terra",
+      "status": "OBSERVED_ROUTE",
+      "eligible_scopes": ["current_control_plane", "codex_current_route"],
+      "capability_states": {
+        "reasoning": "OBSERVED_ROUTE",
+        "planning": "OBSERVED_ROUTE",
+        "long_context": "NOT_PROVEN",
+        "vision": "OBSERVED_ROUTE",
+        "coding": "OBSERVED_ROUTE"
+      },
+      "metrics": {
+        "quality": 0.78,
+        "cost": 0.55,
+        "latency": 0.55,
+        "reliability": 0.70,
+        "provider_stability": 0.70
+      },
+      "evidence": [
+        {"ref": "current_codex_route", "state": "ROUTE_OBSERVED"}
+      ],
+      "notes": "沿用现有 Terra 路径；本注册表不修改默认入口。"
+    },
+    {
+      "id": "zhipu:glm-4-flash",
+      "provider": "zhipu",
+      "model": "glm-4-flash",
+      "status": "VERIFIED_SCOPED",
+      "eligible_scopes": ["current_control_plane", "ace_provider"],
+      "capability_states": {
+        "reasoning": "OBSERVED",
+        "planning": "NOT_PROVEN",
+        "long_context": "NOT_PROVEN",
+        "vision": "NOT_PROVEN",
+        "coding": "OBSERVED",
+        "speed": "VERIFIED",
+        "cost": "VERIFIED",
+        "reliability": "LIVE_HTTP_200",
+        "provider_stability": "LIVE_HTTP_200"
+      },
+      "metrics": {
+        "quality": 0.52,
+        "cost": 0.92,
+        "latency": 0.90,
+        "reliability": 0.80,
+        "provider_stability": 0.80
+      },
+      "evidence": [
+        {"ref": "research/model_task_routing.v1.json", "state": "LIVE_HTTP_200_VERIFIED"}
+      ],
+      "notes": "只在已证明的杂务/快速能力范围内使用，不因一次 HTTP 200 自动扩张能力。"
+    },
+    {
+      "id": "ollama:qwen-vl",
+      "provider": "ollama",
+      "model": "configured_local_vl",
+      "status": "CANDIDATE",
+      "eligible_scopes": [],
+      "capability_states": {
+        "vision": "NOT_PROVEN",
+        "reasoning": "NOT_PROVEN",
+        "speed": "NOT_PROVEN"
+      },
+      "metrics": {
+        "quality": 0.45,
+        "cost": 0.99,
+        "latency": 0.80,
+        "reliability": 0.30,
+        "provider_stability": 0.30
+      },
+      "evidence": [],
+      "notes": "存在配置候选，但本 POC 不把文件存在等同于可调用。"
+    }
+  ]
+}

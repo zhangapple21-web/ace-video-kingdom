@@ -1,0 +1,144 @@
+{
+  "schema": "video_kingdom.provider_admission_closure.v1",
+  "date": "2026-09-06",
+  "scope": "local_runtime_only",
+  "implementation_status": "IMPLEMENTED",
+  "verification_status": "VERIFIED",
+  "partially_verified": [
+    "Static inventory covers all current repository executable Provider-like entry points outside research/external_repos.",
+    "Legacy episode_007 wrappers now propagate downstream admission failure instead of returning success.",
+    "Canonical receipts bind the exact provider-facing payload and assert it immediately before POST.",
+    "Shenwen image anchor lanes now POST the admitted JSON body directly; the prior SDK re-serialization gap is closed.",
+    "Zhipu/OneAPI chore retries reuse the immutable admitted request payload."
+  ],
+  "not_proven": [
+    "Provider servers independently enforcing the local Admission Receipt.",
+    "Agnes/Shenwen/Zhipu actually honoring camera, action, identity, first/last-frame, and visible-entity semantics.",
+    "A real Provider production sample; no real Provider was called in this pass."
+  ],
+  "canonical_chain": [
+    "Shot/Episode Contract",
+    "model_free_preflight",
+    "Canonical Generation Request",
+    "request_hash",
+    "Admission Receipt",
+    "assert_admission(provider_payload)",
+    "Provider boundary"
+  ],
+  "changes": [
+    {
+      "path": "runtime/provider_admission.py",
+      "status": "IMPLEMENTED",
+      "details": [
+        "Canonical request stores exact provider_payload.",
+        "assert_admission re-hashes canonical_request and checks preflight plus optional provider payload.",
+        "Empty delivery status sets fail closed."
+      ]
+    },
+    {
+      "path": "tools/run_short_clip.py",
+      "status": "IMPLEMENTED",
+      "details": [
+        "Contract is required before any Agnes POST.",
+        "Payload is checked against the hash-bound receipt immediately before POST.",
+        "Existing artifacts are not overwritten."
+      ]
+    },
+    {
+      "path": "tools/run_image_edit_retry.py",
+      "status": "IMPLEMENTED",
+      "details": ["Wrapped Provider CLI is explicitly closed until an adapter can bind its exact payload to a canonical request; a receipt alone cannot authorize arbitrary child commands."]
+    },
+    {
+      "path": "tools/run_episode007_*.py",
+      "status": "IMPLEMENTED",
+      "details": ["No-contract legacy paths fail closed and propagate non-zero status."]
+    },
+    {
+      "path": "tools/run_idea_pipeline.py",
+      "status": "IMPLEMENTED",
+      "details": ["Execution conformance requires a canonical delivery gate receipt whose statuses recompute to PASS."]
+    },
+    {
+      "path": "tools/generate_episode007_anchors.py and tools/generate_episode007_scene_action_anchors.py",
+      "status": "IMPLEMENTED",
+      "details": [
+        "Removed the unbound Shenwen SDK call from these entry points.",
+        "The exact admitted JSON payload is serialized for the Provider POST and the scene-action receipt is stored under repository research/admission_receipts."
+      ]
+    },
+    {
+      "path": "tools/run_zhipu_chore.py",
+      "status": "IMPLEMENTED",
+      "details": [
+        "Retries pass the same request payload used to build the canonical request.",
+        "Every POST requires the admitted dict payload and re-asserts it immediately before POST; the historical string-form transport path is explicitly fail-closed."
+      ]
+    }
+  ],
+  "entry_points": {
+    "unified": [
+      "runtime.shot_core.run_take",
+      "tools.run_shot_core_pilot",
+      "tools.run_shot_core_provider_reality_probe",
+      "tools.run_short_clip (when contract supplied)",
+      "tools.run_comedy_episode",
+      "tools.run_controlled_shift",
+      "tools.consume_dispatch_provider_card (when contract supplied)",
+      "tools.run_idea_pipeline asset lane",
+      "tools.build_longmen_strict_plan asset lane",
+      "tools.generate_episode007_anchors",
+      "tools.generate_episode007_scene_action_anchors",
+      "tools.semantic_slice_novel",
+      "tools.run_zhipu_chore",
+      "tools.multi_model_script_battle"
+    ],
+    "fail_closed": [
+      "tools.run_episode007_production",
+      "tools.run_episode007_action_probe",
+      "tools.run_episode007_camera_probe_v2",
+      "tools.run_episode007_full_scene_anchor",
+      "tools.run_episode007_scene_anchor_probe",
+      "tools.run_episode007_targeted_repairs",
+      "tools.run_image_edit_retry (no canonical payload adapter)",
+      "tools.consume_dispatch_provider_card without contract"
+    ],
+    "poll_only_or_provider_free": [
+      "tools.resume_shot_core",
+      "tools.run_shot_core_cross_process_recovery",
+      "tools.assemble_episode",
+      "tools.assemble_shot_core"
+    ]
+  },
+  "evidence": {
+    "pytest": {
+      "command": "pytest -q",
+      "result": "101 passed"
+    },
+    "legacy_fail_closed_probe": {
+      "command": "python tools/run_episode007_action_probe.py",
+      "returncode": 1,
+      "stderr_or_stdout": "provider admission blocked: --episode-contract or --shot-contract is required; no provider request submitted",
+      "provider_post": "not reached"
+    },
+    "legacy_wrapper_fail_closed_probe": {
+      "command": "python tools/run_image_edit_retry.py --log research/image_edit_fail_closed_probe.log --admission-receipt <receipt> -- <child command>",
+      "returncode": 1,
+      "stderr_or_stdout": "provider admission blocked: wrapped Provider CLI has no canonical payload adapter; no provider request submitted",
+      "child_command": "not launched"
+    },
+    "legacy_string_transport_probe": {
+      "command": "pytest -q tests/test_oneapi_chore_transport.py::test_legacy_string_request_is_closed_before_provider_post",
+      "result": "1 passed",
+      "provider_post": "not reached"
+    },
+    "missing_receipt_transport_probe": {
+      "command": "pytest -q tests/test_oneapi_chore_transport.py::test_dict_request_without_receipt_is_closed_before_provider_post",
+      "result": "1 passed",
+      "provider_post": "not reached"
+    },
+    "inventory": "research/provider_admission_inventory.v1.md"
+  },
+  "final_receipt": "IMPLEMENTED / VERIFIED / PARTIALLY_VERIFIED / NOT_PROVEN",
+  "stop_boundary": "Complete this admission-closure pass and stop; do not expand to real-provider execution or new architecture without a separate authorization."
+}

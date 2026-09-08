@@ -1,0 +1,5 @@
+file 'C:\tmp\ace_video_kingdom_git\research\background_runs\episode007_formal_s03a_frames\0_5.png'
+file 'C:\tmp\ace_video_kingdom_git\research\background_runs\episode007_formal_s03a_frames\1_5.png'
+file 'C:\tmp\ace_video_kingdom_git\research\background_runs\episode007_formal_s03a_frames\3_0.png'
+file 'C:\tmp\ace_video_kingdom_git\research\background_runs\episode007_formal_s03a_frames\4_5.png'
+file 'C:\tmp\ace_video_kingdom_git\research\background_runs\episode007_formal_s03a_frames\5_5.png'

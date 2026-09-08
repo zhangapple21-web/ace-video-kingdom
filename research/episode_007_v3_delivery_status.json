@@ -1,0 +1,23 @@
+{
+  "project_id": "episode_007_virtual_data",
+  "candidate": "media_staging/episode_007_virtual_data/video_camera_grammar_v2/episode_007_final_candidate_v3.mp4",
+  "at": "2026-09-03T09:40:00+08:00",
+  "status": "NOT_DELIVERABLE",
+  "production_integration": false,
+  "facts": [
+    "The MP4 has a valid H.264 video stream, AAC audio stream, 18 subtitle cues, and a duration of 108.041667 seconds.",
+    "The episode runtime preflight is BLOCKED with 36 hard failures and 131 quality-contract gaps.",
+    "The rendered cast is Alang and Feige, not the Wenji female-character asset set."
+  ],
+  "blocking_reasons": [
+    "The storyboard is EXPERIMENTAL and omits required causal, action-beat, camera, continuity, and audio fields.",
+    "All 18 shots lack the required public scene-anchor URL in the active episode plan.",
+    "The candidate lacks a fresh post-render director review; media integrity cannot establish narrative, performance, identity, or audio quality."
+  ],
+  "required_before_delivery": [
+    "Create a FORMAL approved storyboard for the intended character and story.",
+    "Pass deterministic preflight before any new provider submission.",
+    "Run a post-render director review and mark an explicit delivery decision.",
+    "If the requested work is Wenji, render from the Wenji character asset set rather than reuse this candidate."
+  ]
+}

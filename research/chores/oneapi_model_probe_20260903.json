@@ -1,0 +1,26 @@
+{
+  "contract_version": "ace.video_kingdom.oneapi_model_probe.v1",
+  "at": "2026-09-03T11:24:14+08:00",
+  "scope": "LOCAL_RESEARCH_ONLY",
+  "production_integration": false,
+  "endpoint": "http://127.0.0.1:3000/v1/chat/completions",
+  "method": "authenticated minimal Chat Completions probe",
+  "results": [
+    {"model": "gpt-5.4-mini", "http_status": 200, "status": "VERIFIED_FRESH", "latency_ms": 2363},
+    {"model": "grok-4.6", "http_status": 200, "status": "VERIFIED_FRESH"},
+    {"model": "grok-4.5", "http_status": 200, "status": "VERIFIED_FRESH"},
+    {"model": "gpt-5.4", "http_status": 200, "status": "VERIFIED_FRESH", "latency_ms": 2581},
+    {"model": "gpt-5.5", "http_status": 200, "status": "VERIFIED_FRESH", "latency_ms": 2491},
+    {"model": "gpt-5.6-terra", "http_status": 200, "status": "VERIFIED_FRESH", "latency_ms": 1911}
+  ],
+  "transient_failure_history": {
+    "at": "2026-09-03T11:05:51+08:00",
+    "models": ["gpt-5.4-mini", "gpt-5.4", "gpt-5.5", "gpt-5.6-terra"],
+    "http_status": 403,
+    "classification": "TRANSIENT_OR_ROUTE_STATE_UNRESOLVED",
+    "note": "A later independent fresh probe succeeded for all four; the 403 event must not be promoted to a permanent quarantine."
+  },
+  "active_routing_directory": ["gpt-5.4-mini", "gpt-5.4", "gpt-5.5", "gpt-5.6-terra", "grok-4.5", "grok-4.6"],
+  "decision": "Use gpt-5.4-mini for bounded low-cost chores by default, Grok only when explicitly selected for independent audit, and gpt-5.6-terra only for a final judgment. Every model remains contingent on a fresh minimal call after a gateway restart or provider error.",
+  "secrets_logged": false
+}

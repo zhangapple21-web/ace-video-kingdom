@@ -1,0 +1,71 @@
+{
+  "schema": "video_kingdom.dirty_state_inventory.v1",
+  "captured_at": "2026-09-05",
+  "workspace": "C:/tmp/ace_video_kingdom_git",
+  "head": "9095f0c feat: grant Free Zone isolated video capability",
+  "status_porcelain_lines": 339,
+  "tracked_modified_count": 15,
+  "untracked_count": 1417,
+  "tracked_modified": [
+    "PROJECT_BRIDGE.md",
+    "README.md",
+    "governance/production_workflow_profile.v1.json",
+    "governance/short_drama_review_policy.v1.json",
+    "pytest.ini",
+    "research/ONEAPI_MINERPOOL_FIT.v1.md",
+    "research/episode_007_preflight_runtime.json",
+    "research/street_visit_ledger.v1.json",
+    "tools/assemble_episode.py",
+    "tools/emit_ace_result_bridge.py",
+    "tools/preflight_episode.py",
+    "tools/run_comedy_episode.py",
+    "tools/run_controlled_shift.py",
+    "tools/run_episode007_production.py",
+    "tools/run_short_clip.py"
+  ],
+  "untracked_by_top_level": {
+    "episodes": 653,
+    "research": 381,
+    "media_staging": 245,
+    "experiments": 45,
+    "tools": 45,
+    "tests": 16,
+    "governance": 5,
+    "memory": 4,
+    "roles": 3,
+    "runtime": 3,
+    "root_or_quoted_path_entries": 17
+  },
+  "parallel_owner": {
+    "thread_id": "01a0678d-5046-7f03-8fd8-6c41d329f0cf",
+    "role": "video-production-owner",
+    "status_at_capture": "active/inProgress",
+    "protected_scope": [
+      "runtime/shot_core.py",
+      "tools/run_shot_core_pilot.py",
+      "tools/assemble_shot_core.py",
+      "tests/test_shot_core_runtime.py",
+      "tests/test_shot_core_hardening.py",
+      "research/shot_core_production_pilot.v1.md",
+      "research/shot_core_production_audit.v1.md",
+      "research/shot_core_pilot_*.json",
+      "media_staging/shot_core_pilot/"
+    ]
+  },
+  "external_reference": {
+    "url": "https://github.com/modelscope/scepter/commit/c4b4d88e7585184dd74bd1aee1471c75ce7217e5",
+    "commit": "c4b4d88e7585184dd74bd1aee1471c75ce7217e5",
+    "date": "2025-02-10",
+    "message": "update readme",
+    "changed_files": ["docs/en/tasks/ace.md", "readme.md"],
+    "fit": "reference_only",
+    "video_kingdom_runtime_evidence": false
+  },
+  "safety": {
+    "provider_calls": false,
+    "deletions": false,
+    "reset_or_checkout": false,
+    "commit_created": false,
+    "cleaning_authorized": false
+  }
+}

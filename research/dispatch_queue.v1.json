@@ -1,0 +1,449 @@
+{
+  "contract_version": "ace.video_kingdom.dispatch_queue.v1",
+  "production_integration": false,
+  "cards": [
+    {
+      "task_id": "VK-AUTO-871f045f99a93740",
+      "fingerprint": "871f045f99a93740",
+      "task_type": "CONTINUITY_REPAIR",
+      "brief": "Review patrol warnings, attribute each failure, and create the smallest repair experiment.",
+      "trigger": "manual_probe",
+      "created_at": "2026-09-02T04:38:04.313753+00:00",
+      "status": "COMPLETED",
+      "production_integration": false,
+      "provider_calls": 0,
+      "automatic_promotion": false,
+      "claimed_at": "2026-09-02T04:43:10.610908+00:00",
+      "finished_at": "2026-09-02T04:43:10.610908+00:00",
+      "evidence": {
+        "action": "REPAIR_REVIEW_RECORDED",
+        "warning_count": 0,
+        "warning_digest": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+      }
+    },
+    {
+      "task_id": "VK-AUTO-311ead8735e4f9d4",
+      "fingerprint": "311ead8735e4f9d4",
+      "task_type": "CONTINUITY_REPAIR",
+      "brief": "Review patrol warnings, attribute each failure, and create the smallest repair experiment.",
+      "trigger": "ace_daemon_cycle",
+      "created_at": "2026-09-04T03:56:05.190002+00:00",
+      "status": "PROVIDER_COMPLETED",
+      "production_integration": false,
+      "provider_calls": 1,
+      "automatic_promotion": false,
+      "claimed_at": "2026-09-04T03:56:05.191325+00:00",
+      "finished_at": "2026-09-04T03:56:05.192318+00:00",
+      "evidence": {
+        "action": "REPAIR_REVIEW_RECORDED",
+        "warning_count": 1,
+        "warning_digest": "ec1ec1c673c7350ea24b34fd98ff9dfd67a24ffe95eb9fcac7c4b682384b2cbf"
+      },
+      "provider_receipts": [
+        {
+          "shot_id": "S03A_FEIGE_LOCKED_R1",
+          "video_id": "video_bGl0ZWxsbTpjdXN0b21fbGxtX3Byb3ZpZGVyOm9wZW5haTttb2RlbF9pZDphZ25lcy12aWRlby12Mi4wO3ZpZGVvX2lkOnZpZGVvXzJlNmRkYzEyNmQ1ZTQ3OTA4YjEwMzllMDAzYTgzMjY2",
+          "manifest": "experiments/episode_007_s03a_feige_locked_r1_tasks.json",
+          "artifact": "media_staging/episode_007_virtual_data/video_camera_grammar_v2/S03A_FEIGE_LOCKED_R1.mp4",
+          "artifact_sha256": "a6a2876b448c86924edc4642686ed440b8922602af9cec359da8cbcef17323b0"
+        }
+      ]
+    },
+    {
+      "task_id": "VK-AUTO-485002e87b61397b",
+      "fingerprint": "485002e87b61397b",
+      "task_type": "RESUME_MEDIA_WORK",
+      "brief": "Resume existing video jobs by video_id; do not submit duplicates.",
+      "trigger": "ace_daemon_cycle",
+      "created_at": "2026-09-04T04:01:49.936110+00:00",
+      "status": "HANDOFF_READY",
+      "production_integration": false,
+      "provider_calls": 0,
+      "automatic_promotion": false,
+      "claimed_at": "2026-09-04T04:01:49.937610+00:00",
+      "finished_at": "2026-09-04T04:01:49.938134+00:00",
+      "evidence": {
+        "action": "RESUME_POLL_ONLY",
+        "resumable_jobs": 1,
+        "duplicate_submission": false
+      }
+    },
+    {
+      "task_id": "VK-AUTO-e580632bcad6759c",
+      "fingerprint": "e580632bcad6759c",
+      "task_type": "EXTERNAL_LEARNING",
+      "brief": "Visit one public source or shop, extract one bounded mechanism, and record a source hash and next probe.",
+      "trigger": "ace_daemon_cycle",
+      "created_at": "2026-09-04T04:08:31.522508+00:00",
+      "status": "HANDOFF_READY",
+      "production_integration": false,
+      "provider_calls": 0,
+      "automatic_promotion": false,
+      "claimed_at": "2026-09-04T04:08:31.523514+00:00",
+      "finished_at": "2026-09-04T04:08:31.524519+00:00",
+      "evidence": {
+        "action": "LEARNING_SLOT_OPENED",
+        "source_boundary": "PUBLIC_ONLY",
+        "next_step": "deduplicate against public_street_learning_ledger",
+        "provider_calls": 0
+      }
+    },
+    {
+      "task_id": "VK-AUTO-b3e476fb2e1ad55f",
+      "fingerprint": "b3e476fb2e1ad55f",
+      "task_type": "EXTERNAL_LEARNING",
+      "brief": "Visit one public source or shop, extract one bounded mechanism, and record a source hash and next probe.",
+      "trigger": "provider_call_accounting_probe_20260904",
+      "created_at": "2026-09-04T04:53:22.011868+00:00",
+      "status": "HANDOFF_READY",
+      "production_integration": false,
+      "provider_calls": 0,
+      "automatic_promotion": false,
+      "linkage": {
+        "project_id": "episode_007_virtual_data",
+        "evidence_refs": [
+          {
+            "name": "episode_contract",
+            "path": "episodes/episode_007_virtual_data.v1.json",
+            "exists": true,
+            "sha256": "a64601e4b275da4e79c3ef9f5ed566bf2ccfbdb05e7a678bfbdd50413f200e43"
+          },
+          {
+            "name": "six_module_contract",
+            "path": "episodes/episode_007_virtual_data.six_module.v1.json",
+            "exists": true,
+            "sha256": "f0aeab2e24a8022c21c5df9bf9da621cc4d84b3b3222be8077d12e194794bc02"
+          },
+          {
+            "name": "preflight",
+            "path": "research/episode_007_preflight_runtime_20260904.json",
+            "exists": true,
+            "sha256": "b7eee4b92db41531ee958aba1910d270611fc2848120ebcb8d1a4a59090473ba"
+          },
+          {
+            "name": "previous_cut_audit",
+            "path": "research/episode_007_previous_cut_audit_latest.json",
+            "exists": true,
+            "sha256": "4067bcf1e0eb2b1e7bd41e274dbb799719eb66a98ad71da4eb24d68c7f3d5bd5"
+          }
+        ],
+        "contract_status": "LINKED",
+        "previous_cut_audit_status": "AVAILABLE",
+        "next_owner": "video_kingdom_shift",
+        "production_integration": false
+      },
+      "claimed_at": "2026-09-04T04:53:22.013637+00:00",
+      "finished_at": "2026-09-04T04:53:22.016642+00:00",
+      "evidence": {
+        "action": "LEARNING_SLOT_OPENED",
+        "source_boundary": "PUBLIC_ONLY",
+        "next_step": "deduplicate against public_street_learning_ledger",
+        "provider_calls": 0,
+        "linkage": {
+          "project_id": "episode_007_virtual_data",
+          "linked_artifacts": 4,
+          "hash_verified_artifacts": 4,
+          "contract_status": "LINKED",
+          "previous_cut_audit_status": "AVAILABLE",
+          "next_owner": "video_kingdom_shift"
+        }
+      }
+    },
+    {
+      "task_id": "VK-AUTO-550fb7dacd0c725e",
+      "fingerprint": "550fb7dacd0c725e",
+      "task_type": "CONTINUITY_REPAIR",
+      "brief": "Review patrol warnings, attribute each failure, and create the smallest repair experiment.",
+      "trigger": "user_verification_20260904",
+      "created_at": "2026-09-04T05:30:56.791578+00:00",
+      "status": "HANDOFF_READY",
+      "production_integration": false,
+      "provider_calls": 0,
+      "automatic_promotion": false,
+      "linkage": {
+        "project_id": "episode_007_virtual_data",
+        "evidence_refs": [
+          {
+            "name": "episode_contract",
+            "path": "episodes/episode_007_virtual_data.v1.json",
+            "exists": true,
+            "sha256": "a64601e4b275da4e79c3ef9f5ed566bf2ccfbdb05e7a678bfbdd50413f200e43"
+          },
+          {
+            "name": "six_module_contract",
+            "path": "episodes/episode_007_virtual_data.six_module.v1.json",
+            "exists": true,
+            "sha256": "f0aeab2e24a8022c21c5df9bf9da621cc4d84b3b3222be8077d12e194794bc02"
+          },
+          {
+            "name": "preflight",
+            "path": "research/episode_007_preflight_runtime_20260904.json",
+            "exists": true,
+            "sha256": "b7eee4b92db41531ee958aba1910d270611fc2848120ebcb8d1a4a59090473ba"
+          },
+          {
+            "name": "previous_cut_audit",
+            "path": "research/episode_007_previous_cut_audit_latest.json",
+            "exists": true,
+            "sha256": "4067bcf1e0eb2b1e7bd41e274dbb799719eb66a98ad71da4eb24d68c7f3d5bd5"
+          }
+        ],
+        "contract_status": "LINKED",
+        "previous_cut_audit_status": "AVAILABLE",
+        "next_owner": "video_kingdom_shift",
+        "production_integration": false
+      },
+      "claimed_at": "2026-09-04T05:30:56.794098+00:00",
+      "finished_at": "2026-09-04T05:30:56.798606+00:00",
+      "evidence": {
+        "action": "REPAIR_REVIEW_RECORDED",
+        "warning_count": 1,
+        "warning_digest": "52e4a40354aeb8c7b21ae2bc098aac70380672b32056eecbbc5d6c7b146b2b78",
+        "linkage": {
+          "project_id": "episode_007_virtual_data",
+          "linked_artifacts": 4,
+          "hash_verified_artifacts": 4,
+          "contract_status": "LINKED",
+          "previous_cut_audit_status": "AVAILABLE",
+          "next_owner": "video_kingdom_shift"
+        }
+      }
+    },
+    {
+      "task_id": "VK-AUTO-d758770c763a2c16",
+      "fingerprint": "d758770c763a2c16",
+      "task_type": "CONTINUITY_REPAIR",
+      "brief": "Review patrol warnings, attribute each failure, and create the smallest repair experiment.",
+      "trigger": "user_provider_consumption_20260904",
+      "created_at": "2026-09-04T05:32:22.085348+00:00",
+      "status": "PROVIDER_COMPLETED",
+      "production_integration": false,
+      "provider_calls": 1,
+      "automatic_promotion": false,
+      "linkage": {
+        "project_id": "episode_007_virtual_data",
+        "evidence_refs": [
+          {
+            "name": "episode_contract",
+            "path": "episodes/episode_007_virtual_data.v1.json",
+            "exists": true,
+            "sha256": "a64601e4b275da4e79c3ef9f5ed566bf2ccfbdb05e7a678bfbdd50413f200e43"
+          },
+          {
+            "name": "six_module_contract",
+            "path": "episodes/episode_007_virtual_data.six_module.v1.json",
+            "exists": true,
+            "sha256": "f0aeab2e24a8022c21c5df9bf9da621cc4d84b3b3222be8077d12e194794bc02"
+          },
+          {
+            "name": "preflight",
+            "path": "research/episode_007_preflight_runtime_20260904.json",
+            "exists": true,
+            "sha256": "b7eee4b92db41531ee958aba1910d270611fc2848120ebcb8d1a4a59090473ba"
+          },
+          {
+            "name": "previous_cut_audit",
+            "path": "research/episode_007_previous_cut_audit_latest.json",
+            "exists": true,
+            "sha256": "4067bcf1e0eb2b1e7bd41e274dbb799719eb66a98ad71da4eb24d68c7f3d5bd5"
+          }
+        ],
+        "contract_status": "LINKED",
+        "previous_cut_audit_status": "AVAILABLE",
+        "next_owner": "video_kingdom_shift",
+        "production_integration": false
+      },
+      "provider_receipts": [
+        {
+          "shot_id": "ACE_CARD_PROVIDER_PROBE_S01A",
+          "video_id": "video_bGl0ZWxsbTpjdXN0b21fbGxtX3Byb3ZpZGVyOm9wZW5haTttb2RlbF9pZDphZ25lcy12aWRlby12Mi4wO3ZpZGVvX2lkOnZpZGVvXzUwZDNiMjA2MzlhZjQ1M2Q4NjI3NWZkMGE0NjY2YTBl",
+          "manifest": "experiments/ace_card_provider_probe_tasks.json",
+          "artifact": "media_staging/episode_007_virtual_data/video_camera_grammar_v2/ACE_CARD_PROVIDER_PROBE_S01A.mp4",
+          "artifact_sha256": "1ef49a34a840d82f85073fc990cfa0a4c3bac15db87f2ce281253908f39155f6"
+        }
+      ]
+    },
+    {
+      "task_id": "VK-AUTO-1a2bf5b5587be635",
+      "fingerprint": "1a2bf5b5587be635",
+      "task_type": "EXTERNAL_LEARNING",
+      "brief": "Visit one public source or shop, extract one bounded mechanism, and record a source hash and next probe.",
+      "trigger": "ace_daemon_cycle",
+      "created_at": "2026-09-05T00:01:58.578140+00:00",
+      "status": "HANDOFF_READY",
+      "production_integration": false,
+      "provider_calls": 0,
+      "automatic_promotion": false,
+      "claimed_at": "2026-09-05T00:01:58.580971+00:00",
+      "finished_at": "2026-09-05T00:01:58.582482+00:00",
+      "evidence": {
+        "action": "LEARNING_SLOT_OPENED",
+        "source_boundary": "PUBLIC_ONLY",
+        "next_step": "deduplicate against public_street_learning_ledger",
+        "provider_calls": 0
+      }
+    },
+    {
+      "task_id": "VK-AUTO-a1e8e71bf766b4fd",
+      "fingerprint": "a1e8e71bf766b4fd",
+      "task_type": "EXTERNAL_LEARNING",
+      "brief": "Visit one public source or shop, extract one bounded mechanism, and record a source hash and next probe.",
+      "trigger": "ace_daemon_cycle",
+      "created_at": "2026-09-06T00:00:50.040811+00:00",
+      "status": "HANDOFF_READY",
+      "production_integration": false,
+      "provider_calls": 0,
+      "automatic_promotion": false,
+      "claimed_at": "2026-09-06T00:00:50.045609+00:00",
+      "finished_at": "2026-09-06T00:00:50.048600+00:00",
+      "evidence": {
+        "action": "LEARNING_SLOT_OPENED",
+        "source_boundary": "PUBLIC_ONLY",
+        "next_step": "deduplicate against public_street_learning_ledger",
+        "provider_calls": 0
+      }
+    },
+    {
+      "task_id": "VK-AUTO-a4359ca7dececa55",
+      "fingerprint": "a4359ca7dececa55",
+      "task_type": "EXTERNAL_LEARNING",
+      "brief": "Visit one public source or shop, extract one bounded mechanism, and record a source hash and next probe.",
+      "trigger": "ace_daemon_cycle",
+      "created_at": "2026-09-07T00:06:08.525706+00:00",
+      "status": "HANDOFF_READY",
+      "production_integration": false,
+      "provider_calls": 0,
+      "automatic_promotion": false,
+      "claimed_at": "2026-09-07T00:06:08.528238+00:00",
+      "finished_at": "2026-09-07T00:06:08.529782+00:00",
+      "evidence": {
+        "action": "LEARNING_SLOT_OPENED",
+        "source_boundary": "PUBLIC_ONLY",
+        "next_step": "deduplicate against public_street_learning_ledger",
+        "provider_calls": 0
+      }
+    },
+    {
+      "task_id": "VK-AUTO-7b66a172cdc17924",
+      "fingerprint": "7b66a172cdc17924",
+      "task_type": "EXTERNAL_LEARNING",
+      "brief": "Visit one public source or shop, extract one bounded mechanism, and record a source hash and next probe.",
+      "trigger": "ace_daemon_cycle",
+      "created_at": "2026-09-07T11:40:12.895182+00:00",
+      "status": "HANDOFF_READY",
+      "production_integration": false,
+      "provider_calls": 0,
+      "automatic_promotion": false,
+      "linkage": {
+        "project_id": "episode_007_virtual_data",
+        "evidence_refs": [
+          {
+            "name": "episode_contract",
+            "path": "episodes/episode_007_virtual_data.v1.json",
+            "exists": true,
+            "sha256": "a64601e4b275da4e79c3ef9f5ed566bf2ccfbdb05e7a678bfbdd50413f200e43"
+          },
+          {
+            "name": "six_module_contract",
+            "path": "episodes/episode_007_virtual_data.six_module.v1.json",
+            "exists": true,
+            "sha256": "f0aeab2e24a8022c21c5df9bf9da621cc4d84b3b3222be8077d12e194794bc02"
+          },
+          {
+            "name": "preflight",
+            "path": "research/episode_007_preflight_runtime_20260904.json",
+            "exists": true,
+            "sha256": "b7eee4b92db41531ee958aba1910d270611fc2848120ebcb8d1a4a59090473ba"
+          },
+          {
+            "name": "previous_cut_audit",
+            "path": "research/episode_007_previous_cut_audit_latest.json",
+            "exists": true,
+            "sha256": "4067bcf1e0eb2b1e7bd41e274dbb799719eb66a98ad71da4eb24d68c7f3d5bd5"
+          }
+        ],
+        "contract_status": "LINKED",
+        "previous_cut_audit_status": "AVAILABLE",
+        "next_owner": "video_kingdom_shift",
+        "production_integration": false
+      },
+      "claimed_at": "2026-09-07T11:46:41.381779+00:00",
+      "finished_at": "2026-09-07T11:46:41.388244+00:00",
+      "evidence": {
+        "action": "LEARNING_SLOT_OPENED",
+        "source_boundary": "PUBLIC_ONLY",
+        "next_step": "deduplicate against public_street_learning_ledger",
+        "provider_calls": 0,
+        "linkage": {
+          "project_id": "episode_007_virtual_data",
+          "linked_artifacts": 4,
+          "hash_verified_artifacts": 4,
+          "contract_status": "LINKED",
+          "previous_cut_audit_status": "AVAILABLE",
+          "next_owner": "video_kingdom_shift"
+        }
+      }
+    },
+    {
+      "task_id": "VK-AUTO-d6fbeb34fe16cc69",
+      "fingerprint": "d6fbeb34fe16cc69",
+      "task_type": "EXTERNAL_LEARNING",
+      "brief": "Visit one public source or shop, extract one bounded mechanism, and record a source hash and next probe.",
+      "trigger": "ace_daemon_cycle",
+      "created_at": "2026-09-08T00:05:35.834951+00:00",
+      "status": "HANDOFF_READY",
+      "production_integration": false,
+      "provider_calls": 0,
+      "automatic_promotion": false,
+      "linkage": {
+        "project_id": "episode_007_virtual_data",
+        "evidence_refs": [
+          {
+            "name": "episode_contract",
+            "path": "episodes/episode_007_virtual_data.v1.json",
+            "exists": true,
+            "sha256": "a64601e4b275da4e79c3ef9f5ed566bf2ccfbdb05e7a678bfbdd50413f200e43"
+          },
+          {
+            "name": "six_module_contract",
+            "path": "episodes/episode_007_virtual_data.six_module.v1.json",
+            "exists": true,
+            "sha256": "f0aeab2e24a8022c21c5df9bf9da621cc4d84b3b3222be8077d12e194794bc02"
+          },
+          {
+            "name": "preflight",
+            "path": "research/episode_007_preflight_runtime_20260904.json",
+            "exists": true,
+            "sha256": "b7eee4b92db41531ee958aba1910d270611fc2848120ebcb8d1a4a59090473ba"
+          },
+          {
+            "name": "previous_cut_audit",
+            "path": "research/episode_007_previous_cut_audit_latest.json",
+            "exists": true,
+            "sha256": "4067bcf1e0eb2b1e7bd41e274dbb799719eb66a98ad71da4eb24d68c7f3d5bd5"
+          }
+        ],
+        "contract_status": "LINKED",
+        "previous_cut_audit_status": "AVAILABLE",
+        "next_owner": "video_kingdom_shift",
+        "production_integration": false
+      },
+      "claimed_at": "2026-09-08T00:11:51.691159+00:00",
+      "finished_at": "2026-09-08T00:11:51.727731+00:00",
+      "evidence": {
+        "action": "LEARNING_SLOT_OPENED",
+        "source_boundary": "PUBLIC_ONLY",
+        "next_step": "deduplicate against public_street_learning_ledger",
+        "provider_calls": 0,
+        "linkage": {
+          "project_id": "episode_007_virtual_data",
+          "linked_artifacts": 4,
+          "hash_verified_artifacts": 4,
+          "contract_status": "LINKED",
+          "previous_cut_audit_status": "AVAILABLE",
+          "next_owner": "video_kingdom_shift"
+        }
+      }
+    }
+  ]
+}

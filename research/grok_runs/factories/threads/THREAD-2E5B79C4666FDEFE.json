@@ -1,0 +1,27 @@
+{
+  "content_retained": false,
+  "contract_version": "ace.free_zone_factories.v1",
+  "created_at": "2026-09-02T03:44:04.132163+00:00",
+  "factory": "recovery",
+  "origin": {
+    "fingerprint": "resident_shift:video_kingdom_r1_narrator:2026-09-02",
+    "parent_experiment_id": null,
+    "source_kind": "resident_shift",
+    "source_ref": "video_kingdom_r1_narrator"
+  },
+  "production_integration": false,
+  "realm_state": {
+    "authority": "SANDBOX_ONLY",
+    "contract_version": "ace.free_zone_realm.v1",
+    "outbound_rule": "REOBSERVE",
+    "production_integration": false,
+    "realm": "FREE",
+    "retention": "SEED"
+  },
+  "research_shape": {
+    "hypothesis": "video_kingdom_r1_archaeology_shadow resident activity; source and response retained by hash only",
+    "method": "Isolated shadow resident call; retain hashes for independent audit."
+  },
+  "thread_hash": "16d761d4f2f9d0269a5a0093cb111db8f25cfb8cd47a6b8e897c1d9eb7c6880d",
+  "thread_id": "THREAD-2E5B79C4666FDEFE"
+}

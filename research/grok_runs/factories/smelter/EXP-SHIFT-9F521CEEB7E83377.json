@@ -1,0 +1,23 @@
+{
+  "contract_version": "ace.free_zone_factories.v1",
+  "distillation_hash": "74fc8f5ad62c4c7c914d42d37e1a1754ffa6f3bb1b9e7763538187548fe3cd9d",
+  "distillation_status": "OPEN_QUESTION",
+  "experiment_id": "EXP-SHIFT-9F521CEEB7E83377",
+  "factory": "ruin_smelter",
+  "outcome": "INCONCLUSIVE",
+  "production_integration": false,
+  "realm_state": {
+    "authority": "SANDBOX_ONLY",
+    "contract_version": "ace.free_zone_realm.v1",
+    "outbound_rule": "NONE",
+    "production_integration": false,
+    "realm": "SHADOW",
+    "retention": "ACTIVE"
+  },
+  "receipt_hash": "098540f3abd4e5b0dbe36979b3b7803016649a3791b95293c1750e24c0107631",
+  "receipt_id": "SMELT-EXP-SHIFT-9F521CEEB7E83377",
+  "recorded_at": "2026-09-02T03:44:04.161361+00:00",
+  "source_record_hash": "be565e894fbf7627cf4f9a73ee69a0e929ff4e6ab1d09ea50811f82a8a5a91b7",
+  "thread_id": null,
+  "world_id": null
+}

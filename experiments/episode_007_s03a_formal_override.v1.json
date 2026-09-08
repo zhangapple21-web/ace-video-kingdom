@@ -1,0 +1,25 @@
+[
+  {
+    "shot_id": "S03A",
+    "status": "COMPLETED",
+    "artifact_path": "C:\\tmp\\ace_video_kingdom_git\\media_staging\\episode_007_virtual_data\\video_camera_grammar_v2\\S03A_ANNOUNCEMENT_R3_PADDED.mp4",
+    "artifact_sha256": "abef097e35140bb21a9437ec88f43ca67685218e3e5ebacfe5af55fadb9bcc79",
+    "take_lineage": {
+      "source_shot_id": "S03A_ANNOUNCEMENT_R3",
+      "branch_reason": "independent_scene_anchor_and_camera_grammar_rework",
+      "operation": "append one-second terminal hold with synchronized audio padding",
+      "does_not_replace": "baseline S03A take until this explicit override is selected"
+    },
+    "provider_execution": {
+      "model": "agnes-video-v2.0",
+      "manifest": "experiments/episode_007_s03a_announcement_repair_tasks.v1.json",
+      "video_id": "video_bGl0ZWxsbTpjdXN0b21fbGxtX3Byb3ZpZGVyOm9wZW5haTttb2RlbF9pZDphZ25lcy12aWRlby12Mi4wO3ZpZGVvXzg5MjU0MGEzZjc2YjQ1MDQ4NGE5YTY0YjAxYmMzZmYy",
+      "terminal_state": "completed"
+    },
+    "derivation": {
+      "source_artifact": "media_staging/episode_007_virtual_data/video_camera_grammar_v2/S03A_ANNOUNCEMENT_R3.mp4",
+      "source_sha256": "913a5e833d2c8e97d7d5ae8bce505e8585cf73faa80149bcb5f9262dbd39f7c6",
+      "duration_seconds": 6.0
+    }
+  }
+]

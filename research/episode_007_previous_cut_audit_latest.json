@@ -1,0 +1,244 @@
+{
+  "contract_version": "ace.video_kingdom.previous_cut_audit.v1",
+  "scope": "FREE_ZONE_RESEARCH_ONLY",
+  "production_integration": false,
+  "read_only": true,
+  "generated_at_note": "deterministic local audit; timestamp supplied by caller",
+  "cuts": {
+    "previous_episode_006": {
+      "exists": true,
+      "path": "C:\\tmp\\ace_video_kingdom_git\\media_staging\\episode_006_wenji_110s\\video\\episode_006_wenji_full_108s_subtitled.mp4",
+      "bytes": 23833202,
+      "sha256": "adf00b452459727e4fc3ebba4baaca7fec8f19290b0cab4f884d3134499b5bd0",
+      "duration_seconds": 107.546333,
+      "video_streams": [
+        {
+          "index": 0,
+          "codec_name": "h264",
+          "codec_type": "video",
+          "width": 704,
+          "height": 1280,
+          "avg_frame_rate": "5158/215"
+        }
+      ],
+      "audio_streams": [
+        {
+          "index": 1,
+          "codec_name": "aac",
+          "codec_type": "audio",
+          "sample_rate": "48000",
+          "channels": 2,
+          "avg_frame_rate": "0/0"
+        }
+      ]
+    },
+    "current_episode_007": {
+      "exists": true,
+      "path": "C:\\tmp\\ace_video_kingdom_git\\media_staging\\episode_007_virtual_data\\video_camera_grammar_v2\\episode_007_candidate_v7_subtitled.mp4",
+      "bytes": 33661211,
+      "sha256": "d535bae788f3b08d2de7b2ba539ecb4de5016d57cc48e2994314a5da1fc0204a",
+      "duration_seconds": 108.041667,
+      "video_streams": [
+        {
+          "index": 0,
+          "codec_name": "h264",
+          "codec_type": "video",
+          "width": 704,
+          "height": 1280,
+          "avg_frame_rate": "24/1"
+        }
+      ],
+      "audio_streams": [
+        {
+          "index": 1,
+          "codec_name": "aac",
+          "codec_type": "audio",
+          "sample_rate": "48000",
+          "channels": 2,
+          "avg_frame_rate": "0/0"
+        }
+      ]
+    }
+  },
+  "review_evidence": {
+    "episode_006_receipt": {
+      "contract_version": "ace.video_kingdom.full_cut_receipt.v1",
+      "scope": "FREE_ZONE_RESEARCH_ONLY",
+      "production_integration": false,
+      "project_id": "episode_006_wenji_110s",
+      "artifact_path": "media_staging/episode_006_wenji_110s/video/episode_006_wenji_full_108s_subtitled.mp4",
+      "artifact_sha256": "adf00b452459727e4fc3ebba4baaca7fec8f19290b0cab4f884d3134499b5bd0",
+      "duration_seconds": 107.546333,
+      "dimensions": [
+        704,
+        1280
+      ],
+      "streams": {
+        "video": "h264",
+        "audio": "aac",
+        "audio_sample_rate": 48000,
+        "audio_channels": 2
+      },
+      "subtitle_path": "media_staging/episode_006_wenji_110s/subtitles/episode_006_full_inner_monologue.srt",
+      "subtitle_mode": "burned_in_first_person_inner_monologue_or_dialogue",
+      "subtitle_style_policy": "governance/subtitle_style_policy.v1.json",
+      "subtitle_validation": "media_staging/episode_006_wenji_110s/review/subtitle_validation.v1.json",
+      "renderer": {
+        "primary": "agnes-video-2.5-flash",
+        "mode": "reference",
+        "fallbacks_used": 0
+      },
+      "shot_receipt_manifests": [
+        "experiments/episode_006_wenji_110s_tasks.json",
+        "experiments/episode_006_flash_tasks.json",
+        "experiments/episode_006_flash_reference_probe_tasks.json",
+        "experiments/episode_006_remaining_flash_tasks.json"
+      ],
+      "quality_verdict": "CONDITIONAL_RESEARCH_CUT",
+      "quality_limits": [
+        "Early beats include alternate desk/phone/lobby takes to reach long-form duration.",
+        "The final consultation-counter shot has incidental background presence at the frame edge.",
+        "This is an auditable research cut, not a zero-error publication master."
+      ],
+      "external_publication": false
+    },
+    "episode_007_quality": {
+      "contract_version": "ace.video_kingdom.quality_review.v1",
+      "project_id": "episode_007_virtual_data",
+      "status": "REJECTED",
+      "verdict": "NOT_DELIVERABLE",
+      "evidence": {
+        "contact_sheet": "media_staging/episode_007_virtual_data/video/episode_007_contact_sheet.jpg",
+        "final_file": "media_staging/episode_007_virtual_data/video/episode_007_final_subtitled.mp4",
+        "shot_count": 18,
+        "duration_seconds": 90.791667
+      },
+      "findings": [
+        {
+          "severity": "critical",
+          "issue": "镜头大多是正面/半身静态肖像，动作只表现为轻微呼吸、眨眼和镜头漂移，未达到剧本要求的敲键盘、摔手机、拍桌、冲出工位、机械复制粘贴等叙事动作。"
+        },
+        {
+          "severity": "critical",
+          "issue": "场景变化不足，办公大厅、主管办公室、厕所隔间、深夜大厅没有被可靠区分，出现同质化办公室背景。"
+        },
+        {
+          "severity": "critical",
+          "issue": "角色服装与用户参考不一致：阿浪多次变成深色连帽卫衣，肥哥/阿浪身份在部分镜头中混淆。"
+        },
+        {
+          "severity": "major",
+          "issue": "字幕已烧录且媒体技术完整，但字幕无法弥补画面没有叙事动作的问题。"
+        },
+        {
+          "severity": "major",
+          "issue": "当前音轨是模型基础环境音，不是对白/内心独白配音，不能称作完成的声音设计。"
+        }
+      ],
+      "required_action": [
+        "保留剧本、字幕和已完成任务收据，退回全部18个视觉镜头重做。",
+        "每镜改为独立场景锚图+明确起止动作；禁止用角色肖像直接做全镜头起始画面。",
+        "阿浪统一使用用户提供的灰色旧衬衫参考；肥哥统一使用黑色Polo参考。",
+        "先完成S01A、S01D、S02C、S05B、S07A五个动作验收镜，再批量生成。",
+        "只有动作抽帧和连续性通过后，才重新合成成片。"
+      ]
+    },
+    "episode_007_action_probe": {
+      "contract_version": "ace.video_kingdom.action_probe_review.v3",
+      "project_id": "episode_007_virtual_data",
+      "evidence": "action_probe_v2 plus targeted repair artifacts P02_PHONE_SLAM_R1 and P05_COPY_PASTE_R1; contact strips inspected",
+      "shots": [
+        {
+          "shot_id": "P01_KEYBOARD",
+          "decision": "CONDITIONAL",
+          "force": "PARTIAL",
+          "inertia": "PARTIAL",
+          "temporal_continuity": "PASS",
+          "risk": "敲击反馈仍偏轻",
+          "repair": "保留原片仅作参考，正式镜头增加键帽回弹与手腕回收"
+        },
+        {
+          "shot_id": "P02_PHONE_SLAM_R1",
+          "decision": "PASS",
+          "force": "PASS",
+          "inertia": "PASS",
+          "temporal_continuity": "PASS",
+          "evidence": "可见蓄力、快速下砸、桌面/同事反应、手机落桌后的自然停留"
+        },
+        {
+          "shot_id": "P03_DESK_SLAM",
+          "decision": "PASS",
+          "force": "PASS",
+          "inertia": "PASS",
+          "temporal_continuity": "PASS",
+          "evidence": "肥哥前倾拍桌，纸张与烟灰有冲击反馈"
+        },
+        {
+          "shot_id": "P04_RUN_OUT",
+          "decision": "CONDITIONAL",
+          "force": "PASS",
+          "inertia": "PARTIAL",
+          "temporal_continuity": "PARTIAL",
+          "risk": "推椅和连续脚步重量仍需正式镜头复核",
+          "repair": "保留为动作参考，补强重心和跟拍连续性"
+        },
+        {
+          "shot_id": "P05_COPY_PASTE_R1",
+          "decision": "CONDITIONAL",
+          "force": "PASS",
+          "inertia": "PARTIAL",
+          "temporal_continuity": "PASS",
+          "evidence": "复制粘贴和镜头拉远均可见，动作连续；结束回收和非均匀节奏仍需整镜复核",
+          "repair": "整集使用时加入鼠标/键盘声音与字幕节奏，并抽检末1秒"
+        }
+      ],
+      "overall_decision": "CONDITIONAL_SCENE_GATE",
+      "next_action": "P01/P04各做一次定向修复或在正式镜头中加强；不得将旧版90秒片升级为最终片",
+      "production_integration": false
+    },
+    "episode_007_subtitle": {
+      "status": "SUBTITLED_MEDIA_INTEGRITY_PASSED",
+      "input": "C:\\tmp\\ace_video_kingdom_git\\media_staging\\episode_007_virtual_data\\video_camera_grammar_v2\\episode_007_camera_grammar_v3_base.mp4",
+      "subtitle": "C:\\tmp\\ace_video_kingdom_git\\media_staging\\episode_007_virtual_data\\subtitles\\episode_007_dialogue_aligned_v2.srt",
+      "output": "C:\\tmp\\ace_video_kingdom_git\\media_staging\\episode_007_virtual_data\\video_camera_grammar_v2\\episode_007_candidate_v7_subtitled.mp4",
+      "output_sha256": "d535bae788f3b08d2de7b2ba539ecb4de5016d57cc48e2994314a5da1fc0204a",
+      "subtitle_validation": {
+        "status": "VALID",
+        "cue_count": 18,
+        "fps": 24,
+        "minimum_duration_seconds": 0.8333333333333334,
+        "minimum_gap_seconds": 0.08333333333333333,
+        "errors": [],
+        "warnings": []
+      },
+      "render_style": {
+        "font": "Microsoft YaHei",
+        "font_size": 10,
+        "margin_v": 10,
+        "alignment": 2
+      }
+    }
+  },
+  "successes_to_reuse": [
+    "episode_006 kept one coherent costume, lighting language, and scene vocabulary across the cut",
+    "scene/action stills were used as motion starting states rather than isolated portraits",
+    "longer reference chunks exposed less static-cover startup than fragmented portrait I2V",
+    "episode_007 v7 has verified 704x1280 H.264/AAC media and bottom subtitle placement"
+  ],
+  "failures_to_prevent": [
+    "provider completion or an AAC stream is not proof of dialogue, lip-sync, or acting quality",
+    "episode_007 review found portrait-like shots, weak narrative actions, scene homogenisation, and costume/identity drift",
+    "camera movement must not be added to dialogue or inner-monologue shots; actions need visible preparation, impact, and recovery",
+    "subtitle timing must follow measured shot/audio timing, never a fixed character-count or fixed five-second grid",
+    "a static fallback image may not be promoted as an action shot"
+  ],
+  "pre_render_checklist": [
+    "Read this audit and the latest shot-level review before submitting any new provider request",
+    "Reuse only hash-identified approved assets and branch from the last satisfactory scene/action state",
+    "For each shot, bind dialogue/action type, camera movement, action beats, end state, and audio source",
+    "Generate or measure audio before locking duration; retain provider-generated audio as a valid candidate path only after content checks",
+    "Review one representative dialogue shot and one action shot before batch generation",
+    "After rendering, compare against this audit and record new failures instead of silently overwriting the baseline"
+  ],
+  "decision": "AUDIT_ONLY_NO_AUTOMATIC_PROMOTION"
+}

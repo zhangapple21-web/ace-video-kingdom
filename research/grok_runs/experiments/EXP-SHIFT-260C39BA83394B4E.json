@@ -1,0 +1,46 @@
+{
+  "contract_version": "ace.free_research_sandbox.v1",
+  "evidence": {
+    "latency_ms": 48411,
+    "model": "grok-4.6",
+    "provider": "shenwen_grok",
+    "response_chars": 842,
+    "response_sha256": "fac1cd6a803b15748227c47af03e83ecb43524e5e7054a2222a1ff7855af68ef",
+    "usage": {
+      "completion_tokens": 2683,
+      "completion_tokens_details": {
+        "reasoning_tokens": 2191
+      },
+      "prompt_tokens": 2227,
+      "prompt_tokens_details": {
+        "cached_tokens": 128
+      },
+      "total_tokens": 4910
+    }
+  },
+  "experiment_id": "EXP-SHIFT-260C39BA83394B4E",
+  "hypothesis": "grok_research_shadow resident activity; source and response retained by hash only",
+  "metadata": {
+    "audit_status": "PENDING_INDEPENDENT_GPT_REVIEW",
+    "automatic_model_call": true,
+    "production_integration": false,
+    "prompt_sha256": "5b7506c362c6e1ab914bf697e879f3a078414301ebb912921b7e948595c7ee80",
+    "resident_id": "shenwen_grok_reviewer",
+    "source_kind": "resident_shift"
+  },
+  "method": "Isolated shadow resident call; retain hashes for independent audit.",
+  "mode": "FREE_RESEARCH_ONLY",
+  "outcome": "INCONCLUSIVE",
+  "pollution_flags": [],
+  "production_integration": false,
+  "realm_state": {
+    "authority": "SANDBOX_ONLY",
+    "contract_version": "ace.free_zone_realm.v1",
+    "outbound_rule": "NONE",
+    "production_integration": false,
+    "realm": "SHADOW",
+    "retention": "ACTIVE"
+  },
+  "record_hash": "1e8923e04802f90c3420fae58379a1191ed51b265d91a7d1b1e26eda110694b1",
+  "recorded_at": "2026-09-02T03:42:44.859193+00:00"
+}

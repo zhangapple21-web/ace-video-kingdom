@@ -1,0 +1,52 @@
+{
+  "schema": "episode008.shot_director_review.v1",
+  "project_id": "episode_008_rule_seat_system",
+  "shot_id": "E008_S04",
+  "script_status": "SCRIPT_LOCKED",
+  "reviewed_at": "2026-09-04",
+  "status": "PASS_WITH_LOCAL_CORRECTION",
+  "raw_artifact": {
+    "path": "media_staging/episode_008_rule_seat_system/E008_S04.mp4",
+    "sha256": "e2a195085487cceff3a3868f0417910a8aacc4a8afe014600edde5249797b5de",
+    "media_integrity": "PASS",
+    "duration_seconds": 5.041667,
+    "video": "H.264 704x1280 24fps",
+    "audio": "AAC stereo 48kHz"
+  },
+  "visual_verdicts": {
+    "action_beat": "PASS",
+    "information": "PASS_WITH_SUBTITLE_CORRECTION",
+    "identity": "CONDITIONAL_PASS",
+    "setting_and_continuity": "PASS_WITH_MINOR_VARIANCE",
+    "cut_timing": "PASS",
+    "subtitle_position": "PASS",
+    "audio_stream_presence": "PASS",
+    "dialogue_audio_sync": "UNVERIFIED"
+  },
+  "observations": [
+    "陈岳指向墙面公告，林岚记录并把资料整理成一叠，主要动作完成。",
+    "生成纸面文字存在伪字，不作为事实；本地对白字幕固定信息。",
+    "旧木桌、暖色台灯和窗光连续性明显好于 S03；人物服装仍有轻微漂移，保留为研究样片。"
+  ],
+  "overall_verdict": "PASS_WITH_LOCAL_SUBTITLE_CORRECTION",
+  "next_gate": "SHOT_5_ALLOWED",
+  "corrected_artifact": {
+    "path": "media_staging/episode_008_rule_seat_system/E008_S04_subtitled_research_v1.mp4",
+    "sha256": "0c07de5100e28d5068ad5e7a3c4e32d2d185ea4ca7232b5e9a47d1f29ad6d2ba",
+    "subtitle_track": "media_staging/episode_008_rule_seat_system/E008_S04_review.srt",
+    "subtitle_validation": "VALID",
+    "audio_preserved": true
+  },
+  "table_lens": {
+    "need": "把口头规矩转成可保存、可复核的书面资料包。",
+    "capability_evidence": "video_id video_bGl0ZWxsbTpjdXN0b21fbGxtX3Byb3ZpZGVyOm9wZW5haTttb2RlbF9pZDphZ25lcy12aWRlby12Mi4wO3ZpZGVvX2lkOnZpZGVvXzljZjA5ODAwNjk4MjRlOWViODE5YTFiMDFiMjRjNTQw",
+    "verification_result": "指向、记录、整理动作通过；信息由本地字幕固定。",
+    "follow_up": "第五镜继续使用证据包，但转入系统四栏的关系标注，禁止出现联网或改数据。"
+  },
+  "evidence": [
+    "media_staging/episode_008_rule_seat_system/E008_S04_review/contact.jpg",
+    "media_staging/episode_008_rule_seat_system/E008_S04_subtitled_review/contact.jpg",
+    "media_staging/episode_008_rule_seat_system/E008_S04_review.srt",
+    "media_staging/episode_008_rule_seat_system/E008_S04_subtitle_receipt.json"
+  ]
+}

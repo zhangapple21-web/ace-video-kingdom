@@ -1,0 +1,58 @@
+{
+  "schema": "episode008.shot_director_review.v1",
+  "project_id": "episode_008_rule_seat_system",
+  "shot_id": "E008_S01",
+  "script_status": "SCRIPT_LOCKED",
+  "reviewed_at": "2026-09-04",
+  "status": "PASS_WITH_LOCAL_CORRECTION",
+  "raw_artifact": {
+    "path": "media_staging/episode_008_rule_seat_system/E008_S01.mp4",
+    "sha256": "e35ef33fc3c7c4a2b852851cf089e03866cbc3571a8c1a5ecaa41b37be6fd83d",
+    "media_integrity": "PASS",
+    "duration_seconds": 5.184,
+    "video": "H.264 720x1280 24fps",
+    "audio": "AAC stereo 32kHz"
+  },
+  "corrected_artifact": {
+    "path": "media_staging/episode_008_rule_seat_system/E008_S01_subtitled_research_v1.mp4",
+    "sha256": "0d2e6cf344b07118f2c31f49923d86cd90580082265d39424c82eda7f696e33b",
+    "media_integrity": "PASS",
+    "subtitle_track": "media_staging/episode_008_rule_seat_system/E008_S01_review.srt",
+    "subtitle_validation": "VALID",
+    "audio_preserved": true
+  },
+  "visual_verdicts": {
+    "action_beat": "PASS",
+    "information": "PASS_WITH_SUBTITLE_CORRECTION",
+    "identity": "PASS",
+    "setting_and_continuity": "CONDITIONAL_PASS",
+    "cut_timing": "PASS",
+    "subtitle_position": "PASS",
+    "audio_stream_presence": "PASS",
+    "dialogue_audio_sync": "UNVERIFIED"
+  },
+  "observations": [
+    "林岚翻页、看到空白字段、写下 Please specify conditions 的动作在镜头内完成。",
+    "原片纸面生成文字混杂且不可作为事实依据；本地中文对白字幕补足观众对空白离开条件的理解。",
+    "画面为虚构办公空间，未出现真实机构、公司、地名、暴力或黑客行为；可作为后续镜头的视觉基准。"
+  ],
+  "overall_verdict": "PASS_WITH_LOCAL_SUBTITLE_CORRECTION",
+  "next_gate": "SHOT_2_ALLOWED",
+  "table_lens": {
+    "need": "让观众无需解释就理解离开条件栏为空，并看见林岚完成书面留痕。",
+    "capability_evidence": "provider video_id task_XI0XPLZ2EvNDHkp4RnMbepNOQkstVPXT + local subtitle render",
+    "verification_result": "动作证据通过；原片文字不可靠，字幕修正后信息可读。",
+    "follow_up": "以本镜桌面、光向和林岚外观作为 E008_S02 连续性基准。"
+  },
+  "human_checks_remaining": [
+    "若要进入最终交付，仍需人工听辨对白与字幕是否逐字同步。",
+    "后续镜头需复用林岚的外观、桌面与冷暖光方向。"
+  ],
+  "evidence": [
+    "media_staging/episode_008_rule_seat_system/E008_S01_subtitled_review/contact.jpg",
+    "media_staging/episode_008_rule_seat_system/E008_S01_subtitled_review/frame_1_2.jpg",
+    "media_staging/episode_008_rule_seat_system/E008_S01_subtitled_review/frame_3_6.jpg",
+    "media_staging/episode_008_rule_seat_system/E008_S01_subtitled_review/frame_4_8.jpg",
+    "media_staging/episode_008_rule_seat_system/E008_S01_subtitled_receipt.json"
+  ]
+}

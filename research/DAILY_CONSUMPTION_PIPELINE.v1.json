@@ -1,0 +1,40 @@
+{
+  "contract_version": "ace.video_kingdom.daily_consumption_pipeline.v1",
+  "scope": "FREE_ZONE_RESEARCH_ONLY",
+  "production_integration": false,
+  "principle": "低成本整理，独立反例审计，最终判断分离；任何阶段都可休息、失败或不产出",
+  "stages": [
+    {
+      "stage_id": "UTILITY_DIGEST",
+      "worker": "zhipu:glm-4-flash",
+      "role": "整理公开/已授权研究材料、去重、提取最小机制",
+      "entrypoint": "tools/run_zhipu_chore.py",
+      "allowed_tasks": ["public_source_summary", "failed_attempt_digest", "asset_hash_manifest_formatting", "continuity_issue_detection"],
+      "required_receipt": ["input_sha256", "attempts", "result", "status"],
+      "current_evidence": "runner_exists_but_ZHIPU_KEY_missing_in_current_shell"
+    },
+    {
+      "stage_id": "ADVERSARIAL_AUDIT",
+      "worker": "shenwen_grok:grok-4.6",
+      "role": "独立找反例、重复性、因果断裂、许可证/来源误读和过度结论",
+      "entrypoint": "ACE shadow resident route",
+      "required_receipt": ["source_hash", "audit_findings", "counterexamples", "audit_status"],
+      "current_evidence": "historical_shadow_receipts_exist; fresh_daily_run_not_proven"
+    },
+    {
+      "stage_id": "FINAL_JUDGMENT",
+      "worker": "codex:gpt-5.6-terra",
+      "role": "综合整理与反例，决定 OBSERVE/ADAPT/AB_TEST/REJECT；不得被前两阶段自动升级",
+      "entrypoint": "existing review and repository-curator path",
+      "required_receipt": ["facts", "uncertainties", "decision", "next_test", "stop_condition"],
+      "current_evidence": "current_window_review_only"
+    }
+  ],
+  "promotion": {
+    "automatic": false,
+    "minimum": "two independent evidence stages plus final judgment",
+    "states": ["OBSERVE", "ADAPT", "AB_TEST", "REJECT", "RESTED", "BLOCKED"]
+  },
+  "no_second_control_plane": true,
+  "daily_claim_rule": "没有当天真实收据就不得声称已每日消费；可以记录 NO_NEW_EVIDENCE 或 RESTED"
+}

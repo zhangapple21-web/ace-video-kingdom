@@ -1,0 +1,20 @@
+[
+  {
+    "shot_id": "E008_S01_VERTICAL_9X16_GAZE_SEGMENT",
+    "model_id": "agnes-video-v2.0",
+    "status": "COMPLETED",
+    "payload_sha256": "fdd1fc0d16006bd1bddff8a8523c44bdbe0c5947b3e312129106335a27bdf07d",
+    "create_endpoint": "https://apihub.agnes-ai.com/v1/videos",
+    "poll_endpoint": "https://apihub.agnes-ai.com/agnesapi",
+    "poll_id_field": "video_id",
+    "create_attempt": 1,
+    "create_http_status": 200,
+    "video_id": "video_bGl0ZWxsbTpjdXN0b21fbGxtX3Byb3ZpZGVyOm9wZW5haTttb2RlbF9pZDphZ25lcy12aWRlby12Mi4wO3ZpZGVvX2lkOnZpZGVvXzUxZjE5OGE4YjhjYzQwMGM4ZDI3NjJlYTBmZjgzNDUz",
+    "created_status": "queued",
+    "last_poll_http_status": 200,
+    "last_state": "completed",
+    "artifact_sha256": "1f40c614543c096e720689a3d087af90664263be417f43064aeffebfd6081a64",
+    "bytes": 339137,
+    "artifact_path": "C:\\tmp\\ace_video_kingdom_git\\media_staging\\episode_008_rule_seat_system\\revision_pilot\\vertical_gaze_segment\\E008_S01_VERTICAL_9X16_GAZE_SEGMENT.mp4"
+  }
+]

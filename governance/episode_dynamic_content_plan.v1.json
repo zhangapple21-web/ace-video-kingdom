@@ -1,0 +1,31 @@
+{
+  "contract_version": "ace.video_kingdom.episode_dynamic_content_plan.v1",
+  "scope": "CONTROLLED_VIDEO_PRODUCTION_ONLY",
+  "production_integration": false,
+  "purpose": "在现有 Episode -> Storyboard -> Shot Core -> Take -> Assembly 流程内记录内容可行性与可回溯的单向降级。",
+  "content_state": ["R0", "R1", "R2", "R3", "R4", "R5"],
+  "state_policy": {
+    "monotonic_within_run": true,
+    "new_run_starts_at": "R0",
+    "r5_terminal": "REWRITE_REQUIRED",
+    "canonical_story_immutable": true,
+    "ratio_role": "diagnostic_only"
+  },
+  "failure_separation": {
+    "content_failure": "only class allowed to trigger R1-R5",
+    "technical_failure": "route/retry/repair lane; content remains unchanged",
+    "provider_failure": "provider fallback/retry lane; content remains unchanged"
+  },
+  "required_lineage_fields": [
+    "from", "to", "reason", "reason_code", "changed_items",
+    "preserved_beats", "removed_items", "impact", "timestamp"
+  ],
+  "reason_codes": [
+    "REDUNDANT_DIALOGUE",
+    "VISUALIZATION_SUBSTITUTION",
+    "REDUNDANT_SHOT",
+    "NON_CORE_SETUP_REMOVAL",
+    "NARRATIVE_CORE_UNSATISFIABLE"
+  ],
+  "non_authority": ["does_not_create_scheduler", "does_not_create_router", "does_not_call_provider", "does_not_approve_delivery"]
+}

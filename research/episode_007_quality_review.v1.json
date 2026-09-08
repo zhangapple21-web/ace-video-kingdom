@@ -1,0 +1,41 @@
+{
+  "contract_version": "ace.video_kingdom.quality_review.v1",
+  "project_id": "episode_007_virtual_data",
+  "status": "REJECTED",
+  "verdict": "NOT_DELIVERABLE",
+  "evidence": {
+    "contact_sheet": "media_staging/episode_007_virtual_data/video/episode_007_contact_sheet.jpg",
+    "final_file": "media_staging/episode_007_virtual_data/video/episode_007_final_subtitled.mp4",
+    "shot_count": 18,
+    "duration_seconds": 90.791667
+  },
+  "findings": [
+    {
+      "severity": "critical",
+      "issue": "镜头大多是正面/半身静态肖像，动作只表现为轻微呼吸、眨眼和镜头漂移，未达到剧本要求的敲键盘、摔手机、拍桌、冲出工位、机械复制粘贴等叙事动作。"
+    },
+    {
+      "severity": "critical",
+      "issue": "场景变化不足，办公大厅、主管办公室、厕所隔间、深夜大厅没有被可靠区分，出现同质化办公室背景。"
+    },
+    {
+      "severity": "critical",
+      "issue": "角色服装与用户参考不一致：阿浪多次变成深色连帽卫衣，肥哥/阿浪身份在部分镜头中混淆。"
+    },
+    {
+      "severity": "major",
+      "issue": "字幕已烧录且媒体技术完整，但字幕无法弥补画面没有叙事动作的问题。"
+    },
+    {
+      "severity": "major",
+      "issue": "当前音轨是模型基础环境音，不是对白/内心独白配音，不能称作完成的声音设计。"
+    }
+  ],
+  "required_action": [
+    "保留剧本、字幕和已完成任务收据，退回全部18个视觉镜头重做。",
+    "每镜改为独立场景锚图+明确起止动作；禁止用角色肖像直接做全镜头起始画面。",
+    "阿浪统一使用用户提供的灰色旧衬衫参考；肥哥统一使用黑色Polo参考。",
+    "先完成S01A、S01D、S02C、S05B、S07A五个动作验收镜，再批量生成。",
+    "只有动作抽帧和连续性通过后，才重新合成成片。"
+  ]
+}

@@ -1,0 +1,15 @@
+[
+  {
+    "shot_id": "S03A_ANNOUNCEMENT_R3_PADDED",
+    "status": "COMPLETED",
+    "artifact_path": "C:\\tmp\\ace_video_kingdom_git\\media_staging\\episode_007_virtual_data\\video_camera_grammar_v2\\S03A_ANNOUNCEMENT_R3_PADDED.mp4",
+    "artifact_sha256": "abef097e35140bb21a9437ec88f43ca67685218e3e5ebacfe5af55fadb9bcc79",
+    "derivation": {
+      "source_shot_id": "S03A_ANNOUNCEMENT_R3",
+      "source_artifact": "media_staging/episode_007_virtual_data/video_camera_grammar_v2/S03A_ANNOUNCEMENT_R3.mp4",
+      "source_sha256": "913a5e833d2c8e97d7d5ae8bce505e8585cf73faa80149bcb5f9262dbd39f7c6",
+      "operation": "append one-second terminal hold with synchronized audio padding",
+      "reason": "preserve the measured six-second edit slot without looping the performance"
+    }
+  }
+]

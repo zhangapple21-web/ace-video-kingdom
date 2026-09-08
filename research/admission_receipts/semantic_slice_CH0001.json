@@ -1,0 +1,76 @@
+{
+  "canonical_request": {
+    "action": "semantic_slice",
+    "audio_contract": {
+      "status": "NOT_APPLICABLE"
+    },
+    "camera": {
+      "framing": "text",
+      "movement": "NONE"
+    },
+    "contract_fingerprint": null,
+    "duration": null,
+    "endpoint": "https://example.invalid",
+    "episode_id": "research",
+    "first_frame": null,
+    "generation_parameters": {
+      "max_tokens": 5000,
+      "messages": [
+        {
+          "content": "你是短剧前期语义切片器，不是编剧，不改写原文，不补写事实。只根据给定原文输出 JSON。每个切片必须绑定原文字符区间和原文摘录；不确定就写 UNKNOWN。目标是给后续导演编译 Shot Contract，不能直接生成宣传文案。",
+          "role": "system"
+        },
+        {
+          "content": "原文来源哈希：7d7a2033f51c18f4aae08bc4bf6bcbd4e7e15eb98954d45a5c9203fd6fd9f6e3\n原文字符区间：0-16\n请把下面这一段切成 1-4 个语义单元。不要总结成宣传文案，不要写镜头文学，不要补写原文没有的因果。每个 visual event 只能是一个主要事件；如果原文没有足够信息，填 UNKNOWN。严格返回 JSON，形状参考：\n{\"slices\": [{\"slice_id\": \"string\", \"source_span\": {\"char_start\": 0, \"char_end\": 0, \"chapter\": \"string|null\"}, \"source_excerpt\": \"exact excerpt, <= 1200 chars\", \"causal_before\": \"source-grounded or UNKNOWN\", \"primary_event\": \"one observable event\", \"causal_after\": \"source-grounded or UNKNOWN\", \"characters\": [{\"name\": \"string\", \"role\": \"source-grounded\", \"goal\": \"string|UNKNOWN\", \"relationship\": \"string|UNKNOWN\"}], \"relationship_and_power\": \"subtext, source-grounded or UNKNOWN\", \"dialogue_and_subtext\": [{\"speaker\": \"string|UNKNOWN\", \"text\": \"exact or close source text\", \"subtext\": \"string|UNKNOWN\"}], \"emotion_change\": \"start -> end or UNKNOWN\", \"props_and_state\": [\"object and state\"], \"continuity_start_state\": \"string\", \"continuity_end_state\": \"string\", \"candidate_shot_events\": [{\"event\": \"one visual event\", \"allowed\": [\"observable action\"], \"forbidden\": [\"unsupported addition\"]}], \"forbidden_additions\": [\"facts not in source\"], \"confidence\": \"HIGH|MEDIUM|LOW\"}]}\n\n原文：\n第1章 夜归\r\n他放下酒杯。\r\n",
+          "role": "user"
+        }
+      ],
+      "response_format": {
+        "type": "json_object"
+      },
+      "temperature": 0.1
+    },
+    "last_frame": null,
+    "model": "gpt-5.4-mini",
+    "negative_prompt": "",
+    "payload_schema": "openai.chat.completions.v1",
+    "prompt": "原文来源哈希：7d7a2033f51c18f4aae08bc4bf6bcbd4e7e15eb98954d45a5c9203fd6fd9f6e3\n原文字符区间：0-16\n请把下面这一段切成 1-4 个语义单元。不要总结成宣传文案，不要写镜头文学，不要补写原文没有的因果。每个 visual event 只能是一个主要事件；如果原文没有足够信息，填 UNKNOWN。严格返回 JSON，形状参考：\n{\"slices\": [{\"slice_id\": \"string\", \"source_span\": {\"char_start\": 0, \"char_end\": 0, \"chapter\": \"string|null\"}, \"source_excerpt\": \"exact excerpt, <= 1200 chars\", \"causal_before\": \"source-grounded or UNKNOWN\", \"primary_event\": \"one observable event\", \"causal_after\": \"source-grounded or UNKNOWN\", \"characters\": [{\"name\": \"string\", \"role\": \"source-grounded\", \"goal\": \"string|UNKNOWN\", \"relationship\": \"string|UNKNOWN\"}], \"relationship_and_power\": \"subtext, source-grounded or UNKNOWN\", \"dialogue_and_subtext\": [{\"speaker\": \"string|UNKNOWN\", \"text\": \"exact or close source text\", \"subtext\": \"string|UNKNOWN\"}], \"emotion_change\": \"start -> end or UNKNOWN\", \"props_and_state\": [\"object and state\"], \"continuity_start_state\": \"string\", \"continuity_end_state\": \"string\", \"candidate_shot_events\": [{\"event\": \"one visual event\", \"allowed\": [\"observable action\"], \"forbidden\": [\"unsupported addition\"]}], \"forbidden_additions\": [\"facts not in source\"], \"confidence\": \"HIGH|MEDIUM|LOW\"}]}\n\n原文：\n第1章 夜归\r\n他放下酒杯。\r\n",
+    "provider": "openai-compatible",
+    "provider_payload": {
+      "max_tokens": 5000,
+      "messages": [
+        {
+          "content": "你是短剧前期语义切片器，不是编剧，不改写原文，不补写事实。只根据给定原文输出 JSON。每个切片必须绑定原文字符区间和原文摘录；不确定就写 UNKNOWN。目标是给后续导演编译 Shot Contract，不能直接生成宣传文案。",
+          "role": "system"
+        },
+        {
+          "content": "原文来源哈希：7d7a2033f51c18f4aae08bc4bf6bcbd4e7e15eb98954d45a5c9203fd6fd9f6e3\n原文字符区间：0-16\n请把下面这一段切成 1-4 个语义单元。不要总结成宣传文案，不要写镜头文学，不要补写原文没有的因果。每个 visual event 只能是一个主要事件；如果原文没有足够信息，填 UNKNOWN。严格返回 JSON，形状参考：\n{\"slices\": [{\"slice_id\": \"string\", \"source_span\": {\"char_start\": 0, \"char_end\": 0, \"chapter\": \"string|null\"}, \"source_excerpt\": \"exact excerpt, <= 1200 chars\", \"causal_before\": \"source-grounded or UNKNOWN\", \"primary_event\": \"one observable event\", \"causal_after\": \"source-grounded or UNKNOWN\", \"characters\": [{\"name\": \"string\", \"role\": \"source-grounded\", \"goal\": \"string|UNKNOWN\", \"relationship\": \"string|UNKNOWN\"}], \"relationship_and_power\": \"subtext, source-grounded or UNKNOWN\", \"dialogue_and_subtext\": [{\"speaker\": \"string|UNKNOWN\", \"text\": \"exact or close source text\", \"subtext\": \"string|UNKNOWN\"}], \"emotion_change\": \"start -> end or UNKNOWN\", \"props_and_state\": [\"object and state\"], \"continuity_start_state\": \"string\", \"continuity_end_state\": \"string\", \"candidate_shot_events\": [{\"event\": \"one visual event\", \"allowed\": [\"observable action\"], \"forbidden\": [\"unsupported addition\"]}], \"forbidden_additions\": [\"facts not in source\"], \"confidence\": \"HIGH|MEDIUM|LOW\"}]}\n\n原文：\n第1章 夜归\r\n他放下酒杯。\r\n",
+          "role": "user"
+        }
+      ],
+      "model": "gpt-5.4-mini",
+      "response_format": {
+        "type": "json_object"
+      },
+      "temperature": 0.1
+    },
+    "reference_assets": [],
+    "request_kind": "research",
+    "schema": "video_kingdom.canonical_generation_request.v1",
+    "scope": "research",
+    "shot_id": "CH0001",
+    "source_contract": {},
+    "state": {},
+    "visible_entities": []
+  },
+  "created_at": "2026-09-08T01:37:51Z",
+  "preflight": {
+    "errors": [],
+    "status": "CONTRACT_VALID",
+    "warnings": []
+  },
+  "provider_post_allowed": true,
+  "request_hash": "5c69ccef6d289cc7b6656373337ad8e7fcb8bdbc6d4d7ad86cb9cc0ce9e834df",
+  "schema": "video_kingdom.provider_admission_receipt.v1",
+  "status": "ADMITTED"
+}

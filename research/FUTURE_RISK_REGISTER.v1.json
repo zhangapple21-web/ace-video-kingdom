@@ -1,0 +1,17 @@
+{
+  "contract_version": "ace.video_kingdom.future_risk_register.v1",
+  "scope": "FREE_ZONE_RESEARCH_ONLY",
+  "production_integration": false,
+  "purpose": "把一次性故障转成可观察信号、有限应对和复验条件；不承诺消除模型随机性。",
+  "risks": [
+    {"id":"R001_ACTION_TEMPLATE_COLLAPSE","horizon":"now_to_3_months","signal":"相邻镜头动作签名相似，连续出现低头/叹气/抬眼","mitigation":"preflight 强制三个 action_beats，动作签名去重；渲染后抽帧复核","evidence":"tools/validate_motion_diversity.py","stop_condition":"动作弧未通过或出现相似度警告时不提交 Provider"},
+    {"id":"R002_PROVIDER_CONTRACT_DRIFT","horizon":"now_to_12_months","signal":"HTTP 状态、字段名、轮询路径或 Retry-After 语义改变","mitigation":"收据记录 payload_sha256、创建/轮询端点、poll_id_field；轮询优先遵守 Retry-After；保留错误摘要","evidence":"tools/run_short_clip.py","stop_condition":"缺少 video_id、状态未知或下载 Content-Type 不符时进入失败态"},
+    {"id":"R003_IDENTITY_AND_SCENE_DRIFT","horizon":"now_to_12_months","signal":"脸、发型、冷敷贴、卫衣、道具或空间跨镜头漂移","mitigation":"每镜独立场景锚图、URL 可达性和 SHA-256；Flash 主线路，V2 仅明确回退","evidence":"tools/preflight_episode.py and Flash manifests","stop_condition":"锚图缺失/不可达或抽帧发现身份漂移时不得进入成片"},
+    {"id":"R004_AUDIO_SUBTITLE_DESYNC","horizon":"now_to_6_months","signal":"字幕重叠、过短、跨切泄露反转或场景说明混入对白轨","mitigation":"统一 subtitle policy、SRT 校验、统一安全区烧录入口；音轨和时长复验","evidence":"governance/subtitle_style_policy.v1.json and tools/validate_subtitles.py","stop_condition":"字幕校验失败时拒绝烧录"},
+    {"id":"R005_DUPLICATE_ORPHANED_WORK","horizon":"now_to_24_months","signal":"同一 shot_id 多次提交、活动任务无 video_id、旧任务被误判完成","mitigation":"manifest 单写者、跨 manifest 冲突巡逻、video_id 持久化、完成物 SHA-256 验收","evidence":"tools/patrol_and_doctor.py and tools/run_short_clip.py","stop_condition":"冲突或未知状态进入注意态，禁止自动重提"},
+    {"id":"R006_CACHE_AND_STORAGE_GROWTH","horizon":"3_to_24_months","signal":"失败分支、锚图、视频和日志无限增长","mitigation":"按 episode/日期分区；保留 manifest、哈希、失败原因和抽样锚图；清理生成收据","evidence":"media_staging and cleanup_media_staging.py","stop_condition":"容量或清理范围未验证时只报告，不删除"},
+    {"id":"R007_ECOSYSTEM_AND_LICENSE_DRIFT","horizon":"6_to_36_months","signal":"外部轮子许可证、API、网关或权重要求变化","mitigation":"只记录来源、许可证和最小机制；先离线 A/B，再提交替换适配器","evidence":"research/OPEN_SOURCE_2026_TRIAGE.md","stop_condition":"没有运行证据、许可证边界或回滚路径时保持 RESEARCH_ONLY"},
+    {"id":"R008_MODEL_QUALITY_NONSTATIONARITY","horizon":"12_to_36_months","signal":"同一 prompt/锚图在模型升级、配额或时段变化下质量改变","mitigation":"保存模型 ID、提示词/锚图指纹、时间、耗时、状态和人工视觉结论；固定小样本 A/B","evidence":"现有 shot receipts and research manifests","stop_condition":"没有可比基线时不宣称质量提升或成本下降"}
+  ],
+  "operating_rule": "自由区可以探索和失败；ACE 生产仍需独立、最新、可复现的证据桥接。"
+}

@@ -1,0 +1,49 @@
+{
+  "schema": "episode008.provider_attempt_log.v1",
+  "project_id": "episode_008_rule_seat_system",
+  "shot_id": "E008_S02",
+  "model_id": "agnes-video-2.5-flash",
+  "status": "CREATE_FAILED",
+  "attempt_policy": {
+    "max_attempts_per_window": 2,
+    "cooldown_seconds": 60,
+    "attempts_used_current_window": 1,
+    "historical_attempts": 3
+  },
+  "attempts": [
+    {
+      "attempt": 1,
+      "http_status": 503,
+      "provider_code": "video_queue_full",
+      "video_id": null,
+      "response_excerpt": "video queue is full, please retry later",
+      "result": "NO_TASK_CREATED"
+    },
+    {
+      "attempt": 2,
+      "cooldown_respected": true,
+      "http_status": 503,
+      "provider_code": "video_queue_full",
+      "video_id": null,
+      "response_excerpt": "video queue is full, please retry later",
+      "result": "NO_TASK_CREATED"
+    },
+    {
+      "attempt": 3,
+      "new_retry_window": true,
+      "http_status": 503,
+      "provider_code": "video_queue_full",
+      "video_id": null,
+      "response_excerpt": "video queue is full, please retry later",
+      "result": "NO_TASK_CREATED"
+    }
+  ],
+  "next_action": "BLOCK_PROVIDER_SUBMISSION_UNTIL_A_NEW_RETRY_WINDOW; do not fabricate footage or alter locked script.",
+  "table_lens": {
+    "need": "把三类资料并排、圈出同一日期差异并留下待核验标记。",
+    "capability_evidence": "agnes-video-2.5-flash create endpoint returned 503 twice; no video_id",
+    "verification_result": "未创建任务，不能评价画面质量；失败属于供应商可用性，不是剧本失败。",
+    "follow_up": "新窗口只从 E008_S02 恢复一次，成功后再做抽帧和导演复核。"
+  },
+  "evidence": "experiments/episode_008_agnes_tasks.json"
+}

@@ -1,0 +1,107 @@
+{
+  "status": "MEDIA_INTEGRITY_PASSED",
+  "output": "C:\\tmp\\ace_video_kingdom_git\\media_staging\\episode_007_virtual_data\\video\\episode_007_full_scene_anchor_base.mp4",
+  "output_sha256": "99536f9ab327c3d1a3c419face96f734ea10309b320774ba3afba39041b33fbd",
+  "clip_count": 11,
+  "sources": [
+    {
+      "shot_id": "F01",
+      "path": "C:\\tmp\\ace_video_kingdom_git\\media_staging\\episode_007_virtual_data\\full_scene_anchor\\F01.mp4",
+      "sha256": "2cd0705a3eb3d5c26b5764a4f18d7f16301c24e08616bcfc1483c6c9a05510e0",
+      "duration_seconds": 10.041667,
+      "width": 704,
+      "height": 1280
+    },
+    {
+      "shot_id": "F02",
+      "path": "C:\\tmp\\ace_video_kingdom_git\\media_staging\\episode_007_virtual_data\\full_scene_anchor\\F02.mp4",
+      "sha256": "aacd07da694c34a3143aba0f407ba2bdc553e20e61eb42be391f19eb67e9f543",
+      "duration_seconds": 10.041667,
+      "width": 704,
+      "height": 1280
+    },
+    {
+      "shot_id": "F03",
+      "path": "C:\\tmp\\ace_video_kingdom_git\\media_staging\\episode_007_virtual_data\\full_scene_anchor\\F03.mp4",
+      "sha256": "45f8db22c48a057491dc2529a7a9d1eccc24598e6b13eed7573b277abf71b4c8",
+      "duration_seconds": 10.041667,
+      "width": 704,
+      "height": 1280
+    },
+    {
+      "shot_id": "F04",
+      "path": "C:\\tmp\\ace_video_kingdom_git\\media_staging\\episode_007_virtual_data\\full_scene_anchor\\F04.mp4",
+      "sha256": "3c5f21203953392fe63e50d72584a9b7bbe2b9502b0720ed3795bb6ce6a48a66",
+      "duration_seconds": 10.041667,
+      "width": 704,
+      "height": 1280
+    },
+    {
+      "shot_id": "F05",
+      "path": "C:\\tmp\\ace_video_kingdom_git\\media_staging\\episode_007_virtual_data\\full_scene_anchor\\F05.mp4",
+      "sha256": "cfcf97230dc8999620c16a15f9e51668a87c2b78cc1188b826b9b4a85d613886",
+      "duration_seconds": 10.041667,
+      "width": 704,
+      "height": 1280
+    },
+    {
+      "shot_id": "F06",
+      "path": "C:\\tmp\\ace_video_kingdom_git\\media_staging\\episode_007_virtual_data\\full_scene_anchor\\F06.mp4",
+      "sha256": "499ad14a14fef1c8435bad03a16d41751dcbcd74e731d699f7ba4d012dc7acf2",
+      "duration_seconds": 10.041667,
+      "width": 704,
+      "height": 1280
+    },
+    {
+      "shot_id": "F07",
+      "path": "C:\\tmp\\ace_video_kingdom_git\\media_staging\\episode_007_virtual_data\\full_scene_anchor\\F07.mp4",
+      "sha256": "3dec4b7345bcf7b99494ddda91c5ea764204dc75eb9e1238b4b9371709111d9b",
+      "duration_seconds": 10.041667,
+      "width": 704,
+      "height": 1280
+    },
+    {
+      "shot_id": "F08",
+      "path": "C:\\tmp\\ace_video_kingdom_git\\media_staging\\episode_007_virtual_data\\full_scene_anchor\\F08.mp4",
+      "sha256": "5d4200d5c45d32183ea23c755bf1617a84cf3adbe5109678643c0050d27f49ff",
+      "duration_seconds": 10.041667,
+      "width": 704,
+      "height": 1280
+    },
+    {
+      "shot_id": "F09",
+      "path": "C:\\tmp\\ace_video_kingdom_git\\media_staging\\episode_007_virtual_data\\full_scene_anchor\\F09.mp4",
+      "sha256": "89879aa164742118b730e5816b2d1eea7812339a4b99cd98bfc7e426a90cd66c",
+      "duration_seconds": 10.041667,
+      "width": 704,
+      "height": 1280
+    },
+    {
+      "shot_id": "F10",
+      "path": "C:\\tmp\\ace_video_kingdom_git\\media_staging\\episode_007_virtual_data\\full_scene_anchor\\F10.mp4",
+      "sha256": "abb22a3fef1fe5e7effa2d6b84e8cb442a0c02e202fdd3490fc487e0baa13fb8",
+      "duration_seconds": 10.041667,
+      "width": 704,
+      "height": 1280
+    },
+    {
+      "shot_id": "F11",
+      "path": "C:\\tmp\\ace_video_kingdom_git\\media_staging\\episode_007_virtual_data\\full_scene_anchor\\F11.mp4",
+      "sha256": "595ce5543c7437cbee4f5e149dd71b4c90cb7987996dd08eed7da1d90c6304d3",
+      "duration_seconds": 10.041667,
+      "width": 704,
+      "height": 1280
+    }
+  ],
+  "output_media": {
+    "duration_seconds": 105.522333,
+    "width": 704,
+    "height": 1280
+  },
+  "duration_window_seconds": [
+    95.0,
+    120.0
+  ],
+  "normalized_to": null,
+  "trim_leading_seconds": 0.45
+}
