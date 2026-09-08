@@ -1,0 +1,38 @@
+{
+  "provider": "zhipu",
+  "model": "glm-4-flash",
+  "task": "shot_list_structuring",
+  "input_sha256": "07495c6e6f3e222c180c1a7271a5af58bb30df116d3d3aa895678084cc2f2a04",
+  "attempts": [
+    {
+      "attempt": 1,
+      "status_code": 200,
+      "ok": true
+    }
+  ],
+  "production_integration": false,
+  "started_at": "2026-09-02T03:29:06.034342+00:00",
+  "result": {
+    "choices": [
+      {
+        "finish_reason": "stop",
+        "index": 0,
+        "message": {
+          "content": "```json\n{\n  \"contract_version\": \"ace.video_kingdom.asset_storyboard.v1\",\n  \"scope\": \"FREE_ZONE_RESEARCH_ONLY\",\n  \"production_integration\": false,\n  \"project_id\": \"episode_006_wenji_110s\",\n  \"format\": {\n    \"target_seconds\": 110,\n    \"tolerance_seconds\": 1,\n    \"aspect_ratio\": \"9:16\",\n    \"video_target\": \"1088x1920\"\n  },\n  \"source_boundary\": {\n    \"reference_type\": \"USER_SUPPLIED_LOCAL_IMAGE\",\n    \"reference_path\": \"../media_staging/anchors/wenji_user_reference_2026-09-01.png\",\n    \"reference_sha256\": \"546cbac39360505da4dbb57590e73e9e27fa54b8aa3af035ac81ccde83df143c\",\n    \"publication\": \"FORBIDDEN\"\n  },\n  \"identity_invariants\": [\n    \"same young adult Chinese woman\",\n    \"messy dark hair with black clip\",\n    \"forehead cooling patch\",\n    \"oversized charcoal-black hoodie\",\n    \"tired but clear-eyed\"\n  ],\n  \"asset_policy\": \"Each scene uses its own approved reference still. A full reference image is never reused as every shot's first frame.\",\n  \"assets\": [\n    {\n      \"asset_id\": \"SCENE_06\",\n      \"kind\": \"identity_preserving_scene_still\",\n      \"path\": \"../media_staging/episode_006_wenji_110s/anchors/SCENE_06_consultation_lobby_anchor.png\",\n      \"status\": \"VISUALLY_APPROVED_FOR_I2V_PROBE\",\n      \"sha256\": \"d13a316f06984f8ff6b954fcc18bf2e44faa5abdbfbc0c1bce598a765cab38d2\"\n    }\n  ],\n  \"story_safety\": {\n    \"fictional_interfaces_only\": true,\n    \"no_personal_data\": true,\n    \"no_real_platform_or_agency\": true,\n    \"resolution\": \"evidence_preservation_and_lawful_consultation\"\n  },\n  \"gates\": [\n    \"Every AI scene must have a distinct approved static reference before video generation.\",\n    \"Reject face, hairstyle, cooling-patch, hoodie, hand, phone, text, logo, or lighting drift.\",\n    \"Subtitles are first-person internal thoughts or spoken dialogue only; system UI text is not duplicated as captions.\",\n    \"No final assembly until each selected source clip passes visual inspection and ffprobe confirms 9:16 output.\"\n  ]\n}\n```",
+          "role": "assistant"
+        }
+      }
+    ],
+    "created": 1788319779,
+    "id": "20260902112912b3e6288b1abf403d",
+    "model": "glm-4-flash",
+    "object": "chat.completion",
+    "request_id": "20260902112912b3e6288b1abf403d",
+    "usage": {
+      "completion_tokens": 571,
+      "prompt_tokens": 587,
+      "total_tokens": 1158
+    }
+  },
+  "status": "COMPLETED"
+}

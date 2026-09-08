@@ -37,6 +37,8 @@ def probe_media(path: Path) -> dict:
 def main() -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument("--manifest", type=Path, action="append", required=True, help="repeat to combine verified shot manifests")
+    parser.add_argument("--override-manifest", type=Path, action="append", default=[],
+                        help="optional verified manifest whose shot IDs replace records from --manifest")
     parser.add_argument("--shot-ids", nargs="+", required=True)
     parser.add_argument("--output", type=Path, required=True)
     parser.add_argument("--min-seconds", type=float, default=45)
@@ -46,6 +48,10 @@ def main() -> int:
         "--normalize-to",
         help="optional WIDTHxHEIGHT portrait/landscape target; re-encodes each verified source before concat",
     )
+    parser.add_argument("--trim-leading-seconds", type=float, default=0.0,
+        help="trim static cover intro from every clip before concat")
+    parser.add_argument("--clip-seconds", type=float,
+        help="cap each source clip to this duration before concat")
     args = parser.parse_args()
 
     records: dict[str, dict] = {}
@@ -54,6 +60,22 @@ def main() -> int:
         if overlap:
             raise SystemExit(f"duplicate shot IDs across manifests: {', '.join(sorted(overlap))}")
         records.update(load_records(manifest))
+    # Explicit repair branches are allowed to replace a shot without mutating
+    # the baseline manifest.  The override remains hash-bound and is visible
+    # in the review receipt; accidental duplicates in the base manifests still
+    # fail closed above.
+    base_ids = set(records)
+    for manifest in args.override_manifest:
+        overrides = load_records(manifest)
+        if not overrides:
+            raise SystemExit(f"override manifest has no shot records: {manifest}")
+        unknown = sorted(set(overrides) - base_ids)
+        if unknown:
+            raise SystemExit(
+                "override manifest contains unknown shot IDs; use the formal contract ID: "
+                + ", ".join(unknown)
+            )
+        records.update(overrides)
     clips: list[Path] = []
     source_review: list[dict] = []
     for shot_id in args.shot_ids:
@@ -88,11 +110,20 @@ def main() -> int:
         concat = Path(handle.name)
         for index, clip in enumerate(clips):
             usable_clip = clip
-            if target_width and target_height:
+            if (target_width and target_height) or args.trim_leading_seconds > 0 or args.clip_seconds:
                 usable_clip = concat.parent / f"ace_normalized_{index}.mp4"
+                filters = []
+                if args.trim_leading_seconds > 0:
+                    end = (args.trim_leading_seconds + args.clip_seconds) if args.clip_seconds else None
+                    filters.append(f"trim=start={args.trim_leading_seconds}" + (f":end={end}" if end else "") + ",setpts=PTS-STARTPTS")
+                elif args.clip_seconds:
+                    filters.append(f"trim=duration={args.clip_seconds},setpts=PTS-STARTPTS")
+                if target_width and target_height:
+                    filters.append(f"scale={target_width}:{target_height}:force_original_aspect_ratio=decrease,pad={target_width}:{target_height}:(ow-iw)/2:(oh-ih)/2,setsar=1")
                 subprocess.run([
                     "ffmpeg", "-y", "-i", str(clip),
-                    "-vf", f"scale={target_width}:{target_height}:force_original_aspect_ratio=decrease,pad={target_width}:{target_height}:(ow-iw)/2:(oh-ih)/2,setsar=1",
+                    "-vf", ",".join(filters),
+                    "-af", (f"atrim=start={args.trim_leading_seconds}" + (f":end={args.trim_leading_seconds + args.clip_seconds}" if args.clip_seconds else "") + ",asetpts=PTS-STARTPTS") if args.trim_leading_seconds > 0 else (f"atrim=duration={args.clip_seconds},asetpts=PTS-STARTPTS" if args.clip_seconds else "anull"),
                     "-c:v", "libx264", "-pix_fmt", "yuv420p", "-c:a", "aac", "-ar", "48000", str(usable_clip),
                 ], check=True)
                 temporary_clips.append(usable_clip)
@@ -123,6 +154,7 @@ def main() -> int:
         "output_media": output_media,
         "duration_window_seconds": [args.min_seconds, args.max_seconds],
         "normalized_to": args.normalize_to,
+        "trim_leading_seconds": args.trim_leading_seconds,
     }
     if args.review_output:
         args.review_output.parent.mkdir(parents=True, exist_ok=True)

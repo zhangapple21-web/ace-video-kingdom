@@ -1,0 +1,22 @@
+[
+  {
+    "shot_id": "S03A_FEIGE_LOCKED_R1",
+    "model_id": "agnes-video-v2.0",
+    "status": "COMPLETED",
+    "payload_sha256": "0562249ebc6369350658bd47498d216663c95782875987c664b1e66633445aa6",
+    "create_endpoint": "https://apihub.agnes-ai.com/v1/videos",
+    "poll_endpoint": "https://apihub.agnes-ai.com/agnesapi",
+    "poll_id_field": "video_id",
+    "create_attempt": 1,
+    "create_http_status": 200,
+    "video_id": "video_bGl0ZWxsbTpjdXN0b21fbGxtX3Byb3ZpZGVyOm9wZW5haTttb2RlbF9pZDphZ25lcy12aWRlby12Mi4wO3ZpZGVvX2lkOnZpZGVvXzJlNmRkYzEyNmQ1ZTQ3OTA4YjEwMzllMDAzYTgzMjY2",
+    "created_status": "queued",
+    "last_poll_http_status": 200,
+    "last_state": "completed",
+    "next_poll_in_seconds": 2,
+    "poll_retry_after": "2",
+    "artifact_sha256": "a6a2876b448c86924edc4642686ed440b8922602af9cec359da8cbcef17323b0",
+    "bytes": 1063433,
+    "artifact_path": "C:\\tmp\\ace_video_kingdom_git\\media_staging\\episode_007_virtual_data\\video_camera_grammar_v2\\S03A_FEIGE_LOCKED_R1.mp4"
+  }
+]

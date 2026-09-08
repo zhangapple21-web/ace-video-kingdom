@@ -1,0 +1,25 @@
+{
+  "status": "SUBTITLED_MEDIA_INTEGRITY_PASSED",
+  "input": "C:\\tmp\\ace_video_kingdom_git\\media_staging\\episode_007_virtual_data\\video_camera_grammar_v2\\episode_007_camera_grammar_v3_base.mp4",
+  "subtitle": "C:\\tmp\\ace_video_kingdom_git\\media_staging\\episode_007_virtual_data\\subtitles\\episode_007_dialogue.srt",
+  "output": "C:\\tmp\\ace_video_kingdom_git\\media_staging\\episode_007_virtual_data\\video_camera_grammar_v2\\episode_007_final_candidate_v3.mp4",
+  "output_sha256": "74b18bdb0b685fdd14fb0eefb67d31ef3be04aff448d00466270aa161e9eaa3c",
+  "subtitle_validation": {
+    "status": "VALID",
+    "cue_count": 18,
+    "fps": 24,
+    "minimum_duration_seconds": 0.8333333333333334,
+    "minimum_gap_seconds": 0.08333333333333333,
+    "errors": [],
+    "warnings": [
+      "cue 3: line has 23 CJK characters; consider a natural break",
+      "cue 5: line has 25 CJK characters; consider a natural break"
+    ]
+  },
+  "render_style": {
+    "font": "Microsoft YaHei",
+    "font_size": 10,
+    "margin_v": 80,
+    "alignment": 2
+  }
+}

@@ -1,0 +1,135 @@
+{
+  "contract_version": "ace.video_kingdom.frame_continuity_audit.v1",
+  "video": "media_staging\\episode_007_virtual_data\\video_camera_grammar_v2\\episode_007_candidate_v7_subtitled.mp4",
+  "frame_count_decoded": 2592,
+  "frame_count_reported": 2592,
+  "fps": 24.0,
+  "median_adjacent_luma_diff": 4.0857,
+  "max_adjacent_luma_diff": 67.7022,
+  "spike_threshold": 12.2572,
+  "spike_count": 355,
+  "top_spikes": [
+    {
+      "frame": 2160,
+      "time_seconds": 90.0,
+      "mean_abs_luma_diff": 67.7022,
+      "histogram_jump": 0.591
+    },
+    {
+      "frame": 576,
+      "time_seconds": 24.0,
+      "mean_abs_luma_diff": 63.6948,
+      "histogram_jump": 0.3079
+    },
+    {
+      "frame": 432,
+      "time_seconds": 18.0,
+      "mean_abs_luma_diff": 61.0955,
+      "histogram_jump": 0.3097
+    },
+    {
+      "frame": 2016,
+      "time_seconds": 84.0,
+      "mean_abs_luma_diff": 59.3905,
+      "histogram_jump": 0.1659
+    },
+    {
+      "frame": 2067,
+      "time_seconds": 86.125,
+      "mean_abs_luma_diff": 57.5541,
+      "histogram_jump": 0.5335
+    },
+    {
+      "frame": 1584,
+      "time_seconds": 66.0,
+      "mean_abs_luma_diff": 57.297,
+      "histogram_jump": 0.1506
+    },
+    {
+      "frame": 1624,
+      "time_seconds": 67.666667,
+      "mean_abs_luma_diff": 57.1464,
+      "histogram_jump": 0.2392
+    },
+    {
+      "frame": 1872,
+      "time_seconds": 78.0,
+      "mean_abs_luma_diff": 53.6414,
+      "histogram_jump": 0.2232
+    },
+    {
+      "frame": 1704,
+      "time_seconds": 71.0,
+      "mean_abs_luma_diff": 52.9708,
+      "histogram_jump": 0.0855
+    },
+    {
+      "frame": 720,
+      "time_seconds": 30.0,
+      "mean_abs_luma_diff": 52.0649,
+      "histogram_jump": 0.2697
+    },
+    {
+      "frame": 1296,
+      "time_seconds": 54.0,
+      "mean_abs_luma_diff": 51.5245,
+      "histogram_jump": 0.1597
+    },
+    {
+      "frame": 2589,
+      "time_seconds": 107.875,
+      "mean_abs_luma_diff": 47.8932,
+      "histogram_jump": 0.1431
+    },
+    {
+      "frame": 20,
+      "time_seconds": 0.833333,
+      "mean_abs_luma_diff": 47.4016,
+      "histogram_jump": 0.1769
+    },
+    {
+      "frame": 1728,
+      "time_seconds": 72.0,
+      "mean_abs_luma_diff": 46.5628,
+      "histogram_jump": 0.1155
+    },
+    {
+      "frame": 583,
+      "time_seconds": 24.291667,
+      "mean_abs_luma_diff": 45.3661,
+      "histogram_jump": 0.0297
+    },
+    {
+      "frame": 864,
+      "time_seconds": 36.0,
+      "mean_abs_luma_diff": 45.1059,
+      "histogram_jump": 0.1284
+    },
+    {
+      "frame": 1008,
+      "time_seconds": 42.0,
+      "mean_abs_luma_diff": 44.353,
+      "histogram_jump": 0.1516
+    },
+    {
+      "frame": 1440,
+      "time_seconds": 60.0,
+      "mean_abs_luma_diff": 43.887,
+      "histogram_jump": 0.2742
+    },
+    {
+      "frame": 144,
+      "time_seconds": 6.0,
+      "mean_abs_luma_diff": 43.8408,
+      "histogram_jump": 0.2232
+    },
+    {
+      "frame": 288,
+      "time_seconds": 12.0,
+      "mean_abs_luma_diff": 43.4009,
+      "histogram_jump": 0.0731
+    }
+  ],
+  "status": "REVIEW_REQUIRED",
+  "note": "Every decoded frame was scanned. Spikes are conservative QC signals and require visual review."
+}

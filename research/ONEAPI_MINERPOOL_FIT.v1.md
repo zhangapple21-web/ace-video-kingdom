@@ -27,3 +27,10 @@ OneAPI 可以作为现有 MinerPool 的**低成本统一文本通道**，优先�
 ```
 
 健康失败时，智普阶段应记录 `ONEAPI_UNAVAILABLE`，转回原有已验证 Provider 或 `RESTED`，不得空转重试、伪造完成或写入生产事实。
+## 2026-09-03 live update
+
+- Current `OPENAI_BASE_URL` gateway responded `GET /v1/models` with HTTP 200.
+- A non-sensitive `gpt-5.4-mini` chat probe returned HTTP 200 and the exact marker `ONEAPI_PROBE_OK`.
+- `gpt-4o` returned HTTP 400 through this gateway; it is not a safe default here.
+- A research-task probe completed but produced generic/non-local output, so One-API is suitable for low-cost chores and document cleanup, not final director judgment.
+- Evidence: `research/external_research/oneapi_live_probe_20260903.json`.

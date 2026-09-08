@@ -1,0 +1,36 @@
+{
+  "contract_version": "ace.video_kingdom.model_task_routing.v1",
+  "scope": "FREE_ZONE_RESEARCH_ONLY",
+  "production_integration": false,
+  "principle": "Keep the user-facing task choice small; hide provider selection behind evidence-backed routing.",
+  "task_classes": {
+    "DIRECTOR": {
+      "purpose": "剧本深读、剧情重构、导演级分镜、角色行为弧",
+      "primary": {"provider": "shenwen_grok", "model": "grok-4.6", "status": "configured_external_channel"},
+      "challenge": {"provider": "shenwen_grok", "model": "grok-4.5", "status": "configured_external_channel"},
+      "formal_reviewer": {"provider": "codex", "model": "gpt-5.6-terra", "status": "current_codex_route"},
+      "escalation": {"provider": "codex", "model": "gpt-5.6-terra", "status": "current_codex_route"}
+    },
+    "RESEARCH": {
+      "purpose": "公开资料比较、反例、能力测绘和实验假设",
+      "primary": {"provider": "shenwen_grok", "model": "grok-4.6", "status": "configured_external_channel"},
+      "challenge": {"provider": "shenwen_grok", "model": "grok-4.5", "status": "configured_external_channel"}
+    },
+    "UTILITY": {
+      "purpose": "清洗、摘要、归档、字幕和清单整理",
+      "primary": {"provider": "zhipu", "model": "glm-4-flash", "status": "live_http_200_verified"}
+    },
+    "VISION": {
+      "purpose": "抽帧、图片/视频观察和视觉质量记录",
+      "primary": {"provider": "codex", "model": "gpt-5.6-terra", "status": "current_codex_route"}
+    },
+    "GENERATION": {
+      "purpose": "锚图和短视频叶片生成",
+      "image": {"provider": "shenwen_images", "model": "gpt-image-2", "status": "historical_isolated_receipt"},
+      "video": {"provider": "agnes", "model": "agnes-video-2.5-flash", "status": "historical_isolated_receipt"}
+    }
+  },
+  "local_model_installation": "not_required",
+  "automatic_promotion": false,
+  "user_experience": {"entry_point": "choose_task_class", "provider_selection": "automatic", "advanced_overrides": "internal_only"}
+}

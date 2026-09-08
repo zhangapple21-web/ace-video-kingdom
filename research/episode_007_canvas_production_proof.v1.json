@@ -1,0 +1,52 @@
+{
+  "contract_version": "infinite_canvas.production_proof.v1",
+  "scope": "FORMALIZATION_TEST_ONLY",
+  "production_integration": false,
+  "episode_id": "episode_007_virtual_data",
+  "source_evidence": {
+    "assembly_review": "research/episode_007_assembly_review.json",
+    "subtitled_candidate": "media_staging/episode_007_virtual_data/video_camera_grammar_v2/episode_007_candidate_v7_subtitled.mp4",
+    "subtitled_candidate_sha256": "d535bae788f3b08d2de7b2ba539ecb4de5016d57cc48e2994314a5da1fc0204a"
+  },
+  "asset_identity_test": {
+    "status": "READY_FOR_CANVAS_BINDING",
+    "asset": {
+      "assetId": "asset_episode007_action_probe_keyboard_v1",
+      "assetType": "KEYFRAME",
+      "version": "v1",
+      "sourceNodeId": "canvas-episode007-keyboard-anchor",
+      "sha256": "UNKNOWN_REQUIRES_CANVAS_UPLOAD_HASH",
+      "reusableScope": ["episode_007_virtual_data"]
+    },
+    "honesty_note": "The actual canvas node is not connected in this run; no fabricated node hash or reference count is claimed."
+  },
+  "branch_semantics_test": {
+    "status": "REWORK_LINEAGE_RECORDED",
+    "shot_id": "S03A",
+    "takes": [
+      {"takeId": "take_S03A_original", "parentShotId": "S03A", "branchReason": "original_render", "selected": false},
+      {"takeId": "take_S03A_camera_grammar_v2", "parentShotId": "S03A", "branchReason": "camera_grammar_rework", "supersedes": "take_S03A_original", "selected": true}
+    ],
+    "isolation_assertion": "Only S03A lineage changes; S01A, S01B, S01C, S01D, S02A, S02B, S02C and later source clips remain independently hash-addressed in the assembly receipt."
+  },
+  "production_evidence_test": {
+    "status": "NOT_PASSABLE_YET",
+    "generated": true,
+    "media_validated": true,
+    "visual_reviewed": false,
+    "audio_checked": false,
+    "edit_checked": false,
+    "decision_record": null,
+    "required_guard_result": "EVIDENCE_INCOMPLETE",
+    "reason": "A valid generated MP4 and a completed provider task cannot directly become PASS."
+  },
+  "episode_diagnostics_test": {
+    "dramatic_function_repetition": "READY_TO_DETECT_AFTER_SHOT_METADATA_BINDING",
+    "continuity_conflict": "READY_TO_DETECT_AFTER_previousState_nextState_BINDING",
+    "known_current_gap": "The latest episode's research preflight records 18 shots missing required action, camera and continuity contract fields; it is not falsely marked stable."
+  },
+  "free_zone_compatibility": {
+    "result": "PRESERVED",
+    "rule": "FREE_ZONE_RESEARCH nodes may omit formal evidence and receive warnings/diagnostics; only CONTROLLED_VIDEO_PRODUCTION nodes are denied PASS for missing evidence."
+  }
+}

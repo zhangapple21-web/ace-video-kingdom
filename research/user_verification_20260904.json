@@ -1,0 +1,50 @@
+{
+  "contract_version": "ace.video_kingdom.user_verification.v1",
+  "at": "2026-09-04T05:36:00Z",
+  "scope": "FREE_ZONE_RESEARCH_ONLY",
+  "production_integration": false,
+  "item_1_card_consumption": {
+    "dispatch_task_id": "VK-AUTO-d758770c763a2c16",
+    "dispatch_status": "DISPATCHED",
+    "claim_status": "HANDOFF_READY",
+    "provider_status": "PROVIDER_COMPLETED",
+    "provider_calls": 1,
+    "shot_id": "ACE_CARD_PROVIDER_PROBE_S01A",
+    "provider_model": "agnes-video-v2.0",
+    "provider_video_id_recorded": true,
+    "artifact": "media_staging/episode_007_virtual_data/video_camera_grammar_v2/ACE_CARD_PROVIDER_PROBE_S01A.mp4",
+    "artifact_sha256": "1ef49a34a840d82f85073fc990cfa0a4c3bac15db87f2ce281253908f39155f6",
+    "causal_linkage": "ESTABLISHED"
+  },
+  "item_2_result_return": {
+    "record": "research/decision_records/episode_007_S01_review_result.v1.json",
+    "bridge": "research/ace_result_outbox.v1.jsonl",
+    "ace_receipt": "research/ace_result_receipts.v1.jsonl",
+    "bridge_status": "ALREADY_EMITTED",
+    "ace_consumer_status": "RESULT_CONSUMED",
+    "decision_verdict": "REWORK",
+    "delivery_approved": false,
+    "reason": "S01 dialogue/camera/performance gate remains unmet"
+  },
+  "item_3_episode_007": {
+    "preflight_status": "CONDITIONAL",
+    "hard_failures": 0,
+    "rework": 0,
+    "quality_contract": "FORMAL_VALID",
+    "six_module_contract": "VALID",
+    "delivery_gate": "NOT_DELIVERABLE",
+    "delivery_approved": false,
+    "blocking_reasons": [
+      "S03A identity/continuity failure remains",
+      "dialogue shots still lack accepted locked-camera/post-line performance evidence",
+      "audio stream integrity is proven but intelligible dialogue/final voice performance is not",
+      "latest review is CONDITIONAL_RESEARCH_CUT, not delivery approval"
+    ]
+  },
+  "cross_repo_comparison": {
+    "toonflow_app_commit": "e03cf590eb0cab63534a4040db9acb4ec95b42a6",
+    "fastmovieai_commit": "31c324c3bcce36121e7d6c21df830fceb259d82c",
+    "shared_mechanism": "durable task record binds provider task id, polling, result asset and final status",
+    "current_gap": "ACE dispatch card previously stopped at handoff and did not bind provider receipt or increment provider_calls"
+  }
+}

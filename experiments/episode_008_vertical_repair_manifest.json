@@ -1,0 +1,20 @@
+[
+  {
+    "shot_id": "E008_S01_VERTICAL_9X16_REPAIR",
+    "model_id": "agnes-video-v2.0",
+    "status": "COMPLETED",
+    "payload_sha256": "32f4eb23f72bf22f5a2c119f932dbc56a3c3df2697e4c540455dcbaa550606b7",
+    "create_endpoint": "https://apihub.agnes-ai.com/v1/videos",
+    "poll_endpoint": "https://apihub.agnes-ai.com/agnesapi",
+    "poll_id_field": "video_id",
+    "create_attempt": 1,
+    "create_http_status": 200,
+    "video_id": "video_bGl0ZWxsbTpjdXN0b21fbGxtX3Byb3ZpZGVyOm9wZW5haTttb2RlbF9pZDphZ25lcy12aWRlby12Mi4wO3ZpZGVvX2lkOnZpZGVvX2NmNWVjNWJjZDlkNDQ2Yzg4ZDhiNTI4YjYyNDQ2YzY5",
+    "created_status": "queued",
+    "last_poll_http_status": 200,
+    "last_state": "completed",
+    "artifact_sha256": "8fc25b68f9b05091a568a24ce300f0d9e0e44ae515f2f45e102c818fb480cb59",
+    "bytes": 2023394,
+    "artifact_path": "C:\\tmp\\ace_video_kingdom_git\\media_staging\\episode_008_rule_seat_system\\revision_pilot\\vertical_repair\\E008_S01_VERTICAL_9X16_REPAIR.mp4"
+  }
+]

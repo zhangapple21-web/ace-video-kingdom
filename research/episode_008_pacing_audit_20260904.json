@@ -1,0 +1,30 @@
+{
+  "contract_version": "ace.video_kingdom.video_pacing_audit.v1",
+  "video": "media_staging\\episode_008_rule_seat_system\\episode_008_research_cut_v1.mp4",
+  "status": "FAIL",
+  "media": {
+    "duration_seconds": 35.455323,
+    "width": 720,
+    "height": 1280,
+    "has_audio": true
+  },
+  "internal_scene_cut_count": 11,
+  "internal_scene_cut_times_seconds": [
+    1.562988,
+    3.021322,
+    4.187988,
+    10.246989,
+    15.288656,
+    19.288656,
+    20.330322,
+    25.371989,
+    26.455322,
+    27.830322,
+    29.455322
+  ],
+  "dialogue_gate": true,
+  "max_internal_cuts": 0,
+  "subtitle_seconds": 5.0,
+  "subtitle_coverage_ratio": 0.14102254829267807,
+  "note": "Scene detection is a conservative QC signal; it does not prove acting or lip-sync."
+}

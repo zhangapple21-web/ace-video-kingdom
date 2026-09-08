@@ -1,0 +1,45 @@
+{
+  "contract_version": "ace.video_kingdom.shot_review.v1",
+  "project_id": "episode_007_virtual_data",
+  "review_template": "director_forced_reasoning_v1",
+  "status": "CONDITIONAL",
+  "reviewed_shots": [
+    {
+      "shot_id": "P01_KEYBOARD",
+      "decision": "CONDITIONAL",
+      "core_task": "establish fatigue and irritation",
+      "completion": "keyboard and eye-rub visible; continuous force still needs motion check",
+      "risk": "may collapse into light finger tapping"
+    },
+    {
+      "shot_id": "P02_PHONE_SLAM",
+      "decision": "CONDITIONAL",
+      "core_task": "embody anger through impact",
+      "completion": "phone and raised arm visible; impact/rebound needs frame confirmation",
+      "risk": "could read as placing phone down"
+    },
+    {
+      "shot_id": "P03_DESK_SLAM",
+      "decision": "CONDITIONAL",
+      "core_task": "make supervisory pressure physical",
+      "completion": "black polo, smoke and forward shouting visible; desk feedback needs confirmation",
+      "risk": "without paper/ashtray reaction, impact feels weightless"
+    },
+    {
+      "shot_id": "P04_RUN_OUT",
+      "decision": "CONDITIONAL",
+      "core_task": "show brief hope as physical movement",
+      "completion": "standing and movement visible",
+      "risk": "continuity may jump during tracking"
+    },
+    {
+      "shot_id": "P05_COPY_PASTE",
+      "decision": "CONDITIONAL",
+      "core_task": "end in mechanical numbness",
+      "completion": "dark office and repetitive operation visible",
+      "risk": "pull-back may drift or accidentally soften ending"
+    }
+  ],
+  "gate": "Do not batch-render episode until each probe is PASS or its stated condition is verified.",
+  "production_integration": false
+}

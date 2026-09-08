@@ -16,6 +16,15 @@ import urllib.error
 import urllib.request
 from datetime import datetime, timezone
 from pathlib import Path
+import sys
+
+if str(Path(__file__).resolve().parents[1]) not in sys.path:
+    sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
+
+try:
+    from runtime.provider_admission import admit_provider_request, assert_admission, build_canonical_generation_request
+except ImportError:  # pragma: no cover
+    from tools.runtime.provider_admission import admit_provider_request, assert_admission, build_canonical_generation_request  # type: ignore
 
 ENDPOINT = "https://open.bigmodel.cn/api/paas/v4/chat/completions"
 MODEL = "glm-4-flash"
@@ -29,13 +38,33 @@ def _retry_after(headers: object) -> float | None:
         return None
 
 
-def _request(key: str, prompt: str, timeout: int, *, endpoint: str, model: str) -> tuple[int, dict, float | None]:
-    body = json.dumps({
-        "model": model,
-        "messages": [{"role": "user", "content": prompt}],
-        "temperature": 0.2,
-        "max_tokens": 2048,
-    }).encode("utf-8")
+def _request(
+    key: str,
+    request_payload: dict | str,
+    timeout: int,
+    *,
+    endpoint: str,
+    model: str | None = None,
+    admission: dict | None = None,
+    request_hash: str | None = None,
+) -> tuple[int, dict, float | None]:
+    """POST the exact admitted payload.
+
+    Every Provider request must carry the exact dict payload that was bound
+    into the canonical request and receipt.  The historical string/model
+    shape is kept only as an explicit fail-closed compatibility surface so an
+    old caller cannot silently rebuild a second, unadmitted payload.
+    """
+    if not isinstance(request_payload, dict):
+        raise ValueError(
+            "provider admission blocked: legacy string request form is closed; "
+            "pass the exact admitted dict payload and receipt"
+        )
+    effective_payload = request_payload
+    if admission is None or not request_hash:
+        raise ValueError("provider admission is required for every Provider request")
+    assert_admission(admission, request_hash, provider_payload=effective_payload)
+    body = json.dumps(effective_payload, ensure_ascii=False).encode("utf-8")
     request = urllib.request.Request(
         endpoint, data=body,
         headers={"Authorization": f"Bearer {key}", "Content-Type": "application/json"},
@@ -92,23 +121,43 @@ def main() -> int:
     source = args.input.read_text(encoding="utf-8")
     prompt = ("你是视频王国的低成本杂务工，只做研究辅助，不调用其他工具，不发布内容。\n"
               f"任务类型：{args.task}\n请输出结构化 JSON，保留不确定项，不编造事实。\n\n输入：\n{source}")
+    request_payload = {"model": model, "messages": [{"role": "user", "content": prompt}], "temperature": 0.2, "max_tokens": 2048}
+    canonical = build_canonical_generation_request(
+        {"episode_id": "research", "shot_id": f"CHORE_{args.task}", "prompt": prompt,
+         "action": args.task, "camera": {"framing": "text", "movement": "NONE"},
+         "visible_entities": [], "audio_contract": {"status": "NOT_APPLICABLE"}, "reference_assets": []},
+        request_payload, provider=provider, endpoint=endpoint, payload_schema="openai.chat.completions.v1",
+        model=model, scope="research", request_kind="research",
+    )
+    admission_path = args.output.with_name(args.output.stem + ".admission.json")
+    admission = admit_provider_request(canonical, receipt_path=admission_path)
+    if admission["status"] != "ADMITTED":
+        raise SystemExit("provider admission blocked: " + ";".join(admission["preflight"]["errors"]))
     receipt = {"provider": provider, "model": model, "task": args.task,
                "input_sha256": hashlib.sha256(source.encode()).hexdigest(),
                "attempts": [], "production_integration": False,
+               "request_hash": admission["request_hash"], "admission_receipt": str(admission_path),
                "started_at": datetime.now(timezone.utc).isoformat()}
     for attempt in range(1, args.max_attempts + 1):
-        status, payload, retry_after = _request(key, prompt, 60, endpoint=endpoint, model=model)
+        status, response_payload, retry_after = _request(
+            key,
+            request_payload,
+            60,
+            endpoint=endpoint,
+            admission=admission,
+            request_hash=admission["request_hash"],
+        )
         row = {"attempt": attempt, "status_code": status, "ok": status == 200}
         if status == 200:
             receipt["attempts"].append(row)
-            receipt["result"] = payload
+            receipt["result"] = response_payload
             receipt["status"] = "COMPLETED"
             args.output.parent.mkdir(parents=True, exist_ok=True)
             args.output.write_text(json.dumps(receipt, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
             return 0
         transient = status in {0, 408, 425, 429, 500, 502, 503, 504}
         row["transient"] = transient
-        row["error_summary"] = re.sub(r"\s+", " ", str(payload.get("error", "")))[:300]
+        row["error_summary"] = re.sub(r"\s+", " ", str(response_payload.get("error", "")))[:300]
         receipt["attempts"].append(row)
         if not transient or attempt == args.max_attempts:
             receipt["status"] = "FAILED_FINAL"

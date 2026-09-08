@@ -1,0 +1,11 @@
+{
+  "schema": "ace.video_kingdom.content_control.v1",
+  "content_state": "R0",
+  "tech_route": "NORMAL",
+  "failure_class": null,
+  "transition_authority": "CONTENT_FEASIBILITY_GATE_ONLY",
+  "automatic_transition": false,
+  "canonical_story_immutable": true,
+  "lineage": [],
+  "run_id": "d_overbudget"
+}

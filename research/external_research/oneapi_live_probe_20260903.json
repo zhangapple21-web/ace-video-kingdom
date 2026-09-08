@@ -1,0 +1,32 @@
+{
+  "timestamp_utc": "2026-09-03T01:43:02.2763755Z",
+  "endpoint_source": "OPENAI_BASE_URL (value redacted)",
+  "api_key_present": true,
+  "models_probe": {
+    "http_status": 200,
+    "model_ids_observed": ["gpt-5.6-terra", "gpt-5.6-terra", "gpt-5.6-terra", "gpt-5.5", "gpt-5.4", "gpt-5.4-mini", "codex-auto-review"]
+  },
+  "chat_probe": {
+    "model": "gpt-5.4-mini",
+    "http_status": 200,
+    "expected_marker": "ONEAPI_PROBE_OK",
+    "returned_marker": "ONEAPI_PROBE_OK",
+    "result": "PASS"
+  },
+  "gpt4o_probe": {
+    "http_status": 400,
+    "result": "UNSUPPORTED_OR_INVALID_MODEL_REQUEST",
+    "note": "No response body retained in this evidence record."
+  },
+  "research_task_probe": {
+    "model": "gpt-5.4-mini",
+    "http_status": 200,
+    "result": "LOW_QUALITY_OR_NONCOMPLIANT",
+    "note": "The model returned process narration and a generic six-gate answer instead of the requested local audit. Not used as production guidance."
+  },
+  "safety": {
+    "secrets_logged": false,
+    "production_files_changed": false,
+    "video_api_called": false
+  }
+}

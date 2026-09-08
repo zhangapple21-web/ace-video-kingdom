@@ -1,0 +1,52 @@
+{
+  "schema": "episode008.shot_director_review.v1",
+  "project_id": "episode_008_rule_seat_system",
+  "shot_id": "E008_S03",
+  "script_status": "SCRIPT_LOCKED",
+  "reviewed_at": "2026-09-04",
+  "status": "PASS_WITH_LOCAL_CORRECTION",
+  "raw_artifact": {
+    "path": "media_staging/episode_008_rule_seat_system/E008_S03.mp4",
+    "sha256": "8e9bf6a620d3ed6d91531e75c1f46b699300ea04c9876f6633139c0e941450bb",
+    "media_integrity": "PASS",
+    "duration_seconds": 5.041667,
+    "video": "H.264 704x1280 24fps",
+    "audio": "AAC stereo 48kHz"
+  },
+  "visual_verdicts": {
+    "action_beat": "PASS",
+    "information": "PASS_WITH_SUBTITLE_CORRECTION",
+    "identity": "CONDITIONAL_PASS",
+    "setting_and_continuity": "CONDITIONAL_PASS",
+    "cut_timing": "PASS",
+    "subtitle_position": "PASS",
+    "audio_stream_presence": "PASS",
+    "dialogue_audio_sync": "UNVERIFIED"
+  },
+  "observations": [
+    "人物完成将三类资料并排、圈出日期并留下待核验标记的主要动作。",
+    "生成纸面文字仍有伪字，不作为事实；本地对白字幕固定信息。",
+    "人物与上一镜属于同一角色类型，但场景漂移到更现代的蓝调办公室，连续性仅条件通过；后续提示词需强化同一张旧木桌、同一盏台灯和同一空间。"
+  ],
+  "overall_verdict": "PASS_WITH_LOCAL_SUBTITLE_CORRECTION",
+  "next_gate": "SHOT_4_ALLOWED",
+  "corrected_artifact": {
+    "path": "media_staging/episode_008_rule_seat_system/E008_S03_subtitled_research_v1.mp4",
+    "sha256": "8aa1de8d39befee8a9ea21d81207710d869443141f96164e5b476ef6998d840b",
+    "subtitle_track": "media_staging/episode_008_rule_seat_system/E008_S03_review.srt",
+    "subtitle_validation": "VALID",
+    "audio_preserved": true
+  },
+  "table_lens": {
+    "need": "把班次表、扣费单和个人记录并排，形成日期差异的可核验证据节点。",
+    "capability_evidence": "video_id video_bGl0ZWxsbTpjdXN0b21fbGxtX3Byb3ZpZGVyOm9wZW5haTttb2RlbF9pZDphZ25lcy12aWRlby12Mi4wO3ZpZGVvX2lkOnZpZGVvX2M1Y2FmMTQ0MzA5MDRiM2VhMGZiMDhhMmUxYTBkMTI2",
+    "verification_result": "动作通过；文本由本地字幕固定；连续性条件通过。",
+    "follow_up": "第四镜继续使用同一组三类资料，并显式要求旧木桌、暖色台灯和边境园区办公室连续性。"
+  },
+  "evidence": [
+    "media_staging/episode_008_rule_seat_system/E008_S03_review/contact.jpg",
+    "media_staging/episode_008_rule_seat_system/E008_S03_subtitled_review/contact.jpg",
+    "media_staging/episode_008_rule_seat_system/E008_S03_review.srt",
+    "media_staging/episode_008_rule_seat_system/E008_S03_subtitle_receipt.json"
+  ]
+}

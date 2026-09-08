@@ -1,0 +1,35 @@
+{
+  "project_id": "episode_008_rule_seat_system",
+  "artifact": "media_staging/episode_008_rule_seat_system/director_recut_v2/episode_008_director_recut_v2_subtitled.mp4",
+  "status": "CONDITIONAL_RESEARCH_CUT",
+  "reason": "A complete, dialogue-first recut was produced from the only episode-008 source clip that keeps the records-room cast and wardrobe coherent.",
+  "reference_learning": {
+    "local_sources": [
+      "C:/tmp/reference_ai_short_films/unexpected_love.mp4",
+      "C:/tmp/reference_ai_short_films/bone_throne.mp4"
+    ],
+    "observed_patterns": [
+      "Dialogue and reaction beats hold within a scene before editorial cuts.",
+      "A 5-minute AI short still uses distinct information beats rather than a cut every 1-3 seconds.",
+      "Character and location continuity are carried by repeated wardrobe, props, lighting and spatial grammar."
+    ],
+    "internet_lookup": "attempted_but_unavailable_in_this_run"
+  },
+  "production_changes": [
+    "One room and one cast anchor for the full cut.",
+    "No internal scene cuts inside the source shot; editorial changes occur only at 12-second dialogue/reaction blocks.",
+    "Chinese spoken lines and first-person inner monologue synthesized with the installed Microsoft Huihui zh-CN voice.",
+    "Subtitles are burned from a validated SRT and do not rely on generated paper text."
+  ],
+  "continuity_lock": {
+    "LIN_LAN": "black long-sleeve top, low ponytail, seated at scratched desk",
+    "CHEN_YUE": "gray polo, ID badge, standing behind desk",
+    "location": "cramped concrete records room with barred window, fluorescent tube, old desk and telephone",
+    "forbidden": ["throne or luxury office", "suit/managerial costume drift", "new location within a dialogue block"]
+  },
+  "known_limits": [
+    "The same coherent provider clip is reused with controlled crops; this is a pacing/continuity proof, not a final multi-scene episode.",
+    "Voice intelligibility and lip-sync are not claimed as provider-verified; audio is local TTS over a muted visual plate.",
+    "The fictional helper character 阿棠 is represented by dialogue only in this proof cut and is not visibly introduced."
+  ]
+}

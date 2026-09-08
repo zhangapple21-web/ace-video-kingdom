@@ -1,0 +1,21 @@
+{
+  "contract_version": "ace.free_zone_factories.v1",
+  "execution_state": "BLUEPRINT_ONLY",
+  "factory": "imitation",
+  "method": "Isolated shadow resident call; retain hashes for independent audit.",
+  "production_integration": false,
+  "question": "grok_coding_shadow resident activity; source and response retained by hash only",
+  "realm_state": {
+    "authority": "SANDBOX_ONLY",
+    "contract_version": "ace.free_zone_realm.v1",
+    "outbound_rule": "NONE",
+    "production_integration": false,
+    "realm": "INTERNAL",
+    "retention": "ACTIVE"
+  },
+  "recorded_at": "2026-09-02T03:43:22.094473+00:00",
+  "stance": "DIRECT_OBSERVATION",
+  "thread_id": "THREAD-8A4801E07D5AD5DD",
+  "world_hash": "67ffc66555340c6f5b51dacb43c220e702cdbfbecc8bd572fe3949ad877655f7",
+  "world_id": "WORLD-THREAD-8A4801E07D5AD5DD-DIRECT_OBSERVATION"
+}

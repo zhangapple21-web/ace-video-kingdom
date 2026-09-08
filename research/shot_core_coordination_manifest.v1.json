@@ -1,0 +1,56 @@
+{
+  "schema": "video_kingdom.codex_coordination.v1",
+  "work_id": "shot-core-full-audit-20260905",
+  "workspace": "C:/tmp/ace_video_kingdom_git",
+  "production_integration": false,
+  "taskpool_authority": false,
+  "takeover_requires_new_declaration": true,
+  "created_at": "2026-09-05T13:25:00+08:00",
+  "owners": [
+    {
+      "thread_id": "01a0678d-5046-7f03-8fd8-6c41d329f0cf",
+      "role": "video-production-owner",
+      "mission": "controlled Shot Core pilot, existing Agnes chain, evidence, regression",
+      "scope": [
+        "runtime/shot_core.py",
+        "tools/run_shot_core_pilot.py",
+        "tools/assemble_shot_core.py",
+        "tests/test_shot_core_runtime.py",
+        "tests/test_shot_core_hardening.py",
+        "research/shot_core_production_pilot.v1.md",
+        "research/shot_core_production_audit.v1.md",
+        "research/shot_core_pilot_*.json",
+        "media_staging/shot_core_pilot/"
+      ],
+      "status": "active",
+      "production_provider_calls": "only_if_existing_pilot_receipts_and_hard_gates_allow",
+      "heartbeat_at": "2026-09-05T13:25:00+08:00",
+      "ttl_seconds": 7200
+    },
+    {
+      "thread_id": "01a06f4c-58c7-7f72-bfbc-c3ba9e477a07",
+      "role": "adversarial-audit-owner",
+      "mission": "read-only future bug and failure-mode audit; no provider calls",
+      "scope": [
+        "research/shot_core_adversarial_gap_audit.v1.md"
+      ],
+      "status": "active",
+      "heartbeat_at": "2026-09-05T13:25:00+08:00",
+      "ttl_seconds": 7200
+    },
+    {
+      "thread_id": "01a076ba-a167-7393-8ec1-c169f61c2bf1",
+      "role": "production-control-audit-owner",
+      "mission": "unified demand entrypoint, durable state-machine gates, recovery and delivery closure",
+      "scope": [
+        "production_control/",
+        "tests/test_production_control.py",
+        "production_control-related tests only"
+      ],
+      "status": "active",
+      "production_provider_calls": "none; provider execution remains behind existing admission boundary",
+      "heartbeat_at": "2026-09-06T22:23:17+08:00",
+      "ttl_seconds": 7200
+    }
+  ]
+}

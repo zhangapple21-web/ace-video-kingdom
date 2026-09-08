@@ -1,0 +1,21 @@
+{
+  "contract_version": "ace.free_zone_factories.v1",
+  "execution_state": "BLUEPRINT_ONLY",
+  "factory": "imitation",
+  "method": "Preserve this rival world for a dedicated counterexample executor; do not infer a result merely because it has not run.",
+  "production_integration": false,
+  "question": "What bounded observation would restrict or falsify the research shape of THREAD-8A4801E07D5AD5DD?",
+  "realm_state": {
+    "authority": "SANDBOX_ONLY",
+    "contract_version": "ace.free_zone_realm.v1",
+    "outbound_rule": "NONE",
+    "production_integration": false,
+    "realm": "INTERNAL",
+    "retention": "ACTIVE"
+  },
+  "recorded_at": "2026-09-02T03:43:22.097167+00:00",
+  "stance": "COUNTEREXAMPLE_SEARCH",
+  "thread_id": "THREAD-8A4801E07D5AD5DD",
+  "world_hash": "7cb0d6e02856eef15b20c0ff813858b2f456c01a40827fa50dfc28ad04fef795",
+  "world_id": "WORLD-THREAD-8A4801E07D5AD5DD-COUNTEREXAMPLE_SEARCH"
+}

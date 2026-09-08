@@ -1,0 +1,71 @@
+{
+  "schema": "ace.video_kingdom.model_capability_probe_receipt.v1",
+  "recorded_at": "2026-09-08T09:27:44+08:00",
+  "provider": "shenwen",
+  "model": "gpt-6-astra",
+  "scope": "remote_shenwen",
+  "endpoint": "https://api.shenwenai.com/v1/responses",
+  "authorization": "environment_key_presence_only",
+  "request_storage": "request_body_not_stored; hashes below are canonical non-secret payload hashes",
+  "probes": [
+    {
+      "capability": "reasoning",
+      "request_sha256": "4127fd8a90bdd2f42ec1a04fb2a1b673d6efeda1effb08c291fa3d174eec7d2c",
+      "http_status": 200,
+      "response_status": "completed",
+      "semantic_check": true,
+      "elapsed_ms": 3713,
+      "response_id_present": true
+    },
+    {
+      "capability": "planning",
+      "request_sha256": "c88bd1039e40d9283e46d31414e58b79796ca25323cdbdf5c705c2beaade55ad",
+      "http_status": 200,
+      "response_status": "completed",
+      "semantic_check": true,
+      "elapsed_ms": 3593,
+      "response_id_present": true
+    },
+    {
+      "capability": "long_context",
+      "request_sha256": "717a2ae0ba7813949f30e7e3ab99dd51a79f67dc474efecb1125c28227288557",
+      "http_status": 200,
+      "response_status": "completed",
+      "semantic_check": true,
+      "elapsed_ms": 3310,
+      "bounded_input_note": "900 repeated markers; this is not a claim about the maximum context window"
+    },
+    {
+      "capability": "vision",
+      "request_sha256": "fc072b8e44697dc071b6ebb2423ede495099258ab34899272a61368149f3f075",
+      "http_status": 200,
+      "response_status": "completed",
+      "semantic_check": true,
+      "elapsed_ms": 4294,
+      "image_sha256": "eddbc67be1eaea4e782b3573aef75b1c4ecc235294f9196cce8d0085a800f5ec",
+      "image_source": "user_supplied_attachment; not retained by this receipt"
+    }
+  ],
+  "documentation": {
+    "url": "https://shenwenai.com/docs/codex",
+    "sha256": "ac579ee6f3379ebb847e2f41c97721dbb792ca024bf028c99371f5001e90328c",
+    "observed": ["gpt-6-astra", "Responses", "https://api.shenwenai.com/v1"]
+  },
+  "local_entry_check": {
+    "endpoints": {
+      "http://127.0.0.1:3000/v1/models": {"http_status": 200, "astra_present": true, "observed_at": "2026-09-08T18:12:00+08:00"},
+      "http://127.0.0.1:3002/v1/models": {"http_status": 200, "astra_present": true, "observed_at": "2026-09-08T18:12:00+08:00"}
+    },
+    "conclusion": "catalog_and_transport_reachable_on_3000_miner_pool_and_3002_codex_compat; production_control_plane_promotion_still_blocked"
+  },
+  "health": {
+    "source": "C:/tmp/ace_core/06_RUNTIME/ace/data/miner_pool/provider_watchdog/watchdog_state.json",
+    "provider_status_observed": "HEALTHY",
+    "health_score_derivation": "status mapping only; watchdog persisted snapshot has no explicit score",
+    "cost": "NOT_RECORDED",
+    "provider_stability": "SCOPED_OBSERVATION_ONLY"
+  },
+  "verification_result": "VERIFIED_SCOPED_FOR_REASONING_PLANNING_BOUNDED_LONG_CONTEXT_AND_SINGLE_IMAGE",
+  "production_integration": false,
+  "default_model_changed": false
+}

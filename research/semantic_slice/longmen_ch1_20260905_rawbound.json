@@ -1,0 +1,72 @@
+{
+  "schema": "video_kingdom.semantic_slice.v1",
+  "production_integration": false,
+  "source": {
+    "path": "C:\\tmp\\小说题材\\龙门战神.txt",
+    "sha256": "cc0eef87635f1fa5d93203d80ec4a7a4f52249eaea7dca9f1b8248677a7d132d",
+    "encoding": "utf-8",
+    "char_count": 6157154
+  },
+  "method": {
+    "provider_requested": "local",
+    "model_status": "NOT_PROVEN",
+    "chapter_count": 1,
+    "deterministic_fallback": true,
+    "source_preservation": "exact_excerpt_and_char_span"
+  },
+  "provider_receipts": [
+    {
+      "chunk_id": "CH0001",
+      "status": "NOT_PROVEN",
+      "reason": "provider_credentials_or_base_url_unavailable"
+    }
+  ],
+  "slices": [
+    {
+      "slice_id": "CH0001_SLICE_01",
+      "source_span": {
+        "char_start": 174,
+        "char_end": 1374,
+        "chapter": "第1章 回来了"
+      },
+      "source_excerpt": "\r\n第1章 回来了\r\n荒山上，孤坟前。\r\r\n    穿着迷彩服的陆凡，久跪不起，泛红的双眼，直直盯着眼前那由乱石砌成的简陋坟头。\r\r\n    坟前那块长满青苔的木板上，写着陆山河之墓。\r\r\n    谁也无法想象，躺在这座孤坟里的，会是林城前首富！\r\r\n    陆凡连磕三个响头，身体微微颤抖，“爸，儿子不孝，此仇不报，誓不为人！”\r\r\n    他做梦也没想到，在国外执行几年任务，回到国内，却是这种境况！\r\r\n    话音落下，陆凡将面前的两瓶五十年陈酿的茅台打开，一瓶倒在坟前，另外一瓶，紧握在手。\r\r\n    “爸，你以前一直想让我陪你喝酒，今天，我陪你喝个够！”\r\r\n    “只是没想到，我们父子俩第一次喝酒，是这种方式！”\r\r\n    陆凡举起酒杯，猛灌一口。\r\r\n    “咳咳咳……”\r\r\n    “龙魂，您别太伤心了，您伤还没好。”\r\r\n    身后，原本钢枪为骨，脊梁如山般站着的男人，满脸担忧的搀扶陆凡。\r\r\n    这人身穿与众不同迷彩服，在他的衣服上有一个很明显的肩章，上面的图案是一把重剑和一个盾牌！\r\r\n    这是龙门的标志！\r\r\n    龙门，一个让全世界都闻风丧胆的华国最精锐的队伍！\r\r\n    无论是世界维和任务，还是保家卫国，龙门都首当其冲，战功显赫！\r\r\n    而陆凡，所有人都尊称他为龙魂！\r\r\n    “我父亲的死，查清了吗？”\r\r\n    陆凡侧目望向身后的黑雨。\r\r\n    “回龙魂，查清了，林城首富陆山河，被张李孙刘四家设计陷害，走投无路，于三年前，从世纪大酒店顶楼，跳楼自杀！”\r\r\n    “陆家所有资产，全被这四家瓜分。”\r\r\n    这些话，对陆凡而言，字字诛心。\r\r\n    即便他是战无不胜，叱咤风云的战神，那又如何？\r\r\n    依旧没能保护自己最亲的人！\r\r\n    想必，在父亲最绝望的时候，应该很希望自己出现吧？\r\r\n    想到这些，陆凡指甲镶入掌心，却感觉不到丝毫疼痛。\r\r\n    “龙魂，我这就去屠尽张李孙刘四家，奉上六百人头当做祭品！”\r\r\n    黑雨杀意骤起。\r\r\n    “不用！”\r\r\n    陆凡抬起手来，一滴鲜血从掌心渗出，他用舌头舔了舔血，“我亲自来，一个人，也跑不掉！”\r\r\n    陆凡的杀意，如惊涛骇浪，席卷四周。\r\r\n    哪怕是黑雨，也不由自主的往后退了两步。\r\r\n    这种杀气，他从没见过。\r\r\n    “车里，有多少现金？”\r\r\n    “五千万美元！”\r\r\n    听到这个数字，陆凡皱了皱眉，“全拿过来。”\r\r\n    “是！”\r\r\n    黑雨没有任何怠慢，将车上几个大纸箱搬下来。\r\r\n    陆凡面无表情的将纸箱打开，拿出里面崭新的美元，直接点燃，烧了起来。\r\r\n    “五千万虽然很少，但可以让我父亲先凑合用用。”\r\r\n    黑雨就这样站在陆凡身后，看到他把钱全部",
+      "chapter_or_section": "第1章 回来了",
+      "causal_before": "UNKNOWN",
+      "primary_event": "第1章 回来了",
+      "causal_after": "UNKNOWN",
+      "characters": [],
+      "relationship_and_power": "UNKNOWN",
+      "dialogue_and_subtext": [
+        "荒山上，孤坟前。",
+        "穿着迷彩服的陆凡，久跪不起，泛红的双眼，直直盯着眼前那由乱石砌成的简陋坟头。",
+        "坟前那块长满青苔的木板上，写着陆山河之墓。",
+        "谁也无法想象，躺在这座孤坟里的，会是林城前首富！",
+        "陆凡连磕三个响头，身体微微颤抖，“爸，儿子不孝，此仇不报，誓不为人！”",
+        "他做梦也没想到，在国外执行几年任务，回到国内，却是这种境况！",
+        "话音落下，陆凡将面前的两瓶五十年陈酿的茅台打开，一瓶倒在坟前，另外一瓶，紧握在手。",
+        "“爸，你以前一直想让我陪你喝酒，今天，我陪你喝个够！”",
+        "“只是没想到，我们父子俩第一次喝酒，是这种方式！”",
+        "陆凡举起酒杯，猛灌一口。",
+        "“咳咳咳……”",
+        "“龙魂，您别太伤心了，您伤还没好。”"
+      ],
+      "emotion_change": "UNKNOWN",
+      "props_and_state": [],
+      "continuity_start_state": "UNKNOWN",
+      "continuity_end_state": "UNKNOWN",
+      "candidate_shot_events": [],
+      "forbidden_additions": [
+        "未出现在原文中的人物、关系、地点、对白、动作、伏笔解释"
+      ],
+      "confidence": "LOW",
+      "interpretation_status": "LOCAL_DETERMINISTIC_ONLY",
+      "source_sha256": "cc0eef87635f1fa5d93203d80ec4a7a4f52249eaea7dca9f1b8248677a7d132d"
+    }
+  ],
+  "admission": {
+    "status": "RESEARCH_ONLY",
+    "next_gate": "director_review_then_shot_contract",
+    "provider_submission_allowed": false
+  },
+  "created_at": "2026-09-05T07:32:19.448557+00:00"
+}

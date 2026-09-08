@@ -1,0 +1,80 @@
+{
+  "schema": "video_kingdom.semantic_slice.v1",
+  "production_integration": false,
+  "source": {
+    "path": "C:\\tmp\\小说题材\\龙门战神.txt",
+    "sha256": "cc0eef87635f1fa5d93203d80ec4a7a4f52249eaea7dca9f1b8248677a7d132d",
+    "encoding": "utf-8",
+    "char_count": 6157154
+  },
+  "method": {
+    "provider_requested": "oneapi",
+    "model_status": "NOT_PROVEN",
+    "chapter_count": 1,
+    "deterministic_fallback": true,
+    "source_preservation": "exact_excerpt_and_char_span"
+  },
+  "provider_receipts": [
+    {
+      "chunk_id": "WINDOW_001",
+      "status": "NOT_PROVEN",
+      "provider": "zhipu",
+      "model": "glm-4-flash",
+      "http_status": 200,
+      "latency_ms": 42406,
+      "slice_count": 3,
+      "reason": "model_source_binding_rejected",
+      "validation_errors": [
+        "source_excerpt_not_exact_for_span"
+      ]
+    }
+  ],
+  "slices": [
+    {
+      "slice_id": "WINDOW_001_SLICE_01",
+      "source_span": {
+        "char_start": 185,
+        "char_end": 586,
+        "chapter": null
+      },
+      "source_excerpt": "荒山上，孤坟前。\r\r\n    穿着迷彩服的陆凡，久跪不起，泛红的双眼，直直盯着眼前那由乱石砌成的简陋坟头。\r\r\n    坟前那块长满青苔的木板上，写着陆山河之墓。\r\r\n    谁也无法想象，躺在这座孤坟里的，会是林城前首富！\r\r\n    陆凡连磕三个响头，身体微微颤抖，“爸，儿子不孝，此仇不报，誓不为人！”\r\r\n    他做梦也没想到，在国外执行几年任务，回到国内，却是这种境况！\r\r\n    话音落下，陆凡将面前的两瓶五十年陈酿的茅台打开，一瓶倒在坟前，另外一瓶，紧握在手。\r\r\n    “爸，你以前一直想让我陪你喝酒，今天，我陪你喝个够！”\r\r\n    “只是没想到，我们父子俩第一次喝酒，是这种方式！”\r\r\n    陆凡举起酒杯，猛灌一口。\r\r\n    “咳咳咳……”\r\r\n    “龙魂，您别太伤心了，您伤还没好。”\r\r\n    身后，原本钢枪为骨，脊梁如山般站着的男人，满脸担忧的搀扶陆凡。",
+      "chapter_or_section": "荒山上，孤坟前。",
+      "causal_before": "UNKNOWN",
+      "primary_event": "荒山上，孤坟前。",
+      "causal_after": "UNKNOWN",
+      "characters": [],
+      "relationship_and_power": "UNKNOWN",
+      "dialogue_and_subtext": [
+        "荒山上，孤坟前。",
+        "穿着迷彩服的陆凡，久跪不起，泛红的双眼，直直盯着眼前那由乱石砌成的简陋坟头。",
+        "坟前那块长满青苔的木板上，写着陆山河之墓。",
+        "谁也无法想象，躺在这座孤坟里的，会是林城前首富！",
+        "陆凡连磕三个响头，身体微微颤抖，“爸，儿子不孝，此仇不报，誓不为人！”",
+        "他做梦也没想到，在国外执行几年任务，回到国内，却是这种境况！",
+        "话音落下，陆凡将面前的两瓶五十年陈酿的茅台打开，一瓶倒在坟前，另外一瓶，紧握在手。",
+        "“爸，你以前一直想让我陪你喝酒，今天，我陪你喝个够！”",
+        "“只是没想到，我们父子俩第一次喝酒，是这种方式！”",
+        "陆凡举起酒杯，猛灌一口。",
+        "“咳咳咳……”",
+        "“龙魂，您别太伤心了，您伤还没好。”"
+      ],
+      "emotion_change": "UNKNOWN",
+      "props_and_state": [],
+      "continuity_start_state": "UNKNOWN",
+      "continuity_end_state": "UNKNOWN",
+      "candidate_shot_events": [],
+      "forbidden_additions": [
+        "未出现在原文中的人物、关系、地点、对白、动作、伏笔解释"
+      ],
+      "confidence": "LOW",
+      "interpretation_status": "LOCAL_DETERMINISTIC_ONLY",
+      "source_sha256": "cc0eef87635f1fa5d93203d80ec4a7a4f52249eaea7dca9f1b8248677a7d132d"
+    }
+  ],
+  "admission": {
+    "status": "RESEARCH_ONLY",
+    "next_gate": "director_review_then_shot_contract",
+    "provider_submission_allowed": false
+  },
+  "created_at": "2026-09-05T08:06:03.290334+00:00"
+}

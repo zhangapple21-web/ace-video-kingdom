@@ -1,0 +1,20 @@
+[
+  {
+    "shot_id": "E008_S01_DIALOGUE_LOCKED_PILOT",
+    "model_id": "agnes-video-v2.0",
+    "status": "COMPLETED",
+    "payload_sha256": "d6a1fe44caaf8763ebb8a0948d89e2544ebf0de533b73de07c7d127ffde3a6b2",
+    "create_endpoint": "https://apihub.agnes-ai.com/v1/videos",
+    "poll_endpoint": "https://apihub.agnes-ai.com/agnesapi",
+    "poll_id_field": "video_id",
+    "create_attempt": 1,
+    "create_http_status": 200,
+    "video_id": "video_bGl0ZWxsbTpjdXN0b21fbGxtX3Byb3ZpZGVyOm9wZW5haTttb2RlbF9pZDphZ25lcy12aWRlby12Mi4wO3ZpZGVvX2lkOnZpZGVvX2U5NDE1Y2U5NWNjZTQzY2NiYzVkZDc2N2QxOWJlYTAy",
+    "created_status": "queued",
+    "last_poll_http_status": 200,
+    "last_state": "completed",
+    "artifact_sha256": "f1c0eaad65014b06fec629979869274911e9e57e35150ef11f77b1b2d68b86c3",
+    "bytes": 1694090,
+    "artifact_path": "C:\\tmp\\ace_video_kingdom_git\\media_staging\\episode_008_rule_seat_system\\revision_pilot\\E008_S01_dialogue_locked_12s.mp4"
+  }
+]

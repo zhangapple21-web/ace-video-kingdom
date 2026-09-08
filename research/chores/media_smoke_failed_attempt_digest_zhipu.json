@@ -1,0 +1,38 @@
+{
+  "provider": "zhipu",
+  "model": "glm-4-flash",
+  "task": "failed_attempt_digest",
+  "input_sha256": "15a6ca934e54e04d4a489ea6b83f501f7a2be52e548e744940ed86b875bc28e9",
+  "attempts": [
+    {
+      "attempt": 1,
+      "status_code": 200,
+      "ok": true
+    }
+  ],
+  "production_integration": false,
+  "started_at": "2026-09-02T03:33:35.383880+00:00",
+  "result": {
+    "choices": [
+      {
+        "finish_reason": "stop",
+        "index": 0,
+        "message": {
+          "content": "```json\n{\n  \"experiment_id\": \"vk_media_smoke_2026-08-31\",\n  \"created_at\": \"2026-08-31\",\n  \"scope\": \"FREE_ZONE_RESEARCH_ONLY\",\n  \"story\": \"原创：清晨酒馆里一盏灯短暂亮起\",\n  \"source_kind\": \"ORIGINAL_RESIDENT_WRITING\",\n  \"story_rights_note\": \"原创测试文本，无外部素材\",\n  \"trials\": [\n    {\n      \"media_type\": \"image\",\n      \"model_id\": \"gpt-image-2\",\n      \"provider\": \"OpenAI-compatible endpoint\",\n      \"result_status\": \"SUCCEEDED\",\n      \"failure_class\": null,\n      \"artifact_sha256\": \"13a744e49149eebccb9a807a6f3d24fade357657daeb3ce35541d67b2135ebb5\",\n      \"artifact_path\": \"media_staging/image_test_gpt-image-2.png\",\n      \"bytes\": 1721260,\n      \"cleanup_class\": \"none\",\n      \"note\": \"通过神隐兼容端点 SHENWEN_IMAGE_API_KEY 完成真实调用，耗时约 28 秒；未保存或记录密钥值。\"\n    },\n    {\n      \"media_type\": \"video\",\n      \"model_id\": \"agnes-video-v2.0\",\n      \"provider\": \"Agnes adapter\",\n      \"result_status\": \"SUCCEEDED\",\n      \"failure_class\": null,\n      \"create_http_status\": 200,\n      \"artifact_sha256\": \"8e85093c6e399722552ab233c62982b19f03be9e63a7b3b9ef87ff5ed2a325b8\",\n      \"artifact_path\": \"media_staging/video_test_agnes-v2.0.mp4\",\n      \"bytes\": 869279,\n      \"cleanup_class\": \"none\",\n      \"note\": \"使用用户级 AGNES_API_KEY 直连 Agnes 创建接口，创建返回 HTTP 200；任务在延迟后通过 video_id 查询完成，返回可下载 video/mp4。\"\n    }\n  ],\n  \"production_integration\": false,\n  \"automatic_publishing\": false,\n  \"follow_up\": \"修复或确认隔离渠道后再重试；不得把本次失败改写为成功。\",\n  \"duration_probe\": {\n    \"model_id\": \"agnes-video-v2.0\",\n    \"requested_seconds\": \"45\",\n    \"create_http_status\": 200,\n    \"initial_status\": \"queued\",\n    \"conclusion\": \"接口接受 45 秒请求；当前没有证据表明免费模型因 45 秒而在创建阶段拒绝。后续仍需以任务终态确认实际时长。\",\n    \"rate_limit_observed\": \"后续请求触发 1 request/minute 限流\",\n    \"official_docs_status\": \"public docs endpoint returned 403; live API response recorded as primary evidence\"\n  }\n}\n```",
+          "role": "assistant"
+        }
+      }
+    ],
+    "created": 1788320053,
+    "id": "202609021133424f7575b265174ddd",
+    "model": "glm-4-flash",
+    "object": "chat.completion",
+    "request_id": "202609021133424f7575b265174ddd",
+    "usage": {
+      "completion_tokens": 644,
+      "prompt_tokens": 690,
+      "total_tokens": 1334
+    }
+  },
+  "status": "COMPLETED"
+}

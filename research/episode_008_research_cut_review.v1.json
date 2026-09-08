@@ -1,0 +1,37 @@
+{
+  "schema": "episode008.research_cut_review.v1",
+  "project_id": "episode_008_rule_seat_system",
+  "reviewed_at": "2026-09-04",
+  "status": "CONDITIONAL_RESEARCH_CUT",
+  "production_integration": false,
+  "artifact": {
+    "path": "media_staging/episode_008_rule_seat_system/episode_008_research_cut_v1.mp4",
+    "sha256": "04c327ae8a325e48078935ed09bf19a1099ffa37b387622c87335cb5d1474f79",
+    "duration_seconds": 35.455323,
+    "video": "H.264 720x1280 ~24fps",
+    "audio": "AAC stereo 48kHz",
+    "shot_count": 7
+  },
+  "overall_verdict": "CONDITIONAL_RESEARCH_CUT",
+  "what_passed": [
+    "七个锁定镜头均有真实 provider video_id、本地文件和字幕验收记录。",
+    "证据链从空白条件、资料核对、关系标注、求助到核验离开保持可理解的因果顺序。",
+    "所有关键事实使用本地字幕固定，未把模型生成的伪文字当作事实。"
+  ],
+  "conditions": [
+    "角色外观和办公室在镜头间仍有漂移，不能作为最终成片的连续性证明。",
+    "provider 原生对白音频未建立逐句同步证据；当前字幕是研究版叙事支架。",
+    "七镜头各约 5 秒，总长 35.5 秒，尚未扩展到脚本目标 86 秒。"
+  ],
+  "next_experiment": "若继续迭代，优先做角色/场景参考图锁定与逐镜音频同步，不新增剧情信息。",
+  "evidence": [
+    "media_staging/episode_008_rule_seat_system/episode_008_research_cut_review/contact.jpg",
+    "research/episode_008_E008_S01_director_review.v1.json",
+    "research/episode_008_E008_S02_director_review.v1.json",
+    "research/episode_008_E008_S03_director_review.v1.json",
+    "research/episode_008_E008_S04_director_review.v1.json",
+    "research/episode_008_E008_S05_director_review.v1.json",
+    "research/episode_008_E008_S06_director_review.v1.json",
+    "research/episode_008_E008_S07_director_review.v1.json"
+  ]
+}

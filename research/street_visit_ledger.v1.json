@@ -29,6 +29,100 @@
       "trace_ids": ["episode_003_character_reference_v1.png"],
       "outcome": "FOUND",
       "next_thread": "Use the approved character asset only after the selected video provider proves reference-image support."
+    },
+    {
+      "visit_id": "street_20260901_model_observatory_episode003_gate",
+      "date": "2026-09-01",
+      "shop_id": "model_observatory",
+      "visit_reason": "Rechecked the validated episode_003 contract and Agnes v2.0 field profile before any new render; the only planned shot requires identity, wardrobe, space and prop continuity while reference-image and identity-lock support remain unverified.",
+      "trace_ids": ["experiments/short_drama_project_contract.v1.json", "research/AGNES_V2_FIELD_PROFILE.md", "contract_validator_20260901"],
+      "outcome": "REJECTED",
+      "next_thread": "Keep episode_003 in pre-production; run only an isolated renderer capability A/B after reference control is evidenced, otherwise rest or develop a leaf-shot branch without identity risk."
+    },
+    {
+      "visit_id": "street_20260905_model_observatory_rest_after_patrol",
+      "date": "2026-09-05",
+      "shop_id": "model_observatory",
+      "visit_reason": "Patrol found no active or resumable jobs; episode_003 remains blocked on verified reference control, and Agnes capability boundaries are unchanged.",
+      "trace_ids": [
+        "experiments/short_drama_project_contract.v1.json",
+        "research/AGNES_V2_FIELD_PROFILE.md",
+        "research/CONTINUOUS_LEARNING_PROTOCOL.md"
+      ],
+      "outcome": "RESTED",
+      "next_thread": "Wait for a verified reference-controlled renderer or a new public method; do not resubmit the historical quota-failed smoke or create a daily filler shot."
+    },
+    {
+      "visit_id": "street_20260905_story_foundry_local_hidden_workshop_seed",
+      "date": "2026-09-05",
+      "shop_id": "story_foundry",
+      "visit_reason": "A local novel shelf yielded a line-bound, mechanism-level causal spine that had not yet been indexed as reusable story research.",
+      "trace_ids": ["C:/tmp/ace_core/07_SANDBOX/free_research/inbox/2026-09-05-local-novel-ore-hidden-workshop.json", "C:/tmp/小说题材/龙语人.txt#SHA256:C86FC74371202C83E4EDD3F7220A234CB1C4D033C2FD3C886399F03E1243EE6A"],
+      "outcome": "FOUND",
+      "next_thread": "Rewrite the mechanism with entirely new entities, then run only local contract/schema and continuity checks; rights remain unknown and no verbatim reuse is allowed."
+    },
+    {
+      "visit_id": "street_20260905_open_street_library_recovery_audit_methods",
+      "date": "2026-09-05",
+      "shop_id": "open_street_library",
+      "visit_reason": "Public FFmpeg and PySceneDetect materials supplied two small, auditable recovery/boundary methods for the existing video workflow.",
+      "trace_ids": ["psl_20260905_ffmpeg_timestamp_recovery", "psl_20260905_pyscenedetect_boundary_audit", "research/public_street_learning_ledger.v1.json"],
+      "outcome": "FOUND",
+      "next_thread": "Shadow-test timestamp and declared-cut boundary checks on local fictional clips before adopting either method; neither proves identity or narrative continuity."
+    },
+    {
+      "visit_id": "street_20260905_storyboard_studio_seed_preflight",
+      "date": "2026-09-05",
+      "shop_id": "storyboard_studio",
+      "visit_reason": "A local preflight checked the new hidden-workshop seed for five causal beats, rights boundary, evidence classes, originalization rule, and production-off lineage.",
+      "trace_ids": ["hidden_workshop_seed_preflight", "experiments/short_drama_project_contract.v1.json", "contract_validator_local_20260905"],
+      "outcome": "PARTIAL",
+      "next_thread": "The seed passes local structural checks, but it is not a shootable contract and must not trigger a provider call until new-entity assets and continuity gates exist."
+    },
+    {
+      "visit_id": "street_20260905_model_observatory_rest_after_contract_gate",
+      "date": "2026-09-05",
+      "shop_id": "model_observatory",
+      "visit_reason": "The scheduled patrol found no active or resumable jobs; the validated episode_003 contract is still blocked on verified reference control, while the historical Agnes quota failure remains unchanged.",
+      "trace_ids": ["patrol_20260905T122841Z", "experiments/short_drama_project_contract.v1.json", "research/AGNES_V2_FIELD_PROFILE.md", "experiments/agnes_v2_prompt_profile.v1.json"],
+      "outcome": "RESTED",
+      "next_thread": "Wait for a verified reference-controlled renderer or a new public method; do not resubmit quota-failed work, invent a filler shot, or label an unanchored branch final."
+    },
+    {
+      "visit_id": "street_20260905_model_observatory_rest_after_off_duty_patrol",
+      "date": "2026-09-05",
+      "shop_id": "model_observatory",
+      "visit_reason": "OFF_DUTY autonomy check-in and patrol found no active or resumable jobs; the only validated episode remains blocked on reference-control evidence, and the historical quota failure is unchanged.",
+      "trace_ids": ["EXP-20260905124910943481-FREEZONE-614A3F73D264", "patrol_20260905T124916Z", "experiments/short_drama_project_contract.v1.json", "research/AGNES_V2_FIELD_PROFILE.md"],
+      "outcome": "RESTED",
+      "next_thread": "Preserve the current boundary: wait for verified reference control or a new public method; do not resubmit quota-failed work, create filler, or call a provider without a newly evidenced safe candidate."
+    },
+    {
+      "visit_id": "street_20260906_model_observatory_rest_after_patrol",
+      "date": "2026-09-06",
+      "shop_id": "model_observatory",
+      "visit_reason": "OFF_DUTY autonomy check-in and patrol found no active or resumable jobs; episode_003 remains blocked on verified reference control, while the historical Agnes quota failure is unchanged.",
+      "trace_ids": ["EXP-20260906103151407076-FREEZONE-6389C950E0CC", "patrol_20260906T103212Z", "experiments/short_drama_project_contract.v1.json", "research/AGNES_V2_FIELD_PROFILE.md", "experiments/agnes_v2_prompt_profile.v1.json"],
+      "outcome": "RESTED",
+      "next_thread": "Wait for a verified reference-controlled renderer or a new public method; do not resubmit quota-failed work, invent an unanchored filler shot, or call a provider without a newly evidenced safe candidate."
+    },
+    {
+      "visit_id": "street_20260907_model_observatory_rest_after_patrol",
+      "date": "2026-09-07",
+      "shop_id": "model_observatory",
+      "visit_reason": "OFF_DUTY autonomy check-in and patrol found no active or resumable jobs; episode_003 remains blocked on verified reference control, while the historical Agnes quota failure is unchanged.",
+      "trace_ids": ["EXP-20260907103302102276-FREEZONE-D3EEEC3F0F50", "patrol_20260907T103313Z", "experiments/short_drama_project_contract.v1.json", "research/AGNES_V2_FIELD_PROFILE.md", "experiments/agnes_v2_prompt_profile.v1.json"],
+      "outcome": "RESTED",
+      "next_thread": "Wait for a verified reference-controlled renderer or a new public method; do not resubmit quota-failed work, invent an unanchored filler shot, or call a provider without a newly evidenced safe candidate."
+    },
+    {
+      "visit_id": "street_20260908_model_observatory_rest_after_patrol",
+      "date": "2026-09-08",
+      "shop_id": "model_observatory",
+      "visit_reason": "OFF_DUTY autonomy check-in and patrol found no active or resumable jobs; episode_003 remains blocked on verified reference control, while the historical Agnes quota failure is unchanged.",
+      "trace_ids": ["EXP-20260908103152275868-FREEZONE-6C76C0111F97", "patrol_20260908T103203Z", "experiments/short_drama_project_contract.v1.json", "research/AGNES_V2_FIELD_PROFILE.md", "experiments/agnes_v2_prompt_profile.v1.json"],
+      "outcome": "RESTED",
+      "next_thread": "Wait for a verified reference-controlled renderer or a new public method; do not resubmit quota-failed work, invent an unanchored filler shot, or call a provider without a newly evidenced safe candidate."
     }
   ]
 }

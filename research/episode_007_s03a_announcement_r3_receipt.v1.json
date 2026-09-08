@@ -1,0 +1,49 @@
+{
+  "contract_version": "video_kingdom.shot_receipt.v1",
+  "episode_id": "episode_007_virtual_data",
+  "shot_id": "S03A_ANNOUNCEMENT_R3",
+  "take_lineage": {
+    "parent_shot_id": "S03A",
+    "branch_reason": "independent_scene_anchor_and_camera_grammar_rework",
+    "does_not_replace": "take_S03A_camera_grammar_v2"
+  },
+  "provider_execution": {
+    "model": "agnes-video-v2.0",
+    "manifest": "experiments/episode_007_s03a_announcement_repair_tasks.v1.json",
+    "create_result": "HTTP_200",
+    "poll_identifier": "video_id",
+    "terminal_state": "completed",
+    "recovery_contract": "durable video_id polling; bounded create retry; provider Retry-After when supplied; no duplicate submit after video_id persistence"
+  },
+  "artifact": {
+    "path": "media_staging/episode_007_virtual_data/video_camera_grammar_v2/S03A_ANNOUNCEMENT_R3.mp4",
+    "sha256": "913A5E833D2C8E97D7D5AE8BCE505E8585CF73FAA80149BCB5F9262DBD39F7C6",
+    "duration_seconds": 5.041667,
+    "video": "h264 704x1280 24fps",
+    "audio": "aac stereo 48000Hz"
+  },
+  "measured_audio": {
+    "mean_volume_db": -37.2,
+    "max_volume_db": -9.4,
+    "result": "AUDIO_TRACK_PRESENT"
+  },
+  "visual_spot_check": {
+    "frame_time_seconds": 2.5,
+    "frame_path": "research/background_runs/S03A_ANNOUNCEMENT_R3_midframe.png",
+    "observed": [
+      "single manager carrying blank papers in a fluorescent office",
+      "seated worker remains in the background",
+      "no title card, subtitle overlay, obvious duplicate person, or real-brand interface in the checked frame"
+    ]
+  },
+  "decision": {
+    "state": "CANDIDATE_FOR_SEQUENCE_REVIEW",
+    "not_delivery_pass": true,
+    "remaining_checks": [
+      "review full temporal motion for the exact three action beats",
+      "compare identity and scene continuity against adjacent S02C and S03B takes",
+      "check spoken-audio intelligibility and edit timing before selecting or assembling"
+    ]
+  },
+  "recorded_at": "2026-09-03T14:05:52+08:00"
+}

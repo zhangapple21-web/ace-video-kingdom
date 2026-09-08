@@ -1,0 +1,52 @@
+{
+  "schema": "episode008.shot_director_review.v1",
+  "project_id": "episode_008_rule_seat_system",
+  "shot_id": "E008_S06",
+  "script_status": "SCRIPT_LOCKED",
+  "reviewed_at": "2026-09-04",
+  "status": "PASS_WITH_LOCAL_CORRECTION",
+  "raw_artifact": {
+    "path": "media_staging/episode_008_rule_seat_system/E008_S06.mp4",
+    "sha256": "5ba3678008f810fb22b3ecfa749c087deccd94eecd454c91fad31e04a29239c9",
+    "media_integrity": "PASS",
+    "duration_seconds": 5.041667,
+    "video": "H.264 704x1280 24fps",
+    "audio": "AAC stereo 48kHz"
+  },
+  "visual_verdicts": {
+    "action_beat": "CONDITIONAL_PASS",
+    "information": "PASS_WITH_SUBTITLE_CORRECTION",
+    "identity": "CONDITIONAL_PASS",
+    "setting_and_continuity": "PASS_WITH_MINOR_VARIANCE",
+    "cut_timing": "PASS",
+    "subtitle_position": "PASS",
+    "audio_stream_presence": "PASS",
+    "dialogue_audio_sync": "UNVERIFIED"
+  },
+  "observations": [
+    "电话、资料和两人依法求助的情境成立，但‘拨号/接通’动作只部分可见，不能把抽象手机画面当作案件编号的事实证据。",
+    "生成界面和纸面文字不可靠；本地对白字幕固定信息。",
+    "同一类桌面和暖色灯光保持，人物服装与前镜有轻微漂移。"
+  ],
+  "overall_verdict": "PASS_WITH_LOCAL_SUBTITLE_CORRECTION",
+  "next_gate": "SHOT_7_ALLOWED",
+  "corrected_artifact": {
+    "path": "media_staging/episode_008_rule_seat_system/E008_S06_subtitled_research_v1.mp4",
+    "sha256": "f78e524af6c361f89cd080beb62143d2eff58e592831e5d2ae4e681894a025c8",
+    "subtitle_track": "media_staging/episode_008_rule_seat_system/E008_S06_review.srt",
+    "subtitle_validation": "VALID",
+    "audio_preserved": true
+  },
+  "table_lens": {
+    "need": "把整理后的证据带入合法公共求助流程。",
+    "capability_evidence": "video_id video_bGl0ZWxsbTpjdXN0b21fbGxtX3Byb3ZpZGVyOm9wZW5haTttb2RlbF9pZDphZ25lcy12aWRlby12Mi4wO3ZpZGVvX2lkOnZpZGVvXzk0NGJmN2M1M2QyMTRkMGFiNTY4ZjYwNTg3YmM3OTlh",
+    "verification_result": "依法求助的视觉意图通过；拨号与接通细节仅条件通过。",
+    "follow_up": "第七镜明确拍身份核验、资料签收与离开，不添加报复或奇迹。"
+  },
+  "evidence": [
+    "media_staging/episode_008_rule_seat_system/E008_S06_review/contact.jpg",
+    "media_staging/episode_008_rule_seat_system/E008_S06_subtitled_review/contact.jpg",
+    "media_staging/episode_008_rule_seat_system/E008_S06_review.srt",
+    "media_staging/episode_008_rule_seat_system/E008_S06_subtitle_receipt.json"
+  ]
+}

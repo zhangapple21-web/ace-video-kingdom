@@ -1,0 +1,22 @@
+[
+  {
+    "shot_id": "S03A",
+    "status": "COMPLETED",
+    "artifact_path": "C:\\tmp\\ace_video_kingdom_git\\media_staging\\episode_007_virtual_data\\video_camera_grammar_v2\\S03A_FEIGE_LOCKED_R1_EDITED.mp4",
+    "artifact_sha256": "ff13ed72111e46b8d8be250e20ecd5133141966d21d0b97f2e4f3ee89774d2e2",
+    "take_lineage": {
+      "source_shot_id": "S03A_FEIGE_LOCKED_R1",
+      "formal_shot_id": "S03A",
+      "branch_reason": "replace_unestablished_character_and_reference_board_intro",
+      "operation": "trim 0.375-second reference-board intro and append terminal hold to measured 7.05-second slot",
+      "does_not_replace": "baseline S03A take until this explicit override is selected"
+    },
+    "provider_execution": {
+      "model": "agnes-video-v2.0",
+      "manifest": "experiments/episode_007_s03a_feige_locked_r1_tasks.json",
+      "video_id": "video_bGl0ZWxsbTpjdXN0b21fbGxtX3Byb3ZpZGVyOm9wZW5haTttb2RlbF9pZDphZ25lcy12aWRlby12Mi4wO3ZpZGVvXzJlNmRkYzEyNmQ1ZTQ3OTA4YjEwMzllMDAzYTgzMjY2",
+      "terminal_state": "completed"
+    },
+    "edit_evidence": "research/episode_007_s03a_feige_locked_r1_edited_pacing.json"
+  }
+]

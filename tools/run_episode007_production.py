@@ -10,6 +10,15 @@ import json, subprocess, sys
 root = Path(__file__).resolve().parents[1]
 episode_path = root / "episodes/episode_007_virtual_data.v1.json"
 preflight = root / "research/episode_007_preflight_runtime.json"
+# Required pre-work memory step: inspect the prior cut before any provider
+# request. This is read-only and never promotes a result automatically.
+prior_audit = root / "research/episode_007_previous_cut_audit_latest.json"
+audit = subprocess.run([
+    sys.executable, str(root / "tools/audit_previous_cut.py"),
+    "--root", str(root), "--output", str(prior_audit),
+], cwd=root, check=False)
+if audit.returncode:
+    raise SystemExit(f"previous-cut audit failed; no provider request submitted. See {prior_audit}")
 gate = subprocess.run([
     sys.executable, str(root / "tools/preflight_episode.py"),
     "--episode", str(episode_path),
@@ -56,5 +65,7 @@ for shot in plan["shots"]:
     cmd=[sys.executable, str(root/"tools/run_short_clip.py"), "--shot-id", sid, "--prompt", prompt,
          "--manifest", str(manifest), "--output", str(outdir/f"{sid}.mp4"), "--model", "agnes-video-v2.0",
          "--image", str(anchor), "--width", "704", "--height", "1280", "--num-frames", "241", "--frame-rate", "24", "--timeout", "900"]
-    subprocess.run(cmd, cwd=root, check=False)
+    result = subprocess.run(cmd, cwd=root, check=False)
+    if result.returncode:
+        raise SystemExit(result.returncode)
 

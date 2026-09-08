@@ -1,0 +1,20 @@
+[
+  {
+    "shot_id": "S01A_CAMERA_WIDE_R1",
+    "model_id": "agnes-video-v2.0",
+    "status": "COMPLETED",
+    "payload_sha256": "59132d12b438a6f1247dff7d1898e75088bd6d35d972cf8c618ad1b0b0e43a94",
+    "create_endpoint": "https://apihub.agnes-ai.com/v1/videos",
+    "poll_endpoint": "https://apihub.agnes-ai.com/agnesapi",
+    "poll_id_field": "video_id",
+    "create_attempt": 1,
+    "create_http_status": 200,
+    "video_id": "video_bGl0ZWxsbTpjdXN0b21fbGxtX3Byb3ZpZGVyOm9wZW5haTttb2RlbF9pZDphZ25lcy12aWRlby12Mi4wO3ZpZGVvX2lkOnZpZGVvXzEwNGRlMDc3YWI1MzQ4MGU4ZmU3ZTc3MjM5N2RiOWJm",
+    "created_status": "queued",
+    "last_poll_http_status": 200,
+    "last_state": "completed",
+    "artifact_sha256": "7c1973e89a657730ce0f825c68cd532fe7549014c840b1deba0cf3061348cded",
+    "bytes": 1545985,
+    "artifact_path": "media_staging\\longmen_s01a_camera_wide_r1\\S01A_CAMERA_WIDE_R1.mp4"
+  }
+]

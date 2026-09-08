@@ -1,0 +1,22 @@
+{
+  "status": "SUBTITLED_MEDIA_INTEGRITY_PASSED",
+  "input": "media_staging\\episode_007_virtual_data\\video_camera_grammar_v2\\episode_007_candidate_r3_slow_v1_base.mp4",
+  "subtitle": "media_staging\\episode_007_virtual_data\\subtitles\\episode_007_dialogue_r3_slow_v1.srt",
+  "output": "media_staging\\episode_007_virtual_data\\video_camera_grammar_v2\\episode_007_candidate_r3_slow_v1_subtitled.mp4",
+  "output_sha256": "80d3362f976915e2707e4c3ed1f615d8e08cd9c8da242f6ef5732dafa8d72605",
+  "subtitle_validation": {
+    "status": "VALID",
+    "cue_count": 18,
+    "fps": 24,
+    "minimum_duration_seconds": 0.8333333333333334,
+    "minimum_gap_seconds": 0.08333333333333333,
+    "errors": [],
+    "warnings": []
+  },
+  "render_style": {
+    "font": "Microsoft YaHei",
+    "font_size": 10,
+    "margin_v": 70,
+    "alignment": 2
+  }
+}

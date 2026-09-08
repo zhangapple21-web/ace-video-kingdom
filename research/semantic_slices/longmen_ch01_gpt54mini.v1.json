@@ -1,0 +1,371 @@
+{
+  "schema": "video_kingdom.semantic_slice.v1",
+  "production_integration": false,
+  "source": {
+    "path": "C:\\tmp\\小说题材\\龙门战神.txt",
+    "sha256": "ba9333f30162d13bbc0fd5e6abb73ba7ca2e6d3d0a2c97a154d7142b738145fd",
+    "encoding": "utf-8",
+    "char_count": 5920656
+  },
+  "method": {
+    "provider_requested": "openai",
+    "model_status": "VERIFIED",
+    "chapter_count": 1,
+    "deterministic_fallback": true,
+    "source_preservation": "exact_excerpt_and_char_span"
+  },
+  "provider_receipts": [
+    {
+      "chunk_id": "CH0001",
+      "status": "VERIFIED",
+      "provider": "openai_compatible",
+      "model": "gpt-5.4-mini",
+      "http_status": 200,
+      "latency_ms": 43719,
+      "slice_count": 3
+    }
+  ],
+  "slices": [
+    {
+      "slice_id": "slice_1",
+      "source_span": {
+        "char_start": 168,
+        "char_end": 1420,
+        "chapter": "第1章"
+      },
+      "source_excerpt": "荒山上，孤坟前。\n\n    穿着迷彩服的陆凡，久跪不起，泛红的双眼，直直盯着眼前那由乱石砌成的简陋坟头。\n\n    坟前那块长满青苔的木板上，写着陆山河之墓。\n\n    谁也无法想象，躺在这座孤坟里的，会是林城前首富！\n\n    陆凡连磕三个响头，身体微微颤抖，“爸，儿子不孝，此仇不报，誓不为人！”\n\n    他做梦也没想到，在国外执行几年任务，回到国内，却是这种境况！\n\n    话音落下，陆凡将面前的两瓶五十年陈酿的茅台打开，一瓶倒在坟前，另外一瓶，紧握在手。\n\n    “爸，你以前一直想让我陪你喝酒，今天，我陪你喝个够！”\n\n    “只是没想到，我们父子俩第一次喝酒，是这种方式！”\n\n    陆凡举起酒杯，猛灌一口。\n\n    “咳咳咳……”\n\n    “龙魂，您别太伤心了，您伤还没好。”",
+      "causal_before": "UNKNOWN",
+      "primary_event": "陆凡在父亲陆山河的坟前下跪磕头、倒酒并喝酒",
+      "causal_after": "黑雨上前搀扶陆凡并劝他别太伤心",
+      "characters": [
+        {
+          "name": "陆凡",
+          "role": "主角",
+          "goal": "为父报仇",
+          "relationship": "陆山河之子"
+        },
+        {
+          "name": "陆山河",
+          "role": "被祭奠者",
+          "goal": "UNKNOWN",
+          "relationship": "陆凡父亲"
+        },
+        {
+          "name": "黑雨",
+          "role": "随从/部下",
+          "goal": "劝扶陆凡",
+          "relationship": "陆凡下属"
+        }
+      ],
+      "relationship_and_power": "陆凡对亡父的情感与愧疚占主导；黑雨作为下属在身后照应，权力与情绪中心都在陆凡",
+      "dialogue_and_subtext": [
+        {
+          "speaker": "陆凡",
+          "text": "爸，儿子不孝，此仇不报，誓不为人！",
+          "subtext": "宣告复仇誓言"
+        },
+        {
+          "speaker": "陆凡",
+          "text": "爸，你以前一直想让我陪你喝酒，今天，我陪你喝个够！",
+          "subtext": "以饮酒方式祭奠父亲"
+        },
+        {
+          "speaker": "黑雨",
+          "text": "龙魂，您别太伤心了，您伤还没好。",
+          "subtext": "担心陆凡身体状况"
+        }
+      ],
+      "emotion_change": "悲痛压抑 -> 决绝愤怒",
+      "props_and_state": [
+        "迷彩服",
+        "孤坟",
+        "写有陆山河之墓的木板",
+        "两瓶五十年陈酿茅台",
+        "酒杯",
+        "坟前酒液"
+      ],
+      "continuity_start_state": "陆凡跪在父亲孤坟前",
+      "continuity_end_state": "陆凡喝酒后咳嗽，黑雨在旁搀扶",
+      "candidate_shot_events": [
+        {
+          "event": "陆凡在孤坟前连磕三个响头",
+          "allowed": [
+            "observable action"
+          ],
+          "forbidden": [
+            "补写未提及的心理活动"
+          ]
+        },
+        {
+          "event": "陆凡打开茅台并向坟前倒酒",
+          "allowed": [
+            "observable action"
+          ],
+          "forbidden": [
+            "添加祭祀仪式细节"
+          ]
+        },
+        {
+          "event": "黑雨站在陆凡身后搀扶并劝说",
+          "allowed": [
+            "observable action"
+          ],
+          "forbidden": [
+            "添加未提及的新人物动作"
+          ]
+        }
+      ],
+      "forbidden_additions": [
+        "陆山河死因细节以外的新增原因",
+        "未提及的战斗或回忆画面",
+        "宣传性旁白"
+      ],
+      "confidence": "HIGH",
+      "source_sha256": "ba9333f30162d13bbc0fd5e6abb73ba7ca2e6d3d0a2c97a154d7142b738145fd",
+      "interpretation_status": "MODEL_ASSISTED_PENDING_DIRECTOR_REVIEW"
+    },
+    {
+      "slice_id": "slice_2",
+      "source_span": {
+        "char_start": 1421,
+        "char_end": 2310,
+        "chapter": "第1章"
+      },
+      "source_excerpt": "“我父亲的死，查清了吗？”\n\n    陆凡侧目望向身后的黑雨。\n\n    “回龙魂，查清了，林城首富陆山河，被张李孙刘四家设计陷害，走投无路，于三年前，从世纪大酒店顶楼，跳楼自杀！”\n\n    “陆家所有资产，全被这四家瓜分。”\n\n    这些话，对陆凡而言，字字诛心。\n\n    即便他是战无不胜，叱咤风云的战神，那又如何？\n\n    依旧没能保护自己最亲的人！\n\n    想必，在父亲最绝望的时候，应该很希望自己出现吧？\n\n    想到这些，陆凡指甲镶入掌心，却感觉不到丝毫疼痛。\n\n    “龙魂，我这就去屠尽张李孙刘四家，奉上六百人头当做祭品！”\n\n    黑雨杀意骤起。\n\n    “不用！”\n\n    陆凡抬起手来，一滴鲜血从掌心渗出，他用舌头舔了舔血，“我亲自来，一个人，也跑不掉！”\n\n    陆凡的杀意，如惊涛骇浪，席卷四周。\n\n    哪怕是黑雨，也不由自主的往后退了两步。",
+      "causal_before": "陆凡祭拜亡父后询问死因",
+      "primary_event": "黑雨向陆凡说明陆山河的死因与陆家资产被夺",
+      "causal_after": "陆凡拒绝黑雨代为屠杀，决定亲自复仇",
+      "characters": [
+        {
+          "name": "陆凡",
+          "role": "主角",
+          "goal": "亲自向张李孙刘四家复仇",
+          "relationship": "陆山河之子"
+        },
+        {
+          "name": "黑雨",
+          "role": "部下",
+          "goal": "代替陆凡出手复仇",
+          "relationship": "陆凡下属"
+        }
+      ],
+      "relationship_and_power": "黑雨主动请战但被陆凡压制；陆凡以强烈杀意主导局面",
+      "dialogue_and_subtext": [
+        {
+          "speaker": "陆凡",
+          "text": "我父亲的死，查清了吗？",
+          "subtext": "追问真相"
+        },
+        {
+          "speaker": "黑雨",
+          "text": "林城首富陆山河，被张李孙刘四家设计陷害，走投无路，于三年前，从世纪大酒店顶楼，跳楼自杀！",
+          "subtext": "交代死因"
+        },
+        {
+          "speaker": "黑雨",
+          "text": "陆家所有资产，全被这四家瓜分。",
+          "subtext": "交代财产被夺"
+        },
+        {
+          "speaker": "黑雨",
+          "text": "我这就去屠尽张李孙刘四家，奉上六百人头当做祭品！",
+          "subtext": "主动请命复仇"
+        },
+        {
+          "speaker": "陆凡",
+          "text": "不用！",
+          "subtext": "拒绝代劳"
+        },
+        {
+          "speaker": "陆凡",
+          "text": "我亲自来，一个人，也跑不掉！",
+          "subtext": "亲自报仇，不放过任何人"
+        }
+      ],
+      "emotion_change": "追问真相 -> 愤怒升级 -> 冷酷决绝",
+      "props_and_state": [
+        "指甲嵌入掌心",
+        "掌心鲜血",
+        "黑雨退后两步"
+      ],
+      "continuity_start_state": "陆凡询问父亲死因，黑雨准备汇报",
+      "continuity_end_state": "陆凡表态亲自复仇，现场杀意逼退黑雨",
+      "candidate_shot_events": [
+        {
+          "event": "黑雨口述陆山河被设计陷害跳楼自杀",
+          "allowed": [
+            "observable action"
+          ],
+          "forbidden": [
+            "加入未提及调查过程"
+          ]
+        },
+        {
+          "event": "黑雨提出屠尽四家",
+          "allowed": [
+            "observable action"
+          ],
+          "forbidden": [
+            "补写具体杀戮画面"
+          ]
+        },
+        {
+          "event": "陆凡用舌头舔去掌心鲜血并表示亲自来",
+          "allowed": [
+            "observable action"
+          ],
+          "forbidden": [
+            "添加超出原文的暴力动作"
+          ]
+        }
+      ],
+      "forbidden_additions": [
+        "四家成员具体身份细节",
+        "未提及的枪战或打斗",
+        "对话外延解释"
+      ],
+      "confidence": "HIGH",
+      "source_sha256": "ba9333f30162d13bbc0fd5e6abb73ba7ca2e6d3d0a2c97a154d7142b738145fd",
+      "interpretation_status": "MODEL_ASSISTED_PENDING_DIRECTOR_REVIEW"
+    },
+    {
+      "slice_id": "slice_3",
+      "source_span": {
+        "char_start": 2311,
+        "char_end": 3401,
+        "chapter": "第1章"
+      },
+      "source_excerpt": "“车里，有多少现金？”\n\n    “五千万美元！”\n\n    听到这个数字，陆凡皱了皱眉，“全拿过来。”\n\n    “是！”\n\n    黑雨没有任何怠慢，将车上几个大纸箱搬下来。\n\n    陆凡面无表情的将纸箱打开，拿出里面崭新的美元，直接点燃，烧了起来。\n\n    “五千万虽然很少，但可以让我父亲先凑合用用。”\n\n    黑雨就这样站在陆凡身后，看到他把钱全部烧完后，犹豫再三，才缓缓开口，“龙魂，您老婆和女儿的下落，我也都查清了。”\n\n    听到老婆和女儿，陆凡眼中掠过一丝柔情，“她们，过的还好吗？”\n\n    “不……不是很好！”\n\n    话音刚落，陆凡瞳孔猛然收缩，直直盯着他。\n\n    “她们母女俩，暂时住在这里……”\n\n    黑雨双手有些颤抖的拿出手机给陆凡看。\n\n    看到这个地址后，陆凡剑眉倒竖，朝孤坟磕了三个头以后，便有些吃力的起身，“马上带我过去。”\n\n    “是！龙魂请上车！”\n\n    黑雨将一件黑色长衣，轻轻披在陆凡身上。",
+      "causal_before": "陆凡决定亲自复仇后询问车辆现金",
+      "primary_event": "陆凡烧掉五千万美元，并得知妻女下落后准备离开",
+      "causal_after": "陆凡在黑雨带领下前往妻女所在地址",
+      "characters": [
+        {
+          "name": "陆凡",
+          "role": "主角",
+          "goal": "用现金祭父并去见妻女",
+          "relationship": "陆山河之子、韩瑶瑶丈夫、陆媛韩父亲"
+        },
+        {
+          "name": "黑雨",
+          "role": "部下",
+          "goal": "汇报妻女下落并带路",
+          "relationship": "陆凡下属"
+        },
+        {
+          "name": "韩瑶瑶",
+          "role": "陆凡妻子",
+          "goal": "UNKNOWN",
+          "relationship": "陆凡妻子"
+        },
+        {
+          "name": "陆媛韩",
+          "role": "陆凡女儿",
+          "goal": "UNKNOWN",
+          "relationship": "陆凡女儿"
+        }
+      ],
+      "relationship_and_power": "陆凡在家族与行动上处于主导；黑雨负责汇报与执行；妻女成为陆凡情绪转向的中心",
+      "dialogue_and_subtext": [
+        {
+          "speaker": "陆凡",
+          "text": "车里，有多少现金？",
+          "subtext": "准备处理现金"
+        },
+        {
+          "speaker": "黑雨",
+          "text": "五千万美元！",
+          "subtext": "汇报金额"
+        },
+        {
+          "speaker": "陆凡",
+          "text": "全拿过来。",
+          "subtext": "要求全部取出"
+        },
+        {
+          "speaker": "陆凡",
+          "text": "五千万虽然很少，但可以让我父亲先凑合用用。",
+          "subtext": "以烧钱方式祭父"
+        },
+        {
+          "speaker": "黑雨",
+          "text": "龙魂，您老婆和女儿的下落，我也都查清了。",
+          "subtext": "转报妻女信息"
+        },
+        {
+          "speaker": "陆凡",
+          "text": "她们，过的还好吗？",
+          "subtext": "关切妻女现状"
+        },
+        {
+          "speaker": "黑雨",
+          "text": "不……不是很好！",
+          "subtext": "暗示处境不佳"
+        },
+        {
+          "speaker": "黑雨",
+          "text": "她们母女俩，暂时住在这里……",
+          "subtext": "给出地址"
+        },
+        {
+          "speaker": "陆凡",
+          "text": "马上带我过去。",
+          "subtext": "立即去见妻女"
+        }
+      ],
+      "emotion_change": "冷硬祭奠 -> 柔情一闪 -> 惊惧收紧 -> 决然起身",
+      "props_and_state": [
+        "五千万美元现金",
+        "大纸箱",
+        "燃烧的美元",
+        "手机地址",
+        "黑色长衣"
+      ],
+      "continuity_start_state": "现金在车里，陆凡仍在孤坟前",
+      "continuity_end_state": "陆凡披上黑色长衣准备上车离开",
+      "candidate_shot_events": [
+        {
+          "event": "黑雨搬下装现金的大纸箱",
+          "allowed": [
+            "observable action"
+          ],
+          "forbidden": [
+            "增加具体搬运困难情节"
+          ]
+        },
+        {
+          "event": "陆凡点燃美元并烧掉",
+          "allowed": [
+            "observable action"
+          ],
+          "forbidden": [
+            "添加火势扩散"
+          ]
+        },
+        {
+          "event": "黑雨展示手机里的地址，陆凡起身要去",
+          "allowed": [
+            "observable action"
+          ],
+          "forbidden": [
+            "补写路线与到达过程"
+          ]
+        }
+      ],
+      "forbidden_additions": [
+        "妻女遭遇的具体原因和细节",
+        "地址内容",
+        "未提及的车辆动作"
+      ],
+      "confidence": "HIGH",
+      "source_sha256": "ba9333f30162d13bbc0fd5e6abb73ba7ca2e6d3d0a2c97a154d7142b738145fd",
+      "interpretation_status": "MODEL_ASSISTED_PENDING_DIRECTOR_REVIEW"
+    }
+  ],
+  "admission": {
+    "status": "RESEARCH_ONLY",
+    "next_gate": "director_review_then_shot_contract",
+    "provider_submission_allowed": false
+  },
+  "created_at": "2026-09-05T05:27:14.390171+00:00"
+}

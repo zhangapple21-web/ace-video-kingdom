@@ -55,7 +55,32 @@
     "Long actions are split at preparation, peak/impact, and recovery boundaries.",
     "Character, wardrobe, scene, prop, spatial blocking, and camera references are explicit.",
     "A failed child branch preserves the parent and its evidence.",
-    "Free Zone research renders remain candidates until explicit hash-bound admission."
+    "Free Zone research renders remain candidates until explicit hash-bound admission.",
+    "Episode Dynamic Plan binds story spine and beats to Shot Core without adding a scheduler.",
+    "Content state R0-R5 is monotonic within one Production Run and independent from technical/provider route.",
+    "Pacing ratios are diagnostic evidence only; only CONTENT_FAILURE may authorize content degradation."
   ],
-  "non_authority": ["does_not_create_scheduler", "does_not_call_provider", "does_not_approve_delivery", "does_not_promote_free_zone_automatically"]
+  "content_control": {
+    "contract": "governance/episode_dynamic_content_plan.v1.json",
+    "artifacts": ["episode_dynamic_plan.json", "content_control.v1.json", "research/post_production_diagnostics.v1.json"],
+    "validator": "tools/validate_content_plan.py",
+    "non_authority": ["does_not_create_scheduler", "does_not_create_second_router", "does_not_call_provider"]
+  },
+  "execution_surfaces": {
+    "principle": "The Infinite Canvas is the human-facing creative and review surface, never the sole execution dependency for an agent running on the local computer.",
+    "local_execution_first": [
+      "Use the existing local media runner for provider submission, durable video_id recovery, download, SHA-256 receipt and retry handling.",
+      "Use local asset paths, manifests, ffprobe and FFmpeg for media validation, assembly, subtitles and audio checks.",
+      "Use the browser only to inspect or verify the user-facing canvas, deployed configuration and visual result; do not require a browser button click to resume an already-defined local production task."
+    ],
+    "canvas_writeback": "After a local action has an artifact or a concrete blocked/error receipt, write a compact asset, take, evidence or Decision Record reference back to the existing canvas. The canvas remains the human-readable branch and choice surface.",
+    "fallback": "If the canvas website, browser session or local Canvas Agent is unavailable, continue only safe local execution and evidence collection. Do not pretend the canvas was updated; record CANVAS_WRITEBACK_PENDING and reconcile when the surface recovers.",
+    "free_zone": "Free Zone may use isolated browser sessions and local probes for discovery. Controlled production uses the same local substrate but keeps its existing asset, review and release gates."
+  },
+  "demand_entrypoint": {
+    "command": "python -m production_control auto",
+    "purpose": "route user demand through the existing state machine and invoke safe local stages automatically",
+    "provider_calls": "remain behind the admitted request boundary and reuse the existing provider runner"
+  },
+  "non_authority": ["does_not_create_scheduler", "does_not_create_second_router", "does_not_call_provider", "does_not_approve_delivery", "does_not_promote_free_zone_automatically"]
 }

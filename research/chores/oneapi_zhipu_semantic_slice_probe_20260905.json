@@ -1,0 +1,37 @@
+{
+  "contract_version": "ace.video_kingdom.oneapi_zhipu_semantic_slice_probe.v1",
+  "at": "2026-09-05T16:13:24+08:00",
+  "scope": "LOCAL_RESEARCH_ONLY",
+  "endpoint": "http://127.0.0.1:3000/v1/chat/completions",
+  "provider": "zhipu_via_oneapi",
+  "model": "glm-4-flash",
+  "request": {
+    "task": "evidence_bound_semantic_slice",
+    "source_path": "C:\\tmp\\小说题材\\龙门战神.txt",
+    "source_sha256": "cc0eef87635f1fa5d93203d80ec4a7a4f52249eaea7dca9f1b8248677a7d132d",
+    "source_window": {"char_start": 185, "char_end": 586},
+    "max_chars": 12000,
+    "response_format": "json_object"
+  },
+  "http_status": 200,
+  "latency_ms": 47479,
+  "model_status": "VERIFIED",
+  "slice_count": 3,
+  "source_binding": {
+    "accepted_rows": 3,
+    "normalized_excerpt_relocated_rows": 3,
+    "exact_source_excerpt_rows": 3,
+    "span_bounds_verified": true
+  },
+  "admission": {
+    "status": "RESEARCH_ONLY",
+    "provider_submission_allowed": false,
+    "next_gate": "director_review_then_shot_contract"
+  },
+  "production_integration": false,
+  "secrets_logged": false,
+  "notes": [
+    "The provider returned compact excerpts and stale global spans; the bounded relocation rule accepted only unique whitespace-normalized source matches and replaced them with exact source text.",
+    "This proves a fresh local OneAPI-to-Zhipu semantic-slice call, not model quality, director approval, or video-provider readiness."
+  ]
+}

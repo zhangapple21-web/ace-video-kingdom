@@ -1,0 +1,290 @@
+{
+  "schema": "video_kingdom.shot_core_provider_reality_probe.v1",
+  "shots": {
+    "PROBE_DIALOGUE": {
+      "shot_id": "PROBE_DIALOGUE",
+      "lifecycle": "REVIEWING",
+      "stale": false,
+      "selected_take_id": null,
+      "contract_fingerprint": "5d09623ce7cc74ebe75f7c82e5efbb4678da43b9956ff1408864a92821d3a8a4",
+      "dependency_snapshot": {
+        "asset_refs": [
+          {
+            "asset_id": "SCENE_02",
+            "asset_type": "scene",
+            "version": 1,
+            "sha256": "e5015c19d9f75b3164aeace2542892f893914cd3c7cd630c4cd69db28c7473a3",
+            "scope": "episode",
+            "provider_ref": "https://raw.githubusercontent.com/zhangapple21-web/-/main/ace-video-kingdom/wenji-episode-006/SCENE_02_typing_log_anchor.png"
+          }
+        ],
+        "first_frame_ref": null,
+        "last_frame_ref": null,
+        "prompt": "Wenji quietly finishes one short line in a dim desk room; a single continuous locked-off shot, no extra movement, no cut.",
+        "audio": {
+          "dialogue": [
+            {
+              "speaker": "WENJI",
+              "content": "我先把这页记下来。",
+              "start": 0,
+              "end": 2.021,
+              "audio_ref": "C:\\tmp\\ace_video_kingdom_git\\media_staging\\episode_006_wenji_110s\\audio\\wenji_01.wav"
+            }
+          ],
+          "narration": [],
+          "sfx": [],
+          "ambience": [
+            "room_tone"
+          ],
+          "music": [],
+          "dialogue_duration": 2.021,
+          "action_duration": 0,
+          "hold_duration": 0.8,
+          "render_seconds": 5
+        }
+      }
+    },
+    "PROBE_ACTION": {
+      "shot_id": "PROBE_ACTION",
+      "lifecycle": "REWORK",
+      "stale": false,
+      "selected_take_id": null,
+      "contract_fingerprint": "f0c3ccca0aa13b6535518daa5ea683aecdac30a894e0eb70f8f3c1aaa85ee9bd",
+      "dependency_snapshot": {
+        "asset_refs": [
+          {
+            "asset_id": "SCENE_02",
+            "asset_type": "scene",
+            "version": 1,
+            "sha256": "e5015c19d9f75b3164aeace2542892f893914cd3c7cd630c4cd69db28c7473a3",
+            "scope": "episode",
+            "provider_ref": "https://raw.githubusercontent.com/zhangapple21-web/-/main/ace-video-kingdom/wenji-episode-006/SCENE_02_typing_log_anchor.png"
+          }
+        ],
+        "first_frame_ref": null,
+        "last_frame_ref": null,
+        "prompt": "A hand moves the phone from the left side of the desk to the right side in one continuous motion and stops; deliberately ignore any extra movement, no cut.",
+        "audio": {
+          "dialogue": [],
+          "narration": [],
+          "sfx": [],
+          "ambience": [
+            "room_tone"
+          ],
+          "music": [],
+          "dialogue_duration": 0,
+          "action_duration": 2.5,
+          "hold_duration": 1,
+          "render_seconds": 5
+        }
+      }
+    }
+  },
+  "takes": [
+    {
+      "take_id": "PROBE_DIALOGUE_T01",
+      "shot_id": "PROBE_DIALOGUE",
+      "parent_take_id": null,
+      "branch_reason": null,
+      "provider": "agnes",
+      "model": "agnes-video-2.5-flash",
+      "generation_config": {
+        "model": "agnes-video-2.5-flash",
+        "prompt": "Wenji quietly finishes one short line in a dim desk room; a single continuous locked-off shot, no extra movement, no cut.\n[SHOT_CORE_CONTRACT]\n{\"action_state\": {\"camera\": \"locked\", \"character\": \"WENJI speaks\", \"lighting\": \"dim\", \"location\": \"desk\", \"props\": [\"phone\"], \"time\": \"night\", \"wardrobe\": \"unchanged\"}, \"allowed_behaviors\": [\"speak\", \"hold\"], \"asset_refs\": [{\"asset_id\": \"SCENE_02\", \"asset_type\": \"scene\", \"sha256\": \"e5015c19d9f75b3164aeace2542892f893914cd3c7cd630c4cd69db28c7473a3\", \"version\": 1}], \"audio\": {\"action_duration\": 0, \"ambience\": [\"room_tone\"], \"dialogue\": [{\"audio_ref\": \"C:\\\\tmp\\\\ace_video_kingdom_git\\\\media_staging\\\\episode_006_wenji_110s\\\\audio\\\\wenji_01.wav\", \"content\": \"我先把这页记下来。\", \"end\": 2.021, \"speaker\": \"WENJI\", \"start\": 0}], \"dialogue_duration\": 2.021, \"hold_duration\": 0.8, \"music\": [], \"narration\": [], \"render_seconds\": 5, \"sfx\": []}, \"camera\": {\"axis\": \"none\", \"internal_cuts\": 0, \"movement\": \"NONE\", \"position\": \"desk\", \"scale\": \"medium\"}, \"end_state\": {\"camera\": \"locked\", \"character\": \"WENJI holds gaze\", \"lighting\": \"dim\", \"location\": \"desk\", \"props\": [\"phone\"], \"time\": \"night\", \"wardrobe\": \"unchanged\"}, \"forbidden_behaviors\": [\"pan\", \"tilt\", \"zoom\", \"orbit\", \"internal cut\", \"new character\"], \"internal_cuts\": 0, \"primary_visual_event\": \"Wenji finishes one line and holds\", \"shot_id\": \"PROBE_DIALOGUE\", \"start_state\": {\"camera\": \"medium\", \"character\": \"WENJI\", \"lighting\": \"dim\", \"location\": \"desk\", \"props\": [\"phone\"], \"time\": \"night\", \"wardrobe\": \"unchanged\"}, \"visible_character_ids\": [\"WENJI\"], \"visible_prop_ids\": [\"PHONE\"]}",
+        "mode": "reference",
+        "seconds": "5",
+        "size": "720P",
+        "aspect_ratio": "9:16",
+        "n": 1,
+        "images": [
+          "https://raw.githubusercontent.com/zhangapple21-web/-/main/ace-video-kingdom/wenji-episode-006/SCENE_02_typing_log_anchor.png"
+        ]
+      },
+      "generation_fingerprint": "bceb5df51aff94ba6851110dd7a7f38d77d103b2e2280dfba3b2d24cde00a641",
+      "shot_snapshot": {
+        "contract": {
+          "first_frame_ref": null,
+          "last_frame_ref": null,
+          "allowed_behaviors": [
+            "speak",
+            "hold"
+          ],
+          "forbidden_behaviors": [
+            "pan",
+            "tilt",
+            "zoom",
+            "orbit",
+            "internal cut",
+            "new character"
+          ],
+          "camera": {
+            "scale": "medium",
+            "position": "desk",
+            "movement": "NONE",
+            "axis": "none",
+            "internal_cuts": 0
+          },
+          "render_seconds": 5
+        },
+        "audio": {
+          "dialogue": [
+            {
+              "speaker": "WENJI",
+              "content": "我先把这页记下来。",
+              "start": 0,
+              "end": 2.021,
+              "audio_ref": "C:\\tmp\\ace_video_kingdom_git\\media_staging\\episode_006_wenji_110s\\audio\\wenji_01.wav"
+            }
+          ],
+          "narration": [],
+          "sfx": [],
+          "ambience": [
+            "room_tone"
+          ],
+          "music": [],
+          "dialogue_duration": 2.021,
+          "action_duration": 0,
+          "hold_duration": 0.8,
+          "render_seconds": 5
+        },
+        "media_profile": {},
+        "aspect_ratio": "9:16"
+      },
+      "contract_fingerprint": "5d09623ce7cc74ebe75f7c82e5efbb4678da43b9956ff1408864a92821d3a8a4",
+      "idempotency_key": "vk-shot-bceb5df51aff94ba6851110dd7a7f38d77d103b2e2280dfba3b2d24cde00a641",
+      "asset_bindings": [
+        {
+          "asset_id": "SCENE_02",
+          "version": 1,
+          "sha256": "e5015c19d9f75b3164aeace2542892f893914cd3c7cd630c4cd69db28c7473a3"
+        }
+      ],
+      "provider_status": "SUCCESS",
+      "technical_status": "PASS",
+      "creative_status": "UNKNOWN",
+      "status": "GENERATED",
+      "selected": false,
+      "created_at": "2026-09-05T08:20:31Z",
+      "create_http_status": 200,
+      "video_id": "task_WsMLdnJGn2MOjuWwkPKX4XitEo3GFs60",
+      "created_status": "queued",
+      "last_poll_http_status": 200,
+      "last_state": "completed",
+      "artifact_path": "C:\\tmp\\ace_video_kingdom_git\\media_staging\\shot_core_provider_probe_v1\\PROBE_DIALOGUE_T01.mp4",
+      "artifact_hash": "4e30b8f639371ffacfb8035bbaab76698b94e4accffbcf80ac307b906f810c9b",
+      "bytes": 1179139,
+      "media": {
+        "duration_seconds": 5.184,
+        "width": 720,
+        "height": 1280,
+        "fps": "24/1",
+        "video_codec": "h264",
+        "aspect_ratio": null,
+        "video_start_time": "0.000000",
+        "video_duration_seconds": "5.166667",
+        "has_audio": true,
+        "audio_codec": "aac",
+        "audio_duration_seconds": "5.184000",
+        "audio_sample_rate": "32000",
+        "audio_channels": 2
+      },
+      "provider_actual_seconds": 5.184,
+      "duration_contract_seconds": 5.0,
+      "machine_qc": {
+        "file_integrity": "PASS",
+        "resolution": "PASS",
+        "fps": "PASS",
+        "audio_stream": "PASS",
+        "duration": "PASS",
+        "black_frames": "PASS",
+        "freeze_tail": "PASS",
+        "internal_cuts": "PASS",
+        "duration_tolerance_seconds": 0.75,
+        "detector_errors": [],
+        "observed_internal_cuts": 0
+      },
+      "duration_mismatch": false
+    },
+    {
+      "take_id": "PROBE_ACTION_T01",
+      "shot_id": "PROBE_ACTION",
+      "parent_take_id": null,
+      "branch_reason": null,
+      "provider": "agnes",
+      "model": "agnes-video-2.5-flash",
+      "generation_config": {
+        "model": "agnes-video-2.5-flash",
+        "prompt": "A hand moves the phone from the left side of the desk to the right side in one continuous motion and stops; deliberately ignore any extra movement, no cut.\n[SHOT_CORE_CONTRACT]\n{\"action_state\": {\"camera\": \"close\", \"character\": \"hand moves phone\", \"lighting\": \"cool\", \"location\": \"desk\", \"props\": [\"phone center\"], \"time\": \"night\", \"wardrobe\": \"unchanged\"}, \"allowed_behaviors\": [\"move phone once\", \"hold\"], \"asset_refs\": [{\"asset_id\": \"SCENE_02\", \"asset_type\": \"scene\", \"sha256\": \"e5015c19d9f75b3164aeace2542892f893914cd3c7cd630c4cd69db28c7473a3\", \"version\": 1}], \"audio\": {\"action_duration\": 2.5, \"ambience\": [\"room_tone\"], \"dialogue\": [], \"dialogue_duration\": 0, \"hold_duration\": 1, \"music\": [], \"narration\": [], \"render_seconds\": 5, \"sfx\": []}, \"camera\": {\"axis\": \"none\", \"internal_cuts\": 0, \"movement\": \"NONE\", \"position\": \"desk\", \"scale\": \"close\"}, \"end_state\": {\"camera\": \"close\", \"character\": \"hand leaves phone\", \"lighting\": \"cool\", \"location\": \"desk\", \"props\": [\"phone right\"], \"time\": \"night\", \"wardrobe\": \"unchanged\"}, \"forbidden_behaviors\": [\"pick up phone\", \"open screen\", \"new character\", \"internal cut\"], \"internal_cuts\": 0, \"primary_visual_event\": \"hand moves phone once\", \"shot_id\": \"PROBE_ACTION\", \"start_state\": {\"camera\": \"close\", \"character\": \"WENJI\", \"lighting\": \"cool\", \"location\": \"desk\", \"props\": [\"phone left\"], \"time\": \"night\", \"wardrobe\": \"unchanged\"}, \"visible_character_ids\": [\"WENJI\"], \"visible_prop_ids\": [\"PHONE\"]}",
+        "mode": "reference",
+        "seconds": "5",
+        "size": "720P",
+        "aspect_ratio": "9:16",
+        "n": 1,
+        "images": [
+          "https://raw.githubusercontent.com/zhangapple21-web/-/main/ace-video-kingdom/wenji-episode-006/SCENE_02_typing_log_anchor.png"
+        ]
+      },
+      "generation_fingerprint": "c1400e9b9bf35744d72f01d6d5da6edead5199582ed378e4875638f7b199ecde",
+      "shot_snapshot": {
+        "contract": {
+          "first_frame_ref": null,
+          "last_frame_ref": null,
+          "allowed_behaviors": [
+            "move phone once",
+            "hold"
+          ],
+          "forbidden_behaviors": [
+            "pick up phone",
+            "open screen",
+            "new character",
+            "internal cut"
+          ],
+          "camera": {
+            "scale": "close",
+            "position": "desk",
+            "movement": "NONE",
+            "axis": "none",
+            "internal_cuts": 0
+          },
+          "render_seconds": 5
+        },
+        "audio": {
+          "dialogue": [],
+          "narration": [],
+          "sfx": [],
+          "ambience": [
+            "room_tone"
+          ],
+          "music": [],
+          "dialogue_duration": 0,
+          "action_duration": 2.5,
+          "hold_duration": 1,
+          "render_seconds": 5
+        },
+        "media_profile": {},
+        "aspect_ratio": "9:16"
+      },
+      "contract_fingerprint": "f0c3ccca0aa13b6535518daa5ea683aecdac30a894e0eb70f8f3c1aaa85ee9bd",
+      "idempotency_key": "vk-shot-c1400e9b9bf35744d72f01d6d5da6edead5199582ed378e4875638f7b199ecde",
+      "asset_bindings": [
+        {
+          "asset_id": "SCENE_02",
+          "version": 1,
+          "sha256": "e5015c19d9f75b3164aeace2542892f893914cd3c7cd630c4cd69db28c7473a3"
+        }
+      ],
+      "provider_status": "FAILED",
+      "technical_status": "UNKNOWN",
+      "creative_status": "UNKNOWN",
+      "status": "FAILED",
+      "selected": false,
+      "created_at": "2026-09-05T08:21:19Z",
+      "create_http_status": 429,
+      "video_id": null,
+      "created_status": null,
+      "failure_reason": "{\"error\":{\"message\":\"You’ve reached the API rate limit for free users. Upgrade to a Token Plan to unlock higher limits and continue using the API without interruption. (request id: 20260905082119742745478gCGBxy5m)\",\"type\":\"AgnesAI_error\",\"param\":\"\",\"code\":\"rate_limit_exceeded\"}}"
+    }
+  ],
+  "events": [],
+  "manifest_revision": 12
+}

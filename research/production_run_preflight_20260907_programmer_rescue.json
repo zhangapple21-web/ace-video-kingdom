@@ -1,0 +1,134 @@
+{
+  "contract_version": "ace.video_kingdom.episode_preflight.v1",
+  "scope": "FREE_ZONE_RESEARCH_ONLY",
+  "production_integration": false,
+  "episode": "C:\\tmp\\ace_video_kingdom_git\\episodes\\generated\\programmer-rescue-30s-v2\\episode_plan.json",
+  "project_id": "programmer-rescue-30s-v2",
+  "verdict": "REWORK",
+  "hard_failures": [],
+  "rework": [
+    "scene_switches: more than 4 scene changes occur within a 60-second window; explicit review is required"
+  ],
+  "warnings": [
+    "primary renderer is 'agnes-video-v2.0'; current default policy expects agnes-video-2.5-flash",
+    "scene_switches: 5 transitions in a 60-second window"
+  ],
+  "planned_shot_count": 6,
+  "planned_duration_seconds": 30,
+  "motion_contract": {
+    "status": "VALID",
+    "shot_count": 6,
+    "errors": [],
+    "warnings": [],
+    "duplicate_threshold": 0.7
+  },
+  "scene_switch_audit": {
+    "status": "REVIEW_REQUIRED",
+    "transition_count": 5,
+    "max_transitions_per_60s": 5,
+    "threshold": 4,
+    "transition_times_seconds": [
+      5.0,
+      10.0,
+      15.0,
+      20.0,
+      25.0
+    ]
+  },
+  "quality_contract": {
+    "status": "VALID",
+    "mode": "FORMAL",
+    "errors": [],
+    "warnings": [],
+    "gap_count": 0
+  },
+  "six_module_contract": {
+    "status": "VALID",
+    "errors": [],
+    "shot_count": 6,
+    "contract_version": "video_kingdom.six_module_shot_contract.idea_compiler.v2",
+    "path": "C:\\tmp\\ace_video_kingdom_git\\episodes\\generated\\programmer-rescue-30s-v2\\six_module_contract.json"
+  },
+  "timing_audit": {
+    "status": "NOT_PROVIDED",
+    "path": null
+  },
+  "review_policy": [
+    "deterministic_preflight",
+    "gpt-5.6-terra primary review",
+    "grok-4.6 high-cognition review when available",
+    "gpt-5.6-terra escalation only",
+    "gpt-5.6-terra packaging only"
+  ],
+  "primary_review_packet": {
+    "reviewer": "5.6 Terra",
+    "shots": [
+      {
+        "shot_id": "S01A",
+        "prompt": "主生成指令：严格还原可核对的故事场景：一个程序员深夜发现代码里藏着求救信息；地点为深夜值守机房。只执行当前镜头的一个主要视觉事件，保持自然表演和中国短剧电影质感。。角色身份锁：主角身份与服装固定，关系不可改写。当前镜头合同：首态=深夜值守前的稳定构图与角色身份；唯一主要视觉事件=主角按下回车唤醒深夜服务器终端；末态=动作完成后保留反应与留白；固定机位，镜头内部不切换。禁止行为：不得新增人物、改变人物关系或替换角色身份；不得改变地点、时间、天气、服装、道具状态或屏幕轴线；不得推拉摇移、自动转场、内部切镜或插入第二个主要动作；不得生成可读字幕、logo、品牌、现实机构标识或宣传/MV画面；不得美化、补写小说未给出的动作、对白、因果或情绪。场景细节：深夜值守机房，抽象求救标记但不生成可读文字，竖屏9:16。",
+        "scene_anchor_reference": "assets/sc01_anchor.png",
+        "scene_anchor_kind": "local_path",
+        "fallback_image": "assets/sc01_anchor.png"
+      },
+      {
+        "shot_id": "S02A",
+        "prompt": "主生成指令：严格还原可核对的故事场景：一个程序员深夜发现代码里藏着求救信息；地点为深夜值守机房。只执行当前镜头的一个主要视觉事件，保持自然表演和中国短剧电影质感。。角色身份锁：主角身份与服装固定，关系不可改写。当前镜头合同：首态=隐藏注释前的稳定构图与角色身份；唯一主要视觉事件=主角把光标停在一行异常注释上；末态=动作完成后保留反应与留白；固定机位，镜头内部不切换。禁止行为：不得新增人物、改变人物关系或替换角色身份；不得改变地点、时间、天气、服装、道具状态或屏幕轴线；不得推拉摇移、自动转场、内部切镜或插入第二个主要动作；不得生成可读字幕、logo、品牌、现实机构标识或宣传/MV画面；不得美化、补写小说未给出的动作、对白、因果或情绪。场景细节：深夜值守机房，抽象求救标记但不生成可读文字，竖屏9:16。",
+        "scene_anchor_reference": "assets/sc02_anchor.png",
+        "scene_anchor_kind": "local_path",
+        "fallback_image": "assets/sc02_anchor.png"
+      },
+      {
+        "shot_id": "S03A",
+        "prompt": "主生成指令：严格还原可核对的故事场景：一个程序员深夜发现代码里藏着求救信息；地点为深夜值守机房。只执行当前镜头的一个主要视觉事件，保持自然表演和中国短剧电影质感。。角色身份锁：主角身份与服装固定，关系不可改写。当前镜头合同：首态=时间戳核对前的稳定构图与角色身份；唯一主要视觉事件=主角把日志时间戳与提交记录并排对照；末态=动作完成后保留反应与留白；固定机位，镜头内部不切换。禁止行为：不得新增人物、改变人物关系或替换角色身份；不得改变地点、时间、天气、服装、道具状态或屏幕轴线；不得推拉摇移、自动转场、内部切镜或插入第二个主要动作；不得生成可读字幕、logo、品牌、现实机构标识或宣传/MV画面；不得美化、补写小说未给出的动作、对白、因果或情绪。场景细节：深夜值守机房，抽象求救标记但不生成可读文字，竖屏9:16。",
+        "scene_anchor_reference": "assets/sc03_anchor.png",
+        "scene_anchor_kind": "local_path",
+        "fallback_image": "assets/sc03_anchor.png"
+      },
+      {
+        "shot_id": "S04A",
+        "prompt": "主生成指令：严格还原可核对的故事场景：一个程序员深夜发现代码里藏着求救信息；地点为深夜值守机房。只执行当前镜头的一个主要视觉事件，保持自然表演和中国短剧电影质感。。角色身份锁：主角身份与服装固定，关系不可改写。当前镜头合同：首态=异常唤醒前的稳定构图与角色身份；唯一主要视觉事件=主角拔掉终端网线；末态=动作完成后保留反应与留白；固定机位，镜头内部不切换。禁止行为：不得新增人物、改变人物关系或替换角色身份；不得改变地点、时间、天气、服装、道具状态或屏幕轴线；不得推拉摇移、自动转场、内部切镜或插入第二个主要动作；不得生成可读字幕、logo、品牌、现实机构标识或宣传/MV画面；不得美化、补写小说未给出的动作、对白、因果或情绪。场景细节：深夜值守机房，抽象求救标记但不生成可读文字，竖屏9:16。",
+        "scene_anchor_reference": "assets/sc04_anchor.png",
+        "scene_anchor_kind": "local_path",
+        "fallback_image": "assets/sc04_anchor.png"
+      },
+      {
+        "shot_id": "S05A",
+        "prompt": "主生成指令：严格还原可核对的故事场景：一个程序员深夜发现代码里藏着求救信息；地点为深夜值守机房。只执行当前镜头的一个主要视觉事件，保持自然表演和中国短剧电影质感。。角色身份锁：主角身份与服装固定，关系不可改写。当前镜头合同：首态=保留证据前的稳定构图与角色身份；唯一主要视觉事件=主角将可疑提交标记为保留；末态=动作完成后保留反应与留白；固定机位，镜头内部不切换。禁止行为：不得新增人物、改变人物关系或替换角色身份；不得改变地点、时间、天气、服装、道具状态或屏幕轴线；不得推拉摇移、自动转场、内部切镜或插入第二个主要动作；不得生成可读字幕、logo、品牌、现实机构标识或宣传/MV画面；不得美化、补写小说未给出的动作、对白、因果或情绪。场景细节：深夜值守机房，抽象求救标记但不生成可读文字，竖屏9:16。",
+        "scene_anchor_reference": "assets/sc05_anchor.png",
+        "scene_anchor_kind": "local_path",
+        "fallback_image": "assets/sc05_anchor.png"
+      },
+      {
+        "shot_id": "S06A",
+        "prompt": "主生成指令：严格还原可核对的故事场景：一个程序员深夜发现代码里藏着求救信息；地点为深夜值守机房。只执行当前镜头的一个主要视觉事件，保持自然表演和中国短剧电影质感。。角色身份锁：主角身份与服装固定，关系不可改写。当前镜头合同：首态=离线求救前的稳定构图与角色身份；唯一主要视觉事件=主角按下离线硬盘的加密保存键；末态=动作完成后保留反应与留白；固定机位，镜头内部不切换。禁止行为：不得新增人物、改变人物关系或替换角色身份；不得改变地点、时间、天气、服装、道具状态或屏幕轴线；不得推拉摇移、自动转场、内部切镜或插入第二个主要动作；不得生成可读字幕、logo、品牌、现实机构标识或宣传/MV画面；不得美化、补写小说未给出的动作、对白、因果或情绪。场景细节：深夜值守机房，抽象求救标记但不生成可读文字，竖屏9:16。",
+        "scene_anchor_reference": "assets/sc06_anchor.png",
+        "scene_anchor_kind": "local_path",
+        "fallback_image": "assets/sc06_anchor.png"
+      }
+    ],
+    "questions": [
+      "Does each shot advance the causal chain?",
+      "Does the character state change visibly?",
+      "Can the stated action be filmed in one short clip?",
+      "Are the first three seconds and end state clear?"
+    ]
+  },
+  "red_team_packet": {
+    "reviewer": "Grok 4.6",
+    "enabled": false,
+    "questions": [
+      "What would confuse a first-time viewer?",
+      "Where is a motive or causal bridge missing?",
+      "Which beat feels generic or repetitive?",
+      "Which image/video constraint will make this shot look like a repeated cover?"
+    ]
+  },
+  "escalation": {
+    "reviewer": "5.6 Sol",
+    "only_if": "primary and red-team recommendations materially conflict"
+  },
+  "packaging": {
+    "reviewer": "5.6 Luna",
+    "only_after": "an approved review result; no approval or provider authority"
+  }
+}

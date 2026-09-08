@@ -1,0 +1,20 @@
+[
+  {
+    "shot_id": "E008_S01_FIXED_MEDIUM_PILOT",
+    "model_id": "agnes-video-v2.0",
+    "status": "COMPLETED",
+    "payload_sha256": "0f01f21d47402ad0f7a20457298ec2457433812108ba8a852e8a75d074afcf2f",
+    "create_endpoint": "https://apihub.agnes-ai.com/v1/videos",
+    "poll_endpoint": "https://apihub.agnes-ai.com/agnesapi",
+    "poll_id_field": "video_id",
+    "create_attempt": 1,
+    "create_http_status": 200,
+    "video_id": "video_bGl0ZWxsbTpjdXN0b21fbGxtX3Byb3ZpZGVyOm9wZW5haTttb2RlbF9pZDphZ25lcy12aWRlby12Mi4wO3ZpZGVvX2lkOnZpZGVvXzRlNjM3MWMxMzY1ZTRjNzY4MThkODIzYzkwYmFkZjdk",
+    "created_status": "queued",
+    "last_poll_http_status": 200,
+    "last_state": "completed",
+    "artifact_sha256": "e8d58b1661d127f9871296dd020ae52ca87c595747d3e57d89e95b41a6a72983",
+    "bytes": 1096582,
+    "artifact_path": "media_staging\\episode_008_rule_seat_system\\revision_pilot\\E008_S01_fixed_medium_10s.mp4"
+  }
+]

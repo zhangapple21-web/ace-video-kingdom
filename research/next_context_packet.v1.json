@@ -1,0 +1,55 @@
+{
+  "contract_version": "video_kingdom.compact_context_packet.v1",
+  "packet_id": "VK-CONTEXT-20260904-1410",
+  "created_at": "2026-09-04",
+  "purpose": "Resume video work without replaying oversized Codex history",
+  "system_status": "CONNECTED_WITH_GAPS",
+  "transport": {
+    "last_error": "HTTP 413 Payload Too Large",
+    "endpoint": "http://127.0.0.1:3002/v1/responses",
+    "max_bytes": 16777216,
+    "action": "fresh_compact_context_required"
+  },
+  "ace_video_linkage": {
+    "card_claim": "PROVEN",
+    "provider_call_attribution": "PROVEN_FOR_VK-AUTO-d758770c763a2c16",
+    "provider_calls": 1,
+    "provider_video_id": "video_bGl0ZWxsbTpjdXN0b21fbGxtX3Byb3ZpZGVyOm9wZW5haTttb2RlbF9pZDphZ25lcy12aWRlby12Mi4wO3ZpZGVvX2lkOnZpZGVvXzUwZDNiMjA2MzlhZjQ1M2Q4NjI3NWZkMGE0NjY2YTBl",
+    "result_return": "RESULT_CONSUMED",
+    "delivery_approved": false,
+    "decision": "REWORK"
+  },
+  "episode_007": {
+    "formal_contract": "research/episode_007_preflight_live_20260904_1410.json",
+    "formal_contract_status": "VALID",
+    "preflight_verdict": "CONDITIONAL",
+    "candidate": "media_staging/episode_007_virtual_data/video_camera_grammar_v2/episode_007_candidate_v7_subtitled.mp4",
+    "candidate_sha256": "d535bae788f3b08d2de7b2ba539ecb4de5016d57cc48e2994314a5da1fc0204a",
+    "duration_seconds": 108.041667,
+    "pacing_audit": {
+      "path": "research/episode_007_pacing_live_20260904_1410.json",
+      "status": "FAIL",
+      "internal_scene_cuts": 26,
+      "allowed_internal_scene_cuts": 0
+    },
+    "continuity_audit": {
+      "path": "research/episode_007_continuity_live_20260904_1410.json",
+      "status": "REVIEW_REQUIRED",
+      "spike_count": 355
+    },
+    "delivery": "NOT_DELIVERABLE",
+    "repair_scope": ["S01A", "S01D", "S02C", "S05B", "S07A"]
+  },
+  "source_material": {
+    "dramaai": "C:/tmp/dramai-source",
+    "fastmovieai": "C:/tmp/fastmovieai-latest-20260904",
+    "comparison": "research/open_source_workbench_cross_validation_20260904.md"
+  },
+  "next_action": "Run a bounded five-shot Shot Contract pilot: one representative dialogue retake and one action retake first; preserve all old takes, record per-take audit deltas, and only then consider batch generation.",
+  "constraints": [
+    "Do not resend oversized conversation",
+    "Do not duplicate provider submission",
+    "Do not promote research cut to delivery",
+    "Do not add a second scheduler/router/runtime"
+  ]
+}

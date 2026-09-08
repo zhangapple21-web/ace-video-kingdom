@@ -1,0 +1,75 @@
+{
+  "contract_version": "ace.video_kingdom.action_probe_review.v2",
+  "project_id": "episode_007_virtual_data",
+  "criteria": [
+    "force",
+    "inertia",
+    "temporal_continuity"
+  ],
+  "overall_decision": "REJECT_AND_REWORK",
+  "reason": "动作探针已证明 Agnes 可以产生可见动作，但角色服装与用户正式参考不一致，且部分动作的力学反馈不足；不能放行整集批量生产。",
+  "shots": [
+    {
+      "shot_id": "P01_KEYBOARD",
+      "force": "YES",
+      "force_detail": "双手在键盘上持续交替移动，动作幅度可见",
+      "inertia": "PARTIAL",
+      "inertia_detail": "手指持续动作有回收，但没有明显敲击反馈",
+      "temporal_continuity": "PASS",
+      "discontinuity": "未见明显瞬移或闪烁",
+      "decision": "REWORK",
+      "priority": "角色服装错误：生成结果为深色连帽外套，不是正式浅灰旧短袖衬衫"
+    },
+    {
+      "shot_id": "P02_PHONE_SLAM",
+      "force": "PARTIAL",
+      "force_detail": "抬手和放下手机可见，但下砸加速度不足",
+      "inertia": "PARTIAL",
+      "inertia_detail": "手机落桌后停住，缺少明确反弹/桌面震动",
+      "temporal_continuity": "PASS",
+      "discontinuity": "动作段连贯，手部接触处需逐帧复核",
+      "decision": "REWORK",
+      "priority": "强化下砸速度、撞击、反弹；修正服装"
+    },
+    {
+      "shot_id": "P03_DESK_SLAM",
+      "force": "YES",
+      "force_detail": "肥哥前倾拍桌，手臂和身体发力明显",
+      "inertia": "YES",
+      "inertia_detail": "纸张/烟灰在冲击后出现反馈",
+      "temporal_continuity": "PASS",
+      "discontinuity": "未见明显跳变",
+      "decision": "CONDITIONAL",
+      "priority": "保持黑色Polo，避免后续镜头换成浅色衬衫"
+    },
+    {
+      "shot_id": "P04_RUN_OUT",
+      "force": "YES",
+      "force_detail": "阿浪起身并向前移动，身体位移明显",
+      "inertia": "PARTIAL",
+      "inertia_detail": "起身后的惯性有，但推椅和脚步反馈弱",
+      "temporal_continuity": "PARTIAL",
+      "discontinuity": "快速运动段有轻微运动模糊，需确认无位置跳变",
+      "decision": "CONDITIONAL",
+      "priority": "补强推椅、连续脚步和跟拍路径"
+    },
+    {
+      "shot_id": "P05_COPY_PASTE",
+      "force": "PARTIAL",
+      "force_detail": "手部重复动作可见但更像规律性表演",
+      "inertia": "PARTIAL",
+      "inertia_detail": "拉远过程没有动作后的自然余波",
+      "temporal_continuity": "PASS",
+      "discontinuity": "拉远时人物比例稳定",
+      "decision": "REWORK",
+      "priority": "强化机械复制粘贴节奏并锁定正式浅灰衬衫，不能使用连帽外套"
+    }
+  ],
+  "next_action": [
+    "将用户提供的阿浪/肥哥正式参考图设为唯一角色锚图；当前生成锚图降级为实验素材。",
+    "每个动作镜头拆为动作起点、冲击/位移、动作结束后三段约束。",
+    "P02优先重做；P01/P05同步修正服装；P03/P04保留作为动作参考但仍需正式锚图重跑。",
+    "五镜全部达到 PASS 后再启动整集批量。"
+  ],
+  "production_integration": false
+}
