@@ -263,7 +263,20 @@ def route_model_demand(
             continue
         if not _scope_allowed(scopes, scope):
             reasons.append("SCOPE_NOT_ELIGIBLE")
-        provider_health = (health_snapshot or {}).get(str(model.get("provider") or ""))
+        # A research model may execute through a verified local gateway even
+        # when its direct upstream credential is stale.  Keep the model's
+        # provider identity for routing receipts, but allow an explicit
+        # health_provider alias to supply the live transport evidence.
+        health_provider = str(model.get("health_provider") or model.get("provider") or "")
+        provider_health = (health_snapshot or {}).get(health_provider)
+        snapshot_meta = (health_snapshot or {}).get("_meta")
+        if (
+            isinstance(snapshot_meta, dict)
+            and snapshot_meta.get("stale") is True
+            and (str(model.get("provider") or "") == "shenwen" or "remote_shenwen" in (scopes or []))
+        ):
+            reasons.append("PROVIDER_UNHEALTHY")
+            reasons.append("PROVIDER_HEALTH_SNAPSHOT_STALE")
         if isinstance(provider_health, dict):
             health_status = str(provider_health.get("status") or "").upper()
             if health_status in {"OFFLINE", "DOWN", "UNHEALTHY", "STALE", "UNKNOWN"}:
@@ -283,6 +296,7 @@ def route_model_demand(
             blocked.append({
                 "id": model_id,
                 "provider": model.get("provider"),
+                "health_provider": health_provider,
                 "reasons": reasons,
                 "capability_states": {cap: _model_capability_state(model, cap) for cap in required},
             })
@@ -298,6 +312,7 @@ def route_model_demand(
         candidates.append({
             "id": model_id,
             "provider": model.get("provider"),
+            "health_provider": health_provider,
             "model": model.get("model"),
             "status": model.get("status"),
             "execution_profile": model.get("execution_profile"),

@@ -29,6 +29,7 @@
     {
       "id": "shenwen:gpt-6-astra",
       "provider": "shenwen",
+      "health_provider": "oneapi",
       "model": "gpt-6-astra",
       "status": "RESEARCH_ACTIVE",
       "eligible_scopes": ["remote_shenwen", "auto"],
