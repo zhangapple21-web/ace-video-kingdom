@@ -16,7 +16,7 @@
   "roles": [
     {"role_id": "outline_structurer", "model": "glm-4-flash", "fallback_models": ["gpt-5.6-terra", "gpt-5.4-mini"], "authority": "candidate", "use_when": "整理结构化简报、角色表和约束清单。"},
     {"role_id": "format_editor", "model": "gpt-5.4-mini", "fallback_models": ["glm-4-flash", "gpt-5.6-terra"], "authority": "candidate", "use_when": "检查 JSON、字段完整性、对白/独白格式和字幕长度。"},
-    {"role_id": "continuity_editor", "model": "gpt-5.4", "fallback_models": ["gpt-5.5", "gpt-5.6-terra"], "authority": "candidate", "use_when": "检查角色、道具、时间线、镜头前后衔接。"},
+    {"role_id": "continuity_editor", "model": "gpt-5.4", "fallback_models": ["gpt-5.5", "gpt-5.6-terra"], "authority": "candidate", "use_when": "检查角色、道具、时间线、镜头前后衔接；对断层剧本标出断点、风险等级、最小补桥和 NEEDS_CLARIFICATION 条件。"},
     {"role_id": "storyboarder", "model": "gpt-5.5", "fallback_models": ["gpt-5.6-terra", "gpt-5.4"], "authority": "candidate", "use_when": "把剧本拆成可拍镜头和动作完成点。"},
     {"role_id": "primary_writer", "model": "gpt-5.6-terra", "fallback_models": ["gpt-5.5", "gpt-5.4"], "authority": "candidate", "use_when": "完成主剧本、角色目标、冲突和完整对白/独白草案。"},
     {"role_id": "arbiter", "model": "gpt-6-astra", "fallback_models": [], "authority": "arbitration_only", "use_when": "仅在重大分歧、返工代价高或安全边界不清时启用；不可静默降级。"},
