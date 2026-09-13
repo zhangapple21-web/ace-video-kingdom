@@ -60,8 +60,9 @@ python -m production_control model-route --text "把这些文件批量整理、�
 ```
 
 当前默认入口仍是 `gpt-5.6-terra`。复杂任务只有在 Astra 的远端、受限能力探针和
-`shenwen=HEALTHY` 快照同时满足时才会选取 `shenwen:gpt-6-astra`；本地
-`3000/3002` 未发现 Astra 时不会伪装成本地已接通。失败回退只能从已验证候选中
+实时健康快照同时满足时才会选取 `shenwen:gpt-6-astra`；该模型允许声明
+`health_provider=oneapi`，表示本地 `3000/3002` 已真实转发并完成最小探测，不能把
+网关可达误写成直连凭据健康。本地未发现 Astra 时不会伪装成本地已接通。失败回退只能从已验证候选中
 顺序选择，证据不足或超出验证边界则 `BLOCKED`。路由收据和探针证据分别位于
 `research/model_capability_registry.v1.json` 与 `research/model_capability_probes/`，
 Watchdog 快照超过 24 小时也会 fail-closed；这些机制不授予生产写入或发布权限。
