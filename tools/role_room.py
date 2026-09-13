@@ -33,21 +33,26 @@ def _prompt(role_id: str, source: str, context: str) -> str:
         "对白和内心独白分离，独白必须给出完整原文。\n"
     )
     tasks = {
+        "outline_structurer": "把创意整理成结构化简报、角色表、场景表和硬约束清单。",
+        "format_editor": "检查 JSON 字段完整性、对白/独白格式、字幕长度和交接可执行性。",
         "primary_writer": "写出故事主方案、角色目标、冲突和完整对白/独白草案。",
         "storyboarder": "把故事拆成可拍镜头，给出景别、机位、动作完成点、切镜理由和声音。",
         "contrarian_auditor": "从现实性、连续性、伦理、镜头可执行性和违规画面风险挑错。",
         "continuity_editor": "检查角色、道具、时间线、对白长度、字幕安全区和镜头前后衔接。",
         "director_convergence": "综合候选意见，收敛成一版可拍但仍需人工创作验收的镜头稿。",
+        "ideation_branch": "提出多个开场钩子、结尾悬念或风格分支，标出各自的风险和适用场景。",
+        "reality_reviewer": "从现实感、受众误读、文化语境和发布风险复核复杂项目。",
+        "arbiter": "只针对已有分歧给出取舍依据、证据和保守方案，不重新创作整稿。",
     }
     return common + f"角色：{role_id}\n任务：{tasks.get(role_id, role_id)}\n素材：\n{source}\n已有意见：\n{context}"
 
 
-def _call(base_url: str, api_key: str, model: str, prompt: str) -> str:
+def _call(base_url: str, api_key: str, model: str, prompt: str) -> tuple[str, str]:
     payload = json.dumps({"model": model, "messages": [{"role": "user", "content": prompt}], "temperature": 0.3}, ensure_ascii=False).encode()
     req = urllib.request.Request(base_url.rstrip("/") + "/chat/completions", data=payload, headers={"Content-Type": "application/json", "Authorization": f"Bearer {api_key}"}, method="POST")
     with urllib.request.urlopen(req, timeout=180) as response:
         data = json.loads(response.read().decode("utf-8"))
-    return str(data["choices"][0]["message"]["content"])
+    return str(data["choices"][0]["message"]["content"]), str(data.get("model") or model)
 
 
 def main(argv: list[str] | None = None) -> int:
@@ -55,27 +60,40 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("--idea", required=True)
     parser.add_argument("--out", type=Path, required=True)
     parser.add_argument("--execute", action="store_true", help="调用本地 OneAPI；默认只做路由 dry-run")
+    parser.add_argument("--profile", choices=("standard", "rapid", "full_audit"), default="standard", help="角色配置：日常、快速整理或全审计")
     parser.add_argument("--base-url", default=os.environ.get("ONEAPI_BASE_URL", "http://127.0.0.1:3000/v1"))
     args = parser.parse_args(argv)
     matrix = _load_json(MATRIX)
     roles = {item["role_id"]: item for item in matrix["roles"]}
     source = args.idea.strip()
-    receipt: dict[str, Any] = {"schema": matrix["schema"], "status": "DRY_RUN" if not args.execute else "RUNNING", "idea": source, "gateway": args.base_url, "roles": []}
+    role_order = matrix["profiles"][args.profile]
+    receipt: dict[str, Any] = {"schema": matrix["schema"], "status": "DRY_RUN" if not args.execute else "RUNNING", "profile": args.profile, "idea": source, "gateway": args.base_url, "roles": []}
     context = ""
     api_key = os.environ.get("ONEAPI_API_KEY") or os.environ.get("OPENAI_API_KEY", "")
-    for role_id in matrix["order"]:
+    for role_id in role_order:
         item = roles[role_id]
-        record: dict[str, Any] = {"role_id": role_id, "model": item["model"], "status": "PLANNED"}
+        primary_model = item["model"]
+        fallback_models = list(item.get("fallback_models", []))
+        record: dict[str, Any] = {"role_id": role_id, "model": primary_model, "requested_model": primary_model, "status": "PLANNED", "attempts": []}
         if args.execute:
             if not api_key:
                 record.update({"status": "FAILED", "error": "缺少 ONEAPI_API_KEY/OPENAI_API_KEY"})
             else:
-                try:
-                    output = _call(args.base_url, api_key, item["model"], _prompt(role_id, source, context))
-                    record.update({"status": "COMPLETED", "output": output})
-                    context += f"\n[{role_id}]\n{output}\n"
-                except (urllib.error.URLError, TimeoutError, KeyError, json.JSONDecodeError) as exc:
-                    record.update({"status": "FAILED", "error": type(exc).__name__ + ": " + str(exc)})
+                output = None
+                last_error = None
+                for attempt_model in [primary_model, *fallback_models]:
+                    try:
+                        text, actual_model = _call(args.base_url, api_key, attempt_model, _prompt(role_id, source, context))
+                        record["attempts"].append({"model": attempt_model, "status": "PASS", "actual_model": actual_model})
+                        output = text
+                        record.update({"status": "COMPLETED", "model": actual_model, "fallback_used": attempt_model != primary_model, "degraded": attempt_model != primary_model, "output": text})
+                        context += f"\n[{role_id}]\n{text}\n"
+                        break
+                    except (urllib.error.URLError, urllib.error.HTTPError, TimeoutError, KeyError, json.JSONDecodeError) as exc:
+                        last_error = type(exc).__name__ + ": " + str(exc)
+                        record["attempts"].append({"model": attempt_model, "status": "FAILED", "error": last_error})
+                if output is None:
+                    record.update({"status": "BLOCKED" if item.get("authority") in {"blocking_candidate", "arbitration_only"} else "FAILED", "error": last_error or "no usable model"})
         receipt["roles"].append(record)
     receipt["status"] = "COMPLETED" if args.execute and all(r["status"] == "COMPLETED" for r in receipt["roles"]) else receipt["status"]
     receipt["production_submission"] = "NOT_PERFORMED"
