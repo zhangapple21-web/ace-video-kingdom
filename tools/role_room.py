@@ -7,6 +7,7 @@ gateway and writes a role receipt; it never submits image or video jobs.
 from __future__ import annotations
 
 import argparse
+import inspect
 import json
 import os
 import sys
@@ -48,12 +49,45 @@ def _prompt(role_id: str, source: str, context: str) -> str:
     return common + f"角色：{role_id}\n任务：{tasks.get(role_id, role_id)}\n素材：\n{source}\n已有意见：\n{context}"
 
 
-def _call(base_url: str, api_key: str, model: str, prompt: str) -> tuple[str, str]:
-    payload = json.dumps({"model": model, "messages": [{"role": "user", "content": prompt}], "temperature": 0.3}, ensure_ascii=False).encode()
+def _call(base_url: str, api_key: str, model: str, prompt: str, timeout: float) -> tuple[str, str]:
+    # OneAPI/上游中文长输出可能持续很久；角色房间先产出可审计的短稿，
+    # 详细扩写留给通过门禁后的专用步骤，避免串行角色把网关拖到超时。
+    bounded_prompt = prompt + "\n输出上限：先给出可执行的短稿，最多 500 个汉字；不要重复题目，不要写过程说明。"
+    payload = json.dumps(
+        {
+            "model": model,
+            "messages": [{"role": "user", "content": bounded_prompt}],
+            "temperature": 0.3,
+            "max_tokens": 512,
+        },
+        ensure_ascii=False,
+    ).encode()
     req = urllib.request.Request(base_url.rstrip("/") + "/chat/completions", data=payload, headers={"Content-Type": "application/json", "Authorization": f"Bearer {api_key}"}, method="POST")
-    with urllib.request.urlopen(req, timeout=180) as response:
+    with urllib.request.urlopen(req, timeout=timeout) as response:
         data = json.loads(response.read().decode("utf-8"))
     return str(data["choices"][0]["message"]["content"]), str(data.get("model") or model)
+
+
+def _normalize_base_url(value: str) -> str:
+    """Accept either an OpenAI base URL or a full chat endpoint.
+
+    The local launcher historically exported ``ONE_API_URL`` as
+    ``.../v1/chat/completions`` while the role room expects a ``/v1`` base.
+    Normalizing here prevents a silent ``.../chat/completions/chat/completions``
+    request and makes new windows use the same gateway configuration.
+    """
+    normalized = value.strip().rstrip("/")
+    suffix = "/chat/completions"
+    if normalized.endswith(suffix):
+        normalized = normalized[: -len(suffix)].rstrip("/")
+    return normalized
+
+
+def _invoke_call(base_url: str, api_key: str, model: str, prompt: str, timeout: float) -> tuple[str, str]:
+    """Call the transport while keeping older local test shims compatible."""
+    if len(inspect.signature(_call).parameters) >= 5:
+        return _call(base_url, api_key, model, prompt, timeout)
+    return _call(base_url, api_key, model, prompt)
 
 
 def main(argv: list[str] | None = None) -> int:
@@ -62,15 +96,39 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("--out", type=Path, required=True)
     parser.add_argument("--execute", action="store_true", help="调用本地 OneAPI；默认只做路由 dry-run")
     parser.add_argument("--profile", choices=("standard", "rapid", "full_audit"), default="standard", help="角色配置：日常、快速整理或全审计")
-    parser.add_argument("--base-url", default=os.environ.get("ONEAPI_BASE_URL", "http://127.0.0.1:3000/v1"))
+    parser.add_argument(
+        "--timeout",
+        type=float,
+        default=float(os.environ.get("ONEAPI_ROLE_TIMEOUT_SECONDS", "45")),
+        help="单模型请求超时秒数（默认 45，可用 ONEAPI_ROLE_TIMEOUT_SECONDS 覆盖）",
+    )
+    parser.add_argument(
+        "--base-url",
+        default=(
+            os.environ.get("ONEAPI_BASE_URL")
+            or os.environ.get("ONE_API_URL")
+            or "http://127.0.0.1:3000/v1"
+        ),
+    )
     args = parser.parse_args(argv)
+    if args.timeout <= 0:
+        parser.error("--timeout 必须大于 0")
+    args.base_url = _normalize_base_url(args.base_url)
     matrix = _load_json(MATRIX)
     roles = {item["role_id"]: item for item in matrix["roles"]}
     source = args.idea.strip()
     role_order = matrix["profiles"][args.profile]
     receipt: dict[str, Any] = {"schema": matrix["schema"], "status": "DRY_RUN" if not args.execute else "RUNNING", "profile": args.profile, "idea": source, "gateway": args.base_url, "roles": []}
     context = ""
-    api_key = os.environ.get("ONEAPI_API_KEY") or os.environ.get("OPENAI_API_KEY", "")
+    # The local launcher historically exposed both ONEAPI_* and ONE_API_* names.
+    # Accept the configured admin token as the local gateway credential so a new
+    # window does not silently fall back to an empty/incorrect key.
+    api_key = (
+        os.environ.get("ONEAPI_API_KEY")
+        or os.environ.get("ONEAPI_ADMIN_TOKEN")
+        or os.environ.get("ONE_API_KEY")
+        or os.environ.get("OPENAI_API_KEY", "")
+    )
     for role_id in role_order:
         item = roles[role_id]
         primary_model = item["model"]
@@ -83,8 +141,9 @@ def main(argv: list[str] | None = None) -> int:
                 output = None
                 last_error = None
                 for attempt_model in [primary_model, *fallback_models]:
+                    print(f"[role-room] {role_id}: trying {attempt_model}", file=sys.stderr, flush=True)
                     try:
-                        text, actual_model = _call(args.base_url, api_key, attempt_model, _prompt(role_id, source, context))
+                        text, actual_model = _invoke_call(args.base_url, api_key, attempt_model, _prompt(role_id, source, context), args.timeout)
                         record["attempts"].append({"model": attempt_model, "status": "PASS", "actual_model": actual_model})
                         output = text
                         record.update({"status": "COMPLETED", "model": actual_model, "fallback_used": attempt_model != primary_model, "degraded": attempt_model != primary_model, "output": text})
@@ -93,10 +152,17 @@ def main(argv: list[str] | None = None) -> int:
                     except (urllib.error.URLError, urllib.error.HTTPError, TimeoutError, KeyError, json.JSONDecodeError) as exc:
                         last_error = type(exc).__name__ + ": " + str(exc)
                         record["attempts"].append({"model": attempt_model, "status": "FAILED", "error": last_error})
+                        print(f"[role-room] {role_id}: {attempt_model} failed; trying fallback", file=sys.stderr, flush=True)
                 if output is None:
                     record.update({"status": "BLOCKED" if item.get("authority") in {"blocking_candidate", "arbitration_only"} else "FAILED", "error": last_error or "no usable model"})
         receipt["roles"].append(record)
-    receipt["status"] = "COMPLETED" if args.execute and all(r["status"] == "COMPLETED" for r in receipt["roles"]) else receipt["status"]
+    if args.execute:
+        if all(r["status"] == "COMPLETED" for r in receipt["roles"]):
+            receipt["status"] = "COMPLETED"
+        elif any(r["status"] == "BLOCKED" for r in receipt["roles"]):
+            receipt["status"] = "BLOCKED"
+        else:
+            receipt["status"] = "FAILED"
     receipt["production_submission"] = "NOT_PERFORMED"
     receipt["created_at"] = time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime())
     args.out.parent.mkdir(parents=True, exist_ok=True)
