@@ -27,8 +27,9 @@
       "single_action": {"target_seconds": [4, 10]},
       "episode_dialogue_or_inner_voice_share_minimum": 0.45
     },
-    "duration_gate": "render_seconds must be explicit per shot; provider defaults never define story timing; a dialogue shot must cover measured audio plus one recovery beat",
-    "duration_policy": "有真实音频时长优先使用音频时长并钳位；无音频时只允许使用合同显式时长，禁止按字符数伪造音频时长。",
+    "duration_gate": "render_seconds must be derived per shot after measuring dialogue/inner-voice audio and adding action completion, reaction, and recovery beats; provider defaults and user-supplied fixed seconds never define story timing",
+    "duration_policy": "统一采用内容优先时长：先测对白与内心独白的真实音频时长，再加动作完成、反应与恢复停留；固定秒数只能是初始预算。若内容说不完，必须延长镜头或在语义停顿处拆镜，禁止压缩、抢拍、截断、口型漂移或把独白挤进末尾几秒。无真实音频时长不得宣称音画已对齐。",
+    "duration_completeness_gate": "dialogue, action, lip-sync, and inner-voice lines must complete before shot end; incomplete content is REGENERATE or SPLIT, never PASS",
     "long_line_policy": "超过18秒仅在语义停顿/反应点拆分，最大递归深度2。"
   },
   "camera_grammar": {
