@@ -37,3 +37,10 @@
 - 吸收“资产先行、结构化中间数据、阶段独立验收、先小样后全量”四条工程原则。
 - 映射到本项目：episode/shot contract、`imagegen`、`Video`、字幕管线、音频 ducking、收据与准入门禁。
 - 不吸收其“主流模型/平台列表”作为自动路由，也不因此引入新 Provider。
+
+## 本次吸收：中文角色配音与声音克隆
+
+- `FunAudioLLM/CosyVoice`：吸收 CosyVoice 3 的中文零样本克隆、情绪/语速/方言指令和流式 TTS 思路；不替换当前视频 Provider。
+- `index-tts/index-tts`：吸收 IndexTTS 2.5 的单参考音频克隆、情绪文字/向量控制和 `duration_factor` 时长控制；模型许可证和样音授权仍需单独核验。
+- `QwenLM/Qwen3-TTS`：吸收参考音频 + 参考文本克隆、自然语言音色控制和逐句/批量生成接口；不把“模型支持”误写成 Agnes 自动口型同步能力。
+- 统一边界：TTS/克隆模型负责准确中文和表演，Agnes 只负责画面与音频参考；最终音轨、字幕和口型必须独立验收。
