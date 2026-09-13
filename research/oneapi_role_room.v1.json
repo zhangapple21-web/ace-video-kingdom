@@ -1,19 +1,39 @@
 {
-  "schema": "video_kingdom.oneapi_role_room.v1",
+  "schema": "video_kingdom.oneapi_role_room.v2",
   "gateway": "http://127.0.0.1:3000/v1",
+  "policy": {
+    "availability_probe_is_not_quality_benchmark": true,
+    "default_profile": "standard",
+    "full_audit_is_opt_in": true,
+    "media_submission_forbidden": true,
+    "provider_completed_is_not_creative_acceptance": true
+  },
+  "profiles": {
+    "standard": ["primary_writer", "storyboarder", "contrarian_auditor", "continuity_editor", "director_convergence"],
+    "rapid": ["outline_structurer", "primary_writer", "format_editor"],
+    "full_audit": ["outline_structurer", "ideation_branch", "primary_writer", "storyboarder", "contrarian_auditor", "reality_reviewer", "continuity_editor", "format_editor", "director_convergence", "arbiter"]
+  },
   "roles": [
-    {"role_id": "primary_writer", "model": "gpt-5.6-terra", "authority": "candidate"},
-    {"role_id": "storyboarder", "model": "gpt-5.5", "authority": "candidate"},
-    {"role_id": "contrarian_auditor", "model": "grok-4.5", "authority": "candidate"},
-    {"role_id": "continuity_editor", "model": "gpt-5.4", "authority": "candidate"},
-    {"role_id": "director_convergence", "model": "gpt-5.6-terra", "authority": "candidate"},
-    {"role_id": "arbiter", "model": "gpt-5.6-terra", "authority": "arbitration_only"}
+    {"role_id": "outline_structurer", "model": "glm-4-flash", "fallback_models": ["gpt-5.6-terra", "gpt-5.4-mini"], "authority": "candidate", "use_when": "整理结构化简报、角色表和约束清单。"},
+    {"role_id": "format_editor", "model": "gpt-5.4-mini", "fallback_models": ["glm-4-flash", "gpt-5.6-terra"], "authority": "candidate", "use_when": "检查 JSON、字段完整性、对白/独白格式和字幕长度。"},
+    {"role_id": "continuity_editor", "model": "gpt-5.4", "fallback_models": ["gpt-5.5", "gpt-5.6-terra"], "authority": "candidate", "use_when": "检查角色、道具、时间线、镜头前后衔接。"},
+    {"role_id": "storyboarder", "model": "gpt-5.5", "fallback_models": ["gpt-5.6-terra", "gpt-5.4"], "authority": "candidate", "use_when": "把剧本拆成可拍镜头和动作完成点。"},
+    {"role_id": "primary_writer", "model": "gpt-5.6-terra", "fallback_models": ["gpt-5.5", "gpt-5.4"], "authority": "candidate", "use_when": "完成主剧本、角色目标、冲突和完整对白/独白草案。"},
+    {"role_id": "arbiter", "model": "gpt-6-astra", "fallback_models": [], "authority": "arbitration_only", "use_when": "仅在重大分歧、返工代价高或安全边界不清时启用；不可静默降级。"},
+    {"role_id": "director_convergence", "model": "gpt-5.6-terra", "fallback_models": ["gpt-5.5", "gpt-5.4"], "authority": "candidate", "use_when": "在候选意见齐备后做结构化导演收敛，不绕过验收。"},
+    {"role_id": "ideation_branch", "model": "gpt-5.6-terra", "fallback_models": ["gpt-5.4-mini", "glm-4-flash"], "authority": "candidate", "use_when": "快速生成钩子、结尾或风格分支，供主笔择优。"},
+    {"role_id": "reality_reviewer", "model": "grok-4.6", "fallback_models": ["grok-4.5", "gpt-5.5"], "authority": "candidate", "use_when": "复杂项目的现实感、受众误读和外部视角复核。"},
+    {"role_id": "contrarian_auditor", "model": "grok-4.5", "fallback_models": ["grok-4.6", "gpt-5.5"], "authority": "blocking_candidate", "use_when": "挑现实性、连续性、伦理、镜头可执行性和违规画面风险；降级后仍可阻断。"}
   ],
-  "order": ["primary_writer", "storyboarder", "contrarian_auditor", "continuity_editor", "director_convergence"],
   "rules": [
-    "角色输出只能形成候选稿，不能直接提交视频任务。",
-    "Provider completed 不等于创作验收通过。",
+    "角色输出只能形成候选稿，不能直接提交图像或视频任务。",
+    "默认 standard，不为凑模型数量而调用全部席位。",
+    "full_audit 只在复杂项目或高返工风险项目显式启用。",
+    "反例审计可以阻断；arbiter 只能解决真实分歧，不能替代 QC。",
     "超时、错误或缺失的角色输出必须保留为失败，不得补写成成功。",
-    "只有存在真实分歧时才调用 arbiter。"
+    "普通候选角色按能力相近顺序降级，并记录实际使用模型；降级不是静默替换。",
+    "反例审计降级后仍保留阻断权；arbiter 无可用替补时必须 BLOCKED，不得改由普通角色冒充仲裁。",
+    "图像和视频 Provider 不得作为聊天角色的降级目标，聊天角色也不得替代媒体 Provider。",
+    "Provider completed 不等于创作验收通过。"
   ]
 }
