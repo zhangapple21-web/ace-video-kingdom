@@ -1,0 +1,24 @@
+[
+  {
+    "shot_id": "PILOT_DIALOGUE",
+    "model_id": "agnes-video-2.5-flash",
+    "status": "COMPLETED",
+    "payload_sha256": "4896a1935688465ad5d68c931ccb2f579cebebb7c0ba2c98a0f0dee6b2d4add1",
+    "create_endpoint": "https://apihub.agnes-ai.com/v1/videos",
+    "poll_endpoint": "https://apihub.agnes-ai.com/agnesapi",
+    "poll_id_field": "video_id",
+    "request_hash": "f614977d97707ddf365d28a67ced48e047026ee5a225156495971e0cd8e7c65b",
+    "admission_receipt_path": "research\\line_test_agnes25_manifest_20260912.PILOT_DIALOGUE.admission.json",
+    "create_attempt": 1,
+    "create_http_status": 200,
+    "video_id": "task_miynjGTDEIUlfndqsGIuoyjYusb4nbE1",
+    "created_status": "queued",
+    "last_poll_http_status": 200,
+    "last_state": "completed",
+    "next_poll_in_seconds": 2,
+    "poll_retry_after": "2",
+    "artifact_sha256": "8a84486d1f4cfea387bff2b70e4811668db3eec26e9efe44d6bcbbb071a0d838",
+    "bytes": 580584,
+    "artifact_path": "media_staging\\line_test_agnes25_flash_20260912.mp4"
+  }
+]

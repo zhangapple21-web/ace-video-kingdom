@@ -1,0 +1,62 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "video_kingdom.persona_card.v1",
+  "description": "人设卡。字段来自《AI 短剧制作完整工作流》剧本阶段（外貌、性格、动机、口头禅），并补上王国已有的音色锁、服装锁、定妆多视图。定妆命名规范：{character_id}_{expression}_{angle}。",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema",
+    "character_id",
+    "name",
+    "role",
+    "appearance",
+    "personality",
+    "motivation",
+    "catchphrase",
+    "voice_lock",
+    "costume_lock",
+    "makeup_sheet"
+  ],
+  "properties": {
+    "schema": {"const": "video_kingdom.persona_card.v1"},
+    "character_id": {"type": "string", "minLength": 1},
+    "name": {"type": "string", "minLength": 1},
+    "role": {"type": "string", "minLength": 1},
+    "appearance": {"type": "string", "minLength": 1, "description": "外貌：脸型、年龄段、发型、体态，必须可画成定妆图"},
+    "personality": {"type": "string", "minLength": 1, "description": "性格：可表演的行为倾向，禁止空口号"},
+    "motivation": {"type": "string", "minLength": 1, "description": "动机：本项目内可被镜头验证的欲求"},
+    "catchphrase": {"type": "string", "minLength": 1, "description": "口头禅：短、口语、方便 TTS"},
+    "voice_lock": {"type": "string", "minLength": 1, "description": "全剧固定音色 ID，不得镜间更换"},
+    "costume_lock": {"type": "string", "minLength": 1, "description": "服装锁：颜色、层数、禁品牌禁文字"},
+    "makeup_sheet": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["naming_rule", "required_views", "required_expressions"],
+      "properties": {
+        "naming_rule": {
+          "type": "string",
+          "const": "{character_id}_{expression}_{angle}"
+        },
+        "required_views": {
+          "type": "array",
+          "minItems": 2,
+          "items": {
+            "type": "object",
+            "required": ["angle", "expression", "required"],
+            "properties": {
+              "angle": {"enum": ["front", "side", "three_quarter", "back"]},
+              "expression": {"type": "string", "minLength": 1},
+              "required": {"type": "boolean"}
+            }
+          }
+        },
+        "required_expressions": {
+          "type": "array",
+          "minItems": 3,
+          "items": {"type": "string", "minLength": 1},
+          "description": "至少中性、张力、反应三张表情"
+        }
+      }
+    }
+  }
+}

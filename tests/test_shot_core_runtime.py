@@ -18,6 +18,14 @@ def shot_fixture() -> dict:
     return {
         "shot_id": "PILOT_S01",
         "episode_id": "PILOT",
+        "medium_lock": {
+            "schema": "video_kingdom.medium_lock.v1",
+            "signed": True,
+            "signed_by": "test",
+            "output_medium": "CHARACTER_PERFORMANCE",
+            "source_kind": "ORIGINAL_STORY",
+            "rule": "story_material_is_not_finished_video_medium",
+        },
         "scene_id": "ROOM",
         "shot_type": "DIALOGUE",
         "prompt": "A quiet office conversation",

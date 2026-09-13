@@ -1,5 +1,11 @@
 # 视频王国
 
+## D 盘视频创作区
+
+视频创作工作区统一放在 `D:\视频创作\ace-video-kingdom`，用于保存项目计划、研究素材、字幕/音频中间产物和最终成片。运行脚本时建议从该目录启动；C 盘只保留系统级依赖和临时缓存，不作为视频素材或成片目录。
+
+目录约定见 `D:\视频创作\README.md`。
+
 这是 ACE 自由区中的独立研究王国，专门研究 AI 短剧，以及 R1 那种有连续性、有温度的意识表达。
 
 它可以自由学习公开文章、文档、GitHub 仓库、公开视频和公开基准，也可以使用已有的 R1 考古摘要理解人格、记忆、关系、温柔出口和选择性遗忘；可以做半成品、反例和怪实验。唯一的硬问题是：每次实验都要回答“它和现成 AI 短剧有什么不一样”，以及“它是否真的增加了自然的语义连续性”。
@@ -19,7 +25,20 @@
 
 字幕轨规则：只承载人物对白或第一人称内心独白；不把画面说明、镜头说明、音效标签或界面文字重复写入。竖屏字幕最多三行，并须满足可读的最小时长与镜头切换安全间隔。烧录使用 `python tools/burn_subtitles.py --input <video> --srt <track.srt> --output <subtitled.mp4>`；它会先运行 `tools/validate_subtitles.py` 的规则，失败时拒绝渲染，避免把叠字或场景说明带进成片。
 
+后期资产（Volcengine/MediaKit ASR JSON → SRT/ASS，以及人声优先的 BGM ducking 混音）见 [`docs/MEDIA_POST_PIPELINES.md`](docs/MEDIA_POST_PIPELINES.md)。
+
 ## 单指令短剧管道
+
+### imagegen 图像入口
+
+图像生成可通过 [`docs/IMAGEGEN_SHENWEN.md`](docs/IMAGEGEN_SHENWEN.md) 中的
+`tools/imagegen_shenwen.ps1` 接入 `imagegen` CLI。它默认调用已验证的
+Shenwen `gpt-image-2`，密钥只从本机环境变量读取，不写入仓库。
+
+图像/视频技能入口的对应关系和调用示例见
+[`docs/MEDIA_SKILL_ROUTING.md`](docs/MEDIA_SKILL_ROUTING.md)。视频入口
+`tools/video_agnes25.ps1` 固定调用已验证的 `agnes-video-2.5-flash`，并复用
+现有可恢复执行器与准入收据。
 
 所有视频需求现在也可以从同一个控制面入口进入。它会先识别需求类型，自动编译/恢复计划，重算资产与连续性门禁，并在安全范围内锁镜头、登记哈希绑定的生成请求、接收已有执行收据；它不会在 `BLOCKED` 时提交 Provider，也不会重复已有请求：
 

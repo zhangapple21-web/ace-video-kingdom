@@ -1,0 +1,38 @@
+# 短剧后期管线资产
+
+后端把“云端识别”和“本地成片”分开：云端只负责得到带时间戳的 ASR JSON，本地负责稳定地产出字幕文件和混音结果。
+
+## 字幕管线
+
+`tools/asr_to_subtitles.py` 接收 Volcengine/MediaKit 常见响应形状（`result.subtitles`、`result.utterances`、`segments` 等），统一输出 SRT 与带样式的 ASS。它不读取 API 密钥，也不上传媒体；可直接消费 `video-skills-toolkit` 的 `audio-to-subtitles` 结果。
+
+```powershell
+python tools/asr_to_subtitles.py `
+  --input .\work\captions\asr-result.json `
+  --srt .\work\captions\captions.srt `
+  --ass .\work\captions\captions.ass
+python tools/validate_subtitles.py --input .\work\captions\captions.srt
+```
+
+云端 ASR 仍需按工具包的说明配置 MediaKit/R2 凭证；凭证只放在本机环境，不写入仓库。
+
+## 音频混音管线
+
+`tools/mix_audio_ducking.py` 是本地 FFmpeg 混音入口：人声决定总时长，BGM 自动循环、淡入、淡出，并在检测到人声时进行 sidechain ducking，最后做统一响度处理。
+
+```powershell
+python tools/mix_audio_ducking.py `
+  --voice .\work\audio\voice.wav `
+  --bgm .\work\audio\bgm.mp3 `
+  --output .\work\audio\mix.m4a `
+  --receipt .\work\audio\mix.receipt.json
+```
+
+默认查找 `ffmpeg`/`ffprobe`；若运行时不在 `PATH`，可分别设置 `FFMPEG_BIN`、`FFPROBE_BIN`。这一步不依赖任何云端密钥。
+
+## 来源与边界
+
+- 参考来源：[`bozhouDev/video-skills-toolkit`](https://github.com/bozhouDev/video-skills-toolkit) 的 `audio-to-subtitles` 工作流（该仓库声明 MIT License）。
+- 工具包的字幕云端步骤依赖 MediaKit/R2，本仓库只复用其输入/输出契约，避免把第三方凭证和上传逻辑耦合进控制面。
+- 工具包中没有可直接移植的 FFmpeg Audio Mixer 实现；本地混音器是按短剧成片需求实现的独立后端资产。
+- 字幕生成后仍须经过 `validate_subtitles.py`，并由现有成片门禁决定是否允许烧录或交付。

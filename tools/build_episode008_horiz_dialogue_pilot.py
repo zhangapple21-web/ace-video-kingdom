@@ -5,7 +5,7 @@ import json
 import subprocess
 from pathlib import Path
 
-ROOT = Path(r"C:\tmp\ace_video_kingdom_git")
+ROOT = Path(__file__).resolve().parents[1]
 PILOT = ROOT / "media_staging" / "episode_008_rule_seat_system" / "revision_pilot"
 WORK = PILOT / "horiz_pilot"
 WORK.mkdir(parents=True, exist_ok=True)

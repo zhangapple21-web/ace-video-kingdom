@@ -1,0 +1,24 @@
+{
+  "schema": "project_manifest.v1",
+  "project_id": "ace-video-kingdom",
+  "canonical_root": "D:/视频创作/ace-video-kingdom",
+  "compatibility_roots": [
+    "D:/tmp/ace-video-kingdom",
+    "C:/tmp"
+  ],
+  "path_map": {
+    "tools": "tools",
+    "state": "state",
+    "assets": "assets",
+    "receipts": "receipts",
+    "research": "research"
+  },
+  "paths": {
+    "tools": "tools",
+    "state": "state",
+    "assets": "assets",
+    "receipts": "receipts",
+    "research": "research"
+  },
+  "manifest_hash_algorithm": "sha256-canonical-json"
+}

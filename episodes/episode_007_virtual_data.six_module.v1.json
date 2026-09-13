@@ -1,0 +1,1139 @@
+{
+  "contract_version": "video_kingdom.six_module_shot_contract.research.v3",
+  "production_boundary": "RESEARCH_ONLY",
+  "source_episode": "episode_007_virtual_data.v1.json",
+  "project_id": "episode_007_virtual_data",
+  "quality_mode": "FORMAL",
+  "premise": "在虚假数据驱动的封闭办公室里，阿浪逐步看见‘出单’和‘工资’都可能是同一套控制幻觉。",
+  "causal_chain": [
+    "假粉刷屏",
+    "管理层加码",
+    "同事困境",
+    "到账幻觉",
+    "冻结退回",
+    "等待工资的真相",
+    "机械化回归"
+  ],
+  "plants": [
+    "绿色聊天窗口",
+    "护照/工资威胁",
+    "男同事母亲住院",
+    "假到账提示"
+  ],
+  "payoffs": [
+    "到账提示反转为冻结",
+    "日报替代理由",
+    "人被当作最廉价的数据单元"
+  ],
+  "viewer_knowledge_checkpoints": [
+    "观众先知道刷屏可能是机器人",
+    "观众与阿浪同时看到到账反转",
+    "结尾确认等待本身就是控制"
+  ],
+  "anchor_reuse_policy": "允许同一场景动作锚在不同镜头复用，但每镜必须有不同的动作弧、台词/信息增量和切镜理由；肖像不得代替动作锚。",
+  "shots": [
+    {
+      "shot_id": "S01A",
+      "source_scene": "场景1·密闭大厅，键盘如雨；阿浪揉眼后猛敲键盘。",
+      "source_prompt": "handheld push-in, close-up fingers and tired eyes, no static cover; 阿浪与肥哥外观必须连续，冷峻压抑现实主义，竖屏9:16",
+      "anchor_reuse_allowed": true,
+      "script": {
+        "scene_id": "S01",
+        "speaker": "UNKNOWN",
+        "dialogue_text": "今天加了五十个…… 总该有一个活人吧。",
+        "emotion": "irritation",
+        "line_locked": true,
+        "tts_duration_seconds": 6.145,
+        "audio_status": "MEASURED"
+      },
+      "camera": {
+        "shot_type": "action",
+        "scale": "medium shot",
+        "movement": "FIXED_ACTION_FRAME",
+        "axis": "screen-left facing screen-right",
+        "first_frame_kind": "scene_action_anchor",
+        "movement_count": 0
+      },
+      "edit": {
+        "duration_seconds": 6.745,
+        "cut_after_performance": true,
+        "transition_reason": "cut only after the line/action and recovery beat complete",
+        "rhythm_phase": "irritation"
+      },
+      "performance": {
+        "emotion_goal": "irritation: the character state must visibly change within the shot",
+        "action_beats": [
+          "准备：道具与身体位置先建立（场景1·密闭大厅，键盘如雨；阿浪揉眼后猛敲键盘。）",
+          "动作：完成一个可辨认的主要动作或冲击（场景1·密闭大厅，键盘如雨；阿浪揉眼后猛敲键盘。）",
+          "回收：保留惯性、反应或环境余波，动作完成后再切镜"
+        ],
+        "sound_cues": [
+          "dialogue or room tone",
+          "keyboard/phone/desk foley as applicable"
+        ]
+      },
+      "assets": {
+        "identity_reference": "../media_staging/episode_007_virtual_data/anchors/user/alang_user_reference.png",
+        "scene_action_anchor": "../media_staging/episode_007_virtual_data/anchors/scene_action/office_keyboard.png",
+        "costume": "episode identity invariant",
+        "props": [
+          "keyboard",
+          "phone",
+          "green chat windows",
+          "desk or smoke haze"
+        ],
+        "lighting": "dirty cool fluorescent plus green monitor spill"
+      },
+      "recovery": {
+        "max_attempts": 2,
+        "retry_delay_policy": "Retry-After first; otherwise >=60s provider cooldown",
+        "degrade_order": [
+          "retry with a small seed offset",
+          "manual replacement marker retaining failure evidence"
+        ]
+      }
+    },
+    {
+      "shot_id": "S01B",
+      "source_scene": "场景1·手机好友申请刷屏，聊天窗口暴露机器人与同行。",
+      "source_prompt": "fast lateral pan across screens, notification vibration, 阿浪 freezes; 阿浪与肥哥外观必须连续，冷峻压抑现实主义，竖屏9:16",
+      "anchor_reuse_allowed": true,
+      "script": {
+        "scene_id": "S01",
+        "speaker": "UNKNOWN",
+        "dialogue_text": "“美女，这个理财平台回报率很高， 你可以先投50试试。”",
+        "emotion": "irritation",
+        "line_locked": true,
+        "tts_duration_seconds": 8.359,
+        "audio_status": "MEASURED"
+      },
+      "camera": {
+        "shot_type": "action",
+        "scale": "medium shot",
+        "movement": "ONE_PURPOSEFUL_MOVE",
+        "axis": "screen-left facing screen-right",
+        "first_frame_kind": "scene_action_anchor",
+        "movement_count": 1
+      },
+      "edit": {
+        "duration_seconds": 8.959,
+        "cut_after_performance": true,
+        "transition_reason": "cut only after the line/action and recovery beat complete",
+        "rhythm_phase": "irritation"
+      },
+      "performance": {
+        "emotion_goal": "irritation: the character state must visibly change within the shot",
+        "action_beats": [
+          "准备：道具与身体位置先建立（场景1·手机好友申请刷屏，聊天窗口暴露机器人与同行。）",
+          "动作：完成一个可辨认的主要动作或冲击（场景1·手机好友申请刷屏，聊天窗口暴露机器人与同行。）",
+          "回收：保留惯性、反应或环境余波，动作完成后再切镜"
+        ],
+        "sound_cues": [
+          "dialogue or room tone",
+          "keyboard/phone/desk foley as applicable"
+        ]
+      },
+      "assets": {
+        "identity_reference": "../media_staging/episode_007_virtual_data/anchors/user/alang_user_reference.png",
+        "scene_action_anchor": "../media_staging/episode_007_virtual_data/anchors/scene_action/office_keyboard.png",
+        "costume": "episode identity invariant",
+        "props": [
+          "keyboard",
+          "phone",
+          "green chat windows",
+          "desk or smoke haze"
+        ],
+        "lighting": "dirty cool fluorescent plus green monitor spill"
+      },
+      "recovery": {
+        "max_attempts": 2,
+        "retry_delay_policy": "Retry-After first; otherwise >=60s provider cooldown",
+        "degrade_order": [
+          "retry with a small seed offset",
+          "manual replacement marker retaining failure evidence"
+        ]
+      }
+    },
+    {
+      "shot_id": "S01C",
+      "source_scene": "场景1·阿浪拨通粉商，压低声音质问假粉。",
+      "source_prompt": "over-shoulder phone call, 阿浪 pacing beside desk, smoke haze; 阿浪与肥哥外观必须连续，冷峻压抑现实主义，竖屏9:16",
+      "anchor_reuse_allowed": true,
+      "script": {
+        "scene_id": "S01",
+        "speaker": "UNKNOWN",
+        "dialogue_text": "兄弟，你这批粉全是假的！ 机器人、挂机号，一个活人都没有！",
+        "emotion": "irritation",
+        "line_locked": true,
+        "tts_duration_seconds": 10.088,
+        "audio_status": "MEASURED"
+      },
+      "camera": {
+        "shot_type": "dialogue",
+        "scale": "medium close-up",
+        "movement": "FIXED_DIALOGUE",
+        "axis": "screen-left facing screen-right",
+        "first_frame_kind": "scene_action_anchor",
+        "movement_count": 0
+      },
+      "edit": {
+        "duration_seconds": 10.688,
+        "cut_after_performance": true,
+        "transition_reason": "cut only after the line/action and recovery beat complete",
+        "rhythm_phase": "irritation"
+      },
+      "performance": {
+        "emotion_goal": "irritation: the character state must visibly change within the shot",
+        "action_beats": [
+          "准备：人物稳定在场景中，呼吸/视线建立对白起点（场景1·阿浪拨通粉商，压低声音质问假粉。）",
+          "动作：完整说出台词并完成对应目光或手部动作（场景1·阿浪拨通粉商，压低声音质问假粉。）",
+          "回收：说完后保留一拍，人物状态落定，再切镜"
+        ],
+        "sound_cues": [
+          "dialogue or room tone",
+          "keyboard/phone/desk foley as applicable"
+        ]
+      },
+      "assets": {
+        "identity_reference": "../media_staging/episode_007_virtual_data/anchors/user/alang_user_reference.png",
+        "scene_action_anchor": "../media_staging/episode_007_virtual_data/anchors/scene_action/office_keyboard.png",
+        "costume": "episode identity invariant",
+        "props": [
+          "keyboard",
+          "phone",
+          "green chat windows",
+          "desk or smoke haze"
+        ],
+        "lighting": "dirty cool fluorescent plus green monitor spill"
+      },
+      "recovery": {
+        "max_attempts": 2,
+        "retry_delay_policy": "Retry-After first; otherwise >=60s provider cooldown",
+        "degrade_order": [
+          "retry with a small seed offset",
+          "manual replacement marker retaining failure evidence"
+        ]
+      }
+    },
+    {
+      "shot_id": "S01D",
+      "source_scene": "场景1·电话挂断，手机砸桌，周围人抬头又低头。",
+      "source_prompt": "whip pan to impact, rack focus from phone to silent coworkers; 阿浪与肥哥外观必须连续，冷峻压抑现实主义，竖屏9:16",
+      "anchor_reuse_allowed": true,
+      "script": {
+        "scene_id": "S01",
+        "speaker": "UNKNOWN",
+        "dialogue_text": "这是诈骗！",
+        "emotion": "irritation",
+        "line_locked": true,
+        "tts_duration_seconds": 2.133,
+        "audio_status": "MEASURED"
+      },
+      "camera": {
+        "shot_type": "action",
+        "scale": "medium shot",
+        "movement": "ONE_PURPOSEFUL_MOVE",
+        "axis": "screen-left facing screen-right",
+        "first_frame_kind": "scene_action_anchor",
+        "movement_count": 1
+      },
+      "edit": {
+        "duration_seconds": 2.733,
+        "cut_after_performance": true,
+        "transition_reason": "cut only after the line/action and recovery beat complete",
+        "rhythm_phase": "irritation"
+      },
+      "performance": {
+        "emotion_goal": "irritation: the character state must visibly change within the shot",
+        "action_beats": [
+          "准备：道具与身体位置先建立（场景1·电话挂断，手机砸桌，周围人抬头又低头。）",
+          "动作：完成一个可辨认的主要动作或冲击（场景1·电话挂断，手机砸桌，周围人抬头又低头。）",
+          "回收：保留惯性、反应或环境余波，动作完成后再切镜"
+        ],
+        "sound_cues": [
+          "dialogue or room tone",
+          "keyboard/phone/desk foley as applicable"
+        ]
+      },
+      "assets": {
+        "identity_reference": "../media_staging/episode_007_virtual_data/anchors/user/alang_user_reference.png",
+        "scene_action_anchor": "../media_staging/episode_007_virtual_data/anchors/scene_action/office_phone_impact.png",
+        "costume": "episode identity invariant",
+        "props": [
+          "keyboard",
+          "phone",
+          "green chat windows",
+          "desk or smoke haze"
+        ],
+        "lighting": "dirty cool fluorescent plus green monitor spill"
+      },
+      "recovery": {
+        "max_attempts": 2,
+        "retry_delay_policy": "Retry-After first; otherwise >=60s provider cooldown",
+        "degrade_order": [
+          "retry with a small seed offset",
+          "manual replacement marker retaining failure evidence"
+        ]
+      }
+    },
+    {
+      "shot_id": "S02A",
+      "source_scene": "场景2·肥哥办公室烟灰缸特写，报表红笔划满。",
+      "source_prompt": "macro ashtray, tilt up to 肥哥 at window, slow dolly; 阿浪与肥哥外观必须连续，冷峻压抑现实主义，竖屏9:16",
+      "anchor_reuse_allowed": true,
+      "script": {
+        "scene_id": "S02",
+        "speaker": "UNKNOWN",
+        "dialogue_text": "肥哥，粉商给的全是假粉。 这两周我们组一个人都没开发出来。",
+        "emotion": "pressure",
+        "line_locked": true,
+        "tts_duration_seconds": 9.891,
+        "audio_status": "MEASURED"
+      },
+      "camera": {
+        "shot_type": "action",
+        "scale": "medium shot",
+        "movement": "FIXED_ACTION_FRAME",
+        "axis": "screen-left facing screen-right",
+        "first_frame_kind": "scene_action_anchor",
+        "movement_count": 0
+      },
+      "edit": {
+        "duration_seconds": 10.491,
+        "cut_after_performance": true,
+        "transition_reason": "cut only after the line/action and recovery beat complete",
+        "rhythm_phase": "pressure"
+      },
+      "performance": {
+        "emotion_goal": "pressure: the character state must visibly change within the shot",
+        "action_beats": [
+          "准备：道具与身体位置先建立（场景2·肥哥办公室烟灰缸特写，报表红笔划满。）",
+          "动作：完成一个可辨认的主要动作或冲击（场景2·肥哥办公室烟灰缸特写，报表红笔划满。）",
+          "回收：保留惯性、反应或环境余波，动作完成后再切镜"
+        ],
+        "sound_cues": [
+          "dialogue or room tone",
+          "keyboard/phone/desk foley as applicable"
+        ]
+      },
+      "assets": {
+        "identity_reference": "../media_staging/episode_007_virtual_data/anchors/feige_character_anchor.png",
+        "scene_action_anchor": "../media_staging/episode_007_virtual_data/anchors/scene_action/manager_desk_impact.png",
+        "costume": "episode identity invariant",
+        "props": [
+          "keyboard",
+          "phone",
+          "green chat windows",
+          "desk or smoke haze"
+        ],
+        "lighting": "dirty cool fluorescent plus green monitor spill"
+      },
+      "recovery": {
+        "max_attempts": 2,
+        "retry_delay_policy": "Retry-After first; otherwise >=60s provider cooldown",
+        "degrade_order": [
+          "retry with a small seed offset",
+          "manual replacement marker retaining failure evidence"
+        ]
+      }
+    },
+    {
+      "shot_id": "S02B",
+      "source_scene": "场景2·阿浪质问停买假粉，肥哥吐烟冷笑。",
+      "source_prompt": "two-shot, 肥哥 turns sharply, smoke crossing frame; 阿浪与肥哥外观必须连续，冷峻压抑现实主义，竖屏9:16",
+      "anchor_reuse_allowed": true,
+      "script": {
+        "scene_id": "S02",
+        "speaker": "UNKNOWN",
+        "dialogue_text": "停？停了我们连假数据都没有了。",
+        "emotion": "pressure",
+        "line_locked": true,
+        "tts_duration_seconds": 5.667,
+        "audio_status": "MEASURED"
+      },
+      "camera": {
+        "shot_type": "dialogue",
+        "scale": "medium close-up",
+        "movement": "FIXED_DIALOGUE",
+        "axis": "screen-left facing screen-right",
+        "first_frame_kind": "scene_action_anchor",
+        "movement_count": 0
+      },
+      "edit": {
+        "duration_seconds": 6.267,
+        "cut_after_performance": true,
+        "transition_reason": "cut only after the line/action and recovery beat complete",
+        "rhythm_phase": "pressure"
+      },
+      "performance": {
+        "emotion_goal": "pressure: the character state must visibly change within the shot",
+        "action_beats": [
+          "准备：人物稳定在场景中，呼吸/视线建立对白起点（场景2·阿浪质问停买假粉，肥哥吐烟冷笑。）",
+          "动作：完整说出台词并完成对应目光或手部动作（场景2·阿浪质问停买假粉，肥哥吐烟冷笑。）",
+          "回收：说完后保留一拍，人物状态落定，再切镜"
+        ],
+        "sound_cues": [
+          "dialogue or room tone",
+          "keyboard/phone/desk foley as applicable"
+        ]
+      },
+      "assets": {
+        "identity_reference": "../media_staging/episode_007_virtual_data/anchors/feige_character_anchor.png",
+        "scene_action_anchor": "../media_staging/episode_007_virtual_data/anchors/scene_action/manager_desk_impact.png",
+        "costume": "episode identity invariant",
+        "props": [
+          "keyboard",
+          "phone",
+          "green chat windows",
+          "desk or smoke haze"
+        ],
+        "lighting": "dirty cool fluorescent plus green monitor spill"
+      },
+      "recovery": {
+        "max_attempts": 2,
+        "retry_delay_policy": "Retry-After first; otherwise >=60s provider cooldown",
+        "degrade_order": [
+          "retry with a small seed offset",
+          "manual replacement marker retaining failure evidence"
+        ]
+      }
+    },
+    {
+      "shot_id": "S02C",
+      "source_scene": "场景2·工资与护照争执，肥哥猛拍桌。",
+      "source_prompt": "hard cut, desk impact close-up, camera jolt; 阿浪与肥哥外观必须连续，冷峻压抑现实主义，竖屏9:16",
+      "anchor_reuse_allowed": true,
+      "script": {
+        "scene_id": "S02",
+        "speaker": "UNKNOWN",
+        "dialogue_text": "上个月工资和提成什么时候发？",
+        "emotion": "pressure",
+        "line_locked": true,
+        "tts_duration_seconds": 4.768,
+        "audio_status": "MEASURED"
+      },
+      "camera": {
+        "shot_type": "action",
+        "scale": "medium shot",
+        "movement": "ONE_PURPOSEFUL_MOVE",
+        "axis": "screen-left facing screen-right",
+        "first_frame_kind": "scene_action_anchor",
+        "movement_count": 1
+      },
+      "edit": {
+        "duration_seconds": 5.368,
+        "cut_after_performance": true,
+        "transition_reason": "cut only after the line/action and recovery beat complete",
+        "rhythm_phase": "pressure"
+      },
+      "performance": {
+        "emotion_goal": "pressure: the character state must visibly change within the shot",
+        "action_beats": [
+          "准备：道具与身体位置先建立（场景2·工资与护照争执，肥哥猛拍桌。）",
+          "动作：完成一个可辨认的主要动作或冲击（场景2·工资与护照争执，肥哥猛拍桌。）",
+          "回收：保留惯性、反应或环境余波，动作完成后再切镜"
+        ],
+        "sound_cues": [
+          "dialogue or room tone",
+          "keyboard/phone/desk foley as applicable"
+        ]
+      },
+      "assets": {
+        "identity_reference": "../media_staging/episode_007_virtual_data/anchors/feige_character_anchor.png",
+        "scene_action_anchor": "../media_staging/episode_007_virtual_data/anchors/scene_action/manager_desk_impact.png",
+        "costume": "episode identity invariant",
+        "props": [
+          "keyboard",
+          "phone",
+          "green chat windows",
+          "desk or smoke haze"
+        ],
+        "lighting": "dirty cool fluorescent plus green monitor spill"
+      },
+      "recovery": {
+        "max_attempts": 2,
+        "retry_delay_policy": "Retry-After first; otherwise >=60s provider cooldown",
+        "degrade_order": [
+          "retry with a small seed offset",
+          "manual replacement marker retaining failure evidence"
+        ]
+      }
+    },
+    {
+      "shot_id": "S03A",
+      "source_scene": "场景3·次日上午大厅，肥哥宣布每人再买两千精准粉。",
+      "source_prompt": "low angle on 肥哥 walking, papers raised, fluorescent flicker; 阿浪与肥哥外观必须连续，冷峻压抑现实主义，竖屏9:16",
+      "anchor_reuse_allowed": true,
+      "script": {
+        "scene_id": "S03",
+        "speaker": "UNKNOWN",
+        "dialogue_text": "那你让我怎么办？！ 我也三个月没拿工资了！",
+        "emotion": "collapse",
+        "line_locked": true,
+        "tts_duration_seconds": 6.45,
+        "audio_status": "MEASURED"
+      },
+      "camera": {
+        "shot_type": "dialogue",
+        "scale": "medium close-up",
+        "movement": "FIXED_DIALOGUE",
+        "axis": "screen-left facing screen-right",
+        "first_frame_kind": "scene_action_anchor",
+        "movement_count": 0
+      },
+      "edit": {
+        "duration_seconds": 7.05,
+        "cut_after_performance": true,
+        "transition_reason": "cut only after the line/action and recovery beat complete",
+        "rhythm_phase": "collapse"
+      },
+      "performance": {
+        "emotion_goal": "collapse: the character state must visibly change within the shot",
+        "action_beats": [
+          "准备：人物稳定在场景中，呼吸/视线建立对白起点（场景3·次日上午大厅，肥哥宣布每人再买两千精准粉。）",
+          "动作：完整说出台词并完成对应目光或手部动作（场景3·次日上午大厅，肥哥宣布每人再买两千精准粉。）",
+          "回收：说完后保留一拍，人物状态落定，再切镜"
+        ],
+        "sound_cues": [
+          "dialogue or room tone",
+          "keyboard/phone/desk foley as applicable"
+        ]
+      },
+      "assets": {
+        "identity_reference": "../media_staging/episode_007_virtual_data/anchors/feige_character_anchor.png",
+        "scene_action_anchor": "../media_staging/episode_007_virtual_data/anchors/scene_action/manager_desk_impact.png",
+        "costume": "episode identity invariant",
+        "props": [
+          "keyboard",
+          "phone",
+          "green chat windows",
+          "desk or smoke haze"
+        ],
+        "lighting": "dirty cool fluorescent plus green monitor spill"
+      },
+      "recovery": {
+        "max_attempts": 2,
+        "retry_delay_policy": "Retry-After first; otherwise >=60s provider cooldown",
+        "degrade_order": [
+          "retry with a small seed offset",
+          "manual replacement marker retaining failure evidence"
+        ]
+      }
+    },
+    {
+      "shot_id": "S03B",
+      "source_scene": "场景3·男同事站起说母亲住院，肥哥掐灭烟头。",
+      "source_prompt": "沉默脆弱的男同事站起，脸色苍白、瘦削、眼含泪光，眼泪落在键盘上；肥哥在旁边掐灭烟头，镜头慢推，冷峻压抑现实主义，竖屏9:16，男同事不能长得像阿浪或肥哥",
+      "anchor_reuse_allowed": true,
+      "script": {
+        "scene_id": "S03",
+        "speaker": "UNKNOWN",
+        "dialogue_text": "从今天开始，每人必须额外买 两千块的“精准粉”！",
+        "emotion": "collapse",
+        "line_locked": true,
+        "tts_duration_seconds": 7.129,
+        "audio_status": "MEASURED"
+      },
+      "camera": {
+        "shot_type": "action",
+        "scale": "medium shot",
+        "movement": "ONE_PURPOSEFUL_MOVE",
+        "axis": "screen-left facing screen-right",
+        "first_frame_kind": "scene_action_anchor",
+        "movement_count": 1
+      },
+      "edit": {
+        "duration_seconds": 7.729,
+        "cut_after_performance": true,
+        "transition_reason": "cut only after the line/action and recovery beat complete",
+        "rhythm_phase": "collapse"
+      },
+      "performance": {
+        "emotion_goal": "collapse: the character state must visibly change within the shot",
+        "action_beats": [
+          "准备：道具与身体位置先建立（场景3·男同事站起说母亲住院，肥哥掐灭烟头。）",
+          "动作：完成一个可辨认的主要动作或冲击（场景3·男同事站起说母亲住院，肥哥掐灭烟头。）",
+          "回收：保留惯性、反应或环境余波，动作完成后再切镜"
+        ],
+        "sound_cues": [
+          "dialogue or room tone",
+          "keyboard/phone/desk foley as applicable"
+        ]
+      },
+      "assets": {
+        "identity_reference": "../media_staging/episode_007_virtual_data/anchors/alang_character_anchor.png",
+        "scene_action_anchor": "../media_staging/episode_007_virtual_data/anchors/scene_action/manager_desk_impact.png",
+        "costume": "episode identity invariant",
+        "props": [
+          "keyboard",
+          "phone",
+          "green chat windows",
+          "desk or smoke haze"
+        ],
+        "lighting": "dirty cool fluorescent plus green monitor spill"
+      },
+      "recovery": {
+        "max_attempts": 2,
+        "retry_delay_policy": "Retry-After first; otherwise >=60s provider cooldown",
+        "degrade_order": [
+          "retry with a small seed offset",
+          "manual replacement marker retaining failure evidence"
+        ]
+      }
+    },
+    {
+      "shot_id": "S03C",
+      "source_scene": "场景3·阿浪握拳却沉默，集体继续敲键盘。",
+      "source_prompt": "orbit around clenched fist, background typing becomes oppressive; 阿浪与肥哥外观必须连续，冷峻压抑现实主义，竖屏9:16",
+      "anchor_reuse_allowed": true,
+      "script": {
+        "scene_id": "S03",
+        "speaker": "UNKNOWN",
+        "dialogue_text": "肥哥……我真的没钱了。 昨天我妈住院……",
+        "emotion": "collapse",
+        "line_locked": true,
+        "tts_duration_seconds": 6.44,
+        "audio_status": "MEASURED"
+      },
+      "camera": {
+        "shot_type": "action",
+        "scale": "medium shot",
+        "movement": "ONE_PURPOSEFUL_MOVE",
+        "axis": "screen-left facing screen-right",
+        "first_frame_kind": "scene_action_anchor",
+        "movement_count": 1
+      },
+      "edit": {
+        "duration_seconds": 7.04,
+        "cut_after_performance": true,
+        "transition_reason": "cut only after the line/action and recovery beat complete",
+        "rhythm_phase": "collapse"
+      },
+      "performance": {
+        "emotion_goal": "collapse: the character state must visibly change within the shot",
+        "action_beats": [
+          "准备：道具与身体位置先建立（场景3·阿浪握拳却沉默，集体继续敲键盘。）",
+          "动作：完成一个可辨认的主要动作或冲击（场景3·阿浪握拳却沉默，集体继续敲键盘。）",
+          "回收：保留惯性、反应或环境余波，动作完成后再切镜"
+        ],
+        "sound_cues": [
+          "dialogue or room tone",
+          "keyboard/phone/desk foley as applicable"
+        ]
+      },
+      "assets": {
+        "identity_reference": "../media_staging/episode_007_virtual_data/anchors/alang_character_anchor.png",
+        "scene_action_anchor": "../media_staging/episode_007_virtual_data/anchors/scene_action/office_keyboard.png",
+        "costume": "episode identity invariant",
+        "props": [
+          "keyboard",
+          "phone",
+          "green chat windows",
+          "desk or smoke haze"
+        ],
+        "lighting": "dirty cool fluorescent plus green monitor spill"
+      },
+      "recovery": {
+        "max_attempts": 2,
+        "retry_delay_policy": "Retry-After first; otherwise >=60s provider cooldown",
+        "degrade_order": [
+          "retry with a small seed offset",
+          "manual replacement marker retaining failure evidence"
+        ]
+      }
+    },
+    {
+      "shot_id": "S04A",
+      "source_scene": "场景4·厕所隔间，妈妈语音播放，阿浪删掉回复。",
+      "source_prompt": "tight stall close-up, phone glow, subtle handheld breathing; 阿浪与肥哥外观必须连续，冷峻压抑现实主义，竖屏9:16",
+      "anchor_reuse_allowed": true,
+      "script": {
+        "scene_id": "S04",
+        "speaker": "UNKNOWN",
+        "dialogue_text": "妈……我回不去了。",
+        "emotion": "hope",
+        "line_locked": true,
+        "tts_duration_seconds": 3.322,
+        "audio_status": "MEASURED"
+      },
+      "camera": {
+        "shot_type": "dialogue",
+        "scale": "medium close-up",
+        "movement": "FIXED_DIALOGUE",
+        "axis": "screen-left facing screen-right",
+        "first_frame_kind": "scene_action_anchor",
+        "movement_count": 0
+      },
+      "edit": {
+        "duration_seconds": 3.922,
+        "cut_after_performance": true,
+        "transition_reason": "cut only after the line/action and recovery beat complete",
+        "rhythm_phase": "hope"
+      },
+      "performance": {
+        "emotion_goal": "hope: the character state must visibly change within the shot",
+        "action_beats": [
+          "准备：人物稳定在场景中，呼吸/视线建立对白起点（场景4·厕所隔间，妈妈语音播放，阿浪删掉回复。）",
+          "动作：完整说出台词并完成对应目光或手部动作（场景4·厕所隔间，妈妈语音播放，阿浪删掉回复。）",
+          "回收：说完后保留一拍，人物状态落定，再切镜"
+        ],
+        "sound_cues": [
+          "dialogue or room tone",
+          "keyboard/phone/desk foley as applicable"
+        ]
+      },
+      "assets": {
+        "identity_reference": "../media_staging/episode_007_virtual_data/anchors/alang_character_anchor.png",
+        "scene_action_anchor": "../media_staging/episode_007_virtual_data/anchors/scene_action/office_keyboard.png",
+        "costume": "episode identity invariant",
+        "props": [
+          "keyboard",
+          "phone",
+          "green chat windows",
+          "desk or smoke haze"
+        ],
+        "lighting": "dirty cool fluorescent plus green monitor spill"
+      },
+      "recovery": {
+        "max_attempts": 2,
+        "retry_delay_policy": "Retry-After first; otherwise >=60s provider cooldown",
+        "degrade_order": [
+          "retry with a small seed offset",
+          "manual replacement marker retaining failure evidence"
+        ]
+      }
+    },
+    {
+      "shot_id": "S04B",
+      "source_scene": "场景4·新好友申请出现，阿浪眼神第一次亮。",
+      "source_prompt": "snap rack focus to phone, light shift, he stands abruptly; 阿浪与肥哥外观必须连续，冷峻压抑现实主义，竖屏9:16",
+      "anchor_reuse_allowed": true,
+      "script": {
+        "scene_id": "S04",
+        "speaker": "UNKNOWN",
+        "dialogue_text": "朋友推荐的理财平台，靠谱吗？",
+        "emotion": "hope",
+        "line_locked": true,
+        "tts_duration_seconds": 5.025,
+        "audio_status": "MEASURED"
+      },
+      "camera": {
+        "shot_type": "action",
+        "scale": "medium shot",
+        "movement": "ONE_PURPOSEFUL_MOVE",
+        "axis": "screen-left facing screen-right",
+        "first_frame_kind": "scene_action_anchor",
+        "movement_count": 1
+      },
+      "edit": {
+        "duration_seconds": 5.625,
+        "cut_after_performance": true,
+        "transition_reason": "cut only after the line/action and recovery beat complete",
+        "rhythm_phase": "hope"
+      },
+      "performance": {
+        "emotion_goal": "hope: the character state must visibly change within the shot",
+        "action_beats": [
+          "准备：道具与身体位置先建立（场景4·新好友申请出现，阿浪眼神第一次亮。）",
+          "动作：完成一个可辨认的主要动作或冲击（场景4·新好友申请出现，阿浪眼神第一次亮。）",
+          "回收：保留惯性、反应或环境余波，动作完成后再切镜"
+        ],
+        "sound_cues": [
+          "dialogue or room tone",
+          "keyboard/phone/desk foley as applicable"
+        ]
+      },
+      "assets": {
+        "identity_reference": "../media_staging/episode_007_virtual_data/anchors/alang_character_anchor.png",
+        "scene_action_anchor": "../media_staging/episode_007_virtual_data/anchors/scene_action/office_phone_impact.png",
+        "costume": "episode identity invariant",
+        "props": [
+          "keyboard",
+          "phone",
+          "green chat windows",
+          "desk or smoke haze"
+        ],
+        "lighting": "dirty cool fluorescent plus green monitor spill"
+      },
+      "recovery": {
+        "max_attempts": 2,
+        "retry_delay_policy": "Retry-After first; otherwise >=60s provider cooldown",
+        "degrade_order": [
+          "retry with a small seed offset",
+          "manual replacement marker retaining failure evidence"
+        ]
+      }
+    },
+    {
+      "shot_id": "S05A",
+      "source_scene": "场景5·阿浪温柔发送话术，对方称先转五万。",
+      "source_prompt": "screen reflection close-up, slow zoom, forced gentle smile; 阿浪与肥哥外观必须连续，冷峻压抑现实主义，竖屏9:16",
+      "anchor_reuse_allowed": true,
+      "script": {
+        "scene_id": "S05",
+        "speaker": "UNKNOWN",
+        "dialogue_text": "姐姐，我们平台是内部量化团队， 收益比较稳定。",
+        "emotion": "hope",
+        "line_locked": true,
+        "tts_duration_seconds": 7.499,
+        "audio_status": "MEASURED"
+      },
+      "camera": {
+        "shot_type": "dialogue",
+        "scale": "medium close-up",
+        "movement": "FIXED_DIALOGUE",
+        "axis": "screen-left facing screen-right",
+        "first_frame_kind": "scene_action_anchor",
+        "movement_count": 0
+      },
+      "edit": {
+        "duration_seconds": 8.099,
+        "cut_after_performance": true,
+        "transition_reason": "cut only after the line/action and recovery beat complete",
+        "rhythm_phase": "hope"
+      },
+      "performance": {
+        "emotion_goal": "hope: the character state must visibly change within the shot",
+        "action_beats": [
+          "准备：人物稳定在场景中，呼吸/视线建立对白起点（场景5·阿浪温柔发送话术，对方称先转五万。）",
+          "动作：完整说出台词并完成对应目光或手部动作（场景5·阿浪温柔发送话术，对方称先转五万。）",
+          "回收：说完后保留一拍，人物状态落定，再切镜"
+        ],
+        "sound_cues": [
+          "dialogue or room tone",
+          "keyboard/phone/desk foley as applicable"
+        ]
+      },
+      "assets": {
+        "identity_reference": "../media_staging/episode_007_virtual_data/anchors/alang_character_anchor.png",
+        "scene_action_anchor": "../media_staging/episode_007_virtual_data/anchors/scene_action/office_keyboard.png",
+        "costume": "episode identity invariant",
+        "props": [
+          "keyboard",
+          "phone",
+          "green chat windows",
+          "desk or smoke haze"
+        ],
+        "lighting": "dirty cool fluorescent plus green monitor spill"
+      },
+      "recovery": {
+        "max_attempts": 2,
+        "retry_delay_policy": "Retry-After first; otherwise >=60s provider cooldown",
+        "degrade_order": [
+          "retry with a small seed offset",
+          "manual replacement marker retaining failure evidence"
+        ]
+      }
+    },
+    {
+      "shot_id": "S05B",
+      "source_scene": "场景5·到账提示，阿浪冲出座位大喊出单。",
+      "source_prompt": "tracking shot through desks, coworkers surge in; 阿浪与肥哥外观必须连续，冷峻压抑现实主义，竖屏9:16",
+      "anchor_reuse_allowed": true,
+      "script": {
+        "scene_id": "S05",
+        "speaker": "UNKNOWN",
+        "dialogue_text": "肥哥！出单了！五万美金！",
+        "emotion": "hope",
+        "line_locked": true,
+        "tts_duration_seconds": 5.654,
+        "audio_status": "MEASURED"
+      },
+      "camera": {
+        "shot_type": "action",
+        "scale": "medium shot",
+        "movement": "ONE_PURPOSEFUL_MOVE",
+        "axis": "screen-left facing screen-right",
+        "first_frame_kind": "scene_action_anchor",
+        "movement_count": 1
+      },
+      "edit": {
+        "duration_seconds": 6.254,
+        "cut_after_performance": true,
+        "transition_reason": "cut only after the line/action and recovery beat complete",
+        "rhythm_phase": "hope"
+      },
+      "performance": {
+        "emotion_goal": "hope: the character state must visibly change within the shot",
+        "action_beats": [
+          "准备：道具与身体位置先建立（场景5·到账提示，阿浪冲出座位大喊出单。）",
+          "动作：完成一个可辨认的主要动作或冲击（场景5·到账提示，阿浪冲出座位大喊出单。）",
+          "回收：保留惯性、反应或环境余波，动作完成后再切镜"
+        ],
+        "sound_cues": [
+          "dialogue or room tone",
+          "keyboard/phone/desk foley as applicable"
+        ]
+      },
+      "assets": {
+        "identity_reference": "../media_staging/episode_007_virtual_data/anchors/alang_character_anchor.png",
+        "scene_action_anchor": "../media_staging/episode_007_virtual_data/anchors/scene_action/office_phone_impact.png",
+        "costume": "episode identity invariant",
+        "props": [
+          "keyboard",
+          "phone",
+          "green chat windows",
+          "desk or smoke haze"
+        ],
+        "lighting": "dirty cool fluorescent plus green monitor spill"
+      },
+      "recovery": {
+        "max_attempts": 2,
+        "retry_delay_policy": "Retry-After first; otherwise >=60s provider cooldown",
+        "degrade_order": [
+          "retry with a small seed offset",
+          "manual replacement marker retaining failure evidence"
+        ]
+      }
+    },
+    {
+      "shot_id": "S05C",
+      "source_scene": "场景5·对方质疑平台跑路，系统提示冻结原路退回。",
+      "source_prompt": "hard cut between messages, red warning reflection on faces; 阿浪与肥哥外观必须连续，冷峻压抑现实主义，竖屏9:16",
+      "anchor_reuse_allowed": true,
+      "script": {
+        "scene_id": "S05",
+        "speaker": "UNKNOWN",
+        "dialogue_text": "这个平台……是不是假的？",
+        "emotion": "hope",
+        "line_locked": true,
+        "tts_duration_seconds": 3.99,
+        "audio_status": "MEASURED"
+      },
+      "camera": {
+        "shot_type": "action",
+        "scale": "medium shot",
+        "movement": "ONE_PURPOSEFUL_MOVE",
+        "axis": "screen-left facing screen-right",
+        "first_frame_kind": "scene_action_anchor",
+        "movement_count": 1
+      },
+      "edit": {
+        "duration_seconds": 4.59,
+        "cut_after_performance": true,
+        "transition_reason": "cut only after the line/action and recovery beat complete",
+        "rhythm_phase": "hope"
+      },
+      "performance": {
+        "emotion_goal": "hope: the character state must visibly change within the shot",
+        "action_beats": [
+          "准备：道具与身体位置先建立（场景5·对方质疑平台跑路，系统提示冻结原路退回。）",
+          "动作：完成一个可辨认的主要动作或冲击（场景5·对方质疑平台跑路，系统提示冻结原路退回。）",
+          "回收：保留惯性、反应或环境余波，动作完成后再切镜"
+        ],
+        "sound_cues": [
+          "dialogue or room tone",
+          "keyboard/phone/desk foley as applicable"
+        ]
+      },
+      "assets": {
+        "identity_reference": "../media_staging/episode_007_virtual_data/anchors/alang_character_anchor.png",
+        "scene_action_anchor": "../media_staging/episode_007_virtual_data/anchors/scene_action/office_phone_impact.png",
+        "costume": "episode identity invariant",
+        "props": [
+          "keyboard",
+          "phone",
+          "green chat windows",
+          "desk or smoke haze"
+        ],
+        "lighting": "dirty cool fluorescent plus green monitor spill"
+      },
+      "recovery": {
+        "max_attempts": 2,
+        "retry_delay_policy": "Retry-After first; otherwise >=60s provider cooldown",
+        "degrade_order": [
+          "retry with a small seed offset",
+          "manual replacement marker retaining failure evidence"
+        ]
+      }
+    },
+    {
+      "shot_id": "S06A",
+      "source_scene": "场景6·肥哥接老板电话，只看日报不看理由。",
+      "source_prompt": "static office frame broken by smoke and phone vibration; 阿浪与肥哥外观必须连续，冷峻压抑现实主义，竖屏9:16",
+      "anchor_reuse_allowed": true,
+      "script": {
+        "scene_id": "S06",
+        "speaker": "UNKNOWN",
+        "dialogue_text": "连这一单……都是假的吗？",
+        "emotion": "collapse",
+        "line_locked": true,
+        "tts_duration_seconds": 3.864,
+        "audio_status": "MEASURED"
+      },
+      "camera": {
+        "shot_type": "dialogue",
+        "scale": "medium close-up",
+        "movement": "FIXED_DIALOGUE",
+        "axis": "screen-left facing screen-right",
+        "first_frame_kind": "scene_action_anchor",
+        "movement_count": 0
+      },
+      "edit": {
+        "duration_seconds": 4.464,
+        "cut_after_performance": true,
+        "transition_reason": "cut only after the line/action and recovery beat complete",
+        "rhythm_phase": "collapse"
+      },
+      "performance": {
+        "emotion_goal": "collapse: the character state must visibly change within the shot",
+        "action_beats": [
+          "准备：人物稳定在场景中，呼吸/视线建立对白起点（场景6·肥哥接老板电话，只看日报不看理由。）",
+          "动作：完整说出台词并完成对应目光或手部动作（场景6·肥哥接老板电话，只看日报不看理由。）",
+          "回收：说完后保留一拍，人物状态落定，再切镜"
+        ],
+        "sound_cues": [
+          "dialogue or room tone",
+          "keyboard/phone/desk foley as applicable"
+        ]
+      },
+      "assets": {
+        "identity_reference": "../media_staging/episode_007_virtual_data/anchors/feige_character_anchor.png",
+        "scene_action_anchor": "../media_staging/episode_007_virtual_data/anchors/scene_action/manager_desk_impact.png",
+        "costume": "episode identity invariant",
+        "props": [
+          "keyboard",
+          "phone",
+          "green chat windows",
+          "desk or smoke haze"
+        ],
+        "lighting": "dirty cool fluorescent plus green monitor spill"
+      },
+      "recovery": {
+        "max_attempts": 2,
+        "retry_delay_policy": "Retry-After first; otherwise >=60s provider cooldown",
+        "degrade_order": [
+          "retry with a small seed offset",
+          "manual replacement marker retaining failure evidence"
+        ]
+      }
+    },
+    {
+      "shot_id": "S06B",
+      "source_scene": "场景6·阿浪门口听见，问“我们在等什么”。",
+      "source_prompt": "slow dolly from doorway, silence after call ends; 阿浪与肥哥外观必须连续，冷峻压抑现实主义，竖屏9:16",
+      "anchor_reuse_allowed": true,
+      "script": {
+        "scene_id": "S06",
+        "speaker": "UNKNOWN",
+        "dialogue_text": "我们可能根本不是在等工资。",
+        "emotion": "collapse",
+        "line_locked": true,
+        "tts_duration_seconds": 4.223,
+        "audio_status": "MEASURED"
+      },
+      "camera": {
+        "shot_type": "action",
+        "scale": "medium shot",
+        "movement": "ONE_PURPOSEFUL_MOVE",
+        "axis": "screen-left facing screen-right",
+        "first_frame_kind": "scene_action_anchor",
+        "movement_count": 1
+      },
+      "edit": {
+        "duration_seconds": 4.823,
+        "cut_after_performance": true,
+        "transition_reason": "cut only after the line/action and recovery beat complete",
+        "rhythm_phase": "collapse"
+      },
+      "performance": {
+        "emotion_goal": "collapse: the character state must visibly change within the shot",
+        "action_beats": [
+          "准备：道具与身体位置先建立（场景6·阿浪门口听见，问“我们在等什么”。）",
+          "动作：完成一个可辨认的主要动作或冲击（场景6·阿浪门口听见，问“我们在等什么”。）",
+          "回收：保留惯性、反应或环境余波，动作完成后再切镜"
+        ],
+        "sound_cues": [
+          "dialogue or room tone",
+          "keyboard/phone/desk foley as applicable"
+        ]
+      },
+      "assets": {
+        "identity_reference": "../media_staging/episode_007_virtual_data/anchors/alang_character_anchor.png",
+        "scene_action_anchor": "../media_staging/episode_007_virtual_data/anchors/scene_action/office_keyboard.png",
+        "costume": "episode identity invariant",
+        "props": [
+          "keyboard",
+          "phone",
+          "green chat windows",
+          "desk or smoke haze"
+        ],
+        "lighting": "dirty cool fluorescent plus green monitor spill"
+      },
+      "recovery": {
+        "max_attempts": 2,
+        "retry_delay_policy": "Retry-After first; otherwise >=60s provider cooldown",
+        "degrade_order": [
+          "retry with a small seed offset",
+          "manual replacement marker retaining failure evidence"
+        ]
+      }
+    },
+    {
+      "shot_id": "S07A",
+      "source_scene": "场景7·深夜大厅，阿浪机械复制粘贴，镜头拉远。",
+      "source_prompt": "long pull-back, fluorescent islands, no hopeful movement; 阿浪与肥哥外观必须连续，冷峻压抑现实主义，竖屏9:16",
+      "anchor_reuse_allowed": true,
+      "script": {
+        "scene_id": "S07",
+        "speaker": "UNKNOWN",
+        "dialogue_text": "在数据为王的世界里， 最廉价的，是人。",
+        "emotion": "numbness",
+        "line_locked": true,
+        "tts_duration_seconds": 6.11,
+        "audio_status": "MEASURED"
+      },
+      "camera": {
+        "shot_type": "action",
+        "scale": "medium shot",
+        "movement": "FIXED_ACTION_FRAME",
+        "axis": "screen-left facing screen-right",
+        "first_frame_kind": "scene_action_anchor",
+        "movement_count": 0
+      },
+      "edit": {
+        "duration_seconds": 6.71,
+        "cut_after_performance": true,
+        "transition_reason": "cut only after the line/action and recovery beat complete",
+        "rhythm_phase": "numbness"
+      },
+      "performance": {
+        "emotion_goal": "numbness: the character state must visibly change within the shot",
+        "action_beats": [
+          "准备：道具与身体位置先建立（场景7·深夜大厅，阿浪机械复制粘贴，镜头拉远。）",
+          "动作：完成一个可辨认的主要动作或冲击（场景7·深夜大厅，阿浪机械复制粘贴，镜头拉远。）",
+          "回收：保留惯性、反应或环境余波，动作完成后再切镜"
+        ],
+        "sound_cues": [
+          "dialogue or room tone",
+          "keyboard/phone/desk foley as applicable"
+        ]
+      },
+      "assets": {
+        "identity_reference": "../media_staging/episode_007_virtual_data/anchors/alang_character_anchor.png",
+        "scene_action_anchor": "../media_staging/episode_007_virtual_data/anchors/scene_action/night_copy_pullback.png",
+        "costume": "episode identity invariant",
+        "props": [
+          "keyboard",
+          "phone",
+          "green chat windows",
+          "desk or smoke haze"
+        ],
+        "lighting": "dirty cool fluorescent plus green monitor spill"
+      },
+      "recovery": {
+        "max_attempts": 2,
+        "retry_delay_policy": "Retry-After first; otherwise >=60s provider cooldown",
+        "degrade_order": [
+          "retry with a small seed offset",
+          "manual replacement marker retaining failure evidence"
+        ]
+      }
+    }
+  ],
+  "evidence": {
+    "measured_contract": "episode007_six_module_contract_measured_20260903.json",
+    "scene_action_anchor_root": "../media_staging/episode_007_virtual_data/anchors/scene_action",
+    "audio_rule": "measured TTS duration is authoritative for research timing; provider audio remains separately verified"
+  }
+}

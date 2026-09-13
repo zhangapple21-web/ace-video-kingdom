@@ -10,6 +10,7 @@ from production_control import engine
 from production_control.demand import infer_goal, route
 from production_control import ProductionControl, WorkflowError
 from production_control.workflow import ingest_execution
+from tools.medium_lock import character_performance_lock
 
 
 def _write(path: Path, payload: bytes = b"x" * 5000) -> str:
@@ -27,6 +28,7 @@ def _plan(root: Path, *, bridge: bool) -> Path:
     data = {
         "project_id": "demand-demo",
         "production_integration": False,
+        "medium_lock": character_performance_lock(),
         "assets": {"scene": [{"asset_id": "SCENE", "reference_path": "assets/scene.bin", "sha256": asset_hash}]},
         "shots": [
             {

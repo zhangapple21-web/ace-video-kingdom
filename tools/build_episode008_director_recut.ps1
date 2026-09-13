@@ -1,6 +1,6 @@
 $ErrorActionPreference = 'Stop'
 
-$root = 'C:\tmp\ace_video_kingdom_git'
+$root = (Resolve-Path (Join-Path $PSScriptRoot '..')).Path
 $work = Join-Path $root 'media_staging\episode_008_rule_seat_system\director_recut_v2'
 New-Item -ItemType Directory -Force $work | Out-Null
 

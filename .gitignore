@@ -38,3 +38,8 @@ experiments/agnes_25_flash_smoke_tasks.json
 experiments/agnes_25_paid_smoke_tasks.json
 experiments/agnes_25_smart_fallback_smoke.v1.json
 experiments/agnes_25_smart_fallback_smoke_tasks.json
+
+# Local-only assets produced by current provider line tests and episode work.
+# Keep the small JSON receipts in research/ under version control instead.
+media_staging/episode_007_virtual_data/
+media_staging/line_test_*_20260912*.png

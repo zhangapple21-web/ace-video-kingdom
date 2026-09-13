@@ -22,6 +22,7 @@ try:
 except ImportError:
     from run_idea_pipeline import _build_generation_contract, _write_json, _sha256
 from runtime.provider_admission import admit_provider_request, assert_admission, build_canonical_generation_request
+from tools.medium_lock import character_performance_lock
 
 ROOT = Path(__file__).resolve().parents[1]
 IMAGE_MAX_BYTES = 500 * 1024
@@ -145,6 +146,7 @@ def _generate_assets(project: Path) -> None:
             "visible_entities": [path.stem],
             "audio_contract": {"status": "NOT_APPLICABLE"},
             "reference_assets": [],
+            "medium_lock": character_performance_lock(source_kind="ORIGINAL_STORY", signed_by="longmen_plan_builder"),
         }
         canonical_request = build_canonical_generation_request(
             canonical_shot, payload, provider="shenwen-image", endpoint=f"{base}/images/generations",
@@ -249,7 +251,7 @@ def build(project: Path) -> dict:
             "camera": {"shot_type": "dialogue" if dialogue else "action", "scale": "medium close-up", "movement": "FIXED_DIALOGUE", "axis": "screen-left facing screen-right", "movement_count": 0},
             "dramatic_function": title, "information_gain": dialogue or action, "emotion_change": "悔恨与克制痛感逐步外露", "anchor_reuse_allowed": False,
             "shot_contract": shot_contract, "generation_request": request,
-            "render": {"model": "agnes-video-v2.0", "seconds": 6, "width": 704, "height": 1280, "num_frames": 49, "frame_rate": 8, "image": anchor, "fallback_image": anchor, "image_reference": asset_refs[sid.lower()], "negative_prompt": "; ".join(generation_contract["forbidden_behavior"])},
+            "render": {"model": "agnes-video-2.5-flash", "seconds": 6, "width": 704, "height": 1280, "num_frames": 49, "frame_rate": 8, "image": anchor, "fallback_image": anchor, "image_reference": asset_refs[sid.lower()], "negative_prompt": "; ".join(generation_contract["forbidden_behavior"])},
             "dialogue_text": dialogue, "speaker": speaker,
         }
         shots.append(shot)
@@ -275,10 +277,10 @@ def build(project: Path) -> dict:
     }
     plan = {
         "schema": "video_kingdom.idea_pipeline_plan.v2_strict_source", "project_id": project.name, "status": "COMPILED", "title": "《龙门战神》墓前段落·原文严格还原测试片",
-        "scope": "FREE_ZONE_RESEARCH_ONLY", "production_integration": False, "quality_mode": "FORMAL", "source_rights_note": "用户本地小说库；仅用于本地研究测试，严格绑定原文行/字节锚点",
+        "scope": "FREE_ZONE_RESEARCH_ONLY", "production_integration": False, "quality_mode": "FORMAL", "medium_lock": character_performance_lock(source_kind="ORIGINAL_STORY", signed_by="longmen_plan_builder"), "source_rights_note": "用户本地小说库；仅用于本地研究测试，严格绑定原文行/字节锚点",
         "source_anchor": contract["source_anchor"], "story": {"root_brief": {"theme": "父子悔恨与迟到的祭奠", "relationship_and_conflict": "陆凡与已故父亲陆山河的父子关系；黑雨为随行照护者", "mainline_events": [x[2] for x in SHOT_SPECS], "source_rights_note": "local_user_library_exact_excerpt", "semantic_anchor_type": "tomb_wine_cough_support"}, "scene_nodes": [{"scene_id": x[1], "title": x[2]} for x in SHOT_SPECS]},
         "assets": {"characters": [{"asset_id": "CHAR_MAIN", "name": "陆凡", "status": "APPROVED_REFERENCE_SHEET", "reference": asset_refs["char_main"], "dossier_path": "assets/char_main_dossier.json"}, {"asset_id": "CHAR_COUNTER", "name": "黑雨", "status": "APPROVED_REFERENCE_SHEET", "reference": asset_refs["char_counter"], "dossier_path": "assets/char_counter_dossier.json"}], "scenes": [{"asset_id": x[1], "name": x[2], "status": "APPROVED_REFERENCE_SHEET", "reference": asset_refs[x[0].lower()]} for x in SHOT_SPECS], "props": [{"asset_id": "PROP_WINE", "name": "两瓶五十年陈酿与酒杯", "status": "APPROVED_REFERENCE_SHEET", "reference": asset_refs["prop_wine"]}, {"asset_id": "PROP_TOMB", "name": "乱石坟头与青苔木板墓牌", "status": "APPROVED_REFERENCE_SHEET", "reference": asset_refs["prop_tomb"]}]},
-        "six_module_contract": "six_module_contract.json", "generation_contract": generation_contract, "render_defaults": {"model": "agnes-video-v2.0", "seconds": 6, "width": 704, "height": 1280, "num_frames": 49, "frame_rate": 8, "duration_source": "per_shot_tts_measurement"}, "shots": shots, "acceptance": {"duration_window_seconds": [28, 32], "must_have_receipts": True, "must_pass_media_integrity": True, "must_pass_director_semantic_review": True}, "renderer_routing": {"mainline_identity_requires": "VERIFIED_REFERENCE_CONTROLLED_RENDERER", "agnes_video_v2_0": "LEAF_SHOTS_ONLY_UNTIL_REFERENCE_CONTROL_IS_EVIDENCED"},
+        "six_module_contract": "six_module_contract.json", "generation_contract": generation_contract, "render_defaults": {"model": "agnes-video-2.5-flash", "seconds": 6, "width": 704, "height": 1280, "num_frames": 49, "frame_rate": 8, "duration_source": "per_shot_tts_measurement"}, "shots": shots, "acceptance": {"duration_window_seconds": [28, 32], "must_have_receipts": True, "must_pass_media_integrity": True, "must_pass_director_semantic_review": True}, "renderer_routing": {"mainline_identity_requires": "VERIFIED_REFERENCE_CONTROLLED_RENDERER", "agnes_video_2_5_flash": "PRIMARY_FREE_REFERENCE_CONTROLLED_RENDERER"},
     }
     for char, role in (("char_main", "陆凡；陆山河之子"), ("char_counter", "黑雨；随行照护者")):
         cid = "CHAR_MAIN" if char == "char_main" else "CHAR_COUNTER"

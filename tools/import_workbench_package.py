@@ -22,6 +22,11 @@ from typing import Any
 
 SCHEMA = "video_kingdom.workbench_intake.v1"
 
+try:
+    from medium_lock import unsigned_medium_lock, wash_production_prompt
+except ImportError:  # support ``python -m tools.import_workbench_package``
+    from tools.medium_lock import unsigned_medium_lock, wash_production_prompt
+
 
 def _sha256(path: Path) -> str:
     digest = hashlib.sha256()
@@ -214,10 +219,14 @@ def _fastmovie(payload: dict[str, Any], source: Path, out: Path) -> dict[str, An
 
 def _shot(sid: str, scene_id: str, scene_text: str, dialogue: str, prompt: str, duration: float | None, anchor: dict[str, Any] | None, character_ids: list[str]) -> dict[str, Any]:
     anchor_ref = anchor.get("materialized_path") if isinstance(anchor, dict) and anchor.get("materialized") else anchor.get("source_ref") if isinstance(anchor, dict) else None
+    production_prompt, intake_prompt, ui_detected = wash_production_prompt(prompt)
     return {
         "shot_id": sid,
         "scene_id": scene_id,
-        "prompt": prompt,
+        "prompt": production_prompt,
+        "intake_prompt": intake_prompt,
+        "source_prompt": intake_prompt,
+        "ui_language_in_intake": ui_detected,
         "action_beats": [f"首态：{scene_text or '待补'}", f"动作：{scene_text or '待补'}", "末态：动作完成后保留反应与留白"],
         "required_asset_ids": character_ids,
         "first_state": scene_text or "待补",
@@ -231,7 +240,7 @@ def _shot(sid: str, scene_id: str, scene_text: str, dialogue: str, prompt: str, 
         "emotion_change": "待导演确认",
         "anchor_reuse_allowed": False,
         "shot_contract": {"version": "ace.video_kingdom.single_action_shot_contract.v1", "single_action": True, "action_unit": scene_text or "待补", "max_primary_actions": 1, "internal_cuts_allowed": 0, "cut_policy": "cut only after action completion and recovery hold"},
-        "render": {"model": "agnes-video-v2.0", "seconds": duration or 5, "width": 704, "height": 1280, "num_frames": int((duration or 5) * 8) + 1, "frame_rate": 8, "image": anchor_ref} if anchor_ref else {"model": "agnes-video-v2.0", "seconds": duration or 5, "width": 704, "height": 1280, "num_frames": int((duration or 5) * 8) + 1, "frame_rate": 8},
+        "render": {"model": "agnes-video-2.5-flash", "seconds": duration or 5, "width": 704, "height": 1280, "num_frames": int((duration or 5) * 8) + 1, "frame_rate": 8, "image": anchor_ref} if anchor_ref else {"model": "agnes-video-2.5-flash", "seconds": duration or 5, "width": 704, "height": 1280, "num_frames": int((duration or 5) * 8) + 1, "frame_rate": 8},
         "source_dialogue": dialogue,
     }
 
@@ -253,7 +262,7 @@ def _package(kind: str, source: Path, project_id: str, title: str, characters: l
         duration = shot.get("render", {}).get("seconds")
         contract_shots.append({"shot_id": shot["shot_id"], "source_scene": shot.get("action", ""), "script": {"scene_id": shot["scene_id"], "speaker": "UNKNOWN", "dialogue_text": dialogue, "emotion": "PENDING_DIRECTOR_REVIEW", "line_locked": bool(dialogue), "tts_duration_seconds": None, "audio_status": "AUDIO_PENDING"}, "camera": shot["camera"] | {"first_frame_kind": "scene_action_anchor"}, "edit": {"duration_seconds": duration, "duration_source": "IMPORTED_ESTIMATE" if duration else "PENDING_TTS", "cut_after_performance": True, "transition_reason": "cut after performance and recovery hold"}, "performance": {"emotion_goal": "PENDING_DIRECTOR_REVIEW", "action_beats": shot["action_beats"], "sound_cues": ["dialogue or room tone", "single prop foley"]}, "assets": {"identity_reference": None, "scene_action_anchor": shot.get("render", {}).get("image"), "costume": "PENDING_ASSET_REVIEW", "props": [], "lighting": "PENDING_DIRECTOR_REVIEW"}, "recovery": {"max_attempts": 2, "retry_delay_policy": "Retry-After first; otherwise >=60s provider cooldown", "degrade_order": ["retry with seed offset", "manual replacement marker retaining failure evidence"]}})
     contract = {"contract_version": "video_kingdom.six_module_shot_contract.workbench_import.v1", "production_boundary": "RESEARCH_ONLY", "project_id": project_id, "quality_mode": "INTAKE_PENDING", "premise": title, "causal_chain": [], "plants": [], "payoffs": [], "viewer_knowledge_checkpoints": [], "shots": contract_shots, "source_kind": kind}
-    plan = {"schema": "video_kingdom.workbench_episode_plan.v1", "project_id": project_id, "status": "INTAKE_PENDING", "title": title, "scope": "FREE_ZONE_RESEARCH_ONLY", "production_integration": False, "source_rights_note": "Imported from a local workbench export; rights and reference approval must be reviewed before provider admission.", "story": {"root_brief": {"theme": "PENDING", "relationship_and_conflict": "PENDING", "mainline_events": [], "source_rights_note": "workbench_import", "semantic_anchor_type": "PENDING"}, "scene_nodes": [{"scene_id": s["scene_id"], "title": s["scene_id"]} for s in shots]}, "assets": {"characters": char_assets, "scenes": scene_assets, "props": []}, "six_module_contract": "six_module_contract.json", "render_defaults": {"model": "agnes-video-v2.0", "seconds": 5, "width": 704, "height": 1280, "num_frames": 41, "frame_rate": 8, "duration_source": "pending_tts"}, "shots": shots, "acceptance": {"duration_window_seconds": [15, 180], "must_have_receipts": True, "must_pass_media_integrity": True}, "renderer_routing": {"mainline_identity_requires": "VERIFIED_REFERENCE_CONTROLLED_RENDERER", "agnes_video_v2_0": "LEAF_SHOTS_ONLY_UNTIL_REFERENCE_CONTROL_IS_EVIDENCED"}}
+    plan = {"schema": "video_kingdom.workbench_episode_plan.v1", "project_id": project_id, "status": "INTAKE_PENDING", "title": title, "scope": "FREE_ZONE_RESEARCH_ONLY", "production_integration": False, "medium_lock": unsigned_medium_lock(source_kind="WORKBENCH_EXPORT"), "source_rights_note": "Imported from a local workbench export; rights and reference approval must be reviewed before provider admission. Workbench prompts are intake, not output medium.", "story": {"root_brief": {"theme": "PENDING", "relationship_and_conflict": "PENDING", "mainline_events": [], "source_rights_note": "workbench_import", "semantic_anchor_type": "PENDING"}, "scene_nodes": [{"scene_id": s["scene_id"], "title": s["scene_id"]} for s in shots]}, "assets": {"characters": char_assets, "scenes": scene_assets, "props": []}, "six_module_contract": "six_module_contract.json", "render_defaults": {"model": "agnes-video-2.5-flash", "seconds": 5, "width": 704, "height": 1280, "num_frames": 41, "frame_rate": 8, "duration_source": "pending_tts"}, "shots": shots, "acceptance": {"duration_window_seconds": [15, 180], "must_have_receipts": True, "must_pass_media_integrity": True}, "renderer_routing": {"mainline_identity_requires": "VERIFIED_REFERENCE_CONTROLLED_RENDERER", "agnes_video_2_5_flash": "PRIMARY_FREE_REFERENCE_CONTROLLED_RENDERER"}}
     _write(out / "six_module_contract.json", contract)
     _write(out / "episode_plan.json", plan)
     intake = {"schema": SCHEMA, "source_kind": kind, "source_path": str(source), "source_sha256": _sha256(source), "created_at": datetime.now(timezone.utc).isoformat(), "project_id": project_id, "title": title, "production_integration": False, "status": "INTAKE_PENDING" if missing or not shots else "INTAKE_READY_FOR_REVIEW", "counts": {"characters": len(characters), "shots": len(shots), "source_assets": len(source_assets)}, "missing_requirements": sorted(set(missing)), "artifacts": {"episode_plan": "episode_plan.json", "six_module_contract": "six_module_contract.json"}}

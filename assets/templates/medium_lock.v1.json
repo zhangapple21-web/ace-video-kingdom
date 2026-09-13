@@ -1,0 +1,8 @@
+{
+  "schema": "video_kingdom.medium_lock.v1",
+  "signed": false,
+  "source_kind": "【ORIGINAL_STORY / CHAT_LOG / SCREENSHOT / WORKBENCH_EXPORT / SCRIPT / OTHER】",
+  "output_medium": "UNSIGNED",
+  "signed_by": "【导演或编译器签名】",
+  "rule": "故事素材不等于成片介质。聊天记录、微信截图、工作台 aigc_prompt 只是摄入，不是画面风格。允许成片介质：CHARACTER_PERFORMANCE 角色表演动画 / LIVE_ACTION_DRAMA 实拍感短剧 / UI_ANIMATION UI界面动画。未签名不得调用图像或视频模型。"
+}

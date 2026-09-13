@@ -87,7 +87,7 @@ def main() -> int:
         raise SystemExit("no shot in plan")
     render = first.get("render") if isinstance(first.get("render"), dict) else {}
     payload = {
-        "model": render.get("model", "agnes-video-v2.0"),
+        "model": render.get("model", "agnes-video-2.5-flash"),
         "prompt": first.get("prompt", ""),
         "negative_prompt": render.get("negative_prompt", ""),
         "duration": render.get("seconds"),

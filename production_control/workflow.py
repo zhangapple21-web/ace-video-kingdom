@@ -19,6 +19,11 @@ from typing import Any
 
 from .engine import ProductionControl, WorkflowError, sha256_file
 
+try:
+    from tools.medium_lock import validate_medium_lock
+except ImportError:  # pragma: no cover - package used as a script outside repo root
+    from medium_lock import validate_medium_lock  # type: ignore
+
 
 PLACEHOLDER_BYTES = 4096
 PLACEHOLDER_SHA256 = {
@@ -125,6 +130,9 @@ def preflight_plan(plan_path: Path, *, mode: str = "PRODUCTION") -> dict[str, An
             errors.append({"asset_id": asset_id, "reason": reason, "path": raw_path})
         if mode == "PRODUCTION" and not str(row.get("sha256") or "").strip():
             errors.append({"asset_id": asset_id, "reason": "SHA256_REQUIRED_IN_PRODUCTION", "path": raw_path})
+
+    for detail in validate_medium_lock(plan):
+        errors.append({"reason": "MEDIUM_LOCK", "detail": detail})
 
     shots = plan.get("shots") if isinstance(plan.get("shots"), list) else []
     continuity: list[dict[str, Any]] = []

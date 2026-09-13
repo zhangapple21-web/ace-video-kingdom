@@ -2,6 +2,8 @@
 from pathlib import Path
 import subprocess, sys
 
+from tools.probe_contract import write_probe_contract
+
 root=Path(__file__).resolve().parents[1]
 manifest=root/"experiments/episode_007_action_probe_tasks_v2.json"
 out=root/"media_staging/episode_007_virtual_data/action_probe_v2"
@@ -13,9 +15,14 @@ shots=[
 ("P04_RUN_OUT","阿浪穿洗旧浅灰短袖衬衫从工位猛地站起，推开椅子，穿过拥挤办公桌向前跑，手里攥着手机，镜头手持跟拍，背景同事转头，必须有明显位移，冷峻现实主义，竖屏9:16","alang_character_anchor.png"),
 ("P05_COPY_PASTE","深夜办公大厅只剩零星灯光，阿浪穿浅灰旧衬衫疲惫坐在电脑前，手指机械地复制、粘贴、发送，镜头从键盘缓慢拉远到整间死寂办公室，屏幕光变化，动作持续，冷峻绝望现实主义，竖屏9:16","alang_character_anchor.png"),
 ]
+contract_path = write_probe_contract(
+    root / "experiments/episode_007_action_probe_contract.json",
+    ({"shot_id": sid, "prompt": prompt, "action": sid} for sid, prompt, _anchor in shots),
+    episode_id="episode_007_action_probe",
+)
 for sid,prompt,anchor in shots:
     official = "feige_user_reference.png" if sid == "P03_DESK_SLAM" else "alang_user_reference.png"
-    cmd=[sys.executable,str(root/"tools/run_short_clip.py"),"--shot-id",sid,"--prompt",prompt,"--manifest",str(manifest),"--output",str(out/f"{sid}.mp4"),"--model","agnes-video-v2.0","--image",str(root/"media_staging/episode_007_virtual_data/anchors/user"/official),"--width","704","--height","1280","--num-frames","121","--frame-rate","24","--timeout","600"]
+    cmd=[sys.executable,str(root/"tools/run_short_clip.py"),"--shot-id",sid,"--prompt",prompt,"--episode-contract",str(contract_path),"--admission-scope","production","--manifest",str(manifest),"--output",str(out/f"{sid}.mp4"),"--model","agnes-video-2.5-flash","--image",str(root/"media_staging/episode_007_virtual_data/anchors/user"/official),"--width","704","--height","1280","--num-frames","121","--frame-rate","24","--timeout","600"]
     result = subprocess.run(cmd,cwd=root,check=False)
     if result.returncode:
         raise SystemExit(result.returncode)

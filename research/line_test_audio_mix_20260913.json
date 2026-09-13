@@ -1,0 +1,10 @@
+{
+  "status": "AUDIO_MIXED_DUCKING",
+  "voice": "D:\\视频创作\\temp\\audio_mix_verify\\voice.wav",
+  "bgm": "D:\\视频创作\\temp\\audio_mix_verify\\bgm.wav",
+  "output": "D:\\视频创作\\temp\\audio_mix_verify\\mixed.m4a",
+  "voice_duration_seconds": 2.0,
+  "bgm_volume": 0.22,
+  "duck_ratio": 8.0,
+  "engine": "ffmpeg"
+}

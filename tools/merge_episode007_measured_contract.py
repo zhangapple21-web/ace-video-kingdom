@@ -1,7 +1,7 @@
 import json
 from pathlib import Path
 
-root=Path(r'C:/tmp/ace_video_kingdom_git')
+root=Path(__file__).resolve().parents[1]
 contract=json.loads((root/'research/external_research/episode007_six_module_contract_filled_20260903.json').read_text(encoding='utf-8'))
 tts=json.loads((root/'research/external_research/episode007_tts_measurements_20260903.json').read_text(encoding='utf-8-sig'))
 rows={int(x['cue']):x for x in tts['rows']}

@@ -1,0 +1,41 @@
+{
+  "schema": "video_kingdom.narrative_causal_self_check.v1",
+  "rhythm_rule": "3秒钩子、30秒转折、每集结尾强钩子",
+  "answers": [
+    {
+      "id": "Q1_CAUSE",
+      "question": "每一场戏的发生，是否被上一场已经发生的事实逼出来，而不是作者突然安排？",
+      "answer": "【填写：本集因果链如何一环逼出下一环】",
+      "pass": false,
+      "evidence": "【填写：对应 premise / causal_chain 条目】"
+    },
+    {
+      "id": "Q2_INFO_PAYOFF",
+      "question": "观众在这一镜新知道的信息，是否在后续有兑现（plants 对得上 payoffs）？",
+      "answer": "【填写：埋下的物件/信息在哪一镜兑现】",
+      "pass": false,
+      "evidence": "【填写：plants[] 与 payoffs[] 的 id 对应】"
+    },
+    {
+      "id": "Q3_HOOK_3S",
+      "question": "开场 3 秒内是否有钩子，能拦住划走？",
+      "answer": "【填写：第一镜的具体钩子动作或信息】",
+      "pass": false,
+      "evidence": "【填写：S01A 的 action / information_gain】"
+    },
+    {
+      "id": "Q4_TURN_30S",
+      "question": "30 秒内是否出现转折（验证失败、代价出现或关系翻转）？",
+      "answer": "【填写：哪一镜承担 30 秒转折】",
+      "pass": false,
+      "evidence": "【填写：对应 shot_id 与 dramatic_function】"
+    },
+    {
+      "id": "Q5_ENDING_HOOK",
+      "question": "本集结尾是否留下强钩子，迫使下一集被点开？",
+      "answer": "【填写：末镜留下的未兑现问题】",
+      "pass": false,
+      "evidence": "【填写：S06A last_state / payoff 缺口】"
+    }
+  ]
+}

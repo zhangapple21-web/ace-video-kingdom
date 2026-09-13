@@ -1,7 +1,7 @@
 import json, subprocess
 from pathlib import Path
 
-root=Path(r'C:/tmp/ace_video_kingdom_git')
+root=Path(__file__).resolve().parents[1]
 directory=root/'media_staging/episode_007_virtual_data/video_camera_grammar_v2'
 rows=[]
 for path in sorted(directory.glob('S[0-9][0-9][A-Z].mp4')):

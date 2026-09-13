@@ -1,0 +1,56 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "video_kingdom.continuity_bridge.v1",
+  "description": "连续性桥接。用户指定三项：前一镜末帧状态、出画入画方向、继承状态项。兼容旧字符串写法（truthy 即可过 quality validator），新编译器输出本对象。",
+  "type": "object",
+  "required": [
+    "schema",
+    "previous_end_frame_state",
+    "exit_direction",
+    "enter_direction",
+    "inherited_state_items"
+  ],
+  "properties": {
+    "schema": {"const": "video_kingdom.continuity_bridge.v1"},
+    "status": {"enum": ["READY", "TERMINAL", "PENDING_FRAME_PROOF"]},
+    "from_shot": {"type": "string"},
+    "to_shot": {"type": ["string", "null"]},
+    "label": {"type": "string", "description": "人读标签，例如 SC01 -> S02A"},
+    "previous_end_frame_state": {"type": "string", "minLength": 1, "description": "前一镜末帧状态，下一镜首帧必须接得上"},
+    "next_initial_state": {"type": "string"},
+    "exit_direction": {
+      "enum": ["left", "right", "up", "down", "toward_camera", "away", "hold", "none"],
+      "description": "出画方向。hold=不出画；none=终章无出画"
+    },
+    "enter_direction": {
+      "enum": ["left", "right", "up", "down", "toward_camera", "away", "hold", "none"],
+      "description": "入画方向。角色出画右则下一镜入画左，除非 hold"
+    },
+    "inherited_state_items": {
+      "type": "array",
+      "minItems": 3,
+      "items": {
+        "type": "object",
+        "required": ["key", "value"],
+        "properties": {
+          "key": {
+            "enum": [
+              "costume",
+              "prop_state",
+              "eyeline",
+              "lighting_direction",
+              "spatial_position",
+              "weather_time",
+              "identity"
+            ]
+          },
+          "value": {"type": "string", "minLength": 1},
+          "source_shot": {"type": "string"}
+        }
+      }
+    },
+    "invariants": {"type": "array", "items": {"type": "string"}},
+    "asset_ids": {"type": "array", "items": {"type": "string"}},
+    "evidence_basis": {"type": "string"}
+  }
+}

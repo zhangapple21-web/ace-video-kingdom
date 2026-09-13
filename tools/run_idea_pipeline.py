@@ -46,6 +46,31 @@ except ImportError:  # support ``python -m tools.run_idea_pipeline``
     from tools.content_control import build_episode_dynamic_plan, build_post_diagnostics, classify_route_failure, initial_content_control, validate_beat_shot_mapping
 
 try:
+    from medium_lock import character_performance_lock
+except ImportError:  # support ``python -m tools.run_idea_pipeline``
+    from tools.medium_lock import character_performance_lock
+
+try:
+    from creator_workflow import build_creator_brief, build_publish_recap, load_creator_brief, validate_creator_brief
+except ImportError:  # support ``python -m tools.run_idea_pipeline``
+    from tools.creator_workflow import build_creator_brief, build_publish_recap, load_creator_brief, validate_creator_brief
+
+try:
+    from validate_script_executability import (
+        compile_causal_self_check,
+        compile_continuity_bridge,
+        compile_persona_card,
+        compile_shot_prompt,
+    )
+except ImportError:  # support ``python -m tools.run_idea_pipeline``
+    from tools.validate_script_executability import (
+        compile_causal_self_check,
+        compile_continuity_bridge,
+        compile_persona_card,
+        compile_shot_prompt,
+    )
+
+try:
     from runtime.provider_admission import admit_provider_request, assert_admission, build_canonical_generation_request, delivery_gate
 except ImportError:  # support ``python -m tools.run_idea_pipeline``
     from tools.runtime.provider_admission import admit_provider_request, assert_admission, build_canonical_generation_request, delivery_gate  # type: ignore
@@ -404,6 +429,7 @@ def _make_dossier(character_id: str, name: str, role: str, anchor_hash: str) -> 
         "fictional_character": True,
         "production_integration": False,
         "rights_and_provenance": {"source": "user_idea_compiler", "disallowed_sources": ["UNAUTHORIZED_REAL_PERSON_LIKENESS"]},
+        "persona_card": compile_persona_card(character_id, name, role),
         "identity_invariants": {
             "visual": f"原创虚构角色 {name}；服装和年龄段在本项目内固定",
             "negative_constraints": ["不使用现实人物肖像", "不加入品牌标识", "不改变角色身份"],
@@ -476,6 +502,7 @@ def _compile(
     project_id: str,
     target_seconds: int | None = None,
     tts_measurements: dict[str, dict[str, Any]] | None = None,
+    creator_brief: dict[str, Any] | None = None,
 ) -> dict[str, Any]:
     """Compile a safe, small six-shot plan from free text."""
     title = idea.splitlines()[0].strip()[:42] or "未命名短剧"
@@ -634,31 +661,72 @@ def _compile(
         # Keep a human-readable compiler trace in the actual request. The
         # provider still receives one prompt, but no longer has to infer the
         # identity/forbidden-action contract from vague adjectives.
-        prompt = (
-            f"主生成指令：{shot_request['main_generation_instruction']}。"
-            f"角色身份锁：主角身份与服装固定，关系不可改写。"
-            f"当前镜头合同：首态={shot_request['shot_contract']['first_state']}；"
-            f"唯一主要视觉事件={actions[index - 1]}；末态={shot_request['shot_contract']['last_state']}；"
-            "固定机位，镜头内部不切换。"
-            f"禁止行为：{'；'.join(generation_contract['forbidden_behavior'])}。"
-            f"场景细节：{setting_hint}，{visual_hint}，竖屏9:16。"
+        first_state = f"{scene_name}前的稳定构图与角色身份"
+        last_state = "动作完成后保留反应与留白"
+        next_scene = scenes[index][1] if index < 6 else "证据留存"
+        next_shot_id = f"S{index + 1:02d}A" if index < 6 else None
+        camera_fixed = index in (1, 2, 6)
+        style_baseline = "竖屏9:16，中国审美写实短剧摄影，东亚面部比例自然，服装无品牌无文字"
+        opening_space = f"{setting_hint}；主体=CHAR_MAIN；首态={first_state}；中近景；{'固定机位' if camera_fixed else '一次目的性运镜'}"
+        underscore = "环境底噪与单次道具动作音；对白不渲染为画面文字"
+        timed_action = f"0-1s保持首态；唯一主要视觉事件={actions[index - 1]}；收势后内部切镜=0"
+        aftertaste = f"{last_state}；末帧交给{next_shot_id or '终章留存'}"
+        txt_prompt_elements = {
+            "subject": "CHAR_MAIN",
+            "action": actions[index - 1],
+            "environment": setting_hint,
+            "lighting": "克制的电影实用光",
+            "camera": "medium close-up, FIXED_DIALOGUE" if camera_fixed else "medium close-up, ONE_PURPOSEFUL_MOVE",
+            "style": "写实短剧，竖屏9:16",
+        }
+        prompt, shot_prompt = compile_shot_prompt(
+            main_generation_instruction=shot_request["main_generation_instruction"],
+            identity_lock="主角身份与服装固定，关系不可改写",
+            first_state=first_state,
+            action=actions[index - 1],
+            last_state=last_state,
+            forbidden=generation_contract["forbidden_behavior"],
+            setting_hint=setting_hint,
+            visual_hint=visual_hint,
+            style_baseline=style_baseline,
+            opening_space=opening_space,
+            underscore=underscore,
+            timed_action=timed_action,
+            aftertaste=aftertaste,
+            txt_prompt_elements=txt_prompt_elements,
+        )
+        continuity_bridge = compile_continuity_bridge(
+            from_shot=shot_id,
+            to_shot=next_shot_id,
+            label=f"{scene_id} -> {next_shot_id}" if next_shot_id else "证据留存",
+            previous_end_frame_state=last_state,
+            next_initial_state=f"{next_scene}前的稳定构图与角色身份" if next_shot_id else "证据留存",
+            exit_direction="hold" if next_shot_id else "none",
+            enter_direction="hold",
+            inherited_state_items=[
+                {"key": "costume", "value": "深色无品牌无文字层装", "source_shot": shot_id},
+                {"key": "identity", "value": "CHAR_MAIN 身份与年龄段固定", "source_shot": shot_id},
+                {"key": "spatial_position", "value": setting_hint, "source_shot": shot_id},
+            ],
+            terminal=next_shot_id is None,
         )
         shots.append({
             "shot_id": shot_id, "scene_id": scene_id, "prompt": prompt,
+            "shot_prompt": shot_prompt,
             "action_beats": [f"首态：{scene_name}前的稳定构图", f"动作：{actions[index - 1]}", "末态：动作完成后保留反应与留白"],
             "required_asset_ids": ["CHAR_MAIN", "PROP_PHONE", "PROP_TOKEN", scene_id],
-            "first_state": f"{scene_name}前的稳定构图与角色身份",
+            "first_state": first_state,
             "action": actions[index - 1],
-            "last_state": "动作完成后保留反应与留白",
-            "continuity_bridge_to_next": f"{scene_id} -> S{index + 1:02d}A" if index < 6 else "证据留存",
+            "last_state": last_state,
+            "continuity_bridge_to_next": continuity_bridge["label"],
             "quality_gate": "抽帧无内部切镜、身份连续、动作完成、对白不截断",
-            "camera": {"shot_type": "dialogue" if index in (1, 2, 6) else "action", "scale": "medium close-up", "movement": "FIXED_DIALOGUE" if index in (1, 2, 6) else "ONE_PURPOSEFUL_MOVE", "axis": "screen-left facing screen-right", "movement_count": 0 if index in (1, 2, 6) else 1},
+            "camera": {"shot_type": "dialogue" if camera_fixed else "action", "scale": "medium close-up", "movement": "FIXED_DIALOGUE" if camera_fixed else "ONE_PURPOSEFUL_MOVE", "axis": "screen-left facing screen-right", "movement_count": 0 if camera_fixed else 1},
             "dramatic_function": scene_name, "information_gain": dialogue[index - 1], "emotion_change": "由迟疑走向可验证的选择",
-            "continuity_bridge": f"{scene_id} -> S{index + 1:02d}A" if index < 6 else "证据留存",
+            "continuity_bridge": continuity_bridge,
             "anchor_reuse_allowed": False,
             "shot_contract": shot_contract,
             "generation_request": shot_request,
-            "render": {"model": "agnes-video-v2.0", "seconds": render_seconds, "width": 704, "height": 1280, "num_frames": render_seconds * 8 + 1, "frame_rate": 8, "image": anchor, "fallback_image": anchor,
+            "render": {"model": "agnes-video-2.5-flash", "seconds": render_seconds, "width": 704, "height": 1280, "num_frames": render_seconds * 8 + 1, "frame_rate": 8, "image": anchor, "fallback_image": anchor,
                        "negative_prompt": "; ".join(generation_contract["forbidden_behavior"])},
         })
         sidecar_shots.append({
@@ -683,6 +751,7 @@ def _compile(
                 item["reference"] = _image_reference(path)
             if group == "characters":
                 item["dossier_path"] = f"assets/{asset_id.lower()}_dossier.json"
+                item["persona_card"] = compile_persona_card(asset_id, name, role[0] if role else "未标明关系")
             asset_entries[group].append(item)
 
     contract = {
@@ -692,13 +761,21 @@ def _compile(
         "timing_policy": "tts_first; measured dialogue plus 0.6s recovery hold; no character-count timing",
         "generation_contract": generation_contract,
     }
+    brief = creator_brief or build_creator_brief(title=title, target_seconds=target_seconds)
     plan = {
-        "schema": "video_kingdom.idea_pipeline_plan.v1", "project_id": project_id, "status": "COMPILED", "title": title, "scope": "FREE_ZONE_RESEARCH_ONLY", "production_integration": False,
+        "schema": "video_kingdom.idea_pipeline_plan.v1", "project_id": project_id, "status": "COMPILED", "title": title, "scope": "FREE_ZONE_RESEARCH_ONLY", "production_integration": False, "medium_lock": character_performance_lock(source_kind="ORIGINAL_STORY", signed_by="idea_pipeline"),
         "collaboration": _default_collaboration_context(),
         "source_rights_note": "由用户提供的原创想法编译；未读取私密材料，未使用现实人物肖像。", "quality_mode": "FORMAL", "story": {"root_brief": {"theme": "规则、位置与可验证证据", "relationship_and_conflict": "行动者与规则受益者之间的验证冲突", "mainline_events": contract["causal_chain"], "source_rights_note": "user_idea_only", "semantic_anchor_type": "rule_and_evidence"}, "scene_nodes": [{"scene_id": s[0], "title": s[1]} for s in scenes]},
-        "assets": asset_entries, "six_module_contract": "six_module_contract.json", "generation_contract": generation_contract, "render_defaults": {"model": "agnes-video-v2.0", "seconds": shot_seconds, "width": 704, "height": 1280, "num_frames": shot_frames, "frame_rate": 8, "duration_source": "per_shot_tts_measurement"},
+        "assets": asset_entries, "six_module_contract": "six_module_contract.json", "generation_contract": generation_contract, "render_defaults": {"model": "agnes-video-2.5-flash", "seconds": shot_seconds, "width": 704, "height": 1280, "num_frames": shot_frames, "frame_rate": 8, "duration_source": "per_shot_tts_measurement"},
         "shots": shots, "acceptance": {"duration_window_seconds": ([15, 70] if target_seconds is None else [max(15, target_seconds - 2), target_seconds + 2]), "must_have_receipts": True, "must_pass_media_integrity": True},
-        "renderer_routing": {"mainline_identity_requires": "VERIFIED_REFERENCE_CONTROLLED_RENDERER", "agnes_video_v2_0": "LEAF_SHOTS_ONLY_UNTIL_REFERENCE_CONTROL_IS_EVIDENCED"},
+        "renderer_routing": {"mainline_identity_requires": "VERIFIED_REFERENCE_CONTROLLED_RENDERER", "agnes_video_2_5_flash": "PRIMARY_FREE_REFERENCE_CONTROLLED_RENDERER"},
+        "premise": contract["premise"],
+        "causal_chain": contract["causal_chain"],
+        "plants": contract["plants"],
+        "payoffs": contract["payoffs"],
+        "viewer_knowledge_checkpoints": contract["viewer_knowledge_checkpoints"],
+        "creator_brief": brief,
+        "publish_recap": build_publish_recap(project_id=project_id, brief=brief),
     }
     dynamic_plan = build_episode_dynamic_plan(idea=idea, plan=plan, target_seconds=target_seconds)
     plan["dynamic_content_plan"] = dynamic_plan
@@ -713,12 +790,15 @@ def _compile(
         shot["beat_ids"] = beat_ids_by_shot.get(str(shot.get("shot_id")), [])
         shot["content_state"] = "R0"
         shot["content_lineage_ref"] = "content_control.v1.json"
+        shot["medium_lock"] = plan["medium_lock"]
     for shot in sidecar_shots:
         shot["beat_ids"] = beat_ids_by_shot.get(str(shot.get("shot_id")), [])
         shot["content_state"] = "R0"
         shot["content_lineage_ref"] = "content_control.v1.json"
     contract["dynamic_content_plan_ref"] = "episode_dynamic_plan.json"
     contract["content_control_ref"] = "content_control.v1.json"
+    plan["narrative_causal_self_check"] = compile_causal_self_check(plan)
+    contract["narrative_causal_self_check"] = plan["narrative_causal_self_check"]
     _write_json(project_dir / "six_module_contract.json", contract)
     _write_json(project_dir / "episode_dynamic_plan.json", dynamic_plan)
     _write_json(project_dir / "content_control.v1.json", plan["content_control"])
@@ -786,6 +866,7 @@ def _generate_assets(project_dir: Path, idea: str, *, force: bool = False) -> tu
             "audio_contract": {"status": "NOT_APPLICABLE"},
             "reference_assets": [],
             "duration": None,
+            "medium_lock": compiled_plan.get("medium_lock"),
         }
         canonical_request = build_canonical_generation_request(
             asset_shot, payload, provider="shenwen-image", endpoint=f"{base}/images/generations",
@@ -859,12 +940,23 @@ def main() -> int:
     parser.add_argument("--no-local-tts", action="store_true", help="do not synthesize local research WAVs when no measured manifest is supplied")
     parser.add_argument("--target-seconds", type=int, choices=range(24, 73), metavar="N",
                         help="target assembled duration; six shots are sized evenly (24..72 seconds)")
+    parser.add_argument("--creator-brief", type=Path,
+                        help="optional JSON creator brief; audience/hook/ending_hook/style are required when supplied")
     args = parser.parse_args()
     project_id = args.project_id or f"idea_{_slug(args.idea)}"
     project_dir = (args.output_root / project_id).resolve()
     if project_dir.exists() and not args.resume:
         raise SystemExit(f"project exists; pass --resume to continue: {project_dir}")
     project_dir.mkdir(parents=True, exist_ok=True)
+    creator_brief: dict[str, Any] | None = None
+    if args.creator_brief:
+        try:
+            creator_brief = load_creator_brief(args.creator_brief)
+            brief_check = validate_creator_brief(creator_brief, require_ready=True)
+        except ValueError as exc:
+            raise SystemExit(str(exc)) from exc
+        if brief_check["status"] != "PASS":
+            raise SystemExit("creator brief is incomplete: " + "; ".join(brief_check["errors"]))
     collaboration = _default_collaboration_context()
     project_research_dir = project_dir / "research"
     project_research_dir.mkdir(parents=True, exist_ok=True)
@@ -896,8 +988,15 @@ def main() -> int:
             _write_json(project_dir / "content_control.v1.json", plan["content_control"])
             _write_json(plan_path, plan)
     else:
-        plan = _compile(args.idea, project_dir, project_id, args.target_seconds)
+        plan = _compile(args.idea, project_dir, project_id, args.target_seconds, creator_brief=creator_brief)
     receipt["stages"].append({"name": "script_and_storyboard", "status": "COMPLETED", "artifacts": [str(plan_path), str(project_dir / "six_module_contract.json")]})
+    brief = plan.get("creator_brief") if isinstance(plan.get("creator_brief"), dict) else build_creator_brief(title=plan.get("title", ""), target_seconds=args.target_seconds)
+    brief_path = project_dir / "creator_brief.v1.json"
+    _write_json(brief_path, brief)
+    recap_path = project_dir / "publish_recap.v1.json"
+    if not recap_path.exists():
+        _write_json(recap_path, build_publish_recap(project_id=project_id, brief=brief))
+    receipt["stages"].append({"name": "creator_layer", "status": "READY" if brief.get("status") == "READY" else "PENDING", "artifacts": [str(brief_path), str(recap_path)], "authority": "planning_and_next_iteration_only"})
 
     planning_check = _planning_conformance_check(plan)
     planning_check["recorded_at"] = time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime())
@@ -950,7 +1049,7 @@ def main() -> int:
                 plan, project_dir, args.tts_manifest, synthesize=not args.no_local_tts,
             )
             tts_status = "COMPLETED"
-            plan = _compile(args.idea, project_dir, project_id, args.target_seconds, tts_measurements)
+            plan = _compile(args.idea, project_dir, project_id, args.target_seconds, tts_measurements, creator_brief=creator_brief or plan.get("creator_brief"))
             _write_json(plan_path, plan)
         except Exception as exc:
             tts_status = "BLOCKED"
@@ -972,7 +1071,7 @@ def main() -> int:
         if ok:
             # Provider replacement changes hashes, so rewrite the compiled
             # plan and keep the contract/manifest lineage self-consistent.
-            plan = _compile(args.idea, project_dir, project_id, args.target_seconds, tts_measurements)
+            plan = _compile(args.idea, project_dir, project_id, args.target_seconds, tts_measurements, creator_brief=creator_brief or plan.get("creator_brief"))
             _write_json(plan_path, plan)
     receipt["stages"].append({"name": "assets", "status": asset_status, "artifacts": [str(project_dir / "assets")]})
 

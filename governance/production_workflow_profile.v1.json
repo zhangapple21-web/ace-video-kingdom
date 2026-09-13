@@ -58,7 +58,8 @@
     "Free Zone research renders remain candidates until explicit hash-bound admission.",
     "Episode Dynamic Plan binds story spine and beats to Shot Core without adding a scheduler.",
     "Content state R0-R5 is monotonic within one Production Run and independent from technical/provider route.",
-    "Pacing ratios are diagnostic evidence only; only CONTENT_FAILURE may authorize content degradation."
+    "Pacing ratios are diagnostic evidence only; only CONTENT_FAILURE may authorize content degradation.",
+    "Story material is not the finished video medium. medium_lock must be signed CHARACTER_PERFORMANCE, LIVE_ACTION_DRAMA, or UI_ANIMATION before any image or video provider call; unsigned lock or chat-UI language in a non-UI medium is BLOCKED."
   ],
   "content_control": {
     "contract": "governance/episode_dynamic_content_plan.v1.json",

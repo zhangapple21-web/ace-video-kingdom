@@ -1,0 +1,147 @@
+{
+  "canonical_request": {
+    "action": "Wenji finishes one line and holds",
+    "audio_contract": {
+      "action_duration": 0,
+      "ambience": [
+        "room_tone"
+      ],
+      "dialogue": [
+        {
+          "audio_ref": "C:\\tmp\\ace_video_kingdom_git\\media_staging\\episode_006_wenji_110s\\audio\\wenji_01.wav",
+          "content": "我先把这页记下来。",
+          "end": 2.021,
+          "speaker": "WENJI",
+          "start": 0
+        }
+      ],
+      "dialogue_duration": 2.021,
+      "hold_duration": 0.8,
+      "music": [],
+      "narration": [],
+      "render_seconds": 5,
+      "sfx": []
+    },
+    "camera": {
+      "axis": "none",
+      "internal_cuts": 0,
+      "movement": "NONE",
+      "position": "desk",
+      "scale": "medium"
+    },
+    "contract_fingerprint": null,
+    "duration": 5,
+    "endpoint": "https://apihub.agnes-ai.com/v1/videos",
+    "episode_id": "SHOT_CORE_PILOT",
+    "first_frame": null,
+    "generation_parameters": {
+      "aspect_ratio": "9:16",
+      "mode": "text",
+      "n": 1,
+      "seconds": "4",
+      "size": "720P"
+    },
+    "last_frame": null,
+    "model": "agnes-video-2.5-flash",
+    "negative_prompt": "",
+    "payload_schema": "agnes-video-cli.v1",
+    "prompt": "Wenji quietly finishes one short line in a dim desk room; a single continuous locked-off shot, no extra movement, no cut.",
+    "provider": "agnes",
+    "provider_payload": {
+      "aspect_ratio": "9:16",
+      "mode": "text",
+      "model": "agnes-video-2.5-flash",
+      "n": 1,
+      "prompt": "Wenji quietly finishes one short line in a dim desk room; a single continuous locked-off shot, no extra movement, no cut.",
+      "seconds": "4",
+      "size": "720P"
+    },
+    "reference_assets": [
+      {
+        "asset_id": "SCENE_02",
+        "asset_type": "scene",
+        "provider_ref": "https://raw.githubusercontent.com/zhangapple21-web/-/main/ace-video-kingdom/wenji-episode-006/SCENE_02_typing_log_anchor.png",
+        "scope": "episode",
+        "sha256": "e5015c19d9f75b3164aeace2542892f893914cd3c7cd630c4cd69db28c7473a3",
+        "version": 1
+      }
+    ],
+    "request_kind": "shot",
+    "schema": "video_kingdom.canonical_generation_request.v1",
+    "scope": "research",
+    "shot_id": "PILOT_DIALOGUE",
+    "source_contract": {
+      "allowed_behaviors": [
+        "speak",
+        "hold"
+      ],
+      "camera": {
+        "axis": "none",
+        "internal_cuts": 0,
+        "movement": "NONE",
+        "position": "desk",
+        "scale": "medium"
+      },
+      "first_frame_ref": null,
+      "forbidden_behaviors": [
+        "pan",
+        "tilt",
+        "zoom",
+        "orbit",
+        "internal cut",
+        "new character"
+      ],
+      "last_frame_ref": null,
+      "render_seconds": 5
+    },
+    "state": {
+      "action_state": {
+        "camera": "locked",
+        "character": "WENJI speaks",
+        "lighting": "dim",
+        "location": "desk",
+        "props": [
+          "phone"
+        ],
+        "time": "night",
+        "wardrobe": "unchanged"
+      },
+      "end_state": {
+        "camera": "locked",
+        "character": "WENJI holds gaze",
+        "lighting": "dim",
+        "location": "desk",
+        "props": [
+          "phone"
+        ],
+        "time": "night",
+        "wardrobe": "unchanged"
+      },
+      "start_state": {
+        "camera": "medium",
+        "character": "WENJI",
+        "lighting": "dim",
+        "location": "desk",
+        "props": [
+          "phone"
+        ],
+        "time": "night",
+        "wardrobe": "unchanged"
+      }
+    },
+    "visible_entities": [
+      "WENJI",
+      "PHONE"
+    ]
+  },
+  "created_at": "2026-09-12T09:40:27Z",
+  "preflight": {
+    "errors": [],
+    "status": "CONTRACT_VALID",
+    "warnings": []
+  },
+  "provider_post_allowed": true,
+  "request_hash": "f614977d97707ddf365d28a67ced48e047026ee5a225156495971e0cd8e7c65b",
+  "schema": "video_kingdom.provider_admission_receipt.v1",
+  "status": "ADMITTED"
+}

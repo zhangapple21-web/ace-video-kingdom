@@ -4,7 +4,8 @@
   "production_integration": false,
   "purpose": "将用户提供的短剧调度建议映射到现有单一生产入口，不新增Scheduler/Router/Runtime。",
   "capability_boundary": {
-    "verified_video_paths": ["agnes-video-v2.0", "agnes-video-2.5-flash"],
+    "verified_video_paths": ["agnes-video-2.5-flash", "agnes-video-2.5"],
+    "retired_video_paths": ["agnes-video-v2.0"],
     "verified_local_reference": "scene_action_anchor_first_frame",
     "unverified_features": ["face_vector_input", "audio_driven_video", "provider_callback_webhook", "provider_generated_dialogue_alignment"],
     "policy": "未验证能力只能记录为候选，不得写入实际派单参数。"

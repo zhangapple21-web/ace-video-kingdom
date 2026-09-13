@@ -40,7 +40,7 @@ def main() -> int:
     parser.add_argument("--image", type=Path, required=True)
     parser.add_argument("--manifest", type=Path, required=True)
     parser.add_argument("--output", type=Path, required=True)
-    parser.add_argument("--model", default="agnes-video-v2.0")
+    parser.add_argument("--model", default="agnes-video-2.5-flash")
     parser.add_argument("--episode-contract", type=Path,
                         help="canonical episode JSON; without it the legacy entry is fail-closed")
     args = parser.parse_args()

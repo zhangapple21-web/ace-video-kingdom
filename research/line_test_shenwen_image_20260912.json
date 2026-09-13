@@ -1,0 +1,21 @@
+{
+  "schema": "video_kingdom.image_provider_line_test.v1",
+  "recorded_at": "2026-09-12T09:50:45Z",
+  "provider": "shenwen",
+  "endpoint": "https://api.shenwenai.com/v1/images/generations",
+  "model": "gpt-image-2",
+  "models_http_status": 200,
+  "models_observed": [
+    "gpt-image-2",
+    "gpt-image-2.5-flare",
+    "gpt-image-2.5-sunburst"
+  ],
+  "generation_http_status": 200,
+  "response_mode": "b64_json",
+  "artifact_path": "media_staging/line_test_shenwen_gpt-image-2_20260912.png",
+  "artifact_sha256": "b2f99516a7a7d0b83c7b0e173bc23754ed221fb81c621a622bd02d079666eb90",
+  "artifact_bytes": 2120097,
+  "key_storage": "not_stored",
+  "production_integration": false,
+  "conclusion": "LIVE_IMAGE_GENERATION_PASS"
+}

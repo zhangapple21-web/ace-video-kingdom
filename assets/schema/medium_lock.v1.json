@@ -1,0 +1,33 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "video_kingdom.medium_lock.v1",
+  "description": "成片介质锁。故事素材、聊天记录、微信截图、工作台 aigc_prompt 只是摄入，不是成片风格。任何 AI 短剧在调用图像或视频模型前必须签名 output_medium。未签名一律 BLOCK。",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema", "signed", "source_kind", "output_medium", "rule"],
+  "properties": {
+    "schema": {"const": "video_kingdom.medium_lock.v1"},
+    "signed": {
+      "type": "boolean",
+      "description": "false 或缺失则 fail-closed，禁止图像/视频模型调用。"
+    },
+    "source_kind": {
+      "type": "string",
+      "enum": ["ORIGINAL_STORY", "CHAT_LOG", "SCREENSHOT", "WORKBENCH_EXPORT", "SCRIPT", "OTHER"],
+      "description": "摄入材料类型。CHAT_LOG/SCREENSHOT/WORKBENCH_EXPORT 不等于 UI_ANIMATION。"
+    },
+    "output_medium": {
+      "type": "string",
+      "enum": ["UNSIGNED", "CHARACTER_PERFORMANCE", "LIVE_ACTION_DRAMA", "UI_ANIMATION"],
+      "description": "CHARACTER_PERFORMANCE=角色表演动画；LIVE_ACTION_DRAMA=实拍感短剧；UI_ANIMATION=UI界面动画。UNSIGNED 不得提交。"
+    },
+    "signed_by": {
+      "type": "string",
+      "description": "签名者：导演、编译器或导入器。unsigned 锁可空。"
+    },
+    "rule": {
+      "type": "string",
+      "minLength": 1
+    }
+  }
+}

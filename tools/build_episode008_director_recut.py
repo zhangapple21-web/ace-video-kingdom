@@ -6,7 +6,7 @@ import subprocess
 from pathlib import Path
 
 
-ROOT = Path(r"C:\tmp\ace_video_kingdom_git")
+ROOT = Path(__file__).resolve().parents[1]
 WORK = ROOT / "media_staging" / "episode_008_rule_seat_system" / "director_recut_v2"
 SOURCE = ROOT / "media_staging" / "episode_008_rule_seat_system" / "revision_pilot" / "E008_S01_V2_PILOT.mp4"
 

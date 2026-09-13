@@ -216,22 +216,19 @@ def _v2_fallback_command(command: list[str], render: dict) -> list[str]:
             skip_next = token != "--reference-video-require-audio"
             continue
         filtered.append(token)
-    filtered = _replace_model(filtered, "agnes-video-v2.0")
+    filtered = _replace_model(filtered, "agnes-video-2.5-flash")
     filtered.extend(["--image", image])
     return filtered
 
 
 def _validate_renderer_policy(episode: dict, render: dict) -> None:
-    """Keep unverified v2.0 fallback out of strict reference-controlled plans."""
-    routing = episode.get("renderer_routing") if isinstance(episode.get("renderer_routing"), dict) else {}
-    if routing.get("mainline_identity_requires") != "VERIFIED_REFERENCE_CONTROLLED_RENDERER":
-        return
+    """Reject the retired v2.0 renderer for every new run."""
     model = str(render.get("model", ""))
     fallback = str(render.get("fallback_model", ""))
     if model == "agnes-video-v2.0" or fallback == "agnes-video-v2.0":
         raise SystemExit(
-            "strict reference-controlled episode cannot use agnes-video-v2.0 "
-            "as primary or fallback renderer"
+            "agnes-video-v2.0 is retired; use agnes-video-2.5-flash (free) "
+            "or agnes-video-2.5"
         )
 
 
@@ -302,6 +299,7 @@ def main() -> int:
             "--prompt", prompt, "--episode-contract", str(args.episode),
             "--manifest", str(args.manifest), "--output",
             str(args.media_dir / f"{shot_id}.mp4"), "--timeout", str(args.timeout),
+            "--admission-scope", "production",
         ]
         render = {**defaults, **(shot.get("render", {}) if isinstance(shot.get("render"), dict) else {})}
         _validate_renderer_policy(episode, render)
@@ -330,7 +328,7 @@ def main() -> int:
             print(json.dumps({
                 "status": "FALLBACK_AFTER_PRIMARY_FAILURE",
                 "shot_id": shot_id,
-                "from_model": render.get("model", "agnes-video-v2.0"),
+                "from_model": render.get("model", "agnes-video-2.5-flash"),
                 "to_model": fallback_model,
             }, ensure_ascii=False), flush=True)
             if render.get("model") == "agnes-video-2.5-flash" and fallback_model == "agnes-video-v2.0":

@@ -1,0 +1,25 @@
+{
+  "test_id": "imagegen_shenwen_cli_smoke_20260912",
+  "scope": "FREE_ZONE_RESEARCH_ONLY",
+  "provider": "shenwen-image",
+  "endpoint": "https://api.shenwenai.com/v1/images/generations",
+  "entrypoint": "tools/imagegen_shenwen.ps1",
+  "model": "gpt-image-2",
+  "dry_run": {
+    "status": "SUCCEEDED",
+    "endpoint": "/v1/images/generations",
+    "model": "gpt-image-2"
+  },
+  "live_run": {
+    "status": "SUCCEEDED",
+    "requested_size": "1024x1024",
+    "returned_format": "PNG",
+    "returned_dimensions": "1370x1148",
+    "bytes": 1522322,
+    "artifact_sha256": "36ea7d6993ee1d89d97b5873fdf2fbc99000ecf972327b563f2d12f523889f63",
+    "artifact_path": "tmp/imagegen/shenwen-connection-test.png",
+    "cleanup_class": "temporary_removed"
+  },
+  "secret_handling": "SHENWEN_IMAGE_API_KEY was read from the local environment and mapped in-process; its value was not persisted or logged.",
+  "automatic_publishing": false
+}
