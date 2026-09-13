@@ -1,0 +1,25 @@
+{
+  "schema": "video_kingdom.oneapi_models_smoke.v1",
+  "tested_at": "2026-09-13",
+  "endpoint": "http://127.0.0.1:3000/v1/chat/completions",
+  "request": {
+    "messages": [{"role": "user", "content": "仅回复 OK"}],
+    "max_tokens": 8,
+    "temperature": 0
+  },
+  "scope": "availability_only",
+  "note": "PASS 只证明本地网关可调用，不代表模型质量、成本或角色适配性基准。",
+  "models": [
+    {"model": "glm-4-flash", "status": "PASS", "role": "outline_structurer"},
+    {"model": "gpt-5.4-mini", "status": "PASS", "role": "format_editor"},
+    {"model": "gpt-5.4", "status": "PASS", "role": "continuity_editor"},
+    {"model": "gpt-5.5", "status": "PASS", "role": "storyboarder"},
+    {"model": "gpt-5.6-terra", "status": "PASS", "role": "primary_writer"},
+    {"model": "gpt-6-astra", "status": "PASS", "role": "arbiter"},
+    {"model": "gpt-5.6-\u0073ol", "status": "PASS", "role": "director_convergence"},
+    {"model": "gpt-5.6-\u006cuna", "status": "PASS", "role": "ideation_branch"},
+    {"model": "grok-4.6", "status": "PASS", "role": "reality_reviewer"},
+    {"model": "grok-4.5", "status": "PASS", "role": "contrarian_auditor"}
+  ],
+  "production_submission": "NOT_PERFORMED"
+}

@@ -43,3 +43,6 @@ experiments/agnes_25_smart_fallback_smoke_tasks.json
 # Keep the small JSON receipts in research/ under version control instead.
 media_staging/episode_007_virtual_data/
 media_staging/line_test_*_20260912*.png
+
+# Local-only smoke-test outputs; canonical receipts belong under research/.
+temp/

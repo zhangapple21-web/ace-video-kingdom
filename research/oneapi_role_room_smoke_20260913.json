@@ -1,0 +1,22 @@
+{
+  "schema": "video_kingdom.oneapi_role_room_smoke.v1",
+  "gateway": "http://127.0.0.1:3000/v1",
+  "tested_at": "2026-09-13",
+  "models_listed": 10,
+  "models": [
+    "gpt-5.6-terra",
+    "gpt-5.5",
+    "gpt-5.4",
+    "grok-4.5"
+  ],
+  "role_smoke": {
+    "gpt-5.6-terra": "PASS",
+    "gpt-5.5": "PASS",
+    "grok-4.5": "PASS",
+    "gpt-5.4": "PASS"
+  },
+  "request": "仅回复 OK",
+  "max_tokens": 8,
+  "secrets_recorded": false,
+  "note": "本地 OneAPI 角色席位最小 chat smoke test；不代表创作验收或媒体 Provider 验收。"
+}

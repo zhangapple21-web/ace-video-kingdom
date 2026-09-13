@@ -32,7 +32,7 @@ ACE 使用门槛：跨镜头/跨实验连续性、多分支比较、失败保留
 
 对外部协同方案的吸收统一使用 `governance/ace_table_lens.v1.md` 的“桌子”视角：需求、能力、验真、跟进四类证据回到现有 manifest/复盘字段，不另起平台或队列。
 
-云海 AI 的用户层提供七个可选模型。对视频/自由区，七模型只作为可轮换的角色矩阵：Grok 4.5 做反例审稿，Terra 做主笔与导演收敛，Sol 做重大分歧仲裁，Luna 做快速灵感分支，GPT-5.5 做独立结构备选，GPT-5.4 做连续性/格式编辑，GPT-5.4 Mini 做低成本整理。网站 `/api/models` 的 UI 列表不等于本地 OneAPI 已激活；每次本地调用仍需 `/v1/models` 与真实 Chat Completions 探针。详细映射见 `research/website_model_role_matrix.v1.json`。
+本地 OneAPI 当前实际暴露十个聊天模型，十个模型均已通过最小 Chat Completions 可用性探针；可用性不等于质量基准。它们按 `research/oneapi_role_room.v1.json` 分为三档：日常 `standard` 只调用主笔、分镜、反例审计、连续性和导演收敛；`rapid` 用于低成本结构化整理；高返工风险项目才显式启用 `full_audit`，补齐灵感分支、现实复核、格式编辑和 Astra 仲裁。十个席位分别承担：GLM 快速结构化、GPT-5.4 Mini 格式整理、GPT-5.4 连续性、GPT-5.5 分镜、Terra 主笔、Sol 导演收敛、Luna 灵感分支、Grok 4.5 反例审计、Grok 4.6 现实复核、Astra 重大分歧仲裁。网站 `/api/models` 的 UI 列表不等于本地 OneAPI 已激活；每次本地调用仍需 `/v1/models` 与真实 Chat Completions 探针。十模型收据见 `research/oneapi_models_smoke_20260913.json`。
 ## Workbench intake linkage (2026-09-04)
 
 DramaAI and FastMovieAI are now connected through a single intake boundary,
