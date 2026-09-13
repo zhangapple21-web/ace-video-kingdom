@@ -8,6 +8,7 @@ import pytest
 
 from production_control import ProductionControl, WorkflowError
 from production_control.workflow import bootstrap, lock_plan_shots, recover
+from tools.medium_lock import character_performance_lock
 
 
 def _asset(path: Path, payload: bytes = b"x" * 5000) -> str:
@@ -27,6 +28,7 @@ def _plan(root: Path, *, with_bridge: bool = False) -> Path:
     data = {
         "project_id": "demo-workflow",
         "production_integration": False,
+        "medium_lock": character_performance_lock(),
         "assets": {"characters": [{"asset_id": "CHAR", "reference_path": "assets/char.png", "sha256": char_hash, "status": "APPROVED_REFERENCE_SHEET"}], "scenes": [{"asset_id": "SCENE", "reference_path": "assets/scene.png", "sha256": scene_hash, "status": "APPROVED_REFERENCE_SHEET"}]},
         "shots": [
             {"shot_id": "S01", "action": "look left", "render": {"seconds": 4}, "shot_contract": {"single_action": True, "max_primary_actions": 1}, "continuity_evidence_path": "bridges/S01-S02.json" if with_bridge else None},

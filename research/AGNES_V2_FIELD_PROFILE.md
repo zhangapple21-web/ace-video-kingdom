@@ -1,14 +1,14 @@
-# Agnes Video v2.0：现场能力画像
+# Agnes Video 2.5 Flash：现场能力画像
 
-更新时间：2026-09-01。此文只根据本仓库的真实调用、媒体文件、公开首页和只读接口发现写成；不将营销描述当能力事实。
+更新时间：2026-09-12。此文只根据本仓库的真实调用、媒体文件、公开首页和只读接口发现写成；不将营销描述当能力事实。
 
 ## 已验证事实
 
-- `agnes-video-v2.0` 已成功完成 9 个独立任务；每个任务有持久化 `video_id`、终态 `completed`、可下载 `video/mp4` 和 SHA-256。
+- `agnes-video-2.5-flash` 已完成当前线测任务；有持久化 `video_id`、终态 `completed`、可下载 `video/mp4` 和 SHA-256（见 `research/line_test_agnes25_manifest_20260912.json`）。
 - 当前输出样本均约 **5.041667 秒**；最终重编码成片为 1088×832、24fps、H.264 + AAC。
 - 模型能在单镜里产出有电影感的光照、酒馆环境、玻璃材质、人物动作和安静情绪；这由 2026-09-01 的 45 秒接触表和单镜文件可复核。
 - 当前免费通道曾观察到 `1 request/minute` 限流，且一次创建获得 HTTP 503；执行器现在会按 `Retry-After` 或 60 秒恢复。
-- 公共网页检索只确认 Agnes 是免费多模态 API 网关。`/docs`、`/openapi.json`、`/.well-known/openapi.json` 返回 403，`/v1/openapi.json` 返回 404；当前无公开可读的 `agnes-video-v2.0` 参数契约。
+- 旧 `agnes-video-v2.0` 已退出新任务路径；仓库代码对其做 fail-closed 拒绝。当前线测只使用 `agnes-video-2.5-flash`。
 
 ## 现场推断：适合承担什么
 

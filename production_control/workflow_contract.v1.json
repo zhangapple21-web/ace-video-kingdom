@@ -24,7 +24,7 @@
     "FAILED"
   ],
   "asset_gate": {
-    "required": ["source_exists", "sha256_matches", "non_placeholder", "continuity_evidence"],
+    "required": ["source_exists", "sha256_matches", "non_placeholder", "continuity_evidence", "medium_lock_signed"],
     "failure_state": "ASSETS_BLOCKED",
     "admission_rule": "asset_gate.status == READY"
   },

@@ -1,6 +1,6 @@
 {
   "schema": "video_kingdom.shot_core_cross_process_recovery.v1",
-  "created_at": "2026-09-08T02:03:50Z",
+  "created_at": "2026-09-13T04:10:22Z",
   "provider_calls": 0,
   "provider_submission": "NOT_SENT",
   "crash_child_exit_code": 17,
@@ -47,11 +47,11 @@
       },
       "last_poll_http_status": 200,
       "last_state": "completed",
-      "reconciled_at": "2026-09-08T02:03:50Z",
+      "reconciled_at": "2026-09-13T04:10:22Z",
       "artifact_url": "https://fake.invalid/recovered.mp4",
       "artifact_finalize_status": "PASS",
-      "artifact_finalized_at": "2026-09-08T02:03:50Z",
-      "artifact_path": "C:\\Users\\User\\AppData\\Local\\Temp\\shot-core-cross-process-qjmw5a4q\\recovered.mp4",
+      "artifact_finalized_at": "2026-09-13T04:10:22Z",
+      "artifact_path": "C:\\Users\\Administrator\\AppData\\Local\\Temp\\shot-core-cross-process-6jz8vgtm\\recovered.mp4",
       "artifact_hash": "4ae7dbf1140106ba802e4ba2fefef0cbd5358338629706141c0dbef176eebec5",
       "bytes": 29,
       "media": {

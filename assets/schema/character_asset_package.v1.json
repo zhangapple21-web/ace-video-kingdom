@@ -1,0 +1,45 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "video_kingdom.character_asset_package.v1",
+  "description": "角色资产包。在原 visual_assets / identity_invariants 上补充 persona_card。validate_asset_library.py 仍只扫描 visual_assets；人设卡由 validate_script_executability.py 检查。",
+  "type": "object",
+  "required": ["schema", "character_id", "persona_card", "identity_invariants", "visual_assets"],
+  "properties": {
+    "schema": {"const": "video_kingdom.character_asset_package.v1"},
+    "character_id": {"type": "string", "minLength": 1},
+    "name": {"type": "string"},
+    "fictional_character": {"const": true},
+    "production_integration": {"const": false},
+    "persona_card": {"$ref": "persona_card.v1.json"},
+    "identity_invariants": {
+      "type": "object",
+      "required": ["visual", "negative_constraints", "behavioral", "relational"],
+      "properties": {
+        "visual": {},
+        "negative_constraints": {"type": "array", "minItems": 1},
+        "behavioral": {},
+        "relational": {}
+      }
+    },
+    "allowed_evolution": {"type": "object"},
+    "visual_assets": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["asset_id", "required"],
+        "properties": {
+          "asset_id": {"type": "string"},
+          "purpose": {"type": "string"},
+          "required": {"type": "boolean"},
+          "path": {"type": ["string", "null"]},
+          "sha256": {"type": "string"},
+          "status": {"type": "string"},
+          "naming": {"type": "string", "description": "角色_表情_角度"}
+        }
+      }
+    },
+    "missing": {"type": "array"},
+    "rights_and_provenance": {"type": "object"}
+  }
+}

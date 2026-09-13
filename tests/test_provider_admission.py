@@ -19,6 +19,14 @@ def _shot() -> dict:
     return {
         "episode_id": "E1",
         "shot_id": "S01A",
+        "medium_lock": {
+            "schema": "video_kingdom.medium_lock.v1",
+            "signed": True,
+            "signed_by": "test",
+            "output_medium": "CHARACTER_PERFORMANCE",
+            "source_kind": "ORIGINAL_STORY",
+            "rule": "story_material_is_not_finished_video_medium",
+        },
         "prompt": "one bounded action",
         "action": "the hand closes the folder once",
         "camera": {"movement": "NONE", "internal_cuts": 0},
@@ -43,6 +51,29 @@ def test_admission_receipt_hashes_one_canonical_request(tmp_path: Path) -> None:
     assert receipt["request_hash"]
     assert json.loads(receipt_path.read_text(encoding="utf-8"))["request_hash"] == receipt["request_hash"]
     assert_admission(receipt, receipt["request_hash"])
+
+
+def test_media_asset_without_medium_lock_is_blocked_even_in_research_scope() -> None:
+    request = build_canonical_generation_request(
+        {"episode_id": "E1", "shot_id": "ASSET_1", "prompt": "character reference", "action": "reference", "camera": {"framing": "sheet"}, "audio_contract": {"status": "NOT_APPLICABLE"}},
+        {"model": "gpt-image-2", "prompt": "character reference"},
+        provider="shenwen-image", endpoint="https://provider.invalid/images/generations",
+        payload_schema="openai.images.generations.v1", model="gpt-image-2", scope="research", request_kind="asset",
+    )
+    receipt = admit_provider_request(request)
+    assert receipt["status"] == "REJECTED"
+    assert any(error.startswith("medium_lock:") for error in receipt["preflight"]["errors"])
+
+
+def test_legacy_video_without_medium_lock_is_blocked() -> None:
+    request = build_canonical_generation_request(
+        {"episode_id": "E1", "shot_id": "S01A", "prompt": "one bounded action", "action": "move", "camera": {"movement": "NONE"}, "audio_contract": {"dialogue_duration": 0}, "duration": 5, "shot_contract": {"single_action": True}},
+        {"model": "agnes-video-2.5-flash", "prompt": "one bounded action", "seconds": "5"},
+        provider="agnes", endpoint="https://provider.invalid/videos", payload_schema="agnes-video-cli.v1", model="agnes-video-2.5-flash", scope="legacy", request_kind="shot",
+    )
+    receipt = admit_provider_request(request)
+    assert receipt["status"] == "REJECTED"
+    assert any(error.startswith("medium_lock:") for error in receipt["preflight"]["errors"])
 
 
 def test_admission_rejects_canonical_conflict(tmp_path: Path) -> None:
@@ -119,6 +150,22 @@ def test_legacy_cli_rejects_before_provider_post(monkeypatch, tmp_path: Path) ->
         "--manifest", str(tmp_path / "manifest.json"), "--output", str(tmp_path / "out.mp4"),
     ])
     with pytest.raises(SystemExit, match="episode-contract or --shot-contract is required"):
+        run_short_clip.main()
+
+
+def test_legacy_cli_rejects_prompt_drift_before_provider_post(monkeypatch, tmp_path: Path) -> None:
+    from tools import run_short_clip
+
+    contract = _shot()
+    contract_path = tmp_path / "shot.json"
+    contract_path.write_text(json.dumps(contract), encoding="utf-8")
+    monkeypatch.setattr(run_short_clip.requests, "post", lambda *args, **kwargs: pytest.fail("POST must not be reached"))
+    monkeypatch.setattr(sys, "argv", [
+        "run_short_clip.py", "--shot-id", "S01A", "--prompt", "unapproved prompt",
+        "--shot-contract", str(contract_path), "--manifest", str(tmp_path / "manifest.json"),
+        "--output", str(tmp_path / "out.mp4"),
+    ])
+    with pytest.raises(SystemExit, match="--prompt must exactly match the canonical shot contract"):
         run_short_clip.main()
 
 

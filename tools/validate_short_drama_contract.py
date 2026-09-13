@@ -98,8 +98,10 @@ def main() -> int:
     routing = document.get("renderer_routing", {})
     if routing.get("mainline_identity_requires") != "VERIFIED_REFERENCE_CONTROLLED_RENDERER":
         failures.append("renderer_routing must require verified reference-controlled rendering for mainline identity")
-    if routing.get("agnes_video_v2_0") != "LEAF_SHOTS_ONLY_UNTIL_REFERENCE_CONTROL_IS_EVIDENCED":
-        failures.append("renderer_routing must preserve Agnes leaf-shot boundary")
+    if routing.get("agnes_video_v2_0"):
+        failures.append("renderer_routing must not advertise retired agnes-video-v2.0")
+    if routing.get("agnes_video_2_5_flash") != "PRIMARY_FREE_REFERENCE_CONTROLLED_RENDERER":
+        failures.append("renderer_routing must select agnes-video-2.5-flash as the current free primary")
     if document.get("production_integration") is not False:
         failures.append("production_integration must remain false")
     if failures:

@@ -1,0 +1,53 @@
+{
+  "schema": "ace.capability-registry.v2",
+  "project_id": "ace-video-kingdom",
+  "version": 2,
+  "capabilities": [
+    {
+      "id": "image.generate",
+      "task_class": "IMAGE",
+      "provider": "shenwen",
+      "model": "gpt-image-2",
+      "executable": "D:/视频创作/ace-video-kingdom/tools/imagegen_shenwen.ps1",
+      "executable_candidates": [
+        "D:/视频创作/ace-video-kingdom/tools/imagegen_shenwen.ps1",
+        "D:/tmp/ace-video-kingdom/tools/imagegen_shenwen.ps1"
+      ],
+      "credential_env": "SHENWEN_API_KEY",
+      "eligible_scopes": ["current_control_plane", "production", "auto"],
+      "production_eligible": true,
+      "health": {
+        "status": "PROBE_PASS",
+        "production_integration": "ADAPTER_VERIFIED"
+      },
+      "health_evidence": "research/line_test_shenwen_image_20260912.json",
+      "receipt_schema": "ace.media.receipt.v1",
+      "model_locked": true,
+      "retired_model_policy": "historical_receipts_only",
+      "retired_models": []
+    },
+    {
+      "id": "video.generate",
+      "task_class": "VIDEO",
+      "provider": "agnes",
+      "model": "agnes-video-2.5-flash",
+      "executable": "D:/视频创作/ace-video-kingdom/tools/video_agnes25.ps1",
+      "executable_candidates": [
+        "D:/视频创作/ace-video-kingdom/tools/video_agnes25.ps1",
+        "D:/tmp/ace-video-kingdom/tools/video_agnes25.ps1"
+      ],
+      "credential_env": "AGNES_API_KEY",
+      "eligible_scopes": ["current_control_plane", "production", "auto"],
+      "production_eligible": true,
+      "health": {
+        "status": "PROBE_PASS",
+        "production_integration": "ADAPTER_VERIFIED"
+      },
+      "health_evidence": "research/line_test_agnes25_manifest_20260912.json",
+      "receipt_schema": "ace.media.receipt.v1",
+      "model_locked": true,
+      "retired_model_policy": "historical_receipts_only",
+      "retired_models": ["agnes-video-v2.0"]
+    }
+  ]
+}

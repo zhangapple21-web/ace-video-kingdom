@@ -13,6 +13,7 @@ from runtime.provider_admission import (
     assert_admission,
     build_canonical_generation_request,
 )
+from tools.medium_lock import character_performance_lock
 from tools.run_idea_pipeline import _materialize_image_response
 
 root = repo_root / "media_staging" / "episode_007_virtual_data" / "anchors" / "scene_action"
@@ -51,6 +52,7 @@ for name, prompt in prompts.items():
             "visible_entities": [name],
             "audio_contract": {"status": "NOT_APPLICABLE"},
             "reference_assets": [],
+            "medium_lock": character_performance_lock(source_kind="ORIGINAL_STORY", signed_by="episode007_anchor_generator"),
         },
         payload,
         provider="shenwen-image",

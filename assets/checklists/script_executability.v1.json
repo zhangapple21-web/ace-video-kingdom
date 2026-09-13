@@ -1,0 +1,106 @@
+{
+  "schema": "video_kingdom.script_executability_checklist.v1",
+  "source": "C:/tmp/AI 短剧制作完整工作流.md.txt",
+  "rhythm_rule": "3秒钩子、30秒转折、每集结尾强钩子",
+  "fail_closed": true,
+  "checks": [
+    {
+      "id": "MEDIUM_LOCK",
+      "group": "medium_lock",
+      "severity": "blocked",
+      "item": "成片介质必须在任何图像/视频模型调用前签名；故事素材、聊天记录、微信截图、工作台 aigc_prompt 不是成片风格。允许介质：角色表演动画 / 实拍感短剧 / UI界面动画。未签名或聊天界面语言误入非 UI 介质一律 BLOCK。",
+      "how": "plan.medium_lock.signed==true and output_medium in {CHARACTER_PERFORMANCE, LIVE_ACTION_DRAMA, UI_ANIMATION}; UI tokens in shot.prompt forbidden unless UI_ANIMATION"
+    },
+    {
+      "id": "PERSONA_CARD_FIELDS",
+      "group": "persona_card",
+      "severity": "rework",
+      "item": "每个主要角色必须有人设卡：外貌、性格、动机、口头禅、音色锁、服装锁、定妆多视图",
+      "how": "dossier.persona_card 或 character_asset_package.persona_card 含 appearance/personality/motivation/catchphrase/voice_lock/costume_lock/makeup_sheet"
+    },
+    {
+      "id": "MAKEUP_NAMING",
+      "group": "persona_card",
+      "severity": "rework",
+      "item": "定妆图命名必须是 {character_id}_{expression}_{angle}，至少正面+侧面，至少中性/张力/反应三表情",
+      "how": "makeup_sheet.naming_rule 常量；required_views>=2；required_expressions>=3"
+    },
+    {
+      "id": "SHOT_PROMPT_FIVE_SEGMENTS",
+      "group": "shot_prompt",
+      "severity": "rework",
+      "item": "镜头提示词必须含五段：风格基准、起始空间、底声、分时序动作、余韵",
+      "how": "shot.shot_prompt 五字段非空，且编译后的 prompt 文本含这五个中文标签"
+    },
+    {
+      "id": "SHOT_PROMPT_TXT_ELEMENTS",
+      "group": "shot_prompt",
+      "severity": "rework",
+      "item": "TXT 六要素必须可追溯：主体、动作、环境、光线、镜头、风格",
+      "how": "shot_prompt.txt_prompt_elements 六键非空"
+    },
+    {
+      "id": "SHOT_PROMPT_HARD_CONTRACT",
+      "group": "shot_prompt",
+      "severity": "blocked",
+      "item": "编译后的纯文本 prompt 必须含「主生成指令」和「禁止行为」",
+      "how": "generation_conformance_check 同源硬约束"
+    },
+    {
+      "id": "Q1_CAUSE",
+      "group": "narrative_causal",
+      "severity": "rework",
+      "item": "每一场戏是否被上一场已经发生的事实逼出来？",
+      "how": "narrative_causal_self_check.answers[Q1_CAUSE].pass 且 evidence 指向 causal_chain"
+    },
+    {
+      "id": "Q2_INFO_PAYOFF",
+      "group": "narrative_causal",
+      "severity": "rework",
+      "item": "观众新增信息是否有兑现（plants 对 payoffs）？",
+      "how": "answers[Q2_INFO_PAYOFF] + 计划根字段 plants/payoffs"
+    },
+    {
+      "id": "Q3_HOOK_3S",
+      "group": "narrative_causal",
+      "severity": "rework",
+      "item": "开场 3 秒内是否有钩子？",
+      "how": "answers[Q3_HOOK_3S] 指向 S01A"
+    },
+    {
+      "id": "Q4_TURN_30S",
+      "group": "narrative_causal",
+      "severity": "rework",
+      "item": "30 秒内是否出现转折？",
+      "how": "answers[Q4_TURN_30S] 指向承担转折的 shot_id"
+    },
+    {
+      "id": "Q5_ENDING_HOOK",
+      "group": "narrative_causal",
+      "severity": "rework",
+      "item": "本集结尾是否留下强钩子？",
+      "how": "answers[Q5_ENDING_HOOK] 指向末镜未兑现问题"
+    },
+    {
+      "id": "BRIDGE_PREVIOUS_END_FRAME",
+      "group": "continuity",
+      "severity": "rework",
+      "item": "连续性桥必须写前一镜末帧状态",
+      "how": "continuity_bridge.previous_end_frame_state 非空"
+    },
+    {
+      "id": "BRIDGE_EXIT_ENTER",
+      "group": "continuity",
+      "severity": "rework",
+      "item": "必须写出画/入画方向；出画右则下一镜入画左，除非 hold/none",
+      "how": "exit_direction / enter_direction 枚举合法，且镜间配对"
+    },
+    {
+      "id": "BRIDGE_INHERITED_STATE",
+      "group": "continuity",
+      "severity": "rework",
+      "item": "至少 3 项继承状态（服装/道具/视线/光线/空间/天气/身份）",
+      "how": "inherited_state_items>=3"
+    }
+  ]
+}

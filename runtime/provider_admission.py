@@ -7,7 +7,8 @@ Provider.  A caller must first build one canonical request, obtain an
 
 The same boundary is used by the Shot Core runner and by legacy/research
 adapters.  A legacy adapter may pass ``scope=legacy`` or ``scope=research``;
-that changes the receipt label only, never the hard checks.
+that changes the receipt label only. Media requests still require a signed
+medium lock regardless of scope.
 """
 from __future__ import annotations
 
@@ -21,6 +22,10 @@ from pathlib import Path
 from typing import Any
 from urllib.parse import urlparse
 
+try:
+    from tools.medium_lock import validate_medium_lock
+except ImportError:  # pragma: no cover
+    from medium_lock import validate_medium_lock  # type: ignore
 
 CANONICAL_REQUEST_SCHEMA = "video_kingdom.canonical_generation_request.v1"
 ADMISSION_RECEIPT_SCHEMA = "video_kingdom.provider_admission_receipt.v1"
@@ -129,6 +134,7 @@ def build_canonical_generation_request(
         "contract_fingerprint": shot.get("contract_fingerprint"),
         "source_contract": shot_contract or contract,
         "state": state,
+        "medium_lock": shot.get("medium_lock"),
     }
     return request
 
@@ -138,6 +144,12 @@ def model_free_preflight(request: dict[str, Any], *, contract_status: str = "CON
     errors: list[str] = []
     if not isinstance(request, dict):
         return {"status": "BLOCKED", "errors": ["canonical_request_must_be_object"], "warnings": []}
+    if request.get("request_kind") in {"asset", "shot"}:
+        medium_errors = validate_medium_lock({
+            "medium_lock": request.get("medium_lock"),
+            "shots": [{"shot_id": request.get("shot_id"), "prompt": request.get("prompt", "")}],
+        })
+        errors.extend(f"medium_lock:{error}" for error in medium_errors)
     required = ("provider", "endpoint", "payload_schema", "prompt", "action", "audio_contract", "generation_parameters")
     for field in required:
         value = request.get(field)

@@ -1,7 +1,7 @@
 param(
-  [string]$Srt = 'C:\tmp\ace_video_kingdom_git\media_staging\episode_007_virtual_data\subtitles\episode_007_dialogue_aligned_v2.srt',
-  [string]$OutDir = 'C:\tmp\ace_video_kingdom_git\research\external_research\tts_probe_episode007_20260903',
-  [string]$Manifest = 'C:\tmp\ace_video_kingdom_git\research\external_research\episode007_tts_measurements_20260903.json'
+  [string]$Srt = (Join-Path (Resolve-Path (Join-Path $PSScriptRoot '..')).Path 'media_staging\episode_007_virtual_data\subtitles\episode_007_dialogue_aligned_v2.srt'),
+  [string]$OutDir = (Join-Path (Resolve-Path (Join-Path $PSScriptRoot '..')).Path 'research\external_research\tts_probe_episode007_20260903'),
+  [string]$Manifest = (Join-Path (Resolve-Path (Join-Path $PSScriptRoot '..')).Path 'research\external_research\episode007_tts_measurements_20260903.json')
 )
 $ErrorActionPreference='Stop'
 Add-Type -AssemblyName System.Speech

@@ -1,0 +1,19 @@
+{
+  "schema": "video_kingdom.continuity_bridge.v1",
+  "status": "PENDING_FRAME_PROOF",
+  "from_shot": "S01A",
+  "to_shot": "S02A",
+  "label": "SC01 -> S02A",
+  "previous_end_frame_state": "【前一镜末帧状态：角色位置、道具在哪只手、视线朝向、光线方向】",
+  "next_initial_state": "【下一镜首帧必须接得上的状态】",
+  "exit_direction": "hold",
+  "enter_direction": "hold",
+  "inherited_state_items": [
+    {"key": "costume", "value": "【服装继承：颜色、层数、破损】", "source_shot": "S01A"},
+    {"key": "identity", "value": "【身份继承：同一张脸、同一年龄段】", "source_shot": "S01A"},
+    {"key": "spatial_position", "value": "【空间位置：相对场景锚点的左右前后】", "source_shot": "S01A"}
+  ],
+  "invariants": ["服装不变", "身份不变", "轴线不变"],
+  "asset_ids": ["CHAR_MAIN"],
+  "evidence_basis": "asset package + explicit state transition; post-generation frame proof pending"
+}

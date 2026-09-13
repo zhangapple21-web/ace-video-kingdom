@@ -9,7 +9,7 @@
     "seconds": 11,
     "size": "720P",
     "aspect_ratio": "9:16",
-    "fallback_model": "agnes-video-v2.0",
+    "fallback_model": "agnes-video-2.5",
     "fallback_on_failure": true,
     "negative_prompt": "different person, face drift, changed hair, missing cooling patch, changed hoodie, extra people, distorted hands, readable text, logo, watermark, frozen title card"
   },

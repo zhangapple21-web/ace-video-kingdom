@@ -27,6 +27,7 @@ from .provider_admission import (
     assert_admission,
     build_canonical_generation_request,
 )
+from tools.medium_lock import validate_medium_lock
 
 
 CREATE_URL = "https://apihub.agnes-ai.com/v1/videos"
@@ -330,6 +331,10 @@ def preflight_shot(shot: dict[str, Any]) -> dict[str, Any]:
     warnings: list[str] = []
     if not isinstance(shot, dict):
         return {"status": "BLOCKED", "errors": ["shot_must_be_object"], "warnings": [], "required_render_seconds": 0.0, "contract_render_seconds": 0.0}
+    errors.extend(f"medium_lock:{error}" for error in validate_medium_lock({
+        "medium_lock": shot.get("medium_lock"),
+        "shots": [shot],
+    }))
     required = {"shot_id", "episode_id", "scene_id", "shot_type", "intent", "state", "contract", "audio", "asset_refs"}
     errors.extend(f"missing:{key}" for key in sorted(required - set(shot)))
     if shot.get("shot_type") not in {"ESTABLISHING", "DIALOGUE", "ACTION", "REACTION", "INSERT", "TRANSITION"}:

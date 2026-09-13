@@ -42,9 +42,13 @@ def _load_shot_contract(path: Path, shot_id: str) -> dict:
         return document
     rows = document.get("shots") if isinstance(document, dict) else None
     if isinstance(rows, list):
+        episode_lock = document.get("medium_lock") if isinstance(document.get("medium_lock"), dict) else None
         for row in rows:
             if isinstance(row, dict) and str(row.get("shot_id")) == str(shot_id):
-                return row
+                result = dict(row)
+                if episode_lock is not None and not isinstance(result.get("medium_lock"), dict):
+                    result["medium_lock"] = episode_lock
+                return result
     raise ValueError(f"canonical shot contract missing shot_id:{shot_id}")
 
 
@@ -216,7 +220,7 @@ def main() -> int:
                         help="canonical one-shot JSON; required before any Provider POST")
     parser.add_argument("--output", type=Path, required=True)
     parser.add_argument("--timeout", type=int, default=360)
-    parser.add_argument("--model", choices=["agnes-video-v2.0", "agnes-video-2.5", "agnes-video-2.5-flash"], default="agnes-video-v2.0")
+    parser.add_argument("--model", choices=["agnes-video-2.5-flash", "agnes-video-2.5", "agnes-video-v2.0"], default="agnes-video-2.5-flash")
     parser.add_argument("--image", help="Public URL or local image; local files are converted to WebP under 500KB and sent as path/hash metadata")
     parser.add_argument("--keyframe-image", action="append", help="Repeat for two or more keyframe references")
     parser.add_argument("--width", type=int, default=1152)
@@ -235,9 +239,13 @@ def main() -> int:
     parser.add_argument("--flash-reference-audio-url", action="append", default=[], help="2.5 Flash public audio URL; repeat up to three")
     parser.add_argument("--reference-video-url", action="append", default=[], help="Agnes 2.5 public video URL; not supported by Flash")
     parser.add_argument("--reference-video-require-audio", action="store_true", help="require audio on Agnes 2.5 reference videos")
-    parser.add_argument("--admission-scope", choices=["legacy", "research", "production"], default="legacy",
+    parser.add_argument("--admission-scope", choices=["legacy", "research", "production"], default="production",
                         help="scope recorded in the canonical admission receipt")
     args = parser.parse_args()
+    if args.model == "agnes-video-v2.0":
+        raise SystemExit(
+            "agnes-video-v2.0 is retired; use agnes-video-2.5-flash (free) or agnes-video-2.5"
+        )
 
     if args.timeout <= 0:
         raise SystemExit("timeout must be positive")
@@ -253,6 +261,12 @@ def main() -> int:
         canonical_shot = _load_shot_contract(contract_path, args.shot_id)
     except ValueError as error:
         raise SystemExit(f"provider admission blocked: {error}; no provider request submitted") from error
+    contract_prompt = str(canonical_shot.get("prompt") or "")
+    if not contract_prompt or args.prompt != contract_prompt:
+        raise SystemExit(
+            "provider admission blocked: --prompt must exactly match the canonical shot contract; "
+            "no provider request submitted"
+        )
     args.manifest.parent.mkdir(parents=True, exist_ok=True)
     payload_sha256 = hashlib.sha256(json.dumps(payload, ensure_ascii=False, sort_keys=True, separators=(",", ":")).encode("utf-8")).hexdigest()
     existing = next((row for row in _load_records(args.manifest) if row.get("shot_id") == args.shot_id), None)

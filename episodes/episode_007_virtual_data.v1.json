@@ -1,0 +1,268 @@
+{
+  "contract_version": "ace.video_kingdom.asset_storyboard.v1",
+  "scope": "FREE_ZONE_RESEARCH_ONLY",
+  "medium_lock": {
+    "schema": "video_kingdom.medium_lock.v1",
+    "signed": true,
+    "source_kind": "ORIGINAL_STORY",
+    "output_medium": "CHARACTER_PERFORMANCE",
+    "signed_by": "episode007_contract",
+    "rule": "故事素材不等于成片介质"
+  },
+  "production_integration": false,
+  "project_id": "episode_007_virtual_data",
+  "six_module_contract": "episode_007_virtual_data.six_module.v1.json",
+  "title": "虚假的数据",
+  "format": {
+    "target_seconds": 112,
+    "tolerance_seconds": 4,
+    "aspect_ratio": "9:16",
+    "video_target": "704x1280"
+  },
+  "characters": {
+    "阿浪": {
+      "age": 24,
+      "look": "憔悴、重黑眼圈、揉眼睛、洗旧浅灰短袖衬衫",
+      "arc": "烦躁→希望→幻灭→麻木"
+    },
+    "肥哥": {
+      "age": 35,
+      "look": "偏胖、烟不离手、焦虑暴躁、眼神疲惫"
+    },
+    "男同事": {
+      "look": "沉默脆弱、眼泪落在键盘上"
+    },
+    "妈妈": {
+      "voice_only": true
+    },
+    "粉商": {
+      "voice_only": true
+    }
+  },
+  "visual_style": "冷峻压抑现实主义，东南亚密闭写字楼，暗绿屏幕、昏黄烟雾、黑色荒诞",
+  "render_defaults": {
+    "model": "agnes-video-2.5-flash",
+    "mode": "reference",
+    "seconds": 6
+  },
+  "source_boundary": {
+    "reference_type": "LOCAL_GENERATED_CHARACTER_ANCHORS",
+    "publication": "FORBIDDEN"
+  },
+  "identity_invariants": [
+    "阿浪始终同一张憔悴面孔与重黑眼圈",
+    "肥哥始终偏胖且手持香烟",
+    "办公室窗帘紧闭、绿色聊天界面、烟味泡面味"
+  ],
+  "shots": [
+    {
+      "shot_id": "S01A",
+      "scene": "场景1·密闭大厅，键盘如雨；阿浪揉眼后猛敲键盘。",
+      "continuous_action": false,
+      "prompt": "handheld push-in, close-up fingers and tired eyes, no static cover; 阿浪与肥哥外观必须连续，冷峻压抑现实主义，竖屏9:16",
+      "render": {
+        "reference_image_urls": [],
+      "fallback_image": "../media_staging/episode_007_virtual_data/anchors/user/alang_user_reference.png"
+      }
+    },
+    {
+      "shot_id": "S01B",
+      "scene": "场景1·手机好友申请刷屏，聊天窗口暴露机器人与同行。",
+      "continuous_action": true,
+      "prompt": "fast lateral pan across screens, notification vibration, 阿浪 freezes; 阿浪与肥哥外观必须连续，冷峻压抑现实主义，竖屏9:16",
+      "render": {
+        "reference_image_urls": [],
+      "fallback_image": "../media_staging/episode_007_virtual_data/anchors/user/alang_user_reference.png"
+      }
+    },
+    {
+      "shot_id": "S01C",
+      "scene": "场景1·阿浪拨通粉商，压低声音质问假粉。",
+      "continuous_action": true,
+      "prompt": "over-shoulder phone call, 阿浪 pacing beside desk, smoke haze; 阿浪与肥哥外观必须连续，冷峻压抑现实主义，竖屏9:16",
+      "render": {
+        "reference_image_urls": [],
+      "fallback_image": "../media_staging/episode_007_virtual_data/anchors/user/alang_user_reference.png"
+      }
+    },
+    {
+      "shot_id": "S01D",
+      "scene": "场景1·电话挂断，手机砸桌，周围人抬头又低头。",
+      "continuous_action": true,
+      "prompt": "whip pan to impact, rack focus from phone to silent coworkers; 阿浪与肥哥外观必须连续，冷峻压抑现实主义，竖屏9:16",
+      "render": {
+        "reference_image_urls": [],
+      "fallback_image": "../media_staging/episode_007_virtual_data/anchors/user/alang_user_reference.png"
+      }
+    },
+    {
+      "shot_id": "S02A",
+      "scene": "场景2·肥哥办公室烟灰缸特写，报表红笔划满。",
+      "continuous_action": false,
+      "prompt": "macro ashtray, tilt up to 肥哥 at window, slow dolly; 阿浪与肥哥外观必须连续，冷峻压抑现实主义，竖屏9:16",
+      "render": {
+        "reference_image_urls": [],
+        "fallback_image": "../media_staging/episode_007_virtual_data/anchors/feige_character_anchor.png"
+      }
+    },
+    {
+      "shot_id": "S02B",
+      "scene": "场景2·阿浪质问停买假粉，肥哥吐烟冷笑。",
+      "continuous_action": true,
+      "prompt": "two-shot, 肥哥 turns sharply, smoke crossing frame; 阿浪与肥哥外观必须连续，冷峻压抑现实主义，竖屏9:16",
+      "render": {
+        "reference_image_urls": [],
+        "fallback_image": "../media_staging/episode_007_virtual_data/anchors/feige_character_anchor.png"
+      }
+    },
+    {
+      "shot_id": "S02C",
+      "scene": "场景2·工资与护照争执，肥哥猛拍桌。",
+      "continuous_action": true,
+      "prompt": "hard cut, desk impact close-up, camera jolt; 阿浪与肥哥外观必须连续，冷峻压抑现实主义，竖屏9:16",
+      "render": {
+        "reference_image_urls": [],
+        "fallback_image": "../media_staging/episode_007_virtual_data/anchors/feige_character_anchor.png"
+      }
+    },
+    {
+      "shot_id": "S03A",
+      "scene": "场景3·次日上午大厅，肥哥宣布每人再买两千精准粉。",
+      "continuous_action": false,
+      "prompt": "low angle on 肥哥 walking, papers raised, fluorescent flicker; 阿浪与肥哥外观必须连续，冷峻压抑现实主义，竖屏9:16",
+      "render": {
+        "reference_image_urls": [],
+        "fallback_image": "../media_staging/episode_007_virtual_data/anchors/feige_character_anchor.png"
+      }
+    },
+    {
+      "shot_id": "S03B",
+      "scene": "场景3·男同事站起说母亲住院，肥哥掐灭烟头。",
+      "continuous_action": true,
+      "prompt": "沉默脆弱的男同事站起，脸色苍白、瘦削、眼含泪光，眼泪落在键盘上；肥哥在旁边掐灭烟头，镜头慢推，冷峻压抑现实主义，竖屏9:16，男同事不能长得像阿浪或肥哥",
+      "render": {
+        "reference_image_urls": [],
+        "fallback_image": "../media_staging/episode_007_virtual_data/anchors/alang_character_anchor.png"
+      }
+    },
+    {
+      "shot_id": "S03C",
+      "scene": "场景3·阿浪握拳却沉默，集体继续敲键盘。",
+      "continuous_action": true,
+      "prompt": "orbit around clenched fist, background typing becomes oppressive; 阿浪与肥哥外观必须连续，冷峻压抑现实主义，竖屏9:16",
+      "render": {
+        "reference_image_urls": [],
+        "fallback_image": "../media_staging/episode_007_virtual_data/anchors/alang_character_anchor.png"
+      }
+    },
+    {
+      "shot_id": "S04A",
+      "scene": "场景4·厕所隔间，妈妈语音播放，阿浪删掉回复。",
+      "continuous_action": false,
+      "prompt": "tight stall close-up, phone glow, subtle handheld breathing; 阿浪与肥哥外观必须连续，冷峻压抑现实主义，竖屏9:16",
+      "render": {
+        "reference_image_urls": [],
+        "fallback_image": "../media_staging/episode_007_virtual_data/anchors/alang_character_anchor.png"
+      }
+    },
+    {
+      "shot_id": "S04B",
+      "scene": "场景4·新好友申请出现，阿浪眼神第一次亮。",
+      "continuous_action": true,
+      "prompt": "snap rack focus to phone, light shift, he stands abruptly; 阿浪与肥哥外观必须连续，冷峻压抑现实主义，竖屏9:16",
+      "render": {
+        "reference_image_urls": [],
+        "fallback_image": "../media_staging/episode_007_virtual_data/anchors/alang_character_anchor.png"
+      }
+    },
+    {
+      "shot_id": "S05A",
+      "scene": "场景5·阿浪温柔发送话术，对方称先转五万。",
+      "continuous_action": false,
+      "prompt": "screen reflection close-up, slow zoom, forced gentle smile; 阿浪与肥哥外观必须连续，冷峻压抑现实主义，竖屏9:16",
+      "render": {
+        "reference_image_urls": [],
+        "fallback_image": "../media_staging/episode_007_virtual_data/anchors/alang_character_anchor.png"
+      }
+    },
+    {
+      "shot_id": "S05B",
+      "scene": "场景5·到账提示，阿浪冲出座位大喊出单。",
+      "continuous_action": true,
+      "prompt": "tracking shot through desks, coworkers surge in; 阿浪与肥哥外观必须连续，冷峻压抑现实主义，竖屏9:16",
+      "render": {
+        "reference_image_urls": [],
+        "fallback_image": "../media_staging/episode_007_virtual_data/anchors/alang_character_anchor.png"
+      }
+    },
+    {
+      "shot_id": "S05C",
+      "scene": "场景5·对方质疑平台跑路，系统提示冻结原路退回。",
+      "continuous_action": true,
+      "prompt": "hard cut between messages, red warning reflection on faces; 阿浪与肥哥外观必须连续，冷峻压抑现实主义，竖屏9:16",
+      "render": {
+        "reference_image_urls": [],
+        "fallback_image": "../media_staging/episode_007_virtual_data/anchors/alang_character_anchor.png"
+      }
+    },
+    {
+      "shot_id": "S06A",
+      "scene": "场景6·肥哥接老板电话，只看日报不看理由。",
+      "continuous_action": false,
+      "prompt": "static office frame broken by smoke and phone vibration; 阿浪与肥哥外观必须连续，冷峻压抑现实主义，竖屏9:16",
+      "render": {
+        "reference_image_urls": [],
+        "fallback_image": "../media_staging/episode_007_virtual_data/anchors/feige_character_anchor.png"
+      }
+    },
+    {
+      "shot_id": "S06B",
+      "scene": "场景6·阿浪门口听见，问“我们在等什么”。",
+      "continuous_action": true,
+      "prompt": "slow dolly from doorway, silence after call ends; 阿浪与肥哥外观必须连续，冷峻压抑现实主义，竖屏9:16",
+      "render": {
+        "reference_image_urls": [],
+        "fallback_image": "../media_staging/episode_007_virtual_data/anchors/alang_character_anchor.png"
+      }
+    },
+    {
+      "shot_id": "S07A",
+      "scene": "场景7·深夜大厅，阿浪机械复制粘贴，镜头拉远。",
+      "continuous_action": false,
+      "prompt": "long pull-back, fluorescent islands, no hopeful movement; 阿浪与肥哥外观必须连续，冷峻压抑现实主义，竖屏9:16",
+      "render": {
+        "reference_image_urls": [],
+        "fallback_image": "../media_staging/episode_007_virtual_data/anchors/alang_character_anchor.png"
+      }
+    }
+  ],
+  "acceptance": {
+    "duration_window_seconds": [
+      96,
+      124
+    ],
+    "minimum_shots": 12,
+    "subtitle_mode": "first_person_inner_monologue_or_spoken_dialogue_only",
+    "audio": "optional_voice_or_sfx",
+    "no_extra_caption_for_scene_description": true
+  },
+  "safety": {
+    "fictional_interfaces_only": true,
+    "no_real_platform_or_agency": true,
+    "no_personal_data": true
+  },
+  "assets": [
+    {
+      "asset_id": "ALANG",
+      "kind": "character_anchor",
+      "path": "../media_staging/episode_007_virtual_data/anchors/alang_character_anchor.png",
+      "status": "GENERATED_GPT_IMAGE_2"
+    },
+    {
+      "asset_id": "FEIGE",
+      "kind": "character_anchor",
+      "path": "../media_staging/episode_007_virtual_data/anchors/feige_character_anchor.png",
+      "status": "GENERATED_GPT_IMAGE_2"
+    }
+  ]
+}

@@ -1,7 +1,7 @@
 import json
 from pathlib import Path
 
-root = Path(r'C:/tmp/ace_video_kingdom_git')
+root = Path(__file__).resolve().parents[1]
 src = json.loads((root/'episodes/episode_007_virtual_data.v1.json').read_text(encoding='utf-8'))
 shots=[]
 for s in src['shots']:

@@ -32,6 +32,7 @@ from .workflow import (
     next_action,
     recover,
 )
+from .media_routing import route_media_demand
 
 
 GOALS = {"PRODUCE", "RESUME", "STATUS", "AUDIT", "DELIVER"}
@@ -240,6 +241,9 @@ def route_model_demand(
     Unknown, remote-only, or unproven candidates stay visible as evidence but
     cannot silently become a route.
     """
+    media_route = route_media_demand(text, scope=scope)
+    if media_route is not None:
+        return media_route
     requirements = infer_task_requirements(text)
     registry = _load_capability_registry(registry_path)
     canonical_override, requested_override = _canonical_model_override(model_override, text)

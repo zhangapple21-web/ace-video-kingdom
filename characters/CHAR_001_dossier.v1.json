@@ -5,6 +5,26 @@
   "character_id": "CHAR_001",
   "fictional_character": true,
   "name": "The Tavern Keeper",
+  "persona_card": {
+    "schema": "video_kingdom.persona_card.v1",
+    "character_id": "CHAR_001",
+    "name": "The Tavern Keeper",
+    "role": "keeps a ritual place for an unseen guest",
+    "appearance": "middle-aged Chinese woman, short dark hair, navy cardigan, dark apron; adult silhouette that can be drawn as a makeup sheet",
+    "personality": "observes before acting; chooses care without pretending certainty",
+    "motivation": "keep an ordinary place ready without forcing the guest into visibility",
+    "catchphrase": "先把杯子放下。",
+    "voice_lock": "VOICE_CHAR_001_V1",
+    "costume_lock": "navy cardigan + dark apron; no brand, no readable text, no wardrobe swap",
+    "makeup_sheet": {
+      "naming_rule": "{character_id}_{expression}_{angle}",
+      "required_views": [
+        {"angle": "front", "expression": "neutral", "required": true},
+        {"angle": "side", "expression": "neutral", "required": true}
+      ],
+      "required_expressions": ["neutral", "tension", "reaction"]
+    }
+  },
   "rights_and_provenance": {
     "source_class": "ORIGINAL_RESIDENT_WRITING",
     "source_facts": [

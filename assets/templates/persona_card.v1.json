@@ -1,0 +1,20 @@
+{
+  "schema": "video_kingdom.persona_card.v1",
+  "character_id": "CHAR_XXX",
+  "name": "【填写角色名】",
+  "role": "【填写关系位置，例如观察者与行动者】",
+  "appearance": "【外貌：脸型、年龄段、发型、体态、服装颜色；必须能画成定妆图】",
+  "personality": "【性格：可表演的行为倾向，禁止空口号】",
+  "motivation": "【动机：本项目内可被镜头验证的欲求】",
+  "catchphrase": "【口头禅：短、口语、方便 TTS】",
+  "voice_lock": "VOICE_CHAR_XXX_V1",
+  "costume_lock": "【服装锁：颜色、层数；禁品牌、禁文字、全剧不得更换】",
+  "makeup_sheet": {
+    "naming_rule": "{character_id}_{expression}_{angle}",
+    "required_views": [
+      {"angle": "front", "expression": "neutral", "required": true},
+      {"angle": "side", "expression": "neutral", "required": true}
+    ],
+    "required_expressions": ["neutral", "tension", "reaction"]
+  }
+}

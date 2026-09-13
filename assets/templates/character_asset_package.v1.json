@@ -1,0 +1,71 @@
+{
+  "schema": "video_kingdom.character_asset_package.v1",
+  "character_id": "CHAR_XXX",
+  "name": "【填写角色名】",
+  "fictional_character": true,
+  "production_integration": false,
+  "persona_card": {
+    "schema": "video_kingdom.persona_card.v1",
+    "character_id": "CHAR_XXX",
+    "name": "【填写角色名】",
+    "role": "【填写关系位置】",
+    "appearance": "【外貌：脸型、年龄段、发型、体态、服装颜色】",
+    "personality": "【性格：可表演的行为倾向】",
+    "motivation": "【动机：可被镜头验证的欲求】",
+    "catchphrase": "【口头禅】",
+    "voice_lock": "VOICE_CHAR_XXX_V1",
+    "costume_lock": "【服装锁：颜色、层数；禁品牌禁文字】",
+    "makeup_sheet": {
+      "naming_rule": "{character_id}_{expression}_{angle}",
+      "required_views": [
+        {"angle": "front", "expression": "neutral", "required": true},
+        {"angle": "side", "expression": "neutral", "required": true}
+      ],
+      "required_expressions": ["neutral", "tension", "reaction"]
+    }
+  },
+  "identity_invariants": {
+    "visual": "【视觉不变量：发型、年龄段、服装在本项目内固定】",
+    "negative_constraints": ["不使用现实人物肖像", "不加入品牌标识", "不改变角色身份"],
+    "behavioral": "【行为不变量：由当前镜头动作弧驱动】",
+    "relational": "【关系不变量：关系位置保持为填写的 role】"
+  },
+  "allowed_evolution": {
+    "may_change": ["情绪", "姿态", "道具状态"],
+    "requires_new_dossier_version": true
+  },
+  "visual_assets": [
+    {
+      "asset_id": "CHAR_XXX_neutral_front",
+      "purpose": "identity_reference_sheet",
+      "required": true,
+      "path": null,
+      "sha256": "",
+      "status": "MISSING",
+      "naming": "CHAR_XXX_neutral_front"
+    },
+    {
+      "asset_id": "CHAR_XXX_neutral_side",
+      "purpose": "identity_side_view",
+      "required": true,
+      "path": null,
+      "sha256": "",
+      "status": "MISSING",
+      "naming": "CHAR_XXX_neutral_side"
+    },
+    {
+      "asset_id": "CHAR_XXX_tension_front",
+      "purpose": "expression_sheet",
+      "required": true,
+      "path": null,
+      "sha256": "",
+      "status": "MISSING",
+      "naming": "CHAR_XXX_tension_front"
+    }
+  ],
+  "missing": ["CHAR_XXX_neutral_front", "CHAR_XXX_neutral_side", "CHAR_XXX_tension_front"],
+  "rights_and_provenance": {
+    "source": "user_filled_template",
+    "disallowed_sources": ["UNAUTHORIZED_REAL_PERSON_LIKENESS"]
+  }
+}

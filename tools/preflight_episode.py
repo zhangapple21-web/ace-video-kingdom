@@ -21,6 +21,10 @@ try:
     from validate_episode_quality import validate as validate_quality
 except ImportError:  # support ``python -m tools.preflight_episode`` as well
     from tools.validate_episode_quality import validate as validate_quality
+try:
+    from medium_lock import validate_medium_lock
+except ImportError:  # support ``python -m tools.preflight_episode`` as well
+    from tools.medium_lock import validate_medium_lock
 
 
 def _load(path: Path) -> dict:
@@ -297,6 +301,7 @@ def main() -> int:
     hard_failures: list[str] = []
     rework: list[str] = []
     warnings: list[str] = []
+    hard_failures.extend(f"medium_lock: {error}" for error in validate_medium_lock(plan))
     if plan.get("scope") != "FREE_ZONE_RESEARCH_ONLY":
         hard_failures.append("scope must be FREE_ZONE_RESEARCH_ONLY")
     if plan.get("production_integration") is not False:

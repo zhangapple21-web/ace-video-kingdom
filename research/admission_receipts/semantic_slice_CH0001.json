@@ -31,6 +31,7 @@
       "temperature": 0.1
     },
     "last_frame": null,
+    "medium_lock": null,
     "model": "gpt-5.4-mini",
     "negative_prompt": "",
     "payload_schema": "openai.chat.completions.v1",
@@ -63,14 +64,14 @@
     "state": {},
     "visible_entities": []
   },
-  "created_at": "2026-09-08T01:37:51Z",
+  "created_at": "2026-09-13T04:10:21Z",
   "preflight": {
     "errors": [],
     "status": "CONTRACT_VALID",
     "warnings": []
   },
   "provider_post_allowed": true,
-  "request_hash": "5c69ccef6d289cc7b6656373337ad8e7fcb8bdbc6d4d7ad86cb9cc0ce9e834df",
+  "request_hash": "5c17d6b9e7f0961e7c3e6b17bb094a9e0c00f57847ca224ffdc7cf0c5a792f2f",
   "schema": "video_kingdom.provider_admission_receipt.v1",
   "status": "ADMITTED"
 }

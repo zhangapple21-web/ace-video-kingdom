@@ -61,6 +61,22 @@ def test_idea_pipeline_target_duration_and_topic_branch(tmp_path):
     assert plan["acceptance"]["duration_window_seconds"] == [28, 32]
     assert preflight["planned_duration_seconds"] == 30
     assert "求救" in plan["shots"][1]["prompt"]
+    assert "风格基准" in plan["shots"][1]["prompt"]
+    assert "分时序动作" in plan["shots"][1]["prompt"]
+    assert plan["shots"][1]["shot_prompt"]["txt_prompt_elements"]["action"]
+    assert plan["shots"][1]["continuity_bridge"]["previous_end_frame_state"]
+    assert plan["shots"][1]["continuity_bridge"]["exit_direction"] in {"left", "right", "up", "down", "toward_camera", "away", "hold", "none"}
+    assert len(plan["shots"][1]["continuity_bridge"]["inherited_state_items"]) >= 3
+    assert plan["narrative_causal_self_check"]["rhythm_rule"] == "3秒钩子、30秒转折、每集结尾强钩子"
+    assert plan["premise"]
+    assert plan["causal_chain"]
+    assert plan["plants"]
+    assert plan["payoffs"]
+    by_id = {row["id"]: row for row in plan["narrative_causal_self_check"]["answers"]}
+    assert by_id["Q1_CAUSE"]["pass"] is True
+    assert by_id["Q2_INFO_PAYOFF"]["pass"] is True
+    dossier = json.loads((project / "assets" / "char_main_dossier.json").read_text(encoding="utf-8"))
+    assert dossier["persona_card"]["catchphrase"]
     contract = plan["generation_contract"]
     assert all(contract.get(field) for field in (
         "main_generation_instruction", "character_identity_lock",
