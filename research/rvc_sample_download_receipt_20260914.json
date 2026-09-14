@@ -1,0 +1,65 @@
+{
+  "schema": "rvc_sample_download_receipt.v1",
+  "date": "2026-09-14",
+  "process": "rapid",
+  "purpose": "隔离下载少量 RVC 试听样本，验证音质与后续推理可行性",
+  "quarantine_root": "D:\\视频创作\\quarantine\\rvc_samples",
+  "production_admission": "NOT_ADMITTED",
+  "default_runtime_unchanged": "D:\\视频创作\\runtimes\\cosyvoice3",
+  "klrvc_previews": [
+    {
+      "title": "可商用 九夏 温柔青年音RVC模型",
+      "source": "https://klrvc.com/mxgf/3390.html",
+      "downloaded_file": "D:\\视频创作\\quarantine\\rvc_samples\\klrvc_previews\\jiuxia_after.mp3",
+      "sha256": "2381142F7A54BF09D42409D6226D710C97EC845C8B49E1951F223A2F0D36F22F",
+      "media": {"codec": "mp3", "sample_rate": 44100, "channels": 2, "duration_seconds": 44.408125},
+      "status": "PREVIEW_ONLY"
+    },
+    {
+      "title": "已授权可商用音域宽 月儿 少御音模型",
+      "source": "https://klrvc.com/mxgf/2701.html",
+      "downloaded_file": "D:\\视频创作\\quarantine\\rvc_samples\\klrvc_previews\\yueer_after.wav",
+      "sha256": "16EFCF658D615EF33A4B3277BEB3E0A0AE9053A7FEFBAA79FC39FCA9CC97CF5A",
+      "media": {"codec": "pcm_s16le", "sample_rate": 40000, "channels": 1, "duration_seconds": 10.94},
+      "status": "PREVIEW_ONLY"
+    },
+    {
+      "title": "有授权 可商用 栀酒御姐音RVC模型",
+      "source": "https://klrvc.com/mxgf/1057.html",
+      "downloaded_file": "D:\\视频创作\\quarantine\\rvc_samples\\klrvc_previews\\zhijiu_after.wav",
+      "sha256": "02553B1A1F8F98B6CE93AED8BA48A6339E4273FE6FF30A5C64DA64A3C7379DD2",
+      "media": {"codec": "pcm_s16le", "sample_rate": 40000, "channels": 1, "duration_seconds": 11.2},
+      "status": "PREVIEW_ONLY"
+    }
+  ],
+  "hf_archives": [
+    {
+      "title": "Alien 3 The Gun Male Villain (RVC V2 - 300 epochs)",
+      "source": "https://huggingface.co/TASTomusan/RVC_Models_Collection_Series",
+      "downloaded_file": "D:\\视频创作\\quarantine\\rvc_samples\\hf_archive\\alien3_male_villain.zip",
+      "sha256": "E4FE5D2626E2C7C372C4F6582C00AC24EE6AE0B8BBBD13C13644D1E6E29FBC61",
+      "size_bytes": 59278730,
+      "upstream_lfs_sha256": "E4FE5D2626E2C7C372C4F6582C00AC24EE6AE0B8BBBD13C13644D1E6E29FBC61",
+      "archive_probe": ["Sample (English).wav", "Sample (French).wav", "Sample (Japanese).wav", "Sample (Spanish).wav", "Sample (Tagalog_Filipino).wav", "Reference.jpg"],
+      "extracted_weights": [
+        {"file": "Alien3_The_Gun_Male_Villain (300 epochs).pth", "sha256": "9801016F504CE26955ADA312C3B9B4ED93299A54F4D63D7671094E8782D25B8A"},
+        {"file": "added_IVF90_Flat_nprobe_1_Alien3_The_Gun_Male_Villain_v2.index", "sha256": "07F6C296FA14DBAE7D7AEB6DB27630A598023D1D7F6377EF5621FFE01E5035B2"}
+      ],
+      "status": "RESEARCH_ONLY"
+    },
+    {
+      "title": "Female Wojak 1 (Sally) - enhanced (RVC V2 - 300 epochs)",
+      "source": "https://huggingface.co/TASTomusan/RVC_Models_Collection_Series",
+      "downloaded_file": "D:\\视频创作\\quarantine\\rvc_samples\\hf_archive\\female_wojak_sally.zip",
+      "sha256": "178F6AD2EE536F49FE37FEEDAE62D063D60A3ABEC061D56FCEB2EF9A21905247",
+      "size_bytes": 57611048,
+      "upstream_lfs_sha256": "178F6AD2EE536F49FE37FEEDAE62D063D60A3ABEC061D56FCEB2EF9A21905247",
+      "extracted_weights": [
+        {"file": "Female_Wojak_Sally_enhanced (300 epochs).pth", "sha256": "7A907AB49DE1C393D33E3951DF927996470D3907067D2113A5EE37538C1773EF"},
+        {"file": "added_IVF70_Flat_nprobe_1_Female_Wojak_Sally_enhanced_v2.index", "sha256": "D98FD0E4ADE5505871A039A645664A8C1652A20A7AB2D09B66C3244051602B2F"}
+      ],
+      "status": "RESEARCH_ONLY"
+    }
+  ],
+  "next_step": "仅在用户明确要求后，在 D:\\视频创作\\runtimes\\rvc 建立隔离推理环境；先做三句中文探针，再与 CosyVoice3 对比。"
+}
