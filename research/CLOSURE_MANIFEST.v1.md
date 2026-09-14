@@ -32,3 +32,11 @@
 - Edge‑TTS 已安装到 `D:\视频创作\runtimes\edge-tts\site-packages`，中文 MP3 烟测通过，产物为 `D:\视频创作\temp\audio_probes\edge_tts_probe.mp3`。
 - CosyVoice 3 保持正式默认；RVC 保持隔离精修备选。
 - 三路路由和降级顺序已写入 `research/voice_runtime_routes.v1.json`。
+
+## 2026-09-14：技能工程化优化
+
+- 新增 `production_control/privacy_scan.py` 和 `tools/scan_sensitive_content.py`，并接入 `preflight_episode.py`；命中密钥/Token/密码/联系方式/身份证号时硬阻断为 `BLOCKED_PRIVACY`，收据只保留脱敏片段。
+- 新增创作模式登记 `research/creative_modes.v1.json`，默认仍为 `live_action`；聊天 UI 只有显式模式才允许。
+- 新增 `tools/preflight_environment.py`，检查项目骨架、FFmpeg/ffprobe、参考矿和磁盘空间；本机检查结果为 `PASS`。
+- 新增 `assets/schema/rights_receipt.v1.json`，补齐平台、地区、用途、期限、署名、改编、广告和客户项目范围。
+- 新增 `research/delivery_package.v1.json`，固定 `preview → draft → approved_master → publish_package` 的交付层级。

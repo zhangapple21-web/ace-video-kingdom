@@ -12,6 +12,14 @@ from typing import Any
 
 
 BRIEF_REQUIRED = ("audience", "hook", "ending_hook", "style")
+CREATIVE_MODES = {
+    "live_action",
+    "chat_ui",
+    "cartoon",
+    "product_demo",
+    "motion_graphics",
+    "audit_only",
+}
 
 
 def _text(value: Any) -> str:
@@ -25,6 +33,7 @@ def build_creator_brief(
     hook: str = "",
     ending_hook: str = "",
     style: str = "",
+    creative_mode: str = "live_action",
     platform: str = "",
     episode_number: int | None = None,
     episode_count: int | None = None,
@@ -47,6 +56,7 @@ def build_creator_brief(
         "hook": _text(hook),
         "ending_hook": _text(ending_hook),
         "style": _text(style),
+        "creative_mode": creative_mode if creative_mode in CREATIVE_MODES else "live_action",
         "publish_goal": _text(publish_goal),
     }
     return brief
@@ -62,6 +72,8 @@ def validate_creator_brief(brief: dict[str, Any], *, require_ready: bool = False
     for field in BRIEF_REQUIRED:
         if not _text(brief.get(field)):
             errors.append(f"creator brief missing {field}")
+    if brief.get("creative_mode", "live_action") not in CREATIVE_MODES:
+        errors.append("creative_mode must be one of the registered modes")
     if brief.get("episode_number") is not None and (not isinstance(brief.get("episode_number"), int) or brief["episode_number"] < 1):
         errors.append("episode_number must be a positive integer")
     if brief.get("episode_count") is not None and (not isinstance(brief.get("episode_count"), int) or brief["episode_count"] < 1):
@@ -91,6 +103,7 @@ def build_publish_recap(*, project_id: str, brief: dict[str, Any] | None = None)
             "title": _text((brief or {}).get("title")),
             "platform": _text((brief or {}).get("platform")),
             "audience": _text((brief or {}).get("audience")),
+            "creative_mode": _text((brief or {}).get("creative_mode")) or "live_action",
         },
         "metrics": {
             "impressions": None,

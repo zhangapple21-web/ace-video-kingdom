@@ -15,6 +15,10 @@
 → 才允许使用 final 文件名
 ```
 
+提交前环境和隐私门：`preflight_environment.py` 必须为 `PASS`；剧本、分镜、参考素材和音频元数据必须通过 `privacy_scan`，否则为 `BLOCKED_ENVIRONMENT` 或 `BLOCKED_PRIVACY`，不得调用 Provider。
+
+创作模式字段见 `research/creative_modes.v1.json`。交付包状态和产物清单见 `research/delivery_package.v1.json`。
+
 ## 已封堵的通用错误
 
 - `EXPERIMENTAL_WITH_GAPS` 或 `BLOCKED` 的计划不能调用 Provider。
