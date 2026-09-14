@@ -40,3 +40,4 @@
 - 新增 `tools/preflight_environment.py`，检查项目骨架、FFmpeg/ffprobe、参考矿和磁盘空间；本机检查结果为 `PASS`。
 - 新增 `assets/schema/rights_receipt.v1.json`，补齐平台、地区、用途、期限、署名、改编、广告和客户项目范围。
 - 新增 `research/delivery_package.v1.json`，固定 `preview → draft → approved_master → publish_package` 的交付层级。
+- 吸收扣子流程的控制面分层：视频王国负责导演/QC/交付，专用 HTML/Canvas/Remotion 类合成器只作为显式模式的渲染边界，不虚构现成适配器。
