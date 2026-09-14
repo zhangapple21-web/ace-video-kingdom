@@ -5,7 +5,7 @@
 
 | 能力 | 技能入口 | 当前模型 | 仓库适配器 | Provider 接口 |
 | --- | --- | --- | --- | --- |
-| 图像生成 | `imagegen` | `gpt-image-2` | `tools/imagegen_shenwen.ps1` | `https://api.shenwenai.com/v1/images/generations` |
+| 图像生成 | `imagegen` | `gpt-image-2`（默认）；`gpt-image-2.5-flare`、`gpt-image-2.5-sunburst`（显式可选） | `tools/imagegen_shenwen.ps1` | `https://api.shenwenai.com/v1/images/generations` |
 | 视频生成 | `Video` | `agnes-video-2.5-flash` | `tools/video_agnes25.ps1` | `https://apihub.agnes-ai.com/v1/videos` |
 
 ## 调用
