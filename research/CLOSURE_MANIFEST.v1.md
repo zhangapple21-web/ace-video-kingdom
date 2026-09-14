@@ -26,3 +26,9 @@
 - `runtime/shot_core.py` 已支持 `provider_audio_refs`：在 `reference` 模式下把最多 3 个公网音频 URL 传给 `agnes-video-2.5-flash` 的 `audios` 字段。
 - 提示词自动标注 `<Audio N>`，用于节奏/视听一致性参考；独立 CosyVoice 音轨仍是后期混音和字幕的主时钟，不把 Agnes 的参考音频结果误当成口型同步验收。
 - 本地路径会被硬阻断，防止把 C/D 盘路径直接发给 Provider。
+
+## 2026-09-14：三路配音运行策略
+
+- Edge‑TTS 已安装到 `D:\视频创作\runtimes\edge-tts\site-packages`，中文 MP3 烟测通过，产物为 `D:\视频创作\temp\audio_probes\edge_tts_probe.mp3`。
+- CosyVoice 3 保持正式默认；RVC 保持隔离精修备选。
+- 三路路由和降级顺序已写入 `research/voice_runtime_routes.v1.json`。
