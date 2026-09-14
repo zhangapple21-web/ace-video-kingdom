@@ -61,5 +61,5 @@
       "status": "RESEARCH_ONLY"
     }
   ],
-  "next_step": "仅在用户明确要求后，在 D:\\视频创作\\runtimes\\rvc 建立隔离推理环境；先做三句中文探针，再与 CosyVoice3 对比。"
+  "next_step": "CosyVoice3 已作为默认配音引擎；RVC 隔离推理仅在确有精修需求时再启用，先做三句中文探针并与 CosyVoice3 对比。"
 }
