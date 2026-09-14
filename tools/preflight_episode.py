@@ -10,8 +10,13 @@ from __future__ import annotations
 import argparse
 import json
 import re
+import sys
 from pathlib import Path
 from urllib.parse import urlparse
+
+PROJECT_ROOT = Path(__file__).resolve().parents[1]
+if str(PROJECT_ROOT) not in sys.path:
+    sys.path.insert(0, str(PROJECT_ROOT))
 
 try:
     from validate_motion_diversity import validate as validate_motion
@@ -25,6 +30,10 @@ try:
     from medium_lock import validate_medium_lock
 except ImportError:  # support ``python -m tools.preflight_episode`` as well
     from tools.medium_lock import validate_medium_lock
+try:
+    from production_control.privacy_scan import scan_value
+except ImportError:  # support ``python -m tools.preflight_episode`` as well
+    from production_control.privacy_scan import scan_value
 
 
 def _load(path: Path) -> dict:
@@ -298,6 +307,7 @@ def main() -> int:
     }
     timing_audit = _load_optional_report(args.timing_audit)
     effective_plan = _merge_contract(plan, linked_contract)
+    privacy_scan = scan_value(effective_plan)
     hard_failures: list[str] = []
     rework: list[str] = []
     warnings: list[str] = []
@@ -327,6 +337,8 @@ def main() -> int:
             rework.extend(f"six_module_contract: {error}" for error in contract_check["errors"])
     if args.require_formal and not linked_contract:
         hard_failures.append("six_module_contract: linked contract is missing or invalid")
+    if privacy_scan["status"] == "BLOCKED_PRIVACY":
+        hard_failures.append("privacy: BLOCKED_PRIVACY")
     if args.require_measured_media:
         if timing_audit is None:
             hard_failures.append("timing_audit: a PASS per-shot timing audit is required")
@@ -425,6 +437,7 @@ def main() -> int:
         "hard_failures": hard_failures,
         "rework": rework,
         "warnings": warnings,
+        "privacy_scan": privacy_scan,
         "planned_shot_count": len(shots),
         "planned_duration_seconds": estimate_seconds,
         "motion_contract": motion_contract,

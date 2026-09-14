@@ -1,0 +1,28 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ace-video-kingdom.local/schema/rights_receipt.v1.json",
+  "title": "Video Kingdom Rights Receipt",
+  "type": "object",
+  "required": ["asset_id", "source", "status", "verified_at"],
+  "properties": {
+    "asset_id": {"type": "string", "minLength": 1},
+    "source": {"type": "string", "minLength": 1},
+    "status": {"enum": ["CLEARED", "CLEARED_WITH_ATTRIBUTION", "LIMITED_USE", "PENDING_REVIEW", "BLOCKED"]},
+    "verified_at": {"type": "string", "minLength": 1},
+    "sha256": {"type": "string", "pattern": "^[A-Fa-f0-9]{64}$"},
+    "allowed_platforms": {"type": "array", "items": {"type": "string"}},
+    "allowed_regions": {"type": "array", "items": {"type": "string"}},
+    "allowed_uses": {"type": "array", "items": {"type": "string"}},
+    "expires_at": {"type": ["string", "null"]},
+    "attribution_required": {"type": "boolean"},
+    "adaptation_allowed": {"type": "boolean"},
+    "advertising_allowed": {"type": "boolean"},
+    "client_projects_allowed": {"type": "boolean"},
+    "third_party_samples": {"type": "boolean"},
+    "notes": {"type": "string"}
+  },
+  "allOf": [
+    {"if": {"properties": {"status": {"const": "CLEARED_WITH_ATTRIBUTION"}}}, "then": {"required": ["attribution_required"]}},
+    {"if": {"properties": {"status": {"const": "LIMITED_USE"}}}, "then": {"required": ["allowed_platforms", "allowed_uses"]}}
+  ]
+}

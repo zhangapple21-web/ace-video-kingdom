@@ -1,0 +1,15 @@
+{
+  "schema": "video_kingdom.delivery_package.v1",
+  "statuses": ["preview", "draft", "approved_master", "publish_package"],
+  "required_by_status": {
+    "preview": ["mp4", "technical_probe"],
+    "draft": ["mp4", "shot_manifest", "duration_probe", "audio_status"],
+    "approved_master": ["mp4", "editable_project", "shot_manifest", "source_hashes", "subtitle_receipt", "audio_files", "audio_bgm_sfx_ledger", "qc_report", "version_manifest", "delivery_approval"],
+    "publish_package": ["approved_master", "platform_export", "caption_files", "rights_receipts", "release_notes"]
+  },
+  "forbidden_shortcuts": [
+    "provider_completed_is_not_approved_master",
+    "temporary_preview_is_not_publish_package",
+    "missing_rights_receipt_blocks_publish_package"
+  ]
+}
