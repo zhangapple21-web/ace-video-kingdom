@@ -4,19 +4,22 @@
   "modes": {
     "live_action": {
       "description": "真人感/电影感、多场景、多镜头正常叙事",
+      "renderer": "agnes-video-2.5-flash",
       "allow_chat_ui": false,
       "allow_phone_screen": false
     },
     "chat_ui": {
       "description": "明确选择的聊天界面动画",
+      "renderer": "specialized_compositor",
+      "renderer_status": "REFERENCE_BOUNDARY_ONLY",
       "allow_chat_ui": true,
       "allow_phone_screen": true,
       "hard_rules": ["不得使用真实账号、密码、联系方式、私人聊天截图或未授权头像"]
     },
-    "cartoon": {"description": "二维或三维卡通", "allow_chat_ui": false, "allow_phone_screen": false},
-    "product_demo": {"description": "产品/界面演示", "allow_chat_ui": true, "allow_phone_screen": true},
-    "motion_graphics": {"description": "图文动效", "allow_chat_ui": false, "allow_phone_screen": false},
-    "audit_only": {"description": "只审计，不生成媒体", "allow_chat_ui": false, "allow_phone_screen": false}
+    "cartoon": {"description": "二维或三维卡通", "renderer": "provider_or_specialized_compositor", "allow_chat_ui": false, "allow_phone_screen": false},
+    "product_demo": {"description": "产品/界面演示", "renderer": "specialized_compositor", "renderer_status": "REFERENCE_BOUNDARY_ONLY", "allow_chat_ui": true, "allow_phone_screen": true},
+    "motion_graphics": {"description": "图文动效", "renderer": "specialized_compositor", "renderer_status": "REFERENCE_BOUNDARY_ONLY", "allow_chat_ui": false, "allow_phone_screen": false},
+    "audit_only": {"description": "只审计，不生成媒体", "renderer": "none", "allow_chat_ui": false, "allow_phone_screen": false}
   },
   "routing_rule": "模式是创作合同字段；未显式指定时使用 live_action，不自动切换到 chat_ui。"
 }

@@ -15,6 +15,7 @@
 - 环境预检：`tools/preflight_environment.py`。
 - 版权范围收据：`assets/schema/rights_receipt.v1.json`。
 - 交付层级：`research/delivery_package.v1.json`。
+- 上层控制面与专用渲染器分层：创作模式登记渲染器边界，`chat_ui`/产品演示只登记 `specialized_compositor` 参考边界，不虚构当前已有适配器。
 
 ## 不照搬的建议
 
