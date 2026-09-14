@@ -6,7 +6,7 @@
 `SHENWEN_IMAGE_BASE_URL`（默认 `https://api.shenwenai.com/v1`）映射为
 `OPENAI_BASE_URL`。
 
-默认模型为 `gpt-image-2`，不会回退到旧模型。密钥只从进程或用户级环境变量读取，
+默认模型为 `gpt-image-2`，不会回退到旧模型。当前文档登记的可选模型为 `gpt-image-2.5-flare` 和 `gpt-image-2.5-sunburst`；它们必须通过 `--model` 显式选择，不会静默切换。密钥只从进程或用户级环境变量读取，
 不写入仓库、命令参数或生成收据。
 
 ## 使用

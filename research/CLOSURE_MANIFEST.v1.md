@@ -41,3 +41,9 @@
 - 新增 `assets/schema/rights_receipt.v1.json`，补齐平台、地区、用途、期限、署名、改编、广告和客户项目范围。
 - 新增 `research/delivery_package.v1.json`，固定 `preview → draft → approved_master → publish_package` 的交付层级。
 - 吸收扣子流程的控制面分层：视频王国负责导演/QC/交付，专用 HTML/Canvas/Remotion 类合成器只作为显式模式的渲染边界，不虚构现成适配器。
+
+## 2026-09-14：Shenwen 图像模型更新
+
+- 已登记 `gpt-image-2.5-flare` 和 `gpt-image-2.5-sunburst` 两个新增入口。
+- 保留 `gpt-image-2` 为默认主路由；两个新增模型必须显式 `--model` 选择，且当前状态为 `REGISTERED_UNPROBED`。
+- 证据与边界见 `research/shenwen_image_model_update_20260914.json`。

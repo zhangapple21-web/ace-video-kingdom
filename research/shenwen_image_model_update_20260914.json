@@ -1,0 +1,15 @@
+{
+  "schema": "video_kingdom.shenwen_image_model_update.v1",
+  "source": "https://shenwenai.com/docs/image-generation",
+  "checked_at": "2026-09-14",
+  "models": [
+    {"id": "gpt-image-2", "role": "default", "status": "VERIFIED", "evidence": "research/line_test_shenwen_image_20260912.json"},
+    {"id": "gpt-image-2.5-flare", "role": "optional_variant", "status": "REGISTERED_UNPROBED", "selection": "explicit_only"},
+    {"id": "gpt-image-2.5-sunburst", "role": "optional_variant", "status": "REGISTERED_UNPROBED", "selection": "explicit_only"}
+  ],
+  "route_policy": "gpt-image-2 remains the default. New variants are accepted by the wrapper only when explicitly passed as --model; no silent fallback or model switch.",
+  "not_done": [
+    "No live probe was run for the two new variants because the Shenwen key is not present in the current process/user environment.",
+    "No production health evidence is claimed for the two new variants."
+  ]
+}

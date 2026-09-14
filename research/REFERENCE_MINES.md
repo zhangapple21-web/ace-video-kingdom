@@ -53,3 +53,9 @@
 - `tarunyadav1/awesome-local-voice-ai`：仅作为本地语音项目索引；其表格明确说明 RVC 代码与权重许可“随模型而变”，不提供可直接使用的音色包。
 - 当前决策：CosyVoice 3 免费权重作为默认配音引擎；不购买、不接入 RVC 作为前置条件，RVC 只保留为后续精修备选。若后续引入 RVC，仍须在 `D:\视频创作\runtimes\rvc` 隔离试跑并登记模型哈希、样音来源和授权信息。
 - 用户要求的探索样本已单独下载到 `D:\视频创作\quarantine\rvc_samples`；这不改变生产准入结论，且未安装 RVC 运行时。
+
+## 本次更新：Shenwen 图像模型（2026-09-14）
+
+- 官方文档登记三款入口：`gpt-image-2`、`gpt-image-2.5-flare`、`gpt-image-2.5-sunburst`。
+- `gpt-image-2` 继续是已验证默认；两个 2.5 变体只登记为显式可选，未通过真实线路探针前不计入生产健康路由。
+- `tools/imagegen_shenwen.ps1` 已允许三款完整模型名，未知或旧模型仍硬阻断；不自动切换模型。

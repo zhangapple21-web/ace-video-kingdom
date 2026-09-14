@@ -42,17 +42,22 @@ $env:OPENAI_API_KEY = $apiKey
 $env:OPENAI_BASE_URL = $baseUrl.TrimEnd("/")
 
 $hasModel = $false
+$allowedModels = @("gpt-image-2", "gpt-image-2.5-flare", "gpt-image-2.5-sunburst")
+$selectedModel = "gpt-image-2"
 for ($index = 0; $index -lt $ImageGenArguments.Count; $index++) {
     $argument = $ImageGenArguments[$index]
     if ($argument -eq "--model") {
         $hasModel = $true
-        if (($index + 1) -ge $ImageGenArguments.Count -or $ImageGenArguments[$index + 1] -ne "gpt-image-2") {
-            throw "MODEL_OVERRIDE_REJECTED: image.generate is locked to gpt-image-2"
+        if (($index + 1) -ge $ImageGenArguments.Count -or $allowedModels -notcontains $ImageGenArguments[$index + 1]) {
+            throw "MODEL_OVERRIDE_REJECTED: allowed image models are $($allowedModels -join ', ')"
         }
+        $selectedModel = $ImageGenArguments[$index + 1]
     }
 }
 if (-not $hasModel) {
-    $ImageGenArguments = @("--model", "gpt-image-2") + $ImageGenArguments
+    # Keep the verified model as the default; new models require an explicit
+    # --model selection and are never silently chosen as a fallback.
+    $ImageGenArguments = @("--model", $selectedModel) + $ImageGenArguments
 }
 
 $python = Get-Command py -ErrorAction SilentlyContinue
