@@ -1,0 +1,43 @@
+{
+  "schema": "video_kingdom.voice_runtime_routes.v1",
+  "default": "cosyvoice3",
+  "routes": [
+    {
+      "id": "edge_tts",
+      "profile": "rapid",
+      "purpose": "快速草稿和低成本台词探针",
+      "runtime": "D:\\视频创作\\runtimes\\edge-tts\\site-packages",
+      "output": "MP3",
+      "smoke": "D:\\视频创作\\temp\\audio_probes\\edge_tts_probe.mp3",
+      "fallback_to": "cosyvoice3",
+      "status": "SMOKE_PASS"
+    },
+    {
+      "id": "cosyvoice3",
+      "profile": "standard",
+      "purpose": "正式独立配音、零样本音色、情绪和时长控制",
+      "runtime": "D:\\视频创作\\runtimes\\cosyvoice3",
+      "output": "WAV",
+      "fallback_to": "edge_tts",
+      "status": "VERIFIED_DEFAULT"
+    },
+    {
+      "id": "rvc",
+      "profile": "full_audit",
+      "purpose": "隔离精修和音色转换对比",
+      "runtime": "D:\\视频创作\\quarantine\\rvc_runtime",
+      "output": "WAV",
+      "fallback_to": "cosyvoice3",
+      "status": "QUARANTINE_ONLY"
+    }
+  ],
+  "agnes_reference": {
+    "field": "provider_audio_refs",
+    "payload_field": "audios",
+    "max_items": 3,
+    "requires_public_urls": true,
+    "role": "rhythm_and_audio_visual_reference",
+    "not_a_lip_sync_acceptance": true
+  },
+  "timing_rule": "独立音频实际时长是字幕、动作和后期混音的主时钟"
+}
