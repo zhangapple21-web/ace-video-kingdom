@@ -51,3 +51,4 @@
 - `TASTomusan/RVC_Models_Collection_Series`：仅作为研究样本目录。仓库元数据虽带 `openrail` 标签，但 API 的 `license` 字段为空，文件名包含角色/艺人/作品相关音色，未提供逐模型的身份授权和商用范围；不进入生产音色库。
 - `tarunyadav1/awesome-local-voice-ai`：仅作为本地语音项目索引；其表格明确说明 RVC 代码与权重许可“随模型而变”，不提供可直接使用的音色包。
 - 当前决策：不下载、不接入上述未核验权重；生产默认仍为已隔离验证的 CosyVoice 3。若后续要引入 RVC，必须先登记购买凭证/书面授权、授权用途与期限、模型 SHA-256、样音来源和三句中文实测收据，再在 `D:\视频创作\runtimes\rvc` 做隔离试跑。
+- 用户要求的探索样本已单独下载到 `D:\视频创作\quarantine\rvc_samples`；这不改变生产准入结论，且未安装 RVC 运行时。
