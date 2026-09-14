@@ -606,6 +606,25 @@ def build_payload(shot: dict[str, Any], *, model: str = MODEL) -> dict[str, Any]
             images.append(provider_ref)
         if images:
             payload["images"] = images[:5]
+        # Agnes Video 2.5 Flash accepts up to three public audio references in
+        # reference mode.  They guide rhythm/audio-visual consistency; the
+        # measured CosyVoice track remains the post-mix master clock.
+        audio_refs = shot.get("provider_audio_refs", [])
+        if audio_refs:
+            if not isinstance(audio_refs, list):
+                raise ValueError("provider_audio_refs must be an array")
+            audios: list[str] = []
+            for ref in audio_refs[:3]:
+                provider_ref = ref.get("provider_ref") if isinstance(ref, dict) else ref
+                if not _asset_is_public_url(provider_ref):
+                    raise ValueError("local audio references are not Provider-compatible; supply a public URL")
+                audios.append(provider_ref)
+            if audios:
+                payload["audios"] = audios
+                prompt += "\n[AUDIO_REFERENCE]\n" + "\n".join(
+                    f"Use <Audio {index}> as the rhythm/audio-visual reference." for index in range(1, len(audios) + 1)
+                )
+                payload["prompt"] = prompt
     elif payload["mode"] == "keyframe":
         first = contract.get("first_frame_ref")
         last = contract.get("last_frame_ref")
