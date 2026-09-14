@@ -1,0 +1,82 @@
+{
+  "schema": "rvc_voice_source_triage.v1",
+  "date": "2026-09-14",
+  "scope": "筛选可用于视频王国短剧配音的 RVC 音色来源",
+  "decision": "NO_PRODUCTION_ADMISSION",
+  "default_voice_runtime": "D:\\视频创作\\runtimes\\cosyvoice3",
+  "sources": [
+    {
+      "name": "妙音 RVC 音色模型工坊",
+      "url": "https://klrvc.com/zh",
+      "role": "model_catalog",
+      "status": "CONDITIONAL",
+      "findings": [
+        "站内存在单独的可商用模型区",
+        "站点版权声明禁止未经授权的抓取、模型数据克隆和商业再分发",
+        "本次未下载任何权重或音频"
+      ],
+      "candidates": [
+        {
+          "title": "可商用 九夏 温柔青年音RVC模型",
+          "url": "https://klrvc.com/mxgf/3390.html",
+          "fit": "张铁铁候选（青年男声，需先听测）",
+          "price_displayed": "199",
+          "license_evidence": "页面说明为合作主播授权商用模型",
+          "constraints": ["购买后方可获得授权", "不得用于违法用途", "需保留购买/授权凭证"]
+        },
+        {
+          "title": "已授权可商用音域宽 月儿 少御音模型",
+          "url": "https://klrvc.com/mxgf/2701.html",
+          "fit": "文姬候选（少御女声，需先听测）",
+          "price_displayed": "199",
+          "license_evidence": "页面说明为合作主播授权商用模型",
+          "constraints": ["购买后方可获得授权", "不得用于违法用途", "禁止二次传播"]
+        },
+        {
+          "title": "有授权 可商用 栀酒御姐音RVC模型",
+          "url": "https://klrvc.com/mxgf/1057.html",
+          "fit": "成年女性备用角色，不作为文姬默认",
+          "price_displayed": "199",
+          "license_evidence": "页面说明购买后自动获得该模型授权并可商用",
+          "constraints": ["购买后方可获得授权", "不得用于违法用途", "禁止二次传播"]
+        }
+      ],
+      "admission": "CONDITIONAL_PURCHASE_AND_AUTHORIZATION"
+    },
+    {
+      "name": "TASTomusan/RVC_Models_Collection_Series",
+      "url": "https://huggingface.co/TASTomusan/RVC_Models_Collection_Series",
+      "role": "research_archive",
+      "status": "RESEARCH_ONLY",
+      "findings": [
+        "仓库元数据含 openrail 标签，但 license API 字段为空",
+        "文件名包含作品角色和真人/角色相关名称",
+        "README 未提供逐模型身份授权、商用范围和样音来源证明"
+      ],
+      "admission": "REJECT_UNTIL_PER_MODEL_RIGHTS_VERIFIED"
+    },
+    {
+      "name": "tarunyadav1/awesome-local-voice-ai",
+      "url": "https://github.com/tarunyadav1/awesome-local-voice-ai",
+      "role": "project_index",
+      "status": "RESEARCH_INDEX_ONLY",
+      "findings": [
+        "这是本地 TTS/克隆/转换项目目录，不是音色包仓库",
+        "目录明确提示 RVC 权重许可随具体模型而变"
+      ],
+      "admission": "NOT_A_VOICE_ASSET_SOURCE"
+    }
+  ],
+  "production_gate": [
+    "本人或书面授权，且授权覆盖短剧发布/商业用途",
+    "购买凭证、授权范围、期限和撤销条件已登记",
+    "模型文件 SHA-256 和样音来源已登记",
+    "三句真实中文台词实测：字词准确、无爆音、音色稳定、情绪可控",
+    "独立 RVC 运行时与 CosyVoice3 对比后再决定角色分配"
+  ],
+  "not_done": [
+    "未下载或部署任何 RVC 权重",
+    "未改变 Agnes 或 OneAPI 默认路由",
+    "未把明星/动漫/游戏角色仿声列入生产候选"
+  ]
+}
