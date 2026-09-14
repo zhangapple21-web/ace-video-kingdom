@@ -4,6 +4,14 @@
   "scope": "筛选可用于视频王国短剧配音的 RVC 音色来源",
   "decision": "NO_PRODUCTION_ADMISSION",
   "default_voice_runtime": "D:\\视频创作\\runtimes\\cosyvoice3",
+  "primary_voice_decision": {
+    "engine": "Fun-CosyVoice3-0.5B-2512",
+    "model_url": "https://huggingface.co/FunAudioLLM/Fun-CosyVoice3-0.5B-2512",
+    "model_license": "Apache-2.0",
+    "status": "DEFAULT_VOICE_ENGINE",
+    "evidence": "D:\\视频创作\\runtimes\\cosyvoice3\\smoke_outputs\\receipt.json",
+    "boundary": "模型许可不替代参考说话人的本人/书面授权"
+  },
   "sources": [
     {
       "name": "妙音 RVC 音色模型工坊",
