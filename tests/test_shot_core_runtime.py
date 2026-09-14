@@ -48,6 +48,23 @@ def test_preflight_and_payload_make_contract_executable():
     assert generation_fingerprint(shot, payload) == generation_fingerprint(shot, payload)
 
 
+def test_reference_payload_accepts_public_audio_references():
+    shot = shot_fixture()
+    shot["provider_mode"] = "reference"
+    shot["provider_audio_refs"] = [{"provider_ref": "https://example.com/dialogue.mp3", "purpose": "rhythm"}]
+    payload = build_payload(shot)
+    assert payload["audios"] == ["https://example.com/dialogue.mp3"]
+    assert "<Audio 1>" in payload["prompt"]
+
+
+def test_reference_payload_rejects_local_audio_references():
+    shot = shot_fixture()
+    shot["provider_mode"] = "reference"
+    shot["provider_audio_refs"] = [{"provider_ref": "D:\\视频创作\\temp\\line.mp3"}]
+    with pytest.raises(ValueError, match="local audio references"):
+        build_payload(shot)
+
+
 def test_duration_hard_gate_blocks_before_provider():
     shot = shot_fixture()
     shot["contract"]["render_seconds"] = 3
