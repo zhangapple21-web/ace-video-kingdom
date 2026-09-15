@@ -2,7 +2,16 @@
 
 ## 来源与边界
 
-本次只审阅公开仓库的方法文档，没有安装外部 Skill、调用外部 Provider 或切换固定模型。审阅副本在 `D:\tmp\video_skill_external_review_20260915`，作为临时研究材料，不是生产依赖。
+本次在隔离目录 `D:\tmp\video_skill_external_review_20260915` 实际克隆并审阅了 6 个公开仓库的代码、Skill、许可证和测试入口；没有安装外部 Skill、调用外部 Provider 或切换固定模型。研究完成后该临时目录会删除，不是生产依赖。
+
+| 仓库 | 研究提交 | 许可证 | 实际可吸收内容 |
+|---|---|---|---|
+| `PomeloR611/libtv-video-agent` | `29c3122a` | MIT | 提示词锁和提示词反例；CLI/StarVideo 本身不接入 |
+| `Qiuxiangxiang/libtv-skill-pro` | `87b4defd` | MIT-0 | dry-run、错误分类、轮询思路；LibTV 会话体系不接入 |
+| `chenyuxiaojin/video-agent-skills` | `fc80890c` | MIT | Producer/Storyboard/Voice/Timeline 分工；不复制其 Provider |
+| `kangarooking/director-skills` | `4a91b5c1` | MIT | `lint_prompt.py`、首帧空间审计、光线/白平衡/尾帧门；已独立改写进本项目 |
+| `bbshare/bbshare-skills` | `61e94e6b` | 未见许可证文件 | 只吸收流程思想，不复制代码或资源 |
+| `Agentchengfeng/chengfeng-videocut-skills` | `b10e85e1` | Apache-2.0 | readback、人耳听感分层、字幕和导出边界；已独立实现对应门禁 |
 
 ## 已吸收的四类能力
 
@@ -23,6 +32,8 @@
 - `tools/validate_media_readback.py`
 - `assets/templates/continuity_bridge.v1.json`
 - `tools/mix_audio_ducking.py`
+
+其中 `validate_shot_prompt.py` 的摄影机/动作冲突提示是对 MIT 许可 Director Skills 规则的独立实现；没有把外部仓库代码整体复制进来。
 
 ## 验收原则
 

@@ -2,7 +2,9 @@
 
 This is a lint gate, not a prompt generator. It catches the common external-
 skill failures (style drift, subject loss, count drift and accidental UI text)
-before a provider request is admitted.
+before a provider request is admitted. The camera/action warning heuristics
+are adapted from the MIT-licensed Director Skills prompt lint pattern; this
+module is an independent implementation and does not depend on that repo.
 """
 
 from __future__ import annotations
@@ -16,10 +18,16 @@ from typing import Any
 
 LABELS = ("主体", "动作", "环境", "光线", "镜头", "风格")
 UI_TERMS = ("微信", "聊天界面", "视频通话界面", "手机屏幕录制", "悬浮窗", "画中画", "chat ui", "phone screen")
+EDIT_WORDS = ("切镜", "切换镜头", "转场", "蒙太奇", "jump cut", "cut to")
+MOTION_GROUPS = {
+    "camera": ("推", "拉", "摇", "移", "跟拍", "旋转", "zoom", "pan", "dolly", "tracking"),
+    "subject": ("跑", "跳", "转身", "挥手", "拿起", "倒下", "奔跑"),
+}
 
 
 def validate_prompt(record: dict[str, Any]) -> dict[str, Any]:
     errors: list[str] = []
+    warnings: list[str] = []
     prompt = str(record.get("compiled_prompt") or "")
     elements = record.get("txt_prompt_elements") if isinstance(record.get("txt_prompt_elements"), dict) else {}
     for key in ("subject", "action", "environment", "lighting", "camera", "style"):
@@ -54,7 +62,14 @@ def validate_prompt(record: dict[str, Any]) -> dict[str, Any]:
             count = item.get("count")
             if entity and count is not None and not re.search(rf"{re.escape(entity)}[^。\n]{{0,40}}{re.escape(str(count))}", prompt):
                 errors.append(f"count constraint missing: {entity}={count}")
-    return {"status": "PASS" if not errors else "BLOCKED", "errors": errors, "checks": {"style_lock": bool(expected_style), "scene_lock": bool(scene_lock), "subject_lock": bool(subject_lock), "count_constraints": len(count_constraints), "negative_constraints": len(record.get("negative_constraints", []) or [])}}
+    if any(word in prompt.lower() for word in EDIT_WORDS):
+        warnings.append("prompt contains an edit/cut instruction; keep one internal shot and move editing to assembly")
+    camera_text = str(elements.get("camera") or prompt).lower()
+    subject_text = str(elements.get("action") or prompt).lower()
+    active_groups = [name for name, words in MOTION_GROUPS.items() if any(word in (camera_text if name == "camera" else subject_text) for word in words)]
+    if len(active_groups) >= 2:
+        warnings.append("camera and subject motion are both active; verify the primary visual event independently")
+    return {"status": "PASS" if not errors else "BLOCKED", "errors": errors, "warnings": warnings, "checks": {"style_lock": bool(expected_style), "scene_lock": bool(scene_lock), "subject_lock": bool(subject_lock), "count_constraints": len(count_constraints), "negative_constraints": len(record.get("negative_constraints", []) or [])}}
 
 
 def main() -> int:
