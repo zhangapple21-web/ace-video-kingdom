@@ -1,4 +1,6 @@
 [CmdletBinding()]
+<# Internal Provider adapter. Public image requests must start at
+   tools/video_kingdom_entry.py and carry its route/entry receipt. #>
 param(
     [Parameter(Mandatory = $true, Position = 0)]
     [ValidateSet("generate", "edit", "generate-batch")]

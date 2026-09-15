@@ -37,7 +37,8 @@ DELIVERABLE 或 RESEARCH_CANDIDATE
 |---|---|---|---|
 | `tools/index_assets.py` | 只读盘点与索引 | `assets/asset_roots.v1.json`、角色目录、共享锚点、episode `assets/` | 哈希可读；旧命名标 `LEGACY` |
 | 角色/场景包模板 | 前置定义 | `assets/templates/`、`assets/schema/` | 必填身份/空间不变量已填写 |
-| `run_idea_pipeline.py` | episode 级兼容入口 | episode contract + 局部 assets | 必须经过 model-free preflight；不等于已走 Shot Core |
+| `tools/video_kingdom_entry.py` | 唯一公共入口 | 统一入口收据 + production_control 路由 | 先识别需求并分派；Provider 适配器不得独立派单 |
+| `run_idea_pipeline.py` | episode 级内部兼容层 | episode contract + 局部 assets | 只能由统一入口/已批准执行收据调用；不等于已走 Shot Core |
 | Shot Core | 单镜 canonical 骨架 | `asset_refs`、Take manifest、selected-only assembly | contract/hash/QC/creative 状态完整 |
 | `tools/assemble_episode.py` | 装配 | selected Take + 机器 QC + 复核收据 | 任何 stale/REVIEW_REQUIRED/UNKNOWN 都 fail-closed |
 
