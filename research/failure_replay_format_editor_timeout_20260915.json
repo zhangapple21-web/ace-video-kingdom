@@ -1,0 +1,14 @@
+{
+  "problem": "format_editor Provider 超时",
+  "judgment": "这是执行层超时，不是创作内容失败",
+  "action": "保留失败证据，按同能力矩阵切换到 glm-4-flash",
+  "result": "fallback candidate 成功返回，格式席位完成",
+  "why": "保留角色职责和验收边界，同时避免重复调用已超时模型",
+  "reuse_when": "format_editor 出现超时且同能力候选仍可用",
+  "effectiveness": "EFFECTIVE",
+  "evidence": {
+    "receipt": "research/oneapi_gateway_role_room_smoke_20260913.json",
+    "failed_model": "gpt-5.4-mini",
+    "fallback_model": "glm-4-flash"
+  }
+}

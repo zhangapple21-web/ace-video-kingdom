@@ -1,0 +1,5 @@
+{
+  "schema": "video_kingdom.capability_growth.v1",
+  "purpose": "只统计经过 baseline→change→test→evaluation→compare 后晋升的能力",
+  "capabilities": {}
+}
