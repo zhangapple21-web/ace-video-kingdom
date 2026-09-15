@@ -16,6 +16,13 @@ from typing import Any
 SPATIAL_FIELDS = ("foreground", "midground", "background", "camera_start", "allowed_content", "forbidden_additions")
 CAMERA_FIELDS = ("main_motion", "tracking_subject", "camera_end")
 LIGHT_FIELDS = ("motivation", "key_source", "direction")
+PERFORMANCE_FIELDS = (
+    "speaker_action",
+    "listener_expression",
+    "pause_points",
+    "monologue_mouth_state",
+    "edit_intent",
+)
 
 
 def _empty(value: Any) -> bool:
@@ -43,6 +50,7 @@ def validate_manifest(manifest: dict[str, Any], *, strict: bool = False) -> dict
         spatial = director.get("spatial_audit") if isinstance(director.get("spatial_audit"), dict) else {}
         camera = director.get("camera") if isinstance(director.get("camera"), dict) else {}
         lighting = director.get("lighting") if isinstance(director.get("lighting"), dict) else {}
+        performance = director.get("performance") if isinstance(director.get("performance"), dict) else {}
         for key in SPATIAL_FIELDS:
             if _empty(spatial.get(key)):
                 warnings.append(f"{shot_id}: spatial_audit.{key} missing")
@@ -55,6 +63,9 @@ def validate_manifest(manifest: dict[str, Any], *, strict: bool = False) -> dict
         for key in ("exposure_lock", "white_balance_lock"):
             if lighting.get(key) is not True:
                 warnings.append(f"{shot_id}: lighting.{key} not locked")
+        for key in PERFORMANCE_FIELDS:
+            if _empty(performance.get(key)):
+                (errors if strict else warnings).append(f"{shot_id}: performance.{key} missing")
         if not spatial.get("subjects_present") and not spatial.get("allowed_entries"):
             warnings.append(f"{shot_id}: source frame has no subject and no allowed entry path")
         bridge = shot.get("continuity_bridge") if isinstance(shot.get("continuity_bridge"), dict) else {}

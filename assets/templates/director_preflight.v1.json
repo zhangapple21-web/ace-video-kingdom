@@ -1,0 +1,35 @@
+{
+  "story_goal": "【这一镜在故事中的功能】",
+  "duration_seconds": 6,
+  "source_frame": "assets/SHOT_01.png",
+  "director_preflight": {
+    "spatial_audit": {
+      "foreground": "【前景】",
+      "midground": "【中景主体】",
+      "background": "【背景】",
+      "camera_start": "【开镜机位】",
+      "allowed_content": "【本镜允许发生的内容】",
+      "forbidden_additions": "【禁止新增的人物/道具/界面】",
+      "subjects_present": true
+    },
+    "camera": {
+      "main_motion": "【唯一主要摄影机运动】",
+      "tracking_subject": "【摄影机跟随谁/什么】",
+      "camera_end": "【收镜位置和停留】"
+    },
+    "lighting": {
+      "motivation": "【光线动机】",
+      "key_source": "【主光源】",
+      "direction": "【主光方向】",
+      "exposure_lock": true,
+      "white_balance_lock": true
+    },
+    "performance": {
+      "speaker_action": "【说话时手和身体在做什么；无对白写‘不适用’】",
+      "listener_expression": "【听者表情如何变化；无听者写‘不适用’】",
+      "pause_points": "【停顿位置和时长；无停顿写‘无’】",
+      "monologue_mouth_state": "【独白时嘴部状态；无独白写‘不适用’】",
+      "edit_intent": "【为什么在这里切镜，如何保持电影感】"
+    }
+  }
+}

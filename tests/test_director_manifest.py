@@ -19,6 +19,13 @@ def _shot():
             },
             "camera": {"main_motion": "缓慢推近", "tracking_subject": "人物眼神", "camera_end": "停在半身"},
             "lighting": {"motivation": "窗光", "key_source": "左侧窗户", "direction": "左向右", "exposure_lock": True, "white_balance_lock": True},
+            "performance": {
+                "speaker_action": "说话时手指轻敲桌面",
+                "listener_expression": "听到关键句时眉头收紧，再缓慢放松",
+                "pause_points": "关键句后停顿一拍",
+                "monologue_mouth_state": "无独白时不适用",
+                "edit_intent": "保持正反打，反应镜头后再切回说话者",
+            },
         },
     }
 
@@ -35,6 +42,14 @@ def test_director_packet_blocks_ready_bridge_without_frame_proof():
     result = validate_manifest({"shots": [shot]}, strict=True)
     assert result["status"] == "BLOCKED"
     assert "frame proof" in result["errors"][0]
+
+
+def test_director_packet_requires_performance_plan_in_strict_mode():
+    shot = _shot()
+    shot["director_preflight"].pop("performance")
+    result = validate_manifest({"shots": [shot]}, strict=True)
+    assert result["status"] == "BLOCKED"
+    assert any("performance.speaker_action" in error for error in result["errors"])
 
 
 def test_non_strict_packet_preserves_legacy_plan_as_warning():
