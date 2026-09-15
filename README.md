@@ -75,15 +75,15 @@ python -m production_control model-route --text "把这些文件批量整理、�
 `research/model_capability_registry.v1.json` 与 `research/model_capability_probes/`，
 Watchdog 快照超过 24 小时也会 fail-closed；这些机制不授予生产写入或发布权限。
 
-不需要打开 DramaAI 或 FastMovieAI 网站。把一个想法交给本地管道即可：
+不需要打开 DramaAI 或 FastMovieAI 网站。把一个想法交给统一入口即可；需要真正启动已批准的 episode 管道时，再由控制面显式执行内部兼容层：
 
 ```powershell
-python tools/run_idea_pipeline.py --idea "一个快递员发现，系统把每个人的等待时间变成了价格"
+python tools/video_kingdom_entry.py --text "制作一个快递员发现系统把每个人的等待时间变成价格的短剧" --out .\temp\entry_receipt.json
 # 可选：把六个镜头均匀压到约 30 秒（本地自动生成、合成并验收）
-python tools/run_idea_pipeline.py --idea "一个程序员深夜发现代码里藏着求救信息" --target-seconds 30
+python tools/video_kingdom_entry.py --text "制作一个程序员深夜发现代码里藏着求救信息的短剧" --out .\temp\entry_receipt.json
 ```
 
-管道会在 `episodes/generated/<project_id>/` 生成剧本、六模块分镜合同、角色/场景/道具资产清单、哈希绑定的参考素材、确定性 preflight 和 `pipeline_receipt.json`；默认会自动尝试素材生成、逐镜生成、断点续跑、合成和媒体验收。`--plan-only` 可用于完全不调用 Provider 的编译/验收干跑。任何缺素材、无 `video_id`、时长/连续性/音频未证实的情况都会停在当前阶段，不会伪造成片，也不会要求用户去网页上点按钮。
+统一入口先生成路由或角色收据，不直接提交 Provider。后续 episode 管道必须沿用同一入口收据、production_control 运行收据和准入门禁；任何缺素材、无 `video_id`、时长/连续性/音频未证实的情况都会停在当前阶段，不会伪造成片。
 
 ### 默认多窗口协作
 
@@ -123,7 +123,7 @@ python tools/validate_content_plan.py --episode .\episodes\generated\<project_id
 `CONTENT_VALID`、`CONTENT_DEGRADED`、`CONTENT_INCOMPLETE`、
 `TECHNICAL_FAILURE`、`PROVIDER_FAILURE`，不会把对白占比直接当作通过条件。
 
-`run_idea_pipeline.py` 复用本仓库唯一的 manifest、preflight、叶片渲染器、FFmpeg 合成和验收脚本；DramaAI/FastMovieAI 只提供流程形状，不会引入第二套 scheduler、后端或运行时。
+`run_idea_pipeline.py` 仍复用本仓库的 manifest、preflight、叶片渲染器、FFmpeg 合成和验收脚本，但现在属于统一入口下的内部兼容层；DramaAI/FastMovieAI 只提供流程形状，不会引入第二套 scheduler、后端或运行时。
 
 FastMovieAI 的本地工作台已支持免登录运行：前端仅对
 `localhost`、`127.0.0.1`、`[::1]` 注入本地访客身份，PHP 后端也只对同样的
@@ -142,7 +142,7 @@ FastMovieAI 的本地工作台已支持免登录运行：前端仅对
 可复用已有实测音频清单：
 
 ```powershell
-python tools/run_idea_pipeline.py --idea "一个程序员深夜发现代码里藏着求救信息" --target-seconds 30 --tts-manifest .\path\to\matching_tts_manifest.json --no-local-tts
+python tools/video_kingdom_entry.py --text "制作一个程序员深夜发现代码里藏着求救信息的短剧" --out .\temp\entry_receipt.json
 ```
 
 镜头不能只写“叹气/看向镜头”这类情绪标签。每个镜头计划必须声明三个

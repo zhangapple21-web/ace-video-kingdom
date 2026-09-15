@@ -1,4 +1,6 @@
 [CmdletBinding()]
+<# Internal Provider adapter. Public video requests must start at
+   tools/video_kingdom_entry.py and carry its route/entry receipt. #>
 param(
     [Parameter(Position = 0, ValueFromRemainingArguments = $true)]
     [string[]]$VideoArguments

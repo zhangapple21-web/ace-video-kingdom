@@ -1,8 +1,11 @@
-"""Run one isolated Agnes short clip with durable task tracking.
+"""Internal Agnes adapter for the unified video-kingdom entrypoint.
 
 The script is intentionally a utility for the existing Free Zone shift, not a
 new scheduler. It persists the provider video_id before polling so an
 interrupted process can resume without submitting a duplicate clip.
+
+Public requests must start at ``tools/video_kingdom_entry.py`` and carry an
+approved contract/admission receipt before this adapter is called.
 """
 from __future__ import annotations
 
@@ -15,6 +18,7 @@ import tempfile
 import time
 from pathlib import Path
 import sys
+from urllib.parse import quote, urlparse
 
 if str(Path(__file__).resolve().parents[1]) not in sys.path:
     sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
@@ -128,7 +132,7 @@ def _image_reference(value: str | None) -> dict[str, object] | str | None:
     if value.startswith("data:"):
         raise ValueError("data URI image references are forbidden")
     if value.startswith(("https://", "http://")):
-        return value
+        return _agnes_public_media_url(value)
     path = Path(value).expanduser().resolve()
     if not path.is_file():
         raise ValueError(f"image reference is neither a public URL nor a file: {value}")
@@ -137,6 +141,67 @@ def _image_reference(value: str | None) -> dict[str, object] | str | None:
     # Refuse locally before POST rather than sending an invalid JSON shape and
     # spending a real Provider attempt on a predictable transport error.
     raise ValueError("local image references are not Provider-compatible for Agnes v2.0; supply a public URL or omit --image")
+
+
+def _agnes_public_media_url(value: str) -> str:
+    parsed = urlparse(value)
+    if parsed.hostname and parsed.hostname.lower().endswith("filebase.io"):
+        relay = os.environ.get("AGNES_MEDIA_RELAY_BASE_URL", "").strip().rstrip("/")
+        if not relay.startswith("https://"):
+            raise ValueError(
+                "Filebase 私有 URL 不能直接提交给 Agnes；请设置已批准的 HTTPS AGNES_MEDIA_RELAY_BASE_URL"
+            )
+        return f"{relay}/?url={quote(value, safe='')}"
+    return value
+
+
+def _preflight_public_media_urls(payload: dict) -> None:
+    """Verify every remote media URL before spending an Agnes POST attempt.
+
+    Agnes returns a generic HTTP 400 when its downloader receives a redirect
+    page, an expired signed URL, or a non-media content type.  A successful
+    HEAD from the local machine is not enough, so use a bounded GET with the
+    same public URL and validate the final response content type.
+    """
+    urls: list[str] = []
+    for field in ("first_frame", "last_frame"):
+        value = payload.get(field)
+        if isinstance(value, str):
+            urls.append(value)
+    for field in ("images", "audios"):
+        values = payload.get(field)
+        if isinstance(values, list):
+            urls.extend(value for value in values if isinstance(value, str))
+    videos = payload.get("videos")
+    if isinstance(videos, list):
+        urls.extend(item.get("url") for item in videos if isinstance(item, dict) and isinstance(item.get("url"), str))
+    for url in urls:
+        parsed = urlparse(url)
+        if parsed.scheme != "https" or not parsed.netloc:
+            raise ValueError(f"Agnes 媒体引用必须是 HTTPS 公网 URL: {url}")
+        try:
+            response = requests.get(
+                url,
+                headers={"User-Agent": "ace-video-kingdom/agnes-preflight"},
+                stream=True,
+                allow_redirects=True,
+                timeout=25,
+            )
+        except requests.RequestException as error:
+            raise ValueError(f"Agnes 媒体 URL 无法访问（未提交请求）: {url} ({error})") from error
+        try:
+            content_type = response.headers.get("Content-Type", "").split(";", 1)[0].lower()
+            length = int(response.headers.get("Content-Length", "0") or 0)
+            if response.status_code != 200:
+                raise ValueError(f"Agnes 媒体 URL 返回 HTTP {response.status_code}（未提交请求）: {url}")
+            if content_type.startswith("text/") or content_type in {"application/json", "application/xml"}:
+                raise ValueError(f"Agnes 媒体 URL 返回 {content_type}，不是媒体文件（未提交请求）: {url}")
+            if length == 0:
+                first_chunk = next(response.iter_content(chunk_size=1), b"")
+                if not first_chunk:
+                    raise ValueError(f"Agnes 媒体 URL 内容为空（未提交请求）: {url}")
+        finally:
+            response.close()
 
 
 def _build_payload(args: argparse.Namespace) -> dict:
@@ -161,22 +226,22 @@ def _build_payload(args: argparse.Namespace) -> dict:
             if not args.flash_first_frame_url and not args.flash_last_frame_url:
                 raise ValueError("2.5 Flash keyframe mode requires a public --flash-first-frame-url or --flash-last-frame-url")
             if args.flash_first_frame_url:
-                payload["first_frame"] = args.flash_first_frame_url
+                payload["first_frame"] = _agnes_public_media_url(args.flash_first_frame_url)
             if args.flash_last_frame_url:
-                payload["last_frame"] = args.flash_last_frame_url
+                payload["last_frame"] = _agnes_public_media_url(args.flash_last_frame_url)
         elif args.flash_mode == "reference":
             if not args.flash_reference_image_url and not args.flash_reference_audio_url and not args.reference_video_url:
                 raise ValueError("Agnes 2.5 reference mode requires public image, audio, or video URLs")
             if args.model == "agnes-video-2.5-flash" and (len(args.flash_reference_image_url) > 5 or len(args.flash_reference_audio_url) > 3):
                 raise ValueError("2.5 Flash accepts at most 5 images and 3 audio references")
             if args.flash_reference_image_url:
-                payload["images"] = args.flash_reference_image_url
+                payload["images"] = [_agnes_public_media_url(url) for url in args.flash_reference_image_url]
             if args.flash_reference_audio_url:
-                payload["audios"] = args.flash_reference_audio_url
+                payload["audios"] = [_agnes_public_media_url(url) for url in args.flash_reference_audio_url]
             if args.reference_video_url:
                 if args.model == "agnes-video-2.5-flash":
                     raise ValueError("2.5 Flash does not support reference videos")
-                payload["videos"] = [{"url": url, "require_audio": args.reference_video_require_audio} for url in args.reference_video_url]
+                payload["videos"] = [{"url": _agnes_public_media_url(url), "require_audio": args.reference_video_require_audio} for url in args.reference_video_url]
         return payload
     if args.num_frames > 441 or args.num_frames < 1 or (args.num_frames - 1) % 8:
         raise ValueError("num_frames must be <= 441 and follow the 8n + 1 rule")
@@ -252,6 +317,10 @@ def main() -> int:
 
     try:
         payload = _build_payload(args)
+    except ValueError as error:
+        raise SystemExit(str(error)) from error
+    try:
+        _preflight_public_media_urls(payload)
     except ValueError as error:
         raise SystemExit(str(error)) from error
     contract_path = args.shot_contract or args.episode_contract
