@@ -23,14 +23,18 @@
 
 角色返回内容还会经过确定性候选稿检查：空结果、占位符和越权提交语句会被标记为质量失败，并继续尝试同能力降级；不会把失败文字写成成功。
 
+失败尝试会生成 `feedback_proposals`，状态固定为 `PROPOSED / REVIEW_REQUIRED`，只作为下一轮复盘候选，不会未经审阅直接写入 L3 或改变硬约束。
+
 ## 使用
 
 ```powershell
 py -3 tools/role_room.py --idea "..." --out temp/role_receipt.json --profile standard
 py -3 tools/role_room.py --idea "..." --project-id episode_007_virtual_data --out temp/role_receipt.json
+py -3 tools/role_room.py --idea "..." --out temp/role_receipt_retry.json --execute --resume-from temp/role_receipt.json
 ```
 
 默认只加载全局 L0/L3；不提供项目 ID 时不会加载当前历史剧集的 L1/L2。
+续跑会跳过上一份收据中已完成且记忆哈希一致的角色；记忆发生变化时会自动重新评估，避免用旧上下文继续生产。
 
 ## 边界
 

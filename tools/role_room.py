@@ -25,9 +25,11 @@ MATRIX = ROOT / "research" / "oneapi_role_room.v1.json"
 try:
     from tools.memory_context import build_memory_context, render_memory_context
     from tools.role_evaluator import evaluate_role_output
+    from tools.role_feedback import build_feedback_proposals
 except ImportError:  # pragma: no cover - script execution from tools/
     from memory_context import build_memory_context, render_memory_context  # type: ignore
     from role_evaluator import evaluate_role_output  # type: ignore
+    from role_feedback import build_feedback_proposals  # type: ignore
 
 
 def _load_json(path: Path) -> dict[str, Any]:
@@ -105,6 +107,7 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("--execute", action="store_true", help="调用本地 OneAPI；默认只做路由 dry-run")
     parser.add_argument("--profile", choices=("standard", "rapid", "full_audit"), default="standard", help="角色配置：日常、快速整理或全审计")
     parser.add_argument("--project-id", default=os.environ.get("VIDEO_KINGDOM_PROJECT_ID", ""), help="可选；匹配后才加载该项目的 L1/L2 记忆")
+    parser.add_argument("--resume-from", type=Path, help="可选；从上一份角色收据续跑，只重试未完成角色")
     parser.add_argument(
         "--timeout",
         type=float,
@@ -130,6 +133,21 @@ def main(argv: list[str] | None = None) -> int:
     trace_id = uuid.uuid4().hex
     memory = build_memory_context(args.project_id.strip() or None)
     memory_text = render_memory_context(memory)
+    resume_receipt: dict[str, Any] = {}
+    resume_compatible = False
+    if args.resume_from:
+        try:
+            resume_receipt = _load_json(args.resume_from)
+        except (OSError, UnicodeDecodeError, json.JSONDecodeError) as exc:
+            parser.error(f"--resume-from 无法读取：{exc}")
+        if resume_receipt.get("schema") != matrix["schema"]:
+            parser.error("--resume-from 的收据 schema 与当前角色房间不兼容")
+        if str(resume_receipt.get("idea") or "") != source:
+            parser.error("--resume-from 的 idea 与本次输入不一致")
+        old_memory = resume_receipt.get("memory_context") if isinstance(resume_receipt.get("memory_context"), dict) else {}
+        resume_compatible = old_memory.get("sha256") == memory["sha256"]
+        if not resume_compatible:
+            print("[role-room] memory context changed; completed roles will be re-evaluated", file=sys.stderr, flush=True)
     receipt: dict[str, Any] = {
         "schema": matrix["schema"],
         "status": "DRY_RUN" if not args.execute else "RUNNING",
@@ -143,9 +161,16 @@ def main(argv: list[str] | None = None) -> int:
             "project_id": args.project_id.strip() or None,
             "l1_l2_loaded": bool(memory["payload"]["scope"]["l1_l2_loaded"]),
         },
+        "resumed_from": str(args.resume_from) if args.resume_from else None,
+        "resume_compatible": resume_compatible if args.resume_from else None,
         "roles": [],
     }
     context = ""
+    previous_roles = {
+        str(item.get("role_id")): item
+        for item in (resume_receipt.get("roles") if isinstance(resume_receipt.get("roles"), list) else [])
+        if isinstance(item, dict) and item.get("role_id")
+    }
     # The local launcher historically exposed both ONEAPI_* and ONE_API_* names.
     # Accept the configured admin token as the local gateway credential so a new
     # window does not silently fall back to an empty/incorrect key.
@@ -157,6 +182,12 @@ def main(argv: list[str] | None = None) -> int:
     )
     for role_id in role_order:
         item = roles[role_id]
+        previous = previous_roles.get(role_id)
+        if resume_compatible and previous and previous.get("status") == "COMPLETED":
+            receipt["roles"].append(previous)
+            if previous.get("output"):
+                context += f"\n[{role_id}]\n{previous['output']}\n"
+            continue
         primary_model = item["model"]
         fallback_models = list(item.get("fallback_models", []))
         record: dict[str, Any] = {"role_id": role_id, "span_id": uuid.uuid4().hex, "model": primary_model, "requested_model": primary_model, "status": "PLANNED", "attempts": []}
@@ -196,6 +227,7 @@ def main(argv: list[str] | None = None) -> int:
             receipt["status"] = "BLOCKED"
         else:
             receipt["status"] = "FAILED"
+    receipt["feedback_proposals"] = build_feedback_proposals(receipt)
     receipt["production_submission"] = "NOT_PERFORMED"
     receipt["created_at"] = time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime())
     args.out.parent.mkdir(parents=True, exist_ok=True)
