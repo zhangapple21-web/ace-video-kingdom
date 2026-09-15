@@ -126,6 +126,8 @@ def main() -> int:
 
     receipt = {
         "status": "AUDIO_MIXED_DUCKING",
+        "human_listening": "UNVERIFIED",
+        "audio_acceptance": "TECHNICAL_ONLY",
         "voice": str(args.voice),
         "bgm": str(args.bgm),
         "output": str(args.output),

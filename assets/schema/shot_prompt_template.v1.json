@@ -20,6 +20,11 @@
       "minLength": 1,
       "description": "风格基准：画幅、色调、画风、摄影质感。全剧锁定，单镜不得重写。必须匹配已签名 medium_lock.output_medium；非 UI_ANIMATION 不得写入微信/气泡/聊天界面。"
     },
+    "style_lock": {"type": "string"},
+    "subject_lock": {"type": "string"},
+    "scene_lock": {"type": "string"},
+    "count_constraints": {"type": "array"},
+    "negative_constraints": {"type": "array", "items": {"type": "string"}},
     "opening_space": {
       "type": "string",
       "minLength": 1,
