@@ -17,4 +17,10 @@ Baseline → Change → Test → Evaluation → Compare → Promote / Rollback
 
 同一个 `evolution_id` 重复提交会幂等跳过，避免自动任务把同一能力重复计数或来回振荡。
 
-所有失败都进入 `failure_replay_db.v1.jsonl`，完整保存问题、当时判断、动作、结果、有效原因和复用条件。复盘记录可以帮助下一次决策，但不能自动改写 L0 硬规则。
+所有失败都进入 `failure_replay_db.v2.jsonl`，除问题、判断、动作、结果、有效原因和复用条件外，必须写清代价、影响范围、未拦截时的反事实后果和复发条件。旧 `v1` 记录只作为历史证据，不自动升级。
+
+## 痛苦复盘硬门
+
+任何能力晋升还必须附带 `painful_review`：`observed_problem`、`cost`、`blast_radius`、`counterfactual`、`recurrence_risk`、`reusable_lesson` 六项都要有具体内容。占位词、`UNKNOWN`、空泛的“已修复”或只有代码 diff，均不得 `PROMOTE`，决策为 `REJECTED_MISSING_PAINFUL_REVIEW`。
+
+复盘至少回答：哪里真的痛、谁/什么被影响、当时为什么没提前发现、如果没拦截会怎样、以后什么条件下可复用。没有痛苦证据，所谓进化只是活跃度。

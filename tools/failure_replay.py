@@ -11,16 +11,34 @@ from typing import Any
 
 
 ROOT = Path(__file__).resolve().parents[1]
-DEFAULT_PATH = ROOT / "research" / "failure_replay_db.v1.jsonl"
-REQUIRED = ("problem", "judgment", "action", "result", "why", "reuse_when")
+DEFAULT_PATH = ROOT / "research" / "failure_replay_db.v2.jsonl"
+REQUIRED = (
+    "problem",
+    "judgment",
+    "action",
+    "result",
+    "why",
+    "reuse_when",
+    "cost",
+    "blast_radius",
+    "counterfactual",
+    "recurrence_risk",
+)
+
+PLACEHOLDERS = {"", "unknown", "n/a", "na", "none", "todo", "待补", "未知", "无"}
 
 
 def record_failure(payload: dict[str, Any], *, path: Path = DEFAULT_PATH) -> dict[str, Any]:
-    missing = [name for name in REQUIRED if not str(payload.get(name, "")).strip()]
+    missing = [
+        name
+        for name in REQUIRED
+        if str(payload.get(name, "")).strip().lower() in PLACEHOLDERS
+        or len(str(payload.get(name, "")).strip()) < 5
+    ]
     if missing:
         raise ValueError("missing failure replay fields: " + ",".join(missing))
     row = {
-        "schema": "video_kingdom.failure_replay.v1",
+        "schema": "video_kingdom.failure_replay.v2",
         "replay_id": str(payload.get("replay_id") or "FR-" + uuid.uuid4().hex[:12]),
         "problem": payload["problem"],
         "judgment": payload["judgment"],
