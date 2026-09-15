@@ -26,8 +26,10 @@ from typing import Any
 
 try:
     from medium_lock import validate_medium_lock
+    from validate_shot_prompt import validate_prompt
 except ImportError:  # support ``python -m tools.validate_script_executability``
     from tools.medium_lock import validate_medium_lock
+    from tools.validate_shot_prompt import validate_prompt
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -117,6 +119,22 @@ def _prompt_errors(shot: dict[str, Any], shot_id: str) -> tuple[list[str], list[
     for key in TXT_ELEMENTS:
         if not _nonempty(elements.get(key)):
             rework.append(f"{shot_id}: txt_prompt_elements.{key} empty")
+    lint = validate_prompt({
+        "compiled_prompt": prompt,
+        "txt_prompt_elements": elements,
+        "style_lock": structured.get("style_lock"),
+        "scene_lock": structured.get("scene_lock"),
+        "subject_lock": structured.get("subject_lock"),
+        "count_constraints": structured.get("count_constraints"),
+        "negative_constraints": structured.get("negative_constraints"),
+        "visual_mode": shot.get("visual_mode"),
+        "strict_locks": False,
+    })
+    for error in lint["errors"]:
+        if error.startswith("forbidden UI term"):
+            blocked.append(f"{shot_id}: {error}")
+        elif error not in rework:
+            rework.append(f"{shot_id}: prompt lint: {error}")
     return blocked, rework
 
 
@@ -330,9 +348,9 @@ def compile_continuity_bridge(
     exit_direction: str,
     enter_direction: str,
     inherited_state_items: list[dict[str, str]],
-    camera_state: str = "",
-    lighting_state: str = "",
-    tail_frame_state: str = "",
+    camera_state: str = "继承上一镜摄影机高度、方向、焦段感和运动速度",
+    lighting_state: str = "继承上一镜主光方向、色温、曝光和天气",
+    tail_frame_state: str = "继承上一镜末态的主体位置、动作阶段和视线",
     terminal: bool = False,
 ) -> dict[str, Any]:
     return {
