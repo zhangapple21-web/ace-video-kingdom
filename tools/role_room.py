@@ -24,8 +24,10 @@ MATRIX = ROOT / "research" / "oneapi_role_room.v1.json"
 
 try:
     from tools.memory_context import build_memory_context, render_memory_context
+    from tools.role_evaluator import evaluate_role_output
 except ImportError:  # pragma: no cover - script execution from tools/
     from memory_context import build_memory_context, render_memory_context  # type: ignore
+    from role_evaluator import evaluate_role_output  # type: ignore
 
 
 def _load_json(path: Path) -> dict[str, Any]:
@@ -168,9 +170,16 @@ def main(argv: list[str] | None = None) -> int:
                     print(f"[role-room] {role_id}: trying {attempt_model}", file=sys.stderr, flush=True)
                     try:
                         text, actual_model = _invoke_call(args.base_url, api_key, attempt_model, _prompt(role_id, source, context, memory_text), args.timeout)
-                        record["attempts"].append({"model": attempt_model, "status": "PASS", "actual_model": actual_model})
+                        evaluation = evaluate_role_output(role_id, text)
+                        attempt = {"model": attempt_model, "actual_model": actual_model, "status": evaluation["status"], "evaluation": evaluation}
+                        record["attempts"].append(attempt)
+                        if evaluation["status"] != "PASS":
+                            last_error = evaluation["failure_class"] or "QUALITY_FAIL"
+                            record["quality_failures"] = int(record.get("quality_failures", 0)) + 1
+                            print(f"[role-room] {role_id}: {attempt_model} returned an invalid candidate; trying fallback", file=sys.stderr, flush=True)
+                            continue
                         output = text
-                        record.update({"status": "COMPLETED", "model": actual_model, "fallback_used": attempt_model != primary_model, "degraded": attempt_model != primary_model, "output": text})
+                        record.update({"status": "COMPLETED", "model": actual_model, "fallback_used": attempt_model != primary_model, "degraded": attempt_model != primary_model, "output": text, "evaluation": evaluation})
                         context += f"\n[{role_id}]\n{text}\n"
                         break
                     except (urllib.error.URLError, urllib.error.HTTPError, TimeoutError, KeyError, json.JSONDecodeError) as exc:
