@@ -39,6 +39,7 @@ def promote(receipt_path: Path, *, execute: bool = False) -> dict[str, Any]:
                 existing.add(str(row["pattern_id"]))
     promoted: list[dict[str, Any]] = []
     skipped: list[str] = []
+    evidence_receipt = str(receipt.get("source_receipt") or receipt_path)
     for proposal in proposals:
         if not isinstance(proposal, dict):
             continue
@@ -52,7 +53,7 @@ def promote(receipt_path: Path, *, execute: bool = False) -> dict[str, Any]:
         promoted.append(
             {
                 "pattern_id": pattern_id,
-                "evidence": {"receipt": str(receipt_path), "trace_id": receipt.get("trace_id")},
+                "evidence": {"receipt": evidence_receipt, "review_record": str(receipt_path), "trace_id": receipt.get("trace_id")},
                 "lesson": proposal.get("lesson"),
                 "confidence": "medium",
                 "status": "ACTIVE",
