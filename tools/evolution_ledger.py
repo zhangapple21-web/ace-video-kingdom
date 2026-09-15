@@ -21,6 +21,8 @@ DEFAULT_LEDGER = ROOT / "research" / "evolution_ledger.v1.jsonl"
 DEFAULT_CAPABILITIES = ROOT / "research" / "capability_growth.v1.json"
 HIGHER_IS_BETTER = {"success_rate", "pass_rate", "quality", "reliability", "coverage"}
 LOWER_IS_BETTER = {"failure_rate", "latency_ms", "cost", "error_rate", "rollback_count"}
+PAINFUL_REVIEW_FIELDS = ("observed_problem", "cost", "blast_radius", "counterfactual", "recurrence_risk", "reusable_lesson")
+PLACEHOLDERS = {"", "unknown", "n/a", "na", "none", "todo", "待补", "未知", "无"}
 
 
 def compare_metrics(before: dict[str, Any], after: dict[str, Any]) -> dict[str, Any]:
@@ -59,13 +61,27 @@ def assess_evolution(record: dict[str, Any]) -> dict[str, Any]:
     comparison = compare_metrics(before, after)
     tests_passed = record.get("tests_passed") is True
     evidence_complete = bool(record.get("change")) and bool(record.get("evaluation")) and comparison["comparable_metrics"] > 0
-    if tests_passed and evidence_complete and comparison["improved"]:
+    painful_review = record.get("painful_review") if isinstance(record.get("painful_review"), dict) else {}
+    painful_review_complete = all(
+        len(str(painful_review.get(name, "")).strip()) >= 5
+        and str(painful_review.get(name, "")).strip().lower() not in PLACEHOLDERS
+        for name in PAINFUL_REVIEW_FIELDS
+    )
+    if tests_passed and evidence_complete and comparison["improved"] and painful_review_complete:
         decision = "PROMOTE"
     elif not tests_passed or comparison["regressions"]:
         decision = "ROLLBACK_REQUIRED"
+    elif not painful_review_complete:
+        decision = "REJECTED_MISSING_PAINFUL_REVIEW"
     else:
         decision = "REJECTED_NO_MEASURABLE_GAIN"
-    return {"decision": decision, "comparison": comparison, "tests_passed": tests_passed, "evidence_complete": evidence_complete}
+    return {
+        "decision": decision,
+        "comparison": comparison,
+        "tests_passed": tests_passed,
+        "evidence_complete": evidence_complete,
+        "painful_review_complete": painful_review_complete,
+    }
 
 
 def record_evolution(record: dict[str, Any], *, ledger_path: Path = DEFAULT_LEDGER, capabilities_path: Path = DEFAULT_CAPABILITIES) -> dict[str, Any]:
@@ -89,6 +105,7 @@ def record_evolution(record: dict[str, Any], *, ledger_path: Path = DEFAULT_LEDG
         "tests": record.get("tests", []),
         "tests_passed": assessment["tests_passed"],
         "evaluation": record.get("evaluation", {}),
+        "painful_review": record.get("painful_review", {}),
         "after_metrics": record.get("after_metrics", {}),
         "comparison": assessment["comparison"],
         "decision": assessment["decision"],
