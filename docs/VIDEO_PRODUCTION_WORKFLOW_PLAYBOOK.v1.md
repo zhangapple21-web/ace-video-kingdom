@@ -28,6 +28,8 @@ ASSET_LIBRARY：角色包、场景包、道具包、连续性桥接、SHA-256
     ↓
 STORYBOARD：镜头功能、初态→单动作→末态、机位、声音、时长
     ↓
+DIRECTOR_PREFLIGHT：提示词锁、首帧空间、摄影机路径、光线动机、尾帧桥
+    ↓
 ASSET_GATE：缺项/哈希/用途/连续性任一失败 = BLOCKED
     ↓
 GENERATE：先选首帧，再做受控图生视频；每次请求有 receipt
@@ -37,6 +39,8 @@ SHOT_QC：媒体完整性 + 多帧连续性 + 表演/动作 + 音频 + 导演复
 ASSEMBLY：仅装配 selected takes，统一颜色、字幕、声音和节奏
     ↓
 EPISODE_QC：全片连续性、音画、来源、合规、导出完整性
+    ↓
+READBACK：分辨率、帧数、音轨、字幕轨、时长与人工听感状态
     ↓
 DELIVERABLE / RESEARCH_CANDIDATE
 ```
@@ -74,6 +78,10 @@ DELIVERABLE / RESEARCH_CANDIDATE
 ### 资产状态
 
 资产包至少要有：`asset_id`、用途、来源路径、`sha256`、引用关系、权利/来源说明、缺项列表、校验时间和收据。资产存在但哈希不能重建、用途不明或连续性未证明，状态仍为 `BLOCKED`。
+
+## 导演预检与连续性桥
+
+提示词提交前必须通过 `tools/validate_shot_prompt.py`：风格锁、主体锁、场景锁、数量约束和负面约束缺失，或非 UI 模式出现禁用界面词，均阻断。相邻镜头的摄影机状态、光线状态和尾帧必须通过 `tools/validate_continuity_bridge.py`；`READY` 桥接还必须有实际帧证据。
 
 ## 阶段 2：首帧与图生视频
 
@@ -121,6 +129,8 @@ DELIVERABLE / RESEARCH_CANDIDATE
 - 导出后再次检查分辨率、时长、音轨、字幕、文件哈希和播放完整性。
 
 全片交付前再做一次故事、镜头、连续性、表演、音频、剪辑和观众信息七层复核。任一层为 `REVIEW_REQUIRED` 或 `UNKNOWN`，不能写 `delivery_approved=true`。
+
+导出后使用 `tools/validate_media_readback.py` 对照计划检查分辨率、帧数、音轨、字幕轨和时长。FFmpeg 混音收据只代表技术处理完成，默认 `human_listening=UNVERIFIED`；没有真实人耳听过并登记，音频不能变成 `VERIFIED`，也不能交付。
 
 ## 门禁和状态机
 
