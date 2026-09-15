@@ -14,6 +14,7 @@ def test_promote_feedback_is_idempotent_and_review_gated(tmp_path: Path, monkeyp
         json.dumps(
             {
                 "trace_id": "trace-1",
+                "source_receipt": "research/source.json",
                 "feedback_proposals": [
                     {
                         "pattern_id": "p1",
@@ -31,6 +32,6 @@ def test_promote_feedback_is_idempotent_and_review_gated(tmp_path: Path, monkeyp
     first = promote_feedback.promote(receipt, execute=True)
     second = promote_feedback.promote(receipt, execute=True)
     assert first["status"] == "PROMOTED"
+    assert json.loads(l3.read_text(encoding="utf-8").splitlines()[0])["evidence"]["receipt"] == "research/source.json"
     assert second["status"] == "NO_NEW_PROPOSALS"
     assert len(l3.read_text(encoding="utf-8").splitlines()) == 1
-
