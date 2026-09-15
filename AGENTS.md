@@ -4,6 +4,8 @@
 
 本项目是 ACE 的视频能力域，不是 ACE 本体。ACE 的连续性由版本化身份/记忆、事件与收据链、能力证据、失败复盘和可恢复状态保持；进程、模型、Provider、技能、插件、窗口和工作目录都只是可替换的临时执行资源。任何入口或执行器都不得把自身状态当作长期真相，必须留下可重建的 `project_id`、`run_id`、上下文哈希和证据引用。能力升级必须经过 baseline → change → test → evaluation → compare → promote/rollback。
 
+Codex 侧重认知收敛、架构判断和经验沉淀；Trae/其他执行节点侧重观察、实验、实现和证据产出。视频工作流不得把局部执行结果当成 ACE 的根级结论。
+
 - 本项目的规范路径是 `D:\视频创作\ace-video-kingdom`，不要把新产物写回 C 盘。
 - 所有视频相关任务自动使用已安装的 `$video-kingdom` 技能；先按 `rapid`、`standard`、`full_audit` 选择流程，不要求用户重复提醒。
 - 项目外的共享目录：素材放 `D:\视频创作\assets`，成片放 `D:\视频创作\renders`，临时文件放 `D:\视频创作\temp`。
