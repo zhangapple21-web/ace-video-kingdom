@@ -1,0 +1,386 @@
+{
+  "schema": "video_kingdom.oneapi_role_room.v2",
+  "status": "COMPLETED",
+  "profile": "standard",
+  "idea": "标准闭环复测二：检查剧本、分镜、反例、连续性和导演收敛；只输出审计意见，不提交媒体任务。",
+  "gateway": "http://localhost:3000/v1",
+  "trace_id": "fd85830d5fe4472daceb96c1a22ebfe3",
+  "memory_context": {
+    "sha256": "20657a84c0dc58ecbdc4ff387bafd6863cd38dfd2d6f0693b54ec0712fe1b439",
+    "sources": [
+      "memory/L0_invariants.json",
+      "memory/L3_experience.jsonl"
+    ],
+    "project_id": null,
+    "l1_l2_loaded": false
+  },
+  "resumed_from": null,
+  "resume_compatible": null,
+  "roles": [
+    {
+      "role_id": "primary_writer",
+      "span_id": "214de2250ef44b8fac9cbc05264bbc44",
+      "model": "grok-4.6",
+      "requested_model": "gpt-5.6-terra",
+      "declared_models": [
+        "gpt-5.6-terra",
+        "gpt-5.5",
+        "gpt-5.4"
+      ],
+      "status": "COMPLETED",
+      "attempts": [
+        {
+          "model": "gpt-5.6-terra",
+          "status": "FAILED",
+          "error": "TimeoutError: timed out"
+        },
+        {
+          "model": "gpt-5.5",
+          "status": "FAILED",
+          "error": "TimeoutError: timed out"
+        },
+        {
+          "model": "gpt-5.4",
+          "actual_model": "grok-4.6",
+          "status": "PASS",
+          "evaluation": {
+            "role_id": "primary_writer",
+            "status": "PASS",
+            "score": 1.0,
+            "checks": [
+              {
+                "name": "non_empty",
+                "passed": true
+              },
+              {
+                "name": "no_placeholder",
+                "passed": true
+              },
+              {
+                "name": "no_provider_submission",
+                "passed": true
+              }
+            ],
+            "failure_class": null,
+            "repair_hint": null
+          }
+        }
+      ],
+      "route_rewritten": true,
+      "fallback_used": true,
+      "degraded": true,
+      "output": "【断点】无剧本、分镜、反例；L1/L2未加载；已有意见空。无法验收连续性与导演收敛。\n\n【原文事实】身份仅约束：阿浪浅灰旧短袖、重黑眼圈；肥哥偏胖黑POLO常持烟。全片禁画中画、悬浮窗、通话界面、聊天UI、录屏感。对白与独白分离，独白须完整原文；每镜一句核心台词。\n\n【明确暗示】本轮只出审计，不交媒体任务。\n\n【待补】主方案、目标、冲突、对白/独白全文、多场景轴线、动作四拍（准备/发力/惯性/过渡）。\n\n【不可推断】无原文不得写成既定剧情。\n\n【结论】剧本与分镜不可审。禁止提交媒体。请先补剧本原文。",
+      "evaluation": {
+        "role_id": "primary_writer",
+        "status": "PASS",
+        "score": 1.0,
+        "checks": [
+          {
+            "name": "non_empty",
+            "passed": true
+          },
+          {
+            "name": "no_placeholder",
+            "passed": true
+          },
+          {
+            "name": "no_provider_submission",
+            "passed": true
+          }
+        ],
+        "failure_class": null,
+        "repair_hint": null
+      }
+    },
+    {
+      "role_id": "storyboarder",
+      "span_id": "6e66722ca349429e94b55d4d11aeed48",
+      "model": "gpt-5.5",
+      "requested_model": "gpt-5.5",
+      "declared_models": [
+        "gpt-5.5",
+        "gpt-5.6-terra",
+        "gpt-5.4"
+      ],
+      "status": "COMPLETED",
+      "attempts": [
+        {
+          "model": "gpt-5.5",
+          "actual_model": "gpt-5.5",
+          "status": "PASS",
+          "evaluation": {
+            "role_id": "storyboarder",
+            "status": "PASS",
+            "score": 1.0,
+            "checks": [
+              {
+                "name": "non_empty",
+                "passed": true
+              },
+              {
+                "name": "no_placeholder",
+                "passed": true
+              },
+              {
+                "name": "no_provider_submission",
+                "passed": true
+              }
+            ],
+            "failure_class": null,
+            "repair_hint": null
+          }
+        }
+      ],
+      "route_rewritten": false,
+      "fallback_used": false,
+      "degraded": false,
+      "output": "【断点】未提供剧本原文、目标、冲突、分镜、反例或连续性记录，无法拆分可拍镜头，也无法验收导演收敛。\n\n【原文事实】阿浪穿浅灰旧短袖、重黑眼圈；肥哥偏胖、穿黑色POLO、常持香烟。全片禁画中画、悬浮窗、通话界面、聊天UI及录屏感。对白与内心独白必须分离，每镜最多一句核心台词。\n\n【明确暗示】本轮仅审计，不提交媒体任务。\n\n【待补信息】完整对白与独白原文、多场景顺序、人物目标、动作四拍、切镜依据、声音设计及连续性约束。\n\n【不可擅自推断】不得补写剧情、对白、独白、地点、人物关系或动作结果。\n\n【结论】当前不可审、不可出分镜、不可提交媒体；补齐剧本原文后再验收。",
+      "evaluation": {
+        "role_id": "storyboarder",
+        "status": "PASS",
+        "score": 1.0,
+        "checks": [
+          {
+            "name": "non_empty",
+            "passed": true
+          },
+          {
+            "name": "no_placeholder",
+            "passed": true
+          },
+          {
+            "name": "no_provider_submission",
+            "passed": true
+          }
+        ],
+        "failure_class": null,
+        "repair_hint": null
+      }
+    },
+    {
+      "role_id": "contrarian_auditor",
+      "span_id": "1f1d2c1ced8a43138284c72ca630e0e7",
+      "model": "grok-4.6",
+      "requested_model": "grok-4.5",
+      "declared_models": [
+        "grok-4.5",
+        "grok-4.6",
+        "gpt-5.5"
+      ],
+      "status": "COMPLETED",
+      "attempts": [
+        {
+          "model": "grok-4.5",
+          "actual_model": "grok-4.6",
+          "status": "PASS",
+          "evaluation": {
+            "role_id": "contrarian_auditor",
+            "status": "PASS",
+            "score": 1.0,
+            "checks": [
+              {
+                "name": "non_empty",
+                "passed": true
+              },
+              {
+                "name": "no_placeholder",
+                "passed": true
+              },
+              {
+                "name": "no_provider_submission",
+                "passed": true
+              }
+            ],
+            "failure_class": null,
+            "repair_hint": null
+          }
+        }
+      ],
+      "route_rewritten": true,
+      "fallback_used": true,
+      "degraded": true,
+      "output": "【断点】无剧本、分镜、反例、连续性记录及导演收敛证据；L1/L2未加载。无法从现实性、连续性、伦理、镜头可执行性、违规画面风险挑错。\n\n【原文事实】身份仅约束阿浪浅灰旧短袖衬衫重黑眼圈、肥哥偏胖黑POLO常持烟。全片禁画中画、悬浮窗、通话界面、聊天UI、录屏感。对白与独白分离，独白须完整原文；每镜一句核心台词。动作须含准备、发力/加速、惯性/回收及连续过渡。\n\n【明确暗示】本轮只出审计，不交媒体任务。\n\n【待补】完整剧本、对白/独白原文、多场景轴线、动作四拍、切镜依据。\n\n【不可擅自推断】无原文不得写成既定剧情、风险或收敛结果。\n\n【结论】素材断层不可审。禁止提交媒体。先补剧本原文。",
+      "evaluation": {
+        "role_id": "contrarian_auditor",
+        "status": "PASS",
+        "score": 1.0,
+        "checks": [
+          {
+            "name": "non_empty",
+            "passed": true
+          },
+          {
+            "name": "no_placeholder",
+            "passed": true
+          },
+          {
+            "name": "no_provider_submission",
+            "passed": true
+          }
+        ],
+        "failure_class": null,
+        "repair_hint": null
+      }
+    },
+    {
+      "role_id": "continuity_editor",
+      "span_id": "f67f2e0a6a4f416b80bcfa577ecd0c27",
+      "model": "grok-4.6",
+      "requested_model": "gpt-5.4",
+      "declared_models": [
+        "gpt-5.4",
+        "gpt-5.5",
+        "gpt-5.6-terra"
+      ],
+      "status": "COMPLETED",
+      "attempts": [
+        {
+          "model": "gpt-5.4",
+          "actual_model": "grok-4.6",
+          "status": "PASS",
+          "evaluation": {
+            "role_id": "continuity_editor",
+            "status": "PASS",
+            "score": 1.0,
+            "checks": [
+              {
+                "name": "non_empty",
+                "passed": true
+              },
+              {
+                "name": "no_placeholder",
+                "passed": true
+              },
+              {
+                "name": "no_provider_submission",
+                "passed": true
+              }
+            ],
+            "failure_class": null,
+            "repair_hint": null
+          }
+        }
+      ],
+      "route_rewritten": true,
+      "fallback_used": true,
+      "degraded": true,
+      "output": "【断点】无剧本、分镜、反例、连续性记录；L1/L2未加载。无法核角色服装/道具、时间线、对白长度、字幕安全区及镜头前后衔接。\n\n【原文事实】阿浪浅灰旧短袖衬衫重黑眼圈；肥哥偏胖黑POLO常持烟。全片禁画中画、悬浮窗、通话界面、聊天UI、录屏感。对白与独白分离，独白须完整原文；每镜一句核心台词。动作须准备/发力/惯性/过渡。字幕仅对白与必要第一人称独白。\n\n【明确暗示】本轮只出审计，不交媒体任务。\n\n【待补】剧本原文、分镜、对白/独白全文、多场景轴线、动作四拍、切镜依据、道具时间线。\n\n【不可擅自推断】无原文不得写成既定服装变化、时间跳跃或衔接事实。\n\n【风险】高。素材断层无法验收连续性。\n\n【最小补桥】先补剧本原文与分镜。\n\n【NEEDS_CLARIFICATION】剧本、分镜、反例齐全后，方可审角色/道具/时间线/对白长度/字幕安全区/镜头衔接。\n\n【结论】当前不可审。禁止提交媒体。先补剧本原文。",
+      "evaluation": {
+        "role_id": "continuity_editor",
+        "status": "PASS",
+        "score": 1.0,
+        "checks": [
+          {
+            "name": "non_empty",
+            "passed": true
+          },
+          {
+            "name": "no_placeholder",
+            "passed": true
+          },
+          {
+            "name": "no_provider_submission",
+            "passed": true
+          }
+        ],
+        "failure_class": null,
+        "repair_hint": null
+      }
+    },
+    {
+      "role_id": "director_convergence",
+      "span_id": "3eeb60bb5e774106a69cde1c30c508e1",
+      "model": "gpt-5.6-terra",
+      "requested_model": "gpt-5.6-terra",
+      "declared_models": [
+        "gpt-5.6-terra",
+        "gpt-5.5",
+        "gpt-5.4"
+      ],
+      "status": "COMPLETED",
+      "attempts": [
+        {
+          "model": "gpt-5.6-terra",
+          "actual_model": "gpt-5.6-terra",
+          "status": "PASS",
+          "evaluation": {
+            "role_id": "director_convergence",
+            "status": "PASS",
+            "score": 1.0,
+            "checks": [
+              {
+                "name": "non_empty",
+                "passed": true
+              },
+              {
+                "name": "no_placeholder",
+                "passed": true
+              },
+              {
+                "name": "no_provider_submission",
+                "passed": true
+              }
+            ],
+            "failure_class": null,
+            "repair_hint": null
+          }
+        }
+      ],
+      "route_rewritten": false,
+      "fallback_used": false,
+      "degraded": false,
+      "output": "【断点】未提供剧本原文、分镜、反例、连续性记录，L1/L2亦未加载，无法收敛镜头稿。\n\n【原文事实】阿浪穿浅灰旧短袖衬衫、重黑眼圈；肥哥偏胖，穿黑色POLO，常持香烟。全片禁止画中画、悬浮窗、通话界面、聊天UI及录屏感；对白与内心独白分离；每镜最多一句核心台词；动作须包含准备、发力/加速、惯性/回收、连续过渡；字幕仅可呈现对白及必要的完整第一人称独白。\n\n【明确暗示】本轮只做文字审计，不提交媒体任务。\n\n【待补】剧本全文、对白与独白原文、多场景顺序、人物目标与冲突、道具时间线、镜头切换依据、反例及连续性记录。\n\n【不可擅自推断】不得补写剧情、关系、地点、动作结果、对白或独白。\n\n【结论】当前不可出可拍镜头稿，禁止提交媒体；补齐上述材料后再审。",
+      "evaluation": {
+        "role_id": "director_convergence",
+        "status": "PASS",
+        "score": 1.0,
+        "checks": [
+          {
+            "name": "non_empty",
+            "passed": true
+          },
+          {
+            "name": "no_placeholder",
+            "passed": true
+          },
+          {
+            "name": "no_provider_submission",
+            "passed": true
+          }
+        ],
+        "failure_class": null,
+        "repair_hint": null
+      }
+    }
+  ],
+  "feedback_proposals": [
+    {
+      "pattern_id": "role_room_primary_writer_provider_failure",
+      "status": "PROPOSED",
+      "authority": "REVIEW_REQUIRED",
+      "role_id": "primary_writer",
+      "model": "gpt-5.6-terra",
+      "failure_class": "provider_failure",
+      "lesson": "角色 primary_writer 使用 gpt-5.6-terra 时出现 provider_failure；下一轮应先执行同类检查并保留降级记录。",
+      "evidence": {
+        "trace_id": "fd85830d5fe4472daceb96c1a22ebfe3",
+        "span_id": "214de2250ef44b8fac9cbc05264bbc44"
+      }
+    },
+    {
+      "pattern_id": "role_room_primary_writer_provider_failure",
+      "status": "PROPOSED",
+      "authority": "REVIEW_REQUIRED",
+      "role_id": "primary_writer",
+      "model": "gpt-5.5",
+      "failure_class": "provider_failure",
+      "lesson": "角色 primary_writer 使用 gpt-5.5 时出现 provider_failure；下一轮应先执行同类检查并保留降级记录。",
+      "evidence": {
+        "trace_id": "fd85830d5fe4472daceb96c1a22ebfe3",
+        "span_id": "214de2250ef44b8fac9cbc05264bbc44"
+      }
+    }
+  ],
+  "production_submission": "NOT_PERFORMED",
+  "created_at": "2026-09-15T14:09:07Z"
+}
