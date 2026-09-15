@@ -1,0 +1,361 @@
+{
+  "schema": "video_kingdom.oneapi_role_room.v2",
+  "status": "BLOCKED",
+  "profile": "standard",
+  "idea": "闭环验收：请分别检查剧本、分镜、连续性、表演节奏和导演收敛；只输出可执行审计意见，不提交任何媒体任务。",
+  "gateway": "http://localhost:3000/v1",
+  "trace_id": "a6f07ce01aab4fb4b1cb1c21ab59a1b0",
+  "memory_context": {
+    "sha256": "20657a84c0dc58ecbdc4ff387bafd6863cd38dfd2d6f0693b54ec0712fe1b439",
+    "sources": [
+      "memory/L0_invariants.json",
+      "memory/L3_experience.jsonl"
+    ],
+    "project_id": null,
+    "l1_l2_loaded": false
+  },
+  "resumed_from": null,
+  "resume_compatible": null,
+  "roles": [
+    {
+      "role_id": "primary_writer",
+      "span_id": "60e9690f07904df18c79b4ea2dae5acc",
+      "model": "gpt-5.6-terra",
+      "requested_model": "gpt-5.6-terra",
+      "status": "COMPLETED",
+      "attempts": [
+        {
+          "model": "gpt-5.6-terra",
+          "actual_model": "gpt-5.6-terra",
+          "status": "PASS",
+          "evaluation": {
+            "role_id": "primary_writer",
+            "status": "PASS",
+            "score": 1.0,
+            "checks": [
+              {
+                "name": "non_empty",
+                "passed": true
+              },
+              {
+                "name": "no_placeholder",
+                "passed": true
+              },
+              {
+                "name": "no_provider_submission",
+                "passed": true
+              }
+            ],
+            "failure_class": null,
+            "repair_hint": null
+          }
+        }
+      ],
+      "fallback_used": false,
+      "degraded": false,
+      "output": "剧本断点：未提供具体剧本文本，无法形成可验收的故事主方案、角色目标、冲突及完整对白/独白。\n\n原文事实：素材仅要求检查剧本、分镜、连续性、表演节奏和导演收敛；禁止提交媒体任务。  \n明确暗示：成片应为真人电影感、多场景多镜头；对白与内心独白必须分离；独白须提供完整原文。  \n待补信息：人物身份与关系、时间地点、事件因果、结局、场景顺序、对白及独白需求。  \n不可擅自推断：不得补写人物动机、事件结果、动作、台词或视觉信息。\n\n执行验收意见：补齐剧本后，逐镜核对“准备—发力/加速—惯性/回收—过渡”；每镜最多一句核心台词，独白单列并保留全文；检查服装、道具、轴线、时空和情绪递进；删除画中画、悬浮窗、通话界面、聊天UI及录屏感；确认每个运镜均服务于动作、信息或转场，并以导演收敛检查重复、漂移和无效镜头。",
+      "evaluation": {
+        "role_id": "primary_writer",
+        "status": "PASS",
+        "score": 1.0,
+        "checks": [
+          {
+            "name": "non_empty",
+            "passed": true
+          },
+          {
+            "name": "no_placeholder",
+            "passed": true
+          },
+          {
+            "name": "no_provider_submission",
+            "passed": true
+          }
+        ],
+        "failure_class": null,
+        "repair_hint": null
+      }
+    },
+    {
+      "role_id": "storyboarder",
+      "span_id": "0b41abfda5db47d8bfdd50f1ead9e0c9",
+      "model": "gpt-5.5",
+      "requested_model": "gpt-5.5",
+      "status": "COMPLETED",
+      "attempts": [
+        {
+          "model": "gpt-5.5",
+          "actual_model": "gpt-5.5",
+          "status": "PASS",
+          "evaluation": {
+            "role_id": "storyboarder",
+            "status": "PASS",
+            "score": 1.0,
+            "checks": [
+              {
+                "name": "non_empty",
+                "passed": true
+              },
+              {
+                "name": "no_placeholder",
+                "passed": true
+              },
+              {
+                "name": "no_provider_submission",
+                "passed": true
+              }
+            ],
+            "failure_class": null,
+            "repair_hint": null
+          }
+        }
+      ],
+      "fallback_used": false,
+      "degraded": false,
+      "output": "剧本审计：当前断点为未提供剧本文本。原文事实：仅有验收要求，未给出人物、关系、时空、事件因果、结局、对白或独白。明确暗示：真人电影感、多场景多镜头；对白与独白分离。待补信息：完整剧情及独白原文。不可擅自推断：不得补写动机、动作、台词或结果。\n\n分镜审计：剧本补齐前不得生成具体镜头。补齐后逐镜登记景别、机位、动作完成点、准备—发力/加速—惯性/回收—连续过渡、切镜理由、现场声音；每镜最多一句核心台词。\n\n连续性：核对人物正式参考图、服装、道具、轴线、视线、时空、动作接点和场景顺序。\n\n表演节奏：对白与独白分轨，独白保留完整原文；固定机位完成表演，长动作按语义拆段。\n\n导演收敛：删除无信息运镜、重复镜头及身份/景别/色调漂移；全片排除画中画、悬浮窗、通话界面、聊天UI和录屏感。",
+      "evaluation": {
+        "role_id": "storyboarder",
+        "status": "PASS",
+        "score": 1.0,
+        "checks": [
+          {
+            "name": "non_empty",
+            "passed": true
+          },
+          {
+            "name": "no_placeholder",
+            "passed": true
+          },
+          {
+            "name": "no_provider_submission",
+            "passed": true
+          }
+        ],
+        "failure_class": null,
+        "repair_hint": null
+      }
+    },
+    {
+      "role_id": "contrarian_auditor",
+      "span_id": "a044e60d582b442f8ba2275bf32dfb60",
+      "model": "grok-4.5",
+      "requested_model": "grok-4.5",
+      "status": "BLOCKED",
+      "attempts": [
+        {
+          "model": "grok-4.5",
+          "status": "FAILED",
+          "error": "TimeoutError: timed out"
+        },
+        {
+          "model": "grok-4.6",
+          "status": "FAILED",
+          "error": "TimeoutError: timed out"
+        },
+        {
+          "model": "gpt-5.5",
+          "status": "FAILED",
+          "error": "TimeoutError: timed out"
+        }
+      ],
+      "error": "TimeoutError: timed out"
+    },
+    {
+      "role_id": "continuity_editor",
+      "span_id": "8eb56691c8a24d2f9641c3364913bb1a",
+      "model": "gpt-5.5",
+      "requested_model": "gpt-5.4",
+      "status": "COMPLETED",
+      "attempts": [
+        {
+          "model": "gpt-5.4",
+          "status": "FAILED",
+          "error": "TimeoutError: timed out"
+        },
+        {
+          "model": "gpt-5.5",
+          "actual_model": "gpt-5.5",
+          "status": "PASS",
+          "evaluation": {
+            "role_id": "continuity_editor",
+            "status": "PASS",
+            "score": 1.0,
+            "checks": [
+              {
+                "name": "non_empty",
+                "passed": true
+              },
+              {
+                "name": "no_placeholder",
+                "passed": true
+              },
+              {
+                "name": "no_provider_submission",
+                "passed": true
+              }
+            ],
+            "failure_class": null,
+            "repair_hint": null
+          }
+        }
+      ],
+      "fallback_used": true,
+      "degraded": true,
+      "output": "**断点与风险**\n\n- **P0｜阻断验收**：未提供剧本文本、分镜表、角色/道具设定或对白与独白原文，无法核验角色、因果、时间线、镜头衔接、表演节奏及导演收敛。\n- **原文事实**：当前仅有验收约束，无具体剧情事实。\n- **明确暗示**：需真人电影感、多场景多镜头；对白与内心独白分离，独白须保留完整原文；禁止画中画、悬浮窗、通话界面、聊天UI、录屏感。\n- **待补信息**：人物关系与正式参考图、服装、场景顺序、时间地点、道具、事件因果、结局、逐句对白、完整独白、逐镜动作与切镜依据。\n- **不可擅自推断**：不得补写动机、动作、台词、独白、结果或视觉信息。\n\n**最小补桥候选**\n\n补交“场次—镜号—时间地点—人物/服装—道具—动作接点—对白/独白—切镜理由”的逐镜清单；动作标注准备、发力/加速、惯性/回收、过渡。长台词拆分，每镜最多一句核心台词，独白单列全文。\n\n**NEEDS_CLARIFICATION**\n\n缺任一关键因果、角色身份、时空接点、对白/独白原文或前后镜动作状态，即暂停连续性与导演收敛验收，不提交媒体任务。",
+      "evaluation": {
+        "role_id": "continuity_editor",
+        "status": "PASS",
+        "score": 1.0,
+        "checks": [
+          {
+            "name": "non_empty",
+            "passed": true
+          },
+          {
+            "name": "no_placeholder",
+            "passed": true
+          },
+          {
+            "name": "no_provider_submission",
+            "passed": true
+          }
+        ],
+        "failure_class": null,
+        "repair_hint": null
+      }
+    },
+    {
+      "role_id": "director_convergence",
+      "span_id": "ba6326014abd47679109f7af124cbfc8",
+      "model": "gpt-5.5",
+      "requested_model": "gpt-5.6-terra",
+      "status": "COMPLETED",
+      "attempts": [
+        {
+          "model": "gpt-5.6-terra",
+          "status": "FAILED",
+          "error": "TimeoutError: timed out"
+        },
+        {
+          "model": "gpt-5.5",
+          "actual_model": "gpt-5.5",
+          "status": "PASS",
+          "evaluation": {
+            "role_id": "director_convergence",
+            "status": "PASS",
+            "score": 1.0,
+            "checks": [
+              {
+                "name": "non_empty",
+                "passed": true
+              },
+              {
+                "name": "no_placeholder",
+                "passed": true
+              },
+              {
+                "name": "no_provider_submission",
+                "passed": true
+              }
+            ],
+            "failure_class": null,
+            "repair_hint": null
+          }
+        }
+      ],
+      "fallback_used": true,
+      "degraded": true,
+      "output": "结论：当前存在 P0 断点，不能收敛为可拍镜头稿，也不提交媒体任务。\n\n原文事实：仅有验收约束，未提供具体剧情、人物、场景、对白或独白。  \n明确暗示：真人电影感、多场景多镜头；对白与内心独白分离；独白须保留完整原文；禁止画中画、悬浮窗、通话界面、聊天 UI、录屏感。  \n待补信息：人物关系及正式参考图、时间地点、事件因果与结局、服装道具、场次顺序、逐句对白和完整独白。  \n不可擅自推断：不得补写动机、动作、台词、结果或视觉信息。\n\n请补交逐镜表：场次/镜号、时间地点、人物服装、道具、景别机位、动作的“准备—发力/加速—惯性/回收—过渡”、对白或独白、现场声、切镜理由及前后动作接点。验收时逐项核对连续性、轴线、节奏和导演收敛；每镜最多一句核心台词，长动作按语义拆段，运镜必须服务动作、信息或转场。",
+      "evaluation": {
+        "role_id": "director_convergence",
+        "status": "PASS",
+        "score": 1.0,
+        "checks": [
+          {
+            "name": "non_empty",
+            "passed": true
+          },
+          {
+            "name": "no_placeholder",
+            "passed": true
+          },
+          {
+            "name": "no_provider_submission",
+            "passed": true
+          }
+        ],
+        "failure_class": null,
+        "repair_hint": null
+      }
+    }
+  ],
+  "feedback_proposals": [
+    {
+      "pattern_id": "role_room_contrarian_auditor_provider_failure",
+      "status": "PROPOSED",
+      "authority": "REVIEW_REQUIRED",
+      "role_id": "contrarian_auditor",
+      "model": "grok-4.5",
+      "failure_class": "provider_failure",
+      "lesson": "角色 contrarian_auditor 使用 grok-4.5 时出现 provider_failure；下一轮应先执行同类检查并保留降级记录。",
+      "evidence": {
+        "trace_id": "a6f07ce01aab4fb4b1cb1c21ab59a1b0",
+        "span_id": "a044e60d582b442f8ba2275bf32dfb60"
+      }
+    },
+    {
+      "pattern_id": "role_room_contrarian_auditor_provider_failure",
+      "status": "PROPOSED",
+      "authority": "REVIEW_REQUIRED",
+      "role_id": "contrarian_auditor",
+      "model": "grok-4.6",
+      "failure_class": "provider_failure",
+      "lesson": "角色 contrarian_auditor 使用 grok-4.6 时出现 provider_failure；下一轮应先执行同类检查并保留降级记录。",
+      "evidence": {
+        "trace_id": "a6f07ce01aab4fb4b1cb1c21ab59a1b0",
+        "span_id": "a044e60d582b442f8ba2275bf32dfb60"
+      }
+    },
+    {
+      "pattern_id": "role_room_contrarian_auditor_provider_failure",
+      "status": "PROPOSED",
+      "authority": "REVIEW_REQUIRED",
+      "role_id": "contrarian_auditor",
+      "model": "gpt-5.5",
+      "failure_class": "provider_failure",
+      "lesson": "角色 contrarian_auditor 使用 gpt-5.5 时出现 provider_failure；下一轮应先执行同类检查并保留降级记录。",
+      "evidence": {
+        "trace_id": "a6f07ce01aab4fb4b1cb1c21ab59a1b0",
+        "span_id": "a044e60d582b442f8ba2275bf32dfb60"
+      }
+    },
+    {
+      "pattern_id": "role_room_continuity_editor_provider_failure",
+      "status": "PROPOSED",
+      "authority": "REVIEW_REQUIRED",
+      "role_id": "continuity_editor",
+      "model": "gpt-5.4",
+      "failure_class": "provider_failure",
+      "lesson": "角色 continuity_editor 使用 gpt-5.4 时出现 provider_failure；下一轮应先执行同类检查并保留降级记录。",
+      "evidence": {
+        "trace_id": "a6f07ce01aab4fb4b1cb1c21ab59a1b0",
+        "span_id": "8eb56691c8a24d2f9641c3364913bb1a"
+      }
+    },
+    {
+      "pattern_id": "role_room_director_convergence_provider_failure",
+      "status": "PROPOSED",
+      "authority": "REVIEW_REQUIRED",
+      "role_id": "director_convergence",
+      "model": "gpt-5.6-terra",
+      "failure_class": "provider_failure",
+      "lesson": "角色 director_convergence 使用 gpt-5.6-terra 时出现 provider_failure；下一轮应先执行同类检查并保留降级记录。",
+      "evidence": {
+        "trace_id": "a6f07ce01aab4fb4b1cb1c21ab59a1b0",
+        "span_id": "ba6326014abd47679109f7af124cbfc8"
+      }
+    }
+  ],
+  "production_submission": "NOT_PERFORMED",
+  "created_at": "2026-09-15T13:28:10Z"
+}
