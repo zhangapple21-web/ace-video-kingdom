@@ -210,7 +210,9 @@ def main(argv: list[str] | None = None) -> int:
                             print(f"[role-room] {role_id}: {attempt_model} returned an invalid candidate; trying fallback", file=sys.stderr, flush=True)
                             continue
                         output = text
-                        record.update({"status": "COMPLETED", "model": actual_model, "fallback_used": attempt_model != primary_model, "degraded": attempt_model != primary_model, "output": text, "evaluation": evaluation})
+                        route_rewritten = actual_model != attempt_model
+                        used_fallback = attempt_model != primary_model or route_rewritten
+                        record.update({"status": "COMPLETED", "model": actual_model, "requested_model": primary_model, "route_rewritten": route_rewritten, "fallback_used": used_fallback, "degraded": used_fallback, "output": text, "evaluation": evaluation})
                         context += f"\n[{role_id}]\n{text}\n"
                         break
                     except (urllib.error.URLError, urllib.error.HTTPError, TimeoutError, KeyError, json.JSONDecodeError) as exc:
