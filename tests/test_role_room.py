@@ -38,3 +38,15 @@ def test_role_room_dry_run_does_not_call_provider(tmp_path, monkeypatch):
     out = tmp_path / "receipt.json"
     assert ROLE_ROOM.main(["--idea", "test", "--out", str(out)]) == 0
     assert json.loads(out.read_text(encoding="utf-8"))["status"] == "DRY_RUN"
+
+
+def test_role_room_records_gateway_model_rewrite(tmp_path, monkeypatch):
+    monkeypatch.setattr(ROLE_ROOM, "_call", lambda *_args: ("candidate", "grok-4.6"))
+    monkeypatch.setenv("ONEAPI_API_KEY", "test")
+    out = tmp_path / "receipt.json"
+    assert ROLE_ROOM.main(["--idea", "test", "--out", str(out), "--execute", "--profile", "rapid"]) == 0
+    first = json.loads(out.read_text(encoding="utf-8"))["roles"][0]
+    assert first["requested_model"] == "glm-4-flash"
+    assert first["model"] == "grok-4.6"
+    assert first["route_rewritten"] is True
+    assert first["degraded"] is True
