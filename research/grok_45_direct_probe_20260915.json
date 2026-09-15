@@ -1,0 +1,19 @@
+{
+  "schema": "ace.model_direct_probe.v1",
+  "tested_at": "2026-09-15",
+  "requested_model": "grok-4.5",
+  "endpoint_scope": "local OneAPI chat completion",
+  "probe_prompt": "只回复 OK",
+  "attempts": [
+    {"status": "PASS", "actual_model": "grok-4.6", "response": "OK", "latency_ms": 9585},
+    {"status": "PASS", "actual_model": "grok-4.6", "response": "OK", "latency_ms": 6885},
+    {"status": "PASS", "actual_model": "grok-4.6", "response": "OK", "latency_ms": 6927}
+  ],
+  "conclusion": {
+    "requested_model_usable": "ROUTED_ALIAS",
+    "actual_model_usable": true,
+    "model_identity_preserved": false,
+    "action": "保留请求模型与实际回显模型，标记 route_rewritten/degraded；不要把 grok-4.6 静默记为 grok-4.5"
+  },
+  "media_submission": "NOT_PERFORMED"
+}
