@@ -4,6 +4,15 @@ from tools.validate_director_manifest import validate_manifest
 def _shot():
     return {
         "shot_id": "S01",
+        "role_audit": {
+            "schema": "video_kingdom.oneapi_role_room.v2",
+            "status": "COMPLETED",
+            "profile": "standard",
+            "production_submission": "NOT_PERFORMED",
+            "roles": [{"role_id": role_id, "status": "COMPLETED"} for role_id in (
+                "primary_writer", "storyboarder", "contrarian_auditor", "continuity_editor", "director_convergence"
+            )],
+        },
         "story_goal": "建立人物处境",
         "duration_seconds": 6,
         "source_frame": "assets/S01.png",
@@ -50,6 +59,14 @@ def test_director_packet_requires_performance_plan_in_strict_mode():
     result = validate_manifest({"shots": [shot]}, strict=True)
     assert result["status"] == "BLOCKED"
     assert any("performance.speaker_action" in error for error in result["errors"])
+
+
+def test_director_packet_requires_role_audit_in_strict_mode():
+    shot = _shot()
+    shot.pop("role_audit")
+    result = validate_manifest({"shots": [shot]}, strict=True)
+    assert result["status"] == "BLOCKED"
+    assert any("role_audit receipt missing" in error for error in result["errors"])
 
 
 def test_non_strict_packet_preserves_legacy_plan_as_warning():

@@ -12,6 +12,8 @@ import json
 from pathlib import Path
 from typing import Any
 
+from tools.validate_role_audit import validate_role_audit
+
 
 SPATIAL_FIELDS = ("foreground", "midground", "background", "camera_start", "allowed_content", "forbidden_additions")
 CAMERA_FIELDS = ("main_motion", "tracking_subject", "camera_end")
@@ -43,6 +45,13 @@ def validate_manifest(manifest: dict[str, Any], *, strict: bool = False) -> dict
             errors.append(f"{shot_id}: duplicate shot_id")
         seen.add(shot_id)
         director = shot.get("director_preflight") if isinstance(shot.get("director_preflight"), dict) else {}
+        role_audit = shot.get("role_audit") if isinstance(shot.get("role_audit"), dict) else None
+        if role_audit is None:
+            (errors if strict else warnings).append(f"{shot_id}: role_audit receipt missing")
+        else:
+            audit_check = validate_role_audit(role_audit)
+            if audit_check["status"] != "PASS":
+                (errors if strict else warnings).extend(f"{shot_id}: {error}" for error in audit_check["errors"])
         required = ("story_goal", "duration_seconds", "source_frame")
         for key in required:
             if _empty(shot.get(key)):
