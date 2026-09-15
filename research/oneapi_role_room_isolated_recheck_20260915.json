@@ -1,0 +1,363 @@
+{
+  "schema": "video_kingdom.oneapi_role_room.v2",
+  "status": "COMPLETED",
+  "profile": "standard",
+  "idea": "串线修复后的标准闭环复测：检查剧本、分镜、反例、连续性和导演收敛；只输出审计意见，不提交媒体任务。",
+  "gateway": "http://localhost:3000/v1",
+  "trace_id": "31baacbcc43444e0bf8645a5aa580a0b",
+  "memory_context": {
+    "sha256": "20657a84c0dc58ecbdc4ff387bafd6863cd38dfd2d6f0693b54ec0712fe1b439",
+    "sources": [
+      "memory/L0_invariants.json",
+      "memory/L3_experience.jsonl"
+    ],
+    "project_id": null,
+    "l1_l2_loaded": false
+  },
+  "resumed_from": null,
+  "resume_compatible": null,
+  "roles": [
+    {
+      "role_id": "primary_writer",
+      "span_id": "fee9cd7e22a549fb8818be8f91c4d27d",
+      "model": "gpt-5.5",
+      "requested_model": "gpt-5.6-terra",
+      "declared_models": [
+        "gpt-5.6-terra",
+        "gpt-5.5"
+      ],
+      "status": "COMPLETED",
+      "attempts": [
+        {
+          "model": "gpt-5.6-terra",
+          "status": "FAILED",
+          "error": "TimeoutError: timed out"
+        },
+        {
+          "model": "gpt-5.5",
+          "actual_model": "gpt-5.5",
+          "status": "PASS",
+          "evaluation": {
+            "role_id": "primary_writer",
+            "status": "PASS",
+            "score": 1.0,
+            "checks": [
+              {
+                "name": "non_empty",
+                "passed": true
+              },
+              {
+                "name": "no_placeholder",
+                "passed": true
+              },
+              {
+                "name": "no_provider_submission",
+                "passed": true
+              }
+            ],
+            "failure_class": null,
+            "repair_hint": null
+          }
+        }
+      ],
+      "route_rewritten": false,
+      "fallback_used": true,
+      "degraded": true,
+      "output": "【审计结论】当前未提供剧本正文、结局、场景表或人物关系，无法确认串线是否真正修复，创作验收暂不通过。\n\n【断点与证据】\n- 原文事实：仅知需复测剧本、分镜、反例、连续性与导演收敛。\n- 明确暗示：需真人电影感、多场景多镜头；阿浪、肥哥的身份与服装沿用正式设定。\n- 待补信息：事件起因、冲突目标、场景顺序、结局、对白语气。\n- 不可擅自推断：不得补写两人关系、行动动机、时间地点或事件结果。\n\n【可执行方案】补齐剧本后，按“发现问题—追查原因—正面决断—结果落地”拆四场，每场含准备、发力、惯性、过渡；对白固定机位，每镜一句核心台词，独白另列并给出完整原文。当前对白/独白不能合规起草，否则会把缺失事实伪装成既定剧情。",
+      "evaluation": {
+        "role_id": "primary_writer",
+        "status": "PASS",
+        "score": 1.0,
+        "checks": [
+          {
+            "name": "non_empty",
+            "passed": true
+          },
+          {
+            "name": "no_placeholder",
+            "passed": true
+          },
+          {
+            "name": "no_provider_submission",
+            "passed": true
+          }
+        ],
+        "failure_class": null,
+        "repair_hint": null
+      }
+    },
+    {
+      "role_id": "storyboarder",
+      "span_id": "9971b4d8dd604d10a03023d65b5ec274",
+      "model": "gpt-5.5",
+      "requested_model": "gpt-5.5",
+      "declared_models": [
+        "gpt-5.5",
+        "gpt-5.6-terra"
+      ],
+      "status": "COMPLETED",
+      "attempts": [
+        {
+          "model": "gpt-5.5",
+          "actual_model": "gpt-5.5",
+          "status": "PASS",
+          "evaluation": {
+            "role_id": "storyboarder",
+            "status": "PASS",
+            "score": 1.0,
+            "checks": [
+              {
+                "name": "non_empty",
+                "passed": true
+              },
+              {
+                "name": "no_placeholder",
+                "passed": true
+              },
+              {
+                "name": "no_provider_submission",
+                "passed": true
+              }
+            ],
+            "failure_class": null,
+            "repair_hint": null
+          }
+        }
+      ],
+      "route_rewritten": false,
+      "fallback_used": false,
+      "degraded": false,
+      "output": "【审计结论】创作验收暂不通过，现有材料不足以确认串线已修复。\n\n【原文事实】仅有复测目标：检查剧本、分镜、反例、连续性与导演收敛。未提供剧本正文、场景、事件结果、对白或独白。\n\n【明确暗示】需真人电影感、多场景多镜头；阿浪穿浅灰旧短袖衬衫、重黑眼圈，肥哥穿偏胖黑色POLO、常持香烟。\n\n【待补信息】起因、目标、冲突升级、场景顺序、结局、人物关系、对白语气、独白原文。\n\n【不可擅自推断】不得补写时间地点、动机、行动结果或两人关系。\n\n【分镜准入】补齐后逐镜登记：场景/景别/机位/准备—发力或加速—惯性或回收—动作完成点/切镜理由/声音。对白与独白分栏；独白须保留完整原文，每镜最多一句核心台词。检查反例：画中画、悬浮窗、通话或聊天界面、录屏感、身份服装漂移、轴线跳切、无动作闭环。当前不得提交媒体任务。",
+      "evaluation": {
+        "role_id": "storyboarder",
+        "status": "PASS",
+        "score": 1.0,
+        "checks": [
+          {
+            "name": "non_empty",
+            "passed": true
+          },
+          {
+            "name": "no_placeholder",
+            "passed": true
+          },
+          {
+            "name": "no_provider_submission",
+            "passed": true
+          }
+        ],
+        "failure_class": null,
+        "repair_hint": null
+      }
+    },
+    {
+      "role_id": "contrarian_auditor",
+      "span_id": "69ced3676c12402ea62bd0b1d24f7c57",
+      "model": "grok-4.6",
+      "requested_model": "grok-4.6",
+      "declared_models": [
+        "grok-4.6",
+        "gpt-5.5"
+      ],
+      "status": "COMPLETED",
+      "attempts": [
+        {
+          "model": "grok-4.6",
+          "actual_model": "grok-4.6",
+          "status": "PASS",
+          "evaluation": {
+            "role_id": "contrarian_auditor",
+            "status": "PASS",
+            "score": 1.0,
+            "checks": [
+              {
+                "name": "non_empty",
+                "passed": true
+              },
+              {
+                "name": "no_placeholder",
+                "passed": true
+              },
+              {
+                "name": "no_provider_submission",
+                "passed": true
+              }
+            ],
+            "failure_class": null,
+            "repair_hint": null
+          }
+        }
+      ],
+      "route_rewritten": false,
+      "fallback_used": false,
+      "degraded": false,
+      "output": "【审计结论】材料全缺，串线修复无法证实，闭环复测不通过。现实性、连续性、伦理、镜头可执行性与违规画面风险均无法落地。\n\n【断点】原文事实：仅复测指令，无剧本、分镜、对白、独白、场景、结局。明确暗示：真人电影感多场景多镜头；阿浪浅灰旧短袖重黑眼圈，肥哥黑POLO持烟；禁画中画/悬浮窗/通话聊天UI/录屏感；对白独白分离且独白须完整原文。待补：起因冲突目标顺序结局关系语气独白原文镜头表。不可推断：动机时间地点结果关系不得写成事实。\n\n【挑错】现实性：无因果链，生活逻辑无法验。连续性：缺准备-发力-惯性-回收过渡，服装身份轴线易跳，超8秒动作未拆。伦理：无内容暂无，独白若不当或字幕越界需审。镜头可执行：对白须固定机位演完再切，每镜一句核心台词，运镜服务动作，首帧须场景+动作状态。违规风险：易出聊天UI画中画录屏感身份漂移。禁止提交媒体。补齐后重审。",
+      "evaluation": {
+        "role_id": "contrarian_auditor",
+        "status": "PASS",
+        "score": 1.0,
+        "checks": [
+          {
+            "name": "non_empty",
+            "passed": true
+          },
+          {
+            "name": "no_placeholder",
+            "passed": true
+          },
+          {
+            "name": "no_provider_submission",
+            "passed": true
+          }
+        ],
+        "failure_class": null,
+        "repair_hint": null
+      }
+    },
+    {
+      "role_id": "continuity_editor",
+      "span_id": "97008005c8e84cec86c1b77fecfb15a4",
+      "model": "gpt-5.5",
+      "requested_model": "gpt-5.5",
+      "declared_models": [
+        "gpt-5.5",
+        "gpt-5.6-terra"
+      ],
+      "status": "COMPLETED",
+      "attempts": [
+        {
+          "model": "gpt-5.5",
+          "actual_model": "gpt-5.5",
+          "status": "PASS",
+          "evaluation": {
+            "role_id": "continuity_editor",
+            "status": "PASS",
+            "score": 1.0,
+            "checks": [
+              {
+                "name": "non_empty",
+                "passed": true
+              },
+              {
+                "name": "no_placeholder",
+                "passed": true
+              },
+              {
+                "name": "no_provider_submission",
+                "passed": true
+              }
+            ],
+            "failure_class": null,
+            "repair_hint": null
+          }
+        }
+      ],
+      "route_rewritten": false,
+      "fallback_used": false,
+      "degraded": false,
+      "output": "【审计结论】串线修复无法证实，创作验收不通过；不得提交媒体任务。\n\n【断点】\n- 原文事实：仅有“闭环复测”目标，未提供剧本、分镜、反例、对白、独白、场景表或结局。\n- 明确暗示：真人电影感、多场景多镜头；阿浪穿浅灰旧短袖衬衫、重黑眼圈；肥哥穿偏胖黑色POLO、常持香烟；禁画中画、悬浮窗、通话/聊天界面、录屏感。\n- 待补信息：角色关系、道具清单、时间地点、事件因果、场景顺序、冲突目标、结局、对白及完整独白原文、字幕安全区和镜头衔接。\n- 不可擅自推断：不得补写动机、行动结果、关系或时间线。\n\n【风险】无法核验服装道具连续性、动作闭环、轴线、对白长度、独白分离、字幕越界及镜头前后衔接；身份漂移、无准备/发力/惯性/回收、超8秒未拆段均属高风险。\n\n【最小补桥候选】提交“场景—事件—角色—道具—对白/独白—镜头顺序—切镜依据”表，并标注每项证据来源。\n\nNEEDS_CLARIFICATION：缺任一关键事实、完整独白原文或结局；补齐后方可复测。",
+      "evaluation": {
+        "role_id": "continuity_editor",
+        "status": "PASS",
+        "score": 1.0,
+        "checks": [
+          {
+            "name": "non_empty",
+            "passed": true
+          },
+          {
+            "name": "no_placeholder",
+            "passed": true
+          },
+          {
+            "name": "no_provider_submission",
+            "passed": true
+          }
+        ],
+        "failure_class": null,
+        "repair_hint": null
+      }
+    },
+    {
+      "role_id": "director_convergence",
+      "span_id": "92724e84a30f458a88278c9fab0ee688",
+      "model": "gpt-5.6-terra",
+      "requested_model": "gpt-5.6-terra",
+      "declared_models": [
+        "gpt-5.6-terra",
+        "gpt-5.5"
+      ],
+      "status": "COMPLETED",
+      "attempts": [
+        {
+          "model": "gpt-5.6-terra",
+          "actual_model": "gpt-5.6-terra",
+          "status": "PASS",
+          "evaluation": {
+            "role_id": "director_convergence",
+            "status": "PASS",
+            "score": 1.0,
+            "checks": [
+              {
+                "name": "non_empty",
+                "passed": true
+              },
+              {
+                "name": "no_placeholder",
+                "passed": true
+              },
+              {
+                "name": "no_provider_submission",
+                "passed": true
+              }
+            ],
+            "failure_class": null,
+            "repair_hint": null
+          }
+        }
+      ],
+      "route_rewritten": false,
+      "fallback_used": false,
+      "degraded": false,
+      "output": "【导演收敛审计】创作验收不通过，串线修复无法证实，禁止提交媒体任务。\n\n【断点】现有原文仅说明复测目标；缺剧本正文、场景顺序、人物关系、起因、冲突目标、结局、对白及完整独白原文、道具与反例。\n\n【可执行短稿】补齐后按“发现问题—追查原因—正面决断—结果落地”编排多场景多镜头。每镜登记：场景、景别、机位、角色、道具、准备—发力/加速—惯性/回收、完成点、切镜依据、声音、对白、独白。对白与独白分栏；每镜最多一句核心台词，独白保留完整原文；对白固定机位，表演完成前不切镜。首帧须含场景与动作状态，连续动作超过8秒拆段并保持轴线。阿浪固定浅灰旧短袖衬衫、重黑眼圈；肥哥固定偏胖黑色POLO、常持香烟。全片排除画中画、悬浮窗、通话/聊天界面及录屏感。缺失事实不得擅补。",
+      "evaluation": {
+        "role_id": "director_convergence",
+        "status": "PASS",
+        "score": 1.0,
+        "checks": [
+          {
+            "name": "non_empty",
+            "passed": true
+          },
+          {
+            "name": "no_placeholder",
+            "passed": true
+          },
+          {
+            "name": "no_provider_submission",
+            "passed": true
+          }
+        ],
+        "failure_class": null,
+        "repair_hint": null
+      }
+    }
+  ],
+  "feedback_proposals": [
+    {
+      "pattern_id": "role_room_primary_writer_provider_failure",
+      "status": "PROPOSED",
+      "authority": "REVIEW_REQUIRED",
+      "role_id": "primary_writer",
+      "model": "gpt-5.6-terra",
+      "failure_class": "provider_failure",
+      "lesson": "角色 primary_writer 使用 gpt-5.6-terra 时出现 provider_failure；下一轮应先执行同类检查并保留降级记录。",
+      "evidence": {
+        "trace_id": "31baacbcc43444e0bf8645a5aa580a0b",
+        "span_id": "fee9cd7e22a549fb8818be8f91c4d27d"
+      }
+    }
+  ],
+  "production_submission": "NOT_PERFORMED",
+  "created_at": "2026-09-15T14:33:32Z"
+}
