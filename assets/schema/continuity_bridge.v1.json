@@ -18,6 +18,10 @@
     "label": {"type": "string", "description": "人读标签，例如 SC01 -> S02A"},
     "previous_end_frame_state": {"type": "string", "minLength": 1, "description": "前一镜末帧状态，下一镜首帧必须接得上"},
     "next_initial_state": {"type": "string"},
+    "camera_state": {"type": "string", "minLength": 1},
+    "lighting_state": {"type": "string", "minLength": 1},
+    "tail_frame_state": {"type": "string", "minLength": 1},
+    "frame_proof_status": {"enum": ["PENDING", "VERIFIED", "FAILED", "TERMINAL"]},
     "exit_direction": {
       "enum": ["left", "right", "up", "down", "toward_camera", "away", "hold", "none"],
       "description": "出画方向。hold=不出画；none=终章无出画"

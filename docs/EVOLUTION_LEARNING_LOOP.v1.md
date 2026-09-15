@@ -24,3 +24,5 @@ Baseline → Change → Test → Evaluation → Compare → Promote / Rollback
 任何能力晋升还必须附带 `painful_review`：`observed_problem`、`cost`、`blast_radius`、`counterfactual`、`recurrence_risk`、`reusable_lesson` 六项都要有具体内容。占位词、`UNKNOWN`、空泛的“已修复”或只有代码 diff，均不得 `PROMOTE`，决策为 `REJECTED_MISSING_PAINFUL_REVIEW`。
 
 复盘至少回答：哪里真的痛、谁/什么被影响、当时为什么没提前发现、如果没拦截会怎样、以后什么条件下可复用。没有痛苦证据，所谓进化只是活跃度。
+
+外部参考矿同样适用这条门：阅读仓库、复制提示词或新增文档不算吸收；必须有本地实现、测试、前后指标和痛苦复盘，才能进入能力成长账本。

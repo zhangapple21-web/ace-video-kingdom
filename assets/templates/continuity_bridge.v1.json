@@ -6,6 +6,10 @@
   "label": "SC01 -> S02A",
   "previous_end_frame_state": "【前一镜末帧状态：角色位置、道具在哪只手、视线朝向、光线方向】",
   "next_initial_state": "【下一镜首帧必须接得上的状态】",
+  "camera_state": "【摄影机：高度、方向、焦段感、运动速度】",
+  "lighting_state": "【光线：主光方向、色温、曝光和天气】",
+  "tail_frame_state": "【尾帧：动作阶段、主体位置、视线和下一镜进入方式】",
+  "frame_proof_status": "PENDING",
   "exit_direction": "hold",
   "enter_direction": "hold",
   "inherited_state_items": [

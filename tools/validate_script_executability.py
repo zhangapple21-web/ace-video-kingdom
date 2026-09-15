@@ -330,6 +330,9 @@ def compile_continuity_bridge(
     exit_direction: str,
     enter_direction: str,
     inherited_state_items: list[dict[str, str]],
+    camera_state: str = "",
+    lighting_state: str = "",
+    tail_frame_state: str = "",
     terminal: bool = False,
 ) -> dict[str, Any]:
     return {
@@ -343,6 +346,10 @@ def compile_continuity_bridge(
         "exit_direction": exit_direction,
         "enter_direction": enter_direction,
         "inherited_state_items": inherited_state_items,
+        "camera_state": camera_state,
+        "lighting_state": lighting_state,
+        "tail_frame_state": tail_frame_state,
+        "frame_proof_status": "TERMINAL" if terminal else "PENDING",
         "invariants": ["服装不变", "身份不变", "轴线不变"],
         "evidence_basis": "compiled state transition; post-generation frame proof pending",
     }
