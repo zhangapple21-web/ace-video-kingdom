@@ -34,6 +34,10 @@ try:
     from production_control.privacy_scan import scan_value
 except ImportError:  # support ``python -m tools.preflight_episode`` as well
     from production_control.privacy_scan import scan_value
+try:
+    from validate_director_manifest import validate_manifest as validate_director
+except ImportError:  # support ``python -m tools.preflight_episode`` as well
+    from tools.validate_director_manifest import validate_manifest as validate_director
 
 
 def _load(path: Path) -> dict:
@@ -330,6 +334,14 @@ def main() -> int:
         warnings.extend(quality_contract.get("warnings", []))
     if args.require_formal and quality_contract.get("status") != "VALID":
         hard_failures.append("quality: a provider run requires a complete FORMAL seven-layer contract")
+    director_preflight = validate_director(
+        effective_plan,
+        strict=bool(plan.get("director_preflight_required", False)),
+    )
+    if director_preflight["status"] == "BLOCKED":
+        hard_failures.extend(f"director_preflight: {error}" for error in director_preflight["errors"])
+    else:
+        warnings.extend(f"director_preflight: {warning}" for warning in director_preflight["warnings"])
     if linked_contract and contract_check["status"] != "VALID":
         if any("must resolve to an HTTPS URL or local file" not in error for error in contract_check["errors"]):
             hard_failures.append("six_module_contract: linked contract is missing or invalid")
@@ -443,6 +455,7 @@ def main() -> int:
         "motion_contract": motion_contract,
         "scene_switch_audit": scene_switch_audit,
         "quality_contract": quality_contract,
+        "director_preflight": director_preflight,
         "six_module_contract": {**contract_check, "path": linked_contract_path},
         "timing_audit": {**(timing_audit or {"status": "NOT_PROVIDED"}), "path": str(args.timing_audit) if args.timing_audit else None},
         "review_policy": policy.get("review_order"),

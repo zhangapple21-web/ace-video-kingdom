@@ -81,7 +81,7 @@ DELIVERABLE / RESEARCH_CANDIDATE
 
 ## 导演预检与连续性桥
 
-提示词提交前必须通过 `tools/validate_shot_prompt.py`：风格锁、主体锁、场景锁、数量约束和负面约束缺失，或非 UI 模式出现禁用界面词，均阻断。相邻镜头的摄影机状态、光线状态和尾帧必须通过 `tools/validate_continuity_bridge.py`；`READY` 桥接还必须有实际帧证据。
+提示词提交前必须通过 `tools/validate_shot_prompt.py`：风格锁、主体锁、场景锁、数量约束和负面约束缺失，或非 UI 模式出现禁用界面词，均阻断。导演预检使用 `tools/validate_director_manifest.py --strict` 检查首帧空间、主体路径、摄影机路径、光线动机、曝光和白平衡。相邻镜头的摄影机状态、光线状态和尾帧必须通过 `tools/validate_continuity_bridge.py`；`READY` 桥接还必须有实际帧证据。
 
 ## 阶段 2：首帧与图生视频
 

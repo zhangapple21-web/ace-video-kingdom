@@ -28,12 +28,13 @@
 ## 本地落点
 
 - `tools/validate_shot_prompt.py`
+- `tools/validate_director_manifest.py`
 - `tools/validate_continuity_bridge.py`
 - `tools/validate_media_readback.py`
 - `assets/templates/continuity_bridge.v1.json`
 - `tools/mix_audio_ducking.py`
 
-其中 `validate_shot_prompt.py` 的摄影机/动作冲突提示是对 MIT 许可 Director Skills 规则的独立实现；没有把外部仓库代码整体复制进来。
+其中 `validate_shot_prompt.py` 与 `validate_director_manifest.py` 的摄影机/动作、首帧空间和布光检查是对 MIT 许可 Director Skills 规则的独立实现；没有把外部仓库代码整体复制进来。
 
 ## 验收原则
 

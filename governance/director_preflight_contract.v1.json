@@ -1,0 +1,10 @@
+{
+  "schema": "video_kingdom.director_preflight_contract.v1",
+  "purpose": "在 Provider admission 前验证首帧空间、主体路径、摄影机路径和布光锁。",
+  "required_when_strict": ["story_goal", "duration_seconds", "source_frame"],
+  "spatial_audit": ["foreground", "midground", "background", "camera_start", "allowed_content", "forbidden_additions"],
+  "camera": ["main_motion", "tracking_subject", "camera_end"],
+  "lighting": ["motivation", "key_source", "direction", "exposure_lock", "white_balance_lock"],
+  "ready_bridge_requires": "frame_proof_status=VERIFIED",
+  "provider_calls": false
+}
