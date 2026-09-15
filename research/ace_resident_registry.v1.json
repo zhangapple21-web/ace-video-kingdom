@@ -1,0 +1,12 @@
+{
+  "schema": "ace.resident.registry.v1",
+  "purpose": "记录可替换执行资源的探针与生命周期，不授予身份或权威。",
+  "states": [
+    "DISCOVERED",
+    "PROBED",
+    "ACTIVE",
+    "DEGRADED",
+    "RETIRED"
+  ],
+  "residents": []
+}
