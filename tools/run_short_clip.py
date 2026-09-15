@@ -25,6 +25,7 @@ if str(Path(__file__).resolve().parents[1]) not in sys.path:
 
 import requests
 from PIL import Image
+from tools.production_shot_gate import validate_production_shot
 
 try:
     from runtime.provider_admission import admit_provider_request, assert_admission, build_canonical_generation_request
@@ -336,6 +337,11 @@ def main() -> int:
             "provider admission blocked: --prompt must exactly match the canonical shot contract; "
             "no provider request submitted"
         )
+    if args.admission_scope == "production":
+        try:
+            validate_production_shot(canonical_shot, contract_prompt)
+        except ValueError as error:
+            raise SystemExit(f"provider admission blocked: {error}; no provider request submitted") from error
     args.manifest.parent.mkdir(parents=True, exist_ok=True)
     payload_sha256 = hashlib.sha256(json.dumps(payload, ensure_ascii=False, sort_keys=True, separators=(",", ":")).encode("utf-8")).hexdigest()
     existing = next((row for row in _load_records(args.manifest) if row.get("shot_id") == args.shot_id), None)
