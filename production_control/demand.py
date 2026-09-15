@@ -249,6 +249,10 @@ def route_model_demand(
     canonical_override, requested_override = _canonical_model_override(model_override, text)
     if health_snapshot is None:
         health_snapshot = load_provider_health_snapshot()
+    snapshot_meta = (health_snapshot or {}).get("_meta") if isinstance(health_snapshot, dict) else {}
+    health_action = "NONE"
+    if isinstance(snapshot_meta, dict) and snapshot_meta.get("stale") is True:
+        health_action = "REFRESH_WATCHDOG_THEN_RETRY"
     models = [row for row in registry.get("models", []) if isinstance(row, dict)]
     weights = _priority_weights(requirements["priority"])
     required = requirements["required_capabilities"]
@@ -281,6 +285,8 @@ def route_model_demand(
             health_status = str(provider_health.get("status") or "").upper()
             if health_status in {"OFFLINE", "DOWN", "UNHEALTHY", "STALE", "UNKNOWN"}:
                 reasons.append("PROVIDER_UNHEALTHY")
+                if health_action == "NONE":
+                    health_action = "REFRESH_WATCHDOG_THEN_RETRY"
         missing = [cap for cap in required if _model_capability_state(model, cap) not in CAPABILITY_EVIDENCE_OK]
         if missing:
             reasons.append("CAPABILITY_NOT_PROVEN:" + ",".join(missing))
@@ -298,6 +304,7 @@ def route_model_demand(
                 "provider": model.get("provider"),
                 "health_provider": health_provider,
                 "reasons": reasons,
+                "recovery_action": health_action if any(reason.startswith("PROVIDER_") for reason in reasons) else "REVIEW_CAPABILITY_EVIDENCE",
                 "capability_states": {cap: _model_capability_state(model, cap) for cap in required},
             })
             continue
@@ -358,6 +365,7 @@ def route_model_demand(
         "blocked_candidates": blocked,
         "fallback_policy": "retry_next_scored_candidate_after_execution_failure; never promote unproven capability",
         "health_snapshot": health_snapshot or {},
+        "health_action": health_action,
         "reason": reason,
         "model_override": requested_override,
         "production_integration": False,
