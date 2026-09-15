@@ -29,6 +29,14 @@
 
 ## 单指令短剧管道
 
+### 唯一公共入口
+
+所有视频、图像和短剧需求先进入 `tools/video_kingdom_entry.py`。它只负责识别需求、加载三级流程和统一控制面路由；`run_idea_pipeline.py`、`video_agnes25.ps1`、`run_short_clip.py` 与 `imagegen_shenwen.ps1` 均为内部兼容/Provider 适配器，不再作为工作流入口单独派单。
+
+```powershell
+py -3 tools/video_kingdom_entry.py --text "制作第1镜视频" --out temp/entry_receipt.json
+```
+
 ### imagegen 图像入口
 
 图像生成可通过 [`docs/IMAGEGEN_SHENWEN.md`](docs/IMAGEGEN_SHENWEN.md) 中的
