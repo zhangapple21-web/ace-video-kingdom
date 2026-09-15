@@ -1,0 +1,54 @@
+{
+  "schema": "video_kingdom.stream_disconnect_diagnostic.v1",
+  "observed_error": "stream disconnected before completion: Transport error: network error: error decoding response body",
+  "thread_id": "01a0a498-c892-7dd0-aaf6-71502a2bde2d",
+  "timeline": [
+    {
+      "local_time": "2026-09-15T20:08:07.9429001+08:00",
+      "source": "C:\\Users\\Administrator\\.codex\\local_automation_logs\\oneapi-watchdog.log",
+      "event": "responses compatibility proxy restarting (cold_start absent port=3002)"
+    },
+    {
+      "local_time": "2026-09-15T20:08:09.53+08:00",
+      "source": "responses-compat.telemetry.jsonl",
+      "event": "two upstream attempts started against http://127.0.0.1:3000/v1/responses",
+      "request_ids": ["d93e8778f6bf454993a6e7ad4d91bd07", "55cc771ae16d49c28d75d2122b8940fa"],
+      "upstream_bytes": [809172, 677913]
+    },
+    {
+      "local_time": "2026-09-15T20:08:11.589382+08:00",
+      "source": "responses-compat.telemetry.jsonl",
+      "event": "upstream attempt exception",
+      "request_id": "d93e8778f6bf454993a6e7ad4d91bd07",
+      "status": null,
+      "outcome": "exception"
+    },
+    {
+      "local_time": "2026-09-15T20:08:11.7281756+08:00",
+      "source": "responses-compat.telemetry.jsonl",
+      "event": "upstream attempt exception",
+      "request_id": "55cc771ae16d49c28d75d2122b8940fa",
+      "status": null,
+      "outcome": "exception"
+    },
+    {
+      "local_time": "2026-09-15T20:08:27.2252902+08:00",
+      "source": "C:\\Users\\Administrator\\.codex\\local_automation_logs\\oneapi-watchdog.log",
+      "event": "gateway absent on port 3000; cold start"
+    }
+  ],
+  "root_cause": "The local 3002 compatibility stream was interrupted while the 3002 process was being cold-restarted and its 3000 upstream was unavailable. This is a local transport/supervision failure, not an Agnes video task failure.",
+  "changes_applied": [
+    "C:\\tmp\\local_oneapi_watchdog.ps1 now defers 3002 startup/repair while gateway 3000 is not ready.",
+    "C:\\tmp\\local_oneapi_watchdog.ps1 launches the compat process with Python faulthandler and unbuffered output.",
+    "C:\\tmp\\shenwen_responses_compat_proxy.py now keeps a Python-level server exception from terminating the process and records the traceback before retrying."
+  ],
+  "verification": {
+    "proxy_py_compile": "PASS",
+    "watchdog_probe": "PASS",
+    "watchdog_tests": "PASS_WITH_ONE_PREEXISTING_CONTRACT_FAILURE",
+    "test_failure": "legacy test expects no System32\\cmd.exe text, while current watchdog source still contains that existing guard"
+  },
+  "no_provider_task_submitted_by_diagnostic": true,
+  "secrets_recorded": false
+}
