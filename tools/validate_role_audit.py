@@ -50,6 +50,12 @@ def validate_role_audit(receipt: dict[str, Any], *, minimum_profile: str = "stan
             continue
         if row.get("status") != "COMPLETED":
             errors.append(f"role audit seat {role_id} is not COMPLETED")
+        declared_models = row.get("declared_models") if isinstance(row.get("declared_models"), list) else []
+        actual_model = str(row.get("model") or "")
+        if declared_models and actual_model not in {str(model) for model in declared_models}:
+            errors.append(f"role audit seat {role_id} actual model {actual_model} is outside declared fallback set")
+        if row.get("route_rewritten") is True and not declared_models:
+            errors.append(f"role audit seat {role_id} has an unverified model route rewrite")
         evaluation = row.get("evaluation") if isinstance(row.get("evaluation"), dict) else {}
         if evaluation and evaluation.get("status") != "PASS":
             errors.append(f"role audit seat {role_id} evaluation is not PASS")

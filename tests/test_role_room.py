@@ -48,5 +48,6 @@ def test_role_room_records_gateway_model_rewrite(tmp_path, monkeypatch):
     first = json.loads(out.read_text(encoding="utf-8"))["roles"][0]
     assert first["requested_model"] == "glm-4-flash"
     assert first["model"] == "grok-4.6"
+    assert "grok-4.6" not in first["declared_models"]
     assert first["route_rewritten"] is True
     assert first["degraded"] is True

@@ -190,7 +190,7 @@ def main(argv: list[str] | None = None) -> int:
             continue
         primary_model = item["model"]
         fallback_models = list(item.get("fallback_models", []))
-        record: dict[str, Any] = {"role_id": role_id, "span_id": uuid.uuid4().hex, "model": primary_model, "requested_model": primary_model, "status": "PLANNED", "attempts": []}
+        record: dict[str, Any] = {"role_id": role_id, "span_id": uuid.uuid4().hex, "model": primary_model, "requested_model": primary_model, "declared_models": [primary_model, *fallback_models], "status": "PLANNED", "attempts": []}
         if args.execute:
             if not api_key:
                 record.update({"status": "FAILED", "error": "缺少 ONEAPI_API_KEY/OPENAI_API_KEY"})
