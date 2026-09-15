@@ -1,0 +1,25 @@
+{
+  "schema": "ace.oneapi_route_isolation_receipt.v1",
+  "tested_at": "2026-09-15",
+  "gateway": "http://127.0.0.1:3000/v1",
+  "config_path": "C:/tmp/local_oneapi_config.yaml",
+  "config_sha256": "73447AB544036D82B055D83AB3B96859FAAADC75F6C9023A80AECCAAEEDB14D5",
+  "global_fallbacks": [],
+  "direct_model_probe": {
+    "supported_and_identity_preserved": ["glm-4-flash", "gpt-5.5", "gpt-5.6-terra", "gpt-6-astra", "grok-4.6"],
+    "unsupported_upstream": ["gpt-5.4-mini", "gpt-5.4", "grok-4.5"],
+    "unsupported_behavior": "HTTP 400; no cross-model fallback"
+  },
+  "standard_role_closure": {
+    "status": "PASS",
+    "production_submission": "NOT_PERFORMED",
+    "roles": {
+      "primary_writer": {"requested": "gpt-5.6-terra", "actual": "gpt-5.5", "fallback_used": true},
+      "storyboarder": {"requested": "gpt-5.5", "actual": "gpt-5.5", "fallback_used": false},
+      "contrarian_auditor": {"requested": "grok-4.6", "actual": "grok-4.6", "fallback_used": false},
+      "continuity_editor": {"requested": "gpt-5.5", "actual": "gpt-5.5", "fallback_used": false},
+      "director_convergence": {"requested": "gpt-5.6-terra", "actual": "gpt-5.6-terra", "fallback_used": false}
+    }
+  },
+  "conclusion": "网关不再跨模型串线；不支持的模型显式失败，角色房间只在声明的同能力集合内降级。"
+}
