@@ -25,9 +25,11 @@ def validate_prompt(record: dict[str, Any]) -> dict[str, Any]:
     for key in ("subject", "action", "environment", "lighting", "camera", "style"):
         if not str(elements.get(key) or "").strip():
             errors.append(f"missing txt_prompt_elements.{key}")
-    for label in LABELS:
-        if label not in prompt:
-            errors.append(f"compiled prompt missing label {label}")
+    strict_locks = bool(record.get("strict_locks", True))
+    if strict_locks:
+        for label in LABELS:
+            if label not in prompt:
+                errors.append(f"compiled prompt missing label {label}")
     expected_style = str(record.get("style_lock") or "").strip()
     if expected_style and expected_style not in prompt:
         errors.append("style_lock not present in compiled prompt")
@@ -41,7 +43,7 @@ def validate_prompt(record: dict[str, Any]) -> dict[str, Any]:
         if str(constraint).strip() and str(constraint) not in prompt:
             errors.append(f"negative constraint missing: {constraint}")
     visual_mode = str(record.get("visual_mode") or "FILM_NARRATIVE").upper()
-    if visual_mode != "UI_ANIMATION":
+    if strict_locks and visual_mode != "UI_ANIMATION":
         for term in UI_TERMS:
             if term.lower() in prompt.lower():
                 errors.append(f"forbidden UI term in non-UI prompt: {term}")
