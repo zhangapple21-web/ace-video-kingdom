@@ -12,6 +12,7 @@ import json
 import os
 import sys
 import time
+import uuid
 import urllib.error
 import urllib.request
 from pathlib import Path
@@ -21,12 +22,17 @@ from typing import Any
 ROOT = Path(__file__).resolve().parents[1]
 MATRIX = ROOT / "research" / "oneapi_role_room.v1.json"
 
+try:
+    from tools.memory_context import build_memory_context, render_memory_context
+except ImportError:  # pragma: no cover - script execution from tools/
+    from memory_context import build_memory_context, render_memory_context  # type: ignore
+
 
 def _load_json(path: Path) -> dict[str, Any]:
     return json.loads(path.read_text(encoding="utf-8"))
 
 
-def _prompt(role_id: str, source: str, context: str) -> str:
+def _prompt(role_id: str, source: str, context: str, memory_text: str = "") -> str:
     common = (
         "你是视频王国的候选角色，不是最终执行器。只能提出可审计的文字建议，"
         "不得调用图像/视频接口，不得切换模型，不得把接口完成当作创作验收。\n"
@@ -46,7 +52,7 @@ def _prompt(role_id: str, source: str, context: str) -> str:
         "reality_reviewer": "从现实感、受众误读、文化语境和发布风险复核复杂项目。",
         "arbiter": "只针对已有分歧给出取舍依据、证据和保守方案，不重新创作整稿。",
     }
-    return common + f"角色：{role_id}\n任务：{tasks.get(role_id, role_id)}\n素材：\n{source}\n已有意见：\n{context}"
+    return common + memory_text + f"角色：{role_id}\n任务：{tasks.get(role_id, role_id)}\n素材：\n{source}\n已有意见：\n{context}"
 
 
 def _call(base_url: str, api_key: str, model: str, prompt: str, timeout: float) -> tuple[str, str]:
@@ -96,6 +102,7 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("--out", type=Path, required=True)
     parser.add_argument("--execute", action="store_true", help="调用本地 OneAPI；默认只做路由 dry-run")
     parser.add_argument("--profile", choices=("standard", "rapid", "full_audit"), default="standard", help="角色配置：日常、快速整理或全审计")
+    parser.add_argument("--project-id", default=os.environ.get("VIDEO_KINGDOM_PROJECT_ID", ""), help="可选；匹配后才加载该项目的 L1/L2 记忆")
     parser.add_argument(
         "--timeout",
         type=float,
@@ -118,7 +125,24 @@ def main(argv: list[str] | None = None) -> int:
     roles = {item["role_id"]: item for item in matrix["roles"]}
     source = args.idea.strip()
     role_order = matrix["profiles"][args.profile]
-    receipt: dict[str, Any] = {"schema": matrix["schema"], "status": "DRY_RUN" if not args.execute else "RUNNING", "profile": args.profile, "idea": source, "gateway": args.base_url, "roles": []}
+    trace_id = uuid.uuid4().hex
+    memory = build_memory_context(args.project_id.strip() or None)
+    memory_text = render_memory_context(memory)
+    receipt: dict[str, Any] = {
+        "schema": matrix["schema"],
+        "status": "DRY_RUN" if not args.execute else "RUNNING",
+        "profile": args.profile,
+        "idea": source,
+        "gateway": args.base_url,
+        "trace_id": trace_id,
+        "memory_context": {
+            "sha256": memory["sha256"],
+            "sources": memory["sources"],
+            "project_id": args.project_id.strip() or None,
+            "l1_l2_loaded": bool(memory["payload"]["scope"]["l1_l2_loaded"]),
+        },
+        "roles": [],
+    }
     context = ""
     # The local launcher historically exposed both ONEAPI_* and ONE_API_* names.
     # Accept the configured admin token as the local gateway credential so a new
@@ -133,7 +157,7 @@ def main(argv: list[str] | None = None) -> int:
         item = roles[role_id]
         primary_model = item["model"]
         fallback_models = list(item.get("fallback_models", []))
-        record: dict[str, Any] = {"role_id": role_id, "model": primary_model, "requested_model": primary_model, "status": "PLANNED", "attempts": []}
+        record: dict[str, Any] = {"role_id": role_id, "span_id": uuid.uuid4().hex, "model": primary_model, "requested_model": primary_model, "status": "PLANNED", "attempts": []}
         if args.execute:
             if not api_key:
                 record.update({"status": "FAILED", "error": "缺少 ONEAPI_API_KEY/OPENAI_API_KEY"})
@@ -143,7 +167,7 @@ def main(argv: list[str] | None = None) -> int:
                 for attempt_model in [primary_model, *fallback_models]:
                     print(f"[role-room] {role_id}: trying {attempt_model}", file=sys.stderr, flush=True)
                     try:
-                        text, actual_model = _invoke_call(args.base_url, api_key, attempt_model, _prompt(role_id, source, context), args.timeout)
+                        text, actual_model = _invoke_call(args.base_url, api_key, attempt_model, _prompt(role_id, source, context, memory_text), args.timeout)
                         record["attempts"].append({"model": attempt_model, "status": "PASS", "actual_model": actual_model})
                         output = text
                         record.update({"status": "COMPLETED", "model": actual_model, "fallback_used": attempt_model != primary_model, "degraded": attempt_model != primary_model, "output": text})
