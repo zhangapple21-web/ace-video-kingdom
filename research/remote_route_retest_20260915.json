@@ -1,0 +1,14 @@
+{
+  "schema": "video_kingdom.remote_route_retest.v1",
+  "provider": "shenwen",
+  "model": "gpt-6-astra",
+  "state_path": "C:\\tmp\\ace_core\\06_RUNTIME\\ace\\data\\miner_pool\\provider_watchdog\\watchdog_state.json",
+  "route_before_probe": {
+    "status": "BLOCKED",
+    "reason": "NO_ELIGIBLE_LABOR_FOR_VERIFIED_CAPABILITIES",
+    "health_action": "REFRESH_WATCHDOG_THEN_RETRY"
+  },
+  "attempted": false,
+  "status": "BLOCKED_MISSING_SHENWEN_API_KEY",
+  "secret_recorded": false
+}

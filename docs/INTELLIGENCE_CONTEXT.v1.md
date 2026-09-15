@@ -25,6 +25,8 @@
 
 失败尝试会生成 `feedback_proposals`，状态固定为 `PROPOSED / REVIEW_REQUIRED`，只作为下一轮复盘候选，不会未经审阅直接写入 L3 或改变硬约束。
 
+已审阅的提案可用 `tools/promote_feedback.py` 幂等晋升到 L3；远程 Shenwen 路由复测使用 `tools/retest_remote_route.py`，缺少文本密钥时只记录阻断，不会借用图像密钥或虚报健康。
+
 ## 使用
 
 ```powershell

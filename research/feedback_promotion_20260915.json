@@ -1,0 +1,22 @@
+{
+  "schema": "video_kingdom.feedback_promotion_receipt.v1",
+  "status": "PROMOTED",
+  "source_receipt": "research\\role_feedback_review_20260915.json",
+  "source_sha256": "c209204ef667c4cf7c78dd38d214ff85afbc67b72904d5b92426e0d550c2d994",
+  "promoted": [
+    {
+      "pattern_id": "role_room_format_editor_timeout_requires_same_capability_fallback",
+      "evidence": {
+        "receipt": "research\\role_feedback_review_20260915.json",
+        "trace_id": null
+      },
+      "lesson": "format_editor 遇到 Provider 超时时，应保留失败证据并切换同能力候选 glm-4-flash；不得把超时当作成功，也不得跳过格式验收。",
+      "confidence": "medium",
+      "status": "ACTIVE",
+      "promoted_at": "2026-09-15T05:28:30Z",
+      "promotion": "reviewed_role_feedback"
+    }
+  ],
+  "skipped": [],
+  "execute": true
+}

@@ -1,0 +1,22 @@
+{
+  "schema": "video_kingdom.role_feedback_review.v1",
+  "reviewed_at": "2026-09-15",
+  "source_receipt": "research/oneapi_gateway_role_room_smoke_20260913.json",
+  "reviewer_decision": "APPROVE_L3_PROMOTION",
+  "feedback_proposals": [
+    {
+      "pattern_id": "role_room_format_editor_timeout_requires_same_capability_fallback",
+      "status": "PROPOSED",
+      "authority": "REVIEW_REQUIRED",
+      "role_id": "format_editor",
+      "model": "gpt-5.4-mini",
+      "failure_class": "provider_timeout",
+      "lesson": "format_editor 遇到 Provider 超时时，应保留失败证据并切换同能力候选 glm-4-flash；不得把超时当作成功，也不得跳过格式验收。",
+      "evidence": {
+        "receipt": "research/oneapi_gateway_role_room_smoke_20260913.json",
+        "failed_model": "gpt-5.4-mini",
+        "fallback_model": "glm-4-flash"
+      }
+    }
+  ]
+}
