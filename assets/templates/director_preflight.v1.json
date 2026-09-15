@@ -1,4 +1,17 @@
 {
+  "role_audit": {
+    "schema": "video_kingdom.oneapi_role_room.v2",
+    "status": "COMPLETED",
+    "profile": "standard",
+    "production_submission": "NOT_PERFORMED",
+    "roles": [
+      {"role_id": "primary_writer", "status": "COMPLETED"},
+      {"role_id": "storyboarder", "status": "COMPLETED"},
+      {"role_id": "contrarian_auditor", "status": "COMPLETED"},
+      {"role_id": "continuity_editor", "status": "COMPLETED"},
+      {"role_id": "director_convergence", "status": "COMPLETED"}
+    ]
+  },
   "story_goal": "【这一镜在故事中的功能】",
   "duration_seconds": 6,
   "source_frame": "assets/SHOT_01.png",
