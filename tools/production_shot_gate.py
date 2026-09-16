@@ -59,11 +59,9 @@ def validate_production_shot(canonical_shot: dict[str, Any], contract_prompt: st
         raise ValueError("director preflight failed: " + ";".join(director_check["errors"]))
 
     rhythm_packet = canonical_shot.get("shot_rhythm")
-    rhythm_check = validate_shot_rhythm(rhythm_packet) if isinstance(rhythm_packet, dict) else {
-        "status": "NEEDS_REVIEW",
-        "errors": ["shot_rhythm contract missing; attach assets/templates/shot_rhythm_contract.v1.json for new shots"],
-        "warnings": [],
-    }
+    if not isinstance(rhythm_packet, dict):
+        raise ValueError("shot rhythm contract missing: attach assets/templates/shot_rhythm_contract.v1.json before provider submission")
+    rhythm_check = validate_shot_rhythm(rhythm_packet)
     if rhythm_check["status"] == "BLOCKED":
         raise ValueError("shot rhythm contract failed: " + ";".join(rhythm_check["errors"]))
 
