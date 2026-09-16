@@ -2,6 +2,7 @@
   "schema": "video_kingdom.director_preflight_contract.v1",
   "purpose": "在 Provider admission 前验证首帧空间、主体路径、摄影机路径、布光锁和表演节奏。",
   "required_when_strict": ["story_goal", "duration_seconds", "source_frame"],
+  "creative_constraints_required_when_strict": true,
   "role_audit_required_when_strict": true,
   "spatial_audit": ["foreground", "midground", "background", "camera_start", "allowed_content", "forbidden_additions"],
   "camera": ["main_motion", "tracking_subject", "camera_end"],
