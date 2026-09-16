@@ -1,0 +1,36 @@
+{
+  "schema": "video_kingdom.shot_rhythm_contract.v1",
+  "purpose": "通用镜头节奏与表演标注；指导镜头设计，不把经验规则误当成固定秒数",
+  "hard_constraints": [
+    "shot_purpose_required",
+    "camera_change_must_be_motivated",
+    "performance_beats_required",
+    "dialogue_and_inner_voice_are_separate",
+    "timing_is_audio_or_action_driven"
+  ],
+  "shot_sizes": {
+    "wide": "交代地点、关系、处境和转场落点",
+    "medium": "承载对白、听者反应和可见手部动作",
+    "close": "承载情绪变化、关键台词和细微表演",
+    "detail": "强调眼神、手、道具或伏笔，必须有故事目的"
+  },
+  "rhythm_patterns": {
+    "dialogue": ["orientation", "medium_exchange", "emotion_close", "meaningful_detail", "release"],
+    "conflict": ["stable_exchange", "reaction_close", "action_detail", "pause_or_release"],
+    "introspection": ["space_or_profile", "quiet_close", "measured_hold", "release"],
+    "action": ["orientation", "preparation", "single_primary_action", "recovery"],
+    "transition": ["new_space_establish", "orientation", "story_action"]
+  },
+  "script_annotations": ["action", "dialogue", "emotion", "subtext", "motivation", "atmosphere"],
+  "performance_beats": ["speaker_hands_body", "listener_reaction", "pause_point", "inner_voice_mouth_state", "cut_motivation"],
+  "professional_extensions": {
+    "now": ["subtext", "motivation", "atmosphere"],
+    "later": {
+      "camera": ["focal_length", "camera_height", "composition_reference"],
+      "lighting": ["color_temperature_k", "key_fill", "palette"],
+      "audio": ["bgm_entry", "sfx_cue", "silence_seconds"],
+      "delivery": ["bitrate", "frame_rate", "color_space", "subtitle_spec"]
+    }
+  },
+  "advisory_only": ["fixed_cut_seconds", "one_sentence_one_shot", "same_scale_duration_limit"]
+}

@@ -65,3 +65,10 @@
 - 使用同一 `SHENWEN_IMAGE_API_KEY` 对 `/v1/images/generations` 做最小真实探针：`gpt-image-2`、`gpt-image-2.5-flare`、`gpt-image-2.5-sunburst` 均返回 HTTP 200 并产出图像数据。
 - `grok-imagine-image`、`grok-imagine-image-quality` 在该 Shenwen 图像端点均返回 HTTP 404；不加入当前适配器白名单，也不把名称存在误判为线路可用。
 - 两个 2.5 变体晋升为 `PROBE_PASS`，仍保持 `explicit_only`；默认入口继续锁定 `imagegen → gpt-image-2`。完整脱敏收据见 `research/image_model_probe_20260916.json`。
+
+## 本次吸收：通用镜头节奏与专业标注（2026-09-16）
+
+- 用户提供的镜头节奏手册：吸收景别按叙事目的选择、对白/冲突/独白/动作的节奏模式，以及“手部动作、听者反应、停顿、独白嘴部状态、切镜动机”五项表演检查。
+- Adobe 镜头序列与镜头清单资料：吸收远景/中景/近景作为覆盖基础、视线和屏幕方向连续性、镜头时长与切换节奏共同影响叙事的原则；不吸收固定秒数或平台能力承诺。
+- 本地落地：`assets/templates/shot_rhythm_contract.v1.json`、`tools/validate_shot_rhythm.py`、`docs/SHOT_RHYTHM_GUIDE.v1.md`。潜台词/动机/氛围立即进入合同；焦距/机位/构图、灯光 K 值、BGM 卡点和交付规格按后期阶段启用。
+- 边界：不把某一集的角色、道具、电话规则或“三秒一切”写成全局硬编码；生产仍固定走统一入口和现有角色/连续性/音频门禁。

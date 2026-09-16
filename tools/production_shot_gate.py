@@ -14,6 +14,7 @@ from tools.validate_continuity_bridge import validate_bridge
 from tools.validate_creative_constraints import validate_creative_constraints
 from tools.validate_director_manifest import validate_manifest as validate_director_manifest
 from tools.validate_shot_prompt import validate_prompt
+from tools.validate_shot_rhythm import validate_shot_rhythm
 
 
 def validate_production_shot(canonical_shot: dict[str, Any], contract_prompt: str) -> dict[str, Any]:
@@ -57,10 +58,20 @@ def validate_production_shot(canonical_shot: dict[str, Any], contract_prompt: st
     if director_check["status"] != "PASS":
         raise ValueError("director preflight failed: " + ";".join(director_check["errors"]))
 
+    rhythm_packet = canonical_shot.get("shot_rhythm")
+    rhythm_check = validate_shot_rhythm(rhythm_packet) if isinstance(rhythm_packet, dict) else {
+        "status": "NEEDS_REVIEW",
+        "errors": ["shot_rhythm contract missing; attach assets/templates/shot_rhythm_contract.v1.json for new shots"],
+        "warnings": [],
+    }
+    if rhythm_check["status"] == "BLOCKED":
+        raise ValueError("shot rhythm contract failed: " + ";".join(rhythm_check["errors"]))
+
     return {
         "status": "PASS",
         "creative": creative_check,
         "prompt": prompt_check,
         "continuity": continuity_check,
         "director": director_check,
+        "rhythm": rhythm_check,
     }
