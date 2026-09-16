@@ -18,9 +18,12 @@ import urllib.request
 from pathlib import Path
 from typing import Any
 
-
 ROOT = Path(__file__).resolve().parents[1]
 MATRIX = ROOT / "research" / "oneapi_role_room.v1.json"
+
+if str(ROOT) not in sys.path:
+    sys.path.insert(0, str(ROOT))
+from production_control.model_transport import post_chat_completion
 
 try:
     from tools.memory_context import build_memory_context, render_memory_context
@@ -63,18 +66,16 @@ def _call(base_url: str, api_key: str, model: str, prompt: str, timeout: float) 
     # OneAPI/上游中文长输出可能持续很久；角色房间先产出可审计的短稿，
     # 详细扩写留给通过门禁后的专用步骤，避免串行角色把网关拖到超时。
     bounded_prompt = prompt + "\n输出上限：先给出可执行的短稿，最多 500 个汉字；不要重复题目，不要写过程说明。"
-    payload = json.dumps(
-        {
-            "model": model,
-            "messages": [{"role": "user", "content": bounded_prompt}],
-            "temperature": 0.3,
-            "max_tokens": 512,
-        },
-        ensure_ascii=False,
-    ).encode()
-    req = urllib.request.Request(base_url.rstrip("/") + "/chat/completions", data=payload, headers={"Content-Type": "application/json", "Authorization": f"Bearer {api_key}"}, method="POST")
-    with urllib.request.urlopen(req, timeout=timeout) as response:
-        data = json.loads(response.read().decode("utf-8"))
+    data, _transport_meta = post_chat_completion(
+        base_url=base_url,
+        api_key=api_key,
+        model=model,
+        messages=[{"role": "user", "content": bounded_prompt}],
+        asset_store=ROOT / "assets" / "cache" / "transport",
+        max_tokens=512,
+        temperature=0.3,
+        timeout=timeout,
+    )
     return str(data["choices"][0]["message"]["content"]), str(data.get("model") or model)
 
 
@@ -175,7 +176,9 @@ def main(argv: list[str] | None = None) -> int:
     # Accept the configured admin token as the local gateway credential so a new
     # window does not silently fall back to an empty/incorrect key.
     api_key = (
-        os.environ.get("ONEAPI_API_KEY")
+        os.environ.get("ONEAPI_LOCAL_MASTER_KEY")
+        or os.environ.get("ONEAPI_KEY")
+        or os.environ.get("ONEAPI_API_KEY")
         or os.environ.get("ONEAPI_ADMIN_TOKEN")
         or os.environ.get("ONE_API_KEY")
         or os.environ.get("OPENAI_API_KEY", "")
@@ -193,7 +196,7 @@ def main(argv: list[str] | None = None) -> int:
         record: dict[str, Any] = {"role_id": role_id, "span_id": uuid.uuid4().hex, "model": primary_model, "requested_model": primary_model, "declared_models": [primary_model, *fallback_models], "status": "PLANNED", "attempts": []}
         if args.execute:
             if not api_key:
-                record.update({"status": "FAILED", "error": "缺少 ONEAPI_API_KEY/OPENAI_API_KEY"})
+                record.update({"status": "FAILED", "error": "缺少 ONEAPI_LOCAL_MASTER_KEY/ONEAPI_API_KEY/OPENAI_API_KEY"})
             else:
                 output = None
                 last_error = None
