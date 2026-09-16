@@ -1,0 +1,41 @@
+{
+  "schema": "ace.video_kingdom.audio_ab_test.v1",
+  "test_id": "SHOT_01_AUDIO_AB_20260917",
+  "status": "BLOCKED_PENDING_B_REFERENCE_SEGMENTS",
+  "fairness_policy": {
+    "same_script": true,
+    "same_reference_images": true,
+    "same_video_model": "agnes-video-2.5-flash",
+    "same_attempt_count": 3,
+    "blind_review": true,
+    "no_preferred_group": true
+  },
+  "lines": [
+    {"speaker":"老张","kind":"dialogue","text":"明天准备接粉。"},
+    {"speaker":"文姬","kind":"dialogue","text":"好哒～"},
+    {"speaker":"文姬","kind":"inner_voice","text":"又来了，老张一到晚上就爱安排工作，也不看看几点了。"}
+  ],
+  "groups": {
+    "A": {
+      "name":"Agnes 内置声音",
+      "audio_source":"provider_generated",
+      "attempts":3,
+      "preserve_provider_audio":true,
+      "required_records":["voice_quality","duration","pauses","lip_sync","omissions","cross_run_consistency"]
+    },
+    "B": {
+      "name":"CosyVoice 3 外置克隆",
+      "audio_source":"external_cloned_tts",
+      "attempts":3,
+      "reference_audio_role":"provider_reference_only",
+      "final_mix_audio":"same_external_audio",
+      "required_records":["voice_quality","duration","pauses","lip_sync","omissions","cross_run_consistency"],
+      "blocked_reason":"基准音频尚未按角色切分，禁止把混合片段直接锁为单一角色音色"
+    }
+  },
+  "evaluation": {
+    "scales":["voice_naturalness","timbre_stability","duration_accuracy","pause_quality","lip_sync","text_completeness","cross_run_consistency"],
+    "rating":"1-5 plus evidence note",
+    "promotion_rule":"只在三次重复和逐句证据都完成后选择默认方案"
+  }
+}
