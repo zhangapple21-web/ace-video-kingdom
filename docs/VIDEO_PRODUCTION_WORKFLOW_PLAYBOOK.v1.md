@@ -87,6 +87,8 @@ DELIVERABLE / RESEARCH_CANDIDATE
 
 正式开拍还必须附带 OneAPI 角色房间收据 `role_audit`：至少使用 `standard` 席位（主笔、分镜、反例审计、连续性编辑、导演收敛），复杂项目使用 `full_audit`。每个必需席位必须为 `COMPLETED`，反例审计评价必须为 `PASS`，且收据必须声明 `production_submission=NOT_PERFORMED`。`rapid` 只能用于整理和探针，不能作为正式开拍的审计凭证。
 
+所有项目还必须携带通用创作约束包 `creative_constraints`：`hard` 固定包含主体/参考锁、叙事顺序、空间关系、可见性与排除项、表演与声音五类；`flexible` 记录可放宽的范围；`deferred` 记录暂缓事项。具体规则由项目填写，类别结构由 `tools/validate_creative_constraints.py` 统一校验。生产入口缺少任一硬约束类别时直接阻断，避免把单个项目经验误当成全局硬编码。
+
 ## 阶段 2：首帧与图生视频
 
 图生视频的正确心智模型是“把一张已确定的画面交给动画师”：首帧负责外观和空间，运动提示负责如何变化。适合的首帧通常已经暗示时间瞬间、运动方向、空间纵深或环境动态。

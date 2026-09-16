@@ -1,4 +1,16 @@
 {
+  "creative_constraints": {
+    "schema": "video_kingdom.creative_constraints.v1",
+    "hard": {
+      "identity_reference": {"status": "LOCKED", "rules": ["【本项目主体/参考资产不变量】"]},
+      "narrative_order": {"status": "LOCKED", "rules": ["【本项目不可逆的叙事/对白/动作顺序】"]},
+      "spatial_relationship": {"status": "LOCKED", "rules": ["【本项目空间关系/隔离/轴线约束】"]},
+      "visibility_and_exclusions": {"status": "LOCKED", "rules": ["【本项目必须可见/不可见/禁用画面约束】"]},
+      "performance_and_audio": {"status": "LOCKED", "rules": ["【本项目表演、口型、独白、停顿、声音约束】"]}
+    },
+    "flexible": {"duration": "【可接受时长范围】", "cut_timing": "【允许的节奏弹性】"},
+    "deferred": ["【后置处理，不阻塞本镜开拍的事项】"]
+  },
   "role_audit": {
     "schema": "video_kingdom.oneapi_role_room.v2",
     "status": "COMPLETED",

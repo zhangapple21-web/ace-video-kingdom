@@ -11,6 +11,7 @@ from __future__ import annotations
 from typing import Any
 
 from tools.validate_continuity_bridge import validate_bridge
+from tools.validate_creative_constraints import validate_creative_constraints
 from tools.validate_director_manifest import validate_manifest as validate_director_manifest
 from tools.validate_shot_prompt import validate_prompt
 
@@ -22,6 +23,10 @@ def validate_production_shot(canonical_shot: dict[str, Any], contract_prompt: st
     they are non-deliverable scopes.  Production calls must supply the same
     structured packet used by the video-kingdom workflow.
     """
+
+    creative_check = validate_creative_constraints(canonical_shot.get("creative_constraints"))
+    if creative_check["status"] != "PASS":
+        raise ValueError("creative constraints failed: " + ";".join(creative_check["errors"]))
 
     shot_prompt = canonical_shot.get("shot_prompt")
     shot_prompt = shot_prompt if isinstance(shot_prompt, dict) else {}
@@ -54,6 +59,7 @@ def validate_production_shot(canonical_shot: dict[str, Any], contract_prompt: st
 
     return {
         "status": "PASS",
+        "creative": creative_check,
         "prompt": prompt_check,
         "continuity": continuity_check,
         "director": director_check,

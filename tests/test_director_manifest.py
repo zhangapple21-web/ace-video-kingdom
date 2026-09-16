@@ -4,6 +4,14 @@ from tools.validate_director_manifest import validate_manifest
 def _shot():
     return {
         "shot_id": "S01",
+        "creative_constraints": {
+            "hard": {
+                key: {"status": "LOCKED", "rules": ["test rule"]}
+                for key in ("identity_reference", "narrative_order", "spatial_relationship", "visibility_and_exclusions", "performance_and_audio")
+            },
+            "flexible": {},
+            "deferred": [],
+        },
         "role_audit": {
             "schema": "video_kingdom.oneapi_role_room.v2",
             "status": "COMPLETED",

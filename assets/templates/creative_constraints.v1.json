@@ -1,0 +1,33 @@
+{
+  "schema": "video_kingdom.creative_constraints.v1",
+  "hard": {
+    "identity_reference": {
+      "status": "LOCKED",
+      "rules": ["【角色/主体参考资产、外观和身份不变量】"]
+    },
+    "narrative_order": {
+      "status": "LOCKED",
+      "rules": ["【对白、动作、信息和情绪的不可逆顺序】"]
+    },
+    "spatial_relationship": {
+      "status": "LOCKED",
+      "rules": ["【人物/主体之间的空间关系、场景隔离或轴线约束】"]
+    },
+    "visibility_and_exclusions": {
+      "status": "LOCKED",
+      "rules": ["【不可见内容、禁用界面、禁用构图或必须保持的朝向】"]
+    },
+    "performance_and_audio": {
+      "status": "LOCKED",
+      "rules": ["【口型、独白、停顿、动作和声音的表演边界】"]
+    }
+  },
+  "flexible": {
+    "duration": "【可接受范围】",
+    "cut_timing": "【允许的节奏弹性】",
+    "environment_detail": "【允许简化的环境细节】",
+    "performance_microblocking": "【允许自然变化的微动作】",
+    "silent_rehearsal": "【静音预演与有声测试的优先级】"
+  },
+  "deferred": ["【当前不影响开拍、后置处理的事项】"]
+}
