@@ -33,6 +33,7 @@ from .workflow import (
     recover,
 )
 from .media_routing import route_media_demand
+from .semantic_context import build_semantic_context
 
 
 GOALS = {"PRODUCE", "RESUME", "STATUS", "AUDIT", "DELIVER"}
@@ -139,6 +140,7 @@ def infer_task_requirements(text: str) -> dict[str, Any]:
             "required_capabilities": ["speed", "cost"],
             "priority": "cost>latency>reliability>quality",
             "signals": [],
+            "semantic_context": build_semantic_context(text),
         }
 
     signals: list[str] = []
@@ -183,6 +185,7 @@ def infer_task_requirements(text: str) -> dict[str, Any]:
         "required_capabilities": capabilities,
         "priority": priority,
         "signals": signals,
+        "semantic_context": build_semantic_context(text),
     }
 
 
@@ -360,6 +363,7 @@ def route_model_demand(
         "required_capabilities": required,
         "priority": requirements["priority"],
         "signals": requirements["signals"],
+        "semantic_context": requirements["semantic_context"],
         "selected_labor": selected,
         "candidate_set": candidates,
         "blocked_candidates": blocked,
