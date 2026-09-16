@@ -1,0 +1,17 @@
+{
+  "schema": "ace.video_kingdom.project_profile.v1",
+  "project_id": "zhang_tietie_episode_001",
+  "episode_id": "EP001",
+  "script_version": "v1.0",
+  "production_mode": "BUILT_IN_AUDIO_EXPERIMENT",
+  "hard_rules": {
+    "audio": "全程使用 agnes-video-2.5-flash 内置声音；不外接 TTS、不换音源；短句、对白、独白统一音色风格",
+    "timing": "动作、表情、留白完整；不压缩、不硬卡、不抢节奏；按观众状态、反应和情绪确定时长",
+    "picture": "真人电影感正常叙事；使用正反打、近景和特写；禁止画中画、手机界面 UI、通话悬浮窗和录屏感"
+  },
+  "audit_output": {
+    "required_summary": ["可直接拍", "需要微调", "预计时长"],
+    "no_unresolved_provider_submission": true
+  },
+  "scope_note": "仅覆盖本项目本集；不改变 ACE 正式短剧默认的独立配音主时钟策略。"
+}
