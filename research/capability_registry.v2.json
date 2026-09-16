@@ -9,8 +9,8 @@
       "provider": "shenwen",
       "model": "gpt-image-2",
       "model_variants": [
-        {"model": "gpt-image-2.5-flare", "status": "REGISTERED_UNPROBED", "selection": "explicit_only"},
-        {"model": "gpt-image-2.5-sunburst", "status": "REGISTERED_UNPROBED", "selection": "explicit_only"}
+        {"model": "gpt-image-2.5-flare", "status": "PROBE_PASS", "selection": "explicit_only", "health_evidence": "research/image_model_probe_20260916.json"},
+        {"model": "gpt-image-2.5-sunburst", "status": "PROBE_PASS", "selection": "explicit_only", "health_evidence": "research/image_model_probe_20260916.json"}
       ],
       "executable": "D:/视频创作/ace-video-kingdom/tools/imagegen_shenwen.ps1",
       "executable_candidates": [
@@ -24,7 +24,7 @@
         "status": "PROBE_PASS",
         "production_integration": "ADAPTER_VERIFIED"
       },
-      "health_evidence": "research/line_test_shenwen_image_20260912.json",
+      "health_evidence": "research/image_model_probe_20260916.json",
       "receipt_schema": "ace.media.receipt.v1",
       "model_locked": true,
       "model_lock_scope": "default_route_only; variants require explicit --model and separate receipt",

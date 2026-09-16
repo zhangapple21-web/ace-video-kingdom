@@ -59,3 +59,9 @@
 - 官方文档登记三款入口：`gpt-image-2`、`gpt-image-2.5-flare`、`gpt-image-2.5-sunburst`。
 - `gpt-image-2` 继续是已验证默认；两个 2.5 变体只登记为显式可选，未通过真实线路探针前不计入生产健康路由。
 - `tools/imagegen_shenwen.ps1` 已允许三款完整模型名，未知或旧模型仍硬阻断；不自动切换模型。
+
+## 本次真实线路复测：Shenwen 图像模型（2026-09-16）
+
+- 使用同一 `SHENWEN_IMAGE_API_KEY` 对 `/v1/images/generations` 做最小真实探针：`gpt-image-2`、`gpt-image-2.5-flare`、`gpt-image-2.5-sunburst` 均返回 HTTP 200 并产出图像数据。
+- `grok-imagine-image`、`grok-imagine-image-quality` 在该 Shenwen 图像端点均返回 HTTP 404；不加入当前适配器白名单，也不把名称存在误判为线路可用。
+- 两个 2.5 变体晋升为 `PROBE_PASS`，仍保持 `explicit_only`；默认入口继续锁定 `imagegen → gpt-image-2`。完整脱敏收据见 `research/image_model_probe_20260916.json`。

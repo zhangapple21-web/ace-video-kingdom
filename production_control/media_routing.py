@@ -10,6 +10,7 @@ from pathlib import Path
 from typing import Any, Mapping
 
 from .project import discover_project
+from .semantic_context import build_semantic_context
 
 
 REGISTRY_PATH = Path(__file__).resolve().parents[1] / "research" / "capability_registry.v2.json"
@@ -105,6 +106,7 @@ def route_media_demand(
         "schema": "ace.media.route.v1",
         "status": status,
         "task_class": intent,
+        "semantic_context": build_semantic_context(text),
         "required_capabilities": [row["capability"] for row in selected],
         "required_capability": selected[0]["capability"] if len(selected) == 1 else None,
         "selected_routes": selected,

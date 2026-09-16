@@ -1,0 +1,65 @@
+{
+  "schema": "ace.image.model_probe_receipt.v1",
+  "probe_id": "shenwen-image-models-20260916",
+  "created_at": "2026-09-16",
+  "endpoint": "https://api.shenwenai.com/v1/images/generations",
+  "credential_source": "SHENWEN_IMAGE_API_KEY",
+  "credential_value_recorded": false,
+  "request": {
+    "prompt_class": "safe_minimal_still_life",
+    "prompt_recorded": false,
+    "size": "1024x1024",
+    "quality": "low",
+    "n": 1,
+    "input_images": 0
+  },
+  "results": [
+    {
+      "model": "gpt-image-2",
+      "status": "PROBE_PASS",
+      "http_status": 200,
+      "response_payload": "image_data",
+      "fallback_used": false,
+      "degraded": false
+    },
+    {
+      "model": "gpt-image-2.5-flare",
+      "status": "PROBE_PASS",
+      "http_status": 200,
+      "response_payload": "image_data",
+      "fallback_used": false,
+      "degraded": false
+    },
+    {
+      "model": "gpt-image-2.5-sunburst",
+      "status": "PROBE_PASS",
+      "http_status": 200,
+      "response_payload": "image_data",
+      "fallback_used": false,
+      "degraded": false
+    },
+    {
+      "model": "grok-imagine-image",
+      "status": "UNAVAILABLE_AT_ENDPOINT",
+      "http_status": 404,
+      "response_payload": "error_redacted",
+      "fallback_used": false,
+      "degraded": false
+    },
+    {
+      "model": "grok-imagine-image-quality",
+      "status": "UNAVAILABLE_AT_ENDPOINT",
+      "http_status": 404,
+      "response_payload": "error_redacted",
+      "fallback_used": false,
+      "degraded": false
+    }
+  ],
+  "decision": {
+    "default_model_unchanged": true,
+    "verified_variants": ["gpt-image-2.5-flare", "gpt-image-2.5-sunburst"],
+    "rejected_variants": ["grok-imagine-image", "grok-imagine-image-quality"],
+    "selection_policy": "explicit_only_for_variants",
+    "safety_note": "模型可用性探针不绕过内容安全策略；请求理解采用结构化语义字段，未知意图保持待确认。"
+  }
+}
