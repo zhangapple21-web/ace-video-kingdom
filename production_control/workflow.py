@@ -281,6 +281,37 @@ def lock_plan_shots(run_path: Path, plan_path: Path) -> dict[str, Any]:
             contract = {**contract, "actions": [shot["action"]]}
         if "primary_action" not in contract and shot.get("action"):
             contract = {**contract, "primary_action": shot["action"]}
+        # Materialize the generic rhythm contract at the single shot-lock point.
+        # Content remains explicit/pending for the role room to refine; the
+        # provider gate will reject unresolved placeholders before submission.
+        if not isinstance(shot.get("shot_rhythm"), dict):
+            dialogue = shot.get("dialogue") or shot.get("script", {}).get("dialogue") if isinstance(shot.get("script"), dict) else shot.get("dialogue")
+            shot["shot_rhythm"] = {
+                "schema": "video_kingdom.shot_rhythm_contract.v1",
+                "shot_purpose": shot.get("dramatic_function") or "PENDING_ROLE_ROOM",
+                "scale": (shot.get("camera", {}) or {}).get("scale", "medium") if isinstance(shot.get("camera"), dict) else "medium",
+                "transition_intent": "PENDING_ROLE_ROOM",
+                "movement": (shot.get("camera", {}) or {}).get("movement", "static") if isinstance(shot.get("camera"), dict) else "static",
+                "movement_motivation": "PENDING_ROLE_ROOM",
+                "timing_basis": "AUDIO_DRIVEN" if dialogue else "ACTION_DRIVEN",
+                "audio_anchor": "PENDING_AUDIO_RECEIPT" if dialogue else "NOT_APPLICABLE",
+                "script_annotations": {
+                    "action": shot.get("action") or "PENDING_ROLE_ROOM",
+                    "dialogue": dialogue or "不适用",
+                    "emotion": shot.get("emotion_change") or "PENDING_ROLE_ROOM",
+                    "subtext": "PENDING_ROLE_ROOM",
+                    "motivation": "PENDING_ROLE_ROOM",
+                    "atmosphere": "PENDING_ROLE_ROOM",
+                },
+                "performance_beats": {
+                    "speaker_hands_body": "PENDING_ROLE_ROOM",
+                    "listener_reaction": "不适用" if not dialogue else "PENDING_ROLE_ROOM",
+                    "pause_point": "PENDING_ROLE_ROOM",
+                    "inner_voice_mouth_state": "不适用" if not shot.get("inner_voice") else "PENDING_ROLE_ROOM",
+                    "cut_motivation": "PENDING_ROLE_ROOM",
+                },
+            }
+        contract = {**contract, "shot_rhythm": shot["shot_rhythm"]}
         if not shot_id:
             raise WorkflowError("SHOT_ID_REQUIRED")
         run.lock_shot(shot_id, contract)
