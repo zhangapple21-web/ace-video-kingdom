@@ -81,3 +81,9 @@
 - `rany2/edge-tts`：已隔离拉取；代码许可混合 MIT/LGPLv3，实际调用微软在线 TTS，适合作为快速草稿或降级探针，不作为正式短剧默认音源。
 - 研究副本：`D:\视频创作\quarantine\tts_compare_20260916`。未安装到生产运行时，未下载模型权重，未改变视频入口。
 - 结构性吸收：正式对白镜头现在必须携带 `shot_rhythm` 和音频锚点；生产门禁缺少该合同即阻断 Agnes，避免声音、口型和画面各自猜测。
+
+## SHOT_01 内部音频参考（2026-09-17）
+
+- 用户提供的 `4a99c8dec39f492d97e805082f3a0029.mp3` 已完成格式、时长、采样率、声道和 SHA-256 登记。
+- 已登记为 `PRIMARY_AUDIO_CLOCK`，可用于第一镜内部预览、Agnes 参考音频和后期复用同一音频；收据见 `research/audio_refs/SHOT_01_doubao_reference_audio.v1.json`。
+- 只有在对白分句、口型/动作验收和最终音频收据补齐后，才可从 `RESEARCH_PREVIEW_READY` 晋升正式交付。
