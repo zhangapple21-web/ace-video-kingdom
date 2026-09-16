@@ -1,0 +1,16 @@
+{
+  "schema": "ace.video_kingdom.audio_reference_receipt.v1",
+  "shot_id": "SHOT_01",
+  "status": "RESEARCH_PREVIEW_READY",
+  "usage": "internal_preview_and_a_b_only",
+  "path": "D:/视频创作/专门放声音的/4a99c8dec39f492d97e805082f3a0029.mp3",
+  "format": "mp3",
+  "sample_rate_hz": 44100,
+  "channels": 2,
+  "duration_seconds": 15.11619,
+  "sha256": "5569F87B59CD854730517BD7D5083D6365597067786DD02442093142DDAF73CE",
+  "timing_role": "PRIMARY_AUDIO_CLOCK",
+  "provider_role": "reference_audio_only",
+  "final_mix_role": "reuse_same_audio_after_visual_qc",
+  "notes": "由用户提供并允许用于本项目测试；尚未绑定具体对白分句和口型验收收据。"
+}
