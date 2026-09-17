@@ -1,0 +1,77 @@
+{
+  "created_at": "2026-09-17T02:15:08.414167+00:00",
+  "gateway": "http://127.0.0.1:3000/v1",
+  "probe_kind": "availability_not_quality",
+  "models": [
+    {
+      "model": "gpt-5.4",
+      "status": "FAIL",
+      "error_type": "HTTPError",
+      "http_status": 400,
+      "latency_ms": 234
+    },
+    {
+      "model": "gpt-5.4-mini",
+      "status": "FAIL",
+      "error_type": "HTTPError",
+      "http_status": 400,
+      "latency_ms": 172
+    },
+    {
+      "model": "glm-4-flash",
+      "status": "PASS",
+      "actual_model": "glm-4-flash",
+      "nonempty": true,
+      "latency_ms": 922
+    },
+    {
+      "model": "gpt-5.6-luna",
+      "status": "FAIL",
+      "error_type": "HTTPError",
+      "http_status": 400,
+      "latency_ms": 250
+    },
+    {
+      "model": "gpt-5.5",
+      "status": "PASS",
+      "actual_model": "gpt-5.5",
+      "nonempty": true,
+      "latency_ms": 40031
+    },
+    {
+      "model": "gpt-5.6-sol",
+      "status": "FAIL",
+      "error_type": "TimeoutError",
+      "http_status": null,
+      "latency_ms": 60015
+    },
+    {
+      "model": "gpt-6-astra",
+      "status": "PASS",
+      "actual_model": "gpt-6-astra",
+      "nonempty": true,
+      "latency_ms": 33797
+    },
+    {
+      "model": "grok-4.5",
+      "status": "FAIL",
+      "error_type": "HTTPError",
+      "http_status": 400,
+      "latency_ms": 219
+    },
+    {
+      "model": "grok-4.6",
+      "status": "PASS",
+      "actual_model": "grok-4.6",
+      "nonempty": true,
+      "latency_ms": 3672
+    },
+    {
+      "model": "gpt-5.6-terra",
+      "status": "FAIL",
+      "error_type": "TimeoutError",
+      "http_status": null,
+      "latency_ms": 60016
+    }
+  ]
+}
