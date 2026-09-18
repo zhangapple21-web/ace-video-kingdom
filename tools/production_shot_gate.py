@@ -15,6 +15,8 @@ from tools.validate_creative_constraints import validate_creative_constraints
 from tools.validate_director_manifest import validate_manifest as validate_director_manifest
 from tools.validate_shot_prompt import validate_prompt
 from tools.validate_shot_rhythm import validate_shot_rhythm
+from tools.validate_script_prompt_review import validate_script_prompt_review
+from tools.validate_new_drama_semantics import is_new_drama, validate_new_drama_semantics
 
 
 def validate_production_shot(canonical_shot: dict[str, Any], contract_prompt: str) -> dict[str, Any]:
@@ -25,9 +27,24 @@ def validate_production_shot(canonical_shot: dict[str, Any], contract_prompt: st
     structured packet used by the video-kingdom workflow.
     """
 
+    new_drama_check = None
+    if is_new_drama(canonical_shot):
+        new_drama_check = validate_new_drama_semantics(canonical_shot, enforce=True)
+        if new_drama_check["status"] != "PASS":
+            raise ValueError("new drama semantics failed: " + ";".join(new_drama_check["errors"]))
+
     creative_check = validate_creative_constraints(canonical_shot.get("creative_constraints"))
     if creative_check["status"] != "PASS":
         raise ValueError("creative constraints failed: " + ";".join(creative_check["errors"]))
+
+    review_check = validate_script_prompt_review(
+        canonical_shot.get("script_prompt_review"),
+        shot_id=str(canonical_shot.get("shot_id") or ""),
+        run_id=str(canonical_shot.get("run_id") or ""),
+        compiled_prompt=contract_prompt,
+    )
+    if review_check["status"] != "PASS":
+        raise ValueError("script/prompt review failed: " + ";".join(review_check["errors"]))
 
     shot_prompt = canonical_shot.get("shot_prompt")
     shot_prompt = shot_prompt if isinstance(shot_prompt, dict) else {}
@@ -64,12 +81,32 @@ def validate_production_shot(canonical_shot: dict[str, Any], contract_prompt: st
     rhythm_check = validate_shot_rhythm(rhythm_packet)
     if rhythm_check["status"] == "BLOCKED":
         raise ValueError("shot rhythm contract failed: " + ";".join(rhythm_check["errors"]))
+    # A production drama shot must contain a watchable event.  The rhythm
+    # validator keeps legacy poison phrases as warnings for audit-only and
+    # historical packets, but the provider boundary must reject the explicit
+    # MCUSTATIC/id-photo pattern that repeatedly produced audio-backed stills.
+    static_packet = " ".join(
+        str(value or "")
+        for value in (
+            canonical_shot.get("shot_id"),
+            contract_prompt,
+            rhythm_packet.get("movement"),
+            rhythm_packet.get("camera_motion_reason"),
+        )
+    ).upper()
+    if "MCUSTATIC" in static_packet or "证件照" in static_packet:
+        raise ValueError(
+            "production shot rejected: MCUSTATIC/id-photo framing is not a watchable video event; "
+            "rewrite with a named action, listener reaction, or motivated camera change"
+        )
 
     return {
         "status": "PASS",
         "creative": creative_check,
+        "script_prompt_review": review_check,
         "prompt": prompt_check,
         "continuity": continuity_check,
         "director": director_check,
         "rhythm": rhythm_check,
+        "new_drama": new_drama_check,
     }
