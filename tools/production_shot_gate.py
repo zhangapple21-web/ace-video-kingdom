@@ -44,7 +44,10 @@ def validate_production_shot(canonical_shot: dict[str, Any], contract_prompt: st
         if state_check["status"] != "PASS":
             raise ValueError("state contract failed: " + ";".join(state_check["errors"]))
     else:
-        state_check = {"status": "LEGACY_MISSING", "errors": ["state_contract not attached; new contracts must include Identity/State/Scene State/Shot State"]}
+        raise ValueError(
+            "state contract failed: state_contract is required for production; "
+            "migrate legacy shot to Identity/State/Scene State/Shot State before Provider POST"
+        )
 
     review_check = validate_script_prompt_review(
         canonical_shot.get("script_prompt_review"),
