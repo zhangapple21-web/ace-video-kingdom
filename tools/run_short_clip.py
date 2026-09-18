@@ -25,12 +25,23 @@ if str(Path(__file__).resolve().parents[1]) not in sys.path:
 
 import requests
 from PIL import Image
+
+from tools.video_kingdom_entry import (
+    AGNES_FLASH_MODEL,
+    normalize_agnes_video_payload,
+    to_agnes_transport_payload,
+    normalize_video_status,
+    extract_video_id,
+)
+from tools.validate_continuity_bridge import validate_bridge
+from tools.validate_director_manifest import validate_manifest as validate_director_manifest
+from tools.validate_shot_prompt import validate_prompt
 from tools.production_shot_gate import validate_production_shot
 
 try:
-    from runtime.provider_admission import admit_provider_request, assert_admission, build_canonical_generation_request
+    from runtime.provider_admission import admit_provider_request, assert_admission, build_canonical_generation_request, canonical_hash
 except ModuleNotFoundError:  # pragma: no cover - direct invocation from repo root
-    from tools.runtime.provider_admission import admit_provider_request, assert_admission, build_canonical_generation_request  # type: ignore
+    from tools.runtime.provider_admission import admit_provider_request, assert_admission, build_canonical_generation_request, canonical_hash  # type: ignore
 
 
 CREATE_ENDPOINT = "https://apihub.agnes-ai.com/v1/videos"
@@ -67,6 +78,351 @@ def _load_records(path: Path) -> list[dict]:
     if isinstance(data, dict):
         return [data]
     return [row for row in data if isinstance(row, dict)] if isinstance(data, list) else []
+
+
+def _sha256_file(path: Path) -> str:
+    digest = hashlib.sha256()
+    with path.open("rb") as handle:
+        for chunk in iter(lambda: handle.read(1024 * 1024), b""):
+            digest.update(chunk)
+    return digest.hexdigest()
+
+
+def _workspace_lock_path(contract_path: Path) -> Path:
+    return contract_path.resolve().parent / "user_workspace_lock_manifest_20260917.json"
+
+
+def _load_workspace_lock_assets(contract_path: Path) -> list[dict]:
+    manifest_path = _workspace_lock_path(contract_path)
+    if not manifest_path.is_file():
+        raise ValueError(
+            "workspace lock manifest is required when contract references include location stills; "
+            "no Provider POST: missing user_workspace_lock_manifest_20260917.json"
+        )
+    try:
+        document = json.loads(manifest_path.read_text(encoding="utf-8"))
+    except (OSError, json.JSONDecodeError) as exc:
+        raise ValueError(f"workspace lock manifest is unreadable: {manifest_path}; no Provider POST") from exc
+    assets = document.get("assets") if isinstance(document, dict) else None
+    if not isinstance(assets, list) or not assets:
+        raise ValueError("workspace lock manifest has no assets; no Provider POST")
+    return assets
+
+
+def _workspace_asset_ref(asset: dict, manifest_path: Path) -> dict:
+    role = str(asset.get("role") or "").strip()
+    kind = str(asset.get("kind") or "").strip()
+    local_path = Path(str(asset.get("local_path") or "")).expanduser()
+    public_url = str(asset.get("public_url") or "").strip()
+    expected_hash = str(asset.get("sha256") or "").strip().lower()
+    asset_id = str(asset.get("asset_id") or f"{role}_{kind}").strip()
+    if not role or not kind or not local_path.is_file() or not public_url or len(expected_hash) != 64:
+        raise ValueError(f"workspace lock asset is incomplete: {asset_id or '?'}; no Provider POST")
+    actual_hash = _sha256_file(local_path).lower()
+    if actual_hash != expected_hash:
+        raise ValueError(
+            f"workspace lock SHA-256 mismatch for {asset_id}: expected {expected_hash}, got {actual_hash}; no Provider POST"
+        )
+    return {
+        "asset_id": asset_id,
+        "asset_type": "workspace",
+        "version": "user_workspace_lock_20260917",
+        "sha256": expected_hash,
+        "local_sha256": actual_hash,
+        "scope": "shot",
+        "path": str(local_path),
+        "size_bytes": local_path.stat().st_size,
+        "mime": "image/png",
+        "provider_mime": "image/png",
+        "provider_ref": public_url,
+        "manifest_path": str(manifest_path),
+        "role": role,
+        "kind": kind,
+    }
+
+
+def _bind_project_asset_manifest(canonical_shot: dict, payload: dict, contract_path: Path) -> dict:
+    """Bind identity pack faces, then same-role workspace stills, to the Provider payload."""
+    manifest_path = contract_path.resolve().parent / "user_character_pack_manifest_20260915.json"
+    if not manifest_path.is_file():
+        raise ValueError(
+            "character asset manifest is required for production admission; "
+            "no Provider POST: missing user_character_pack_manifest_20260915.json"
+        )
+
+    try:
+        manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+    except (OSError, json.JSONDecodeError) as exc:
+        raise ValueError(f"character asset manifest is unreadable: {manifest_path}; no Provider POST") from exc
+
+    anchors = manifest.get("production_anchors") if isinstance(manifest, dict) else None
+    if not isinstance(anchors, list) or not anchors:
+        raise ValueError("character asset manifest has no production_anchors; no Provider POST")
+    manifest_sha256 = _sha256_file(manifest_path).lower()
+
+    asset_refs: list[dict] = []
+    expected_urls: list[str] = []
+    seen_urls: set[str] = set()
+    for anchor in anchors:
+        if not isinstance(anchor, dict):
+            raise ValueError("character asset manifest contains an invalid anchor; no Provider POST")
+        role = str(anchor.get("role") or "").strip()
+        local_path = Path(str(anchor.get("local_path") or "")).expanduser()
+        public_url = str(anchor.get("public_url") or "").strip()
+        expected_hash = str(anchor.get("sha256") or "").strip().lower()
+        if not role or not local_path.is_file() or not public_url or len(expected_hash) != 64:
+            raise ValueError(f"character asset manifest anchor is incomplete: {role or '?'}; no Provider POST")
+        if public_url in seen_urls:
+            raise ValueError(f"character asset manifest has duplicate public_url: {public_url}; no Provider POST")
+        seen_urls.add(public_url)
+        actual_hash = _sha256_file(local_path).lower()
+        if actual_hash != expected_hash:
+            raise ValueError(
+                f"character asset SHA-256 mismatch for {role}: expected {expected_hash}, got {actual_hash}; no Provider POST"
+            )
+        expected_urls.append(public_url)
+        asset_refs.append({
+            "asset_id": f"{role}_PACK_FRONT_CROP_512",
+            "asset_type": "character",
+            "version": "user_pack_20260915",
+            "sha256": expected_hash,
+            "local_sha256": actual_hash,
+            "scope": "project",
+            "path": str(local_path),
+            "size_bytes": local_path.stat().st_size,
+            "mime": "image/png",
+            "provider_mime": "image/png",
+            "provider_ref": public_url,
+            "manifest_path": str(manifest_path),
+            "role": role,
+        })
+
+    render = canonical_shot.get("render")
+    contract_urls = render.get("reference_image_urls") if isinstance(render, dict) else None
+    if not isinstance(contract_urls, list) or not contract_urls:
+        raise ValueError(
+            "provider admission blocked: canonical contract references are required; no Provider POST"
+        )
+    if any(not isinstance(url, str) or not url.strip() for url in contract_urls):
+        raise ValueError(
+            "provider admission blocked: canonical contract references must be URL strings; no Provider POST"
+        )
+    if len(set(contract_urls)) != len(contract_urls):
+        raise ValueError(
+            "provider admission blocked: canonical contract references contain duplicates; no Provider POST"
+        )
+
+    pack_index = {url: i for i, url in enumerate(expected_urls)}
+    identity_urls = [url for url in contract_urls if url in pack_index]
+    workspace_urls = [url for url in contract_urls if url not in pack_index]
+    if not identity_urls or contract_urls[0] not in pack_index:
+        raise ValueError(
+            "provider admission blocked: identity face must be the first on-screen reference; no Provider POST"
+        )
+    identity_order = [pack_index[url] for url in identity_urls]
+    if identity_order != sorted(identity_order):
+        raise ValueError(
+            "provider admission blocked: on-screen identity references must keep pack order; no Provider POST"
+        )
+    extra_identity = [url for url in contract_urls[1:] if url in pack_index]
+    if extra_identity and workspace_urls:
+        raise ValueError(
+            "provider admission blocked: workspace stills cannot mix extra identity faces; no Provider POST"
+        )
+
+    payload_urls = payload.get("input_images")
+    if payload_urls is None:
+        payload_urls = payload.get("images")
+    if payload_urls != contract_urls:
+        raise ValueError(
+            "provider admission blocked: Provider input_images/images do not match the current character pack for this shot; no Provider POST"
+        )
+
+    selected_refs = [asset_refs[pack_index[url]] for url in identity_urls]
+    workspace_manifest = None
+    if workspace_urls:
+        workspace_path = _workspace_lock_path(contract_path)
+        lock_assets = _load_workspace_lock_assets(contract_path)
+        url_to_asset: dict[str, dict] = {}
+        for asset in lock_assets:
+            if not isinstance(asset, dict):
+                raise ValueError("workspace lock contains an invalid asset; no Provider POST")
+            public_url = str(asset.get("public_url") or "").strip()
+            if not public_url:
+                continue
+            if public_url in url_to_asset:
+                raise ValueError(f"workspace lock has duplicate public_url: {public_url}; no Provider POST")
+            url_to_asset[public_url] = asset
+        face_role = ""
+        for anchor in anchors:
+            if str(anchor.get("public_url") or "").strip() == contract_urls[0]:
+                face_role = str(anchor.get("role") or "").strip()
+                break
+        if not face_role:
+            raise ValueError(
+                "provider admission blocked: identity face must be the first on-screen reference; no Provider POST"
+            )
+        expected_kinds = ("WORKSPACE_EMPTY", "WORKSTATION_POSE")
+        if len(workspace_urls) != 2:
+            raise ValueError(
+                "provider admission blocked: workspace references must be empty set then workstation pose; no Provider POST"
+            )
+        for url, expected_kind in zip(workspace_urls, expected_kinds):
+            asset = url_to_asset.get(url)
+            if asset is None:
+                raise ValueError(
+                    "provider admission blocked: canonical contract references are not in the current character pack; no Provider POST"
+                )
+            if str(asset.get("role") or "").strip() != face_role:
+                raise ValueError(
+                    f"provider admission blocked: workspace reference role must match on-screen face {face_role}; no Provider POST"
+                )
+            if str(asset.get("kind") or "").strip() != expected_kind:
+                raise ValueError(
+                    "provider admission blocked: workspace references must be empty set then workstation pose; no Provider POST"
+                )
+            selected_refs.append(_workspace_asset_ref(asset, workspace_path))
+        workspace_manifest = {
+            "path": str(workspace_path),
+            "sha256": _sha256_file(workspace_path).lower(),
+            "on_screen_reference_urls": list(workspace_urls),
+            "role": face_role,
+        }
+
+    canonical_shot["asset_refs"] = selected_refs
+    canonical_shot["character_asset_manifest"] = {
+        "path": str(manifest_path),
+        "sha256": manifest_sha256,
+        "roles": [str(anchor["role"]) for anchor in anchors],
+        "reference_urls": expected_urls,
+        "on_screen_reference_urls": list(contract_urls),
+        "on_screen_identity_urls": list(identity_urls),
+        "on_screen_workspace_urls": list(workspace_urls),
+        "workspace_lock": workspace_manifest,
+    }
+    return canonical_shot
+
+
+def _verify_manifest_asset_transport(canonical_shot: dict) -> None:
+    manifest = canonical_shot.get("character_asset_manifest")
+    refs = canonical_shot.get("asset_refs")
+    if not isinstance(manifest, dict) or not isinstance(refs, list) or not refs:
+        raise ValueError("character asset manifest transport refs are required; no Provider POST")
+    for ref in refs:
+        url = str(ref.get("provider_ref") or "")
+        expected = str(ref.get("sha256") or "").lower()
+        local_hash = str(ref.get("local_sha256") or "").lower()
+        if not expected or local_hash != expected:
+            raise ValueError(f"character asset local SHA-256 is not manifest-bound; no Provider POST: {url}")
+        try:
+            response = requests.get(
+                url,
+                headers={"User-Agent": "ace-video-kingdom/character-pack-preflight"},
+                timeout=30,
+            )
+        except requests.RequestException as error:
+            raise ValueError(f"character pack URL is unreachable (no Provider POST): {url} ({error})") from error
+        content_type = response.headers.get("Content-Type", "").split(";", 1)[0].lower()
+        if response.status_code != 200 or content_type != "image/png":
+            raise ValueError(
+                f"character pack URL failed transport preflight (no Provider POST): {url}"
+            )
+        remote_hash = hashlib.sha256(response.content).hexdigest().lower()
+        if remote_hash != expected or remote_hash != local_hash:
+            raise ValueError(
+                f"character pack URL SHA-256 mismatch (no Provider POST): {url}; expected {expected}, got {remote_hash}"
+            )
+        ref["transport_sha256"] = remote_hash
+        if ref["transport_sha256"] != ref["local_sha256"]:
+            raise ValueError(f"character pack local/transport SHA-256 mismatch (no Provider POST): {url}")
+
+
+def _is_zhang_tietie_production_shot(canonical_shot: dict) -> bool:
+    shot_id = str(canonical_shot.get("shot_id") or "")
+    number = shot_id.removeprefix("SHOT_").split("_", 1)[0]
+    return (
+        str(canonical_shot.get("project_id") or "") == "zhang_tietie_episode_001"
+        and number.isdigit()
+        and 1 <= int(number) <= 8
+    )
+
+
+def _require_visual_unlock_for_following_shot(
+    canonical_shot: dict,
+    contract_path: Path,
+    *,
+    batch_id: str,
+) -> None:
+    """Require a fresh, hash-bound SHOT_01 visual pass before SHOT_02-08."""
+    shot_id = str(canonical_shot.get("shot_id") or "")
+    if not _is_zhang_tietie_production_shot(canonical_shot) or shot_id == "SHOT_01":
+        return
+    qc_path = contract_path.resolve().parent / "SHOT_01_ROLE_LOCKED_VISUAL_QC_20260915.json"
+    if not qc_path.is_file():
+        raise ValueError(f"visual unlock blocked for {shot_id}: missing {qc_path.name}; no Provider POST")
+    try:
+        qc = json.loads(qc_path.read_text(encoding="utf-8"))
+    except (OSError, json.JSONDecodeError) as exc:
+        raise ValueError(f"visual unlock blocked for {shot_id}: unreadable SHOT_01 QC; no Provider POST") from exc
+    if not isinstance(qc, dict):
+        raise ValueError(f"visual unlock blocked for {shot_id}: invalid SHOT_01 QC; no Provider POST")
+    if qc.get("batch_id") != batch_id:
+        raise ValueError(f"visual unlock blocked for {shot_id}: SHOT_01 QC batch mismatch; no Provider POST")
+    if qc.get("status") != "PASS" or qc.get("visual_gate") != "PASS":
+        raise ValueError(f"visual unlock blocked for {shot_id}: SHOT_01 visual QC is not PASS; no Provider POST")
+
+    manifest = canonical_shot.get("character_asset_manifest")
+    manifest_hash = str(manifest.get("sha256") or "").lower() if isinstance(manifest, dict) else ""
+    if qc.get("character_asset_manifest_sha256") != manifest_hash:
+        raise ValueError(f"visual unlock blocked for {shot_id}: SHOT_01 manifest hash is not current; no Provider POST")
+    refs = canonical_shot.get("asset_refs")
+    expected_hashes = [str(ref.get("sha256") or "").lower() for ref in refs if isinstance(ref, dict)] if isinstance(refs, list) else []
+    if qc.get("character_asset_hashes") != expected_hashes:
+        raise ValueError(f"visual unlock blocked for {shot_id}: SHOT_01 character asset hashes are not current; no Provider POST")
+    source_request_hash = str(qc.get("source_admission_request_hash") or "").lower()
+    if len(source_request_hash) != 64:
+        raise ValueError(f"visual unlock blocked for {shot_id}: SHOT_01 admission lineage is missing; no Provider POST")
+    receipt_value = qc.get("source_admission_receipt_path")
+    if not receipt_value:
+        raise ValueError(f"visual unlock blocked for {shot_id}: SHOT_01 admission receipt is missing; no Provider POST")
+    receipt_path = Path(str(receipt_value))
+    if not receipt_path.is_absolute():
+        receipt_path = (qc_path.parent / receipt_path).resolve()
+    if not receipt_path.is_file():
+        raise ValueError(f"visual unlock blocked for {shot_id}: SHOT_01 admission receipt is missing; no Provider POST")
+    try:
+        source_receipt = json.loads(receipt_path.read_text(encoding="utf-8"))
+    except (OSError, json.JSONDecodeError) as exc:
+        raise ValueError(f"visual unlock blocked for {shot_id}: unreadable SHOT_01 admission receipt; no Provider POST") from exc
+    canonical_request = source_receipt.get("canonical_request") if isinstance(source_receipt, dict) else None
+    source_refs = canonical_request.get("reference_assets") if isinstance(canonical_request, dict) else None
+    source_ref_hashes = [
+        str(ref.get("sha256") or "").lower()
+        for ref in source_refs
+        if isinstance(ref, dict)
+    ] if isinstance(source_refs, list) else []
+    if (
+        not isinstance(source_receipt, dict)
+        or source_receipt.get("status") != "ADMITTED"
+        or source_receipt.get("provider_post_allowed") is not True
+        or not isinstance(canonical_request, dict)
+        or canonical_request.get("shot_id") != "SHOT_01"
+        or canonical_request.get("batch_id") != batch_id
+        or source_ref_hashes != expected_hashes
+        or canonical_hash(canonical_request) != source_receipt.get("request_hash")
+        or source_receipt.get("request_hash") != source_request_hash
+    ):
+        raise ValueError(f"visual unlock blocked for {shot_id}: SHOT_01 admission receipt hash mismatch; no Provider POST")
+
+    artifact_value = qc.get("artifact")
+    artifact_path = Path(str(artifact_value or ""))
+    if not artifact_path.is_absolute():
+        artifact_path = (qc_path.parent / artifact_path).resolve()
+    if not artifact_path.is_file():
+        raise ValueError(f"visual unlock blocked for {shot_id}: SHOT_01 QC artifact is missing; no Provider POST")
+    artifact_hash = _sha256_file(artifact_path)
+    if qc.get("artifact_sha256") != artifact_hash:
+        raise ValueError(f"visual unlock blocked for {shot_id}: SHOT_01 artifact hash mismatch; no Provider POST")
 
 
 def _persist_record(path: Path, record: dict) -> None:
@@ -169,10 +525,14 @@ def _preflight_public_media_urls(payload: dict) -> None:
         value = payload.get(field)
         if isinstance(value, str):
             urls.append(value)
-    for field in ("images", "audios"):
+    # ``input_images`` is the canonical V2.5 Flash spelling.  Keep ``images``
+    # here for old receipts and for the deployed compatibility adapter.
+    for field in ("input_images", "images", "audios"):
         values = payload.get(field)
         if isinstance(values, list):
-            urls.extend(value for value in values if isinstance(value, str))
+            if any(not isinstance(value, str) or not value.strip() for value in values):
+                raise ValueError(f"Agnes {field} must contain only non-empty public URL strings")
+            urls.extend(values)
     videos = payload.get("videos")
     if isinstance(videos, list):
         urls.extend(item.get("url") for item in videos if isinstance(item, dict) and isinstance(item.get("url"), str))
@@ -278,7 +638,8 @@ def _build_payload(args: argparse.Namespace) -> dict:
 def main() -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument("--shot-id", required=True)
-    parser.add_argument("--prompt", required=True)
+    parser.add_argument("--prompt", default="", help="Inline prompt; use --prompt-file for UTF-8 prompts")
+    parser.add_argument("--prompt-file", type=Path, help="Read the provider prompt as UTF-8 from a local file")
     parser.add_argument("--manifest", type=Path, default=Path("experiments/agnes_tasks.json"))
     parser.add_argument("--episode-contract", type=Path,
                         help="canonical episode JSON containing this shot; required before any Provider POST")
@@ -307,7 +668,15 @@ def main() -> int:
     parser.add_argument("--reference-video-require-audio", action="store_true", help="require audio on Agnes 2.5 reference videos")
     parser.add_argument("--admission-scope", choices=["legacy", "research", "production"], default="production",
                         help="scope recorded in the canonical admission receipt")
+    parser.add_argument("--batch-id", help="production batch identifier; required for SHOT_02-08 visual unlock")
     args = parser.parse_args()
+    if args.prompt_file is not None:
+        try:
+            args.prompt = args.prompt_file.read_text(encoding="utf-8")
+        except (OSError, UnicodeError) as error:
+            raise SystemExit(f"provider admission blocked: UTF-8 prompt file is unreadable: {args.prompt_file}") from error
+    if not args.prompt:
+        raise SystemExit("provider admission blocked: --prompt or --prompt-file is required")
     if args.model == "agnes-video-v2.0":
         raise SystemExit(
             "agnes-video-v2.0 is retired; use agnes-video-2.5-flash (free) or agnes-video-2.5"
@@ -318,6 +687,9 @@ def main() -> int:
 
     try:
         payload = _build_payload(args)
+        if args.model == AGNES_FLASH_MODEL:
+            payload = normalize_agnes_video_payload(payload)
+        transport_payload = to_agnes_transport_payload(payload) if args.model == AGNES_FLASH_MODEL else payload
     except ValueError as error:
         raise SystemExit(str(error)) from error
     try:
@@ -341,7 +713,37 @@ def main() -> int:
         try:
             validate_production_shot(canonical_shot, contract_prompt)
         except ValueError as error:
-            raise SystemExit(f"provider admission blocked: {error}; no provider request submitted") from error
+            raise SystemExit("provider admission blocked: " + str(error)) from error
+        prompt_lint = validate_prompt({
+            "compiled_prompt": contract_prompt,
+            "txt_prompt_elements": canonical_shot.get("shot_prompt", {}).get("txt_prompt_elements", {}) if isinstance(canonical_shot.get("shot_prompt"), dict) else {},
+            "style_lock": canonical_shot.get("shot_prompt", {}).get("style_lock") if isinstance(canonical_shot.get("shot_prompt"), dict) else None,
+            "scene_lock": canonical_shot.get("shot_prompt", {}).get("scene_lock") if isinstance(canonical_shot.get("shot_prompt"), dict) else None,
+            "subject_lock": canonical_shot.get("shot_prompt", {}).get("subject_lock") if isinstance(canonical_shot.get("shot_prompt"), dict) else None,
+            "count_constraints": canonical_shot.get("shot_prompt", {}).get("count_constraints") if isinstance(canonical_shot.get("shot_prompt"), dict) else [],
+            "negative_constraints": canonical_shot.get("shot_prompt", {}).get("negative_constraints") if isinstance(canonical_shot.get("shot_prompt"), dict) else [],
+            "visual_mode": canonical_shot.get("visual_mode"),
+        })
+        if prompt_lint["status"] != "PASS":
+            raise SystemExit("provider admission blocked: prompt director locks failed: " + ";".join(prompt_lint["errors"]))
+        continuity = canonical_shot.get("continuity_bridge")
+        if not isinstance(continuity, dict):
+            raise SystemExit("provider admission blocked: structured continuity_bridge is required for production; no provider request submitted")
+        continuity_check = validate_bridge(continuity)
+        if continuity_check["status"] != "PASS":
+            raise SystemExit("provider admission blocked: continuity bridge failed: " + ";".join(continuity_check["errors"]))
+        director_check = validate_director_manifest({"shots": [canonical_shot]}, strict=True)
+        if director_check["status"] != "PASS":
+            raise SystemExit("provider admission blocked: director preflight failed: " + ";".join(director_check["errors"]))
+    try:
+        _bind_project_asset_manifest(canonical_shot, payload, contract_path)
+        _verify_manifest_asset_transport(canonical_shot)
+        if _is_zhang_tietie_production_shot(canonical_shot) and str(canonical_shot.get("shot_id")) != "SHOT_01":
+            if not args.batch_id:
+                raise ValueError("visual unlock blocked: --batch-id is required for SHOT_02-08; no Provider POST")
+            _require_visual_unlock_for_following_shot(canonical_shot, contract_path, batch_id=args.batch_id)
+    except ValueError as error:
+        raise SystemExit(str(error)) from error
     args.manifest.parent.mkdir(parents=True, exist_ok=True)
     payload_sha256 = hashlib.sha256(json.dumps(payload, ensure_ascii=False, sort_keys=True, separators=(",", ":")).encode("utf-8")).hexdigest()
     existing = next((row for row in _load_records(args.manifest) if row.get("shot_id") == args.shot_id), None)
@@ -350,6 +752,8 @@ def main() -> int:
         canonical_shot, payload, provider="agnes", endpoint=CREATE_ENDPOINT,
         payload_schema="agnes-video-cli.v1", model=args.model, scope=args.admission_scope,
     )
+    if args.batch_id:
+        request["batch_id"] = args.batch_id
     prior_hash = None
     if existing and existing.get("status") not in {"CREATE_FAILED", "PROVIDER_FAILED", "DOWNLOAD_FAILED", "POLL_TIMEOUT"}:
         prior_hash = existing.get("request_hash")
@@ -388,8 +792,12 @@ def main() -> int:
         "create_endpoint": CREATE_ENDPOINT,
         "poll_endpoint": POLL_ENDPOINT,
         "poll_id_field": "video_id",
+        "client_token": payload.get("client_token"),
         "request_hash": admission["request_hash"],
         "admission_receipt_path": str(admission_path),
+        "batch_id": args.batch_id,
+        "character_asset_manifest_sha256": canonical_shot["character_asset_manifest"]["sha256"],
+        "character_asset_hashes": [ref["sha256"] for ref in canonical_shot["asset_refs"]],
     })
     video_id = record.get("video_id")
     if not video_id:
@@ -402,8 +810,16 @@ def main() -> int:
                 assert_admission(admission, admission["request_hash"], provider_payload=payload)
                 response = requests.post(
                     CREATE_ENDPOINT,
-                    headers={"Authorization": f"Bearer {key}", "Content-Type": "application/json"},
-                    json=payload,
+                    # The admission receipt is hash-bound to this exact
+                    # canonical payload.  In particular, do not generate a
+                    # fresh token on retries or substitute a task_id for the
+                    # provider video_id.
+                    json=transport_payload,
+                    headers={
+                        "Authorization": f"Bearer {key}",
+                        "Content-Type": "application/json",
+                        "Idempotency-Key": str(payload.get("client_token")),
+                    },
                     timeout=90,
                 )
             except requests.RequestException as error:
@@ -443,7 +859,7 @@ def main() -> int:
         # A task_id is not interchangeable: persisting it here would make a
         # later resume repeatedly query an unrelated identifier and conceal a
         # create-contract drift as a slow provider job.
-        video_id = body.get("video_id") or body.get("id")
+        video_id = extract_video_id(body)
         record.update({"create_http_status": response.status_code, "video_id": video_id, "created_status": body.get("status")})
         if response.status_code >= 300:
             record["error_class"] = "TRANSIENT_SERVICE_OR_GATEWAY" if response.status_code in {429, 500, 502, 503, 504} else "HTTP_CREATE_ERROR"
@@ -480,8 +896,9 @@ def main() -> int:
             data = {}
         if not isinstance(data, dict):
             data = {}
-        state = str(data.get("status") or data.get("internal_status") or "").lower()
-        record.update({"last_poll_http_status": query.status_code, "last_state": state or "unknown"})
+        normalized = normalize_video_status(data, video_id=video_id, http_status=query.status_code)
+        state = normalized["provider_status"]
+        record.update({"last_poll_http_status": query.status_code, "last_state": state, "provider_status": normalized["status"]})
         _persist_record(args.manifest, record)
         if query.status_code in {429, 500, 502, 503, 504}:
             wait = _retry_seconds(query, default=delay)
@@ -493,9 +910,9 @@ def main() -> int:
         if query.status_code >= 300:
             record.update({"status": "PROVIDER_FAILED", "error_class": "HTTP_POLL_ERROR", "error_body_excerpt": str(getattr(query, "text", ""))[:500]})
             break
-        if query.status_code == 200 and state in {"completed", "succeeded", "success"}:
+        if normalized["status"] == "COMPLETED":
             metadata = data.get("metadata") if isinstance(data.get("metadata"), dict) else {}
-            url = data.get("url") or data.get("video_url") or metadata.get("url")
+            url = normalized.get("artifact_url") or data.get("url") or data.get("video_url") or metadata.get("url")
             if not url:
                 record.update({"status": "DOWNLOAD_FAILED", "error_class": "MISSING_ARTIFACT_URL"})
                 break
@@ -524,8 +941,8 @@ def main() -> int:
                 return 0
             record.update({"status": "DOWNLOAD_FAILED", "error_class": "DOWNLOAD_HTTP_OR_CONTENT_TYPE", "download_http_status": artifact.status_code, "download_content_type": artifact.headers.get("content-type", "")})
             break
-        if query.status_code == 200 and state in {"failed", "error", "cancelled", "canceled", "rejected", "expired"}:
-            record.update({"status": "PROVIDER_FAILED", "error_class": "PROVIDER_TERMINAL", "error_body_excerpt": str(data.get("error") or data.get("message") or state)[:500]})
+        if normalized["status"] == "FAILED":
+            record.update({"status": "PROVIDER_FAILED", "error_class": "PROVIDER_TERMINAL", "error_body_excerpt": str(normalized.get("error") or data.get("error") or data.get("message") or state)[:500]})
             break
         time.sleep(delay)
         delay = min(delay * 2, 60)
