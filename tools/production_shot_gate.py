@@ -94,9 +94,13 @@ def validate_production_shot(canonical_shot: dict[str, Any], contract_prompt: st
             rhythm_packet.get("camera_motion_reason"),
         )
     ).upper()
-    if "MCUSTATIC" in static_packet or "证件照" in static_packet:
+    static_poison = (
+        "MCUSTATIC", "证件照", "自然微动作", "轻微呼吸", "同一帧", "同一位置同一景别",
+        "循环静止", "重复帧", "无动作",
+    )
+    if any(phrase in static_packet for phrase in static_poison):
         raise ValueError(
-            "production shot rejected: MCUSTATIC/id-photo framing is not a watchable video event; "
+            "production shot rejected: static/id-photo framing is not a watchable video event; "
             "rewrite with a named action, listener reaction, or motivated camera change"
         )
 
