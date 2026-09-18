@@ -66,6 +66,16 @@ def _route_one(row: Mapping[str, Any], scope: str, env: Mapping[str, str]) -> di
         "capability": row["id"],
         "provider": row["provider"],
         "model": row["model"],
+        "available_variants": [
+            {
+                "model": str(variant.get("model")),
+                "status": str(variant.get("status") or "UNKNOWN"),
+                "selection": str(variant.get("selection") or "explicit_only"),
+                "health_evidence": variant.get("health_evidence"),
+            }
+            for variant in (row.get("model_variants") or [])
+            if isinstance(variant, Mapping) and variant.get("model")
+        ],
         "model_locked": bool(row.get("model_locked")),
         "executable": executable or str(row.get("executable")),
         "credential_env": credential,
