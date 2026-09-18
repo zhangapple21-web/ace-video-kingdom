@@ -24,7 +24,7 @@ ROOT = Path(__file__).resolve().parents[1]
 if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
-from production_control.media_routing import classify_media_intent, route_media_demand
+from production_control.media_routing import choose_image_strategy, classify_media_intent, route_media_demand
 from production_control.semantic_context import build_semantic_context
 from tools import role_room
 
@@ -283,6 +283,8 @@ def dispatch(*, text: str, out: Path, profile: str = "standard", project_id: str
     if intent:
         route = route_media_demand(source, scope="current_control_plane")
         receipt.update({"dispatch": "media_route", "media_intent": intent, "route": route, "status": route.get("status") if route else "BLOCKED"})
+        if intent in {"VIDEO", "MIXED"}:
+            receipt["image_strategy"] = choose_image_strategy(source)
     else:
         role_receipt = out.with_name(out.stem + ".role.json")
         role_args = ["--idea", source, "--out", str(role_receipt), "--profile", profile]

@@ -1,7 +1,7 @@
 import json
 
 from production_control.media_executor import execute_media_task
-from production_control.media_routing import classify_media_intent, route_media_demand
+from production_control.media_routing import choose_image_strategy, classify_media_intent, route_media_demand
 from production_control.task_state import complete, create, load, progress
 
 
@@ -12,6 +12,11 @@ def test_media_intents_are_not_general():
     assert classify_media_intent("\u751f\u6210\u89d2\u8272\u5305\u56fe") == "IMAGE"
     assert classify_media_intent("\u751f\u6210\u7b2c1\u955c\u89c6\u9891") == "VIDEO"
     assert classify_media_intent("\u751f\u6210\u89d2\u8272\u5305\u56fe + \u7b2c1\u955c\u89c6\u9891") == "MIXED"
+
+
+def test_image_strategy_escalates_only_for_composition_risk():
+    assert choose_image_strategy("\u751f\u6210\u7b2c1\u955c\u89c6\u9891")["mode"] == "REFERENCE_ONLY"
+    assert choose_image_strategy("\u751f\u6210\u7b2c1\u955c\u89c6\u9891，\u5148\u9501\u5b9a\u9996\u5e27\u6784\u56fe")["mode"] == "COMPOSITION_STILL_CANDIDATE"
 
 
 def test_media_route_binds_capability_and_project():
