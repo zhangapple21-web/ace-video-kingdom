@@ -44,10 +44,7 @@ def validate_production_shot(canonical_shot: dict[str, Any], contract_prompt: st
         if state_check["status"] != "PASS":
             raise ValueError("state contract failed: " + ";".join(state_check["errors"]))
     else:
-        raise ValueError(
-            "state contract failed: state_contract is required for production; "
-            "migrate legacy shot to Identity/State/Scene State/Shot State before Provider POST"
-        )
+        state_check = {"status": "BLOCKED", "errors": ["state_contract is required for production; migrate legacy shot to Identity/State/Scene State/Shot State before Provider POST"]}
 
     review_check = validate_script_prompt_review(
         canonical_shot.get("script_prompt_review"),
@@ -57,6 +54,8 @@ def validate_production_shot(canonical_shot: dict[str, Any], contract_prompt: st
     )
     if review_check["status"] != "PASS":
         raise ValueError("script/prompt review failed: " + ";".join(review_check["errors"]))
+    if state_check["status"] != "PASS":
+        raise ValueError("state contract failed: " + ";".join(state_check["errors"]))
 
     shot_prompt = canonical_shot.get("shot_prompt")
     shot_prompt = shot_prompt if isinstance(shot_prompt, dict) else {}
