@@ -26,7 +26,11 @@ def test_image_model_plan_has_verified_fallbacks_only():
     assert [item["model"] for item in plan["candidates"]] == [
         "gpt-image-2", "gpt-image-2.5-flare", "gpt-image-2.5-sunburst"
     ]
-    assert "grok-imagine-image" in plan["blocked_variants"]
+    assert plan["blocked_variants"] == []
+    assert [item["model"] for item in plan["candidates"]] == [
+        "gpt-image-2", "gpt-image-2.5-flare", "gpt-image-2.5-sunburst",
+        "grok-imagine-image", "grok-imagine-image-quality",
+    ]
 
 
 def test_media_route_binds_capability_and_project():

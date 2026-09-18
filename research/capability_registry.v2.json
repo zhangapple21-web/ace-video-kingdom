@@ -11,8 +11,8 @@
       "model_variants": [
         {"model": "gpt-image-2.5-flare", "status": "PROBE_PASS", "selection": "explicit_only", "health_evidence": "research/image_model_probe_20260916.json"},
         {"model": "gpt-image-2.5-sunburst", "status": "PROBE_PASS", "selection": "explicit_only", "health_evidence": "research/image_model_probe_20260916.json"},
-        {"model": "grok-imagine-image", "status": "UNAVAILABLE_AT_ENDPOINT", "selection": "blocked", "health_evidence": "research/grok_image_probe_20260918.json"},
-        {"model": "grok-imagine-image-quality", "status": "UNAVAILABLE_AT_ENDPOINT", "selection": "blocked", "health_evidence": "research/grok_image_probe_20260918.json"}
+        {"model": "grok-imagine-image", "status": "PROBE_PASS", "selection": "explicit_only", "credential_env": "SHENWEN_GROK_API_KEY", "health_evidence": "research/grok_image_probe_20260918.json"},
+        {"model": "grok-imagine-image-quality", "status": "PROBE_PASS", "selection": "explicit_only", "credential_env": "SHENWEN_GROK_API_KEY", "health_evidence": "research/grok_image_probe_20260918.json"}
       ],
       "executable": "D:/视频创作/ace-video-kingdom/tools/imagegen_shenwen.ps1",
       "executable_candidates": [

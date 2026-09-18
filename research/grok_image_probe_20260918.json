@@ -5,12 +5,12 @@
   "credential_source": "SHENWEN_GROK_API_KEY",
   "credential_value_recorded": false,
   "results": [
-    {"model": "grok-imagine-image", "status": "UNAVAILABLE_AT_ENDPOINT", "http_status": 403},
-    {"model": "grok-imagine-image-quality", "status": "UNAVAILABLE_AT_ENDPOINT", "http_status": 403}
+    {"model": "grok-imagine-image", "status": "PROBE_PASS", "http_status": 200, "response_payload": "temporary_image_url"},
+    {"model": "grok-imagine-image-quality", "status": "PROBE_PASS", "http_status": 200, "response_payload": "temporary_image_url"}
   ],
   "decision": {
-    "production_route": "NOT_REGISTERED",
-    "reason": "The configured Shenwen image endpoint rejects the Grok credential/model request; OpenRouter model discovery exposes Grok text/image-input models, not image-output models.",
-    "retest_when": "A documented image-generation endpoint and successful image receipt are available"
+    "production_route": "REGISTERED_EXPLICIT_ONLY",
+    "reason": "The Shenwen Grok image channel accepts grok-imagine-image with the dedicated key. The model is explicit-only until both variants have fresh evidence.",
+    "retest_when": "Before promotion to default, rerun both model probes and retain image receipts"
   }
 }
