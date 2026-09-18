@@ -182,7 +182,7 @@ def _bind_project_asset_manifest(canonical_shot: dict, payload: dict, contract_p
             )
         expected_urls.append(public_url)
         asset_refs.append({
-            "asset_id": f"{role}_PACK_FRONT_CROP_512",
+            "asset_id": str(anchor.get("asset_id") or f"{role}_PACK_FRONT_CROP_512"),
             "asset_type": "character",
             "version": "user_pack_20260915",
             "sha256": expected_hash,
@@ -215,20 +215,32 @@ def _bind_project_asset_manifest(canonical_shot: dict, payload: dict, contract_p
     pack_index = {url: i for i, url in enumerate(expected_urls)}
     identity_urls = [url for url in contract_urls if url in pack_index]
     workspace_urls = [url for url in contract_urls if url not in pack_index]
-    if not identity_urls or contract_urls[0] not in pack_index:
-        raise ValueError(
-            "provider admission blocked: identity face must be the first on-screen reference; no Provider POST"
-        )
-    identity_order = [pack_index[url] for url in identity_urls]
-    if identity_order != sorted(identity_order):
-        raise ValueError(
-            "provider admission blocked: on-screen identity references must keep pack order; no Provider POST"
-        )
-    extra_identity = [url for url in contract_urls[1:] if url in pack_index]
-    if extra_identity and workspace_urls:
-        raise ValueError(
-            "provider admission blocked: workspace stills cannot mix extra identity faces; no Provider POST"
-        )
+    # Current production manifests are original-pack-only unless they
+    # explicitly opt into a legacy workspace composition contract.
+    identity_policy = str(manifest.get("identity_policy") or "ORIGINAL_PACK_ONLY").strip()
+    if identity_policy == "ORIGINAL_PACK_ONLY":
+        if workspace_urls:
+            raise ValueError(
+                "provider admission blocked: this project only uses original character pack images; no Provider POST"
+            )
+        if len(identity_urls) != 1 or contract_urls != identity_urls:
+            raise ValueError(
+                "provider admission blocked: exactly one original pack image for the on-screen character; no Provider POST"
+            )
+    else:
+        if not identity_urls or not workspace_urls or contract_urls[0] in pack_index or contract_urls[-1] not in pack_index:
+            raise ValueError(
+                "provider admission blocked: composition workspace must be first and identity crop last; no Provider POST"
+            )
+        identity_order = [pack_index[url] for url in identity_urls]
+        if identity_order != sorted(identity_order):
+            raise ValueError(
+                "provider admission blocked: on-screen identity references must keep pack order; no Provider POST"
+            )
+        if len(identity_urls) != 1 or identity_urls[0] != contract_urls[-1]:
+            raise ValueError(
+                "provider admission blocked: only one identity crop and it must be last; no Provider POST"
+            )
 
     payload_urls = payload.get("input_images")
     if payload_urls is None:
@@ -255,14 +267,14 @@ def _bind_project_asset_manifest(canonical_shot: dict, payload: dict, contract_p
             url_to_asset[public_url] = asset
         face_role = ""
         for anchor in anchors:
-            if str(anchor.get("public_url") or "").strip() == contract_urls[0]:
+            if str(anchor.get("public_url") or "").strip() == identity_urls[0]:
                 face_role = str(anchor.get("role") or "").strip()
                 break
         if not face_role:
             raise ValueError(
-                "provider admission blocked: identity face must be the first on-screen reference; no Provider POST"
+                "provider admission blocked: identity crop must be present after composition; no Provider POST"
             )
-        expected_kinds = ("WORKSPACE_EMPTY", "WORKSTATION_POSE")
+        expected_kinds = ("WORKSTATION_POSE", "WORKSPACE_EMPTY")
         if len(workspace_urls) != 2:
             raise ValueError(
                 "provider admission blocked: workspace references must be empty set then workstation pose; no Provider POST"
@@ -279,7 +291,7 @@ def _bind_project_asset_manifest(canonical_shot: dict, payload: dict, contract_p
                 )
             if str(asset.get("kind") or "").strip() != expected_kind:
                 raise ValueError(
-                    "provider admission blocked: workspace references must be empty set then workstation pose; no Provider POST"
+                    "provider admission blocked: workspace references must be workstation pose then empty set; no Provider POST"
                 )
             selected_refs.append(_workspace_asset_ref(asset, workspace_path))
         workspace_manifest = {
