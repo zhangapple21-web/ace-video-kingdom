@@ -17,6 +17,7 @@ from tools.validate_shot_prompt import validate_prompt
 from tools.validate_shot_rhythm import validate_shot_rhythm
 from tools.validate_script_prompt_review import validate_script_prompt_review
 from tools.validate_new_drama_semantics import is_new_drama, validate_new_drama_semantics
+from tools.validate_state_contract import validate_state_contract
 
 
 def validate_production_shot(canonical_shot: dict[str, Any], contract_prompt: str) -> dict[str, Any]:
@@ -36,6 +37,14 @@ def validate_production_shot(canonical_shot: dict[str, Any], contract_prompt: st
     creative_check = validate_creative_constraints(canonical_shot.get("creative_constraints"))
     if creative_check["status"] != "PASS":
         raise ValueError("creative constraints failed: " + ";".join(creative_check["errors"]))
+
+    state_contract = canonical_shot.get("state_contract")
+    if state_contract is not None:
+        state_check = validate_state_contract(state_contract)
+        if state_check["status"] != "PASS":
+            raise ValueError("state contract failed: " + ";".join(state_check["errors"]))
+    else:
+        state_check = {"status": "LEGACY_MISSING", "errors": ["state_contract not attached; new contracts must include Identity/State/Scene State/Shot State"]}
 
     review_check = validate_script_prompt_review(
         canonical_shot.get("script_prompt_review"),
@@ -107,6 +116,7 @@ def validate_production_shot(canonical_shot: dict[str, Any], contract_prompt: st
     return {
         "status": "PASS",
         "creative": creative_check,
+        "state": state_check,
         "script_prompt_review": review_check,
         "prompt": prompt_check,
         "continuity": continuity_check,
