@@ -153,6 +153,189 @@ def test_legacy_cli_rejects_before_provider_post(monkeypatch, tmp_path: Path) ->
         run_short_clip.main()
 
 
+def _character_pack_fixture(tmp_path: Path) -> tuple[dict, dict, list[str]]:
+    from tools import run_short_clip
+
+    urls = ["https://pack.example/ZHANG_TIETIE_PACK_ORIGINAL.png"]
+    anchors = []
+    for role, url in zip(("ZHANG_TIETIE",), urls):
+        local = tmp_path / f"{role}.png"
+        local.write_bytes(b"\\x89PNG\\r\\n\\x1a\\n" + role.encode("ascii"))
+        anchors.append({
+            "role": role,
+            "local_path": str(local),
+            "public_url": url,
+            "sha256": run_short_clip._sha256_file(local),
+        })
+    manifest_path = tmp_path / "user_character_pack_manifest_20260915.json"
+    manifest_path.write_text(
+        json.dumps({"identity_policy": "ORIGINAL_PACK_ONLY", "production_anchors": anchors}),
+        encoding="utf-8",
+    )
+    shot = _shot()
+    shot["render"] = {"reference_image_urls": urls}
+    payload = {
+        "model": "agnes-video-2.5-flash",
+        "prompt": "one bounded action",
+        "seconds": "6",
+        "input_images": urls,
+    }
+    return shot, payload, urls
+
+
+def test_run_short_clip_missing_character_manifest_blocks_before_admission_or_post(monkeypatch, tmp_path: Path) -> None:
+    from tools import run_short_clip
+
+    contract = tmp_path / "shot.json"
+    contract.write_text(json.dumps({"shot_id": "S01A", "prompt": "test"}), encoding="utf-8")
+    monkeypatch.setattr(run_short_clip, "_preflight_public_media_urls", lambda payload: None)
+    monkeypatch.setattr(run_short_clip.requests, "post", lambda *args, **kwargs: pytest.fail("POST must not be reached"))
+    monkeypatch.setattr(sys, "argv", [
+        "run_short_clip.py", "--shot-id", "S01A", "--prompt", "test",
+        "--shot-contract", str(contract), "--manifest", str(tmp_path / "records.json"),
+        "--output", str(tmp_path / "out.mp4"), "--admission-scope", "research",
+    ])
+    with pytest.raises(SystemExit, match=r"character asset manifest is required.*no Provider POST"):
+        run_short_clip.main()
+
+
+def test_character_pack_binds_canonical_input_images_and_receipt_assets(monkeypatch, tmp_path: Path) -> None:
+    from tools import run_short_clip
+
+    shot, payload, urls = _character_pack_fixture(tmp_path)
+
+    class Response:
+        status_code = 200
+        headers = {"Content-Type": "image/png"}
+
+        def __init__(self, content: bytes):
+            self.content = content
+
+    contents = {
+        url: (tmp_path / f"{role}.png").read_bytes()
+        for role, url in zip(("ZHANG_TIETIE",), urls)
+    }
+    monkeypatch.setattr(run_short_clip.requests, "get", lambda url, **kwargs: Response(contents[url]))
+    run_short_clip._bind_project_asset_manifest(shot, payload, tmp_path / "shot.json")
+    run_short_clip._verify_manifest_asset_transport(shot)
+
+    assert [ref["provider_ref"] for ref in shot["asset_refs"]] == urls
+    assert all(ref["local_sha256"] == ref["transport_sha256"] == ref["sha256"] for ref in shot["asset_refs"])
+    request = build_canonical_generation_request(
+        shot, payload, provider="agnes", endpoint="https://provider.invalid/v1/videos",
+        payload_schema="agnes-video-cli.v1", model=payload["model"], scope="research",
+    )
+    receipt = admit_provider_request(request)
+    assert receipt["status"] == "ADMITTED"
+    assert receipt["canonical_request"]["reference_assets"]
+
+
+def test_character_pack_rejects_old_clean_urls_before_provider_post(monkeypatch, tmp_path: Path) -> None:
+    from tools import run_short_clip
+
+    shot, payload, urls = _character_pack_fixture(tmp_path)
+    payload["input_images"] = [
+        "https://tmpfiles.org/dl/old/zhang_tietie_clean.png",
+    ]
+    monkeypatch.setattr(run_short_clip.requests, "post", lambda *args, **kwargs: pytest.fail("POST must not be reached"))
+    with pytest.raises(ValueError, match="current character pack"):
+        run_short_clip._bind_project_asset_manifest(shot, payload, tmp_path / "shot.json")
+
+
+def test_character_pack_remote_hash_mismatch_is_rejected(monkeypatch, tmp_path: Path) -> None:
+    from tools import run_short_clip
+
+    shot, payload, _ = _character_pack_fixture(tmp_path)
+    run_short_clip._bind_project_asset_manifest(shot, payload, tmp_path / "shot.json")
+
+    class Response:
+        status_code = 200
+        headers = {"Content-Type": "image/png"}
+        content = b"not-the-local-pack"
+
+    monkeypatch.setattr(run_short_clip.requests, "get", lambda url, **kwargs: Response())
+    with pytest.raises(ValueError, match="SHA-256 mismatch.*no Provider POST"):
+        run_short_clip._verify_manifest_asset_transport(shot)
+
+
+def _visual_unlock_fixture(tmp_path: Path) -> tuple[dict, Path]:
+    from tools import run_short_clip
+    from runtime.provider_admission import canonical_hash
+
+    manifest_path = tmp_path / "shot.json"
+    shot, payload, _ = _character_pack_fixture(tmp_path)
+    run_short_clip._bind_project_asset_manifest(shot, payload, manifest_path)
+    batch_id = "zhang-tietie-regeneration-20260915"
+    shot.update({"project_id": "zhang_tietie_episode_001", "shot_id": "SHOT_02"})
+    artifact = tmp_path / "shot01.mp4"
+    artifact.write_bytes(b"validated-shot-01")
+    source_request = {
+        "schema": "video_kingdom.canonical_generation_request.v1",
+        "shot_id": "SHOT_01",
+        "batch_id": batch_id,
+        "reference_assets": shot["asset_refs"],
+    }
+    receipt_path = tmp_path / "shot01.admission.json"
+    receipt_path.write_text(json.dumps({
+        "status": "ADMITTED",
+        "provider_post_allowed": True,
+        "request_hash": canonical_hash(source_request),
+        "canonical_request": source_request,
+    }), encoding="utf-8")
+    qc_path = manifest_path.parent / "SHOT_01_ROLE_LOCKED_VISUAL_QC_20260915.json"
+    qc_path.write_text(json.dumps({
+        "batch_id": batch_id,
+        "status": "PASS",
+        "visual_gate": "PASS",
+        "character_asset_manifest_sha256": shot["character_asset_manifest"]["sha256"],
+        "character_asset_hashes": [ref["sha256"] for ref in shot["asset_refs"]],
+        "source_admission_request_hash": canonical_hash(source_request),
+        "source_admission_receipt_path": str(receipt_path),
+        "artifact": str(artifact),
+        "artifact_sha256": run_short_clip._sha256_file(artifact),
+    }), encoding="utf-8")
+    return shot, manifest_path
+
+
+def test_following_shot_visual_unlock_blocks_failed_qc_before_provider_post(tmp_path: Path) -> None:
+    from tools import run_short_clip
+
+    shot, contract_path = _visual_unlock_fixture(tmp_path)
+    qc_path = contract_path.parent / "SHOT_01_ROLE_LOCKED_VISUAL_QC_20260915.json"
+    qc = json.loads(qc_path.read_text(encoding="utf-8"))
+    qc["status"] = "FAIL_REWORK"
+    qc_path.write_text(json.dumps(qc), encoding="utf-8")
+    with pytest.raises(ValueError, match="visual QC is not PASS.*no Provider POST"):
+        run_short_clip._require_visual_unlock_for_following_shot(
+            shot, contract_path, batch_id="zhang-tietie-regeneration-20260915"
+        )
+
+
+def test_following_shot_visual_unlock_accepts_current_hash_bound_pass(tmp_path: Path) -> None:
+    from tools import run_short_clip
+
+    shot, contract_path = _visual_unlock_fixture(tmp_path)
+    run_short_clip._require_visual_unlock_for_following_shot(
+        shot, contract_path, batch_id="zhang-tietie-regeneration-20260915"
+    )
+
+
+def test_following_shot_visual_unlock_rejects_tampered_source_receipt(tmp_path: Path) -> None:
+    from tools import run_short_clip
+
+    shot, contract_path = _visual_unlock_fixture(tmp_path)
+    qc_path = contract_path.parent / "SHOT_01_ROLE_LOCKED_VISUAL_QC_20260915.json"
+    qc = json.loads(qc_path.read_text(encoding="utf-8"))
+    receipt_path = Path(qc["source_admission_receipt_path"])
+    receipt = json.loads(receipt_path.read_text(encoding="utf-8"))
+    receipt["canonical_request"]["batch_id"] = "other-batch"
+    receipt_path.write_text(json.dumps(receipt), encoding="utf-8")
+    with pytest.raises(ValueError, match="admission receipt hash mismatch.*no Provider POST"):
+        run_short_clip._require_visual_unlock_for_following_shot(
+            shot, contract_path, batch_id="zhang-tietie-regeneration-20260915"
+        )
+
+
 def test_legacy_cli_rejects_prompt_drift_before_provider_post(monkeypatch, tmp_path: Path) -> None:
     from tools import run_short_clip
 
