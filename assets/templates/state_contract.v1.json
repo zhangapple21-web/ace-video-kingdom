@@ -1,0 +1,28 @@
+{
+  "schema": "video_kingdom.state_contract.v1",
+  "identity_ref": "CHARACTER_IDENTITY_PACK_ID",
+  "inherited_state_refs": [],
+  "episode_state": {
+    "costume": "UNKNOWN",
+    "hair_makeup": "UNKNOWN",
+    "condition": "UNKNOWN",
+    "bound_props": []
+  },
+  "scene_state": {
+    "location": "UNKNOWN",
+    "time": "UNKNOWN",
+    "lighting": "UNKNOWN",
+    "spatial_relations": "UNKNOWN",
+    "environment_props": []
+  },
+  "shot_state": {
+    "start_pose": "REQUIRED",
+    "primary_action": "REQUIRED",
+    "emotion_start_end": "REQUIRED",
+    "camera": "REQUIRED",
+    "end_state": "REQUIRED"
+  },
+  "state_delta": [],
+  "approved_for_next_shot": false,
+  "source_refs": []
+}

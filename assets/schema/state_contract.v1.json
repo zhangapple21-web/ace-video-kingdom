@@ -1,0 +1,17 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Video Kingdom State Contract v1",
+  "type": "object",
+  "required": ["schema", "identity_ref", "episode_state", "scene_state", "shot_state", "approved_for_next_shot"],
+  "properties": {
+    "schema": {"const": "video_kingdom.state_contract.v1"},
+    "identity_ref": {"type": "string", "minLength": 1},
+    "inherited_state_refs": {"type": "array", "items": {"type": "string"}},
+    "episode_state": {"type": "object"},
+    "scene_state": {"type": "object"},
+    "shot_state": {"type": "object"},
+    "state_delta": {"type": "array"},
+    "approved_for_next_shot": {"type": "boolean"},
+    "source_refs": {"type": "array"}
+  }
+}
