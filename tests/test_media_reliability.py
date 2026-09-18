@@ -24,7 +24,8 @@ def test_image_model_plan_has_verified_fallbacks_only():
     plan = build_image_model_plan(route)
     assert plan["status"] == "READY"
     assert [item["model"] for item in plan["candidates"]] == [
-        "gpt-image-2", "gpt-image-2.5-flare", "gpt-image-2.5-sunburst"
+        "gpt-image-2", "gpt-image-2.5-flare", "gpt-image-2.5-sunburst",
+        "grok-imagine-image", "grok-imagine-image-quality",
     ]
     assert plan["blocked_variants"] == []
     assert [item["model"] for item in plan["candidates"]] == [
