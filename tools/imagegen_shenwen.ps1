@@ -18,11 +18,25 @@ if (-not (Test-Path -LiteralPath $imageGenCli -PathType Leaf)) {
     throw "找不到 imagegen CLI：$imageGenCli"
 }
 
-$apiKey = $env:SHENWEN_IMAGE_API_KEY
-if ([string]::IsNullOrWhiteSpace($apiKey)) {
+$allowedModels = @("gpt-image-2", "gpt-image-2.5-flare", "gpt-image-2.5-sunburst", "grok-imagine-image", "grok-imagine-image-quality")
+$selectedModel = "gpt-image-2"
+$hasModel = $false
+for ($index = 0; $index -lt $ImageGenArguments.Count; $index++) {
+    $argument = $ImageGenArguments[$index]
+    if ($argument -eq "--model") {
+        $hasModel = $true
+        if (($index + 1) -ge $ImageGenArguments.Count -or $allowedModels -notcontains $ImageGenArguments[$index + 1]) {
+            throw "MODEL_OVERRIDE_REJECTED: allowed image models are $($allowedModels -join ', ')"
+        }
+        $selectedModel = $ImageGenArguments[$index + 1]
+    }
+}
+
+$apiKey = if ($selectedModel -like "grok-*") { $env:SHENWEN_GROK_API_KEY } else { $env:SHENWEN_IMAGE_API_KEY }
+if ([string]::IsNullOrWhiteSpace($apiKey) -and $selectedModel -notlike "grok-*") {
     $apiKey = [Environment]::GetEnvironmentVariable("SHENWEN_IMAGE_API_KEY", "User")
 }
-if ([string]::IsNullOrWhiteSpace($apiKey)) {
+if ([string]::IsNullOrWhiteSpace($apiKey) -and $selectedModel -notlike "grok-*") {
     $apiKey = $env:SHENWEN_API_KEY
 }
 if ([string]::IsNullOrWhiteSpace($apiKey)) {
@@ -43,19 +57,6 @@ $baseUrl = if ($env:SHENWEN_IMAGE_BASE_URL) {
 $env:OPENAI_API_KEY = $apiKey
 $env:OPENAI_BASE_URL = $baseUrl.TrimEnd("/")
 
-$hasModel = $false
-$allowedModels = @("gpt-image-2", "gpt-image-2.5-flare", "gpt-image-2.5-sunburst")
-$selectedModel = "gpt-image-2"
-for ($index = 0; $index -lt $ImageGenArguments.Count; $index++) {
-    $argument = $ImageGenArguments[$index]
-    if ($argument -eq "--model") {
-        $hasModel = $true
-        if (($index + 1) -ge $ImageGenArguments.Count -or $allowedModels -notcontains $ImageGenArguments[$index + 1]) {
-            throw "MODEL_OVERRIDE_REJECTED: allowed image models are $($allowedModels -join ', ')"
-        }
-        $selectedModel = $ImageGenArguments[$index + 1]
-    }
-}
 if (-not $hasModel) {
     # Keep the verified model as the default; new models require an explicit
     # --model selection and are never silently chosen as a fallback.
