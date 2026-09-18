@@ -17,6 +17,15 @@ REGISTRY_PATH = Path(__file__).resolve().parents[1] / "research" / "capability_r
 GENERATION_RE = re.compile(r"(生成|绘制|画一张|画个|画出|出图|生图|制作|渲染|generate|create|render)", re.I)
 IMAGE_RE = re.compile(r"(图片|图像|角色包|角色设定|参考图|分镜图|关键帧|image|illustration)", re.I)
 VIDEO_RE = re.compile(r"(视频|镜头|第\s*\d+\s*镜|短片|video|clip)", re.I)
+COMPOSITION_STILL_RE = re.compile(r"(首帧|关键帧|构图锁定|构图参考|复杂走位|多人空间|first[- ]?frame|keyframe|composition)", re.I)
+
+
+def choose_image_strategy(text: str) -> dict[str, Any]:
+    """Escalate to a reviewed composition still only when risk warrants it."""
+    source = str(text or "").strip()
+    if COMPOSITION_STILL_RE.search(source):
+        return {"mode": "COMPOSITION_STILL_CANDIDATE", "reason": "explicit composition/keyframe risk", "requires_review": True}
+    return {"mode": "REFERENCE_ONLY", "reason": "identity and shot state are sufficient by default", "requires_review": False}
 
 
 def _registry(path: Path = REGISTRY_PATH) -> dict[str, Any]:
