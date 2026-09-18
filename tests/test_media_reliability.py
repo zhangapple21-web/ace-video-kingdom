@@ -21,8 +21,14 @@ def test_media_route_binds_capability_and_project():
     assert route["required_capabilities"] == ["image.generate"]
     assert route["selected_routes"][0]["model"] == "gpt-image-2"
     assert {item["model"] for item in route["selected_routes"][0]["available_variants"]} == {
-        "gpt-image-2.5-flare", "gpt-image-2.5-sunburst"
+        "gpt-image-2.5-flare", "gpt-image-2.5-sunburst",
+        "grok-imagine-image", "grok-imagine-image-quality",
     }
+    assert all(
+        item["status"] == "PROBE_PASS"
+        for item in route["selected_routes"][0]["available_variants"]
+        if item["model"].startswith("gpt-image")
+    )
     assert route["project"]["project_id"] == "ace-video-kingdom"
     assert route["production_integration"] is True
 

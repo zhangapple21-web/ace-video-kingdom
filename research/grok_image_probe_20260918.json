@@ -1,0 +1,16 @@
+{
+  "schema": "ace.image.model_probe_receipt.v1",
+  "probe_id": "shenwen-grok-image-20260918",
+  "endpoint": "https://api.shenwenai.com/v1/images/generations",
+  "credential_source": "SHENWEN_GROK_API_KEY",
+  "credential_value_recorded": false,
+  "results": [
+    {"model": "grok-imagine-image", "status": "UNAVAILABLE_AT_ENDPOINT", "http_status": 403},
+    {"model": "grok-imagine-image-quality", "status": "UNAVAILABLE_AT_ENDPOINT", "http_status": 403}
+  ],
+  "decision": {
+    "production_route": "NOT_REGISTERED",
+    "reason": "The configured Shenwen image endpoint rejects the Grok credential/model request; OpenRouter model discovery exposes Grok text/image-input models, not image-output models.",
+    "retest_when": "A documented image-generation endpoint and successful image receipt are available"
+  }
+}
