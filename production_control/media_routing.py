@@ -28,6 +28,34 @@ def choose_image_strategy(text: str) -> dict[str, Any]:
     return {"mode": "REFERENCE_ONLY", "reason": "identity and shot state are sufficient by default", "requires_review": False}
 
 
+def build_image_model_plan(route: Mapping[str, Any]) -> dict[str, Any]:
+    """Build an explicit, evidence-backed image fallback plan.
+
+    This is a plan recorded in the entry receipt, not a silent provider switch.
+    Only variants with PROBE_PASS can be selected for a composition still.
+    """
+    selected = route.get("selected_routes") or []
+    image_route = next((item for item in selected if item.get("capability") == "image.generate"), None)
+    if not isinstance(image_route, Mapping):
+        return {"status": "UNAVAILABLE", "candidates": [], "reason": "image route is not registered"}
+    candidates = []
+    primary = str(image_route.get("model") or "").strip()
+    if primary and str((image_route.get("health") or {}).get("status")) == "PROBE_PASS":
+        candidates.append({"model": primary, "role": "primary", "status": "PROBE_PASS"})
+    for variant in image_route.get("available_variants") or []:
+        if str(variant.get("status")) == "PROBE_PASS":
+            candidates.append({"model": str(variant.get("model")), "role": "fallback", "status": "PROBE_PASS"})
+    return {
+        "status": "READY" if candidates and image_route.get("status") == "ROUTED" else "BLOCKED",
+        "candidates": candidates,
+        "selection_policy": "primary_then_verified_variant; explicit_receipt_required",
+        "blocked_variants": [
+            str(item.get("model")) for item in image_route.get("available_variants") or []
+            if str(item.get("status")) != "PROBE_PASS"
+        ],
+    }
+
+
 def _registry(path: Path = REGISTRY_PATH) -> dict[str, Any]:
     data = json.loads(path.read_text(encoding="utf-8"))
     if data.get("schema") != "ace.capability-registry.v2":
