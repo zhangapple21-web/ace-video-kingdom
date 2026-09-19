@@ -95,6 +95,16 @@ def validate_production_shot(canonical_shot: dict[str, Any], contract_prompt: st
     motion_check = validate_shot_rhythm(canonical_shot)
     if motion_check["status"] == "BLOCKED":
         raise ValueError("motion evidence failed: " + ";".join(motion_check["errors"]))
+    # Identity sheets describe who the character is. They are never an
+    # animation source or a substitute for a shot-state composition frame.
+    identity_usage = str(rhythm_packet.get("identity_usage") or "").strip().lower()
+    media_role = str(rhythm_packet.get("media_role") or "").strip().lower()
+    if identity_usage in {"i2v_source", "animate_still", "first_frame", "ti2vid"}:
+        raise ValueError("production shot rejected: identity reference cannot be used as an I2V/first-frame source")
+    if media_role in {"keyframe", "first_frame", "first_last", "first_frame_last_frame"} and not (
+        canonical_shot.get("composition_reference") or canonical_shot.get("first_frame_ref")
+    ):
+        raise ValueError("production shot rejected: keyframe mode requires an explicit shot-state composition frame")
     # A production drama shot must contain a watchable event.  The rhythm
     # validator keeps legacy poison phrases as warnings for audit-only and
     # historical packets, but the provider boundary must reject the explicit
