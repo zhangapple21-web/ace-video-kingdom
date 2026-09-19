@@ -205,6 +205,8 @@ class ProductionControl:
         request_id: str | None = None,
         executor_thread_id: str | None = None,
         request_hash: str | None = None,
+        scope: dict[str, Any] | None = None,
+        plan_shot_ids: list[str] | None = None,
     ) -> "ProductionControl":
         if mode not in {"PRODUCTION", "SANDBOX"}:
             raise WorkflowError(f"INVALID_MODE:{mode}")
@@ -223,6 +225,9 @@ class ProductionControl:
             "request_hash": request_hash,
             "mode": mode,
             "root": str(root),
+            "scope": scope,
+            "plan_shot_ids": list(plan_shot_ids or []),
+            "total_plan_shots": len(plan_shot_ids or []),
             "revision": 0,
             "stage": "DRAFT",
             "assets": {},
@@ -495,8 +500,49 @@ class ProductionControl:
             return self._evaluate_asset_gate_payload(payload, mutate_stage=False)
         return self._mutate("ASSET_GATE_EVALUATED", {}, lambda current: self._evaluate_asset_gate_payload(current, mutate_stage=True))
 
+    def bind_scope(self, scope: dict[str, Any], *, plan_shot_ids: list[str] | None = None) -> dict[str, Any]:
+        if not isinstance(scope, dict) or scope.get("kind") != "SHOT_SUBSET":
+            raise WorkflowError("SCOPE_INVALID")
+        shot_ids = scope.get("shot_ids")
+        if not isinstance(shot_ids, list) or not shot_ids or len(set(shot_ids)) != len(shot_ids):
+            raise WorkflowError("SCOPE_SHOT_IDS_NON_EMPTY_UNIQUE_REQUIRED")
+        def apply(payload: dict[str, Any]) -> dict[str, Any]:
+            expected = list(plan_shot_ids or payload.get("plan_shot_ids") or [])
+            if expected and shot_ids != expected[:len(shot_ids)]:
+                raise WorkflowError("SCOPE_MUST_BE_CONTIGUOUS_PREFIX")
+            if any(str(item) not in expected for item in shot_ids) if expected else False:
+                raise WorkflowError("SCOPE_SHOT_UNKNOWN")
+            existing = payload.get("scope")
+            if existing and existing != scope:
+                raise WorkflowError("SCOPE_RUN_MISMATCH")
+            payload["scope"] = dict(scope)
+            if plan_shot_ids is not None:
+                payload["plan_shot_ids"] = list(plan_shot_ids)
+                payload["total_plan_shots"] = len(plan_shot_ids)
+            return dict(payload["scope"])
+        return self._mutate("SCOPE_BOUND", {"scope": scope, "plan_shot_ids": plan_shot_ids or []}, apply)
+
+    def _scoped_shots(self, payload: dict[str, Any]) -> list[str] | None:
+        scope = payload.get("scope")
+        if not isinstance(scope, dict):
+            return None
+        ids = scope.get("shot_ids")
+        return [str(item) for item in ids] if isinstance(ids, list) else None
+
+    def _require_active_shot(self, payload: dict[str, Any], shot_id: str) -> None:
+        scoped = self._scoped_shots(payload)
+        if scoped is None or payload.get("mode") != "PRODUCTION":
+            return
+        if shot_id not in scoped:
+            raise WorkflowError(f"SHOT_OUTSIDE_SCOPE:{shot_id}")
+        if shot_id != payload.get("scope", {}).get("active_shot_id"):
+            raise WorkflowError(f"SHOT_NOT_ACTIVE:{shot_id}")
+
     def lock_shot(self, shot_id: str, contract: dict[str, Any]) -> dict[str, Any]:
         def apply(payload: dict[str, Any]) -> dict[str, Any]:
+            scoped = self._scoped_shots(payload)
+            if scoped is not None and shot_id not in scoped:
+                raise WorkflowError(f"SHOT_OUTSIDE_SCOPE:{shot_id}")
             if payload.get("asset_gate", {}).get("status") != "READY":
                 raise WorkflowError("ASSET_GATE_NOT_READY")
             duration = contract.get("duration_seconds") or {}
