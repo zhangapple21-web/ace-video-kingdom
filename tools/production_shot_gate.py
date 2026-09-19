@@ -92,22 +92,33 @@ def validate_production_shot(canonical_shot: dict[str, Any], contract_prompt: st
     rhythm_check = validate_shot_rhythm(rhythm_packet)
     if rhythm_check["status"] == "BLOCKED":
         raise ValueError("shot rhythm contract failed: " + ";".join(rhythm_check["errors"]))
+    motion_check = validate_shot_rhythm(canonical_shot)
+    if motion_check["status"] == "BLOCKED":
+        raise ValueError("motion evidence failed: " + ";".join(motion_check["errors"]))
     # A production drama shot must contain a watchable event.  The rhythm
     # validator keeps legacy poison phrases as warnings for audit-only and
     # historical packets, but the provider boundary must reject the explicit
     # MCUSTATIC/id-photo pattern that repeatedly produced audio-backed stills.
+    # Scan only positive production instructions. The compiled prompt also
+    # carries negative constraints such as "无重复帧", which must not be
+    # mistaken for a request to generate a repeated frame.
     static_packet = " ".join(
         str(value or "")
         for value in (
             canonical_shot.get("shot_id"),
-            contract_prompt,
             rhythm_packet.get("movement"),
             rhythm_packet.get("camera_motion_reason"),
+            rhythm_packet.get("script_annotations", {}).get("action")
+            if isinstance(rhythm_packet.get("script_annotations"), dict)
+            else "",
+            rhythm_packet.get("performance_beats", {}).get("speaker_hands_body")
+            if isinstance(rhythm_packet.get("performance_beats"), dict)
+            else "",
         )
     ).upper()
     static_poison = (
         "MCUSTATIC", "证件照", "自然微动作", "轻微呼吸", "同一帧", "同一位置同一景别",
-        "循环静止", "重复帧", "无动作",
+        "循环静止", "重复帧", "无动作", "不表现状态变化", "保持不变",
     )
     if any(phrase in static_packet for phrase in static_poison):
         raise ValueError(
@@ -124,5 +135,6 @@ def validate_production_shot(canonical_shot: dict[str, Any], contract_prompt: st
         "continuity": continuity_check,
         "director": director_check,
         "rhythm": rhythm_check,
+        "motion_evidence": motion_check,
         "new_drama": new_drama_check,
     }
