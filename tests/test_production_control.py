@@ -36,6 +36,27 @@ def test_media_probe_honors_explicit_ffprobe_binary(monkeypatch, tmp_path: Path)
     assert calls[0][0][0] == "C:/tools/ffprobe-custom.exe"
 
 
+def test_frame_extraction_honors_explicit_ffmpeg_binary(monkeypatch, tmp_path: Path):
+    calls = []
+
+    class Completed:
+        stdout = "ffmpeg version test"
+
+    def fake_run(command, **kwargs):
+        calls.append(command)
+        if command[-1] != "-version":
+            Path(command[-1]).write_bytes(b"png-fixture")
+        return Completed()
+
+    monkeypatch.setenv("FFMPEG_BIN", "C:/tools/ffmpeg-custom.exe")
+    monkeypatch.setattr(engine.subprocess, "run", fake_run)
+    result = engine._extract_frames(tmp_path / "clip.mp4", tmp_path / "frames")
+    assert result["tool_path"] == "C:/tools/ffmpeg-custom.exe"
+    assert result["tool_version"] == "ffmpeg version test"
+    assert result["first_frame"]["sha256"] == result["last_frame"]["sha256"]
+    assert calls[0][0] == "C:/tools/ffmpeg-custom.exe"
+
+
 def test_fail_closed_asset_gate_and_recovery(tmp_path: Path):
     run = ProductionControl.create(tmp_path / "run" / "state.json", run_id="demo", mode="SANDBOX")
     asset = tmp_path / "run" / "char.png"
