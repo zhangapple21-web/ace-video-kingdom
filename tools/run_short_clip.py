@@ -68,6 +68,35 @@ def _load_shot_contract(path: Path, shot_id: str) -> dict:
     raise ValueError(f"canonical shot contract missing shot_id:{shot_id}")
 
 
+def _validate_production_contract_status(contract: dict) -> None:
+    """Reject stale/rework contracts before any production provider boundary."""
+    if contract.get("generation_allowed") is not True:
+        raise ValueError("canonical shot contract is not generation-enabled; no Provider POST")
+    if contract.get("rebuild_required") is True:
+        raise ValueError("canonical shot contract requires rebuild; no Provider POST")
+    status = str(contract.get("status") or "").strip().upper()
+    if not status:
+        raise ValueError("canonical shot contract status is missing; no Provider POST")
+    blocked_tokens = ("REWORK", "SUPERSEDED", "FAILED", "BLOCKED", "ARCHIVED", "HISTORICAL", "DEPRECATED", "CANCELLED")
+    if any(token in status for token in blocked_tokens):
+        raise ValueError(f"canonical shot contract status {status} is not active; no Provider POST")
+
+
+def _validate_cli_mode_alignment(contract: dict, payload: dict) -> None:
+    """Ensure the CLI cannot turn a reference contract into an I2V/keyframe job."""
+    rhythm = contract.get("shot_rhythm") if isinstance(contract.get("shot_rhythm"), dict) else {}
+    declared = str(rhythm.get("flash_mode") or rhythm.get("flash_mode_default") or "").strip().lower()
+    actual = str(payload.get("mode") or "").strip().lower()
+    if declared in {"text", "reference", "keyframe"} and actual != declared:
+        raise ValueError(f"provider mode {actual or 'missing'} conflicts with contract flash_mode {declared}; no Provider POST")
+    if actual == "keyframe":
+        media_role = str(rhythm.get("media_role") or "").strip().lower()
+        if media_role not in {"keyframe", "first_frame", "first_last", "first_frame_last_frame"}:
+            raise ValueError("keyframe mode requires an explicit shot-state composition contract; no Provider POST")
+        if not (contract.get("composition_reference") or contract.get("first_frame_ref")):
+            raise ValueError("keyframe mode requires composition_reference/first_frame_ref in the contract; no Provider POST")
+
+
 def _load_records(path: Path) -> list[dict]:
     if not path.is_file():
         return []
@@ -763,7 +792,9 @@ def main() -> int:
         )
     if args.admission_scope == "production":
         try:
+            _validate_cli_mode_alignment(canonical_shot, payload)
             validate_production_shot(canonical_shot, contract_prompt)
+            _validate_production_contract_status(canonical_shot)
         except ValueError as error:
             raise SystemExit("provider admission blocked: " + str(error)) from error
         prompt_lint = validate_prompt({

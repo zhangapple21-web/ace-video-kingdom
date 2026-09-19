@@ -89,6 +89,8 @@ def _find_executable(row: Mapping[str, Any]) -> str | None:
 def _route_one(row: Mapping[str, Any], scope: str, env: Mapping[str, str]) -> dict[str, Any]:
     executable = _find_executable(row)
     credential = str(row.get("credential_env") or "")
+    credential_envs = [credential, *(str(item) for item in (row.get("credential_env_aliases") or []))]
+    credential_envs = [item for index, item in enumerate(credential_envs) if item and item not in credential_envs[:index]]
     reasons: list[str] = []
     if scope not in set(row.get("eligible_scopes") or []):
         reasons.append("SCOPE_NOT_ELIGIBLE")
@@ -96,7 +98,7 @@ def _route_one(row: Mapping[str, Any], scope: str, env: Mapping[str, str]) -> di
         reasons.append("PRODUCTION_NOT_ELIGIBLE")
     if not executable:
         reasons.append("EXECUTABLE_NOT_FOUND")
-    if credential and not str(env.get(credential) or "").strip():
+    if credential_envs and not any(str(env.get(name) or "").strip() for name in credential_envs):
         reasons.append("CREDENTIAL_MISSING")
     status = "ROUTED" if not reasons else "BLOCKED"
     return {
@@ -116,6 +118,7 @@ def _route_one(row: Mapping[str, Any], scope: str, env: Mapping[str, str]) -> di
         "model_locked": bool(row.get("model_locked")),
         "executable": executable or str(row.get("executable")),
         "credential_env": credential,
+        "credential_envs": credential_envs,
         "status": status,
         "reasons": reasons,
         "receipt_schema": row.get("receipt_schema"),

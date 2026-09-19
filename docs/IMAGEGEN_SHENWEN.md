@@ -6,7 +6,7 @@
 `SHENWEN_IMAGE_BASE_URL`（默认 `https://api.shenwenai.com/v1`）映射为
 `OPENAI_BASE_URL`。
 
-默认模型为 `gpt-image-2`，不会回退到旧模型。已用同一 Shenwen 密钥完成真实线路探针的可选模型为 `gpt-image-2.5-flare` 和 `gpt-image-2.5-sunburst`；它们必须通过 `--model` 显式选择，不会静默切换。`grok-imagine-image` 和 `grok-imagine-image-quality` 在该 `/v1/images/generations` 端点返回 404，未登记为可用模型。密钥只从进程或用户级环境变量读取，
+默认模型为 `gpt-image-2`，不会回退到旧模型。`gpt-image-2.5-flare`、`gpt-image-2.5-sunburst`、`grok-imagine-image` 和 `grok-imagine-image-quality` 为显式可选模型，以能力注册表中的探针状态为准，不会静默切换。2026-09-18 使用 Shenwen 专用 `SHENWEN_GROK_API_KEY` 的后续探针已对两个 Grok 图像模型返回 HTTP 200，见 `research/grok_image_probe_20260918.json`；早期 404 收据仅保留为历史失败证据。Grok 线路优先读取专用密钥，其余图像线路读取 `SHENWEN_IMAGE_API_KEY`。密钥只从进程或用户级环境变量读取，
 不写入仓库、命令参数或生成收据。
 
 ## 使用

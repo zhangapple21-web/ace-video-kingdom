@@ -27,6 +27,11 @@ try:
 except ImportError:  # pragma: no cover
     from medium_lock import validate_medium_lock  # type: ignore
 
+try:
+    from production_control.image_assets import assert_model_boundary
+except ImportError:  # pragma: no cover
+    assert_model_boundary = None  # type: ignore
+
 CANONICAL_REQUEST_SCHEMA = "video_kingdom.canonical_generation_request.v1"
 ADMISSION_RECEIPT_SCHEMA = "video_kingdom.provider_admission_receipt.v1"
 
@@ -105,6 +110,31 @@ def build_canonical_generation_request(
         key: value for key, value in payload.items()
         if key not in {"prompt", "negative_prompt", "model"}
     }
+    # These fields live at the top level of current shot contracts. Keep a
+    # hash-bound snapshot so changing an approved state, review, continuity
+    # decision, or composition cannot reuse an old admission merely because
+    # the provider prompt stayed byte-for-byte the same.
+    production_contract = {
+        key: deepcopy(shot[key])
+        for key in (
+            "status",
+            "generation_allowed",
+            "rebuild_required",
+            "identity_policy",
+            "visual_mode",
+            "state_contract",
+            "script_prompt_review",
+            "role_audit",
+            "continuity_bridge",
+            "composition_reference",
+            "first_frame_ref",
+            "shot_rhythm",
+            "creative_constraints",
+            "director_preflight",
+            "medium_lock",
+        )
+        if key in shot
+    }
     request = {
         "schema": CANONICAL_REQUEST_SCHEMA,
         "request_kind": request_kind,
@@ -135,6 +165,7 @@ def build_canonical_generation_request(
         "source_contract": shot_contract or contract,
         "state": state,
         "medium_lock": shot.get("medium_lock"),
+        "production_contract": production_contract,
     }
     return request
 
@@ -263,6 +294,11 @@ def assert_admission(receipt: dict[str, Any], request_hash: str, *, provider_pay
         raise AdmissionError("provider admission request_hash mismatch")
     if provider_payload is not None and canonical_hash(provider_payload) != canonical_hash(canonical_request.get("provider_payload")):
         raise AdmissionError("provider admission provider payload mismatch")
+    if provider_payload is not None and assert_model_boundary is not None:
+        try:
+            assert_model_boundary(provider_payload)
+        except ValueError as exc:
+            raise AdmissionError(f"model boundary rejected inline image payload: {exc}") from exc
 
 
 def delivery_gate(statuses: dict[str, Any]) -> dict[str, Any]:
