@@ -16,6 +16,26 @@ def _write(path: Path, data: bytes = b"fixture") -> str:
     return hashlib.sha256(data).hexdigest()
 
 
+def test_media_probe_honors_explicit_ffprobe_binary(monkeypatch, tmp_path: Path):
+    calls = []
+
+    class Completed:
+        stdout = json.dumps({
+            "format": {"duration": "1.5"},
+            "streams": [{"width": 720, "height": 1280, "r_frame_rate": "24/1"}],
+        })
+
+    def fake_run(command, **kwargs):
+        calls.append((command, kwargs))
+        return Completed()
+
+    monkeypatch.setenv("FFPROBE_BIN", "C:/tools/ffprobe-custom.exe")
+    monkeypatch.setattr(engine.subprocess, "run", fake_run)
+    result = engine._probe_media(tmp_path / "clip.mp4")
+    assert result == {"duration_seconds": 1.5, "width": 720, "height": 1280, "fps": 24.0}
+    assert calls[0][0][0] == "C:/tools/ffprobe-custom.exe"
+
+
 def test_fail_closed_asset_gate_and_recovery(tmp_path: Path):
     run = ProductionControl.create(tmp_path / "run" / "state.json", run_id="demo", mode="SANDBOX")
     asset = tmp_path / "run" / "char.png"

@@ -125,7 +125,7 @@ def _lock(path: Path, timeout: float = 8.0) -> Iterator[None]:
 
 def _probe_media(path: Path) -> dict[str, Any] | None:
     """Return ffprobe metadata when available; None means UNKNOWN."""
-    ffprobe = shutil.which("ffprobe")
+    ffprobe = os.environ.get("FFPROBE_BIN") or shutil.which("ffprobe")
     if not ffprobe:
         return None
     try:
@@ -152,6 +152,38 @@ def _probe_media(path: Path) -> dict[str, Any] | None:
         }
     except (OSError, subprocess.SubprocessError, ValueError, json.JSONDecodeError):
         return None
+
+
+def _extract_frames(artifact: Path, output_dir: Path) -> dict[str, Any]:
+    """Extract real first/last frames; failure is intentionally fatal."""
+    ffmpeg = os.environ.get("FFMPEG_BIN") or shutil.which("ffmpeg")
+    if not ffmpeg:
+        raise WorkflowError("FRAME_EXTRACTION_TOOL_NOT_FOUND")
+    output_dir.mkdir(parents=True, exist_ok=True)
+    first = output_dir / "first.png"
+    last = output_dir / "last.png"
+    commands = (
+        [ffmpeg, "-hide_banner", "-loglevel", "error", "-y", "-i", str(artifact), "-vf", "select=eq(n\\,0)", "-frames:v", "1", str(first)],
+        [ffmpeg, "-hide_banner", "-loglevel", "error", "-y", "-sseof", "-0.1", "-i", str(artifact), "-frames:v", "1", str(last)],
+    )
+    try:
+        for command in commands:
+            subprocess.run(command, check=True, capture_output=True, text=True)
+    except (OSError, subprocess.SubprocessError) as exc:
+        raise WorkflowError("FRAME_EXTRACTION_FAILED") from exc
+    if not first.is_file() or not last.is_file() or not first.stat().st_size or not last.stat().st_size:
+        raise WorkflowError("FRAME_EXTRACTION_INCOMPLETE")
+    try:
+        version = subprocess.run([ffmpeg, "-version"], check=True, capture_output=True, text=True).stdout.splitlines()[0]
+    except (OSError, subprocess.SubprocessError, IndexError):
+        version = str(ffmpeg)
+    return {
+        "tool": "ffmpeg",
+        "tool_path": str(ffmpeg),
+        "tool_version": version,
+        "first_frame": {"path": str(first), "sha256": sha256_file(first)},
+        "last_frame": {"path": str(last), "sha256": sha256_file(last)},
+    }
 
 
 class ProductionControl:
