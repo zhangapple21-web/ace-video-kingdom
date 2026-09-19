@@ -314,25 +314,43 @@ def bootstrap(
             run.register_continuity(edge_id, from_shot=shot_id, to_shot=str(next_shot.get("shot_id")), evidence_path=evidence or f".control/missing_continuity/{edge_id}.json")
 
     gate = run.evaluate_asset_gate()
+    snapshot = run.snapshot()
     return {
         "status": gate["status"],
         "run": str(run_path.resolve()),
         "plan": str(plan_path),
-        "stage": run.snapshot()["stage"],
+        "scope": snapshot.get("scope"),
+        "active_shot_id": (snapshot.get("scope") or {}).get("active_shot_id"),
+        "stage": snapshot["stage"],
         "asset_gate": gate,
-        "next_action": next_action(run.snapshot()),
+        "next_action": next_action(snapshot),
     }
 
 
-def lock_plan_shots(run_path: Path, plan_path: Path) -> dict[str, Any]:
-    """Lock every shot only after the asset gate is READY."""
+def lock_plan_shots(
+    run_path: Path,
+    plan_path: Path,
+    scope: dict[str, Any] | list[str] | None = None,
+) -> dict[str, Any]:
+    """Lock only the validated scope prefix after the asset gate is READY."""
     run = ProductionControl(run_path)
     plan = _read_json(plan_path.resolve())
-    if run.snapshot().get("asset_gate", {}).get("status") != "READY":
+    normalized_scope = normalize_scope(plan, scope) if scope is not None else normalize_scope(plan)
+    snapshot = run.snapshot()
+    run_scope = snapshot.get("scope")
+    if run_scope is not None and run_scope != normalized_scope:
+        raise WorkflowError("SCOPE_RUN_MISMATCH")
+    if snapshot.get("plan_shot_ids") and snapshot["plan_shot_ids"] != _plan_shot_ids(plan):
+        raise WorkflowError("PLAN_SHOT_IDS_MISMATCH")
+    if snapshot.get("asset_gate", {}).get("status") != "READY":
         raise WorkflowError("ASSET_GATE_NOT_READY")
+    scoped_ids = list(normalized_scope["shot_ids"])
     locked: list[str] = []
     for shot in plan.get("shots", []) if isinstance(plan.get("shots"), list) else []:
         if not isinstance(shot, dict):
+            continue
+        shot_id = str(shot.get("shot_id") or "")
+        if shot_id not in scoped_ids:
             continue
         shot_id = str(shot.get("shot_id") or "")
         contract = shot.get("shot_contract") if isinstance(shot.get("shot_contract"), dict) else {}

@@ -102,6 +102,14 @@ def test_preflight_scope_is_normalized_and_limits_continuity_edges(tmp_path: Pat
     assert result["continuity"] == [{"from_shot": "S01", "to_shot": "S02", "evidence_path": "bridges/S01-S02.json"}]
 
 
+def test_lock_plan_shots_respects_run_scope(tmp_path: Path):
+    plan = _plan(tmp_path, with_bridge=True)
+    run_path = tmp_path / "control" / "run.json"
+    bootstrap(plan, run_path, mode="SANDBOX", scope=["S01"])
+    result = lock_plan_shots(run_path, plan)
+    assert result["locked_shots"] == ["S01"]
+
+
 def test_changed_admission_requires_explicit_request_revision(tmp_path: Path):
     run = ProductionControl.create(tmp_path / "run" / "state.json", mode="SANDBOX")
     _asset(tmp_path / "run" / "asset.bin")
