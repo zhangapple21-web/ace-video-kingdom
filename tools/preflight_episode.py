@@ -102,6 +102,7 @@ def _reference_kind(plan_path: Path, value: str) -> str | None:
 def _validate_six_module_contract(plan_path: Path, contract: dict, *, require_measured_tts: bool = False) -> dict:
     """Validate the linked six-module sidecar at the existing preflight gate."""
     errors: list[str] = []
+    warnings: list[str] = []
     for field in ("project_id", "production_boundary", "quality_mode", "premise", "causal_chain", "plants", "payoffs", "viewer_knowledge_checkpoints", "shots"):
         if contract.get(field) in (None, "", []):
             errors.append(f"contract missing {field}")
@@ -198,8 +199,17 @@ def _validate_six_module_contract(plan_path: Path, contract: dict, *, require_me
         for key in ("identity_reference", "scene_action_anchor"):
             ref = shot.get("assets", {}).get(key)
             if isinstance(ref, str) and ref and _reference_kind(plan_path, ref) is None:
-                errors.append(f"{prefix} assets.{key} must resolve to an HTTPS URL or local file")
-    return {"status": "VALID" if not errors else "INVALID", "errors": errors, "shot_count": len(shots), "contract_version": contract.get("contract_version")}
+                if contract.get("production_boundary") == "RESEARCH_ONLY":
+                    warnings.append(f"{prefix} assets.{key} is not present in this checkout; research-only contract remains non-runnable")
+                else:
+                    errors.append(f"{prefix} assets.{key} must resolve to an HTTPS URL or local file")
+    return {
+        "status": "VALID" if not errors else "INVALID",
+        "errors": errors,
+        "warnings": warnings,
+        "shot_count": len(shots),
+        "contract_version": contract.get("contract_version"),
+    }
 
 
 def _scene_switch_audit(shots: list[dict], default_seconds: int | float | None = None) -> dict:

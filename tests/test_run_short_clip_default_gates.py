@@ -22,5 +22,5 @@ def test_production_adapter_rejects_contract_without_director_locks(monkeypatch,
     monkeypatch.setattr(run_short_clip, "_load_shot_contract", lambda path, shot_id: {"shot_id": shot_id, "prompt": "plain prompt", "creative_constraints": constraints})
     monkeypatch.setattr(run_short_clip, "admit_provider_request", lambda *args, **kwargs: pytest.fail("must stop before admission"))
     monkeypatch.setattr("sys.argv", ["run_short_clip.py", "--shot-id", "S01", "--prompt", "plain prompt", "--shot-contract", str(contract), "--output", str(tmp_path / "out.mp4")])
-    with pytest.raises(SystemExit, match="director locks failed"):
+    with pytest.raises(SystemExit, match="script/prompt review failed"):
         run_short_clip.main()

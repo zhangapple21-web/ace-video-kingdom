@@ -4,7 +4,7 @@ from tools.validate_subtitles import Cue, parse_srt, validate
 
 
 def test_episode_006_track_is_valid():
-    path = Path(__file__).parents[1] / "media_staging/episode_006_wenji_110s/subtitles/episode_006_full_inner_monologue.srt"
+    path = Path(__file__).parent / "fixtures/episode_006_full_inner_monologue.srt"
     result = validate(parse_srt(path))
     assert result["status"] == "VALID"
     assert result["errors"] == []

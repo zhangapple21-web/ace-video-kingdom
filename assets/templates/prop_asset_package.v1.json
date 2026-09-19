@@ -1,0 +1,53 @@
+{
+  "schema": "video_kingdom.prop_asset_package.v1",
+  "prop_id": "PROP_XXX",
+  "name": "【填写道具名】",
+  "locked_features": {
+    "form": "【已确认形制、可见面、开口/接口】",
+    "wear": "【已确认新旧与磨损位置】"
+  },
+  "variant_policy": "suffix_new_id_never_overwrite",
+  "static_asset_rules": [
+    "do_not_write_action",
+    "do_not_write_dialogue"
+  ],
+  "material_structure": "【纸纤维/金属拉丝/木材纹理等结构；禁止空泛材质词】",
+  "design_basis": {
+    "facts": [
+      "【剧本或用户已确认】"
+    ],
+    "design_assumptions": [
+      "【有依据推定】"
+    ],
+    "critical_unknowns": [
+      "【关键未知】"
+    ]
+  },
+  "negative_constraints_policy": "evidence_required_except_genre_hard_bans",
+  "reference_image_camera_lock": false,
+  "binding_policy": "episode_brief_decides_url_count_and_order",
+  "state_contract": {
+    "initial": "【持有人与朝向】",
+    "change": "【允许变化】",
+    "final": "【交给下一镜】"
+  },
+  "visual_assets": [
+    {
+      "asset_id": "PROP_XXX_front",
+      "purpose": "identity_reference",
+      "required": false,
+      "path": null,
+      "sha256": "",
+      "status": "MISSING"
+    }
+  ],
+  "missing": [
+    "PROP_XXX_front"
+  ],
+  "reference_role": "identity_not_keyframe",
+  "identity_usage": "lock_features_not_i2v_source",
+  "shot_binding_rule": "character-bound props live in identity pack; other props are shot/scene state, images optional",
+  "origin": "shot_state_unless_character_bound",
+  "long_term_asset": false,
+  "reference_images_required": false
+}
