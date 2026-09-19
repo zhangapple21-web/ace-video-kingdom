@@ -68,13 +68,13 @@
 
 - 官方文档登记三款入口：`gpt-image-2`、`gpt-image-2.5-flare`、`gpt-image-2.5-sunburst`。
 - `gpt-image-2` 继续是已验证默认；两个 2.5 变体只登记为显式可选，未通过真实线路探针前不计入生产健康路由。
-- `tools/imagegen_shenwen.ps1` 已允许三款完整模型名，未知或旧模型仍硬阻断；不自动切换模型。
+- `tools/imagegen_shenwen.ps1` 已允许登记的完整模型名，未知或旧模型仍硬阻断；生产默认仍是 `gpt-image-2`，主模型失败时只按注册表受证据约束降级到 Grok 图像变体，并记录 fallback 收据。
 
 ## 本次真实线路复测：Shenwen 图像模型（2026-09-16）
 
 - 使用同一 `SHENWEN_IMAGE_API_KEY` 对 `/v1/images/generations` 做最小真实探针：`gpt-image-2`、`gpt-image-2.5-flare`、`gpt-image-2.5-sunburst` 均返回 HTTP 200 并产出图像数据。
 - `grok-imagine-image`、`grok-imagine-image-quality` 后续使用专用 `SHENWEN_GROK_API_KEY` 复测返回 HTTP 200，已登记为 `PROBE_PASS`，但仍保持 `explicit_only`；完整脱敏收据见 `research/grok_image_probe_20260918.json`。
-- 四个变体均只在能力注册表健康证据存在且合同显式选择时使用；默认入口继续锁定 `imagegen → gpt-image-2`。
+- 2.5 变体仍需能力注册表健康证据和合同显式选择；Grok 图像变体已登记为主模型失败后的同能力降级候选，默认入口仍锁定 `imagegen → gpt-image-2`。
 
 ## 本次吸收：通用镜头节奏与专业标注（2026-09-16）
 

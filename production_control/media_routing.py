@@ -42,13 +42,20 @@ def build_image_model_plan(route: Mapping[str, Any]) -> dict[str, Any]:
     primary = str(image_route.get("model") or "").strip()
     if primary and str((image_route.get("health") or {}).get("status")) == "PROBE_PASS":
         candidates.append({"model": primary, "role": "primary", "status": "PROBE_PASS"})
+    degraded_fallbacks = []
     for variant in image_route.get("available_variants") or []:
         if str(variant.get("status")) == "PROBE_PASS":
-            candidates.append({"model": str(variant.get("model")), "role": "fallback", "status": "PROBE_PASS"})
+            selection = str(variant.get("selection") or "explicit_only")
+            role = "degraded_fallback" if selection == "degraded_fallback_after_primary_failure" else "fallback"
+            candidate = {"model": str(variant.get("model")), "role": role, "status": "PROBE_PASS"}
+            candidates.append(candidate)
+            if role == "degraded_fallback":
+                degraded_fallbacks.append(candidate)
     return {
         "status": "READY" if candidates and image_route.get("status") == "ROUTED" else "BLOCKED",
         "candidates": candidates,
-        "selection_policy": "primary_then_verified_variant; explicit_receipt_required",
+        "selection_policy": "gpt-image-2_primary; grok_verified_degraded_fallback_after_execution_failure; receipt_required",
+        "degraded_fallback_models": [item["model"] for item in degraded_fallbacks],
         "blocked_variants": [
             str(item.get("model")) for item in image_route.get("available_variants") or []
             if str(item.get("status")) != "PROBE_PASS"
@@ -100,21 +107,41 @@ def _route_one(row: Mapping[str, Any], scope: str, env: Mapping[str, str]) -> di
         reasons.append("EXECUTABLE_NOT_FOUND")
     if credential_envs and not any(str(env.get(name) or "").strip() for name in credential_envs):
         reasons.append("CREDENTIAL_MISSING")
-    status = "ROUTED" if not reasons else "BLOCKED"
+    variants = []
+    for variant in (row.get("model_variants") or []):
+        if not isinstance(variant, Mapping) or not variant.get("model"):
+            continue
+        variant_env = str(variant.get("credential_env") or credential)
+        variant_ready = bool(str(env.get(variant_env) or "").strip()) if variant_env else True
+        variants.append({
+            "model": str(variant.get("model")),
+            "status": str(variant.get("status") or "UNKNOWN"),
+            "selection": str(variant.get("selection") or "explicit_only"),
+            "health_evidence": variant.get("health_evidence"),
+            "credential_env": variant_env or None,
+            "credential_ready": variant_ready,
+        })
+    degraded_fallbacks = [
+        item for item in variants
+        if item["status"] == "PROBE_PASS"
+        and item["selection"] == "degraded_fallback_after_primary_failure"
+        and item["credential_ready"]
+    ]
+    primary_ready = not any(reason == "CREDENTIAL_MISSING" for reason in reasons)
+    # An image route may start degraded when the primary key is unavailable,
+    # but only if a verified Grok fallback has its own key. Other blockers
+    # (scope, executable, production eligibility) still fail closed.
+    if row.get("id") == "image.generate" and not primary_ready and degraded_fallbacks:
+        reasons = [reason for reason in reasons if reason != "CREDENTIAL_MISSING"]
+        reasons.append("PRIMARY_CREDENTIAL_MISSING_DEGRADED")
+    status = "ROUTED" if not reasons or reasons == ["PRIMARY_CREDENTIAL_MISSING_DEGRADED"] else "BLOCKED"
     return {
         "capability": row["id"],
         "provider": row["provider"],
         "model": row["model"],
-        "available_variants": [
-            {
-                "model": str(variant.get("model")),
-                "status": str(variant.get("status") or "UNKNOWN"),
-                "selection": str(variant.get("selection") or "explicit_only"),
-                "health_evidence": variant.get("health_evidence"),
-            }
-            for variant in (row.get("model_variants") or [])
-            if isinstance(variant, Mapping) and variant.get("model")
-        ],
+        "available_variants": variants,
+        "primary_ready": primary_ready,
+        "degraded_fallbacks": degraded_fallbacks,
         "model_locked": bool(row.get("model_locked")),
         "executable": executable or str(row.get("executable")),
         "credential_env": credential,
