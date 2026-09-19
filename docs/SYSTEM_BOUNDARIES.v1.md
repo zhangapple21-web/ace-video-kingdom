@@ -19,6 +19,8 @@
 2. **ACE `memory_system` / `memory_index`** 只负责长期认知、治理、经验和可审计证据；不保存 3002 的投影缓存、413 请求体或图片 data URL。
 3. **3002** 只做 Responses 协议适配、必要的历史投影、SSE、请求体上限和遥测；**3000** 只做 OneAPI/Chat Completions 路由与 provider fallback。任何重试策略变更必须先通过现有回归测试。
 
+视频王国只使用 `3000`。`3002` 不属于视频生产控制面，也不能作为视频模型的备用路由；它仅服务于系统级 Responses 兼容传输。
+
 ## 图片与 413 规则
 
 - 图片优先走 `D:\视频创作\ace-video-kingdom\production_control\image_assets.py` 与 `runtime\filebase_presign.py` 的对象引用/短期 URL；不要把长期 data URL 当作工作记忆。
