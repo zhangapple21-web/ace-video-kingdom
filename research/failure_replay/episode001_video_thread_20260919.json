@@ -1,0 +1,15 @@
+{
+  "schema": "ace.failure_replay.v1",
+  "scope": "codex://threads/01a0ad63-6778-77b3-be43-89aefc7fff29",
+  "subject": "张铁铁的沙雕日常 EP01 旧拍摄线路",
+  "status": "ARCHIVED_ANTI_PATTERN",
+  "failures": [
+    {"problem": "身份参考图被当成构图/首帧，产出两张活照片", "root_cause": "Reference 与 First Frame 职责混淆", "fix": "Identity 只锁身份；Shot Anchor 只承载当镜状态；production_shot_gate 拦截 i2v/first_frame 身份用法", "counterfactual_cost": "所有镜头动作、空间和表演被压扁为口型", "reuse_when": "任何角色包被直接塞入首尾帧或图生视频源"},
+    {"problem": "工位/贴耳模板覆盖不同剧情", "root_cause": "合同只锁地点和手机，未写真实动作、反应和镜头目的", "fix": "强制 Shot State 的起姿、身体/手部/表情动作、运镜和末态；静态毒句阻断", "counterfactual_cost": "想象段、远程上班、修图段无法出现剧本画面", "reuse_when": "多个镜头复用同一动作短语或固定中近景"},
+    {"problem": "03.5 想象内容没有被拍出来", "root_cause": "审查合同把车辆/街道/第二人物排除在外，实际提示词与剧本冲突", "fix": "换场建立新 Scene State，需要构图时先 imagegen 生成并审验 Shot Anchor", "counterfactual_cost": "观众看不到叙事中的想象段，只看到原工位", "reuse_when": "剧本要求闪回、想象、外景、双人同框或复杂空间关系"},
+    {"problem": "场景变成风景画或静态背景", "root_cause": "Scene State 缺少真实布局和互动表面，未要求人物可进入和行动", "fix": "要求 physical_layout、interaction_surface、LIVE_DIEGETIC_SPACE，并在生产门拦截静态景观意图", "counterfactual_cost": "画面像海报，人物无法与空间发生关系", "reuse_when": "任何场景只写氛围/背景而没有可行动空间"},
+    {"problem": "双手机、残手、动作断裂", "root_cause": "手机姿态和手部构图被写成禁令堆，没有先设计可拍的动作路径", "fix": "先写手的任务与入画/出画路径；风险镜头用独立构图静帧并做帧级 QC", "counterfactual_cost": "穿帮后只能整镜重拍", "reuse_when": "手机、方向盘、桌面道具或手部靠近画边"},
+    {"problem": "Provider completed 被误当成成片合格", "root_cause": "技术收据与创作 QC 混为一谈", "fix": "五层 QC 和 Approved State 独立；未通过不得延续到下一镜", "counterfactual_cost": "错误连续传播到整集", "reuse_when": "任何生成成功但未看真实 Take 的镜头"}
+  ],
+  "promotion": {"baseline": "旧线路 01-08 合同与收据", "change": "Identity/Scene State/Shot State + filmed realism constitution", "test": "341 passed; old receipts superseded; production gate blocks stale/static contracts", "evaluation": "旧线路不可再选，新线路需重新双审和帧级验收", "promote": true}
+}
