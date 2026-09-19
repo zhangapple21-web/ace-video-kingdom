@@ -18,6 +18,11 @@ from tools.validate_shot_rhythm import validate_shot_rhythm
 from tools.validate_script_prompt_review import validate_script_prompt_review
 from tools.validate_new_drama_semantics import is_new_drama, validate_new_drama_semantics
 from tools.validate_state_contract import validate_state_contract
+from pathlib import Path
+import json
+
+CONSTITUTION_PATH = Path(__file__).resolve().parents[1] / "governance" / "filmed_drama_production_constitution.v1.json"
+CONSTITUTION = json.loads(CONSTITUTION_PATH.read_text(encoding="utf-8"))
 
 
 def validate_production_shot(canonical_shot: dict[str, Any], contract_prompt: str) -> dict[str, Any]:
@@ -72,7 +77,7 @@ def validate_production_shot(canonical_shot: dict[str, Any], contract_prompt: st
         )
     )
     realism_terms = ("真人", "真实", "电影感", "摄影")
-    forbidden_still_styles = ("风景画", "插画背景", "纯背景图", "景观海报", "静态风景", "绘画风")
+    forbidden_still_styles = tuple(CONSTITUTION["forbidden_substitutes"])
     if not any(term in visual_blob for term in realism_terms):
         raise ValueError("production shot rejected: visual realism policy is missing; describe filmed human/space/prop performance")
     if any(term in visual_blob for term in forbidden_still_styles):
