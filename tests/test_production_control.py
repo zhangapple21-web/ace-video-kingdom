@@ -78,6 +78,10 @@ def test_fail_closed_asset_gate_and_recovery(tmp_path: Path):
     run.record_assembly("final.mp4", ordered_shots=["S01"])
     assert run.promote_delivery()["status"] == "READY"
     assert run.mark_delivered(destination="sandbox://demo")["status"] == "DELIVERED"
+    snapshot = run.snapshot()
+    assert snapshot["stage"] == "DELIVERED"
+    assert len(snapshot["events"]) >= 10
+    assert all(snapshot["events"][i]["prev_event_hash"] == ("GENESIS" if i == 0 else snapshot["events"][i - 1]["event_hash"]) for i in range(len(snapshot["events"])))
 
 
 def test_scope_metadata_is_persisted_on_production_run(tmp_path: Path):
@@ -92,10 +96,6 @@ def test_scope_metadata_is_persisted_on_production_run(tmp_path: Path):
     assert snapshot["scope"] == scope
     assert snapshot["plan_shot_ids"] == ["S01", "S02", "S03"]
     assert snapshot["total_plan_shots"] == 3
-    snapshot = run.snapshot()
-    assert snapshot["stage"] == "DELIVERED"
-    assert len(snapshot["events"]) >= 10
-    assert all(snapshot["events"][i]["prev_event_hash"] == ("GENESIS" if i == 0 else snapshot["events"][i - 1]["event_hash"]) for i in range(len(snapshot["events"])))
 
 
 def test_missing_asset_blocks_and_no_generation_admission(tmp_path: Path):
