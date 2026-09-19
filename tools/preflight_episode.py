@@ -360,7 +360,16 @@ def main() -> int:
     model = defaults.get("model")
     renderer_routing = plan.get("renderer_routing") if isinstance(plan.get("renderer_routing"), dict) else {}
     if model != "agnes-video-2.5-flash":
-        warnings.append(f"primary renderer is {model!r}; current default policy expects agnes-video-2.5-flash")
+        message = f"primary renderer is {model!r}; current default policy expects agnes-video-2.5-flash"
+        # A formal preflight is the last gate before a production adapter can
+        # consume the plan.  Leaving this as a warning allowed a valid-looking
+        # plan to proceed through a different Agnes model, contradicting the
+        # single verified production route.  Research/free-zone plans may
+        # still record the mismatch as a warning.
+        if args.require_formal:
+            hard_failures.append(f"renderer: {message}")
+        else:
+            warnings.append(message)
     # A strict source-bound plan may explicitly require a renderer with
     # verifiable reference control.  The old v2.0 image-to-video path accepts
     # one image and can still invent a second composition or an internal cut;

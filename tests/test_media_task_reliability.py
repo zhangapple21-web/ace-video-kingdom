@@ -31,7 +31,7 @@ def test_project_discovery_is_canonical_and_hashed():
 
 
 def test_image_wrapper_locks_production_model():
-    wrapper = Path("D:/tmp/ace-video-kingdom/tools/imagegen_shenwen.ps1").read_text(encoding="utf-8")
+    wrapper = (Path(__file__).resolve().parents[1] / "tools" / "imagegen_shenwen.ps1").read_text(encoding="utf-8")
     assert "MODEL_OVERRIDE_REJECTED" in wrapper
     assert "gpt-image-2" in wrapper
 

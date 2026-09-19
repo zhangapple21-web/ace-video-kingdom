@@ -21,6 +21,9 @@ def validate_state_contract(contract: Any) -> dict[str, Any]:
         value = str(scene.get(key) or "").strip().upper()
         if not value or value in {"REQUIRED", "UNKNOWN", "N/A", "NONE"}:
             errors.append(f"state_contract.scene_state.{key} must be concrete")
+    scene_mode = str(scene.get("scene_mode") or "").strip().upper()
+    if scene_mode != "LIVE_DIEGETIC_SPACE":
+        errors.append("state_contract.scene_state.scene_mode must be LIVE_DIEGETIC_SPACE")
     scene_blob = " ".join(str(scene.get(key) or "") for key in ("location", "space", "physical_layout", "interaction_surface"))
     if any(token in scene_blob for token in ("风景画", "景观图", "纯背景", "唯美背景", "无人物空间")):
         errors.append("state_contract.scene_state must describe a playable diegetic space, not a scenic still")

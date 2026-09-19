@@ -182,7 +182,7 @@ def _bind_project_asset_manifest(canonical_shot: dict, payload: dict, contract_p
             )
         expected_urls.append(public_url)
         asset_refs.append({
-            "asset_id": str(anchor.get("asset_id") or f"{role}_PACK_FRONT_CROP_512"),
+            "asset_id": str(anchor.get("asset_id") or f"{role}_PACK_ORIGINAL"),
             "asset_type": "character",
             "version": "user_pack_20260915",
             "sha256": expected_hash,
@@ -217,7 +217,11 @@ def _bind_project_asset_manifest(canonical_shot: dict, payload: dict, contract_p
     workspace_urls = [url for url in contract_urls if url not in pack_index]
     # Current production manifests are original-pack-only unless they
     # explicitly opt into a legacy workspace composition contract.
-    identity_policy = str(manifest.get("identity_policy") or "ORIGINAL_PACK_ONLY").strip()
+    identity_policy = str(
+        canonical_shot.get("identity_policy")
+        or manifest.get("identity_policy")
+        or "ORIGINAL_PACK_ONLY"
+    ).strip()
     if identity_policy == "ORIGINAL_PACK_ONLY":
         if workspace_urls:
             raise ValueError(
@@ -227,6 +231,37 @@ def _bind_project_asset_manifest(canonical_shot: dict, payload: dict, contract_p
             raise ValueError(
                 "provider admission blocked: exactly one original pack image for the on-screen character; no Provider POST"
             )
+    elif identity_policy == "COMPOSITION_STILL_PLUS_IDENTITY":
+        composition = canonical_shot.get("composition_reference") if isinstance(canonical_shot.get("composition_reference"), dict) else {}
+        composition_url = str(composition.get("public_url") or "").strip()
+        if not composition_url:
+            raise ValueError(
+                "provider admission blocked: composition still is required and must be bound before Provider POST"
+            )
+        if contract_urls[0] != composition_url:
+            raise ValueError(
+                "provider admission blocked: composition still must be images[0]; identity packs cannot be first frame"
+            )
+        if composition_url in pack_index:
+            raise ValueError(
+                "provider admission blocked: identity pack cannot be used as composition still"
+            )
+        identity_tail = contract_urls[1:]
+        if not identity_tail or any(url not in pack_index for url in identity_tail):
+            raise ValueError(
+                "provider admission blocked: after composition still, only original character packs are allowed"
+            )
+        identity_order = [pack_index[url] for url in identity_tail]
+        if identity_order != sorted(identity_order):
+            raise ValueError(
+                "provider admission blocked: on-screen identity references must keep pack order"
+            )
+        if len(identity_tail) not in {1, 2}:
+            raise ValueError(
+                "provider admission blocked: composition shots allow 1 or 2 original pack identities"
+            )
+        identity_urls = identity_tail
+        workspace_urls = []
     else:
         if not identity_urls or not workspace_urls or contract_urls[0] in pack_index or contract_urls[-1] not in pack_index:
             raise ValueError(
@@ -692,6 +727,11 @@ def main() -> int:
     if args.model == "agnes-video-v2.0":
         raise SystemExit(
             "agnes-video-v2.0 is retired; use agnes-video-2.5-flash (free) or agnes-video-2.5"
+        )
+    if args.admission_scope == "production" and args.model != "agnes-video-2.5-flash":
+        raise SystemExit(
+            "provider admission blocked: production is locked to agnes-video-2.5-flash; "
+            "use legacy/research scope for historical adapter probes"
         )
 
     if args.timeout <= 0:
