@@ -27,6 +27,9 @@ def test_image_model_plan_has_verified_fallbacks_only():
         "gpt-image-2", "gpt-image-2.5-flare", "gpt-image-2.5-sunburst",
         "grok-imagine-image", "grok-imagine-image-quality",
     ]
+    assert plan["degraded_fallback_models"] == [
+        "grok-imagine-image", "grok-imagine-image-quality",
+    ]
     assert plan["blocked_variants"] == []
     assert [item["model"] for item in plan["candidates"]] == [
         "gpt-image-2", "gpt-image-2.5-flare", "gpt-image-2.5-sunburst",
@@ -57,6 +60,20 @@ def test_missing_media_credential_is_blocked_once():
     route = route_media_demand("\u751f\u6210\u7b2c1\u955c\u89c6\u9891", env={})
     assert route["status"] == "BLOCKED"
     assert "CREDENTIAL_MISSING" in route["selected_routes"][0]["reasons"]
+
+
+def test_missing_primary_image_key_routes_to_ready_grok_degradation():
+    route = route_media_demand(
+        "生成角色包图",
+        env={"SHENWEN_GROK_API_KEY": "grok-test-key"},
+    )
+    assert route["status"] == "ROUTED"
+    selected = route["selected_routes"][0]
+    assert selected["primary_ready"] is False
+    assert selected["reasons"] == ["PRIMARY_CREDENTIAL_MISSING_DEGRADED"]
+    assert [item["model"] for item in selected["degraded_fallbacks"]] == [
+        "grok-imagine-image", "grok-imagine-image-quality",
+    ]
 
 
 def test_task_state_stalls_after_two_identical_actions(tmp_path):
@@ -103,3 +120,30 @@ def test_executor_failure_is_persisted_as_failed(tmp_path):
     assert result["status"] == "FAILED"
     assert result["receipt"]["verification"] == "FAIL"
     assert load(tmp_path / "state.json")["state"] == "FAILED"
+
+
+def test_image_executor_uses_grok_after_primary_failure_and_records_degraded_receipt(tmp_path):
+    calls = []
+
+    def runner(route, request, output_dir):
+        calls.append(route["model"])
+        if route["model"] == "gpt-image-2":
+            raise RuntimeError("primary image endpoint unavailable")
+        artifact = output_dir / "grok-fallback.png"
+        artifact.write_bytes(b"verified fallback artifact")
+        return artifact
+
+    result = execute_media_task(
+        tmp_path / "state.json",
+        "t-image-fallback",
+        "生成角色包图",
+        output_dir=tmp_path / "artifacts",
+        env={"SHENWEN_IMAGE_API_KEY": "primary-key", "SHENWEN_GROK_API_KEY": "grok-key"},
+        runner=runner,
+    )
+    assert result["status"] == "COMPLETED"
+    assert calls == ["gpt-image-2", "grok-imagine-image"]
+    assert result["receipt"]["degraded"] is True
+    assert result["receipt"]["fallback_used"] is True
+    assert result["receipt"]["fallback_events"][0]["from_model"] == "gpt-image-2"
+    assert result["receipt"]["fallback_events"][0]["to_model"] == "grok-imagine-image"

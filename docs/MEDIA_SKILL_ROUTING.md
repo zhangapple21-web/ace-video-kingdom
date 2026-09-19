@@ -5,7 +5,7 @@
 
 | 能力 | 技能入口 | 当前模型 | 仓库适配器 | Provider 接口 |
 | --- | --- | --- | --- | --- |
-| 图像生成 | `imagegen` | `gpt-image-2`（默认）；`gpt-image-2.5-flare`、`gpt-image-2.5-sunburst`、`grok-imagine-image`、`grok-imagine-image-quality`（显式可选，均需 `PROBE_PASS` 收据） | `tools/imagegen_shenwen.ps1` | `https://api.shenwenai.com/v1/images/generations` |
+| 图像生成 | `imagegen` | `gpt-image-2`（默认）；主模型执行失败时，`grok-imagine-image` → `grok-imagine-image-quality` 可作为已探针通过且密钥可用的同能力降级；2.5 变体仍需显式选择 | `tools/imagegen_shenwen.ps1` | `https://api.shenwenai.com/v1/images/generations` |
 | 视频生成 | `Video` | `agnes-video-2.5-flash` | `tools/video_agnes25.ps1` | `https://apihub.agnes-ai.com/v1/videos` |
 
 ## 调用
