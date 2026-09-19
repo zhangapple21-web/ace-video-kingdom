@@ -1,0 +1,43 @@
+{
+  "schema": "ace.video_kingdom.voice_role_binding.v1",
+  "created_at": "2026-09-17",
+  "project": "张铁铁的沙雕日常",
+  "authorization_receipt": "D:/视频创作/projects/张铁铁的沙雕日常/张铁铁的沙雕日常/项目文件/voice_clones_20260917/manifest.json",
+  "status": "APPROVED_FOR_SCRIPT_USE",
+  "voice_lock_status": "FROZEN",
+  "frozen_at": "2026-09-17",
+  "change_policy": "任何音色替换、参考音频替换或语速基线变更都必须得到用户明确确认并创建新版本",
+  "engine": "Fun-CosyVoice3-0.5B-2512",
+  "bindings": [
+    {
+      "role": "男主",
+      "character_id": "CHAR_MAIN",
+      "voice_id": "VOICE_MALE_MAIN_V1",
+      "reference_audio": "D:/视频创作/专门放声音的/男性.mp3",
+      "clone_probe": "D:/视频创作/projects/张铁铁的沙雕日常/张铁铁的沙雕日常/项目文件/voice_clones_20260917/VOICE_MALE_MAIN_V1.wav",
+      "voice_lock": "VOICE_MALE_MAIN_V1",
+      "default_direction": "沉稳、清晰、自然聊天，不要播音腔，不要夸张表演"
+    },
+    {
+      "role": "女主",
+      "character_id": "CHAR_COUNTER",
+      "voice_id": "VOICE_FEMALE_MAIN_V2",
+      "reference_audio": "D:/视频创作/专门放声音的/女性.mp3",
+      "clone_probe": "D:/视频创作/projects/张铁铁的沙雕日常/张铁铁的沙雕日常/项目文件/voice_clones_20260917/VOICE_FEMALE_MAIN_V2.wav",
+      "voice_lock": "VOICE_FEMALE_MAIN_V2",
+      "default_direction": "温柔、轻声、柔和、亲近，语速偏慢，句间自然停顿，带一点安抚和坚定"
+    }
+  ],
+  "script_usage": {
+    "dialogue_field": "speaker",
+    "audio_clock": "逐句生成后以实际音频时长为准",
+    "inner_voice_separate_track": true,
+    "provider_reference_audio_is_not_lip_sync_proof": true
+  },
+  "qc": {
+    "authorization": "PASS_USER_CONFIRMED",
+    "technical_probe": "PASS_LOCAL_COSYVOICE3",
+    "listening_qc": "PASS_USER_APPROVED",
+    "lip_sync_qc": "PENDING_PER_SHOT"
+  }
+}

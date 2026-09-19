@@ -1,0 +1,46 @@
+{
+  "schema": "video_kingdom.image_transport_closure_receipt.v1",
+  "status": "CLOSED_LOOP_PASS",
+  "created_at": "2026-09-15",
+  "scope": "ACE/Codex image deduplication and 413 payload hardening",
+  "chain": {
+    "ui_data_url_ingress": "PASS",
+    "agent_to_model_asset_reference_boundary": "PASS",
+    "sha256_deduplication": "PASS",
+    "derived_image_cache": "PASS",
+    "vision_analysis_cache": "PASS",
+    "video_frame_sampling": "PASS",
+    "codex_history_image_isolation": "PASS",
+    "provider_admission_inline_rejection": "PASS"
+  },
+  "smoke": {
+    "oneapi_chat_completions": {
+      "status": "PASS",
+      "endpoint": "http://127.0.0.1:3000/v1/chat/completions",
+      "request_bytes": 375,
+      "history_reused": false,
+      "inline_forbidden": true
+    },
+    "responses_3002": {
+      "status": "PASS",
+      "endpoint": "http://127.0.0.1:3002/v1/responses",
+      "request_bytes": 333,
+      "history_reused": false,
+      "inline_forbidden": true
+    }
+  },
+  "verification": {
+    "pytest": "246 passed",
+    "git_diff_check": "PASS",
+    "models_changed": false,
+    "global_gateway_limit_changed": false,
+    "projection_disabled": false,
+    "user_assets_deleted": false
+  },
+  "legacy_window": {
+    "thread_id": "01a09eaf-8890-7663-8b77-15be6581827f",
+    "status": "CLOSED_FOR_REUSE",
+    "reason": "historical 413 context remains oversized; start a fresh task with asset references"
+  },
+  "recovery_rule": "new_window_only_asset_id_reference_no_legacy_history_replay"
+}

@@ -1,0 +1,324 @@
+{
+  "schema": "video_kingdom.oneapi_role_room.v2",
+  "status": "COMPLETED",
+  "profile": "standard",
+  "idea": "标准闭环复测：检查剧本、分镜、反例、连续性和导演收敛；只输出审计意见，不提交媒体任务。",
+  "gateway": "http://localhost:3000/v1",
+  "trace_id": "3bf477276b264256b0a5f721bbe76721",
+  "memory_context": {
+    "sha256": "20657a84c0dc58ecbdc4ff387bafd6863cd38dfd2d6f0693b54ec0712fe1b439",
+    "sources": [
+      "memory/L0_invariants.json",
+      "memory/L3_experience.jsonl"
+    ],
+    "project_id": null,
+    "l1_l2_loaded": false
+  },
+  "resumed_from": null,
+  "resume_compatible": null,
+  "roles": [
+    {
+      "role_id": "primary_writer",
+      "span_id": "eee2b7d46de94325a7af2c55444a9ad0",
+      "model": "gpt-5.6-terra",
+      "requested_model": "gpt-5.6-terra",
+      "status": "COMPLETED",
+      "attempts": [
+        {
+          "model": "gpt-5.6-terra",
+          "actual_model": "gpt-5.6-terra",
+          "status": "PASS",
+          "evaluation": {
+            "role_id": "primary_writer",
+            "status": "PASS",
+            "score": 1.0,
+            "checks": [
+              {
+                "name": "non_empty",
+                "passed": true
+              },
+              {
+                "name": "no_placeholder",
+                "passed": true
+              },
+              {
+                "name": "no_provider_submission",
+                "passed": true
+              }
+            ],
+            "failure_class": null,
+            "repair_hint": null
+          }
+        }
+      ],
+      "route_rewritten": false,
+      "fallback_used": false,
+      "degraded": false,
+      "output": "断点审计：  \n- 原文事实：仅给出“标准闭环复测”目标及既有意见；未提供剧情、人物关系、地点、时间、事件因果或结局。  \n- 明确暗示：需覆盖剧本、分镜、反例、连续性与导演收敛；成片应为真人电影感、多场景多镜头。  \n- 待补信息：阿浪、肥哥是否属于本案；核心事件、双方目标、冲突升级点、转折、结局。  \n- 不可擅自推断：不得据此编造人物关系、行动动机、对白、独白或事实结局。  \n\n建议主方案：补齐上述信息后，按“触发事件—目标对立—行动升级—代价转折—可验证收束”组织，多场景拆为准备、发力、惯性回收和连续过渡。对白与内心独白分列，独白保留完整原文；每镜最多一句核心台词，禁止画中画、悬浮窗、通话界面、聊天UI及录屏感。当前无法审计完整对白/独白草案，需先补交原剧本。",
+      "evaluation": {
+        "role_id": "primary_writer",
+        "status": "PASS",
+        "score": 1.0,
+        "checks": [
+          {
+            "name": "non_empty",
+            "passed": true
+          },
+          {
+            "name": "no_placeholder",
+            "passed": true
+          },
+          {
+            "name": "no_provider_submission",
+            "passed": true
+          }
+        ],
+        "failure_class": null,
+        "repair_hint": null
+      }
+    },
+    {
+      "role_id": "storyboarder",
+      "span_id": "317fda6a1abb4c5090dcd4bf06e343cd",
+      "model": "gpt-5.5",
+      "requested_model": "gpt-5.5",
+      "status": "COMPLETED",
+      "attempts": [
+        {
+          "model": "gpt-5.5",
+          "actual_model": "gpt-5.5",
+          "status": "PASS",
+          "evaluation": {
+            "role_id": "storyboarder",
+            "status": "PASS",
+            "score": 1.0,
+            "checks": [
+              {
+                "name": "non_empty",
+                "passed": true
+              },
+              {
+                "name": "no_placeholder",
+                "passed": true
+              },
+              {
+                "name": "no_provider_submission",
+                "passed": true
+              }
+            ],
+            "failure_class": null,
+            "repair_hint": null
+          }
+        }
+      ],
+      "route_rewritten": false,
+      "fallback_used": false,
+      "degraded": false,
+      "output": "【断点审计】\n\n原文事实：仅有“标准闭环复测”目标及既有意见，未提供剧情、人物关系、地点、时间、事件因果、冲突或结局；未提供对白、内心独白原文。\n\n明确暗示：成片需真人电影感、多场景多镜头；需复核剧本、分镜、反例、连续性与导演收敛；禁止画中画、悬浮窗、通话界面、聊天UI及录屏感。\n\n待补信息：阿浪、肥哥是否参与本案；触发事件、双方目标、行动升级、转折、代价、结局及全部对白/独白。\n\n不可擅自推断：不得编造人物关系、动机、动作、对白、独白或事实结局；当前不能合法生成具体分镜。\n\n【执行门槛】\n\n补齐剧本后，逐镜列出：场景、景别、机位、准备、发力/加速、惯性/回收、动作完成点、连续过渡、切镜理由、声音、对白或完整内心独白。每镜最多一句核心台词，长台词按语义拆分；对白与独白分栏，字幕仅保留二者。另列反例、身份/服装/轴线连续性及导演收敛判据。当前不提交媒体任务。",
+      "evaluation": {
+        "role_id": "storyboarder",
+        "status": "PASS",
+        "score": 1.0,
+        "checks": [
+          {
+            "name": "non_empty",
+            "passed": true
+          },
+          {
+            "name": "no_placeholder",
+            "passed": true
+          },
+          {
+            "name": "no_provider_submission",
+            "passed": true
+          }
+        ],
+        "failure_class": null,
+        "repair_hint": null
+      }
+    },
+    {
+      "role_id": "contrarian_auditor",
+      "span_id": "e938f1a8534f48bcacd05b8b76ca9e74",
+      "model": "grok-4.6",
+      "requested_model": "grok-4.5",
+      "status": "COMPLETED",
+      "attempts": [
+        {
+          "model": "grok-4.5",
+          "actual_model": "grok-4.6",
+          "status": "PASS",
+          "evaluation": {
+            "role_id": "contrarian_auditor",
+            "status": "PASS",
+            "score": 1.0,
+            "checks": [
+              {
+                "name": "non_empty",
+                "passed": true
+              },
+              {
+                "name": "no_placeholder",
+                "passed": true
+              },
+              {
+                "name": "no_provider_submission",
+                "passed": true
+              }
+            ],
+            "failure_class": null,
+            "repair_hint": null
+          }
+        }
+      ],
+      "route_rewritten": true,
+      "fallback_used": true,
+      "degraded": true,
+      "output": "【断点】无剧本、分镜、对白/独白原文与事件因果。事实仅有复测令及writer/storyboarder意见。待补：人物是否本案、冲突与结局、全部对白及完整独白原文。不可把记忆中阿浪/肥哥、服装当既定事实。\n\n【挑错】\n现实性：无事件可验真；writer“触发—对立—升级—转折—收束”已越权套结构。\n连续性：L1/L2未载、project_id空；轴线/服装/场景语法无锚。肖像不得作动作首帧。\n伦理：暂无涉罪内容；补稿禁可复现违法、胁迫、伤害操作细节。\n可执行性：缺准备—发力—惯性回收—连续过渡；超8秒未拆段；每镜一句台词、独白完整原文均无载体，分镜不可拍。\n违规画面：禁画中画、悬浮窗、通话界面、聊天UI、录屏感；空转易滑向屏幕特写/对白特写。\n导演收敛：无L2证据，传输完成≠质量。不提交媒体。\n\n闭环未成立。先补原剧本再审。",
+      "evaluation": {
+        "role_id": "contrarian_auditor",
+        "status": "PASS",
+        "score": 1.0,
+        "checks": [
+          {
+            "name": "non_empty",
+            "passed": true
+          },
+          {
+            "name": "no_placeholder",
+            "passed": true
+          },
+          {
+            "name": "no_provider_submission",
+            "passed": true
+          }
+        ],
+        "failure_class": null,
+        "repair_hint": null
+      }
+    },
+    {
+      "role_id": "continuity_editor",
+      "span_id": "344640f1346a4fe6bdf4f62035357c50",
+      "model": "grok-4.6",
+      "requested_model": "gpt-5.4",
+      "status": "COMPLETED",
+      "attempts": [
+        {
+          "model": "gpt-5.4",
+          "actual_model": "grok-4.6",
+          "status": "PASS",
+          "evaluation": {
+            "role_id": "continuity_editor",
+            "status": "PASS",
+            "score": 1.0,
+            "checks": [
+              {
+                "name": "non_empty",
+                "passed": true
+              },
+              {
+                "name": "no_placeholder",
+                "passed": true
+              },
+              {
+                "name": "no_provider_submission",
+                "passed": true
+              }
+            ],
+            "failure_class": null,
+            "repair_hint": null
+          }
+        }
+      ],
+      "route_rewritten": true,
+      "fallback_used": true,
+      "degraded": true,
+      "output": "【断点】原文事实：仅复测令及三方意见，无剧本/分镜/角色/道具/时间线/对白独白原文。明确暗示：真人电影感多场景多镜头，禁画中画悬浮窗通话聊天录屏，对白独白分离且独白须完整原文，每镜一句核心台词。待补：阿浪肥哥是否本案、服装道具、事件时间线、对白长度、字幕安全区、镜头衔接。不可擅自推断：记忆服装非本案既定事实。\n\n【风险】高。无锚无法验角色/道具/轴线连续、时间线因果、对白超长拆分、字幕越安全区、切镜断层、动作准备-发力-惯性回收缺失。\n\n【最小补桥】先交完整原剧本（对白与完整独白分列）及分镜（四拍动作、轴线、切镜理由）。\n\nNEEDS_CLARIFICATION：确认人物身份、冲突时间线、道具、全部台词原文后再审衔接与安全区。闭环未成立，不提交媒体。",
+      "evaluation": {
+        "role_id": "continuity_editor",
+        "status": "PASS",
+        "score": 1.0,
+        "checks": [
+          {
+            "name": "non_empty",
+            "passed": true
+          },
+          {
+            "name": "no_placeholder",
+            "passed": true
+          },
+          {
+            "name": "no_provider_submission",
+            "passed": true
+          }
+        ],
+        "failure_class": null,
+        "repair_hint": null
+      }
+    },
+    {
+      "role_id": "director_convergence",
+      "span_id": "1c33f22fd9ff42809089e64765afe35b",
+      "model": "gpt-5.6-terra",
+      "requested_model": "gpt-5.6-terra",
+      "status": "COMPLETED",
+      "attempts": [
+        {
+          "model": "gpt-5.6-terra",
+          "actual_model": "gpt-5.6-terra",
+          "status": "PASS",
+          "evaluation": {
+            "role_id": "director_convergence",
+            "status": "PASS",
+            "score": 1.0,
+            "checks": [
+              {
+                "name": "non_empty",
+                "passed": true
+              },
+              {
+                "name": "no_placeholder",
+                "passed": true
+              },
+              {
+                "name": "no_provider_submission",
+                "passed": true
+              }
+            ],
+            "failure_class": null,
+            "repair_hint": null
+          }
+        }
+      ],
+      "route_rewritten": false,
+      "fallback_used": false,
+      "degraded": false,
+      "output": "【断点审计】\n\n原文事实：仅有复测目标及四方意见；未提供剧本、人物关系、事件因果、场景时间线、分镜、对白或完整独白原文。  \n明确暗示：需真人电影感、多场景多镜头；对白与独白分离；每镜最多一句核心台词；禁画中画、悬浮窗、通话界面、聊天UI、录屏感。  \n待补信息：阿浪、肥哥是否本案角色；人物目标、冲突升级、转折、结局；服装道具、轴线、对白字幕及镜头衔接。  \n不可擅自推断：不得将记忆中的角色设定、关系、动作、对白、独白或结局写成事实。\n\n导演收敛结论：当前闭环未成立，不能合法生成具体镜头稿。补齐原剧本和分镜后，逐镜核验准备—发力/加速—惯性/回收—完成点—连续过渡、切镜理由、声音、对白/完整独白、反例及连续性；不提交媒体任务。",
+      "evaluation": {
+        "role_id": "director_convergence",
+        "status": "PASS",
+        "score": 1.0,
+        "checks": [
+          {
+            "name": "non_empty",
+            "passed": true
+          },
+          {
+            "name": "no_placeholder",
+            "passed": true
+          },
+          {
+            "name": "no_provider_submission",
+            "passed": true
+          }
+        ],
+        "failure_class": null,
+        "repair_hint": null
+      }
+    }
+  ],
+  "feedback_proposals": [],
+  "production_submission": "NOT_PERFORMED",
+  "created_at": "2026-09-15T13:59:18Z"
+}
