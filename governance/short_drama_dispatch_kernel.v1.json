@@ -5,13 +5,12 @@
   "purpose": "将用户提供的短剧调度建议映射到现有单一生产入口，不新增Scheduler/Router/Runtime。",
   "capability_boundary": {
     "verified_video_paths": [
-      "agnes-video-2.5-flash",
-      "agnes-video-2.5"
+      "agnes-video-2.5-flash"
     ],
     "retired_video_paths": [
       "agnes-video-v2.0"
     ],
-    "verified_local_reference": "scene_action_anchor_first_frame",
+    "verified_local_reference": "scene_action_anchor_first_frame_optional",
     "unverified_features": [
       "face_vector_input",
       "audio_driven_video",
@@ -25,10 +24,12 @@
   "asset_gate": {
     "required_before_submission": [
       "shot_contract",
-      "scene_action_anchor",
       "identity_reference",
       "prompt",
       "negative_prompt"
+    ],
+    "optional_before_submission": [
+      "scene_action_anchor"
     ],
     "identity_vs_first_frame": "identity_reference 锁身份；scene_action_anchor 只在本镜需要 Shot State 构图静帧时使用；肖像禁止直接作为动作首帧。缺场景图不是生产 BLOCK。",
     "missing_asset_action": "BLOCKED，不提交视频任务。",
