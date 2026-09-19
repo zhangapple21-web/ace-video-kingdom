@@ -7,7 +7,9 @@
   "model_assignments": {
     "image": "gpt-image-2",
     "video": "agnes-video-2.5-flash",
-    "video_fallback": "agnes-video-2.5"
+    "video_fallback": null,
+    "fallback_policy": "NO_PROVIDER_SWITCH; retry or block with the same verified Flash route",
+    "lifecycle": "ARCHIVED_REFERENCE_ONLY"
   },
   "continuity_contract": {
     "required_shared_anchors": 2,

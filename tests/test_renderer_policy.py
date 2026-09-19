@@ -18,3 +18,21 @@ def test_25_flash_plan_is_allowed():
         episode,
         {"model": "agnes-video-2.5-flash", "fallback_model": ""},
     )
+
+
+def test_production_plan_rejects_non_flash_provider_fallback():
+    episode = {"renderer_routing": {"mainline_identity_requires": "OTHER"}}
+    with pytest.raises(SystemExit):
+        _validate_renderer_policy(
+            episode,
+            {"model": "agnes-video-2.5-flash", "fallback_model": "agnes-video-2.5"},
+        )
+
+
+def test_production_plan_rejects_non_flash_primary():
+    episode = {"renderer_routing": {"mainline_identity_requires": "OTHER"}}
+    with pytest.raises(SystemExit):
+        _validate_renderer_policy(
+            episode,
+            {"model": "agnes-video-2.5", "fallback_model": ""},
+        )

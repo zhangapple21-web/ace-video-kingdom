@@ -179,56 +179,19 @@ def _contract_shots(episode: dict) -> dict[str, dict]:
     return {str(row.get("shot_id")): row for row in contract.get("shots", []) if isinstance(row, dict) and row.get("shot_id")}
 
 
-def _replace_model(command: list[str], model: str) -> list[str]:
-    updated = list(command)
-    try:
-        index = updated.index("--model")
-    except ValueError:
-        updated.extend(["--model", model])
-    else:
-        updated[index + 1] = model
-    return updated
-
-
-def _v2_fallback_command(command: list[str], render: dict) -> list[str]:
-    """Turn a failed Flash reference attempt into an explicit local v2.0 I2V retry.
-
-    The fallback never receives Flash's URL-only fields as its conditioning
-    input.  It must name the matching local anchor in ``fallback_image`` so
-    the two providers preserve the same scene boundary.
-    """
-    image = render.get("fallback_image")
-    if not isinstance(image, str) or not image:
-        raise SystemExit("Flash -> v2.0 fallback requires render.fallback_image")
-    filtered: list[str] = []
-    skip_next = False
-    flash_flags = {
-        "--flash-mode", "--flash-first-frame-url", "--flash-last-frame-url",
-        "--flash-reference-image-url", "--flash-reference-audio-url",
-        "--reference-video-url", "--reference-video-require-audio",
-        "--seconds", "--size", "--aspect-ratio",
-    }
-    for token in command:
-        if skip_next:
-            skip_next = False
-            continue
-        if token in flash_flags:
-            skip_next = token != "--reference-video-require-audio"
-            continue
-        filtered.append(token)
-    filtered = _replace_model(filtered, "agnes-video-2.5-flash")
-    filtered.extend(["--image", image])
-    return filtered
-
-
 def _validate_renderer_policy(episode: dict, render: dict) -> None:
-    """Reject the retired v2.0 renderer for every new run."""
+    """Keep every production episode on the single verified Flash route."""
     model = str(render.get("model", ""))
     fallback = str(render.get("fallback_model", ""))
-    if model == "agnes-video-v2.0" or fallback == "agnes-video-v2.0":
+    if model and model != "agnes-video-2.5-flash":
         raise SystemExit(
-            "agnes-video-v2.0 is retired; use agnes-video-2.5-flash (free) "
-            "or agnes-video-2.5"
+            "production renderer is locked to agnes-video-2.5-flash; "
+            f"received {model!r}"
+        )
+    if fallback:
+        raise SystemExit(
+            "production renderer fallback is disabled; retry or block on "
+            f"agnes-video-2.5-flash instead of {fallback!r}"
         )
 
 
@@ -325,17 +288,10 @@ def main() -> int:
         fallback_reason = _quota_exhausted(args.manifest, shot_id)
         fallback_on_failure = bool(render.get("fallback_on_failure"))
         if result.returncode and fallback_model and (fallback_reason or fallback_on_failure):
-            print(json.dumps({
-                "status": "FALLBACK_AFTER_PRIMARY_FAILURE",
-                "shot_id": shot_id,
-                "from_model": render.get("model", "agnes-video-2.5-flash"),
-                "to_model": fallback_model,
-            }, ensure_ascii=False), flush=True)
-            if render.get("model") == "agnes-video-2.5-flash" and fallback_model == "agnes-video-v2.0":
-                command = _v2_fallback_command(command, render)
-            else:
-                command = _replace_model(command, str(fallback_model))
-            result = subprocess.run(command)
+            raise SystemExit(
+                "production renderer fallback is disabled; preserve the "
+                "agnes-video-2.5-flash route and retry durably"
+            )
         for retry_round in range(1, args.shot_retry_rounds + 1):
             if not result.returncode:
                 break
