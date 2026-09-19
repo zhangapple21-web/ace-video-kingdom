@@ -1,0 +1,16 @@
+{
+  "schema": "video_kingdom.filmed_drama_production_constitution.v1",
+  "status": "ACTIVE",
+  "purpose": "所有短剧输出必须像真实拍摄的电影镜头，不得用静态图、风景画或角色板替代表演与空间。",
+  "layers": {
+    "identity": "只锁人物身份：脸型、发型基线、体型、年龄感、基础服装和角色道具；不锁死构图。",
+    "scene_state": "每镜建立可进入、可站立、可接触、可移动的真实空间；包含地点、时间、光线、空间、physical_layout、interaction_surface。",
+    "shot_state": "每镜明确起始姿态、身体动作、手部动作、表情变化、镜头路径和结束状态。",
+    "performance": "对白必须有说话动作和听者反应；独白必须有闭嘴状态和可见情绪；风景必须有真实摄影视角或环境运动。",
+    "visual_realism": "允许美化、调色和电影化，但主体、材质、光影、空间和动作必须保持真实感。"
+  },
+  "forbidden_substitutes": ["风景画", "插画背景", "纯背景图", "景观海报", "静态风景", "绘画风", "角色板直接动画", "两张活照片对话"],
+  "required_evidence": ["identity_ref", "scene_state", "shot_state", "named_visible_performance", "realism_intent"],
+  "provider_rule": "缺任一必需证据或命中禁止替代物，禁止提交 Provider。",
+  "single_source_of_truth": true
+}
