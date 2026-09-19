@@ -13,11 +13,52 @@
   "exit_direction": "hold",
   "enter_direction": "hold",
   "inherited_state_items": [
-    {"key": "costume", "value": "【服装继承：颜色、层数、破损】", "source_shot": "S01A"},
-    {"key": "identity", "value": "【身份继承：同一张脸、同一年龄段】", "source_shot": "S01A"},
-    {"key": "spatial_position", "value": "【空间位置：相对场景锚点的左右前后】", "source_shot": "S01A"}
+    {
+      "key": "costume",
+      "value": "【服装继承：颜色、层数、破损】",
+      "source_shot": "S01A"
+    },
+    {
+      "key": "identity",
+      "value": "【身份继承：同一张脸、同一年龄段】",
+      "source_shot": "S01A"
+    },
+    {
+      "key": "spatial_position",
+      "value": "【空间位置：相对场景锚点的左右前后】",
+      "source_shot": "S01A"
+    }
   ],
-  "invariants": ["服装不变", "身份不变", "轴线不变"],
-  "asset_ids": ["CHAR_MAIN"],
-  "evidence_basis": "asset package + explicit state transition; post-generation frame proof pending"
+  "invariants": [
+    "服装不变",
+    "身份不变",
+    "轴线不变"
+  ],
+  "asset_ids": [
+    "CHAR_MAIN"
+  ],
+  "evidence_basis": "asset package + explicit state transition; post-generation frame proof pending",
+  "world_position": "【世界坐标：相对场景锚点；不得用上一镜画左代替】",
+  "screen_left_right": "【当前画面左右；换机位后重算】",
+  "force_and_contact": "【跨镜接触/持有/承重；无则写不适用】",
+  "asset_register": [
+    {
+      "asset_id": "CHAR_MAIN",
+      "kind": "character",
+      "initial": "【本桥起始外观与状态】",
+      "change": "【本桥内允许的状态变化；无则 none】",
+      "final": "【交给下一镜的状态】"
+    }
+  ],
+  "default_layer_checks": [
+    "asset_initial_change_final",
+    "world_position_is_not_screen_left_right",
+    "force_and_contact_when_applicable",
+    "inherit_approved_state_only",
+    "identity_not_equal_state"
+  ],
+  "inherit_policy": "approved_state_only; never_latest_unqc_frame; fix_current_shot_before_propagate",
+  "consistency_layers": "Character Identity != Scene State != Shot State; inherit Approved State only",
+  "scene_state": "【同场则继承合格场景状态：空间关系、时间光线、家具风格；换场则新建。不要求场景jpg】",
+  "scene_prep_policy": "dynamic_scene_state_not_image_library"
 }

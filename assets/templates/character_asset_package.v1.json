@@ -18,20 +18,40 @@
     "makeup_sheet": {
       "naming_rule": "{character_id}_{expression}_{angle}",
       "required_views": [
-        {"angle": "front", "expression": "neutral", "required": true},
-        {"angle": "side", "expression": "neutral", "required": true}
+        {
+          "angle": "front",
+          "expression": "neutral",
+          "required": true
+        },
+        {
+          "angle": "side",
+          "expression": "neutral",
+          "required": true
+        }
       ],
-      "required_expressions": ["neutral", "tension", "reaction"]
+      "required_expressions": [
+        "neutral",
+        "tension",
+        "reaction"
+      ]
     }
   },
   "identity_invariants": {
     "visual": "【视觉不变量：发型、年龄段、服装在本项目内固定】",
-    "negative_constraints": ["不使用现实人物肖像", "不加入品牌标识", "不改变角色身份"],
+    "negative_constraints": [
+      "不使用现实人物肖像",
+      "不加入品牌标识",
+      "不改变角色身份"
+    ],
     "behavioral": "【行为不变量：由当前镜头动作弧驱动】",
     "relational": "【关系不变量：关系位置保持为填写的 role】"
   },
   "allowed_evolution": {
-    "may_change": ["情绪", "姿态", "道具状态"],
+    "may_change": [
+      "情绪",
+      "姿态",
+      "道具状态"
+    ],
     "requires_new_dossier_version": true
   },
   "visual_assets": [
@@ -63,9 +83,54 @@
       "naming": "CHAR_XXX_tension_front"
     }
   ],
-  "missing": ["CHAR_XXX_neutral_front", "CHAR_XXX_neutral_side", "CHAR_XXX_tension_front"],
+  "missing": [
+    "CHAR_XXX_neutral_front",
+    "CHAR_XXX_neutral_side",
+    "CHAR_XXX_tension_front"
+  ],
   "rights_and_provenance": {
     "source": "user_filled_template",
-    "disallowed_sources": ["UNAUTHORIZED_REAL_PERSON_LIKENESS"]
-  }
+    "disallowed_sources": [
+      "UNAUTHORIZED_REAL_PERSON_LIKENESS"
+    ]
+  },
+  "locked_features": {
+    "face": "【已确认五官/年龄段/发际线；待审不得写入】",
+    "body": "【已确认体态；待审不得写入】",
+    "costume": "【已确认服装层次；待审不得写入】",
+    "personal_props": "【角色绑定物件：手机、包等；无则写无。有则本镜按需绑定，不得只锁脸】"
+  },
+  "variant_policy": "suffix_new_id_never_overwrite",
+  "static_asset_rules": [
+    "do_not_write_action",
+    "do_not_write_dialogue"
+  ],
+  "material_structure": "【皮肤/发丝/布料等表面结构、磨损、反射；禁止空泛材质词】",
+  "design_basis": {
+    "facts": [
+      "【剧本或用户已确认】"
+    ],
+    "design_assumptions": [
+      "【有依据推定】"
+    ],
+    "critical_unknowns": [
+      "【关键未知】"
+    ]
+  },
+  "negative_constraints_policy": "evidence_required_except_genre_hard_bans",
+  "reference_image_camera_lock": false,
+  "binding_policy": "episode_brief_decides_url_count_and_order",
+  "state_contract": {
+    "initial": "【定妆起始状态】",
+    "change": "【允许变化】",
+    "final": "【本包结束状态】"
+  },
+  "reference_role": "identity_not_keyframe",
+  "identity_usage": "full_identity_lock_not_i2v_source",
+  "identity_layer": "Character Identity：脸/体型/基础服装/关键特征。这是长期资产，需要提前准备。换装、湿发、受伤、哭过不写这里。",
+  "episode_state": "State：本集服装/发型妆面/道具持有/受伤。换场换装新建状态，不改身份包。",
+  "shot_state": "Shot State：这一镜起步姿态与接触。走合同起止状态或构图静帧，不进身份包。",
+  "shot_binding_rule": "bind_needed_sheets_on_demand; never_face_crop_as_whole_world; never_i2v_source",
+  "long_term_asset": true,
+  "origin": "prepare_before_episode"
 }

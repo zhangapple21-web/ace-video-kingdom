@@ -11,6 +11,7 @@ from typing import Any, Callable, Mapping
 
 from .media_routing import route_media_demand
 from .project import discover_project
+from .image_assets import AssetStore
 from .projection import project_messages
 from .task_state import TERMINAL, complete, create, load, progress
 
@@ -85,7 +86,12 @@ def execute_media_task(
     if existing.get("state") in TERMINAL:
         return {"status": existing["state"], "route": None, "state": existing, "idempotent": True}
     route = route_media_demand(request, env=env)
-    projection = project_messages(context_messages or [])
+    route_project = (route.get("project") if isinstance(route, dict) else None) or project
+    # Keep transport assets in the canonical project, outside Codex history.
+    # The provider runner receives only the projected metadata/references.
+    project_root = route_project.get("root") if isinstance(route_project, dict) else None
+    asset_store = AssetStore(Path(project_root) / "assets" / "cache" / "transport") if project_root else AssetStore()
+    projection = project_messages(context_messages or [], asset_store=asset_store)
     if route is None:
         state = progress(
             state_file,
@@ -96,8 +102,7 @@ def execute_media_task(
         )
         return {"status": "WAITING_USER", "route": None, "state": state}
 
-    route_project = route.get("project") or project
-    projection_meta = {key: projection.get(key) for key in ("schema", "dropped_messages", "images", "image_bytes", "image_cap", "aggregate_cap", "within_budget", "protected_conclusions")}
+    projection_meta = {key: projection.get(key) for key in ("schema", "dropped_messages", "history_cap", "images", "inline_images", "image_bytes", "image_cap", "aggregate_cap", "within_budget", "protected_conclusions", "unique_asset_ids", "visuals_deferred", "model_boundary")}
     route_metadata = {
         "task_class": route.get("task_class"),
         "required_capability": (route.get("required_capabilities") or [None])[0],

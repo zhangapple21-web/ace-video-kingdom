@@ -1,0 +1,26 @@
+{
+  "schema": "video_kingdom.script_prompt_review.v1",
+  "shot_id": "SHOT_ID",
+  "run_id": "THIS_ROUND_RUN_ID",
+  "script_hash": "SHA256_OF_THIS_ROUND_SCRIPT",
+  "prompt_hash": "SHA256_OF_COMPILED_PROMPT",
+  "script_review": {
+    "role": "编剧",
+    "dialogue_order": "【对白顺序是否正确】",
+    "phone_state": "【手机状态是否符合硬规则】",
+    "monologue_handling": "【独白怎么处理】",
+    "unfilmable_risks": "【拍不了或会穿帮的点】",
+    "verdict": "通过",
+    "reason": "",
+    "reviewed_at": "2026-09-17T00:00:00+08:00"
+  },
+  "prompt_review": {
+    "role": "导演",
+    "distorts_script": false,
+    "hard_rules_complete": true,
+    "high_risk_extras": false,
+    "conclusion": "合格，可以生成",
+    "reason": "",
+    "reviewed_at": "2026-09-17T00:05:00+08:00"
+  }
+}

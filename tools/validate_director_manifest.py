@@ -85,6 +85,29 @@ def validate_manifest(manifest: dict[str, Any], *, strict: bool = False) -> dict
                 (errors if strict else warnings).append(f"{shot_id}: performance.{key} missing")
         if not spatial.get("subjects_present") and not spatial.get("allowed_entries"):
             warnings.append(f"{shot_id}: source frame has no subject and no allowed entry path")
+        world = str(spatial.get("world_position") or "").strip()
+        screen = str(spatial.get("screen_left_right") or "").strip()
+        if world and screen and world == screen:
+            warnings.append(f"{shot_id}: world_position copied as screen_left_right")
+        if spatial.get("world_not_equal_screen") is False and world and screen:
+            warnings.append(f"{shot_id}: world_not_equal_screen is false")
+        if spatial.get("locked_shot_no_added_beats") is False:
+            warnings.append(f"{shot_id}: locked shot added beats")
+        if lighting.get("recompute_on_camera_change") is False:
+            motion = str(camera.get("main_motion") or "")
+            if motion and motion not in {"固定", "static", "none", "无"}:
+                warnings.append(f"{shot_id}: camera changed but key light not marked for recompute")
+        compile_order = shot.get("compile_order") if isinstance(shot.get("compile_order"), dict) else director.get("compile_order") if isinstance(director.get("compile_order"), dict) else {}
+        if compile_order and compile_order.get("director_packet_before_prompt") is False:
+            warnings.append(f"{shot_id}: compile_order inverted; fill director packet before prompt")
+        knowledge = shot.get("knowledge_status") if isinstance(shot.get("knowledge_status"), dict) else {}
+        if knowledge:
+            mixed = set(map(str, knowledge.get("facts") or [])) & set(map(str, knowledge.get("assumptions") or []))
+            if mixed:
+                warnings.append(f"{shot_id}: facts and assumptions overlap")
+        force = performance.get("force_and_contact")
+        if force is not None and (force == "" or force == []):
+            warnings.append(f"{shot_id}: performance.force_and_contact empty")
         bridge = shot.get("continuity_bridge") if isinstance(shot.get("continuity_bridge"), dict) else {}
         if bridge and bridge.get("status") == "READY" and bridge.get("frame_proof_status") != "VERIFIED":
             errors.append(f"{shot_id}: READY continuity bridge lacks verified frame proof")

@@ -228,7 +228,12 @@ def _provider_config(provider: str) -> tuple[str, str, str] | None:
     return None
 
 
-def _model_slice(chunk: SourceChunk, source_hash: str, provider: str) -> tuple[dict[str, Any] | None, dict[str, Any]]:
+def _model_slice(
+    chunk: SourceChunk,
+    source_hash: str,
+    provider: str,
+    receipt_dir: Path | None = None,
+) -> tuple[dict[str, Any] | None, dict[str, Any]]:
     config = _provider_config(provider)
     if not config:
         return None, {"status": "NOT_PROVEN", "reason": "provider_credentials_or_base_url_unavailable"}
@@ -274,7 +279,8 @@ def _model_slice(chunk: SourceChunk, source_hash: str, provider: str) -> tuple[d
         endpoint=endpoint, payload_schema="openai.chat.completions.v1", model=model,
         scope="research", request_kind="research",
     )
-    receipt_path = Path(__file__).resolve().parents[1] / "research" / "admission_receipts" / f"semantic_slice_{chunk.chunk_id}.json"
+    receipt_root = receipt_dir or (Path(__file__).resolve().parents[1] / "research" / "admission_receipts")
+    receipt_path = receipt_root / f"semantic_slice_{chunk.chunk_id}.json"
     admission = admit_provider_request(canonical, receipt_path=receipt_path)
     if admission["status"] != "ADMITTED":
         return None, {"status": "NOT_PROVEN", "reason": "provider_admission_blocked", "admission_receipt": str(receipt_path), "errors": admission["preflight"]["errors"]}
@@ -303,6 +309,7 @@ def slice_novel(
     max_chars: int = 14000,
     source_start: int | None = None,
     source_end: int | None = None,
+    receipt_dir: Path | None = None,
 ) -> dict[str, Any]:
     # Keep the audit hash tied to the exact file bytes.  ``Path.read_text`` on
     # Windows normalizes CRLF, which previously made a valid source appear to
@@ -328,7 +335,7 @@ def slice_novel(
     slices: list[dict[str, Any]] = []
     provider_receipts: list[dict[str, Any]] = []
     for chunk in chunks:
-        model_result, receipt = _model_slice(chunk, source_hash, provider)
+        model_result, receipt = _model_slice(chunk, source_hash, provider, receipt_dir=receipt_dir)
         provider_receipts.append({"chunk_id": chunk.chunk_id, **receipt})
         accepted = 0
         invalid_reasons: list[str] = []
@@ -383,6 +390,7 @@ def main() -> int:
     parser.add_argument("--max-chars", type=int, default=14000)
     parser.add_argument("--source-start", type=int, help="global character offset of a bounded source window")
     parser.add_argument("--source-end", type=int, help="exclusive global character offset of a bounded source window")
+    parser.add_argument("--receipt-dir", type=Path, help="directory for provider admission receipts; defaults to the repository research directory")
     args = parser.parse_args()
     if not args.input.is_file():
         raise SystemExit(f"source file missing: {args.input}")
@@ -394,6 +402,7 @@ def main() -> int:
         args.max_chars,
         args.source_start,
         args.source_end,
+        args.receipt_dir,
     )
     print(json.dumps({"status": "COMPLETED", "output": str(args.output), "model_status": package["method"]["model_status"], "slice_count": len(package["slices"])}, ensure_ascii=False))
     return 0

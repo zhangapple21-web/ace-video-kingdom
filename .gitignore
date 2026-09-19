@@ -46,3 +46,6 @@ media_staging/line_test_*_20260912*.png
 
 # Local-only smoke-test outputs; canonical receipts belong under research/.
 temp/
+
+# Hash-addressed transport and vision caches are reproducible local state.
+assets/cache/

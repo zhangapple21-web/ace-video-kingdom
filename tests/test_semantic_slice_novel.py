@@ -53,7 +53,7 @@ def test_model_response_is_recorded_without_promoting_to_shot(tmp_path: Path):
                     return 200
                 raise AttributeError(name)
         opener.return_value = Response()
-        package = slice_novel(source, output, provider="openai", max_chapters=1, max_chars=500)
+        package = slice_novel(source, output, provider="openai", max_chapters=1, max_chars=500, receipt_dir=tmp_path / "receipts")
     assert package["method"]["model_status"] == "VERIFIED"
     assert package["slices"][0]["interpretation_status"] == "MODEL_ASSISTED_PENDING_DIRECTOR_REVIEW"
     assert package["admission"]["next_gate"] == "director_review_then_shot_contract"
@@ -77,7 +77,7 @@ def test_model_source_binding_mismatch_fails_closed_to_local_slice(tmp_path: Pat
                     return 200
                 raise AttributeError(name)
         opener.return_value = Response()
-        package = slice_novel(source, output, provider="openai", max_chapters=1, max_chars=500)
+        package = slice_novel(source, output, provider="openai", max_chapters=1, max_chars=500, receipt_dir=tmp_path / "receipts")
     assert package["method"]["model_status"] == "NOT_PROVEN"
     assert package["slices"][0]["interpretation_status"] == "LOCAL_DETERMINISTIC_ONLY"
     receipt = package["provider_receipts"][0]
@@ -138,7 +138,7 @@ def test_model_excerpt_whitespace_is_relocated_to_exact_source(tmp_path: Path):
                     return 200
                 raise AttributeError(name)
         opener.return_value = Response()
-        package = slice_novel(source, output, provider="openai", max_chapters=1, max_chars=500, source_start=start, source_end=end)
+        package = slice_novel(source, output, provider="openai", max_chapters=1, max_chars=500, source_start=start, source_end=end, receipt_dir=tmp_path / "receipts")
     row = package["slices"][0]
     expected_start = start
     expected_end = raw.index("他放下酒杯。") + len("他放下酒杯。")

@@ -4,27 +4,65 @@
   "production_integration": false,
   "purpose": "将用户提供的短剧调度建议映射到现有单一生产入口，不新增Scheduler/Router/Runtime。",
   "capability_boundary": {
-    "verified_video_paths": ["agnes-video-2.5-flash", "agnes-video-2.5"],
-    "retired_video_paths": ["agnes-video-v2.0"],
+    "verified_video_paths": [
+      "agnes-video-2.5-flash",
+      "agnes-video-2.5"
+    ],
+    "retired_video_paths": [
+      "agnes-video-v2.0"
+    ],
     "verified_local_reference": "scene_action_anchor_first_frame",
-    "unverified_features": ["face_vector_input", "audio_driven_video", "provider_callback_webhook", "provider_generated_dialogue_alignment"],
-    "policy": "未验证能力只能记录为候选，不得写入实际派单参数。"
+    "unverified_features": [
+      "face_vector_input",
+      "audio_driven_video",
+      "provider_callback_webhook",
+      "provider_generated_dialogue_alignment"
+    ],
+    "policy": "未验证能力只能记录为候选，不得写入实际派单参数。",
+    "first_frame_policy": "scene_action_anchor / first_frame 只用于明确 Shot State，不是开拍门票。默认生产入口仍是 Agnes flash_mode=reference。本文件 production_integration=false，禁止升为全剧硬门。",
+    "scene_prep_policy": "dynamic_scene_state_not_image_library"
   },
   "asset_gate": {
-    "required_before_submission": ["shot_contract", "scene_action_anchor", "identity_reference", "prompt", "negative_prompt"],
-    "identity_vs_first_frame": "identity_reference锁定脸型、服装和人物；scene_action_anchor负责构图、道具和动作起始状态；肖像禁止直接作为动作首帧。",
-    "missing_asset_action": "BLOCKED，不提交视频任务。"
+    "required_before_submission": [
+      "shot_contract",
+      "scene_action_anchor",
+      "identity_reference",
+      "prompt",
+      "negative_prompt"
+    ],
+    "identity_vs_first_frame": "identity_reference 锁身份；scene_action_anchor 只在本镜需要 Shot State 构图静帧时使用；肖像禁止直接作为动作首帧。缺场景图不是生产 BLOCK。",
+    "missing_asset_action": "BLOCKED，不提交视频任务。",
+    "required_before_submission_scope": "FREE_ZONE_RESEARCH_ONLY；不得把 scene_action_anchor 读成生产开拍门票或每场先备场景 jpg"
   },
   "dialogue_and_duration": {
     "tts_first": true,
     "tts_status": "支持两条音频来源：provider_generated_audio（视频模型返回的音轨）或 external_tts。无真实音频时长时，镜头只能标记 AUDIO_PENDING，不得宣称已完成音画对齐。",
     "provider_audio_policy": "若视频模型返回音轨，先用ffprobe测量音频流，再用语音/对白可辨性检查确认；仅有AAC流不等于对白已对齐。确认后标记 PROVIDER_AUDIO_MEASURED；未确认内容仍为 AUDIO_UNVERIFIED。",
     "line_integrity": "完整一句台词不得跨镜切断；只能在停顿、动作或反应点切分。",
-    "duration_seconds": {"min": 2.5, "max": 18},
+    "duration_seconds": {
+      "min": 2.5,
+      "max": 18
+    },
     "rhythm_defaults": {
-      "dialogue_or_inner_voice": {"target_seconds": [8, 15], "minimum_hold_after_line_seconds": 0.6},
-      "reaction": {"target_seconds": [4, 8]},
-      "single_action": {"target_seconds": [4, 10]},
+      "dialogue_or_inner_voice": {
+        "target_seconds": [
+          8,
+          15
+        ],
+        "minimum_hold_after_line_seconds": 0.6
+      },
+      "reaction": {
+        "target_seconds": [
+          4,
+          8
+        ]
+      },
+      "single_action": {
+        "target_seconds": [
+          4,
+          10
+        ]
+      },
       "episode_dialogue_or_inner_voice_share_minimum": 0.45
     },
     "duration_gate": "render_seconds must be derived per shot after measuring dialogue/inner-voice audio and adding action completion, reaction, and recovery beats; provider defaults and user-supplied fixed seconds never define story timing",
@@ -47,19 +85,50 @@
       "negative": "禁止复合运镜、跳尺度、动作未完成提前切镜。"
     },
     "edit": {
-      "blacklist": ["全景直切超大特写", "连续两个以上特写", "未完成表演切镜"],
+      "blacklist": [
+        "全景直切超大特写",
+        "连续两个以上特写",
+        "未完成表演切镜"
+      ],
       "axis": "双人镜头提示180度轴线；仅作提示，不宣称能硬性保证。"
     }
   },
   "failure_policy": {
-    "provider_retry": {"max_attempts": 2, "delay_source": "Retry-After优先；无响应时按provider_profile，视频默认至少60秒"},
-    "quality_retry": {"max_attempts": 2, "seed_policy": "每次重试使用小幅seed偏移，保留失败证据"},
-    "degrade_order": ["已验证模型回退", "已授权场景动作素材占位", "人工替换素材标记"],
-    "never": ["重复提交已有video_id任务", "用静态图片冒充动作通过", "把provider completed当导演PASS", "无限重试或阻塞整集"]
+    "provider_retry": {
+      "max_attempts": 2,
+      "delay_source": "Retry-After优先；无响应时按provider_profile，视频默认至少60秒"
+    },
+    "quality_retry": {
+      "max_attempts": 2,
+      "seed_policy": "每次重试使用小幅seed偏移，保留失败证据"
+    },
+    "degrade_order": [
+      "已验证模型回退",
+      "已授权场景动作素材占位",
+      "人工替换素材标记"
+    ],
+    "never": [
+      "重复提交已有video_id任务",
+      "用静态图片冒充动作通过",
+      "把provider completed当导演PASS",
+      "无限重试或阻塞整集"
+    ]
   },
   "output_package": {
-    "must_include": ["shot_manifest", "source_hashes", "duration_probe", "director_review", "subtitle_receipt", "audio_status", "failure_log"],
+    "must_include": [
+      "shot_manifest",
+      "source_hashes",
+      "duration_probe",
+      "director_review",
+      "subtitle_receipt",
+      "audio_status",
+      "failure_log"
+    ],
     "release_gate": "所有选用镜头通过画面门禁、时长/分辨率校验、字幕校验和音频状态核对后，才能标记DELIVERABLE。",
-    "human_intervention": ["BGM动态混音", "必要空镜/物件特写补缝", "关键表演最终复核"]
+    "human_intervention": [
+      "BGM动态混音",
+      "必要空镜/物件特写补缝",
+      "关键表演最终复核"
+    ]
   }
 }
