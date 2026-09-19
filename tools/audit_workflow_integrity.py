@@ -8,6 +8,7 @@ from __future__ import annotations
 
 import json
 import re
+import subprocess
 import sys
 from pathlib import Path
 from typing import Any
@@ -40,6 +41,38 @@ def audit() -> dict[str, Any]:
     for path in required:
         if not path.is_file():
             errors.append(f"missing executable: {path}")
+
+    # A dirty worktree can make imports look healthy even when the same commit
+    # cannot recover after a restart. Keep the production import closure
+    # explicit and verify that each module is actually tracked when Git
+    # metadata is available.
+    required_runtime = [
+        ROOT / "production_control" / "model_transport.py",
+        ROOT / "production_control" / "image_assets.py",
+        ROOT / "production_control" / "projection.py",
+        ROOT / "tools" / "validate_script_prompt_review.py",
+        ROOT / "tools" / "validate_new_drama_semantics.py",
+    ]
+    for path in required_runtime:
+        if not path.is_file():
+            errors.append(f"missing production runtime dependency: {path}")
+    try:
+        for path in required_runtime:
+            relative = path.relative_to(ROOT).as_posix()
+            tracked = subprocess.run(
+                ["git", "ls-files", "--error-unmatch", "--", relative],
+                cwd=ROOT,
+                capture_output=True,
+                text=True,
+                check=False,
+            )
+            if tracked.returncode != 0:
+                errors.append(f"production runtime dependency is not tracked: {relative}")
+    except OSError:
+        warnings.append("git metadata unavailable; tracked dependency closure could not be checked")
+    projection_text = (ROOT / "production_control" / "projection.py").read_text(encoding="utf-8", errors="ignore") if (ROOT / "production_control" / "projection.py").is_file() else ""
+    if "def prepare_model_request" not in projection_text:
+        errors.append("production_control.projection missing prepare_model_request")
 
     registry = _load(REGISTRY)
     capabilities = {item.get("id"): item for item in registry.get("capabilities", []) if isinstance(item, dict)}
