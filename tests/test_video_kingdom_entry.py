@@ -12,6 +12,9 @@ def test_unified_entry_routes_video_without_provider_submission(tmp_path: Path, 
     assert receipt["control_plane"] == "production_control"
     assert receipt["dispatch"] == "media_route"
     assert receipt["provider_submission"] == "NOT_PERFORMED"
+    assert receipt["collaboration"]["mode"] == "DEFAULT_MULTI_WINDOW"
+    assert receipt["collaboration"]["authority"] == "DEFAULT_METHOD_ONLY"
+    assert len(receipt["collaboration"]["contract_sha256"]) == 64
     assert json.loads((tmp_path / "entry.json").read_text(encoding="utf-8"))["entry_id"] == receipt["entry_id"]
 
 
@@ -21,4 +24,3 @@ def test_unified_entry_sends_narrative_to_role_room(tmp_path: Path, monkeypatch)
     receipt = dispatch(text="写一个雨夜重逢的短剧大纲", out=tmp_path / "entry.json", profile="rapid")
     assert receipt["dispatch"] == "role_room"
     assert called and "--profile" in called[0]
-
