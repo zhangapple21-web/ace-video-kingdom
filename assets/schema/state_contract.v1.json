@@ -10,14 +10,15 @@
     "episode_state": {"type": "object"},
     "scene_state": {
       "type": "object",
-      "required": ["location", "time", "lighting", "space", "physical_layout", "interaction_surface"],
+      "required": ["location", "time", "lighting", "space", "physical_layout", "interaction_surface", "scene_mode"],
       "properties": {
         "location": {"type": "string", "minLength": 1},
         "time": {"type": "string", "minLength": 1},
         "lighting": {"type": "string", "minLength": 1},
         "space": {"type": "string", "minLength": 1},
         "physical_layout": {"type": "string", "minLength": 1},
-        "interaction_surface": {"type": "string", "minLength": 1}
+        "interaction_surface": {"type": "string", "minLength": 1},
+        "scene_mode": {"const": "LIVE_DIEGETIC_SPACE"}
       }
     },
     "shot_state": {"type": "object"},

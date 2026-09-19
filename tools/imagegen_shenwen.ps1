@@ -33,6 +33,9 @@ for ($index = 0; $index -lt $ImageGenArguments.Count; $index++) {
 }
 
 $apiKey = if ($selectedModel -like "grok-*") { $env:SHENWEN_GROK_API_KEY } else { $env:SHENWEN_IMAGE_API_KEY }
+if ([string]::IsNullOrWhiteSpace($apiKey) -and $selectedModel -like "grok-*") {
+    $apiKey = [Environment]::GetEnvironmentVariable("SHENWEN_GROK_API_KEY", "User")
+}
 if ([string]::IsNullOrWhiteSpace($apiKey) -and $selectedModel -notlike "grok-*") {
     $apiKey = [Environment]::GetEnvironmentVariable("SHENWEN_IMAGE_API_KEY", "User")
 }
@@ -43,7 +46,7 @@ if ([string]::IsNullOrWhiteSpace($apiKey)) {
     $apiKey = [Environment]::GetEnvironmentVariable("SHENWEN_API_KEY", "User")
 }
 if ([string]::IsNullOrWhiteSpace($apiKey)) {
-    throw "未找到 SHENWEN_IMAGE_API_KEY（或 SHENWEN_API_KEY）。请在本机环境变量中设置，不要把密钥写入仓库。"
+    throw "未找到图像模型密钥（SHENWEN_IMAGE_API_KEY、SHENWEN_GROK_API_KEY 或 SHENWEN_API_KEY）。请在本机环境变量中设置，不要把密钥写入仓库。"
 }
 
 $baseUrl = if ($env:SHENWEN_IMAGE_BASE_URL) {
