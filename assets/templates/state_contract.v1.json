@@ -13,6 +13,9 @@
     "time": "UNKNOWN",
     "lighting": "UNKNOWN",
     "spatial_relations": "UNKNOWN",
+    "physical_layout": "【可进入的真实布局：地面/桌椅/门窗/前后景】",
+    "interaction_surface": "【人物实际接触的桌面/方向盘/门把/道具承托面】",
+    "scene_mode": "LIVE_DIEGETIC_SPACE",
     "environment_props": []
   },
   "shot_state": {

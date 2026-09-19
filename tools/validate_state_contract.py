@@ -17,10 +17,13 @@ def validate_state_contract(contract: Any) -> dict[str, Any]:
             errors.append(f"state_contract.{layer} is required")
     shot = contract.get("shot_state") if isinstance(contract.get("shot_state"), dict) else {}
     scene = contract.get("scene_state") if isinstance(contract.get("scene_state"), dict) else {}
-    for key in ("location", "time", "lighting", "space"):
+    for key in ("location", "time", "lighting", "space", "physical_layout", "interaction_surface"):
         value = str(scene.get(key) or "").strip().upper()
         if not value or value in {"REQUIRED", "UNKNOWN", "N/A", "NONE"}:
             errors.append(f"state_contract.scene_state.{key} must be concrete")
+    scene_blob = " ".join(str(scene.get(key) or "") for key in ("location", "space", "physical_layout", "interaction_surface"))
+    if any(token in scene_blob for token in ("风景画", "景观图", "纯背景", "唯美背景", "无人物空间")):
+        errors.append("state_contract.scene_state must describe a playable diegetic space, not a scenic still")
     for key in ("start_pose", "primary_action", "emotion_start_end", "camera", "end_state"):
         value = str(shot.get(key) or "").strip().upper()
         if not value or value in {"REQUIRED", "UNKNOWN", "N/A", "NONE"}:
