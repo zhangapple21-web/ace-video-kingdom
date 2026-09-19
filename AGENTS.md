@@ -14,6 +14,7 @@ Codex 侧重认知收敛、架构判断和经验沉淀；Trae/其他执行节点
 - C 盘轻量项目固定在 `C:\轻量项目`，不从本项目直接导入或读取；跨区同步只走 Git 或 `D:\视频创作\sync` 的显式文件。
 - 保持现有单一控制面、准入门禁和收据链；不要绕过 `production_control` 直接发布。
 - 所有新的视频/图像/短剧请求必须先经 `tools/video_kingdom_entry.py`；其他脚本仅可由统一入口或已批准的执行收据调用。
+- 视频王国的角色、模型和媒体路由固定走本地 OneAPI `http://127.0.0.1:3000/v1`；`3002` 仅是系统级 Responses 兼容传输层，不得作为视频生产入口或视频模型降级路径。
 - 定稿剧本统一归档到 `D:\视频创作\剧本库`，先查 `research/script_registry.v1.json` 的 `FINAL_SOURCE`，不得只依赖项目临时目录或聊天上下文。
 - 创作简报通过 `--creator-brief` 注入 `run_idea_pipeline.py`；发布数据写入 `publish_recap.v1.json`，只供下一轮迭代，不能批准交付、切换模型或覆盖收据。
 - 图像固定使用 `gpt-image-2`，视频固定使用 `agnes-video-2.5-flash`。
