@@ -59,6 +59,24 @@ def validate_production_shot(canonical_shot: dict[str, Any], contract_prompt: st
 
     shot_prompt = canonical_shot.get("shot_prompt")
     shot_prompt = shot_prompt if isinstance(shot_prompt, dict) else {}
+    # Every deliverable is a filmed, watchable scene. Stylisation is allowed,
+    # but a scenic illustration or a static background is not a substitute for
+    # photographed space, expression, props, and physical performance.
+    visual_blob = " ".join(
+        str(value or "")
+        for value in (
+            shot_prompt.get("style_lock"),
+            shot_prompt.get("scene_lock"),
+            shot_prompt.get("compiled_prompt"),
+            canonical_shot.get("visual_mode"),
+        )
+    )
+    realism_terms = ("真人", "真实", "电影感", "摄影")
+    forbidden_still_styles = ("风景画", "插画背景", "纯背景图", "景观海报", "静态风景", "绘画风")
+    if not any(term in visual_blob for term in realism_terms):
+        raise ValueError("production shot rejected: visual realism policy is missing; describe filmed human/space/prop performance")
+    if any(term in visual_blob for term in forbidden_still_styles):
+        raise ValueError("production shot rejected: scenic illustration/static background cannot substitute for a filmed scene")
     prompt_check = validate_prompt(
         {
             "compiled_prompt": contract_prompt,
