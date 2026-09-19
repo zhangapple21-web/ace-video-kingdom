@@ -12,5 +12,10 @@
   "forbidden_substitutes": ["风景画", "插画背景", "纯背景图", "景观海报", "静态风景", "绘画风", "角色板直接动画", "两张活照片对话"],
   "required_evidence": ["identity_ref", "scene_state", "shot_state", "named_visible_performance", "realism_intent"],
   "provider_rule": "缺任一必需证据或命中禁止替代物，禁止提交 Provider。",
+  "ace_execution_principles": {
+    "expert": "复杂问题先拆成可验证模块，保留一条清晰主线，不用局部补丁掩盖结构问题。",
+    "operator": "稳定问题使用标准模板、固定入口和可重复门禁，减少每次重新判断。",
+    "winner": "重复生产必须记录结果、失败代价和前后指标；只有验证有效的改进才能进入长期基线。"
+  },
   "single_source_of_truth": true
 }
