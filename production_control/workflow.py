@@ -335,9 +335,9 @@ def lock_plan_shots(
     """Lock only the validated scope prefix after the asset gate is READY."""
     run = ProductionControl(run_path)
     plan = _read_json(plan_path.resolve())
-    normalized_scope = normalize_scope(plan, scope) if scope is not None else normalize_scope(plan)
     snapshot = run.snapshot()
     run_scope = snapshot.get("scope")
+    normalized_scope = normalize_scope(plan, scope) if scope is not None else (run_scope or normalize_scope(plan))
     if run_scope is not None and run_scope != normalized_scope:
         raise WorkflowError("SCOPE_RUN_MISMATCH")
     if snapshot.get("plan_shot_ids") and snapshot["plan_shot_ids"] != _plan_shot_ids(plan):
