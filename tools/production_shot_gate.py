@@ -112,7 +112,7 @@ def validate_production_shot(canonical_shot: dict[str, Any], contract_prompt: st
     rhythm_packet = canonical_shot.get("shot_rhythm")
     if not isinstance(rhythm_packet, dict):
         raise ValueError("shot rhythm contract missing: attach assets/templates/shot_rhythm_contract.v1.json before provider submission")
-    rhythm_check = validate_shot_rhythm(rhythm_packet)
+    rhythm_check = validate_shot_rhythm(rhythm_packet, strict_performance=True)
     if rhythm_check["status"] == "BLOCKED":
         raise ValueError("shot rhythm contract failed: " + ";".join(rhythm_check["errors"]))
     motion_check = validate_shot_rhythm(canonical_shot)

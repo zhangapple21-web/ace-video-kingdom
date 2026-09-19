@@ -14,6 +14,7 @@ MOTION_HARD_BANS = (
 SCALES = {"wide", "medium", "close", "detail", "extreme_close"}
 ANNOTATIONS = ("action", "dialogue", "emotion", "subtext", "motivation", "atmosphere")
 PERFORMANCE = ("speaker_hands_body", "listener_reaction", "pause_point", "inner_voice_mouth_state", "cut_motivation")
+_PLACEHOLDER_MARKERS = {"PENDING", "PENDING_ROLE_ROOM", "TODO", "TBD", "待补", "待填写", "待定"}
 
 PHOTOGRAPHY_KEYS = ("focal_length", "camera_height", "camera_path", "speed", "focus_handoff", "landing")
 OVERFLOW_POLICIES = {"split_or_extend_never_swallow", "split", "extend"}
@@ -117,7 +118,7 @@ def _collect_submitted_images(shot: dict[str, Any], rhythm: dict[str, Any]) -> l
     return names
 
 
-def validate_shot_rhythm(shot: dict[str, Any]) -> dict[str, Any]:
+def validate_shot_rhythm(shot: dict[str, Any], *, strict_performance: bool = False) -> dict[str, Any]:
     errors: list[str] = []; warnings: list[str] = []
     rhythm = shot.get("shot_rhythm") if isinstance(shot.get("shot_rhythm"), dict) else shot
     if rhythm.get("schema") and rhythm.get("schema") != "video_kingdom.shot_rhythm_contract.v1":
@@ -132,6 +133,23 @@ def validate_shot_rhythm(shot: dict[str, Any]) -> dict[str, Any]:
     beats = rhythm.get("performance_beats") if isinstance(rhythm.get("performance_beats"), dict) else {}
     for key in PERFORMANCE:
         if _blank(beats.get(key)): errors.append(f"missing performance_beats.{key}")
+    if strict_performance:
+        # A materialized placeholder is useful while compiling a draft, but it
+        # must never cross the provider boundary.  Otherwise the generator is
+        # asked to invent the acting and silently falls back to talking heads.
+        for section_name, section in (("script_annotations", annotations), ("performance_beats", beats)):
+            for key, value in section.items():
+                if isinstance(value, str) and value.strip().upper() in _PLACEHOLDER_MARKERS:
+                    errors.append(f"{section_name}.{key} is a placeholder; write the concrete beat before filming")
+        dialogue = annotations.get("dialogue") not in (None, "", "不适用", "无")
+        if dialogue:
+            for key in ("speaker_hands_body", "listener_reaction", "pause_point", "cut_motivation"):
+                value = beats.get(key)
+                if _blank(value) or str(value).strip() in {"不适用", "无"}:
+                    errors.append(f"dialogue requires concrete performance_beats.{key}")
+        if annotations.get("inner_voice") not in (None, "", "不适用", "无"):
+            if beats.get("inner_voice_mouth_state") in (None, "", "不适用", "无"):
+                errors.append("inner voice requires concrete performance_beats.inner_voice_mouth_state")
     movement = str(rhythm.get("movement") or "static").lower()
     if movement not in {"static", "none", "固定", "无"} and _blank(rhythm.get("movement_motivation")):
         errors.append("moving camera requires movement_motivation")
