@@ -2,14 +2,44 @@
   "creative_constraints": {
     "schema": "video_kingdom.creative_constraints.v1",
     "hard": {
-      "identity_reference": {"status": "LOCKED", "rules": ["【本项目主体/参考资产不变量】"]},
-      "narrative_order": {"status": "LOCKED", "rules": ["【本项目不可逆的叙事/对白/动作顺序】"]},
-      "spatial_relationship": {"status": "LOCKED", "rules": ["【本项目空间关系/隔离/轴线约束】"]},
-      "visibility_and_exclusions": {"status": "LOCKED", "rules": ["【本项目必须可见/不可见/禁用画面约束】"]},
-      "performance_and_audio": {"status": "LOCKED", "rules": ["【本项目表演、口型、独白、停顿、声音约束】"]}
+      "identity_reference": {
+        "status": "LOCKED",
+        "rules": [
+          "【本项目主体/参考资产不变量】"
+        ]
+      },
+      "narrative_order": {
+        "status": "LOCKED",
+        "rules": [
+          "【本项目不可逆的叙事/对白/动作顺序】"
+        ]
+      },
+      "spatial_relationship": {
+        "status": "LOCKED",
+        "rules": [
+          "【本项目空间关系/隔离/轴线约束】"
+        ]
+      },
+      "visibility_and_exclusions": {
+        "status": "LOCKED",
+        "rules": [
+          "【本项目必须可见/不可见/禁用画面约束】"
+        ]
+      },
+      "performance_and_audio": {
+        "status": "LOCKED",
+        "rules": [
+          "【本项目表演、口型、独白、停顿、声音约束】"
+        ]
+      }
     },
-    "flexible": {"duration": "【可接受时长范围】", "cut_timing": "【允许的节奏弹性】"},
-    "deferred": ["【后置处理，不阻塞本镜开拍的事项】"]
+    "flexible": {
+      "duration": "【可接受时长范围】",
+      "cut_timing": "【允许的节奏弹性】"
+    },
+    "deferred": [
+      "【后置处理，不阻塞本镜开拍的事项】"
+    ]
   },
   "role_audit": {
     "schema": "video_kingdom.oneapi_role_room.v2",
@@ -17,11 +47,26 @@
     "profile": "standard",
     "production_submission": "NOT_PERFORMED",
     "roles": [
-      {"role_id": "primary_writer", "status": "COMPLETED"},
-      {"role_id": "storyboarder", "status": "COMPLETED"},
-      {"role_id": "contrarian_auditor", "status": "COMPLETED"},
-      {"role_id": "continuity_editor", "status": "COMPLETED"},
-      {"role_id": "director_convergence", "status": "COMPLETED"}
+      {
+        "role_id": "primary_writer",
+        "status": "COMPLETED"
+      },
+      {
+        "role_id": "storyboarder",
+        "status": "COMPLETED"
+      },
+      {
+        "role_id": "contrarian_auditor",
+        "status": "COMPLETED"
+      },
+      {
+        "role_id": "continuity_editor",
+        "status": "COMPLETED"
+      },
+      {
+        "role_id": "director_convergence",
+        "status": "COMPLETED"
+      }
     ]
   },
   "story_goal": "【这一镜在故事中的功能】",
@@ -35,26 +80,118 @@
       "camera_start": "【开镜机位】",
       "allowed_content": "【本镜允许发生的内容】",
       "forbidden_additions": "【禁止新增的人物/道具/界面】",
-      "subjects_present": true
+      "subjects_present": true,
+      "world_position": "【世界坐标：相对场景锚点的左右前后与朝向】",
+      "screen_left_right": "【当前画面左右；换机位后必须重算，不得复制上一镜画左】",
+      "world_not_equal_screen": true,
+      "locked_shot_no_added_beats": true,
+      "environment_visible_when_location_bound": true,
+      "environment_visible_note": "场地/空间参考已绑定则景别必须让空间进画；身份裁图不是构图主图"
     },
     "camera": {
       "main_motion": "【唯一主要摄影机运动】",
       "tracking_subject": "【摄影机跟随谁/什么】",
-      "camera_end": "【收镜位置和停留】"
+      "camera_end": "【收镜位置和停留】",
+      "camera_motion_level": "NONE / SUBTLE / SIMPLE / COMPLEX；缺省不阻断",
+      "camera_motion_reason": "为什么要动；NONE 写本镜不需要改变观看距离",
+      "reverse_shot_policy": "split_clips_ok_not_two_id_photos",
+      "reverse_shot_note": "正反打可拆，不可拆成两张角色包对口型；至少一侧过肩或半身"
     },
     "lighting": {
       "motivation": "【光线动机】",
       "key_source": "【主光源】",
       "direction": "【主光方向】",
       "exposure_lock": true,
-      "white_balance_lock": true
+      "white_balance_lock": true,
+      "recompute_on_camera_change": true
     },
     "performance": {
-      "speaker_action": "【说话时手和身体在做什么；无对白写‘不适用’】",
+      "speaker_action": "【说话时手和身体在做什么；写可命名动词，禁止只写自然微动作；无对白写不适用】",
       "listener_expression": "【听者表情如何变化；无听者写‘不适用’】",
       "pause_points": "【停顿位置和时长；无停顿写‘无’】",
       "monologue_mouth_state": "【独白时嘴部状态；无独白写‘不适用’】",
-      "edit_intent": "【为什么在这里切镜，如何保持电影感】"
+      "edit_intent": "【为什么在这里切镜，如何保持电影感】",
+      "hold_reason": "无 / 听者反应 / 信息落地 / 关系变化 / 眼神手部 / 空间压力；切点后无新信息则结束；NONE 不等于静帧",
+      "end_when_no_new_info": true,
+      "force_and_contact": "【接触/受力/承重；无则写不适用】",
+      "visible_event": "【这几秒观众能看到的事件；听者/道具/空间可见变化；缺省不阻断】"
+    },
+    "default_layer_checks": [
+      "no_add_beats_after_shot_lock",
+      "world_position_is_not_screen_left_right",
+      "director_packet_before_prompt_compile",
+      "physical_key_light_recompute_on_camera_change",
+      "force_and_contact_when_applicable",
+      "facts_assumptions_unknowns_separated",
+      "negative_constraints_need_evidence",
+      "no_motion_without_reason",
+      "fail_downgrade_photography_not_plot",
+      "no_unmotivated_pad",
+      "end_when_no_new_info",
+      "watchable_change_not_still_photo",
+      "none_is_not_freeze_frame",
+      "action_before_camera",
+      "identity_refs_not_keyframes",
+      "downgrade_motion_not_collapse_scale",
+      "mcu_not_show_default",
+      "identity_crop_not_primary_input",
+      "reverse_not_two_pack_crops"
+    ],
+    "consistency_layers": {
+      "identity": "我是谁，来自长期角色包，不随一镜情绪改",
+      "state": "我现在怎样（换装/湿发/受伤），来自本集状态，不写回身份包",
+      "shot_state": "这一镜从哪起步，来自起止状态或构图静帧",
+      "reference_policy": "on_demand_when_identity_stability_needed",
+      "continuation_policy": "approved_state_only",
+      "scene_state": "当前在哪/什么时候/什么光/空间怎么连；由剧本+前后镜动态建立，不要求场景图库",
+      "scene_prep_policy": "dynamic_scene_state_not_image_library"
     }
+  },
+  "script_prompt_review": {
+    "schema": "video_kingdom.script_prompt_review.v1",
+    "shot_id": "SHOT_ID",
+    "run_id": "THIS_ROUND_RUN_ID",
+    "script_hash": "SHA256_OF_THIS_ROUND_SCRIPT",
+    "prompt_hash": "SHA256_OF_COMPILED_PROMPT",
+    "script_review": {
+      "role": "编剧",
+      "dialogue_order": "【对白顺序是否正确】",
+      "phone_state": "【手机状态是否符合硬规则】",
+      "monologue_handling": "【独白怎么处理】",
+      "unfilmable_risks": "【拍不了或会穿帮的点】",
+      "verdict": "通过",
+      "reason": "",
+      "reviewed_at": "2026-09-17T00:00:00+08:00"
+    },
+    "prompt_review": {
+      "role": "导演",
+      "distorts_script": false,
+      "hard_rules_complete": true,
+      "high_risk_extras": false,
+      "conclusion": "合格，可以生成",
+      "reason": "",
+      "reviewed_at": "2026-09-17T00:05:00+08:00"
+    }
+  },
+  "compile_order": {
+    "director_packet_before_prompt": true,
+    "status": "ADVISORY",
+    "note": "先填导演预检包，再编译提交提示词；不改变双审顺序"
+  },
+  "knowledge_status": {
+    "facts": [
+      "【剧本或用户已确认事实】"
+    ],
+    "assumptions": [
+      "【有依据的设计推定，不得冒充事实】"
+    ],
+    "unknowns": [
+      "【关键未知；不影响开拍的可留空】"
+    ]
+  },
+  "negative_constraints_policy": {
+    "evidence_required": true,
+    "genre_hard_bans_always_written": true,
+    "note": "无依据不写通用负面清单；题材硬禁仍必须写"
   }
 }

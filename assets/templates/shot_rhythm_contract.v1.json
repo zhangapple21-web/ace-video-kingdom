@@ -8,29 +8,175 @@
     "dialogue_and_inner_voice_are_separate",
     "timing_is_audio_or_action_driven"
   ],
+  "default_layer_checks": [
+    "no_add_beats_after_shot_lock",
+    "world_position_is_not_screen_left_right",
+    "director_packet_before_prompt_compile",
+    "photography_completeness_self_check",
+    "cut_must_be_motivated",
+    "overflow_split_or_extend_never_swallow",
+    "physical_key_light_recompute_on_camera_change",
+    "force_and_contact_when_applicable",
+    "sequence_is_not_a_shot",
+    "no_motion_without_reason",
+    "dialogue_default_none",
+    "submit_lens_line_is_motion_plus_reason",
+    "complex_motion_needs_path_focus_stop",
+    "fail_downgrade_photography_not_plot",
+    "no_unmotivated_pad",
+    "duration_equals_beats_then_stop",
+    "provider_duration_is_not_creative_duration",
+    "watchable_change_not_still_photo",
+    "none_is_not_freeze_frame",
+    "action_before_camera",
+    "poison_no_natural_micro_motion",
+    "identity_refs_not_keyframes",
+    "identity_pack_not_i2v_source",
+    "composition_still_is_lookdev_not_movie",
+    "asset_books_bound_per_shot",
+    "approved_state_only",
+    "identity_not_equal_state",
+    "downgrade_motion_not_collapse_scale",
+    "mcu_not_show_default",
+    "identity_crop_not_primary_input",
+    "reverse_not_two_pack_crops"
+  ],
   "shot_sizes": {
-    "wide": "交代地点、关系、处境和转场落点",
-    "medium": "承载对白、听者反应和可见手部动作",
-    "close": "承载情绪变化、关键台词和细微表演",
+    "wide": "交代地点、关系、处境和转场落点；对白/电话/双人段落里至少保留一镜能看见环境",
+    "medium": "承载对白、听者反应和可见手部动作；正反打优先半身或过肩，不默认拆成两张脸裁图",
+    "close": "承载情绪变化、关键台词和细微表演；可以有，但不能当全剧唯一景别",
     "detail": "强调眼神、手、道具或伏笔，必须有故事目的"
   },
   "rhythm_patterns": {
-    "dialogue": ["orientation", "medium_exchange", "emotion_close", "meaningful_detail", "release"],
-    "conflict": ["stable_exchange", "reaction_close", "action_detail", "pause_or_release"],
-    "introspection": ["space_or_profile", "quiet_close", "measured_hold", "release"],
-    "action": ["orientation", "preparation", "single_primary_action", "recovery"],
-    "transition": ["new_space_establish", "orientation", "story_action"]
+    "dialogue": [
+      "orientation",
+      "medium_exchange",
+      "emotion_close",
+      "meaningful_detail",
+      "release"
+    ],
+    "conflict": [
+      "stable_exchange",
+      "reaction_close",
+      "action_detail",
+      "pause_or_release"
+    ],
+    "introspection": [
+      "space_or_profile",
+      "quiet_close",
+      "measured_hold",
+      "release"
+    ],
+    "action": [
+      "orientation",
+      "preparation",
+      "single_primary_action",
+      "recovery"
+    ],
+    "transition": [
+      "new_space_establish",
+      "orientation",
+      "story_action"
+    ]
   },
-  "script_annotations": ["action", "dialogue", "emotion", "subtext", "motivation", "atmosphere"],
-  "performance_beats": ["speaker_hands_body", "listener_reaction", "pause_point", "inner_voice_mouth_state", "cut_motivation"],
+  "script_annotations": [
+    "action",
+    "dialogue",
+    "emotion",
+    "subtext",
+    "motivation",
+    "atmosphere"
+  ],
+  "performance_beats": [
+    "speaker_hands_body",
+    "listener_reaction",
+    "pause_point",
+    "inner_voice_mouth_state",
+    "cut_motivation"
+  ],
+  "optional_fields": {
+    "unit": "shot_not_sequence",
+    "overflow_policy": "split_or_extend_never_swallow",
+    "underfill_policy": "trim_or_shorten_never_pad",
+    "hold_reason": "无 / 听者反应 / 信息落地 / 关系变化 / 眼神手部 / 空间压力；没有可看变化就写无，不得靠发呆或两张图互挪填满秒数",
+    "force_and_contact": "【有接触、施力、承重、碰撞时填写；无则写不适用】",
+    "photography": {
+      "focal_length": "【焦段或等效光学；未知写 UNKNOWN，禁止伪精确小数】",
+      "camera_height": "【机位高度相对主体；未知写 UNKNOWN】",
+      "camera_path": "【中心路径；固定写 static】",
+      "speed": "【速度变化；无则 none】",
+      "focus_handoff": "【焦点或遮挡接力；无则 none】",
+      "landing": "【落点；可标 later，但不能省略有辨识作用的落点】"
+    },
+    "color_temperature_k": "【色温或相对冷暖；未知写 UNKNOWN，不编造开尔文数】",
+    "camera_motion_level": "NONE / SUBTLE / SIMPLE / COMPLEX；缺省不阻断旧合同；对白默认不瞎推机，不等于静帧",
+    "camera_motion_reason": "为什么要动；NONE 写本镜不需要改变观看距离，但必须写清可看的表演变化；禁止只写电影感推进或自然微动作",
+    "media_role": "identity_reference_not_keyframe; identity/scene refs are not first_frame/last_frame unless the contract is explicitly keyframe mode",
+    "submit_lens_line": "order: named visible verb -> listener/prop change -> one motion + one reason -> keep appearance; ban empty micro-motion",
+    "identity_usage": "full_identity_lock_not_i2v_source；角色包是长期资产，锁脸/体型/基础服装/角色绑定道具；场景默认 Scene State 不是图库；道具默认当镜状态；禁止复制参考图构图；禁止只把脸裁图当整包",
+    "flash_mode_default": "reference；对白短剧默认 reference。keyframe/ti2vid 必须显式，且首尾帧必须是本镜 Shot State 构图静帧，不是身份/场景/道具分册原图",
+    "composition_still_role": "lookdev_reference_not_i2v_source；构图未锁时 gpt-image-2 或实拍工作位出本镜构图，人工审真假后再作为 composition reference，不替代分册",
+    "asset_books_binding": "本镜 images[] 优先绑角色包；场景图按需，不强制每场一张；禁止只塞一张脸裁图当整场；也不必每镜塞满所有图",
+    "reference_policy": "on_demand_when_identity_stability_needed；近景/侧脸/漂移风险才加强 Identity Reference",
+    "continuation_policy": "approved_state_only；never_latest_unqc_frame",
+    "consistency_layers": "Character Identity != Scene State != Shot State；下一镜只吃 Approved State",
+    "scene_prep_policy": "dynamic_scene_state_not_image_library；不要求每个场景预先准备参考图；同场连续继承 Scene State",
+    "long_term_assets": "character_identity_pack；scene/prop images are optional context, not a required library",
+    "downgrade_motion_not_collapse_scale": "失败只降 COMPLEX->SIMPLE->SUBTLE->NONE；禁止把景别一并塌成 MCU/证件照",
+    "input_images_role": "identity_crop_not_primary_composition；身份裁图不得作为 input_images[0] 构图主图；场地/空间参考若已绑定，景别必须让空间进画",
+    "dialogue_environment_visible": "对白/电话/双人至少一镜能看见环境；MCU 不是全剧默认",
+    "reverse_shot_policy": "split_clips_ok_not_two_id_photos；至少一侧过肩或半身"
+  },
   "professional_extensions": {
-    "now": ["subtext", "motivation", "atmosphere"],
+    "now": [
+      "subtext",
+      "motivation",
+      "atmosphere",
+      "focal_length",
+      "camera_height",
+      "camera_path",
+      "speed",
+      "focus_handoff",
+      "landing",
+      "color_temperature_k",
+      "camera_motion_level",
+      "camera_motion_reason",
+      "underfill_policy",
+      "hold_reason",
+      "media_role",
+      "submit_lens_line",
+      "identity_usage",
+      "flash_mode_default",
+      "composition_still_role",
+      "downgrade_motion_not_collapse_scale",
+      "input_images_role",
+      "dialogue_environment_visible",
+      "reverse_shot_policy"
+    ],
     "later": {
-      "camera": ["focal_length", "camera_height", "composition_reference"],
-      "lighting": ["color_temperature_k", "key_fill", "palette"],
-      "audio": ["bgm_entry", "sfx_cue", "silence_seconds"],
-      "delivery": ["bitrate", "frame_rate", "color_space", "subtitle_spec"]
+      "camera": [
+        "composition_reference"
+      ],
+      "lighting": [
+        "key_fill",
+        "palette"
+      ],
+      "audio": [
+        "bgm_entry",
+        "sfx_cue",
+        "silence_seconds"
+      ],
+      "delivery": [
+        "bitrate",
+        "frame_rate",
+        "color_space",
+        "subtitle_spec"
+      ]
     }
   },
-  "advisory_only": ["fixed_cut_seconds", "one_sentence_one_shot", "same_scale_duration_limit"]
+  "advisory_only": [
+    "fixed_cut_seconds",
+    "one_sentence_one_shot",
+    "same_scale_duration_limit"
+  ]
 }

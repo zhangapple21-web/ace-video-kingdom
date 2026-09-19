@@ -194,11 +194,13 @@ def main() -> int:
     parser.add_argument("--take-id")
     parser.add_argument("--output")
     parser.add_argument("--phase", choices=("crash", "finalize"))
+    parser.add_argument("--receipt", type=Path, help="receipt output path; defaults to the repository research receipt")
     args = parser.parse_args()
     if args.child:
         return _child(args)
     receipt = run_rehearsal()
-    receipt_path = ROOT / "research" / "shot_core_cross_process_recovery.v1.json"
+    receipt_path = args.receipt or (ROOT / "research" / "shot_core_cross_process_recovery.v1.json")
+    receipt_path.parent.mkdir(parents=True, exist_ok=True)
     receipt_path.write_text(json.dumps(receipt, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     print(json.dumps(receipt, ensure_ascii=False, indent=2))
     return 0 if all(receipt["assertions"].values()) else 1

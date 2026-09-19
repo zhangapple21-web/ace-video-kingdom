@@ -1,13 +1,67 @@
 {
   "schema": "video_kingdom.director_preflight_contract.v1",
   "purpose": "在 Provider admission 前验证首帧空间、主体路径、摄影机路径、布光锁和表演节奏。",
-  "required_when_strict": ["story_goal", "duration_seconds", "source_frame"],
+  "required_when_strict": [
+    "story_goal",
+    "duration_seconds",
+    "source_frame"
+  ],
   "creative_constraints_required_when_strict": true,
   "role_audit_required_when_strict": true,
-  "spatial_audit": ["foreground", "midground", "background", "camera_start", "allowed_content", "forbidden_additions"],
-  "camera": ["main_motion", "tracking_subject", "camera_end"],
-  "lighting": ["motivation", "key_source", "direction", "exposure_lock", "white_balance_lock"],
-  "performance": ["speaker_action", "listener_expression", "pause_points", "monologue_mouth_state", "edit_intent"],
+  "spatial_audit": [
+    "foreground",
+    "midground",
+    "background",
+    "camera_start",
+    "allowed_content",
+    "forbidden_additions"
+  ],
+  "camera": [
+    "main_motion",
+    "tracking_subject",
+    "camera_end"
+  ],
+  "lighting": [
+    "motivation",
+    "key_source",
+    "direction",
+    "exposure_lock",
+    "white_balance_lock"
+  ],
+  "performance": [
+    "speaker_action",
+    "listener_expression",
+    "pause_points",
+    "monologue_mouth_state",
+    "edit_intent"
+  ],
   "ready_bridge_requires": "frame_proof_status=VERIFIED",
-  "provider_calls": false
+  "provider_calls": false,
+  "optional_fields": {
+    "spatial_audit": [
+      "world_position",
+      "screen_left_right",
+      "world_not_equal_screen",
+      "locked_shot_no_added_beats"
+    ],
+    "camera": [],
+    "lighting": [
+      "recompute_on_camera_change"
+    ],
+    "performance": [
+      "force_and_contact"
+    ],
+    "packet": [
+      "compile_order",
+      "knowledge_status",
+      "negative_constraints_policy"
+    ]
+  },
+  "default_layer_checks": [
+    "world_position_is_not_screen_left_right",
+    "director_packet_before_prompt_compile",
+    "physical_key_light_recompute_on_camera_change",
+    "no_add_beats_after_shot_lock"
+  ],
+  "optional_not_required": true
 }

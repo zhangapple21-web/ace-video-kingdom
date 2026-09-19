@@ -38,6 +38,69 @@ def test_patrol_has_no_duplicate_shot_ids_in_current_manifests():
     assert not any(item.get("issue") == "DUPLICATE_SHOT_ID_ACROSS_MANIFESTS" for item in report["warnings"])
 
 
+def test_patrol_does_not_treat_missing_completed_artifact_as_healthy(tmp_path: Path):
+    experiments = tmp_path / "experiments"
+    experiments.mkdir()
+    (experiments / "old_tasks.json").write_text(json.dumps({
+        "shot_id": "S01",
+        "status": "COMPLETED",
+        "artifact_path": "missing.mp4",
+        "model_id": "legacy-model",
+    }), encoding="utf-8")
+
+    report = inspect(tmp_path)
+
+    assert report["status"] == "PATROL_ATTENTION_REQUIRED"
+    assert report["active_jobs"] == []
+    assert report["resumable_jobs"] == []
+    assert report["continue_polling"] is False
+    assert report["next_action"] == "REVIEW_ACTIONABLE_FINDINGS"
+    assert report["warning_summary"] == {
+        "total": 1,
+        "by_issue": {"COMPLETED_ARTIFACT_MISSING": 1},
+        "historical_total": 0,
+        "actionable": [{
+            "manifest": "experiments\\old_tasks.json",
+            "shot_id": "S01",
+            "status": "COMPLETED",
+            "model_id": "legacy-model",
+            "issue": "COMPLETED_ARTIFACT_MISSING",
+            "historical": False,
+        }],
+    }
+    assert len(report["warning_digest"]) == 64
+
+
+def test_patrol_historical_flag_suppresses_polling_but_not_evidence(tmp_path: Path):
+    experiments = tmp_path / "experiments"
+    experiments.mkdir()
+    (experiments / "old_tasks.json").write_text(json.dumps({
+        "shot_id": "S01", "status": "COMPLETED", "historical": True,
+        "artifact_path": "missing.mp4", "model_id": "legacy-model",
+    }), encoding="utf-8")
+    report = inspect(tmp_path)
+    assert report["status"] == "PATROL_OK_HISTORICAL_WARNINGS"
+    assert report["next_action"] == "STOP_UNCHANGED"
+    assert report["warning_summary"]["historical_total"] == 1
+
+
+def test_patrol_warning_digest_is_stable_for_reordered_rows(tmp_path: Path):
+    experiments = tmp_path / "experiments"
+    experiments.mkdir()
+    rows = [
+        {"shot_id": "S01", "status": "COMPLETED", "artifact_path": "one.mp4"},
+        {"shot_id": "S02", "status": "COMPLETED", "artifact_path": "two.mp4"},
+    ]
+    manifest = experiments / "tasks.json"
+    manifest.write_text(json.dumps(rows), encoding="utf-8")
+    first = inspect(tmp_path)
+    manifest.write_text(json.dumps(list(reversed(rows))), encoding="utf-8")
+    second = inspect(tmp_path)
+
+    assert first["warning_digest"] != ""
+    assert first["warning_digest"] == second["warning_digest"]
+
+
 def test_payload_fingerprint_input_is_stable():
     import argparse
     args = argparse.Namespace(model="agnes-video-2.5-flash", prompt="a distinct action", seconds=5,

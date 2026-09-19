@@ -14,17 +14,32 @@
     "txt_prompt_elements"
   ],
   "properties": {
-    "schema": {"const": "video_kingdom.shot_prompt_template.v1"},
+    "schema": {
+      "const": "video_kingdom.shot_prompt_template.v1"
+    },
     "style_baseline": {
       "type": "string",
       "minLength": 1,
       "description": "风格基准：画幅、色调、画风、摄影质感。全剧锁定，单镜不得重写。必须匹配已签名 medium_lock.output_medium；非 UI_ANIMATION 不得写入微信/气泡/聊天界面。"
     },
-    "style_lock": {"type": "string"},
-    "subject_lock": {"type": "string"},
-    "scene_lock": {"type": "string"},
-    "count_constraints": {"type": "array"},
-    "negative_constraints": {"type": "array", "items": {"type": "string"}},
+    "style_lock": {
+      "type": "string"
+    },
+    "subject_lock": {
+      "type": "string"
+    },
+    "scene_lock": {
+      "type": "string"
+    },
+    "count_constraints": {
+      "type": "array"
+    },
+    "negative_constraints": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
     "opening_space": {
       "type": "string",
       "minLength": 1,
@@ -48,15 +63,46 @@
     "txt_prompt_elements": {
       "type": "object",
       "additionalProperties": false,
-      "required": ["subject", "action", "environment", "lighting", "camera", "style"],
+      "required": [
+        "subject",
+        "action",
+        "environment",
+        "lighting",
+        "camera",
+        "style"
+      ],
       "properties": {
-        "subject": {"type": "string", "minLength": 1},
-        "action": {"type": "string", "minLength": 1},
-        "environment": {"type": "string", "minLength": 1},
-        "lighting": {"type": "string", "minLength": 1},
-        "camera": {"type": "string", "minLength": 1},
-        "style": {"type": "string", "minLength": 1}
+        "subject": {
+          "type": "string",
+          "minLength": 1
+        },
+        "action": {
+          "type": "string",
+          "minLength": 1
+        },
+        "environment": {
+          "type": "string",
+          "minLength": 1
+        },
+        "lighting": {
+          "type": "string",
+          "minLength": 1
+        },
+        "camera": {
+          "type": "string",
+          "minLength": 1
+        },
+        "style": {
+          "type": "string",
+          "minLength": 1
+        }
       }
+    },
+    "negative_constraints_policy": {
+      "type": "object"
+    },
+    "negative_constraint_evidence": {
+      "type": "array"
     }
   }
 }

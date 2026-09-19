@@ -84,6 +84,25 @@ def wash_production_prompt(prompt: str) -> tuple[str, str, bool]:
     return original, original, False
 
 
+def _contains_positive_ui_medium_language(text: Any) -> bool:
+    blob = str(text or "").casefold()
+    if not blob.strip():
+        return False
+    negative_markers = ("无", "不", "不是", "禁止", "不得", "没有", "不可")
+    for token in UI_MEDIUM_TOKENS:
+        token = token.casefold()
+        start = 0
+        while True:
+            index = blob.find(token, start)
+            if index < 0:
+                break
+            prefix = blob[max(0, index - 12):index]
+            if not any(marker in prefix for marker in negative_markers):
+                return True
+            start = index + len(token)
+    return False
+
+
 def _shot_production_blobs(shot: dict[str, Any]) -> list[str]:
     blobs = [str(shot.get("prompt") or "")]
     structured = shot.get("shot_prompt")
@@ -121,7 +140,7 @@ def validate_medium_lock(plan: dict[str, Any]) -> list[str]:
                 continue
             shot_id = str(shot.get("shot_id") or index)
             blob = "\n".join(_shot_production_blobs(shot))
-            if contains_ui_medium_language(blob):
+            if _contains_positive_ui_medium_language(blob):
                 errors.append(
                     f"{shot_id}: UI-medium language (微信/气泡/聊天界面) is forbidden unless "
                     "medium_lock.output_medium=UI_ANIMATION"

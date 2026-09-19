@@ -369,7 +369,7 @@ class ProductionControl:
                 checked.append({"asset_id": asset_id, "path": str(path), "sha256": actual})
                 if payload.get("mode") == "PRODUCTION" and not expected:
                     errors.append({"asset_id": asset_id, "reason": "SHA256_REQUIRED_IN_PRODUCTION"})
-                if expected and actual != expected:
+                if expected and actual.casefold() != expected.casefold():
                     errors.append({"asset_id": asset_id, "reason": "SHA256_MISMATCH", "expected": expected, "actual": actual})
                 if payload.get("mode") == "PRODUCTION" and candidate.stat().st_size < MIN_PRODUCTION_ASSET_BYTES:
                     errors.append({"asset_id": asset_id, "reason": "PLACEHOLDER_OR_TOO_SMALL", "bytes": candidate.stat().st_size})

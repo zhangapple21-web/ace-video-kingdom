@@ -10,6 +10,7 @@ import json
 import re
 import subprocess
 import sys
+import os
 from pathlib import Path
 from typing import Any
 
@@ -22,14 +23,14 @@ from tools.validate_state_contract import validate_state_contract
 
 REGISTRY = ROOT / "research" / "capability_registry.v2.json"
 ROLE_REGISTRY = ROOT / "research" / "oneapi_role_room.v1.json"
-EPISODE_CONTRACTS = Path(r"D:\视频创作\projects\张铁铁的沙雕日常\张铁铁的沙雕日常\项目文件\EP01_EP01_20260918T171515Z_CONTRACTS")
+DEFAULT_EPISODE_CONTRACTS = Path(r"D:\视频创作\projects\张铁铁的沙雕日常\张铁铁的沙雕日常\项目文件\EP01_EP01_20260918T171515Z_CONTRACTS")
 
 
 def _load(path: Path) -> Any:
     return json.loads(path.read_text(encoding="utf-8"))
 
 
-def audit() -> dict[str, Any]:
+def audit(episode_contracts: Path | None = None) -> dict[str, Any]:
     errors: list[str] = []
     warnings: list[str] = []
     required = [
@@ -134,8 +135,13 @@ def audit() -> dict[str, Any]:
     if hardcoded_tmp:
         errors.append("tests reference the historical D:/tmp clone: " + ", ".join(hardcoded_tmp))
 
-    if EPISODE_CONTRACTS.is_dir():
-        for path in EPISODE_CONTRACTS.glob("SHOT_*.json"):
+    configured_contracts = episode_contracts or (
+        Path(os.environ["VIDEO_KINGDOM_EPISODE_CONTRACTS"])
+        if os.environ.get("VIDEO_KINGDOM_EPISODE_CONTRACTS")
+        else DEFAULT_EPISODE_CONTRACTS
+    )
+    if configured_contracts.is_dir():
+        for path in configured_contracts.glob("SHOT_*.json"):
             if any(token in path.name for token in ("RECEIPT", "SCRIPT_PROMPT", "FIVE_GATE")):
                 continue
             try:
@@ -149,7 +155,7 @@ def audit() -> dict[str, Any]:
                 warnings.append(f"episode contract status is {data.get('status')!r}: {path.name}")
         warnings.append("historical episode receipts remain on disk but are excluded from production selection")
 
-    return {"schema": "ace.video_kingdom.workflow_integrity_audit.v1", "status": "PASS" if not errors else "BLOCKED", "errors": errors, "warnings": warnings, "checked": {"entrypoint": True, "provider_gate": True, "model_registry": True, "state_contract": True, "episode_contracts": EPISODE_CONTRACTS.is_dir()}}
+    return {"schema": "ace.video_kingdom.workflow_integrity_audit.v1", "status": "PASS" if not errors else "BLOCKED", "errors": errors, "warnings": warnings, "checked": {"entrypoint": True, "provider_gate": True, "model_registry": True, "state_contract": True, "episode_contracts": configured_contracts.is_dir(), "episode_contracts_path": str(configured_contracts)}}
 
 
 def main() -> int:

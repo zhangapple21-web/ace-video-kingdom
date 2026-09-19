@@ -1,0 +1,71 @@
+{
+  "schema": "video_kingdom.script_prompt_review.v1",
+  "purpose": "Single pre-shoot checklist: dual review plus five-gate receipts. Coze public pipeline maps here; four-step review is this project gate, not Coze unpublished backend.",
+  "conversation_order": [
+    "0_spec_and_assets_via_creator_brief_and_character_pack",
+    "1_script_review_as_screenwriter",
+    "2_write_prompt_only_if_script_pass",
+    "3_prompt_review_as_director",
+    "4_generate_only_if_director_says_pass_generate",
+    "5_this_round_five_gate_receipts",
+    "6_single_shot_sample",
+    "7_post_and_qc_provider_completed_is_not_master"
+  ],
+  "required_verdicts": {
+    "script_review": "通过",
+    "script_review_fail": "不通过",
+    "prompt_review_pass": "合格，可以生成",
+    "prompt_review_fail": "不合格需修改"
+  },
+  "bind_to": [
+    "shot_id",
+    "run_id",
+    "script_hash",
+    "prompt_hash"
+  ],
+  "stale_rules": [
+    "old COMPLETED role_audit is not this review",
+    "run_id mismatch is not this round",
+    "prompt_hash mismatch requires re-review",
+    "shot_id mismatch cannot impersonate another shot",
+    "chat history 通过/合格，可以生成 is not this round",
+    "new script body starts this round from script review; old COMPLETED/run_id are history not approval; do not delete receipts",
+    "prompt-only edits re-run director review only"
+  ],
+  "high_risk_prompt_terms": [
+    "完整接听",
+    "接听过程",
+    "正在接听",
+    "拨号",
+    "震动",
+    "亮屏",
+    "男声说",
+    "女声说"
+  ],
+  "coze_absorption": {
+    "project_spec": "creator_workflow.creator_brief",
+    "script_and_speakers": "script_prompt_review.script_review",
+    "assets": "character pack + public reference URLs",
+    "audio": "independent voice timeline for formal dialogue; sample/no-dialogue exceptions",
+    "privacy": "privacy_scan / scan_sensitive_content.py",
+    "quota": "local API key + Agnes lock, not Coze credits",
+    "not_absorbed": [
+      "Coze plugin",
+      "Coze storyboard UI",
+      "Coze subscription credits",
+      "chat animation HTML as default for Zhang Tietie",
+      "Coze canvas as production surface",
+      "require camera start/end on raw scripts",
+      "hard independent VO for every video"
+    ],
+    "script_vs_storyboard": "script review = narrative/dialogue/risk; storyboard+prompt = start/end/camera/refs",
+    "phone_review_trigger": "enable when script involves phone/call/UI; Zhang Tietie and phone dramas always on; phone_state may be 本镜不涉及手机",
+    "audio_policy": "formal dialogue drama = independent VO clock; rapid sample = model audio ok; no-dialogue = SFX/BGM",
+    "not_coze_internal": "four-step dual review is this project gate, not Coze unpublished backend",
+    "review_loop": "mark issues -> plan -> user confirm -> local redo; no Coze canvas"
+  },
+  "new_script_starts_fresh": "paste script body only; auto-void prior round for conversation; keep receipts on disk",
+  "entry_lock": "video_kingdom_entry only; skill -> video_kingdom_entry.py -> shoot pipeline -> Agnes; no Coze/plugin production entry",
+  "machine_entry": "tools/validate_script_prompt_review.py",
+  "production_gate": "tools/production_shot_gate.py"
+}

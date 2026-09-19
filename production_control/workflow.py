@@ -73,7 +73,7 @@ def _asset_status(root: Path, row: dict[str, Any]) -> tuple[str, list[str]]:
         return "UNKNOWN", ["SOURCE_NOT_FOUND"]
     actual = sha256_file(path)
     expected = str(row.get("sha256") or "")
-    if expected and actual != expected:
+    if expected and actual.casefold() != expected.casefold():
         errors.append("SHA256_MISMATCH")
     if path.stat().st_size < PLACEHOLDER_BYTES or actual in PLACEHOLDER_SHA256:
         errors.append("PLACEHOLDER_OR_TOO_SMALL")

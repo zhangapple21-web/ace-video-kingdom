@@ -12,41 +12,86 @@
     {
       "stage": "STORY_ROOT",
       "input": "idea_or_user_authorized_source",
-      "outputs": ["premise", "causal_chain", "plants", "payoffs", "viewer_knowledge_checkpoints"]
+      "outputs": [
+        "premise",
+        "causal_chain",
+        "plants",
+        "payoffs",
+        "viewer_knowledge_checkpoints"
+      ]
     },
     {
       "stage": "ASSET_LIBRARY",
       "input": "story_root",
-      "outputs": ["character_bible", "wardrobe_variants", "scene_assets", "prop_assets", "style_reference_pack"],
-      "reuse_rule": "Every reused asset is referenced by asset_id and SHA-256; no silent regeneration of an already approved asset."
+      "outputs": [
+        "character_bible",
+        "wardrobe_variants",
+        "scene_assets",
+        "prop_assets",
+        "style_reference_pack"
+      ],
+      "reuse_rule": "Every reused asset is referenced by asset_id and SHA-256; no silent regeneration of an already approved asset.",
+      "note": "scene_assets 这一步是 Scene State 记录，不是必须预制场景 jpg 图库。角色包才是长期资产。"
     },
     {
       "stage": "EPISODE_STORYBOARD",
       "input": "story_root_and_asset_library",
-      "outputs": ["scene_nodes", "shot_ids", "dramatic_function", "information_gain", "emotion_change", "action_beats", "camera", "audio_beats", "continuity_bridge"]
+      "outputs": [
+        "scene_nodes",
+        "shot_ids",
+        "dramatic_function",
+        "information_gain",
+        "emotion_change",
+        "action_beats",
+        "camera",
+        "audio_beats",
+        "continuity_bridge"
+      ]
     },
     {
       "stage": "BRANCHABLE_REHEARSAL",
       "input": "episode_storyboard",
-      "outputs": ["branch_id", "parent_node_id", "candidate_prompt", "branch_reason"],
+      "outputs": [
+        "branch_id",
+        "parent_node_id",
+        "candidate_prompt",
+        "branch_reason"
+      ],
       "rule": "Local repair creates a child branch and preserves the parent; it never clones an entire episode to repair one shot."
     },
     {
       "stage": "SPATIAL_BLOCKING",
       "input": "scene_nodes_and_character_assets",
-      "outputs": ["actor_positions", "camera_position", "lens_or_scale", "eyelines", "axis_notes"],
+      "outputs": [
+        "actor_positions",
+        "camera_position",
+        "lens_or_scale",
+        "eyelines",
+        "axis_notes"
+      ],
       "rule": "Use explicit blocking for multi-actor or special-angle shots; text-only placement is marked UNKNOWN, not assumed correct."
     },
     {
       "stage": "GENERATE_AND_REVIEW",
       "input": "approved_scene_anchor_and_shot_contract",
-      "outputs": ["provider_job_receipt", "media_integrity", "multi_frame_review", "decision_record"],
-      "rule": "Agnes may be used for isolated trials or controlled takes; provider completion never equals director PASS."
+      "outputs": [
+        "provider_job_receipt",
+        "media_integrity",
+        "multi_frame_review",
+        "decision_record"
+      ],
+      "rule": "Agnes may be used for isolated trials or controlled takes; provider completion never equals director PASS.",
+      "note": "approved_scene_anchor 只表示明确 Shot State 时才需要构图静帧；默认生产仍是 flash_mode=reference，First Frame 不是开拍门票。"
     },
     {
       "stage": "ASSEMBLY_AND_MEMORY",
       "input": "selected_takes_and_decision_records",
-      "outputs": ["subtitle_receipt", "audio_status", "final_integrity", "experience_candidate"],
+      "outputs": [
+        "subtitle_receipt",
+        "audio_status",
+        "final_integrity",
+        "experience_candidate"
+      ],
       "rule": "Only repeated, hash-backed failure patterns become experience; a single opinion does not rewrite routing."
     }
   ],
@@ -63,9 +108,17 @@
   ],
   "content_control": {
     "contract": "governance/episode_dynamic_content_plan.v1.json",
-    "artifacts": ["episode_dynamic_plan.json", "content_control.v1.json", "research/post_production_diagnostics.v1.json"],
+    "artifacts": [
+      "episode_dynamic_plan.json",
+      "content_control.v1.json",
+      "research/post_production_diagnostics.v1.json"
+    ],
     "validator": "tools/validate_content_plan.py",
-    "non_authority": ["does_not_create_scheduler", "does_not_create_second_router", "does_not_call_provider"]
+    "non_authority": [
+      "does_not_create_scheduler",
+      "does_not_create_second_router",
+      "does_not_call_provider"
+    ]
   },
   "execution_surfaces": {
     "principle": "The Infinite Canvas is the human-facing creative and review surface, never the sole execution dependency for an agent running on the local computer.",
@@ -83,5 +136,11 @@
     "purpose": "route user demand through the existing state machine and invoke safe local stages automatically",
     "provider_calls": "remain behind the admitted request boundary and reuse the existing provider runner"
   },
-  "non_authority": ["does_not_create_scheduler", "does_not_create_second_router", "does_not_call_provider", "does_not_approve_delivery", "does_not_promote_free_zone_automatically"]
+  "non_authority": [
+    "does_not_create_scheduler",
+    "does_not_create_second_router",
+    "does_not_call_provider",
+    "does_not_approve_delivery",
+    "does_not_promote_free_zone_automatically"
+  ]
 }

@@ -11,7 +11,7 @@
 集中资产索引（asset_id + SHA-256 + usage + rights）
         │
         ▼
-角色包 / 场景包 / 道具引用 / 分镜合同
+角色包（长期身份） / Scene State（动态场景，不要求图库） / 道具状态 / 分镜合同
         │ preflight：字段、命名、资产存在、用途分流、TTS、单镜动作
         ▼
 Provider admission receipt
@@ -36,7 +36,7 @@ DELIVERABLE 或 RESEARCH_CANDIDATE
 | 入口 | 当前角色 | 资产事实来源 | 放行条件 |
 |---|---|---|---|
 | `tools/index_assets.py` | 只读盘点与索引 | `assets/asset_roots.v1.json`、角色目录、共享锚点、episode `assets/` | 哈希可读；旧命名标 `LEGACY` |
-| 角色/场景包模板 | 前置定义 | `assets/templates/`、`assets/schema/` | 必填身份/空间不变量已填写 |
+| 角色包模板 | 前置定义 | `assets/templates/`、`assets/schema/` | 身份不变量已填写。场景默认 Scene State（scene_id/name 即可），不要求场景 jpg |
 | `tools/video_kingdom_entry.py` | 唯一公共入口 | 统一入口收据 + production_control 路由 | 先识别需求并分派；Provider 适配器不得独立派单 |
 | `run_idea_pipeline.py` | episode 级内部兼容层 | episode contract + 局部 assets | 只能由统一入口/已批准执行收据调用；不等于已走 Shot Core |
 | Shot Core | 单镜 canonical 骨架 | `asset_refs`、Take manifest、selected-only assembly | contract/hash/QC/creative 状态完整 |
@@ -46,7 +46,7 @@ DELIVERABLE 或 RESEARCH_CANDIDATE
 
 1. 资产路径不存在、SHA-256 不匹配或用途为 `unknown`：阻断，不靠 prompt 猜测。
 2. 展示板/海报/带大量文字的全案板：不能自动当 `video_asset`。
-3. 角色主角超过 4 镜、复杂服装、多人同框、多场景或多角度空间：资产包必须升级，缺失时阻断。
+3. 角色主角超过 4 镜、复杂服装、多人同框：角色包必须升级，缺失身份基准时阻断。多场景靠 Scene State 连续，不因缺少场景参考图阻断开拍。
 4. 分镜缺 `initial_state → single_action → end_state`、运镜不在白名单、内部切镜不为 0：阻断。
 5. `AUDIO_PENDING`、`AUDIO_UNVERIFIED` 不能当作 `LOCKED_TTS_BOUND`。
 6. Provider 请求没有唯一 `request_hash` 或没有 reference asset 清单：不得派单。
@@ -60,8 +60,8 @@ DELIVERABLE 或 RESEARCH_CANDIDATE
 | 字段/门 | 本地依据 | 外部参考吸收边界 |
 |---|---|---|
 | `asset_id`、`sha256`、用途分流 | `characters/CHAR_001_dossier.v1.json`、现有 episode contracts、`assets/schema/asset_record.v1.json` | 豆包/资产包资料强调“先锁资产”；不复制外部平台运行时 |
-| 角色正面基准图、三视图、表情、服装 | `assets/schema/character_asset_package.v1.json` | 参考文章角色资产包的 12 项思想；缺失项仍标 `MISSING` |
-| 场景正向/反打/全景及道具区 | `assets/schema/scene_asset_package.v1.json` | 参考文章场景 9 视角思想；不把建议写成 Provider 保证 |
+| 角色身份基准（脸/体型/基础服装/角色道具） | `assets/schema/character_asset_package.v1.json` | 多视图/三视图/表情表按该剧简报启用，缺失标 `MISSING`，不升全剧硬门 |
+| 场景 Scene State（在哪/何时/光线/空间关系） | `assets/schema/scene_asset_package.v1.json` | 9 视角/场景图库是项目策略；`reference_images_required=false` |
 | 13 列分镜、单镜单动作 | `assets/schema/storyboard.v1.json`、`production_workflow_profile.v1.json` | 文章的字段结构与本地 Shot Core 合并，保留本地动作/连续性硬门 |
 | 逐镜与整集 QC | `assets/schema/qc_checklist.v1.json`、`short_drama_quality_contract.v1.json` | 文章的逐镜检查项作为参考；本地增加 `asset_reference_bound` 和来源可追溯性 |
 | 豆包 20 点 | `research/doubao_20_point_crosscheck_20260906.v1.md`、`research/doubao_mature_workflow_gap_matrix_20260906.md` | 只把有字段、代码门、receipt、测试证据的项升级为事实 |

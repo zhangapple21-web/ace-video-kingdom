@@ -4,6 +4,7 @@ from pathlib import Path
 
 from tools.import_workbench_package import import_package
 from tools.medium_lock import INTAKE_PLACEHOLDER, validate_medium_lock
+from tools.medium_lock import character_performance_lock
 
 
 PNG_1X1 = "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNk+A8AAQUBAScY42YAAAAASUVORK5CYII="
@@ -74,3 +75,14 @@ def test_fastmovieai_import_preserves_pending_gates(tmp_path: Path):
     contract = json.loads((tmp_path / "out" / "six_module_contract.json").read_text(encoding="utf-8"))
     assert contract["shots"][0]["edit"]["duration_source"] == "IMPORTED_ESTIMATE"
     assert contract["shots"][0]["script"]["audio_status"] == "AUDIO_PENDING"
+
+
+def test_medium_lock_accepts_explicit_negative_ui_language():
+    plan = {
+        "medium_lock": character_performance_lock(),
+        "shots": [{
+            "shot_id": "S01",
+            "prompt": "真人电影感短剧；不是微信界面，不是聊天气泡，只拍人物在房间里说话。",
+        }],
+    }
+    assert validate_medium_lock(plan) == []

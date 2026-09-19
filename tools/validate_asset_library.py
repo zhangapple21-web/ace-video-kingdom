@@ -32,8 +32,19 @@ def validate(repo_root: Path, index_path: Path) -> dict[str, Any]:
     for package_path in sorted((repo_root / "assets" / "library").glob("**/asset_package.v1.json")):
         package_count += 1
         package = _load(package_path)
-        kind = "character" if "character_asset_package" in package.get("schema", "") else "scene" if "scene_asset_package" in package.get("schema", "") else "unknown"
-        items = package.get("visual_assets", []) if kind == "character" else package.get("views", []) if kind == "scene" else []
+        schema = package.get("schema", "")
+        if "character_asset_package" in schema:
+            kind = "character"
+            items = package.get("visual_assets", [])
+        elif "scene_asset_package" in schema:
+            kind = "scene"
+            items = package.get("views") or package.get("visual_assets") or []
+        elif "prop_asset_package" in schema:
+            kind = "prop"
+            items = package.get("visual_assets") or package.get("views") or []
+        else:
+            kind = "unknown"
+            items = []
         for item in items:
             if not item.get("required"):
                 continue

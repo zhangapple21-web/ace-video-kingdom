@@ -4,18 +4,37 @@
   "style_lock": "【全剧唯一风格锁：正面质感 + 明确排除的反面质感】",
   "subject_lock": "【主体锁：人物身份、数量、服装和主体优先级】",
   "scene_lock": "【场景锁：空间、家具、布局和不可漂移元素】",
-  "count_constraints": [{"entity": "【实体】", "count": 1}],
-  "negative_constraints": ["【禁止的风格/元素/界面】"],
+  "count_constraints": [
+    {
+      "entity": "【实体】",
+      "count": 1
+    }
+  ],
+  "negative_constraints": [
+    "【禁止的风格/元素/界面】"
+  ],
   "opening_space": "【起始空间：地点 + 主体 + 光线 + 镜头 + 首态】",
   "underscore": "【底声：环境底噪、动作音、电话余音；对白不写进画面文字】",
-  "timed_action": "【分时序动作：0-1s 首态 → 唯一主要视觉事件 → 收势；内部切镜=0】",
+  "timed_action": "【分时序动作：0-1s 首态 → 唯一可命名视觉事件 → 收势；禁止自然微动作；内部切镜=0】",
   "aftertaste": "【余韵：末态停留、反应、留白；给下一镜提供末帧】",
   "txt_prompt_elements": {
     "subject": "【主体】",
-    "action": "【动作，给人看的简述】",
+    "action": "【动作：可命名动词，先于镜头写；禁止自然微动作】",
     "environment": "【环境】",
     "lighting": "【光线】",
-    "camera": "【镜头：景别 + 固定/一次目的性运镜】",
-    "style": "【风格】"
-  }
+    "camera": "【镜头：景别 + NONE/SUBTLE/SIMPLE/COMPLEX 一条运动 + 一句理由；放在动作之后】",
+    "style": "【风格】",
+    "submit_order": "subject/action/change -> camera -> style/consistency; identity refs lock appearance, not the frame",
+    "identity_usage": "参考图锁本镜需要的身份（脸/体型/基础服装/角色道具）、场景和物件，不要复制参考图构图；人物在本镜空间完成可命名动作；禁止只按一张脸裁图生成整场"
+  },
+  "negative_constraints_policy": {
+    "evidence_required": true,
+    "genre_hard_bans_always_written": true
+  },
+  "negative_constraint_evidence": [
+    {
+      "constraint": "【负向句】",
+      "evidence": "【依据：剧本硬禁/已出现错误/用户限制/已核实平台要求】"
+    }
+  ]
 }

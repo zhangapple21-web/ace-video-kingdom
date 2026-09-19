@@ -11,23 +11,81 @@
     "inherited_state_items"
   ],
   "properties": {
-    "schema": {"const": "video_kingdom.continuity_bridge.v1"},
-    "status": {"enum": ["READY", "TERMINAL", "PENDING_FRAME_PROOF"]},
-    "from_shot": {"type": "string"},
-    "to_shot": {"type": ["string", "null"]},
-    "label": {"type": "string", "description": "人读标签，例如 SC01 -> S02A"},
-    "previous_end_frame_state": {"type": "string", "minLength": 1, "description": "前一镜末帧状态，下一镜首帧必须接得上"},
-    "next_initial_state": {"type": "string"},
-    "camera_state": {"type": "string", "minLength": 1},
-    "lighting_state": {"type": "string", "minLength": 1},
-    "tail_frame_state": {"type": "string", "minLength": 1},
-    "frame_proof_status": {"enum": ["PENDING", "VERIFIED", "FAILED", "TERMINAL"]},
+    "schema": {
+      "const": "video_kingdom.continuity_bridge.v1"
+    },
+    "status": {
+      "enum": [
+        "READY",
+        "TERMINAL",
+        "PENDING_FRAME_PROOF"
+      ]
+    },
+    "from_shot": {
+      "type": "string"
+    },
+    "to_shot": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "label": {
+      "type": "string",
+      "description": "人读标签，例如 SC01 -> S02A"
+    },
+    "previous_end_frame_state": {
+      "type": "string",
+      "minLength": 1,
+      "description": "前一镜末帧状态，下一镜首帧必须接得上"
+    },
+    "next_initial_state": {
+      "type": "string"
+    },
+    "camera_state": {
+      "type": "string",
+      "minLength": 1
+    },
+    "lighting_state": {
+      "type": "string",
+      "minLength": 1
+    },
+    "tail_frame_state": {
+      "type": "string",
+      "minLength": 1
+    },
+    "frame_proof_status": {
+      "enum": [
+        "PENDING",
+        "VERIFIED",
+        "FAILED",
+        "TERMINAL"
+      ]
+    },
     "exit_direction": {
-      "enum": ["left", "right", "up", "down", "toward_camera", "away", "hold", "none"],
+      "enum": [
+        "left",
+        "right",
+        "up",
+        "down",
+        "toward_camera",
+        "away",
+        "hold",
+        "none"
+      ],
       "description": "出画方向。hold=不出画；none=终章无出画"
     },
     "enter_direction": {
-      "enum": ["left", "right", "up", "down", "toward_camera", "away", "hold", "none"],
+      "enum": [
+        "left",
+        "right",
+        "up",
+        "down",
+        "toward_camera",
+        "away",
+        "hold",
+        "none"
+      ],
       "description": "入画方向。角色出画右则下一镜入画左，除非 hold"
     },
     "inherited_state_items": {
@@ -35,7 +93,10 @@
       "minItems": 3,
       "items": {
         "type": "object",
-        "required": ["key", "value"],
+        "required": [
+          "key",
+          "value"
+        ],
         "properties": {
           "key": {
             "enum": [
@@ -48,13 +109,83 @@
               "identity"
             ]
           },
-          "value": {"type": "string", "minLength": 1},
-          "source_shot": {"type": "string"}
+          "value": {
+            "type": "string",
+            "minLength": 1
+          },
+          "source_shot": {
+            "type": "string"
+          }
         }
       }
     },
-    "invariants": {"type": "array", "items": {"type": "string"}},
-    "asset_ids": {"type": "array", "items": {"type": "string"}},
-    "evidence_basis": {"type": "string"}
+    "invariants": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "asset_ids": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "evidence_basis": {
+      "type": "string"
+    },
+    "world_position": {
+      "type": "string"
+    },
+    "screen_left_right": {
+      "type": "string"
+    },
+    "force_and_contact": {
+      "type": "string"
+    },
+    "default_layer_checks": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "asset_register": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "asset_id",
+          "kind",
+          "initial",
+          "change",
+          "final"
+        ],
+        "properties": {
+          "asset_id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "kind": {
+            "enum": [
+              "character",
+              "scene",
+              "prop"
+            ]
+          },
+          "initial": {
+            "type": "string",
+            "minLength": 1
+          },
+          "change": {
+            "type": "string",
+            "minLength": 1
+          },
+          "final": {
+            "type": "string",
+            "minLength": 1
+          }
+        }
+      }
+    }
   }
 }
