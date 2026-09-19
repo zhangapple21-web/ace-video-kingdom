@@ -8,7 +8,16 @@
     "identity_ref": {"type": "string", "minLength": 1},
     "inherited_state_refs": {"type": "array", "items": {"type": "string"}},
     "episode_state": {"type": "object"},
-    "scene_state": {"type": "object"},
+    "scene_state": {
+      "type": "object",
+      "required": ["location", "time", "lighting", "space"],
+      "properties": {
+        "location": {"type": "string", "minLength": 1},
+        "time": {"type": "string", "minLength": 1},
+        "lighting": {"type": "string", "minLength": 1},
+        "space": {"type": "string", "minLength": 1}
+      }
+    },
     "shot_state": {"type": "object"},
     "state_delta": {"type": "array"},
     "approved_for_next_shot": {"type": "boolean"},
