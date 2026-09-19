@@ -27,7 +27,7 @@ PLANS = {
 
 def concrete_scene(old: dict) -> dict:
     scene = str(old.get("scene") or "").strip()
-    return {"location": scene or "角色独立工作空间", "time": "本镜剧本规定时段", "lighting": "由场景动机决定的连续光线", "space": "角色所在独立空间，按本镜动作允许移动"}
+    return {"location": scene or "角色独立工作空间", "time": "本镜剧本规定时段", "lighting": "由场景动机决定的连续光线", "space": "角色所在独立空间，按本镜动作允许移动", "physical_layout": "地面、桌椅和前后景形成可进入的真实布局", "interaction_surface": "本镜人物实际接触的桌面、座椅或道具承托面", "scene_mode": "LIVE_DIEGETIC_SPACE"}
 
 
 def main() -> None:
