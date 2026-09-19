@@ -57,17 +57,27 @@ def audit() -> dict[str, Any]:
         if not path.is_file():
             errors.append(f"missing production runtime dependency: {path}")
     try:
-        for path in required_runtime:
-            relative = path.relative_to(ROOT).as_posix()
-            tracked = subprocess.run(
-                ["git", "ls-files", "--error-unmatch", "--", relative],
-                cwd=ROOT,
-                capture_output=True,
-                text=True,
-                check=False,
-            )
-            if tracked.returncode != 0:
-                errors.append(f"production runtime dependency is not tracked: {relative}")
+        git_probe = subprocess.run(
+            ["git", "rev-parse", "--is-inside-work-tree"],
+            cwd=ROOT,
+            capture_output=True,
+            text=True,
+            check=False,
+        )
+        if git_probe.returncode == 0:
+            for path in required_runtime:
+                relative = path.relative_to(ROOT).as_posix()
+                tracked = subprocess.run(
+                    ["git", "ls-files", "--error-unmatch", "--", relative],
+                    cwd=ROOT,
+                    capture_output=True,
+                    text=True,
+                    check=False,
+                )
+                if tracked.returncode != 0:
+                    errors.append(f"production runtime dependency is not tracked: {relative}")
+        else:
+            warnings.append("git metadata unavailable; tracked dependency closure could not be checked")
     except OSError:
         warnings.append("git metadata unavailable; tracked dependency closure could not be checked")
     projection_text = (ROOT / "production_control" / "projection.py").read_text(encoding="utf-8", errors="ignore") if (ROOT / "production_control" / "projection.py").is_file() else ""
