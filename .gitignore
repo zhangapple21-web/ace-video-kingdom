@@ -49,3 +49,12 @@ temp/
 
 # Hash-addressed transport and vision caches are reproducible local state.
 assets/cache/
+
+# Generated inspection and experiment outputs are reproducible and must not
+# be mistaken for production source or durable evidence.
+.dbg/
+reports/
+research/_tmp_*/
+experiments/*.admission.json
+research/*_smoke_latest.json
+research/admission_receipts/shot_*.json
