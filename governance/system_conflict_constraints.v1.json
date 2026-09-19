@@ -1,0 +1,143 @@
+{
+  "schema": "video_kingdom.system_conflict_constraints.v1",
+  "status": "LOCKED",
+  "layer": "SYSTEM_CONFLICT_DISABLED",
+  "mark": "系统级冲突，禁用",
+  "source": "https://github.com/62656456/ai-film-skills",
+  "production_integration": false,
+  "rule": "下列方法与本项目控制面冲突，禁止升默认、禁止换入口、禁止换 Provider、禁止替代双审与五关本轮收据。",
+  "items": [
+    {
+      "id": "C01",
+      "title": "换入口或把外部 Skill 安装进主链",
+      "why": "生产只走 $video-kingdom → video_kingdom_entry.py → 开拍总流程 → Agnes；外部仓库只能当参考矿。",
+      "status": "DISABLED_SYSTEM_CONFLICT"
+    },
+    {
+      "id": "C02",
+      "title": "编剧与导演合成一岗",
+      "why": "四步双审是门禁：剧本审核与提示词审核必须分开，结论原文硬锁。",
+      "status": "DISABLED_SYSTEM_CONFLICT"
+    },
+    {
+      "id": "C03",
+      "title": "用数字10或程序回执替代双审加五关本轮收据",
+      "why": "过关证据是本轮 script_prompt_review 原文结论与五关新收据，不是外部自检表。",
+      "status": "DISABLED_SYSTEM_CONFLICT"
+    },
+    {
+      "id": "C04",
+      "title": "正式对白进入视频模型",
+      "why": "中文对白文字不交给视频模型；正式对白短剧走独立配音时间轴。",
+      "status": "DISABLED_SYSTEM_CONFLICT"
+    },
+    {
+      "id": "C05",
+      "title": "用字数/分钟/标点当 Cosy 时间轴，整段多情绪，或覆盖旧 Take",
+      "why": "VOICE_CONTROL_DEFAULT 规定按人按句、speed 用倍率听感、留白靠剪辑、旧 Take 不覆盖。",
+      "status": "DISABLED_SYSTEM_CONFLICT"
+    },
+    {
+      "id": "C06",
+      "title": "更换默认 Provider",
+      "why": "图像入口固定 imagegen → gpt-image-2，视频入口固定 Video → agnes-video-2.5-flash。",
+      "status": "DISABLED_SYSTEM_CONFLICT"
+    },
+    {
+      "id": "C07",
+      "title": "参考图不绑定公网 URL",
+      "why": "参考图必须绑定公网 URL，不能只在提示词里写参考这张图。",
+      "status": "DISABLED_SYSTEM_CONFLICT"
+    },
+    {
+      "id": "C08",
+      "title": "自主模式每段 7–8 镜当作默认",
+      "why": "时长与镜数由音频主时钟和动作完成决定；先 1 镜合格再扩展，不设全局镜数配额。",
+      "status": "DISABLED_SYSTEM_CONFLICT"
+    },
+    {
+      "id": "C09",
+      "title": "一条母提示词覆盖整段当作默认",
+      "why": "本项目按镜头合同提交；段落级母提示词不能替代单镜门禁。",
+      "status": "DISABLED_SYSTEM_CONFLICT"
+    },
+    {
+      "id": "C10",
+      "title": "把 six_module schema 常量升为全局",
+      "why": "six_module 仅为 FREE_ZONE_RESEARCH_ONLY，2.5–18s/三拍/固定情绪枚举不能升默认。",
+      "status": "DISABLED_SYSTEM_CONFLICT"
+    },
+    {
+      "id": "C11",
+      "title": "用 C01/S01/P01 替换现有资产 ID",
+      "why": "现有 character_id / scene / prop 与锚图哈希体系保持不变，外部编号只可内部对照。",
+      "status": "DISABLED_SYSTEM_CONFLICT"
+    },
+    {
+      "id": "C12",
+      "title": "把 V2 运镜方法当成新入口、新生产技能、新 Shot Core、新审批层，或替代双审/五关收据",
+      "why": "V2 只是现有 shot_rhythm 的运镜表达方法。生产仍只走 $video-kingdom → video_kingdom_entry.py → 开拍总流程 → Agnes。",
+      "status": "DISABLED_SYSTEM_CONFLICT"
+    },
+    {
+      "id": "C13",
+      "title": "运镜拍不出来就改对白、改剧情或换默认 Provider",
+      "why": "失败先降摄影 COMPLEX→SIMPLE→SUBTLE→NONE；内容轴与摄影轴分开。不准为了拍得出来改故事或换 Agnes/gpt-image-2。",
+      "status": "DISABLED_SYSTEM_CONFLICT"
+    },
+    {
+      "id": "C14",
+      "title": "用固定秒数或「更电影所以更长」替代音频主时钟，或为了缩短而吞词/加速/截断对白",
+      "why": "观看密度轴禁止无信息垫秒，完整性轴仍禁止吞词。两句台词配 5–6 秒可以成立，但多出来的每一秒必须有观看任务。不准把 Provider 生成时长当成创作时长，也不准为了短而破坏对白。",
+      "status": "DISABLED_SYSTEM_CONFLICT"
+    },
+    {
+      "id": "C15",
+      "title": "把身份锚图当 keyframe 首尾帧互变，或把自然微动作当成唯一表演",
+      "why": "Agnes Flash reference mode uses images to keep appearance; the subject must still perform a named visible action. keyframe first_frame/last_frame is a different mode. Two identity stills plus empty acting become a still-image morph.",
+      "status": "DISABLED_SYSTEM_CONFLICT"
+    },
+    {
+      "id": "C16",
+      "title": "把角色/场景/道具分册当图生视频源，或只塞一张脸裁图让模型编世界，或把作图静帧当唯一视频源而无可命名表演",
+      "why": "分册锁的是身份、空间、物件连续性，不是把参考图做成视频。角色包有脸/体型/服装/角色道具就锁这些，不是只锁脸。Agnes 默认 flash_mode=reference。images[] 按本镜需要绑定。first_frame/ti2vid 只用于明确构图静帧+可命名动作。",
+      "status": "DISABLED_SYSTEM_CONFLICT"
+    },
+    {
+      "id": "C17",
+      "title": "把未经 QC 的最新帧当下一镜延续参考",
+      "why": "Latest Frame 不是 Approved State。漂移会一镜传一镜。错误先修当前镜，合格后才继承。系统级冲突，禁用。",
+      "status": "DISABLED_SYSTEM_CONFLICT"
+    },
+    {
+      "id": "C18",
+      "title": "把集状态/镜头起步写进永久身份包（湿发、哭过、换装、坐姿当 Identity）",
+      "why": "Identity 负责不换人。State 负责不穿帮。Shot State 负责不乱起步。混进身份包，换场换装会锁死。系统级冲突，禁用。",
+      "status": "DISABLED_SYSTEM_CONFLICT"
+    },
+    {
+      "id": "C19",
+      "title": "把项目策略抬成全短剧硬规则：每镜必带全部 Reference、每 3-5 镜强制回刷、双人必须拆生成、服装永不改、默认身份包当 First Frame、每个场景必须预制参考图",
+      "why": "这些是项目/Provider 策略，不是通用底座。默认仍是 flash_mode=reference；Reference 按需；双人能同镜就同镜；换装走 State。系统级冲突，禁用。 场景图库也是项目策略，默认用 Scene State。",
+      "status": "DISABLED_SYSTEM_CONFLICT"
+    },
+    {
+      "id": "C20",
+      "title": "把每个场景预先准备参考图（客厅.jpg/办公室.jpg/医院.jpg…）当成开拍硬门，或没有场景图库就不许拍",
+      "why": "长剧几十个场景很正常。角色包才是长期资产。场景连续性靠 Scene State（同一套房子、空间关系、时间光线、家具风格），不是场景图库。实拍场地锁是项目策略，不是全短剧默认。系统级冲突，禁用。",
+      "status": "DISABLED_SYSTEM_CONFLICT"
+    },
+    {
+      "id": "C21",
+      "title": "把 MCUSTATIC / 脸占满第一帧 / 两张角色包裁图互切当成默认拍法",
+      "why": "短剧要让观众看见空间、关系和表演，不是两张证件照对口型。MCU 可以出现，但不能当全剧默认。系统级冲突，禁用。",
+      "status": "DISABLED_SYSTEM_CONFLICT"
+    },
+    {
+      "id": "C22",
+      "title": "把失败先降摄影做成全剧近景静帧证件照，或把身份裁图放进 input_images[0] 当画面",
+      "why": "降摄影只降 camera_motion_level。身份裁图锁的是人，不是构图。场地参考绑了却用脸裁图当第一张输入图，空间进不了画面。系统级冲突，禁用。",
+      "status": "DISABLED_SYSTEM_CONFLICT"
+    }
+  ]
+}

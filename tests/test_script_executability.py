@@ -105,6 +105,12 @@ def test_templates_and_checklist_exist():
         "assets/templates/medium_lock.v1.json",
         "assets/checklists/script_executability.v1.json",
         "assets/checklists/script_executability.v1.md",
+        "assets/templates/scene_asset_package.v1.json",
+        "assets/templates/prop_asset_package.v1.json",
+        "assets/schema/scene_asset_package.v1.json",
+        "assets/schema/prop_asset_package.v1.json",
+        "assets/checklists/generic_default_layer.v1.json",
+        "governance/system_conflict_constraints.v1.json",
     ):
         assert (ROOT / rel).is_file(), rel
 

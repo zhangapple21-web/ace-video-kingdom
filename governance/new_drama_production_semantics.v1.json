@@ -1,0 +1,120 @@
+{
+  "schema": "video_kingdom.new_drama_production_semantics.v1",
+  "status": "LOCKED",
+  "layer": "NEW_DRAMA_PRODUCTION_SEMANTICS",
+  "production_integration": true,
+  "applies_when": [
+    "production_semantics=new_drama",
+    "new_drama=true",
+    "creator_brief.production_semantics=new_drama"
+  ],
+  "does_not_apply_to": [
+    "existing_locked_shot_contracts",
+    "legacy_packets_without_flag"
+  ],
+  "does_not_replace": [
+    "video-kingdom -> video_kingdom_entry.py -> 开拍总流程 -> Agnes",
+    "script_prompt_review dual review",
+    "production_shot_gate five receipts",
+    "imagegen -> gpt-image-2",
+    "Video -> agnes-video-2.5-flash"
+  ],
+  "note": "不是又吸收一堆新规则。角色包是长期资产；场景资产步=建立 Scene State，不要求场景参考图库；道具同理（角色绑定道具除外）。与现有系统冲突的东西停在门外（B 参考层、C 禁用）。",
+  "pipeline": [
+    {
+      "id": "new_drama",
+      "label": "新剧"
+    },
+    {
+      "id": "script",
+      "label": "剧本"
+    },
+    {
+      "id": "character_assets",
+      "label": "角色资产（长期包）"
+    },
+    {
+      "id": "scene_assets",
+      "label": "Scene State（动态，不强制场景图）"
+    },
+    {
+      "id": "prop_assets",
+      "label": "道具状态（绑定道具除外）"
+    },
+    {
+      "id": "shot",
+      "label": "Shot"
+    },
+    {
+      "id": "a_gate",
+      "label": "A01/A02/A06/A09/A13/A14",
+      "checks": [
+        "A01",
+        "A02",
+        "A06",
+        "A09",
+        "A13",
+        "A14"
+      ]
+    },
+    {
+      "id": "agnes",
+      "label": "真实 Agnes"
+    }
+  ],
+  "a_gate": {
+    "A01": {
+      "item": "禁止已定镜头补戏",
+      "fields": [
+        "director_preflight.spatial_audit.locked_shot_no_added_beats",
+        "forbidden_additions"
+      ]
+    },
+    "A02": {
+      "item": "世界位置不等于画面左右",
+      "fields": [
+        "world_position",
+        "screen_left_right",
+        "world_not_equal_screen"
+      ]
+    },
+    "A06": {
+      "item": "装不下则拆镜或延长，不吞词",
+      "fields": [
+        "shot_rhythm.overflow_policy"
+      ]
+    },
+    "A09": {
+      "item": "资产 initial/change/final",
+      "fields": [
+        "continuity_bridge.asset_register"
+      ]
+    },
+    "A13": {
+      "item": "事实/推定/未知分开",
+      "fields": [
+        "knowledge_status"
+      ]
+    },
+    "A14": {
+      "item": "有依据才写负向；题材硬禁仍写",
+      "fields": [
+        "creative_constraints.negative_constraints_policy"
+      ]
+    }
+  },
+  "leftover_a_remain_advisory": [
+    "A03",
+    "A04",
+    "A05",
+    "A07",
+    "A08",
+    "A10",
+    "A11",
+    "A12",
+    "A15",
+    "A16"
+  ],
+  "validator": "tools/validate_new_drama_semantics.py",
+  "hook": "tools/production_shot_gate.py only when is_new_drama(canonical_shot)"
+}

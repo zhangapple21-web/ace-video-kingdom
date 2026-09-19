@@ -1,0 +1,57 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "video_kingdom.prop_asset_package.v1",
+  "description": "道具资产分册。可选默认层；视图数量由该剧简报决定。",
+  "type": "object",
+  "required": [
+    "schema",
+    "prop_id",
+    "locked_features",
+    "visual_assets"
+  ],
+  "properties": {
+    "schema": {
+      "const": "video_kingdom.prop_asset_package.v1"
+    },
+    "prop_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "name": {
+      "type": "string"
+    },
+    "locked_features": {
+      "type": "object"
+    },
+    "variant_policy": {
+      "type": "string"
+    },
+    "static_asset_rules": {
+      "type": "array"
+    },
+    "material_structure": {
+      "type": "string"
+    },
+    "design_basis": {
+      "type": "object"
+    },
+    "negative_constraints_policy": {
+      "type": "string"
+    },
+    "reference_image_camera_lock": {
+      "type": "boolean"
+    },
+    "binding_policy": {
+      "type": "string"
+    },
+    "state_contract": {
+      "type": "object"
+    },
+    "visual_assets": {
+      "type": "array"
+    },
+    "missing": {
+      "type": "array"
+    }
+  }
+}

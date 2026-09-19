@@ -1,0 +1,81 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "video_kingdom.scene_asset_package.v1",
+  "description": "场景状态分册。默认动态建立，不把场景参考图库或四视图写成全局硬门。views 可空缺。",
+  "type": "object",
+  "required": [
+    "schema",
+    "scene_id",
+    "locked_features",
+    "views"
+  ],
+  "properties": {
+    "schema": {
+      "const": "video_kingdom.scene_asset_package.v1"
+    },
+    "scene_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "name": {
+      "type": "string"
+    },
+    "locked_features": {
+      "type": "object"
+    },
+    "variant_policy": {
+      "type": "string"
+    },
+    "static_asset_rules": {
+      "type": "array"
+    },
+    "material_structure": {
+      "type": "string"
+    },
+    "design_basis": {
+      "type": "object"
+    },
+    "negative_constraints_policy": {
+      "type": "string"
+    },
+    "reference_image_camera_lock": {
+      "type": "boolean"
+    },
+    "binding_policy": {
+      "type": "string"
+    },
+    "state_contract": {
+      "type": "object"
+    },
+    "views": {
+      "type": "array"
+    },
+    "visual_assets": {
+      "type": "array"
+    },
+    "missing": {
+      "type": "array"
+    },
+    "origin": {
+      "type": "string"
+    },
+    "long_term_asset": {
+      "type": "boolean"
+    },
+    "reference_images_required": {
+      "type": "boolean"
+    },
+    "scene_state": {
+      "type": "object"
+    },
+    "shot_binding_rule": {
+      "type": "string"
+    },
+    "reference_role": {
+      "type": "string"
+    },
+    "identity_usage": {
+      "type": "string"
+    }
+  }
+}
