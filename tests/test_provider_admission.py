@@ -53,6 +53,27 @@ def test_admission_receipt_hashes_one_canonical_request(tmp_path: Path) -> None:
     assert_admission(receipt, receipt["request_hash"])
 
 
+def test_canonical_request_hash_includes_current_production_contract() -> None:
+    from runtime.provider_admission import canonical_hash
+
+    shot = _shot()
+    shot.update({
+        "state_contract": {"scene_state": {"location": "room"}},
+        "script_prompt_review": {"prompt_hash": "a" * 64},
+        "continuity_bridge": {"approved_for_next_shot": True},
+        "composition_reference": {"public_url": "https://cdn.example/scene.png"},
+    })
+    payload = {"model": "test", "prompt": "one bounded action", "seconds": "6"}
+    first = build_canonical_generation_request(
+        shot, payload, provider="p", endpoint="https://provider.invalid", payload_schema="test.v1", model="test"
+    )
+    shot["state_contract"]["scene_state"]["location"] = "office"
+    second = build_canonical_generation_request(
+        shot, payload, provider="p", endpoint="https://provider.invalid", payload_schema="test.v1", model="test"
+    )
+    assert canonical_hash(first) != canonical_hash(second)
+
+
 def test_media_asset_without_medium_lock_is_blocked_even_in_research_scope() -> None:
     request = build_canonical_generation_request(
         {"episode_id": "E1", "shot_id": "ASSET_1", "prompt": "character reference", "action": "reference", "camera": {"framing": "sheet"}, "audio_contract": {"status": "NOT_APPLICABLE"}},
@@ -350,6 +371,31 @@ def test_legacy_cli_rejects_prompt_drift_before_provider_post(monkeypatch, tmp_p
     ])
     with pytest.raises(SystemExit, match="--prompt must exactly match the canonical shot contract"):
         run_short_clip.main()
+
+
+def test_production_contract_status_blocks_rework_and_stale_generation() -> None:
+    from tools.run_short_clip import _validate_production_contract_status
+
+    with pytest.raises(ValueError, match="not generation-enabled"):
+        _validate_production_contract_status({"status": "READY", "generation_allowed": False})
+    with pytest.raises(ValueError, match="not active"):
+        _validate_production_contract_status({"status": "SUPERSEDED_REWORK_REQUIRED", "generation_allowed": True})
+
+
+def test_production_cli_mode_cannot_override_reference_contract() -> None:
+    from tools.run_short_clip import _validate_cli_mode_alignment
+
+    contract = {"shot_rhythm": {"flash_mode_default": "reference", "media_role": "identity_reference_not_keyframe"}}
+    with pytest.raises(ValueError, match="conflicts with contract"):
+        _validate_cli_mode_alignment(contract, {"mode": "keyframe"})
+
+
+def test_production_keyframe_requires_explicit_composition_contract() -> None:
+    from tools.run_short_clip import _validate_cli_mode_alignment
+
+    contract = {"shot_rhythm": {"flash_mode": "keyframe", "media_role": "keyframe"}}
+    with pytest.raises(ValueError, match="composition_reference/first_frame_ref"):
+        _validate_cli_mode_alignment(contract, {"mode": "keyframe"})
 
 
 def test_shot_core_chain_persists_receipt_before_fake_provider_boundary(tmp_path: Path) -> None:

@@ -23,6 +23,14 @@ def test_media_route_locks_model_and_fails_closed_without_secret():
     assert "CREDENTIAL_MISSING" in selected["reasons"]
 
 
+def test_media_route_accepts_canonical_image_secret_alias():
+    route = route_media_demand("生成两张角色包图", env={"SHENWEN_IMAGE_API_KEY": "test-key"})
+    assert route["status"] == "ROUTED"
+    selected = route["selected_routes"][0]
+    assert selected["credential_env"] == "SHENWEN_IMAGE_API_KEY"
+    assert "SHENWEN_API_KEY" in selected["credential_envs"]
+
+
 def test_project_discovery_is_canonical_and_hashed():
     result = discover_project("C:/tmp")
     assert result["project_id"] == "ace-video-kingdom"

@@ -19,7 +19,8 @@
         "D:/视频创作/ace-video-kingdom/tools/imagegen_shenwen.ps1",
         "D:/tmp/ace-video-kingdom/tools/imagegen_shenwen.ps1"
       ],
-      "credential_env": "SHENWEN_API_KEY",
+      "credential_env": "SHENWEN_IMAGE_API_KEY",
+      "credential_env_aliases": ["SHENWEN_API_KEY"],
       "eligible_scopes": ["current_control_plane", "production", "auto"],
       "production_eligible": true,
       "health": {
