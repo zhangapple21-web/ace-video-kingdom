@@ -96,7 +96,59 @@ def _continuity_evidence(root: Path, shot: dict[str, Any]) -> str | None:
     return None
 
 
-def preflight_plan(plan_path: Path, *, mode: str = "PRODUCTION") -> dict[str, Any]:
+def _plan_shot_ids(plan: dict[str, Any]) -> list[str]:
+    shots = plan.get("shots") if isinstance(plan.get("shots"), list) else []
+    result: list[str] = []
+    for index, shot in enumerate(shots):
+        if not isinstance(shot, dict):
+            continue
+        shot_id = str(shot.get("shot_id") or f"SHOT_{index + 1:03d}").strip()
+        if not shot_id or shot_id in result:
+            raise WorkflowError("PLAN_SHOT_IDS_INVALID")
+        result.append(shot_id)
+    if not result:
+        raise WorkflowError("PLAN_SHOTS_REQUIRED")
+    return result
+
+
+def normalize_scope(plan: dict[str, Any], scope: dict[str, Any] | list[str] | None = None) -> dict[str, Any]:
+    """Normalize and validate a staged contiguous shot prefix."""
+    plan_ids = _plan_shot_ids(plan)
+    if scope is None:
+        shot_ids = list(plan_ids)
+        active = shot_ids[0]
+        requested_id = None
+    elif isinstance(scope, list):
+        shot_ids = [str(item).strip() for item in scope]
+        active = shot_ids[0] if shot_ids else ""
+        requested_id = None
+    elif isinstance(scope, dict):
+        if scope.get("kind") != "SHOT_SUBSET":
+            raise WorkflowError("SCOPE_KIND_INVALID")
+        raw_ids = scope.get("shot_ids")
+        if not isinstance(raw_ids, list):
+            raise WorkflowError("SCOPE_SHOT_IDS_REQUIRED")
+        shot_ids = [str(item).strip() for item in raw_ids]
+        active = str(scope.get("active_shot_id") or (shot_ids[0] if shot_ids else "")).strip()
+        requested_id = scope.get("scope_id")
+    else:
+        raise WorkflowError("SCOPE_INVALID")
+    if not shot_ids or any(not item for item in shot_ids) or len(set(shot_ids)) != len(shot_ids):
+        raise WorkflowError("SCOPE_SHOT_IDS_NON_EMPTY_UNIQUE_REQUIRED")
+    if any(item not in plan_ids for item in shot_ids):
+        raise WorkflowError("SCOPE_SHOT_UNKNOWN")
+    if shot_ids != plan_ids[:len(shot_ids)]:
+        raise WorkflowError("SCOPE_MUST_BE_CONTIGUOUS_PREFIX")
+    if active not in shot_ids:
+        raise WorkflowError("SCOPE_ACTIVE_SHOT_INVALID")
+    canonical = {"kind": "SHOT_SUBSET", "shot_ids": shot_ids, "active_shot_id": active}
+    scope_id = hashlib.sha256(json.dumps(canonical, ensure_ascii=False, sort_keys=True, separators=(",", ":")).encode("utf-8")).hexdigest()[:16]
+    if requested_id is not None and str(requested_id) != scope_id:
+        raise WorkflowError("SCOPE_ID_MISMATCH")
+    return {**canonical, "scope_id": scope_id}
+
+
+def preflight_plan(plan_path: Path, *, mode: str = "PRODUCTION", scope: dict[str, Any] | list[str] | None = None) -> dict[str, Any]:
     """Validate production inputs before materializing a Run.
 
     A production run is an execution ledger, not a place to discover that the
@@ -107,6 +159,8 @@ def preflight_plan(plan_path: Path, *, mode: str = "PRODUCTION") -> dict[str, An
     plan_path = plan_path.resolve()
     plan = _read_json(plan_path)
     root = plan_path.parent
+    normalized_scope = normalize_scope(plan, scope)
+    scoped_ids = set(normalized_scope["shot_ids"])
     errors: list[dict[str, Any]] = []
     checked_assets: list[dict[str, Any]] = []
 
@@ -141,6 +195,8 @@ def preflight_plan(plan_path: Path, *, mode: str = "PRODUCTION") -> dict[str, An
             continue
         from_shot = str(shot.get("shot_id") or f"SHOT_{index + 1:03d}")
         to_shot = str(shots[index + 1].get("shot_id") or f"SHOT_{index + 2:03d}")
+        if from_shot not in scoped_ids or to_shot not in scoped_ids:
+            continue
         evidence_raw = _continuity_evidence(root, shot)
         row = {"from_shot": from_shot, "to_shot": to_shot, "evidence_path": evidence_raw}
         continuity.append(row)
@@ -170,6 +226,7 @@ def preflight_plan(plan_path: Path, *, mode: str = "PRODUCTION") -> dict[str, An
         "mode": mode,
         "plan": str(plan_path),
         "plan_sha256": hashlib.sha256(plan_path.read_bytes()).hexdigest(),
+        "scope": normalized_scope,
         "assets": checked_assets,
         "continuity": continuity,
         "errors": errors,
@@ -185,6 +242,7 @@ def bootstrap(
     run_id: str | None = None,
     request_id: str | None = None,
     executor_thread_id: str | None = None,
+    scope: dict[str, Any] | list[str] | None = None,
 ) -> dict[str, Any]:
     """Create one control run from an immutable episode plan.
 
@@ -199,12 +257,14 @@ def bootstrap(
         raise WorkflowError("PLAN_PRODUCTION_INTEGRATION_MUST_BE_FALSE")
     if run_path.exists():
         raise WorkflowError(f"RUN_ALREADY_EXISTS:{run_path}")
+    normalized_scope = normalize_scope(plan, scope) if scope is not None else normalize_scope(plan)
+    plan_shot_ids = _plan_shot_ids(plan)
     # Production must prove the asset package and continuity bridges before a
     # Run ledger exists.  Persist only a small sidecar receipt on failure; the
     # actual Run remains uncreated and therefore cannot be mistaken for work
     # that was admitted.
     if mode == "PRODUCTION":
-        preflight = preflight_plan(plan_path, mode=mode)
+        preflight = preflight_plan(plan_path, mode=mode, scope=normalized_scope)
         if preflight["status"] != "READY":
             receipt_path = run_path.with_suffix(run_path.suffix + ".preflight.json")
             _write_json(receipt_path, preflight)
@@ -231,6 +291,8 @@ def bootstrap(
         request_id=request_id or f"req_{uuid.uuid4().hex}",
         executor_thread_id=executor_thread_id,
         request_hash=plan_hash,
+        scope=normalized_scope,
+        plan_shot_ids=plan_shot_ids,
     )
     for row in _all_assets(plan):
         asset_id = str(row["asset_id"])

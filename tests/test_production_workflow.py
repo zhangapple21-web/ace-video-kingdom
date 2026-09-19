@@ -7,7 +7,7 @@ from pathlib import Path
 import pytest
 
 from production_control import ProductionControl, WorkflowError
-from production_control.workflow import bootstrap, lock_plan_shots, recover
+from production_control.workflow import bootstrap, lock_plan_shots, normalize_scope, preflight_plan, recover
 from tools.medium_lock import character_performance_lock
 
 
@@ -89,6 +89,17 @@ def test_production_bootstrap_preflights_before_creating_run(tmp_path: Path):
     assert receipt.is_file()
     payload = json.loads(receipt.read_text(encoding="utf-8"))
     assert any(row["reason"] == "CONTINUITY_EVIDENCE_MISSING" for row in payload["errors"])
+
+
+def test_preflight_scope_is_normalized_and_limits_continuity_edges(tmp_path: Path):
+    plan_path = _plan(tmp_path, with_bridge=True)
+    plan = json.loads(plan_path.read_text(encoding="utf-8"))
+    plan["shots"].append({"shot_id": "S03", "action": "hold"})
+    plan_path.write_text(json.dumps(plan, ensure_ascii=False), encoding="utf-8")
+    scope = normalize_scope(plan, ["S01", "S02"])
+    result = preflight_plan(plan_path, mode="SANDBOX", scope=scope)
+    assert result["scope"] == scope
+    assert result["continuity"] == [{"from_shot": "S01", "to_shot": "S02", "evidence_path": "bridges/S01-S02.json"}]
 
 
 def test_changed_admission_requires_explicit_request_revision(tmp_path: Path):
