@@ -1,0 +1,133 @@
+{
+  "schema": "ace.video_kingdom.creative_collaboration_contract.v1",
+  "status": "LOCKED",
+  "layer": "DEFAULT_METHOD",
+  "purpose": "把一部 AI 短剧当作由人掌握创作、由结构化版本管理和明确交接推进的协作项目；适用于所有视频题材。",
+  "source_note": "吸收墨契式剧本协作思路；不依赖外部平台，不上传剧本，不替换现有生产入口。",
+  "principles": [
+    "剧本是创作真源，镜头、资产、音频和提示词都是可追溯的派生物。",
+    "AI可以整理、标注、检查和提出候选，但不能静默决定核心主题、人物动机、关键反转或最终取舍。",
+    "每次实质修改都产生新版本，旧版本保留为历史，不能用覆盖文件制造假连续。",
+    "每个交接都只消费已批准快照；候选、评论、失败分支和 Provider completed 不等于成片。",
+    "协作权限按最小授权分配；评论和建议不能直接越过双审、五关收据或交付门。"
+  ],
+  "lifecycle": [
+    "idea",
+    "script_draft",
+    "script_reviewed",
+    "script_locked",
+    "shot_plan",
+    "director_reviewed",
+    "shot_locked",
+    "single_shot_sample",
+    "creative_accepted",
+    "scaled_generation",
+    "post_production",
+    "delivery",
+    "publish_recap"
+  ],
+  "canonical_artifacts": {
+    "script": "剧本正文、对白归属、独白原文和本轮 script_hash",
+    "decision_log": "关键创作决定、采用理由、未采用候选和用户确认",
+    "annotations": "绑定到段落/字段/镜头的评论、风险、问题和解决状态",
+    "shot_contract": "从锁定剧本派生的镜头执行合同和 prompt_hash",
+    "approved_state": "可传递到下一镜的连续性、资产和真实 Take 状态",
+    "receipts": "run_id、角色席位、Provider、QC 和交付证据"
+  },
+  "revision_policy": {
+    "required_fields": ["revision_id", "parent_revision_id", "script_hash", "author", "created_at", "change_summary", "status"],
+    "status_values": ["DRAFT", "IN_REVIEW", "LOCKED", "SUPERSEDED", "ARCHIVED"],
+    "material_change": "台词、剧情、人物动机、顺序、结局、敏感边界或镜头目标变化",
+    "invalidation": {
+      "script_change": "重新开始编剧审核；旧 script_prompt_review、prompt 和镜头派生物不得冒充本轮",
+      "prompt_or_motion_change": "保留 script_hash，只重做导演审核并生成新 prompt_hash",
+      "asset_state_change": "保留剧本版本，重做受影响镜头的资产/连续性批准状态"
+    },
+    "overwrite_policy": "append_only; supersedes_previous_revision; no_silent_overwrite"
+  },
+  "annotation_policy": {
+    "anchor": "json_pointer_or_script_line_or_shot_id",
+    "types": ["QUESTION", "RISK", "DECISION", "CONTINUITY", "PERFORMANCE", "RIGHTS"],
+    "states": ["OPEN", "ACCEPTED", "REJECTED", "RESOLVED", "DEFERRED"],
+    "required_resolution": "涉及核心创作或生产风险的评论必须留下决定、决定人和时间；未解决的高风险评论阻断锁稿",
+    "authority": "annotations_are_context_not_approval"
+  },
+  "roles_and_permissions": {
+    "producer": {
+      "can": ["set_scope", "choose_final_creative_direction", "authorize_delivery"],
+      "cannot": ["erase_history", "bypass_gates"]
+    },
+    "writer": {
+      "can": ["write_script", "propose_story_decisions", "resolve_script_annotations"],
+      "cannot": ["approve_own_final_delivery", "submit_provider_request"]
+    },
+    "director": {
+      "can": ["derive_shot_contract", "set_performance_and_camera_intent", "review_prompt"],
+      "cannot": ["silently_change_locked_script", "replace_user_decision"]
+    },
+    "reviewer": {
+      "can": ["annotate", "audit", "request_revision", "mark_risk"],
+      "cannot": ["silently_edit_source", "approve_provider_submission"]
+    },
+    "executor": {
+      "can": ["consume_approved_snapshot", "submit_admitted_request", "write_receipts", "report_failure"],
+      "cannot": ["invent_story_beats", "change_quality_bar", "promote_unapproved_state"]
+    }
+  },
+  "permission_tiers": [
+    {
+      "tier": 1,
+      "name": "OWNER",
+      "scope": "项目范围、核心创作取舍、最终交付授权",
+      "actors": ["producer", "user"],
+      "can": ["set_scope", "adopt_or_reject_core_decisions", "authorize_delivery"],
+      "cannot": ["delete_history", "bypass_hard_gates"]
+    },
+    {
+      "tier": 2,
+      "name": "AUTHORING",
+      "scope": "剧本草稿、镜头派生、资产和表演候选",
+      "actors": ["writer", "director"],
+      "can": ["create_revision", "derive_shot_contract", "propose_candidates"],
+      "cannot": ["silently_overwrite_locked_revision", "self_authorize_delivery"]
+    },
+    {
+      "tier": 3,
+      "name": "REVIEW",
+      "scope": "批注、风险审计、双审意见和状态标记",
+      "actors": ["reviewer"],
+      "can": ["annotate", "request_revision", "mark_review_outcome"],
+      "cannot": ["silently_edit_source", "submit_provider_request"]
+    },
+    {
+      "tier": 4,
+      "name": "EXECUTION",
+      "scope": "消费已批准快照、执行已准入请求、写入收据",
+      "actors": ["executor"],
+      "can": ["consume_approved_state", "execute_admitted_request", "write_receipt"],
+      "cannot": ["invent_story_beats", "change_quality_bar", "promote_unapproved_state"]
+    }
+  ],
+  "ai_authority": {
+    "allowed": ["summarize", "structure", "extract_entities", "find_continuity_risks", "propose_labeled_candidates", "compare_revisions", "format_contracts"],
+    "requires_human_adoption": ["theme", "character_motivation", "major_plot_turn", "ending", "sensitive_boundary", "final_take_selection"],
+    "forbidden": ["silent_overwrite", "invent_unmarked_facts", "self_approve", "treat_provider_completed_as_delivery", "change_provider_route"]
+  },
+  "security": {
+    "default_storage": "local_workspace",
+    "external_upload": "opt_in_only_after_user_confirmation",
+    "secrets": "never_in_script_snapshots_comments_logs_or_receipts",
+    "privacy_gate": "scan_sensitive_content_before_provider_submission"
+  },
+  "integration_boundaries": {
+    "does_not_replace": [
+      "video_kingdom_entry.py",
+      "script_prompt_review dual review",
+      "production_shot_gate five-layer receipt",
+      "imagegen -> gpt-image-2",
+      "Video -> agnes-video-2.5-flash"
+    ],
+    "default_scope": "all_video_projects",
+    "production_gate_change": false
+  }
+}

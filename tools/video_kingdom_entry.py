@@ -26,6 +26,7 @@ if str(ROOT) not in sys.path:
 
 from production_control.media_routing import build_image_model_plan, choose_image_strategy, classify_media_intent, route_media_demand
 from production_control.semantic_context import build_semantic_context
+from production_control.collaboration import load_default_collaboration_context
 from tools import role_room
 
 
@@ -279,6 +280,10 @@ def dispatch(*, text: str, out: Path, profile: str = "standard", project_id: str
         "profile": profile,
         "project_id": project_id or None,
         "provider_submission": "NOT_PERFORMED",
+        # Management/default-method context is recorded at the only public
+        # entry so narrative and media requests cannot silently diverge.
+        # This does not replace the existing script/director/provider gates.
+        "collaboration": load_default_collaboration_context(ROOT),
     }
     if intent:
         route = route_media_demand(source, scope="current_control_plane")
