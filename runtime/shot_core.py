@@ -17,7 +17,7 @@ import time
 from contextlib import contextmanager
 from pathlib import Path
 from typing import Any
-from urllib.parse import urlparse
+from urllib.parse import quote, urlparse
 
 import requests
 from PIL import Image
@@ -120,6 +120,18 @@ def _asset_is_public_url(value: Any) -> bool:
         return False
     parsed = urlparse(value)
     return parsed.scheme in {"http", "https"} and bool(parsed.netloc)
+
+
+def _agnes_media_url(value: str) -> str:
+    parsed = urlparse(value)
+    if parsed.hostname and parsed.hostname.lower().endswith("filebase.io"):
+        relay = os.environ.get("AGNES_MEDIA_RELAY_BASE_URL", "").strip().rstrip("/")
+        if not relay.startswith("https://"):
+            raise ValueError(
+                "Filebase 私有 URL 不能直接提交给 Agnes；请设置已批准的 HTTPS AGNES_MEDIA_RELAY_BASE_URL"
+            )
+        return f"{relay}/?url={quote(value, safe='')}"
+    return value
 
 
 def resolve_artifact_path(manifest_path: Path, artifact_path: str | Path) -> Path:
@@ -603,7 +615,7 @@ def build_payload(shot: dict[str, Any], *, model: str = MODEL) -> dict[str, Any]
                     "local image references are not Provider-compatible; "
                     "supply a public URL or omit the image"
                 )
-            images.append(provider_ref)
+            images.append(_agnes_media_url(provider_ref))
         if images:
             payload["images"] = images[:5]
         # Agnes Video 2.5 Flash accepts up to three public audio references in
@@ -618,7 +630,7 @@ def build_payload(shot: dict[str, Any], *, model: str = MODEL) -> dict[str, Any]
                 provider_ref = ref.get("provider_ref") if isinstance(ref, dict) else ref
                 if not _asset_is_public_url(provider_ref):
                     raise ValueError("local audio references are not Provider-compatible; supply a public URL")
-                audios.append(provider_ref)
+                audios.append(_agnes_media_url(provider_ref))
             if audios:
                 payload["audios"] = audios
                 prompt += "\n[AUDIO_REFERENCE]\n" + "\n".join(
@@ -629,9 +641,9 @@ def build_payload(shot: dict[str, Any], *, model: str = MODEL) -> dict[str, Any]
         first = contract.get("first_frame_ref")
         last = contract.get("last_frame_ref")
         if first:
-            payload["first_frame"] = first
+            payload["first_frame"] = _agnes_media_url(first) if _asset_is_public_url(first) else first
         if last:
-            payload["last_frame"] = last
+            payload["last_frame"] = _agnes_media_url(last) if _asset_is_public_url(last) else last
     return payload
 
 

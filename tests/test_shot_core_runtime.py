@@ -57,6 +57,25 @@ def test_reference_payload_accepts_public_audio_references():
     assert "<Audio 1>" in payload["prompt"]
 
 
+def test_filebase_reference_requires_explicit_https_relay(monkeypatch):
+    shot = shot_fixture()
+    shot["provider_mode"] = "reference"
+    shot["asset_refs"][0]["provider_ref"] = "https://filebase.io/ipfs/QmExample/anchor.png"
+    monkeypatch.delenv("AGNES_MEDIA_RELAY_BASE_URL", raising=False)
+    with pytest.raises(ValueError, match="AGNES_MEDIA_RELAY_BASE_URL"):
+        build_payload(shot)
+
+
+def test_filebase_reference_is_rewritten_only_through_configured_relay(monkeypatch):
+    shot = shot_fixture()
+    shot["provider_mode"] = "reference"
+    source = "https://filebase.io/ipfs/QmExample/anchor.png"
+    shot["asset_refs"][0]["provider_ref"] = source
+    monkeypatch.setenv("AGNES_MEDIA_RELAY_BASE_URL", "https://relay.example/media")
+    payload = build_payload(shot)
+    assert payload["images"] == ["https://relay.example/media/?url=https%3A%2F%2Ffilebase.io%2Fipfs%2FQmExample%2Fanchor.png"]
+
+
 def test_reference_payload_rejects_local_audio_references():
     shot = shot_fixture()
     shot["provider_mode"] = "reference"
