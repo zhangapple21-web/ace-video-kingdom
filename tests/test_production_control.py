@@ -78,6 +78,20 @@ def test_fail_closed_asset_gate_and_recovery(tmp_path: Path):
     run.record_assembly("final.mp4", ordered_shots=["S01"])
     assert run.promote_delivery()["status"] == "READY"
     assert run.mark_delivered(destination="sandbox://demo")["status"] == "DELIVERED"
+
+
+def test_scope_metadata_is_persisted_on_production_run(tmp_path: Path):
+    scope = {"kind": "SHOT_SUBSET", "shot_ids": ["S01", "S02"], "active_shot_id": "S01", "scope_id": "scope-1"}
+    run = ProductionControl.create(
+        tmp_path / "run" / "state.json",
+        mode="PRODUCTION",
+        scope=scope,
+        plan_shot_ids=["S01", "S02", "S03"],
+    )
+    snapshot = run.snapshot()
+    assert snapshot["scope"] == scope
+    assert snapshot["plan_shot_ids"] == ["S01", "S02", "S03"]
+    assert snapshot["total_plan_shots"] == 3
     snapshot = run.snapshot()
     assert snapshot["stage"] == "DELIVERED"
     assert len(snapshot["events"]) >= 10
