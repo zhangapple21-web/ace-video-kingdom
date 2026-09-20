@@ -10,6 +10,8 @@ def test_voice_candidate_registry_is_selectable_by_status():
     assert {item["id"] for item in candidates} == {
         "csemotions.female001.neutral",
         "csemotions.male001.neutral",
+        "csemotions.female001.playful",
+        "csemotions.male001.teasing",
     }
     assert all(item["engine"] == "Fun-CosyVoice3-0.5B-2512" for item in candidates)
 
