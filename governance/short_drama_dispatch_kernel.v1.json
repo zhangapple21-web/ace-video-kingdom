@@ -37,8 +37,8 @@
   },
   "dialogue_and_duration": {
     "tts_first": true,
-    "tts_status": "支持两条音频来源：provider_generated_audio（视频模型返回的音轨）或 external_tts。无真实音频时长时，镜头只能标记 AUDIO_PENDING，不得宣称已完成音画对齐。",
-    "provider_audio_policy": "若视频模型返回音轨，先用ffprobe测量音频流，再用语音/对白可辨性检查确认；仅有AAC流不等于对白已对齐。确认后标记 PROVIDER_AUDIO_MEASURED；未确认内容仍为 AUDIO_UNVERIFIED。",
+    "tts_status": "正式生产只有 external_tts/independent_audio：先生成并实测外部主音轨，再把公网 reference_audio_urls 传给 Agnes 做口型参考，成片后以同一外部主音轨替换 Provider 音轨。无真实音频时长或公网参考 URL 时，镜头必须 BLOCKED。",
+    "provider_audio_policy": "Provider 返回的内置音轨永远不是正式成片音频；它只能作为明确标记的 RAPID_SAMPLE 研究小样。正式对白必须通过 audio_contract + render.reference_audio_urls 绑定外部音频；正式导出前强制以外部 master_audio_path 重混，内置音轨不得进入交付。",
     "line_integrity": "完整一句台词不得跨镜切断；只能在停顿、动作或反应点切分。",
     "duration_seconds": {
       "min": 2.5,

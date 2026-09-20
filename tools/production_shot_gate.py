@@ -18,6 +18,7 @@ from tools.validate_shot_rhythm import validate_shot_rhythm
 from tools.validate_script_prompt_review import validate_script_prompt_review
 from tools.validate_new_drama_semantics import is_new_drama, validate_new_drama_semantics
 from tools.validate_state_contract import validate_state_contract
+from tools.validate_audio_contract import validate_audio_contract
 from pathlib import Path
 import json
 
@@ -61,6 +62,15 @@ def validate_production_shot(canonical_shot: dict[str, Any], contract_prompt: st
         raise ValueError("script/prompt review failed: " + ";".join(review_check["errors"]))
     if state_check["status"] != "PASS":
         raise ValueError("state contract failed: " + ";".join(state_check["errors"]))
+
+    # Formal short drama is audio-first.  A Provider-returned AAC track is
+    # never accepted as the source of truth: dialogue must have a measured
+    # external master plus a public reference URL, while inner voice remains a
+    # closed-mouth external overlay.  Explicit rapid samples are the only
+    # labelled exception and are never deliverables.
+    audio_check = validate_audio_contract(canonical_shot, production=True)
+    if audio_check["status"] != "PASS":
+        raise ValueError("audio contract failed: " + ";".join(audio_check["errors"]))
 
     shot_prompt = canonical_shot.get("shot_prompt")
     shot_prompt = shot_prompt if isinstance(shot_prompt, dict) else {}
@@ -163,6 +173,7 @@ def validate_production_shot(canonical_shot: dict[str, Any], contract_prompt: st
         "status": "PASS",
         "creative": creative_check,
         "state": state_check,
+        "audio": audio_check,
         "script_prompt_review": review_check,
         "prompt": prompt_check,
         "continuity": continuity_check,

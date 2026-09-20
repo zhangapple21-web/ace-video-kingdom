@@ -11,13 +11,13 @@
 - 官方页面没有明确承诺“每次生成都会按台词自动生成可辨识对白/口型同步”。
 - 现有 MP4 有 AAC 音轨，但没有对白转写或语音可辨性收据，因此不能仅凭“有音轨”标记为 `PROVIDER_AUDIO_MEASURED`。
 
-## 已落地规则
+## 当前生产边界
 
-`governance/short_drama_dispatch_kernel.v1.json` 现在同时接受 `provider_generated_audio` 和 `external_tts` 两条路径，但要求：
+这份文件记录的是旧 Provider 能力探针，不是生产协议。Provider 返回的
+`provider_generated_audio` 只能作为历史证据或 `RAPID_SAMPLE` 小样，不能晋升
+为正式对白来源。正式路径固定为：
 
-1. 先用 ffprobe 测量音频流；
-2. 再做对白/语音可辨性与台词对齐检查；
-3. 两项都通过后才标记 `PROVIDER_AUDIO_MEASURED`；
-4. 只有 AAC 轨而没有对白证据时保持 `AUDIO_UNVERIFIED`。
-
-这次没有把外部 SAPI TTS 替换进生产视频，也没有修改既有成片。
+1. 先生成并用 ffprobe 测量外部主音轨；
+2. 把 1–3 个 HTTPS `render.reference_audio_urls` 传给 Agnes 做口型参考；
+3. 生成后始终用同一 `master_audio_path` 重混，内置 AAC 只留在原始收据；
+4. 没有外部主音轨或公网参考 URL 时保持 `BLOCKED`，不能提交视频。

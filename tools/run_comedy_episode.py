@@ -8,8 +8,10 @@ from __future__ import annotations
 
 import argparse
 import json
+import os
 import subprocess
 import sys
+import tempfile
 import time
 from pathlib import Path
 
@@ -17,6 +19,8 @@ try:
     from runtime.provider_admission import delivery_gate
 except ImportError:  # pragma: no cover
     from tools.runtime.provider_admission import delivery_gate  # type: ignore
+
+from tools.replace_audio_track import replace_audio_track, strip_audio_track
 
 
 def _append_option(command: list[str], flag: str, value: object | None) -> None:
@@ -101,10 +105,9 @@ def _run_pacing_audit(
     command = [
         sys.executable, str(Path(__file__).with_name("audit_video_pacing.py")),
         "--video", str(video), "--max-internal-cuts", str(max_internal_cuts), "--output", str(output),
-        "--require-audio",
     ]
     if dialogue:
-        command.append("--dialogue")
+        command.extend(["--require-audio", "--dialogue"])
     if tts_duration is not None:
         command.extend(["--tts-duration", str(tts_duration)])
     if expected_duration is not None:
@@ -177,6 +180,72 @@ def _contract_shots(episode: dict) -> dict[str, dict]:
     except (OSError, json.JSONDecodeError):
         return {}
     return {str(row.get("shot_id")): row for row in contract.get("shots", []) if isinstance(row, dict) and row.get("shot_id")}
+
+
+def _audio_tracks(shot: dict) -> tuple[dict, list[dict], list[dict]]:
+    audio = shot.get("audio_contract") if isinstance(shot.get("audio_contract"), dict) else {}
+    dialogue = [item for item in audio.get("dialogue_tracks", []) if isinstance(item, dict)]
+    inner = [item for item in audio.get("inner_monologue_tracks", []) if isinstance(item, dict)]
+    return audio, dialogue, inner
+
+
+def _external_master_path(shot: dict) -> Path | None:
+    audio, dialogue, inner = _audio_tracks(shot)
+    value = audio.get("master_audio_path") or audio.get("mixdown_path")
+    if not value and len(dialogue) + len(inner) == 1:
+        track = (dialogue + inner)[0]
+        value = track.get("local_path") or track.get("path") or track.get("audio_path")
+    if not isinstance(value, str) or not value.strip():
+        return None
+    path = Path(value).expanduser()
+    return path if path.is_file() else None
+
+
+def _update_manifest_audio_master(manifest: Path, shot_id: str, receipt: dict) -> None:
+    try:
+        value = json.loads(manifest.read_text(encoding="utf-8"))
+    except (OSError, json.JSONDecodeError) as exc:
+        raise SystemExit(f"audio master applied but manifest is unreadable: {manifest}") from exc
+    rows = value if isinstance(value, list) else [value]
+    found = False
+    for row in rows:
+        if isinstance(row, dict) and row.get("shot_id") == shot_id:
+            row["artifact_sha256"] = receipt["output_sha256"]
+            row["bytes"] = Path(str(receipt["output"])).stat().st_size
+            row["audio_master"] = receipt
+            found = True
+            break
+    if not found:
+        raise SystemExit(f"audio master applied but manifest has no shot: {shot_id}")
+    payload = rows if isinstance(value, list) else rows[0]
+    fd, temp_name = tempfile.mkstemp(prefix=f".{manifest.name}.", suffix=".tmp", dir=str(manifest.parent))
+    try:
+        with os.fdopen(fd, "w", encoding="utf-8") as handle:
+            json.dump(payload, handle, ensure_ascii=False, indent=2)
+            handle.write("\n")
+            handle.flush()
+            os.fsync(handle.fileno())
+        os.replace(temp_name, manifest)
+    finally:
+        Path(temp_name).unlink(missing_ok=True)
+
+
+def _apply_external_audio_master(video: Path, shot: dict, manifest: Path, shot_id: str) -> dict:
+    """Replace or strip Provider audio before any pacing or assembly audit."""
+    audio, dialogue, inner = _audio_tracks(shot)
+    has_spoken_audio = bool(dialogue or inner)
+    master = _external_master_path(shot)
+    if has_spoken_audio and master is None:
+        raise SystemExit(f"{shot_id} has spoken audio but no local external master; Provider audio cannot be final")
+    temp = video.with_name(f".{video.stem}.external-audio.mp4")
+    if has_spoken_audio:
+        receipt = replace_audio_track(video, master, temp)
+    else:
+        receipt = strip_audio_track(video, temp)
+    os.replace(temp, video)
+    receipt["output"] = str(video)
+    _update_manifest_audio_master(manifest, shot_id, receipt)
+    return receipt
 
 
 def _validate_renderer_policy(episode: dict, render: dict) -> None:
@@ -309,6 +378,21 @@ def main() -> int:
         if result.returncode:
             print(json.dumps({"status": "STOPPED", "failed_shot": shot_id}, ensure_ascii=False))
             return result.returncode
+        # Agnes may return an AAC stream even when an external reference was
+        # supplied, and may omit it on another take.  Neither outcome is a
+        # deliverable audio policy.  Apply the contract-owned external master
+        # (or strip audio for an explicitly silent shot) before any pacing/QC
+        # or episode assembly reads the artifact.
+        audio_contract_shot = dict(contract_shots.get(str(shot_id), {}))
+        audio_contract_shot.update(shot)
+        try:
+            audio_receipt = _apply_external_audio_master(
+                args.media_dir / f"{shot_id}.mp4", audio_contract_shot, args.manifest, str(shot_id)
+            )
+        except (OSError, ValueError, subprocess.CalledProcessError, SystemExit) as error:
+            print(json.dumps({"status": "STOPPED", "failed_shot": shot_id, "reason": f"external audio master failed: {error}"}, ensure_ascii=False))
+            return 1
+        print(json.dumps({"status": "EXTERNAL_AUDIO_MASTER_APPLIED", "shot_id": shot_id, "receipt": audio_receipt}, ensure_ascii=False), flush=True)
         pacing_dir = args.pacing_audit_dir or args.manifest.parent / "pacing_audits"
         sidecar = contract_shots.get(str(shot_id), {})
         script = sidecar.get("script", {}) if isinstance(sidecar.get("script"), dict) else {}
