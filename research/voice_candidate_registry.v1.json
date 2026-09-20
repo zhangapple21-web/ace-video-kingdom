@@ -49,6 +49,30 @@
       "selection_notes": "本地试听和短剧样片候选；未替换现有冻结角色音色"
     },
     {
+      "id": "csemotions.female001.playful",
+      "label": "CSEMOTIONS 女声 001 / 俏皮可爱",
+      "engine": "Fun-CosyVoice3-0.5B-2512",
+      "source_dataset": "ATH-MaaS/CSEMOTIONS (AIDC-AI alias)",
+      "license": "Apache-2.0 dataset; speaker/rightsholder clearance still required",
+      "status": "RESEARCH_ONLY_PENDING_RIGHTS",
+      "local_sample": "D:/视频创作/voice_research/CSEMOTIONS_20260920/samples/female001_happy.wav",
+      "probe_receipt": "D:/视频创作/voice_research/CSEMOTIONS_20260920/emotion_outputs/receipt.json",
+      "role_fit": ["女主对白", "撒娇", "俏皮回应"],
+      "selection_notes": "角色目标是轻快、俏皮、带一点撒娇；正式使用前仍需逐句听感 QC"
+    },
+    {
+      "id": "csemotions.male001.teasing",
+      "label": "CSEMOTIONS 男声 001 / 沉稳调侃",
+      "engine": "Fun-CosyVoice3-0.5B-2512",
+      "source_dataset": "ATH-MaaS/CSEMOTIONS (AIDC-AI alias)",
+      "license": "Apache-2.0 dataset; speaker/rightsholder clearance still required",
+      "status": "RESEARCH_ONLY_PENDING_RIGHTS",
+      "local_sample": "D:/视频创作/voice_research/CSEMOTIONS_20260920/samples/male001_playfulness.wav",
+      "probe_receipt": "D:/视频创作/voice_research/CSEMOTIONS_20260920/emotion_outputs/receipt.json",
+      "role_fit": ["男主对白", "沉稳调侃", "逗女主"],
+      "selection_notes": "保持沉稳底色，同时加入得意、憋笑和逗人感；正式使用前仍需逐句听感 QC"
+    },
+    {
       "id": "chattts.random.research",
       "label": "ChatTTS 随机说话人 / 口语节奏研究",
       "engine": "ChatTTS",
