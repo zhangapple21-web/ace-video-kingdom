@@ -1,0 +1,44 @@
+{
+  "schema": "ace.video_kingdom.shot_lineage.v1",
+  "purpose": "把逐句台词从剧本版本追踪到镜头、角色/音色、音频、视频 Take、审核和最终成片版本",
+  "status_values": ["DRAFT", "BLOCKED", "READY", "APPROVED_MASTER", "PUBLISH_PACKAGE"],
+  "artifact_ref": {
+    "path": "项目内相对路径或绝对路径",
+    "sha256": "64位小写SHA-256",
+    "status": "PRESENT|MISSING|UNVERIFIED"
+  },
+  "line_required_fields": [
+    "line_id",
+    "text",
+    "track_type",
+    "shot_id",
+    "character_id",
+    "speaker",
+    "voice_id",
+    "audio_track_id",
+    "generation_receipt_id",
+    "video_artifact_path",
+    "review_receipt_ids",
+    "take_id",
+    "selected",
+    "delivery_version_id"
+  ],
+  "lineage": {
+    "script": {"path": "剧本.md", "sha256": "", "status": "MISSING"},
+    "script_structure": {"path": "剧本结构.json", "sha256": "", "status": "MISSING"},
+    "storyboard": {"path": "分镜.json", "sha256": "", "status": "MISSING"},
+    "prompt_contract": {"path": "提示词合同.json", "sha256": "", "status": "MISSING"},
+    "asset_manifest": {"path": "角色-场景-道具资产清单.json", "sha256": "", "status": "MISSING"},
+    "audio_timeline": {"path": "配音时间轴.json", "sha256": "", "status": "MISSING"},
+    "review_record": {"path": "审核记录.json", "sha256": "", "status": "MISSING"},
+    "generation_receipt": {"path": "生成收据.json", "sha256": "", "status": "MISSING"}
+  },
+  "lines": [],
+  "delivery": {
+    "status": "BLOCKED",
+    "version_id": "PENDING",
+    "assembly_path": "",
+    "assembly_sha256": "",
+    "selected_take_ids": []
+  }
+}
