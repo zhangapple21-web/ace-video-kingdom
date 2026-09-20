@@ -1,0 +1,19 @@
+{
+  "schema": "csemotions-download-receipt.v1",
+  "source": "https://huggingface.co/datasets/AIDC-AI/CSEMOTIONS",
+  "resolved_dataset": "ATH-MaaS/CSEMOTIONS",
+  "license": "Apache-2.0 (dataset README); verify speaker/rightsholder clearance before publication",
+  "downloaded_shards": 7,
+  "total_bytes": 2588213233,
+  "raw_data_not_committed": true,
+  "local_root": "D:/视频创作/voice_research/CSEMOTIONS_20260920",
+  "records": [
+    {"shard": 0, "bytes": 400346630, "sha256": "caeb0357cf4fc990204ec83d6c0692303fcde2997767a965b86ff4f489c3ce8e"},
+    {"shard": 1, "bytes": 323382552, "sha256": "5910d384a5eb89c9edc1154c6ce7d5ee8041d01c185c33224f7083546cae66e3"},
+    {"shard": 2, "bytes": 334920722, "sha256": "d74b15673cfb166f90c6e363d5807087aff2ad1b95dc2c3f740e93cae567cd92"},
+    {"shard": 3, "bytes": 512783324, "sha256": "dbfb1a9d449584fd1c05ebd507638c000f426ef902e57b005944450e92a8e751"},
+    {"shard": 4, "bytes": 317245359, "sha256": "98305ba9a4a93407331fdd74481a9e400aab465bca289a20dca7f6dd8c5b10c3"},
+    {"shard": 5, "bytes": 324664675, "sha256": "ee4bdb8c958aaad48ceb48ca7c958200fbab871ac58d0cc8089f3261e9dbed5a"},
+    {"shard": 6, "bytes": 374869971, "sha256": "461c85d5027d93a55f976a2085db47946c8a7926970fb7e8eee0641f8a8a5633"}
+  ]
+}
