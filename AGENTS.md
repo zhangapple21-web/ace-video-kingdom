@@ -104,6 +104,8 @@ OneAPI 角色房间使用 `tools/role_room.py`：主笔、分镜、反例审计�
 
 机器证据：镜头合同 `script_prompt_review` 绑定本镜 `shot_id`、本轮 `run_id`、`script_hash`、当前提示词 `prompt_hash`。入口 `tools/validate_script_prompt_review.py`，由 `production_shot_gate` 阻断。提示词一改必须重做导演审核；剧本一改必须从编剧审核重跑。开拍前唯一检查表：`governance/script_prompt_review_gate.v1.md`。
 
+逐句血缘证据：正式新合同可绑定 `lineage_contract`，统一追踪 `剧本.md → 剧本结构.json → 分镜.json → 提示词合同.json → 角色/场景/道具资产清单 → 配音时间轴.json → 审核记录.json → 生成收据.json → 成片版本`。使用 `tools/build_shot_lineage.py` 编译，使用 `tools/validate_shot_lineage.py --production` 交付审计；一旦镜头声明该引用，`production_shot_gate` 在 Provider POST 前强制校验。旧合同不伪造血缘，保留为 `LEGACY_MISSING/BLOCKED`。详见 `docs/SHOT_LINEAGE_GUIDE.v1.md`。
+
 ## 本集覆盖：《接粉风云》第1镜（第3层，不是全局默认）
 
 - 第一镜只拍**已接通**：侧脸贴耳、手机后盖朝镜头、老张先说话。禁止完整拨号/亮屏/震动/看见屏幕；提交和口述都不用「接听过程」当动作链。

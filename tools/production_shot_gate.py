@@ -19,6 +19,7 @@ from tools.validate_script_prompt_review import validate_script_prompt_review
 from tools.validate_new_drama_semantics import is_new_drama, validate_new_drama_semantics
 from tools.validate_state_contract import validate_state_contract
 from tools.validate_audio_contract import validate_audio_contract
+from tools.validate_shot_lineage import validate_lineage_ref
 from pathlib import Path
 import json
 
@@ -71,6 +72,18 @@ def validate_production_shot(canonical_shot: dict[str, Any], contract_prompt: st
     audio_check = validate_audio_contract(canonical_shot, production=True)
     if audio_check["status"] != "PASS":
         raise ValueError("audio contract failed: " + ";".join(audio_check["errors"]))
+
+    # New contracts may carry the canonical line-to-delivery lineage.  When
+    # present it is a hard gate; old contracts remain historical-compatible
+    # and are not falsely promoted to having lineage merely because a shot
+    # provider returned COMPLETED.
+    lineage_check = {"status": "NOT_DECLARED", "errors": []}
+    if canonical_shot.get("lineage_contract") is not None:
+        contract_path = canonical_shot.get("__contract_path")
+        base_dir = Path(str(contract_path)).resolve().parent if contract_path else None
+        lineage_check = validate_lineage_ref(canonical_shot.get("lineage_contract"), base_dir=base_dir, production=True)
+        if lineage_check["status"] != "PASS":
+            raise ValueError("shot lineage contract failed: " + ";".join(lineage_check.get("errors", [])))
 
     shot_prompt = canonical_shot.get("shot_prompt")
     shot_prompt = shot_prompt if isinstance(shot_prompt, dict) else {}
@@ -174,6 +187,7 @@ def validate_production_shot(canonical_shot: dict[str, Any], contract_prompt: st
         "creative": creative_check,
         "state": state_check,
         "audio": audio_check,
+        "lineage": lineage_check,
         "script_prompt_review": review_check,
         "prompt": prompt_check,
         "continuity": continuity_check,
