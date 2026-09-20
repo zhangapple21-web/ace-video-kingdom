@@ -93,7 +93,7 @@ def build(root: Path) -> dict[str, Any]:
             "Read this audit and the latest shot-level review before submitting any new provider request",
             "Reuse only hash-identified approved assets and branch from the last satisfactory scene/action state",
             "For each shot, bind dialogue/action type, camera movement, action beats, end state, and audio source",
-            "Generate or measure audio before locking duration; retain provider-generated audio as a valid candidate path only after content checks",
+            "Generate and measure the external master audio before locking duration; retain any provider-generated audio only as historical evidence, never as a formal candidate or deliverable",
             "Review one representative dialogue shot and one action shot before batch generation",
             "After rendering, compare against this audit and record new failures instead of silently overwriting the baseline",
         ],
