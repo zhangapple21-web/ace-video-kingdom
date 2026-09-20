@@ -1,0 +1,72 @@
+{
+  "schema": "ace.video_kingdom.voice_candidate_registry.v1",
+  "purpose": "可试听、可验证、可按权利状态晋升的短剧声音候选目录",
+  "updated_at": "2026-09-20",
+  "production_default": {
+    "engine": "Fun-CosyVoice3-0.5B-2512",
+    "route": "research/voice_runtime_routes.v1.json#cosyvoice3",
+    "selection_policy": "角色音色按候选 ID 显式选择；未通过权利和听感门禁不得进入公开交付",
+    "fallback": "edge_tts 仅用于快速草稿，不覆盖已锁角色音色"
+  },
+  "candidate_states": [
+    "RESEARCH_ONLY",
+    "RESEARCH_ONLY_PENDING_RIGHTS",
+    "ACTIVE_LOCAL_TEST",
+    "ACTIVE_PRODUCTION",
+    "RETIRED"
+  ],
+  "promotion_gate": [
+    "样音来源、权利范围、期限和撤回方式已登记",
+    "三句真实中文台词生成成功，字词准确且无漏字",
+    "同一候选连续生成三句，音色不漂移、无爆音和明显底噪",
+    "情绪/语速/停顿指令有听感证据，实测时长已写回音频时间轴",
+    "音频文件 SHA-256、引擎、参考样本和生成收据齐全",
+    "独立配音、口型、字幕、混音分别验收，不以接口 completed 代替成片 QC"
+  ],
+  "candidates": [
+    {
+      "id": "csemotions.female001.neutral",
+      "label": "CSEMOTIONS 女声 001 / 中性",
+      "engine": "Fun-CosyVoice3-0.5B-2512",
+      "source_dataset": "ATH-MaaS/CSEMOTIONS (AIDC-AI alias)",
+      "license": "Apache-2.0 dataset; speaker/rightsholder clearance still required",
+      "status": "RESEARCH_ONLY_PENDING_RIGHTS",
+      "local_sample": "D:/视频创作/voice_research/CSEMOTIONS_20260920/samples/female001_neutral.wav",
+      "probe_receipt": "D:/视频创作/voice_research/CSEMOTIONS_20260920/cosyvoice_outputs/receipt.json",
+      "role_fit": ["女主", "旁白候选"],
+      "selection_notes": "本地试听和短剧样片候选；未替换现有冻结角色音色"
+    },
+    {
+      "id": "csemotions.male001.neutral",
+      "label": "CSEMOTIONS 男声 001 / 中性",
+      "engine": "Fun-CosyVoice3-0.5B-2512",
+      "source_dataset": "ATH-MaaS/CSEMOTIONS (AIDC-AI alias)",
+      "license": "Apache-2.0 dataset; speaker/rightsholder clearance still required",
+      "status": "RESEARCH_ONLY_PENDING_RIGHTS",
+      "local_sample": "D:/视频创作/voice_research/CSEMOTIONS_20260920/samples/male001_neutral.wav",
+      "probe_receipt": "D:/视频创作/voice_research/CSEMOTIONS_20260920/cosyvoice_outputs/receipt.json",
+      "role_fit": ["男主", "旁白候选"],
+      "selection_notes": "本地试听和短剧样片候选；未替换现有冻结角色音色"
+    },
+    {
+      "id": "chattts.random.research",
+      "label": "ChatTTS 随机说话人 / 口语节奏研究",
+      "engine": "ChatTTS",
+      "source": "https://github.com/2noise/ChatTTS",
+      "license": "AGPLv3+ code; CC BY-NC 4.0 model",
+      "status": "RESEARCH_ONLY",
+      "local_probe": "D:/视频创作/voice_research/ChatTTS_20260920/probe_outputs/receipt.json",
+      "role_fit": ["节奏 A/B 对照", "非商用研究"],
+      "selection_notes": "可用于停顿/口语化参数研究，不得作为生产或商业交付默认音色"
+    }
+  ],
+  "dataset_inventory": {
+    "name": "CSEMOTIONS",
+    "local_root": "D:/视频创作/voice_research/CSEMOTIONS_20260920",
+    "downloaded_shards": 7,
+    "compressed_bytes": 2588213233,
+    "sample_count": 61,
+    "coverage": "9 位说话人、7 种情绪（当前下载分片的可试听覆盖）",
+    "raw_data_not_committed": true
+  }
+}
