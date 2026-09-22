@@ -9,6 +9,7 @@ from __future__ import annotations
 import argparse
 import hashlib
 import json
+import os
 import subprocess
 from pathlib import Path
 
@@ -19,16 +20,21 @@ except ImportError:  # support ``python -m tools.burn_subtitles`` as well
 
 
 def _filter_path(path: Path) -> str:
-    # Prefer a path relative to the current repository: the subtitles filter
-    # treats a Windows drive colon as an option separator.  The fallback is
-    # still escaped for callers running the tool from another directory.
+    """Return a subtitles-filter path that survives ffmpeg's escaping.
+
+    ffmpeg strips one level of backslash escapes before the ``subtitles``
+    filter reads its own options, so a raw Windows drive colon is consumed and
+    the rest of the path is misread as a filter option.  A same-drive relative
+    path has no colon at all; otherwise the colon is doubled so it survives.
+    """
     absolute = path.resolve()
     try:
-        value = absolute.relative_to(Path.cwd().resolve()).as_posix()
+        value = os.path.relpath(absolute, Path.cwd().resolve())
     except ValueError:
         value = absolute.as_posix()
-        if len(value) >= 2 and value[1] == ":":
-            value = value[0] + r"\:" + value[2:]
+    value = value.replace("\\", "/")
+    if ":" in value:
+        value = value.replace(":", r"\\:")
     return value.replace("'", r"'\\''")
 
 
