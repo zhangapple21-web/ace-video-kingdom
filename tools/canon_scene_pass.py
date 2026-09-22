@@ -298,6 +298,18 @@ def judge(scene: dict[str, Any]) -> dict[str, Any]:
     quotes = re.findall(r"[“\"]([^”\"]+)[”\"]", text)
     if len(quotes) < 2:
         fails.append("not_enough_pressure_talk")
+    # Failure-mode signals (cheap, language-light). Same heuristic as
+    # analyze_failure_modes.py but the thresholds live in
+    # canon_failure_signals.THRESHOLDS.
+    try:
+        from tools.canon_failure_signals import compute_signals, flag_failures
+    except Exception:
+        sys.path.insert(0, str(ROOT / "tools"))
+        from canon_failure_signals import compute_signals, flag_failures
+    fm_signals = compute_signals(text)
+    fm_fails = flag_failures(fm_signals)
+    if fm_fails:
+        fails.append("failure_modes:" + ",".join(fm_fails))
     # 问答完就推进：连续两轮纯问答且无沉默/不坐/不进
     qa_only = bool(re.search(r"：\s*“[^”]{2,}”\s*\n\n\S+：\s*“[^”]{2,}”", text))
     has_hold = any(x in text for x in ("沉默", "没坐", "不坐", "不进", "不答", "袖", "没让"))
@@ -357,6 +369,8 @@ def judge(scene: dict[str, Any]) -> dict[str, Any]:
         "forbidden_hits": hits,
         "quote_count": len(quotes),
         "packet": packet,
+        "failure_mode_signals": fm_signals,
+        "failure_mode_fails": fm_fails,
     }
 
 
