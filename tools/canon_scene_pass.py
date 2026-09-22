@@ -45,8 +45,14 @@ META_LINE_PATTERNS = (
     # name：未出场 / name：未出场（在城西）
     re.compile(r"^\s*[\u4e00-\u9fa5]{1,6}[：:]\s*未出场[（(][^）)]*[）)]?[。.]?\s*$", re.M),
     re.compile(r"^\s*[\u4e00-\u9fa5]{1,6}[：:]\s*未出场[。.]?\s*$", re.M),
-    # 其他人：xxx
-    re.compile(r"^\s*其他人[：:].*$", re.M),
+    # 其他人：xxx — only strip when the line is a roster (no dialogue
+    # punctuation and short). Long narrative under 其他人： is reader-facing
+    # prose and must NOT be removed. Dialogue quote marks: “” ‘'  「」
+    # and sentence-ending 。 are signs of actual content.
+    re.compile(
+        r"^\s*其他人[：:][^“”‘’「」\n。]{0,24}$",
+        re.M,
+    ),
     # 本场变化：xxx / 本场变化（承上）：xxx (legacy variant allows a short
     # bracketed qualifier between the label and the colon)
     re.compile(r"^\s*本场变化[^：:\n]{0,8}[：:].*$", re.M),
