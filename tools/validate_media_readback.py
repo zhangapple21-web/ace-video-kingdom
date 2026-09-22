@@ -25,7 +25,14 @@ def compare_readback(actual: dict[str, Any], expected: dict[str, Any]) -> dict[s
 
 
 def ffprobe_readback(path: Path, runner: Callable[..., Any] = subprocess.run) -> dict[str, Any]:
-    result = runner(["ffprobe", "-v", "error", "-show_streams", "-show_format", "-of", "json", str(path)], check=True, capture_output=True, text=True)
+    result = runner(
+        ["ffprobe", "-v", "error", "-show_streams", "-show_format", "-of", "json", str(path)],
+        check=True,
+        capture_output=True,
+        text=True,
+        encoding="utf-8",
+        errors="replace",
+    )
     payload = json.loads(result.stdout)
     streams = payload.get("streams", [])
     video = next((s for s in streams if s.get("codec_type") == "video"), {})

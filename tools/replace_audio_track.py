@@ -1,9 +1,13 @@
 """Replace a Provider clip's audio with the contract's external master track.
 
-Agnes is used for filmed performance and lip movement.  The final audio is
-always the independently measured track that was submitted as the reference;
-the Provider-returned audio stream is retained only inside the original
-download receipt, never in the deliverable.
+Permanent audio policy for every episode and shot:
+Provider-native audio may only be treated as environmental noise. Before it
+enters a deliverable it must have dialogue removed or be ducked over every
+Provider dialogue interval. Because Provider reference-mode timing is not a
+reliable dialogue clock, this utility uses the fail-closed path: when an
+external master exists, Provider audio is excluded from the deliverable. The
+Provider stream remains only in the source/download receipt. A no-dialogue
+shot may use Provider audio as ambience in its own dedicated mix path.
 """
 from __future__ import annotations
 

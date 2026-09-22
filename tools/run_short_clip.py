@@ -646,6 +646,15 @@ def _build_payload(args: argparse.Namespace) -> dict:
     if args.model in {"agnes-video-2.5", "agnes-video-2.5-flash"}:
         if args.image or args.keyframe_image:
             raise ValueError("Agnes 2.5 uses public URL fields; use --flash-first-frame-url or --flash-reference-image-url")
+        if args.negative_prompt:
+            # Agnes Video 2.5/2.5 Flash 没有 ``negative_prompt`` 字段。
+            # 真实接口会拒绝该字段；静默丢弃会让调用方误以为“无字幕”等约束已生效。
+            # 因此这里显式阻断，不伪装成已支持。
+            raise ValueError(
+                f"{args.model} does not support --negative-prompt; no Provider POST. "
+                "negative constraints must live in the structured prompt, and "
+                "provider-side subtitle suppression is unavailable for this model"
+            )
         if not 4 <= args.seconds <= 12:
             raise ValueError("2.5 Flash seconds must be between 4 and 12")
         payload: dict = {
@@ -834,6 +843,7 @@ def main() -> int:
     request = build_canonical_generation_request(
         canonical_shot, payload, provider="agnes", endpoint=CREATE_ENDPOINT,
         payload_schema="agnes-video-cli.v1", model=args.model, scope=args.admission_scope,
+        source_contract=canonical_shot,
     )
     if args.batch_id:
         request["batch_id"] = args.batch_id
