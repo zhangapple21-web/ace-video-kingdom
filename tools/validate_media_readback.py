@@ -15,7 +15,9 @@ def compare_readback(actual: dict[str, Any], expected: dict[str, Any]) -> dict[s
         if key in expected and actual.get(key) != expected[key]:
             mismatches.append(f"{key}: expected {expected[key]!r}, got {actual.get(key)!r}")
     if "duration_seconds" in expected:
-        tolerance = float(expected.get("duration_tolerance_seconds", 0.15))
+        # Default 0.25s matches EP01 R3 delivery_review convention and absorbs
+        # ffmpeg's moov-rewrite drift between no-subtitles and subtitles cuts.
+        tolerance = float(expected.get("duration_tolerance_seconds", 0.25))
         if actual.get("duration_seconds") is None or abs(float(actual["duration_seconds"]) - float(expected["duration_seconds"])) > tolerance:
             mismatches.append(f"duration_seconds outside tolerance: expected {expected['duration_seconds']!r}, got {actual.get('duration_seconds')!r}")
     human = str(expected.get("human_listening") or "UNVERIFIED").upper()

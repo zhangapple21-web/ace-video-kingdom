@@ -20,6 +20,11 @@ from pathlib import Path
 from typing import Any
 
 
+# Long-term audio policy for every future episode and every shot.
+PROVIDER_AUDIO_POLICY = "ambience_only_dialogue_removed_or_ducked"
+ONE_COPY_PER_SPOKEN_LINE = "one_external_master_only"
+
+
 def _probe(path: Path) -> dict[str, Any]:
     result = subprocess.run(
         ["ffprobe", "-v", "error", "-show_entries", "format=duration:stream=codec_type",
