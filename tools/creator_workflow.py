@@ -160,6 +160,10 @@ def build_creative_development_profile(
             "checks": list(HOOK_CHECKS),
             "status": "PENDING",
             "authority": "CREATIVE_REVIEW_ONLY",
+            "source_quality_criteria": {},
+            "project_selection_criteria": {},
+            "reviewer": "UNKNOWN",
+            "evidence_refs": [],
         },
         "production_mapping": {
             "character_identity": "assets/templates/character_asset_package.v1.json",
