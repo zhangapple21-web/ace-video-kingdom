@@ -67,6 +67,20 @@ def test_stale_prompt_hash_cannot_impersonate_current_review():
     assert any("prompt_hash mismatch" in error for error in result["errors"])
 
 
+def test_review_receipt_must_match_the_current_locked_script_hash():
+    prompt = "主体：老张。"
+    packet = _packet(prompt)
+    result = validate_script_prompt_review(
+        packet,
+        shot_id="S01",
+        run_id="run-20260917-1",
+        expected_script_hash="b" * 64,
+        compiled_prompt=prompt,
+    )
+    assert result["status"] == "BLOCKED"
+    assert any("review receipt does not bind the currently locked script" in error for error in result["errors"])
+
+
 def test_old_run_id_cannot_impersonate_this_round():
     prompt = "主体：老张。"
     packet = _packet(prompt)

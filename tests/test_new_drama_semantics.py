@@ -1,3 +1,4 @@
+import hashlib
 import json
 from pathlib import Path
 
@@ -8,13 +9,15 @@ from tools.validate_new_drama_semantics import is_new_drama, validate_new_drama_
 from tools.workflow_decision_matrix import build_workflow_policy_receipt
 
 ROOT = Path(__file__).resolve().parents[1]
+LOCKED_SCRIPT_TEXT = "第一集锁定剧本全文：主角完成目标并留下悬念。"
+LOCKED_SCRIPT_HASH = hashlib.sha256(LOCKED_SCRIPT_TEXT.encode("utf-8")).hexdigest()
 
 
 def _load(rel: str):
     return json.loads((ROOT / rel).read_text(encoding="utf-8"))
 
 
-def _workflow_policy(script_hash: str = "a" * 64):
+def _workflow_policy(script_hash: str = LOCKED_SCRIPT_HASH):
     quality_review = {
         "reviewer": "independent-source-review",
         "evidence_refs": ["role-room-receipt.json#contrarian_auditor"],
@@ -38,7 +41,9 @@ def _new_drama_packet(**overrides):
     packet = {
         "production_semantics": "new_drama",
         "shot_id": "ND01",
-        "script_hash": "a" * 64,
+        "script_hash": LOCKED_SCRIPT_HASH,
+        "locked_script_text": LOCKED_SCRIPT_TEXT,
+        "script_prompt_review": {"script_hash": LOCKED_SCRIPT_HASH},
         "character_asset_package": {"character_id": "CHAR_A", "name": "hero"},
         "scene_asset_package": {"scene_id": "SCENE_A", "name": "living-room"},
         "prop_asset_package": {"prop_id": "PROP_A", "name": "cup"},
@@ -106,6 +111,60 @@ def test_provider_spend_blocks_stale_quality_review_after_script_change():
     result = validate_new_drama_semantics(packet)
     assert result["status"] == "BLOCKED"
     assert any("reviewed_script_hash must match" in item for item in result["errors"])
+
+
+def test_provider_spend_rehashes_locked_script_content_not_only_digest_format():
+    packet = _new_drama_packet(locked_script_text=LOCKED_SCRIPT_TEXT + "新增一场戏。")
+
+    result = validate_new_drama_semantics(packet)
+
+    assert result["status"] == "BLOCKED"
+    assert any("script_hash must match the exact locked full-script bytes" in item for item in result["errors"])
+
+
+def test_provider_spend_requires_an_actual_locked_script_source():
+    packet = _new_drama_packet()
+    packet.pop("locked_script_text")
+
+    result = validate_new_drama_semantics(packet)
+
+    assert result["status"] == "BLOCKED"
+    assert any("verifiable locked full-script source" in item for item in result["errors"])
+
+
+def test_provider_spend_reads_and_hashes_relative_script_source(tmp_path: Path):
+    contract_path = tmp_path / "episode_contract.json"
+    contract_path.write_text("{}", encoding="utf-8")
+    script_path = tmp_path / "script.md"
+    script_path.write_text(LOCKED_SCRIPT_TEXT, encoding="utf-8")
+    digest = hashlib.sha256(script_path.read_bytes()).hexdigest()
+    packet = _new_drama_packet(
+        locked_script_text=None,
+        script_source_ref={"path": "script.md", "sha256": digest},
+        script_hash=digest,
+        workflow_policy=_workflow_policy(digest),
+        script_prompt_review={"script_hash": digest},
+        __contract_path=str(contract_path),
+    )
+
+    result = validate_new_drama_semantics(packet)
+
+    assert result["status"] == "PASS"
+
+
+def test_provider_spend_rejects_script_source_path_escape(tmp_path: Path):
+    contract_path = tmp_path / "episode_contract.json"
+    contract_path.write_text("{}", encoding="utf-8")
+    packet = _new_drama_packet(
+        locked_script_text=None,
+        script_source_ref={"path": "../outside.md"},
+        __contract_path=str(contract_path),
+    )
+
+    result = validate_new_drama_semantics(packet)
+
+    assert result["status"] == "BLOCKED"
+    assert any("escapes the canonical contract directory" in item for item in result["errors"])
 
 
 def test_provider_spend_recomputes_reported_quality_scores():

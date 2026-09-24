@@ -67,6 +67,7 @@ def validate_script_prompt_review(
     *,
     shot_id: str | None = None,
     run_id: str | None = None,
+    expected_script_hash: str | None = None,
     compiled_prompt: str | None = None,
 ) -> dict[str, Any]:
     errors: list[str] = []
@@ -95,6 +96,9 @@ def validate_script_prompt_review(
     stored_prompt_hash = str(packet.get("prompt_hash") or "").strip().lower()
     if len(script_hash) != 64 or any(ch not in "0123456789abcdef" for ch in script_hash):
         errors.append("script_hash must be sha256 hex of this-round script")
+    expected_script_hash = str(expected_script_hash or "").strip().lower()
+    if expected_script_hash and script_hash != expected_script_hash:
+        errors.append("script_hash mismatch: review receipt does not bind the currently locked script")
     if compiled_prompt is None:
         if len(stored_prompt_hash) != 64 or any(ch not in "0123456789abcdef" for ch in stored_prompt_hash):
             errors.append("prompt_hash missing")

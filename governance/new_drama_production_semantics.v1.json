@@ -20,6 +20,15 @@
     "Video -> agnes-video-2.5-flash"
   ],
   "note": "不是又吸收一堆新规则。角色包是长期资产；场景资产步=建立 Scene State，不要求场景参考图库；道具同理（角色绑定道具除外）。与现有系统冲突的东西停在门外（B 参考层、C 禁用）。",
+  "script_lock": {
+    "source_fields": ["locked_script_text", "script_source_ref.path"],
+    "digest_field": "script_hash",
+    "algorithm": "SHA-256 of exact UTF-8 text or referenced file bytes",
+    "review_receipt_field": "script_prompt_review.script_hash",
+    "must_match_workflow_policy": true,
+    "path_policy": "relative to canonical contract directory; path escape is blocked",
+    "on_missing_or_mismatch": "BLOCK_PROVIDER"
+  },
   "pipeline": [
     {
       "id": "new_drama",
