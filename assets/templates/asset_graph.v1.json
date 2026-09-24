@@ -28,6 +28,28 @@
     "continues",
     "references"
   ],
+  "reuse_priority_levels": {
+    "P0_CORE": "核心复用：主线、身份或规则不可缺",
+    "P1_RECURRING": "高频复用：多场次反复出现",
+    "P2_SUPPORT": "辅助复用：支撑局部场次或氛围",
+    "P3_EXPERIMENTAL": "试验复用：尚未锁定，不能作为默认资产"
+  },
+  "key_line_catalog": [],
+  "field_audit": {
+    "required_node_fields": [
+      "id",
+      "type",
+      "name",
+      "status",
+      "reuse_priority",
+      "key_lines",
+      "source_refs",
+      "asset_refs",
+      "missing_fields"
+    ],
+    "required_edge_fields": ["from", "type", "to", "source_ref"],
+    "missing_fields": []
+  },
   "nodes": [],
   "edges": [],
   "views": {
