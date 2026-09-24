@@ -1,0 +1,38 @@
+{
+  "schema": "video_kingdom.external_learning_sources.v1",
+  "scope": "PUBLIC_PRIMARY_SOURCES_ONLY",
+  "sources": [
+    {
+      "source_id": "comfyui",
+      "kind": "github_repository",
+      "api_url": "https://api.github.com/repos/Comfy-Org/ComfyUI",
+      "readme_url": "https://raw.githubusercontent.com/Comfy-Org/ComfyUI/master/README.md",
+      "focus": "可复现图像/视频节点编排、队列和工作流证据",
+      "license_policy": "RESEARCH_ONLY_NON_DEFAULT"
+    },
+    {
+      "source_id": "pyscenedetect",
+      "kind": "github_repository",
+      "api_url": "https://api.github.com/repos/Breakthrough/PySceneDetect",
+      "readme_url": "https://raw.githubusercontent.com/Breakthrough/PySceneDetect/main/README.md",
+      "focus": "镜头边界和成片节奏的可测量审计",
+      "license_policy": "RESEARCH_ONLY_NON_DEFAULT"
+    },
+    {
+      "source_id": "langgraph",
+      "kind": "github_repository",
+      "api_url": "https://api.github.com/repos/langchain-ai/langgraph",
+      "readme_url": "https://raw.githubusercontent.com/langchain-ai/langgraph/main/README.md",
+      "focus": "可恢复任务、检查点和长任务状态持久化",
+      "license_policy": "RESEARCH_ONLY_NON_DEFAULT"
+    },
+    {
+      "source_id": "remotion",
+      "kind": "github_repository",
+      "api_url": "https://api.github.com/repos/remotion-dev/remotion",
+      "readme_url": "https://raw.githubusercontent.com/remotion-dev/remotion/main/README.md",
+      "focus": "程序化合成、时间轴和渲染验收",
+      "license_policy": "RESEARCH_ONLY_NON_DEFAULT"
+    }
+  ]
+}

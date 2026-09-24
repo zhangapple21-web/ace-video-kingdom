@@ -26,3 +26,7 @@ Baseline → Change → Test → Evaluation → Compare → Promote / Rollback
 复盘至少回答：哪里真的痛、谁/什么被影响、当时为什么没提前发现、如果没拦截会怎样、以后什么条件下可复用。没有痛苦证据，所谓进化只是活跃度。
 
 外部参考矿同样适用这条门：阅读仓库、复制提示词或新增文档不算吸收；必须有本地实现、测试、前后指标和痛苦复盘，才能进入能力成长账本。
+
+每日公开资料采集入口为 `tools/daily_external_learning.py`，来源登记在
+`research/external_learning_sources.v1.json`，运行收据在
+`research/external_learning_runs/`。采集器只抓取公开一手元数据/README，执行幂等去重，禁止执行外部代码、上传密钥/素材或改动生产路由；它产生的候选默认是 `REVIEW_REQUIRED`，不能绕过本文件的晋升门。
