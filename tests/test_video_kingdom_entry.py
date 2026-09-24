@@ -15,6 +15,10 @@ def test_unified_entry_routes_video_without_provider_submission(tmp_path: Path, 
     assert receipt["creative_development"]["schema"] == "ace.video_kingdom.creative_development_profile.v1"
     assert receipt["creative_development_check"]["status"] == "PASS"
     assert Path(receipt["creative_development_artifact"]).is_file()
+    assert receipt["workflow_policy"]["schema"] == "ace.video_kingdom.video_workflow_decision_matrix.v1"
+    assert receipt["workflow_policy"]["stage_order"] == [1, 2, 3, 4, 5, 6, 7]
+    assert receipt["workflow_policy"]["validation"]["status"] == "PASS"
+    assert len(receipt["workflow_policy"]["sha256"]) == 64
     assert receipt["collaboration"]["mode"] == "DEFAULT_MULTI_WINDOW"
     assert receipt["collaboration"]["authority"] == "DEFAULT_METHOD_ONLY"
     assert len(receipt["collaboration"]["contract_sha256"]) == 64

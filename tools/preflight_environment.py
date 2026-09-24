@@ -14,7 +14,9 @@ REQUIRED_FILES = (
     "research/oneapi_role_room.v1.json",
     "research/capability_registry.v2.json",
     "tools/creator_workflow.py",
+    "tools/workflow_decision_matrix.py",
     "assets/templates/creative_development_profile.v1.json",
+    "governance/video_workflow_decision_matrix.v1.json",
 )
 REQUIRED_DIRS = ("assets", "research", "production_control", "runtime")
 VOICE_RUNTIME_ROOT = Path(r"D:\视频创作\runtimes")

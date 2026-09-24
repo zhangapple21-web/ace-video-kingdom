@@ -29,6 +29,7 @@ from production_control.semantic_context import build_semantic_context
 from production_control.collaboration import load_default_collaboration_context
 from tools import role_room
 from tools.creator_workflow import build_creative_development_profile, validate_creative_development_profile
+from tools.workflow_decision_matrix import build_workflow_policy_receipt
 
 
 # Agnes' V2.5 Flash contract is deliberately kept here, at the public
@@ -271,6 +272,7 @@ def dispatch(*, text: str, out: Path, profile: str = "standard", project_id: str
         raise ValueError("ENTRY_TEXT_REQUIRED")
     entry_id = "ENTRY-" + uuid.uuid4().hex[:12]
     intent = classify_media_intent(source)
+    workflow_policy = build_workflow_policy_receipt(ROOT)
     creative_development = build_creative_development_profile(
         title=project_id or "未命名短剧",
         source_text=source,
@@ -295,6 +297,10 @@ def dispatch(*, text: str, out: Path, profile: str = "standard", project_id: str
         "creative_development": creative_development,
         "creative_development_artifact": str(creative_development_path),
         "creative_development_check": creative_development_check,
+        # The matrix is a method/budget contract, not a second gate.  Loading
+        # it here makes the 1-7 decisions available in every window and leaves
+        # a hash proving which policy the run consumed.
+        "workflow_policy": workflow_policy,
         # Management/default-method context is recorded at the only public
         # entry so narrative and media requests cannot silently diverge.
         # This does not replace the existing script/director/provider gates.
