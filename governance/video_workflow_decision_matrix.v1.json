@@ -1,0 +1,212 @@
+{
+  "schema": "ace.video_kingdom.video_workflow_decision_matrix.v1",
+  "version": "1.0.0",
+  "authority": "METHOD_AND_BUDGET_GUIDANCE",
+  "production_integration": false,
+  "description": "1-7阶段的可执行决策卡。它统一创作取舍、失败恢复和预算优先级，不新增入口、Provider 或审批层。",
+  "stage_order": [1, 2, 3, 4, 5, 6, 7],
+  "stages": [
+    {
+      "stage_id": 1,
+      "name": "规格与素材",
+      "do": [
+        "先锁题材、受众、画幅、创作模式和交付目标",
+        "建立角色 Identity、当前 State、Scene State、道具状态和来源哈希",
+        "确认角色包只锁身份，场景按当前镜头动态建立；必要时才做构图静帧"
+      ],
+      "dont": [
+        "没有剧本和身份基准就批量生图或生视频",
+        "把工位图、脸部裁图或上一镜成片误当长期角色身份",
+        "用没有来源、许可证或哈希的素材进入生产"
+      ],
+      "failure_recovery": [
+        "停止提交并保留缺项、哈希和来源证据",
+        "补齐或替换资产后重算清单和身份/场景状态",
+        "只重做受影响镜头，不覆盖旧分支"
+      ],
+      "spend_priority": ["剧本和身份基准", "关键场景构图", "非必要风格探索"],
+      "evidence": ["创作简报", "角色包", "场景/道具清单", "来源与哈希收据"]
+    },
+    {
+      "stage_id": 2,
+      "name": "剧本审核",
+      "do": [
+        "确认因果、对白顺序、人物动机、动作节拍、内心独白和断层补桥",
+        "把每句对白写成说前状态、说中表演、说后反应和潜台词",
+        "让编剧/连续性/反例席位先发现错误，再进入镜头设计"
+      ],
+      "dont": [
+        "只审台词字面，不审动作、反应、空间和信息增量",
+        "把待确认推断伪装成定稿事实",
+        "剧本未通过就先写提示词或购买批量生成额度"
+      ],
+      "failure_recovery": [
+        "退回剧本层，标出事实、暗示、未知和候选补桥",
+        "低风险缺口用最小补桥；高风险缺口保持 NEEDS_CLARIFICATION",
+        "剧本改动产生新 revision_id 和 script_hash，重新跑编剧审核"
+      ],
+      "spend_priority": ["叙事/连续性审计", "角色动机与表演节拍", "额外模型意见"],
+      "evidence": ["定稿剧本", "script_hash", "角色关系图", "剧本审核记录"]
+    },
+    {
+      "stage_id": 3,
+      "name": "提示词与镜头合同",
+      "do": [
+        "为每镜写初态→主要动作/对白节拍→末态和 Approved State",
+        "写清机位、景别、运镜理由、光线动机、手部/眼神/肩体动作和音频锚点",
+        "按题材触发手机、界面、同场、道具和隐私专项约束"
+      ],
+      "dont": [
+        "用贴耳中景模板覆盖所有场景",
+        "用电影感、自然微动作等不可验收词替代具体表演",
+        "把身份参考图当 First Frame，或把风景静帧当成真实表演"
+      ],
+      "failure_recovery": [
+        "先修合同和状态，不先重试 Provider",
+        "只降低摄影复杂度，不牺牲剧情、表演或空间关系",
+        "提示词或运镜改变后重做导演审核并生成新 prompt_hash"
+      ],
+      "spend_priority": ["关键镜头的 Shot State", "动作/表演可验收性", "可选视觉探索"],
+      "evidence": ["分镜", "镜头合同", "script_hash", "prompt_hash", "连续性桥"]
+    },
+    {
+      "stage_id": 4,
+      "name": "导演审核",
+      "do": [
+        "让导演确认镜头是否把剧本演出来，而不是只把台词念出来",
+        "逐项核对身份、空间、动作、镜头运动、声音、禁用项和相邻镜头",
+        "争议时使用反例审计/仲裁，但保持导演最终收敛"
+      ],
+      "dont": [
+        "执行者自审自批或用 Provider completed 冒充导演通过",
+        "发现活照片、双手机、残手、风景糊弄后继续批量拍",
+        "为了省一次审计而放宽硬边界"
+      ],
+      "failure_recovery": [
+        "状态回到 NEEDS_REVIEW/REWORK_REQUIRED，保留反例证据",
+        "定位根因属于剧本、资产、合同、路由还是 Provider",
+        "修复后只重审受影响镜头，未验证仍禁止提交"
+      ],
+      "spend_priority": ["导演/反例审计", "一镜验证", "低收益争议细节"],
+      "evidence": ["双审收据", "导演原文结论", "反例清单", "风险处置记录"]
+    },
+    {
+      "stage_id": 5,
+      "name": "五关本轮收据",
+      "do": [
+        "用同一 run_id 绑定连续性、身份锚图、音频主时钟、运镜和统一入口",
+        "记录模型尝试、智能降级、失败原因、请求哈希和恢复动作",
+        "仅把 Approved State 传给下一镜，保持可重建证据链"
+      ],
+      "dont": [
+        "复用旧 run_id、旧 completed 或没有提交证据的历史收据",
+        "静默换模型、盲目重试或把聊天模型当媒体 Provider",
+        "为了让流程继续而删除失败记录"
+      ],
+      "failure_recovery": [
+        "幂等重试前先读回状态，避免重复扣费或重复任务",
+        "按同能力已验证顺序降级，写清 fallback_used 和 degraded",
+        "无可验证路径时 BLOCKED，等待外部状态变化而不是伪造通过"
+      ],
+      "spend_priority": ["收据和幂等保护", "已验证路由探针", "无证据的重复请求"],
+      "evidence": ["run_id", "production_shot_gate", "Provider admission receipt", "失败/降级收据"]
+    },
+    {
+      "stage_id": 6,
+      "name": "单镜小样",
+      "do": [
+        "先拍一镜，检查多帧运动、表情、手部、空间、口型、声音和镜头节奏",
+        "用真实回看决定通过、局部重做或退回合同",
+        "通过后才扩展同一身份/场景状态下的批量镜头"
+      ],
+      "dont": [
+        "没有小样就批量消耗额度",
+        "只看首帧或网页 completed，不看完整播放和人耳听感",
+        "用后期剪辑掩盖根本的动作、表演或身份失败"
+      ],
+      "failure_recovery": [
+        "先分类是创作根因还是 Provider 随机失败",
+        "创作根因回到合同/资产；随机失败才按幂等策略重试",
+        "连续失败保留对照样本并降级摄影，不降级为活照片"
+      ],
+      "spend_priority": ["一镜信息增益", "关键表演和口型", "批量生成"],
+      "evidence": ["单镜视频", "逐镜 QC", "多帧/音频回看记录", "选片或返工决定"]
+    },
+    {
+      "stage_id": 7,
+      "name": "后期交付",
+      "do": [
+        "只装配 selected takes，按独立音频主时钟做混音、字幕和节拍",
+        "完成技术、创作、连续性、音频、版权和交付读回 QC",
+        "把发布结果压缩成下一轮可复用的经验，而不是修改当前收据"
+      ],
+      "dont": [
+        "把 Provider 内置音轨自动当最终音轨",
+        "把未听过、未核权、未读回的 MP4 报为交付",
+        "用 BGM、滤镜或转场掩盖对白漏字和表演断裂"
+      ],
+      "failure_recovery": [
+        "回退到最近一个已通过的 selected take，保留坏版本",
+        "只替换出错的音频/字幕/镜头层，重新计算交付哈希",
+        "任何 UNKNOWN 或硬门失败都降为 RESEARCH_CANDIDATE/BLOCKED"
+      ],
+      "spend_priority": ["主音轨与可听性", "字幕/读回/交付完整性", "装饰性特效"],
+      "evidence": ["配音时间轴", "混音收据", "字幕校验", "七层 QC", "最终哈希"]
+    }
+  ],
+  "budget_priority_order": [
+    {
+      "rank": 1,
+      "item": "剧本、连续性和导演预检",
+      "reason": "用最低成本阻止大规模返工；不要花钱修一个没锁定的故事"
+    },
+    {
+      "rank": 2,
+      "item": "角色身份与关键场景构图",
+      "reason": "身份漂移、活照片和错误空间会污染整集；只为需要的镜头做静帧"
+    },
+    {
+      "rank": 3,
+      "item": "独立配音和音频主时钟",
+      "reason": "先锁声音真实时长，减少口型、节奏和重拍返工"
+    },
+    {
+      "rank": 4,
+      "item": "单镜小样与逐镜 QC",
+      "reason": "先买信息，不先买数量；小样不过就停止批量"
+    },
+    {
+      "rank": 5,
+      "item": "最终混音、字幕和读回",
+      "reason": "让已选镜头成为可播放、可复核、可恢复的交付物"
+    },
+    {
+      "rank": 6,
+      "item": "批量扩展和装饰性探索",
+      "reason": "只有基线通过后才值得消费；不为遮掩根因追加预算"
+    }
+  ],
+  "cost_evidence_policy": {
+    "rule": "不写死未验证的 Provider 价格、额度或成功率；实际花费若可取得必须随请求收据记录，否则标记 UNKNOWN",
+    "free_or_local_first": true,
+    "one_shot_before_batch": true,
+    "no_blind_retries": true
+  },
+  "recovery_ladder": [
+    "STOP_AND_PRESERVE_EVIDENCE",
+    "CLASSIFY_ROOT_CAUSE",
+    "FIX_SCRIPT_ASSET_OR_CONTRACT",
+    "RETEST_ONE_SHOT",
+    "DEGRADE_CAMERA_COMPLEXITY_ONLY",
+    "IDEMPOTENT_RETRY_WITH_COOLDOWN",
+    "USE_SAME_CAPABILITY_VERIFIED_FALLBACK",
+    "BLOCK_AND_WAIT_FOR_EXTERNAL_STATE_CHANGE"
+  ],
+  "global_stop_rules": [
+    "不完整合同不得提交 Provider",
+    "Provider completed 不等于创作验收通过",
+    "无证据不得把候选晋升为基线",
+    "没有新信息、新反应或新空间关系时不得用空秒填时长",
+    "任何未验证降级、来源不明资产或硬门 UNKNOWN 都必须阻断"
+  ]
+}
