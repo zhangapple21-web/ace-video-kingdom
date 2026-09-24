@@ -30,6 +30,8 @@ from tools.evolution_ledger import (
     PAINFUL_REVIEW_FIELDS,
     record_evolution,
 )
+from tools.failure_replay import record_failure
+from tools.failure_replay import DEFAULT_PATH as DEFAULT_FAILURE_REPLAY
 
 
 DEFAULT_QUEUE = ROOT / "research" / "evolution_candidates.v1.jsonl"
@@ -111,6 +113,7 @@ def run(
     receipts_dir: Path = DEFAULT_RECEIPTS,
     ledger_path: Path = DEFAULT_LEDGER,
     capabilities_path: Path = DEFAULT_CAPABILITIES,
+    failure_replay_path: Path = DEFAULT_FAILURE_REPLAY,
 ) -> dict[str, Any]:
     """Run one bounded promotion-gate pass without granting production authority."""
 
@@ -135,11 +138,38 @@ def run(
             })
             continue
         entry = record_evolution(row, ledger_path=ledger_path, capabilities_path=capabilities_path)
+        failure_replay_id = None
+        review = row.get("painful_review") if isinstance(row.get("painful_review"), dict) else {}
+        if entry.get("decision") in {"ROLLBACK_REQUIRED", "REJECTED_NO_MEASURABLE_GAIN"}:
+            # Failure replay is allowed only when the supplied review is
+            # complete. Never synthesize missing impact/cost from metrics.
+            replay = record_failure({
+                "replay_id": "FR-PG-" + _stable_id(row.get("evolution_id")),
+                "problem": str(review.get("observed_problem") or ""),
+                "judgment": f"能力实验 {entry.get('decision')}；按真实比较结果拒绝晋升。",
+                "action": str(row.get("change") or ""),
+                "result": json.dumps(entry.get("comparison", {}), ensure_ascii=False, sort_keys=True),
+                "why": str(row.get("evaluation") or ""),
+                "reuse_when": str(review.get("reusable_lesson") or ""),
+                "cost": str(review.get("cost") or ""),
+                "blast_radius": str(review.get("blast_radius") or ""),
+                "counterfactual": str(review.get("counterfactual") or ""),
+                "recurrence_risk": str(review.get("recurrence_risk") or ""),
+                "effectiveness": entry.get("decision"),
+                "evidence": {
+                    "evolution_id": entry.get("evolution_id"),
+                    "baseline_metrics": row.get("baseline_metrics"),
+                    "after_metrics": row.get("after_metrics"),
+                    "tests": row.get("tests"),
+                },
+            }, path=failure_replay_path)
+            failure_replay_id = replay.get("replay_id")
         decisions.append({
             "evolution_id": entry.get("evolution_id"),
             "decision": entry.get("decision"),
             "comparison": entry.get("comparison"),
-            "failure_replay_written": entry.get("decision") != "PROMOTE",
+            "failure_replay_id": failure_replay_id,
+            "failure_replay_written": bool(failure_replay_id),
         })
 
     payload = {

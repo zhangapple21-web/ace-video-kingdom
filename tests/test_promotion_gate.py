@@ -73,3 +73,23 @@ def test_gate_caps_batch_and_keeps_production_closed(tmp_path: Path):
     assert result["remaining_ready"] == 2
     assert result["execution_authorized"] is False
     assert result["production_integration"] is False
+
+
+def test_gate_persists_complete_painful_review_for_regression_once(tmp_path: Path):
+    queue = tmp_path / "candidates.jsonl"
+    row = _record(after_metrics={"success_rate": 0.25})
+    queue.write_text(json.dumps(row, ensure_ascii=False) + "\n", encoding="utf-8")
+    kwargs = {
+        "execute": True,
+        "queue_path": queue,
+        "receipts_dir": tmp_path / "receipts",
+        "ledger_path": tmp_path / "ledger.jsonl",
+        "capabilities_path": tmp_path / "capabilities.json",
+        "failure_replay_path": tmp_path / "failure.jsonl",
+    }
+    first = run(**kwargs)
+    second = run(**kwargs)
+    assert first["decisions"][0]["decision"] == "ROLLBACK_REQUIRED"
+    assert first["decisions"][0]["failure_replay_written"] is True
+    assert second["decisions"][0]["failure_replay_id"] == first["decisions"][0]["failure_replay_id"]
+    assert len((tmp_path / "failure.jsonl").read_text(encoding="utf-8").splitlines()) == 1
