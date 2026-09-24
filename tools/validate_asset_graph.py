@@ -20,6 +20,7 @@ EDGE_TYPES = {
     "continues",
     "references",
 }
+REUSE_PRIORITIES = {"P0_CORE", "P1_RECURRING", "P2_SUPPORT", "P3_EXPERIMENTAL"}
 
 
 def validate(graph: Any) -> dict[str, Any]:
@@ -41,6 +42,34 @@ def validate(graph: Any) -> dict[str, Any]:
     if not isinstance(edges, list):
         errors.append("edges must be a list")
         edges = []
+    priority_levels = graph.get("reuse_priority_levels")
+    if not isinstance(priority_levels, dict) or set(priority_levels) != REUSE_PRIORITIES:
+        errors.append("reuse_priority_levels must define P0_CORE/P1_RECURRING/P2_SUPPORT/P3_EXPERIMENTAL")
+    line_catalog = graph.get("key_line_catalog")
+    line_ids: set[str] = set()
+    if not isinstance(line_catalog, list):
+        errors.append("key_line_catalog must be a list")
+        line_catalog = []
+    for index, line in enumerate(line_catalog):
+        if not isinstance(line, dict):
+            errors.append(f"key_line_catalog[{index}] must be an object")
+            continue
+        line_id = str(line.get("id") or "").strip()
+        if not line_id:
+            errors.append(f"key_line_catalog[{index}].id is required")
+        elif line_id in line_ids:
+            errors.append(f"duplicate key line id: {line_id}")
+        else:
+            line_ids.add(line_id)
+        if not str(line.get("name") or "").strip():
+            errors.append(f"key_line_catalog[{index}].name is required")
+    field_audit = graph.get("field_audit")
+    if not isinstance(field_audit, dict):
+        errors.append("field_audit must be an object")
+    else:
+        for key in ("required_node_fields", "required_edge_fields", "missing_fields"):
+            if not isinstance(field_audit.get(key), list):
+                errors.append(f"field_audit.{key} must be a list")
     node_ids: set[str] = set()
     for index, node in enumerate(nodes):
         if not isinstance(node, dict):
@@ -58,7 +87,21 @@ def validate(graph: Any) -> dict[str, Any]:
             errors.append(f"nodes[{index}].type is invalid: {node_type or 'EMPTY'}")
         if not str(node.get("name") or "").strip():
             errors.append(f"nodes[{index}].name is required")
-        if not isinstance(node.get("source_refs"), list) or not node.get("source_refs"):
+        if not str(node.get("status") or "").strip():
+            errors.append(f"nodes[{index}].status is required")
+        if node.get("reuse_priority") not in REUSE_PRIORITIES:
+            errors.append(f"nodes[{index}].reuse_priority is invalid: {node.get('reuse_priority') or 'EMPTY'}")
+        key_lines = node.get("key_lines")
+        if not isinstance(key_lines, list):
+            errors.append(f"nodes[{index}].key_lines must be a list")
+        else:
+            unknown_lines = [line for line in key_lines if line not in line_ids]
+            if unknown_lines:
+                errors.append(f"nodes[{index}].key_lines has unknown ids: {', '.join(map(str, unknown_lines))}")
+        for field in ("source_refs", "asset_refs", "missing_fields"):
+            if not isinstance(node.get(field), list):
+                errors.append(f"nodes[{index}].{field} must be a list")
+        if not node.get("source_refs"):
             warnings.append(f"nodes[{index}] has no source_refs")
     for index, edge in enumerate(edges):
         if not isinstance(edge, dict):

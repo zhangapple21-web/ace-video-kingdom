@@ -17,6 +17,10 @@ def test_shuangdu_graph_has_resolvable_evidence_bound_edges():
     assert result["node_count"] >= 20
     assert result["edge_count"] >= 20
     assert graph["production_integration"] is False
+    assert set(graph["reuse_priority_levels"]) == {"P0_CORE", "P1_RECURRING", "P2_SUPPORT", "P3_EXPERIMENTAL"}
+    assert graph["key_line_catalog"]
+    assert graph["field_audit"]["missing_fields"]
+    assert all("reuse_priority" in node and "key_lines" in node and "missing_fields" in node for node in graph["nodes"])
 
 
 def test_asset_graph_rejects_unknown_edge_endpoints_and_authority_escalation():
