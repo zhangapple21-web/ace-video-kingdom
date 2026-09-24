@@ -192,6 +192,97 @@
     "one_shot_before_batch": true,
     "no_blind_retries": true
   },
+  "budget_unit_definition": "1 个镜头额度 = 1 个 shot_id 的生产预算包（必要的构图静帧、音频和视频尝试都计入该镜头包），不是人民币承诺，也不代表各 Provider 成本相同。实际价格、额度和折扣必须以本次收据为准，未知就写 UNKNOWN。",
+  "budget_tiers": [
+    {
+      "tier": "T0",
+      "name": "源头与合同验证",
+      "shot_units": 0,
+      "allowed": ["剧本/角色/连续性审计", "本地校验", "模型能力探针"],
+      "exit": "source_quality 与项目取舍至少达到 PASS 或明确标记 REWORK_REQUIRED"
+    },
+    {
+      "tier": "T1",
+      "name": "单镜小样",
+      "shot_units": 1,
+      "allowed": ["必要的构图静帧", "一镜视频小样", "代表性台词试听"],
+      "exit": "动作、表演、空间、音画和身份逐镜 QC 通过"
+    },
+    {
+      "tier": "T2",
+      "name": "有限试播段",
+      "shot_units": 5,
+      "allowed": ["通过小样的相邻镜头", "有限的同能力重试", "必要的后期混音与字幕"],
+      "exit": "连续性桥和片段级 QC 通过，且新增花费仍产生新信息"
+    },
+    {
+      "tier": "T3",
+      "name": "整集量产",
+      "shot_units": 20,
+      "allowed": ["已通过基线的批量镜头", "selected takes 装配", "交付读回"],
+      "exit": "全片 QC、权利、音频人耳听感和交付哈希全部通过"
+    }
+  ],
+  "source_quality_gate": {
+    "schema": "ace.video_kingdom.source_quality_gate.v1",
+    "authority": "CREATIVE_GO_NO_GO",
+    "before_provider_spend": "PASS_OR_EXPLICIT_USER_EXCEPTION",
+    "statuses": ["PENDING", "REWORK_REQUIRED", "PASS", "REJECT"],
+    "checks": [
+      {"id": "hook", "label": "开场钩子", "critical": true},
+      {"id": "conflict", "label": "可视化冲突", "critical": true},
+      {"id": "character_goal", "label": "主角目标与关系", "critical": true},
+      {"id": "escalation", "label": "升级或信息变化", "critical": true},
+      {"id": "payoff", "label": "回收/结尾问题", "critical": false},
+      {"id": "visual_action", "label": "能被镜头表现的动作", "critical": true},
+      {"id": "production_fit", "label": "与当前模式和资产能力匹配", "critical": true}
+    ],
+    "pass_threshold": 6,
+    "rework_threshold": 4,
+    "reject_conditions": [
+      "没有主角目标或冲突，且经过一次补桥仍不能形成可拍动作",
+      "权利/授权来源不明且无法补证",
+      "核心要求与当前创作模式互相矛盾，不能通过改写解决"
+    ]
+  },
+  "project_selection_gate": {
+    "schema": "ace.video_kingdom.project_selection_gate.v1",
+    "scale": "0-2",
+    "criteria": [
+      {"id": "hook", "label": "一眼能说清的开场"},
+      {"id": "conflict", "label": "观众能理解的冲突"},
+      {"id": "visual_action", "label": "不是只靠念台词"},
+      {"id": "character_memorability", "label": "角色可识别且有关系张力"},
+      {"id": "episode_payload", "label": "本集有信息/关系/情绪推进"},
+      {"id": "continuation", "label": "有可持续的后续问题"},
+      {"id": "production_fit", "label": "符合当前资产、音频和视频能力"}
+    ],
+    "pass_threshold": 10,
+    "rework_range": [7, 9],
+    "reject_threshold": 6,
+    "critical_zero_rejects": ["hook", "conflict", "visual_action", "production_fit"],
+    "decision": "PASS 才能进入 T1；REWORK_REQUIRED 先修源头；REJECT 只归档为研究，不烧 Provider 额度"
+  },
+  "stop_policy": {
+    "max_identical_request_attempts": 1,
+    "max_provider_attempts_per_shot": 2,
+    "second_attempt_requires_material_change": true,
+    "max_same_root_cause_sample_failures": 2,
+    "block_not_abandon": [
+      "Provider 暂时不可用或网络超时",
+      "密钥/公网 URL/运行时缺失但可补齐",
+      "真实成本、能力或权利证据暂时 UNKNOWN"
+    ],
+    "abandon_or_archive": [
+      "source_quality 为 REJECT",
+      "同一根因在修合同后仍连续两次小样失败且没有新信息",
+      "超过当前预算层级仍只重复同一失败，不再产生信息增益",
+      "关键资产或声音授权无法补证",
+      "镜头始终只能退化成无动作的活照片或静态风景"
+    ],
+    "resume_requires": "新的源头决定、资产证据、Provider 能力证据或可验证修复，不允许仅靠时间经过自动复活",
+    "cost_stop": "达到当前 shot_units 上限后停止新增付费请求；只有新证据证明下一额度会测试不同假设时才升档"
+  },
   "recovery_ladder": [
     "STOP_AND_PRESERVE_EVIDENCE",
     "CLASSIFY_ROOT_CAUSE",
