@@ -48,3 +48,24 @@ def test_failure_replay_rejects_pain_free_placeholder(tmp_path: Path):
         assert "cost" in str(exc)
     else:
         raise AssertionError("pain-free failure replay must be rejected")
+
+
+def test_failure_replay_with_stable_id_is_idempotent(tmp_path: Path):
+    path = tmp_path / "failure.jsonl"
+    payload = {
+        "replay_id": "FR-stable",
+        "problem": "measured regression in clip continuity",
+        "judgment": "the change regressed the baseline metric",
+        "action": "revert the experiment",
+        "result": "rollback required",
+        "why": "after metric is lower than baseline",
+        "reuse_when": "same continuity metric regression occurs",
+        "cost": "one repeated test run was wasted",
+        "blast_radius": "only the isolated fixture and candidate",
+        "counterfactual": "without rollback the regression would enter capability memory",
+        "recurrence_risk": "medium until the contract assertion is retained",
+    }
+    first = record_failure(payload, path=path)
+    second = record_failure(payload, path=path)
+    assert first["replay_id"] == second["replay_id"] == "FR-stable"
+    assert len(path.read_text(encoding="utf-8").splitlines()) == 1

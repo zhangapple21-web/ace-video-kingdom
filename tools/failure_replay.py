@@ -37,9 +37,18 @@ def record_failure(payload: dict[str, Any], *, path: Path = DEFAULT_PATH) -> dic
     ]
     if missing:
         raise ValueError("missing failure replay fields: " + ",".join(missing))
+    replay_id = str(payload.get("replay_id") or "FR-" + uuid.uuid4().hex[:12])
+    if path.exists():
+        for line in path.read_text(encoding="utf-8").splitlines():
+            try:
+                previous = json.loads(line)
+            except json.JSONDecodeError:
+                continue
+            if isinstance(previous, dict) and previous.get("replay_id") == replay_id:
+                return previous
     row = {
         "schema": "video_kingdom.failure_replay.v2",
-        "replay_id": str(payload.get("replay_id") or "FR-" + uuid.uuid4().hex[:12]),
+        "replay_id": replay_id,
         "problem": payload["problem"],
         "judgment": payload["judgment"],
         "action": payload["action"],
