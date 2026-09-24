@@ -11,6 +11,7 @@ import argparse
 import hashlib
 import json
 import re
+import sys
 import time
 from collections import Counter
 from pathlib import Path
@@ -18,6 +19,8 @@ from typing import Any
 
 
 ROOT = Path(__file__).resolve().parents[1]
+if str(ROOT) not in sys.path:
+    sys.path.insert(0, str(ROOT))
 QUEUE = ROOT / "research" / "dispatch_queue.v1.json"
 RECEIPTS = ROOT / "research" / "task_wall_triage.v1.jsonl"
 LEARNING_RUNS = ROOT / "research" / "external_learning_runs"
