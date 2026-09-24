@@ -57,6 +57,7 @@ def validate_production_shot(canonical_shot: dict[str, Any], contract_prompt: st
         canonical_shot.get("script_prompt_review"),
         shot_id=str(canonical_shot.get("shot_id") or ""),
         run_id=str(canonical_shot.get("run_id") or ""),
+        expected_script_hash=str(canonical_shot.get("script_hash") or ""),
         compiled_prompt=contract_prompt,
     )
     if review_check["status"] != "PASS":

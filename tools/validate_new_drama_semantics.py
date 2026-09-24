@@ -5,6 +5,8 @@ production receipts.  Legacy packets without the new-drama flag are skipped.
 """
 from __future__ import annotations
 
+import hashlib
+from collections.abc import Mapping
 from pathlib import Path
 from typing import Any
 
@@ -112,6 +114,46 @@ def _packages(shot: dict[str, Any]) -> tuple[Any, Any, Any]:
     return tuple(_asset_package(shot, kind) for kind in ("character", "scene", "prop"))
 
 
+def _locked_script_sha256(shot: dict[str, Any], errors: list[str]) -> str:
+    """Hash the actual locked script bytes; a caller-provided digest alone is not evidence."""
+    inline = shot.get("locked_script_text")
+    source_ref = shot.get("script_source_ref")
+    if isinstance(inline, str) and inline.strip():
+        if source_ref:
+            errors.append("script source must use either locked_script_text or script_source_ref, not both")
+            return ""
+        return hashlib.sha256(inline.encode("utf-8")).hexdigest()
+
+    if not isinstance(source_ref, Mapping):
+        errors.append("locked full script source required: provide locked_script_text or script_source_ref.path")
+        return ""
+    raw_path = str(source_ref.get("path") or "").strip()
+    if not raw_path:
+        errors.append("script_source_ref.path is required")
+        return ""
+    relative_path = Path(raw_path)
+    if relative_path.is_absolute():
+        errors.append("script_source_ref.path must be relative to the canonical contract")
+        return ""
+    contract_path = str(shot.get("__contract_path") or "").strip()
+    if not contract_path:
+        errors.append("script_source_ref requires the canonical contract path")
+        return ""
+    try:
+        base = Path(contract_path).resolve().parent
+        candidate = (base / relative_path).resolve()
+        candidate.relative_to(base)
+        content = candidate.read_bytes()
+    except (OSError, ValueError):
+        errors.append("script_source_ref.path is missing or escapes the canonical contract directory")
+        return ""
+    digest = hashlib.sha256(content).hexdigest()
+    declared_ref_hash = str(source_ref.get("sha256") or "").strip().lower()
+    if declared_ref_hash and declared_ref_hash != digest:
+        errors.append("script_source_ref.sha256 does not match the referenced file bytes")
+    return digest
+
+
 def validate_new_drama_semantics(shot: Any, *, enforce: bool | None = None) -> dict[str, Any]:
     errors: list[str] = []
     warnings: list[str] = []
@@ -128,13 +170,17 @@ def validate_new_drama_semantics(shot: Any, *, enforce: bool | None = None) -> d
         if labels != list(PIPELINE):
             errors.append("pipeline order must be 新剧→剧本→角色资产→场景资产→道具资产→Shot→A-gate→Agnes")
 
-    script_ok = any(
-        not _blank(shot.get(key))
-        for key in ("script_hash", "script", "script_text")
-    ) or isinstance(shot.get("script_prompt_review"), dict)
-    if not script_ok:
-        errors.append("script missing: new drama requires a script packet before assets")
     script_hash = str(shot.get("script_hash") or "").strip().lower()
+    locked_script_hash = _locked_script_sha256(shot, errors)
+    if not locked_script_hash:
+        errors.append("script missing: new drama requires a verifiable locked full-script source before assets")
+    elif script_hash != locked_script_hash:
+        errors.append("script_hash must match the exact locked full-script bytes")
+    script_review_receipt = shot.get("script_prompt_review") if isinstance(shot.get("script_prompt_review"), dict) else {}
+    if not script_review_receipt:
+        errors.append("script_prompt_review is required to bind the locked full-script source")
+    elif locked_script_hash and str(script_review_receipt.get("script_hash") or "").strip().lower() != locked_script_hash:
+        errors.append("script_prompt_review.script_hash must match the exact locked full-script bytes")
     readiness = validate_provider_spend_readiness(
         shot.get("workflow_policy"),
         expected_script_hash=script_hash,

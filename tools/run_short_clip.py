@@ -793,6 +793,7 @@ def main() -> int:
         canonical_shot = _load_shot_contract(contract_path, args.shot_id)
     except ValueError as error:
         raise SystemExit(f"provider admission blocked: {error}; no provider request submitted") from error
+    canonical_shot["__contract_path"] = str(contract_path.resolve())
     contract_prompt = str(canonical_shot.get("prompt") or "")
     if not contract_prompt or args.prompt != contract_prompt:
         raise SystemExit(
