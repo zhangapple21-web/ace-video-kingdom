@@ -272,12 +272,12 @@ def dispatch(*, text: str, out: Path, profile: str = "standard", project_id: str
         raise ValueError("ENTRY_TEXT_REQUIRED")
     entry_id = "ENTRY-" + uuid.uuid4().hex[:12]
     intent = classify_media_intent(source)
-    workflow_policy = build_workflow_policy_receipt(ROOT)
     creative_development = build_creative_development_profile(
         title=project_id or "未命名短剧",
         source_text=source,
     )
     creative_development_check = validate_creative_development_profile(creative_development)
+    workflow_policy = build_workflow_policy_receipt(ROOT, creative_development=creative_development)
     out.parent.mkdir(parents=True, exist_ok=True)
     creative_development_path = out.with_name(out.stem + ".creative_development_profile.v1.json")
     creative_development_path.write_text(
