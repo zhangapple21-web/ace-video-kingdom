@@ -29,11 +29,23 @@ def test_nightly_cycle_has_one_ordered_entry(monkeypatch, tmp_path):
         calls.append("drain")
         return Completed()
 
+    def fake_promotion(**kwargs):
+        calls.append("promotion")
+        return {
+            "run_id": "PG-test",
+            "selected": 0,
+            "remaining_ready": 0,
+            "decisions": [],
+            "receipt": str(tmp_path / "PG-test.json"),
+        }
+
     monkeypatch.setattr(cycle, "collect", fake_collect)
     monkeypatch.setattr(cycle, "persist", fake_persist)
     monkeypatch.setattr(cycle, "publish", fake_publish)
     monkeypatch.setattr(cycle.subprocess, "run", fake_run)
+    monkeypatch.setattr(cycle, "run_promotion_gate", fake_promotion)
     result = cycle.run(limit=3)
-    assert calls == ["collect", "persist", ("publish", "EL-test.json"), "drain"]
+    assert calls == ["collect", "persist", ("publish", "EL-test.json"), "drain", "promotion"]
     assert result["production_integration"] is False
     assert result["provider_calls"] == 0
+    assert result["promotion_gate"]["selected"] == 0

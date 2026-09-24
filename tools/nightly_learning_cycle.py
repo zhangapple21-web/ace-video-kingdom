@@ -1,8 +1,9 @@
 """视频王国夜间学习的唯一编排入口。
 
-顺序固定为：公开资料采集 → ACE Evolution Kernel 桥接 → 任务墙收口。
-它不创建媒体任务、不执行外部代码、不更改 Provider 或模型路由；真正的
-研究与晋升仍由 ACE 既有 DailyLearningLoop/TaskPool/Guardian 负责。
+顺序固定为：公开资料采集 → ACE Evolution Kernel 桥接 → 任务墙收口
+→ 有界能力晋升门。它不创建媒体任务、不执行外部代码、不更改 Provider
+或模型路由；研究消费和能力晋升仍分别受 ACE DailyLearningLoop/TaskPool/
+Guardian 与本地 evolution ledger 的证据门约束，晋升也不会获得生产权限。
 """
 
 from __future__ import annotations
@@ -19,6 +20,7 @@ if str(ROOT) not in sys.path:
 
 from tools.daily_external_learning import collect, persist
 from tools.publish_ace_learning_packet import publish
+from tools.promotion_gate import run as run_promotion_gate
 
 def run(*, limit: int = 5) -> dict[str, object]:
     collected = collect()
@@ -38,12 +40,20 @@ def run(*, limit: int = 5) -> dict[str, object]:
         drain_summary = json.loads(drain.stdout.strip() or "{}")
     except json.JSONDecodeError:
         drain_summary = {"raw": drain.stdout[-1000:]}
+    promotion = run_promotion_gate(execute=True, limit=limit)
     return {
         "schema": "video_kingdom.nightly_learning_cycle.v1",
         "run_id": collected.get("run_id"),
         "run_path": str(run_path),
         "bridge": bridge,
         "task_wall": drain_summary,
+        "promotion_gate": {
+            "run_id": promotion["run_id"],
+            "selected": promotion["selected"],
+            "remaining_ready": promotion["remaining_ready"],
+            "decisions": [item.get("decision") for item in promotion["decisions"]],
+            "receipt": promotion["receipt"],
+        },
         "production_integration": False,
         "provider_calls": 0,
     }
