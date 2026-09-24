@@ -45,7 +45,9 @@ def record_failure(payload: dict[str, Any], *, path: Path = DEFAULT_PATH) -> dic
             except json.JSONDecodeError:
                 continue
             if isinstance(previous, dict) and previous.get("replay_id") == replay_id:
-                return previous
+                if all(previous.get(field) == payload.get(field) for field in REQUIRED):
+                    return previous
+                raise ValueError("failure_replay_id_conflict")
     row = {
         "schema": "video_kingdom.failure_replay.v2",
         "replay_id": replay_id,

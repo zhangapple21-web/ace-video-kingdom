@@ -69,3 +69,28 @@ def test_failure_replay_with_stable_id_is_idempotent(tmp_path: Path):
     second = record_failure(payload, path=path)
     assert first["replay_id"] == second["replay_id"] == "FR-stable"
     assert len(path.read_text(encoding="utf-8").splitlines()) == 1
+
+
+def test_failure_replay_stable_id_cannot_hide_changed_evidence(tmp_path: Path):
+    path = tmp_path / "failure.jsonl"
+    payload = {
+        "replay_id": "FR-conflict",
+        "problem": "one failure with a stable identity",
+        "judgment": "the evidence is bounded",
+        "action": "keep the candidate in review",
+        "result": "not promoted",
+        "why": "the measurable gain is absent",
+        "reuse_when": "the same evidence boundary recurs",
+        "cost": "one review cycle",
+        "blast_radius": "one candidate",
+        "counterfactual": "promotion would hide the missing proof",
+        "recurrence_risk": "medium until the gate remains",
+    }
+    record_failure(payload, path=path)
+    payload["result"] = "changed result"
+    try:
+        record_failure(payload, path=path)
+    except ValueError as exc:
+        assert "conflict" in str(exc)
+    else:
+        raise AssertionError("changed evidence must not be silently deduplicated")
