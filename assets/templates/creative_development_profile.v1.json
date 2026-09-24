@@ -1,0 +1,98 @@
+{
+  "schema": "ace.video_kingdom.creative_development_profile.v1",
+  "status": "PENDING",
+  "production_integration": false,
+  "title": "【项目名】",
+  "input_classification": {
+    "kind": "ORIGINAL_STORY",
+    "source_text_hash": "",
+    "facts_only": true,
+    "unknown_policy": "未被原文或用户采用决定支持的内容保持 UNKNOWN；候选必须标记 inferred。"
+  },
+  "requested_outputs": [
+    "character_model",
+    "relationship_map",
+    "episode_script",
+    "shot_plan",
+    "visual_assets",
+    "audio_plan",
+    "quality_review"
+  ],
+  "character_roster": [],
+  "relationship_graph": {
+    "nodes": [],
+    "edges": [],
+    "unknown_edges": []
+  },
+  "character_signature_system": {
+    "fields": [
+      "signature_action",
+      "signature_expression",
+      "signature_shot",
+      "signature_palette",
+      "signature_dialogue_style",
+      "signature_costume_element",
+      "signature_prop",
+      "signature_emotion",
+      "signature_entrance",
+      "signature_contrast"
+    ],
+    "records": [],
+    "policy": "让观众通过轮廓、色彩、动作和语言认出角色；十项是设计提示，不是每镜硬门。"
+  },
+  "character_arcs": [],
+  "visual_world": {
+    "era": "UNKNOWN",
+    "geography": "UNKNOWN",
+    "architecture": "UNKNOWN",
+    "technology_or_magic": "UNKNOWN",
+    "palette_rules": [],
+    "lighting_rules": [],
+    "style_baseline": "继承项目 creative_mode；真实场景表演不能被风景画替代。"
+  },
+  "series_plan": {
+    "mode": "OPTIONAL",
+    "planned_episodes": null,
+    "arc_milestones": {
+      "40": null,
+      "60": null,
+      "80": null
+    },
+    "anti_filler_policy": "长线规划按需启用；启用后每集至少推进剧情、关系、秘密、冲突、世界观或情绪之一。"
+  },
+  "episode_structure": {
+    "opening_hook": "",
+    "conflict": "",
+    "escalation": "",
+    "information_change": "",
+    "reversal_or_payoff": "",
+    "ending_question": "",
+    "target_seconds": null
+  },
+  "quality_review": {
+    "checks": [
+      "opening_hook",
+      "early_conflict",
+      "information_change",
+      "emotion_escalation",
+      "ending_question",
+      "character_memorability",
+      "generation_feasibility"
+    ],
+    "status": "PENDING",
+    "authority": "CREATIVE_REVIEW_ONLY"
+  },
+  "production_mapping": {
+    "character_identity": "assets/templates/character_asset_package.v1.json",
+    "state_layers": ["Identity", "State", "Scene State", "Shot State"],
+    "script_review": "script_prompt_review.script_review",
+    "shot_review": "script_prompt_review.prompt_review",
+    "provider_gate": "production_shot_gate",
+    "prompt_language": "zh-CN; English optional, never required"
+  },
+  "source_policy": {
+    "creative_authority": "HUMAN_ADOPTED_DECISIONS",
+    "ai_role": ["classify", "structure", "extract", "audit", "propose_labeled_candidates"],
+    "forbidden": ["silent_invention", "silent_overwrite", "self_approve", "change_provider_route"]
+  }
+}

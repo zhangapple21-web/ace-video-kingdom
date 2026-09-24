@@ -3,9 +3,17 @@
 The creator brief is an optional planning input.  The publish recap is a
 non-authoritative feedback record: it may improve the next story/shot plan,
 but it can never approve delivery or change provider routing by itself.
+
+The creative-development profile below absorbs the useful part of an
+industrial animation workflow (cast inventory, relationships, character
+signatures, arcs, visual world rules, episode hook and review checklist).
+It is a planning/read-model layer only.  It does not replace the script,
+Identity/State/Scene State/Shot State contracts, double review, production
+gate or provider routing.
 """
 from __future__ import annotations
 
+import hashlib
 import json
 from pathlib import Path
 from typing import Any
@@ -20,10 +28,214 @@ CREATIVE_MODES = {
     "motion_graphics",
     "audit_only",
 }
+DEVELOPMENT_STATUSES = {"PENDING", "DRAFT", "READY", "LOCKED", "ARCHIVED"}
+INPUT_KINDS = {
+    "ORIGINAL_STORY",
+    "NOVEL",
+    "SCRIPT",
+    "MANGA_ADAPTATION",
+    "WORLD_SETTING",
+    "CHARACTER_SETTING",
+    "EPISODE_OUTLINE",
+    "SHOT_REQUEST",
+    "UNKNOWN",
+}
+SIGNATURE_FIELDS = (
+    "signature_action",
+    "signature_expression",
+    "signature_shot",
+    "signature_palette",
+    "signature_dialogue_style",
+    "signature_costume_element",
+    "signature_prop",
+    "signature_emotion",
+    "signature_entrance",
+    "signature_contrast",
+)
+HOOK_CHECKS = (
+    "opening_hook",
+    "early_conflict",
+    "information_change",
+    "emotion_escalation",
+    "ending_question",
+    "character_memorability",
+    "generation_feasibility",
+)
 
 
 def _text(value: Any) -> str:
     return str(value or "").strip()
+
+
+def classify_creator_input(text: str) -> str:
+    """Classify a supplied idea without inventing story facts."""
+    value = _text(text)
+    if not value:
+        return "UNKNOWN"
+    rules = (
+        ("MANGA_ADAPTATION", ("漫画", "动漫", "改编")),
+        ("NOVEL", ("小说", "网文", "原著")),
+        ("SCRIPT", ("剧本", "台词", "场次")),
+        ("EPISODE_OUTLINE", ("分集", "第1集", "第1话", "大纲")),
+        ("WORLD_SETTING", ("世界观", "设定", "阵营", "魔法体系")),
+        ("CHARACTER_SETTING", ("人物设定", "角色设定", "人设")),
+        ("SHOT_REQUEST", ("分镜", "镜头", "拍摄")),
+    )
+    for kind, markers in rules:
+        if any(marker in value for marker in markers):
+            return kind
+    return "ORIGINAL_STORY"
+
+
+def build_creative_development_profile(
+    *,
+    title: str = "",
+    source_text: str = "",
+    status: str = "PENDING",
+    input_kind: str | None = None,
+    requested_outputs: list[str] | None = None,
+) -> dict[str, Any]:
+    """Build a reusable, provider-independent creator development profile.
+
+    The ten signature slots are prompts for deliberate character design, not
+    mandatory assets for every genre.  Empty values remain explicit instead
+    of being filled by inference.
+    """
+    safe_status = status if status in DEVELOPMENT_STATUSES else "PENDING"
+    source_value = _text(source_text)
+    kind = input_kind if input_kind in INPUT_KINDS else classify_creator_input(source_value)
+    return {
+        "schema": "ace.video_kingdom.creative_development_profile.v1",
+        "status": safe_status,
+        "production_integration": False,
+        "title": _text(title) or "未命名短剧",
+        "input_classification": {
+            "kind": kind,
+            "source_text_hash": hashlib.sha256(source_value.encode("utf-8")).hexdigest() if source_value else "",
+            "facts_only": True,
+            "unknown_policy": "未被原文或用户采用决定支持的内容保持 UNKNOWN；候选必须标记 inferred。",
+        },
+        "requested_outputs": requested_outputs or [
+            "character_model",
+            "relationship_map",
+            "episode_script",
+            "shot_plan",
+            "visual_assets",
+            "audio_plan",
+            "quality_review",
+        ],
+        "character_roster": [],
+        "relationship_graph": {"nodes": [], "edges": [], "unknown_edges": []},
+        "character_signature_system": {
+            "fields": list(SIGNATURE_FIELDS),
+            "records": [],
+            "policy": "让观众通过轮廓、色彩、动作和语言认出角色；不把十项清单升为每镜硬门。",
+        },
+        "character_arcs": [],
+        "visual_world": {
+            "era": "UNKNOWN",
+            "geography": "UNKNOWN",
+            "architecture": "UNKNOWN",
+            "technology_or_magic": "UNKNOWN",
+            "palette_rules": [],
+            "lighting_rules": [],
+            "style_baseline": "继承本项目 creative_mode；不得用风景画替代真实场景表演。",
+        },
+        "series_plan": {
+            "mode": "OPTIONAL",
+            "planned_episodes": None,
+            "arc_milestones": {"40": None, "60": None, "80": None},
+            "anti_filler_policy": "若未启用长线规划，不强制扩写集数；启用后每集必须推动剧情、关系、秘密、冲突、世界观或情绪至少一项。",
+        },
+        "episode_structure": {
+            "opening_hook": "",
+            "conflict": "",
+            "escalation": "",
+            "information_change": "",
+            "reversal_or_payoff": "",
+            "ending_question": "",
+            "target_seconds": None,
+        },
+        "quality_review": {
+            "checks": list(HOOK_CHECKS),
+            "status": "PENDING",
+            "authority": "CREATIVE_REVIEW_ONLY",
+        },
+        "production_mapping": {
+            "character_identity": "assets/templates/character_asset_package.v1.json",
+            "state_layers": ["Identity", "State", "Scene State", "Shot State"],
+            "script_review": "script_prompt_review.script_review",
+            "shot_review": "script_prompt_review.prompt_review",
+            "provider_gate": "production_shot_gate",
+            "prompt_language": "zh-CN; English optional, never required",
+        },
+        "source_policy": {
+            "creative_authority": "HUMAN_ADOPTED_DECISIONS",
+            "ai_role": ["classify", "structure", "extract", "audit", "propose_labeled_candidates"],
+            "forbidden": ["silent_invention", "silent_overwrite", "self_approve", "change_provider_route"],
+        },
+    }
+
+
+def validate_creative_development_profile(
+    profile: dict[str, Any], *, require_ready: bool = False
+) -> dict[str, Any]:
+    """Validate the creator layer without turning it into a production bypass."""
+    errors: list[str] = []
+    if not isinstance(profile, dict):
+        errors.append("creative development profile must be an object")
+        profile = {}
+    if profile.get("schema") != "ace.video_kingdom.creative_development_profile.v1":
+        errors.append("creative development profile schema is invalid")
+    status = profile.get("status", "PENDING")
+    if status not in DEVELOPMENT_STATUSES:
+        errors.append("creative development profile status is invalid")
+    if profile.get("production_integration") is not False:
+        errors.append("creative development profile cannot authorize production integration")
+    classification = profile.get("input_classification")
+    if not isinstance(classification, dict) or classification.get("kind") not in INPUT_KINDS:
+        errors.append("input_classification.kind is invalid")
+    signatures = profile.get("character_signature_system")
+    if not isinstance(signatures, dict) or not isinstance(signatures.get("fields"), list):
+        errors.append("character_signature_system.fields is required")
+    roster = profile.get("character_roster")
+    if roster is not None and not isinstance(roster, list):
+        errors.append("character_roster must be a list")
+    graph = profile.get("relationship_graph")
+    if not isinstance(graph, dict) or not all(isinstance(graph.get(key), list) for key in ("nodes", "edges", "unknown_edges")):
+        errors.append("relationship_graph must declare nodes, edges and unknown_edges lists")
+    structure = profile.get("episode_structure")
+    if not isinstance(structure, dict):
+        errors.append("episode_structure must be an object")
+    structural_error_count = len(errors)
+    if status in {"READY", "LOCKED"} or require_ready:
+        structure_map = structure if isinstance(structure, dict) else {}
+        if not roster:
+            errors.append("ready creative development profile needs at least one character")
+        else:
+            for index, character in enumerate(roster, start=1):
+                if not isinstance(character, dict) or not _text(character.get("character_id")) or not _text(character.get("name")):
+                    errors.append(f"character_roster[{index}] needs character_id and name")
+        required_structure = ("opening_hook", "conflict", "information_change", "ending_question")
+        for field in required_structure:
+            if not _text(structure_map.get(field)):
+                errors.append(f"episode_structure missing {field}")
+        quality_review = profile.get("quality_review")
+        if not isinstance(quality_review, dict) or not isinstance(quality_review.get("checks"), list):
+            errors.append("quality_review.checks must be a list")
+    structural_errors = errors[:structural_error_count]
+    readiness_errors = errors[structural_error_count:]
+    failed = bool(structural_errors) or bool(readiness_errors and (require_ready or status in {"READY", "LOCKED"}))
+    return {
+        "schema": "ace.video_kingdom.creative_development_conformance.v1",
+        "status": "FAIL" if failed else ("PASS" if not readiness_errors else "PENDING"),
+        "verdict": "BLOCKED" if failed else ("PASS" if not readiness_errors else "REVIEW_REQUIRED"),
+        "profile_status": status,
+        "errors": errors,
+        "structural_errors": structural_errors,
+        "readiness_errors": readiness_errors,
+        "non_authority": "CREATIVE_PLANNING_ONLY",
+    }
 
 
 def build_creator_brief(
@@ -40,6 +252,8 @@ def build_creator_brief(
     target_seconds: int | None = None,
     publish_goal: str = "",
     source: str = "USER_INPUT",
+    creative_development: dict[str, Any] | None = None,
+    source_text: str = "",
 ) -> dict[str, Any]:
     """Build a versioned, provider-independent creative brief."""
     required_values = {"audience": audience, "hook": hook, "ending_hook": ending_hook, "style": style}
@@ -58,6 +272,10 @@ def build_creator_brief(
         "style": _text(style),
         "creative_mode": creative_mode if creative_mode in CREATIVE_MODES else "live_action",
         "publish_goal": _text(publish_goal),
+        "creative_development": creative_development or build_creative_development_profile(
+            title=title,
+            source_text=source_text or title,
+        ),
     }
     return brief
 
@@ -80,6 +298,11 @@ def validate_creator_brief(brief: dict[str, Any], *, require_ready: bool = False
         errors.append("episode_count must be a positive integer")
     if brief.get("target_seconds") is not None and (not isinstance(brief.get("target_seconds"), int) or brief["target_seconds"] < 1):
         errors.append("target_seconds must be a positive integer")
+    development = brief.get("creative_development")
+    if development is not None:
+        development_check = validate_creative_development_profile(development)
+        if development_check["status"] == "FAIL":
+            errors.extend(f"creative_development: {item}" for item in development_check["errors"])
     if require_ready and errors:
         return {"schema": "ace.video_kingdom.creator_brief_conformance.v1", "status": "FAIL", "verdict": "BLOCKED", "errors": errors}
     return {
@@ -88,6 +311,7 @@ def validate_creator_brief(brief: dict[str, Any], *, require_ready: bool = False
         "verdict": "PASS" if not errors else "REVIEW_REQUIRED",
         "errors": errors,
         "required_fields": list(BRIEF_REQUIRED),
+        "creative_development": validate_creative_development_profile(brief.get("creative_development") or build_creative_development_profile()),
     }
 
 

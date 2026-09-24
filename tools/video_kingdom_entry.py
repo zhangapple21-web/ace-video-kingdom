@@ -28,6 +28,7 @@ from production_control.media_routing import build_image_model_plan, choose_imag
 from production_control.semantic_context import build_semantic_context
 from production_control.collaboration import load_default_collaboration_context
 from tools import role_room
+from tools.creator_workflow import build_creative_development_profile, validate_creative_development_profile
 
 
 # Agnes' V2.5 Flash contract is deliberately kept here, at the public
@@ -270,6 +271,17 @@ def dispatch(*, text: str, out: Path, profile: str = "standard", project_id: str
         raise ValueError("ENTRY_TEXT_REQUIRED")
     entry_id = "ENTRY-" + uuid.uuid4().hex[:12]
     intent = classify_media_intent(source)
+    creative_development = build_creative_development_profile(
+        title=project_id or "未命名短剧",
+        source_text=source,
+    )
+    creative_development_check = validate_creative_development_profile(creative_development)
+    out.parent.mkdir(parents=True, exist_ok=True)
+    creative_development_path = out.with_name(out.stem + ".creative_development_profile.v1.json")
+    creative_development_path.write_text(
+        json.dumps(creative_development, ensure_ascii=False, indent=2) + "\n",
+        encoding="utf-8",
+    )
     receipt: dict[str, Any] = {
         "schema": "video_kingdom.unified_entry_receipt.v1",
         "entry_id": entry_id,
@@ -280,6 +292,9 @@ def dispatch(*, text: str, out: Path, profile: str = "standard", project_id: str
         "profile": profile,
         "project_id": project_id or None,
         "provider_submission": "NOT_PERFORMED",
+        "creative_development": creative_development,
+        "creative_development_artifact": str(creative_development_path),
+        "creative_development_check": creative_development_check,
         # Management/default-method context is recorded at the only public
         # entry so narrative and media requests cannot silently diverge.
         # This does not replace the existing script/director/provider gates.
@@ -300,7 +315,6 @@ def dispatch(*, text: str, out: Path, profile: str = "standard", project_id: str
             role_args.append("--execute")
         role_status = role_room.main(role_args)
         receipt.update({"dispatch": "role_room", "role_receipt": str(role_receipt), "role_exit_code": role_status, "status": "COMPLETED" if role_status == 0 else "BLOCKED"})
-    out.parent.mkdir(parents=True, exist_ok=True)
     out.write_text(json.dumps(receipt, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     return receipt
 

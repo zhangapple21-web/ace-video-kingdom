@@ -12,6 +12,9 @@ def test_unified_entry_routes_video_without_provider_submission(tmp_path: Path, 
     assert receipt["control_plane"] == "production_control"
     assert receipt["dispatch"] == "media_route"
     assert receipt["provider_submission"] == "NOT_PERFORMED"
+    assert receipt["creative_development"]["schema"] == "ace.video_kingdom.creative_development_profile.v1"
+    assert receipt["creative_development_check"]["status"] == "PASS"
+    assert Path(receipt["creative_development_artifact"]).is_file()
     assert receipt["collaboration"]["mode"] == "DEFAULT_MULTI_WINDOW"
     assert receipt["collaboration"]["authority"] == "DEFAULT_METHOD_ONLY"
     assert len(receipt["collaboration"]["contract_sha256"]) == 64

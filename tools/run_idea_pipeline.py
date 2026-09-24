@@ -51,9 +51,23 @@ except ImportError:  # support ``python -m tools.run_idea_pipeline``
     from tools.medium_lock import character_performance_lock
 
 try:
-    from creator_workflow import build_creator_brief, build_publish_recap, load_creator_brief, validate_creator_brief
+    from creator_workflow import (
+        build_creator_brief,
+        build_creative_development_profile,
+        build_publish_recap,
+        load_creator_brief,
+        validate_creator_brief,
+        validate_creative_development_profile,
+    )
 except ImportError:  # support ``python -m tools.run_idea_pipeline``
-    from tools.creator_workflow import build_creator_brief, build_publish_recap, load_creator_brief, validate_creator_brief
+    from tools.creator_workflow import (
+        build_creator_brief,
+        build_creative_development_profile,
+        build_publish_recap,
+        load_creator_brief,
+        validate_creator_brief,
+        validate_creative_development_profile,
+    )
 
 try:
     from validate_script_executability import (
@@ -177,6 +191,13 @@ def _planning_conformance_check(plan: dict[str, Any]) -> dict[str, Any]:
     errors.extend(f"missing plan field: {field}" for field in sorted(required - set(plan)))
     if plan.get("production_integration") is not False:
         errors.append("production_integration must remain false")
+    development = plan.get("creative_development")
+    if not isinstance(development, dict):
+        errors.append("creative_development must be an object")
+    else:
+        development_check = validate_creative_development_profile(development)
+        if development_check["status"] == "FAIL":
+            errors.extend(f"creative_development: {item}" for item in development_check["errors"])
     generation_contract = plan.get("generation_contract")
     if not isinstance(generation_contract, dict):
         errors.append("generation_contract must be an object")
@@ -761,10 +782,19 @@ def _compile(
         "timing_policy": "tts_first; measured dialogue plus 0.6s recovery hold; no character-count timing",
         "generation_contract": generation_contract,
     }
-    brief = creator_brief or build_creator_brief(title=title, target_seconds=target_seconds)
+    brief = creator_brief or build_creator_brief(title=title, target_seconds=target_seconds, source_text=idea)
+    development = brief.get("creative_development") if isinstance(brief, dict) else None
+    if not isinstance(development, dict):
+        development = build_creative_development_profile(title=title, source_text=idea)
+        brief = dict(brief)
+        brief["creative_development"] = development
+    development_check = validate_creative_development_profile(development)
+    if development_check["status"] == "FAIL":
+        raise ValueError("creative development profile is invalid: " + "; ".join(development_check["errors"]))
     plan = {
         "schema": "video_kingdom.idea_pipeline_plan.v1", "project_id": project_id, "status": "COMPILED", "title": title, "scope": "FREE_ZONE_RESEARCH_ONLY", "production_integration": False, "medium_lock": character_performance_lock(source_kind="ORIGINAL_STORY", signed_by="idea_pipeline"),
         "collaboration": _default_collaboration_context(),
+        "creative_development": development,
         "source_rights_note": "由用户提供的原创想法编译；未读取私密材料，未使用现实人物肖像。", "quality_mode": "FORMAL", "story": {"root_brief": {"theme": "规则、位置与可验证证据", "relationship_and_conflict": "行动者与规则受益者之间的验证冲突", "mainline_events": contract["causal_chain"], "source_rights_note": "user_idea_only", "semantic_anchor_type": "rule_and_evidence"}, "scene_nodes": [{"scene_id": s[0], "title": s[1]} for s in scenes]},
         "assets": asset_entries, "six_module_contract": "six_module_contract.json", "generation_contract": generation_contract, "render_defaults": {"model": "agnes-video-2.5-flash", "seconds": shot_seconds, "width": 704, "height": 1280, "num_frames": shot_frames, "frame_rate": 8, "duration_source": "per_shot_tts_measurement"},
         "shots": shots, "acceptance": {"duration_window_seconds": ([15, 70] if target_seconds is None else [max(15, target_seconds - 2), target_seconds + 2]), "must_have_receipts": True, "must_pass_media_integrity": True},
@@ -941,7 +971,7 @@ def main() -> int:
     parser.add_argument("--target-seconds", type=int, choices=range(24, 73), metavar="N",
                         help="target assembled duration; six shots are sized evenly (24..72 seconds)")
     parser.add_argument("--creator-brief", type=Path,
-                        help="optional JSON creator brief; audience/hook/ending_hook/style are required when supplied")
+                        help="optional JSON creator brief; audience/hook/ending_hook/style are required when supplied; creative_development is optional")
     args = parser.parse_args()
     project_id = args.project_id or f"idea_{_slug(args.idea)}"
     project_dir = (args.output_root / project_id).resolve()
@@ -957,6 +987,11 @@ def main() -> int:
             raise SystemExit(str(exc)) from exc
         if brief_check["status"] != "PASS":
             raise SystemExit("creator brief is incomplete: " + "; ".join(brief_check["errors"]))
+        development = creator_brief.get("creative_development")
+        if development is not None:
+            development_check = validate_creative_development_profile(development)
+            if development_check["status"] == "FAIL":
+                raise SystemExit("creative development profile is invalid: " + "; ".join(development_check["errors"]))
     collaboration = _default_collaboration_context()
     project_research_dir = project_dir / "research"
     project_research_dir.mkdir(parents=True, exist_ok=True)
@@ -981,6 +1016,13 @@ def main() -> int:
     plan_path = project_dir / "episode_plan.json"
     if plan_path.exists() and args.resume:
         plan = json.loads(plan_path.read_text(encoding="utf-8"))
+        if not isinstance(plan.get("creative_development"), dict):
+            existing_brief = plan.get("creator_brief") if isinstance(plan.get("creator_brief"), dict) else {}
+            plan["creative_development"] = existing_brief.get("creative_development") or build_creative_development_profile(
+                title=str(plan.get("title") or project_id),
+                source_text=args.idea,
+            )
+            _write_json(plan_path, plan)
         if not isinstance(plan.get("dynamic_content_plan"), dict):
             plan["dynamic_content_plan"] = build_episode_dynamic_plan(idea=args.idea, plan=plan, target_seconds=args.target_seconds)
             plan.setdefault("content_control", initial_content_control())
@@ -993,10 +1035,21 @@ def main() -> int:
     brief = plan.get("creator_brief") if isinstance(plan.get("creator_brief"), dict) else build_creator_brief(title=plan.get("title", ""), target_seconds=args.target_seconds)
     brief_path = project_dir / "creator_brief.v1.json"
     _write_json(brief_path, brief)
+    development = plan.get("creative_development") or brief.get("creative_development")
+    development_path = project_dir / "creative_development_profile.v1.json"
+    _write_json(development_path, development)
     recap_path = project_dir / "publish_recap.v1.json"
     if not recap_path.exists():
         _write_json(recap_path, build_publish_recap(project_id=project_id, brief=brief))
-    receipt["stages"].append({"name": "creator_layer", "status": "READY" if brief.get("status") == "READY" else "PENDING", "artifacts": [str(brief_path), str(recap_path)], "authority": "planning_and_next_iteration_only"})
+    development_check = validate_creative_development_profile(development)
+    receipt["stages"].append({
+        "name": "creator_layer",
+        "status": "READY" if brief.get("status") == "READY" else "PENDING",
+        "artifacts": [str(brief_path), str(development_path), str(recap_path)],
+        "authority": "planning_and_next_iteration_only",
+        "creative_development_status": development.get("status", "PENDING"),
+        "creative_development_check": development_check["status"],
+    })
 
     planning_check = _planning_conformance_check(plan)
     planning_check["recorded_at"] = time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime())
