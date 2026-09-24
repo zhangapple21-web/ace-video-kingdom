@@ -34,6 +34,8 @@
 这一步是“真实抓取和登记”，不是把外部观点直接变成生产规则。每日自动任务随后只允许对新收据做只读对比和本地小样验证；只有完整通过
 `Baseline → Change → Test → Evaluation → Compare → Promote / Rollback`，并附带六项痛苦复盘，才可调用 `tools/evolution_ledger.py` 晋升能力。没有新证据时记录 `UNCHANGED/NO_NEW_EVIDENCE`，不制造修改；许可证不明或限制较强的仓库永远停在 `RESEARCH_ONLY_LICENSE_REVIEW`。
 
+任务墙由 `tools/drain_task_wall.py` 幂等收口：`EXTERNAL_LEARNING`/`LEARNING_RESULT` 自动结案并关联学习收据，`CONTINUITY_REPAIR` 自动进入 `AUTO_TRIAGED` 并保留下一步与证据缺口；`RESUME_MEDIA_WORK` 永远留给已有视频任务监控，不由学习任务提交 Provider。这样复盘是系统动作，不要求用户逐卡审核，同时又不会把“已分流”伪装成“已修复”。
+
 ## 已吸收：Toonflow-app 的工艺，不复制其应用
 
 来源：[HBAI-Ltd/Toonflow-app](https://github.com/HBAI-Ltd/Toonflow-app)，2026-09-01 公开元数据复核：活跃、Apache-2.0；README 另含补充商业分发条件，任何整体复用前需重新审查。
