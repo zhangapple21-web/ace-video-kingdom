@@ -14,7 +14,7 @@ def test_publish_accepts_only_video_learning_receipts(tmp_path, monkeypatch):
     run_dir = module.VIDEO_ROOT / "research" / "external_learning_runs"
     run_dir.mkdir(parents=True)
     run = run_dir / "EL-test.json"
-    run.write_text(json.dumps({"schema": "video_kingdom.external_learning_run.v1", "run_id": "EL-test", "source_boundary": "PUBLIC_PRIMARY_SOURCES_ONLY", "promotion": {"status": "NONE"}, "records": [{"source_id": "x", "status": "NEW_OR_CHANGED"}]}), encoding="utf-8")
+    run.write_text(json.dumps({"schema": "video_kingdom.external_learning_run.v1", "run_id": "EL-test", "source_boundary": "PUBLIC_PRIMARY_SOURCES_ONLY", "promotion": {"status": "NONE"}, "records": [{"source_id": "x", "status": "NEW_OR_CHANGED", "source_content_key": "x:v1"}]}), encoding="utf-8")
     result = publish(run, module.ACE_ROOT / "08_GOVERNANCE" / "video_learning_bridge" / "bridge.jsonl")
     assert result["packets"] == 1
     assert result["production_integration"] is False
