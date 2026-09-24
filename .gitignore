@@ -55,6 +55,7 @@ assets/cache/
 .dbg/
 reports/
 research/_tmp_*/
+research/promotion_gate_runs/*.json
 experiments/*.admission.json
 research/*_smoke_latest.json
 research/admission_receipts/shot_*.json
