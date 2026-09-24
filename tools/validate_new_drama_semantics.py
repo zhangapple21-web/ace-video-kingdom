@@ -5,11 +5,33 @@ production receipts.  Legacy packets without the new-drama flag are skipped.
 """
 from __future__ import annotations
 
+from pathlib import Path
 from typing import Any
+
+from tools.workflow_decision_matrix import validate_provider_spend_readiness
+
+PROJECT_ROOT = Path(__file__).resolve().parents[1]
 
 NEW_DRAMA_TOKENS = {"new_drama", "NEW_DRAMA"}
 A_GATE_IDS = ("A01", "A02", "A06", "A09", "A13", "A14")
 OVERFLOW_POLICIES = {"split_or_extend_never_swallow", "split", "extend"}
+ASSET_PACKAGE_ALIASES = {
+    "character": ("character_asset_package", "character", "characters", "character_assets"),
+    "scene": ("scene_asset_package", "scene", "scenes", "scene_assets"),
+    "prop": ("prop_asset_package", "prop", "props", "prop_assets"),
+    "clue": ("clue_asset_package", "clue", "clues", "clue_assets"),
+    "ui_plate": ("ui_plate_asset_package", "ui_asset_package", "ui_plate", "ui_plates", "ui_assets"),
+    "fx": ("fx_asset_package", "effect_asset_package", "fx", "effects", "fx_assets"),
+}
+ASSET_ID_FIELDS = {
+    "asset_id", "id", "character_id", "scene_id", "prop_id", "clue_id",
+    "ui_id", "ui_plate_id", "fx_id", "effect_id",
+}
+ASSET_ID_LIST_FIELDS = {
+    "asset_ids", "character_ids", "scene_ids", "prop_ids", "clue_ids",
+    "ui_ids", "ui_plate_ids", "fx_ids", "effect_ids",
+}
+ASSET_KINDS = frozenset(ASSET_PACKAGE_ALIASES)
 PIPELINE = (
     "new_drama",
     "script",
@@ -47,33 +69,47 @@ def _blank(value: Any) -> bool:
 
 def _present_package(value: Any) -> bool:
     if isinstance(value, dict):
-        return any(not _blank(value.get(key)) for key in ("scene_id", "prop_id", "character_id", "asset_id", "name", "id"))
+        return bool(_package_ids(value)) or any(not _blank(value.get(key)) for key in ("name",))
     if isinstance(value, list):
         return any(_present_package(item) or (isinstance(item, str) and not _blank(item)) for item in value)
     return isinstance(value, str) and not _blank(value)
 
 
-def _packages(shot: dict[str, Any]) -> tuple[Any, Any, Any]:
+def _package_ids(value: Any, *, in_id_list: bool = False) -> set[str]:
+    """Collect stable IDs from a typed asset package without treating names as IDs."""
+    found: set[str] = set()
+    if isinstance(value, str):
+        if in_id_list and value.strip():
+            found.add(value.strip())
+        return found
+    if isinstance(value, list):
+        for item in value:
+            found.update(_package_ids(item, in_id_list=in_id_list))
+        return found
+    if not isinstance(value, dict):
+        return found
+    for key, child in value.items():
+        if key in ASSET_ID_FIELDS and isinstance(child, str) and child.strip():
+            found.add(child.strip())
+        elif key in ASSET_ID_LIST_FIELDS:
+            found.update(_package_ids(child, in_id_list=True))
+        elif isinstance(child, (dict, list)):
+            found.update(_package_ids(child))
+    return found
+
+
+def _asset_package(shot: dict[str, Any], kind: str) -> Any:
     bundled = shot.get("asset_packages") if isinstance(shot.get("asset_packages"), dict) else {}
-    character = (
-        shot.get("character_asset_package")
-        or bundled.get("character")
-        or bundled.get("characters")
-        or shot.get("character_assets")
-    )
-    scene = (
-        shot.get("scene_asset_package")
-        or bundled.get("scene")
-        or bundled.get("scenes")
-        or shot.get("scene_assets")
-    )
-    prop = (
-        shot.get("prop_asset_package")
-        or bundled.get("prop")
-        or bundled.get("props")
-        or shot.get("prop_assets")
-    )
-    return character, scene, prop
+    for key in ASSET_PACKAGE_ALIASES[kind]:
+        if key in shot and not _blank(shot.get(key)):
+            return shot[key]
+        if key in bundled and not _blank(bundled.get(key)):
+            return bundled[key]
+    return None
+
+
+def _packages(shot: dict[str, Any]) -> tuple[Any, Any, Any]:
+    return tuple(_asset_package(shot, kind) for kind in ("character", "scene", "prop"))
 
 
 def validate_new_drama_semantics(shot: Any, *, enforce: bool | None = None) -> dict[str, Any]:
@@ -98,14 +134,20 @@ def validate_new_drama_semantics(shot: Any, *, enforce: bool | None = None) -> d
     ) or isinstance(shot.get("script_prompt_review"), dict)
     if not script_ok:
         errors.append("script missing: new drama requires a script packet before assets")
+    script_hash = str(shot.get("script_hash") or "").strip().lower()
+    readiness = validate_provider_spend_readiness(
+        shot.get("workflow_policy"),
+        expected_script_hash=script_hash,
+        project_root=PROJECT_ROOT,
+    )
+    if readiness["status"] != "PASS":
+        errors.extend(f"P0: {message}" for message in readiness["errors"])
 
     character, scene, prop = _packages(shot)
     if not _present_package(character):
         errors.append("character assets missing")
     if not _present_package(scene):
         errors.append("scene assets missing")
-    if not _present_package(prop):
-        errors.append("prop assets missing")
     if _blank(shot.get("shot_id")):
         errors.append("shot_id missing")
 
@@ -132,6 +174,8 @@ def validate_new_drama_semantics(shot: Any, *, enforce: bool | None = None) -> d
 
     bridge = shot.get("continuity_bridge") if isinstance(shot.get("continuity_bridge"), dict) else {}
     register = bridge.get("asset_register")
+    registered_scene_ids: set[str] = set()
+    seen_asset_ids: dict[str, str] = {}
     if not isinstance(register, list) or not register:
         errors.append("A09: continuity_bridge.asset_register required")
     else:
@@ -146,9 +190,42 @@ def validate_new_drama_semantics(shot: Any, *, enforce: bool | None = None) -> d
             kind = str(item.get("kind") or "")
             if kind:
                 kinds.add(kind)
-        for kind in ("character", "scene", "prop"):
+            asset_id = str(item.get("asset_id") or "").strip()
+            if not kind or not asset_id:
+                continue
+            if kind not in ASSET_KINDS:
+                errors.append(f"A09: asset_register[{index}].kind unsupported: {kind}")
+                continue
+            previous_kind = seen_asset_ids.get(asset_id)
+            if previous_kind:
+                errors.append(f"A09: duplicate asset_id {asset_id} in asset_register")
+            else:
+                seen_asset_ids[asset_id] = kind
+            package = _asset_package(shot, kind)
+            if not _present_package(package):
+                errors.append(f"A09: asset_register[{index}] references {kind} asset without a declared package")
+                continue
+            package_ids = _package_ids(package)
+            if asset_id not in package_ids:
+                errors.append(f"A09: asset_register[{index}].asset_id {asset_id} does not resolve in the {kind} asset package")
+            if kind == "scene":
+                registered_scene_ids.add(asset_id)
+        for kind in ("character", "scene"):
             if kind not in kinds:
                 errors.append(f"A09: asset_register missing {kind}")
+
+    # A project may have many scene assets, but each shot state must name the
+    # one it occupies. Text-only/dynamically generated scenes remain valid;
+    # this is an ID continuity check, not a scene-image requirement.
+    state_contract = shot.get("state_contract") if isinstance(shot.get("state_contract"), dict) else {}
+    scene_state = state_contract.get("scene_state") if isinstance(state_contract.get("scene_state"), dict) else {}
+    state_scene_id = str(scene_state.get("scene_id") or "").strip()
+    if state_scene_id:
+        scene_package_ids = _package_ids(_asset_package(shot, "scene"))
+        if state_scene_id not in scene_package_ids:
+            errors.append(f"A09: state_contract.scene_state.scene_id {state_scene_id} does not resolve in the scene asset package")
+        if registered_scene_ids and state_scene_id not in registered_scene_ids:
+            errors.append(f"A09: state_contract.scene_state.scene_id {state_scene_id} is not registered for this shot")
 
     knowledge = shot.get("knowledge_status") if isinstance(shot.get("knowledge_status"), dict) else {}
     for key in ("facts", "assumptions", "unknowns"):
@@ -178,5 +255,6 @@ def validate_new_drama_semantics(shot: Any, *, enforce: bool | None = None) -> d
         "errors": errors,
         "warnings": warnings,
         "checks": list(A_GATE_IDS),
+        "pre_spend_readiness": readiness,
         "pipeline": list(PIPELINE),
     }

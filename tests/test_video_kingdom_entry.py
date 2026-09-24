@@ -31,3 +31,17 @@ def test_unified_entry_sends_narrative_to_role_room(tmp_path: Path, monkeypatch)
     receipt = dispatch(text="写一个雨夜重逢的短剧大纲", out=tmp_path / "entry.json", profile="rapid")
     assert receipt["dispatch"] == "role_room"
     assert called and "--profile" in called[0]
+
+
+def test_script_review_with_video_keywords_still_goes_to_role_room(tmp_path: Path, monkeypatch):
+    called: list[list[str]] = []
+    monkeypatch.setattr("tools.video_kingdom_entry.role_room.main", lambda argv: called.append(argv) or 0)
+    receipt = dispatch(
+        text="先审这个剧本、补齐分镜，再制作视频镜头。",
+        out=tmp_path / "entry.json",
+        profile="standard",
+    )
+    assert receipt["routing_decision"] == "NARRATIVE_FIRST"
+    assert receipt["detected_media_intent"] == "VIDEO"
+    assert receipt["dispatch"] == "role_room"
+    assert called

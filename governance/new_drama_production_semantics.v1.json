@@ -87,7 +87,9 @@
     "A09": {
       "item": "资产 initial/change/final",
       "fields": [
-        "continuity_bridge.asset_register"
+        "continuity_bridge.asset_register[].asset_id resolves in the matching typed package",
+        "state_contract.scene_state.scene_id",
+        "continuity_bridge.asset_register[].initial/change/final"
       ]
     },
     "A13": {

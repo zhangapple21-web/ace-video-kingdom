@@ -10,6 +10,7 @@ def _valid_contract() -> dict:
         "identity_ref": "CHARACTER_IDENTITY_PACK_ID",
         "episode_state": {"costume": "black shirt"},
         "scene_state": {
+            "scene_id": "SCENE_NIGHT_STUDIO",
             "location": "night studio",
             "time": "night",
             "lighting": "warm desk lamp from camera left",
@@ -37,9 +38,18 @@ def test_state_contract_requires_playable_scene_mode():
     assert any("scene_mode" in error for error in result["errors"])
 
 
+def test_state_contract_requires_stable_scene_id():
+    contract = _valid_contract()
+    contract["scene_state"]["scene_id"] = "UNKNOWN"
+    result = validate_state_contract(contract)
+    assert result["status"] == "BLOCKED"
+    assert any("scene_id" in error for error in result["errors"])
+
+
 def test_state_contract_template_uses_validator_field_names():
     root = Path(__file__).resolve().parents[1]
     template = json.loads((root / "assets" / "templates" / "state_contract.v1.json").read_text(encoding="utf-8"))
     scene = template["scene_state"]
     assert "space" in scene
+    assert scene["scene_id"] != "UNKNOWN"
     assert "spatial_relations" not in scene

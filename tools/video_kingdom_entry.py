@@ -11,6 +11,7 @@ from __future__ import annotations
 import argparse
 import hashlib
 import json
+import re
 import sys
 import time
 import uuid
@@ -44,6 +45,11 @@ _PENDING_STATES = {"", "queued", "pending", "running", "processing", "in_progres
 _SUCCESS_STATES = {"completed", "complete", "succeeded", "success", "done"}
 _FAILURE_STATES = {"failed", "failure", "error", "cancelled", "canceled", "rejected", "expired"}
 _RETRYABLE_HTTP = {408, 425, 429, 500, 502, 503, 504}
+_NARRATIVE_WORK_RE = re.compile(
+    r"(?:(?:写|编|创作|改编|润色|修改|审(?:核|计)?|完善|补全|续写|拆解|分析|策划|定稿|梳理).{0,16}(?:剧本|短剧|故事|大纲|分镜|剧集)"
+    r"|(?:剧本|短剧|故事|大纲|分镜|剧集).{0,16}(?:写|编|创作|改|审|补|续|拆|分析|策划|定稿|优化|完善))",
+    re.IGNORECASE,
+)
 
 
 def _canonical_json(value: Any) -> str:
@@ -271,7 +277,13 @@ def dispatch(*, text: str, out: Path, profile: str = "standard", project_id: str
     if not source:
         raise ValueError("ENTRY_TEXT_REQUIRED")
     entry_id = "ENTRY-" + uuid.uuid4().hex[:12]
-    intent = classify_media_intent(source)
+    detected_media_intent = classify_media_intent(source)
+    # A request to develop/audit narrative must reach the writer/director room
+    # before media routing, even when the same sentence mentions making a
+    # video or shots. Otherwise a script can be mistaken for an instruction to
+    # call the image/video capability directly.
+    narrative_first = bool(_NARRATIVE_WORK_RE.search(source))
+    intent = None if narrative_first else detected_media_intent
     creative_development = build_creative_development_profile(
         title=project_id or "未命名短剧",
         source_text=source,
@@ -290,6 +302,8 @@ def dispatch(*, text: str, out: Path, profile: str = "standard", project_id: str
         "entrypoint": "video-kingdom",
         "control_plane": "production_control",
         "request": source,
+        "routing_decision": "NARRATIVE_FIRST" if narrative_first else ("MEDIA_CAPABILITY" if intent else "NARRATIVE_OR_GENERAL"),
+        "detected_media_intent": detected_media_intent,
         "semantic_context": build_semantic_context(source),
         "profile": profile,
         "project_id": project_id or None,

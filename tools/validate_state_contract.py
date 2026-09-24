@@ -17,6 +17,9 @@ def validate_state_contract(contract: Any) -> dict[str, Any]:
             errors.append(f"state_contract.{layer} is required")
     shot = contract.get("shot_state") if isinstance(contract.get("shot_state"), dict) else {}
     scene = contract.get("scene_state") if isinstance(contract.get("scene_state"), dict) else {}
+    scene_id = str(scene.get("scene_id") or "").strip().upper()
+    if not scene_id or scene_id in {"REQUIRED", "UNKNOWN", "N/A", "NONE"}:
+        errors.append("state_contract.scene_state.scene_id must be a stable scene asset ID")
     for key in ("location", "time", "lighting", "space", "physical_layout", "interaction_surface"):
         value = str(scene.get(key) or "").strip().upper()
         if not value or value in {"REQUIRED", "UNKNOWN", "N/A", "NONE"}:

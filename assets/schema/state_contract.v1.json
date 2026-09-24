@@ -10,8 +10,9 @@
     "episode_state": {"type": "object"},
     "scene_state": {
       "type": "object",
-      "required": ["location", "time", "lighting", "space", "physical_layout", "interaction_surface", "scene_mode"],
+      "required": ["scene_id", "location", "time", "lighting", "space", "physical_layout", "interaction_surface", "scene_mode"],
       "properties": {
+        "scene_id": {"type": "string", "minLength": 1, "description": "跨镜稳定场景 ID；场景图不是必需资产"},
         "location": {"type": "string", "minLength": 1},
         "time": {"type": "string", "minLength": 1},
         "lighting": {"type": "string", "minLength": 1},

@@ -169,7 +169,10 @@
             "enum": [
               "character",
               "scene",
-              "prop"
+              "prop",
+              "clue",
+              "ui_plate",
+              "fx"
             ]
           },
           "initial": {
