@@ -75,17 +75,18 @@
       "brief": "Visit one public source or shop, extract one bounded mechanism, and record a source hash and next probe.",
       "trigger": "ace_daemon_cycle",
       "created_at": "2026-09-04T04:08:31.522508+00:00",
-      "status": "HANDOFF_READY",
+      "status": "COMPLETED",
       "production_integration": false,
       "provider_calls": 0,
       "automatic_promotion": false,
       "claimed_at": "2026-09-04T04:08:31.523514+00:00",
-      "finished_at": "2026-09-04T04:08:31.524519+00:00",
+      "finished_at": "2026-09-25T00:25:49+08:00",
       "evidence": {
         "action": "LEARNING_SLOT_OPENED",
         "source_boundary": "PUBLIC_ONLY",
         "next_step": "deduplicate against public_street_learning_ledger",
-        "provider_calls": 0
+        "provider_calls": 0,
+        "task_wall_triage": "TW-7b2703d9b1104233"
       }
     },
     {
@@ -95,7 +96,7 @@
       "brief": "Visit one public source or shop, extract one bounded mechanism, and record a source hash and next probe.",
       "trigger": "provider_call_accounting_probe_20260904",
       "created_at": "2026-09-04T04:53:22.011868+00:00",
-      "status": "HANDOFF_READY",
+      "status": "COMPLETED",
       "production_integration": false,
       "provider_calls": 0,
       "automatic_promotion": false,
@@ -133,7 +134,7 @@
         "production_integration": false
       },
       "claimed_at": "2026-09-04T04:53:22.013637+00:00",
-      "finished_at": "2026-09-04T04:53:22.016642+00:00",
+      "finished_at": "2026-09-25T00:25:49+08:00",
       "evidence": {
         "action": "LEARNING_SLOT_OPENED",
         "source_boundary": "PUBLIC_ONLY",
@@ -146,7 +147,8 @@
           "contract_status": "LINKED",
           "previous_cut_audit_status": "AVAILABLE",
           "next_owner": "video_kingdom_shift"
-        }
+        },
+        "task_wall_triage": "TW-9d907eb1a10c2cf7"
       }
     },
     {
@@ -156,7 +158,7 @@
       "brief": "Review patrol warnings, attribute each failure, and create the smallest repair experiment.",
       "trigger": "user_verification_20260904",
       "created_at": "2026-09-04T05:30:56.791578+00:00",
-      "status": "HANDOFF_READY",
+      "status": "AUTO_TRIAGED",
       "production_integration": false,
       "provider_calls": 0,
       "automatic_promotion": false,
@@ -194,7 +196,7 @@
         "production_integration": false
       },
       "claimed_at": "2026-09-04T05:30:56.794098+00:00",
-      "finished_at": "2026-09-04T05:30:56.798606+00:00",
+      "finished_at": "2026-09-25T00:25:49+08:00",
       "evidence": {
         "action": "REPAIR_REVIEW_RECORDED",
         "warning_count": 1,
@@ -206,7 +208,8 @@
           "contract_status": "LINKED",
           "previous_cut_audit_status": "AVAILABLE",
           "next_owner": "video_kingdom_shift"
-        }
+        },
+        "task_wall_triage": "TW-927b727e00f09106"
       }
     },
     {
@@ -270,17 +273,18 @@
       "brief": "Visit one public source or shop, extract one bounded mechanism, and record a source hash and next probe.",
       "trigger": "ace_daemon_cycle",
       "created_at": "2026-09-05T00:01:58.578140+00:00",
-      "status": "HANDOFF_READY",
+      "status": "COMPLETED",
       "production_integration": false,
       "provider_calls": 0,
       "automatic_promotion": false,
       "claimed_at": "2026-09-05T00:01:58.580971+00:00",
-      "finished_at": "2026-09-05T00:01:58.582482+00:00",
+      "finished_at": "2026-09-25T00:25:49+08:00",
       "evidence": {
         "action": "LEARNING_SLOT_OPENED",
         "source_boundary": "PUBLIC_ONLY",
         "next_step": "deduplicate against public_street_learning_ledger",
-        "provider_calls": 0
+        "provider_calls": 0,
+        "task_wall_triage": "TW-fc0895787bff01f3"
       }
     },
     {
@@ -290,17 +294,18 @@
       "brief": "Visit one public source or shop, extract one bounded mechanism, and record a source hash and next probe.",
       "trigger": "ace_daemon_cycle",
       "created_at": "2026-09-06T00:00:50.040811+00:00",
-      "status": "HANDOFF_READY",
+      "status": "COMPLETED",
       "production_integration": false,
       "provider_calls": 0,
       "automatic_promotion": false,
       "claimed_at": "2026-09-06T00:00:50.045609+00:00",
-      "finished_at": "2026-09-06T00:00:50.048600+00:00",
+      "finished_at": "2026-09-25T00:25:49+08:00",
       "evidence": {
         "action": "LEARNING_SLOT_OPENED",
         "source_boundary": "PUBLIC_ONLY",
         "next_step": "deduplicate against public_street_learning_ledger",
-        "provider_calls": 0
+        "provider_calls": 0,
+        "task_wall_triage": "TW-cad5efeaccbb6160"
       }
     },
     {
@@ -310,17 +315,18 @@
       "brief": "Visit one public source or shop, extract one bounded mechanism, and record a source hash and next probe.",
       "trigger": "ace_daemon_cycle",
       "created_at": "2026-09-07T00:06:08.525706+00:00",
-      "status": "HANDOFF_READY",
+      "status": "COMPLETED",
       "production_integration": false,
       "provider_calls": 0,
       "automatic_promotion": false,
       "claimed_at": "2026-09-07T00:06:08.528238+00:00",
-      "finished_at": "2026-09-07T00:06:08.529782+00:00",
+      "finished_at": "2026-09-25T00:26:13+08:00",
       "evidence": {
         "action": "LEARNING_SLOT_OPENED",
         "source_boundary": "PUBLIC_ONLY",
         "next_step": "deduplicate against public_street_learning_ledger",
-        "provider_calls": 0
+        "provider_calls": 0,
+        "task_wall_triage": "TW-ac0be621127fa980"
       }
     },
     {
@@ -330,7 +336,7 @@
       "brief": "Visit one public source or shop, extract one bounded mechanism, and record a source hash and next probe.",
       "trigger": "ace_daemon_cycle",
       "created_at": "2026-09-07T11:40:12.895182+00:00",
-      "status": "HANDOFF_READY",
+      "status": "COMPLETED",
       "production_integration": false,
       "provider_calls": 0,
       "automatic_promotion": false,
@@ -368,7 +374,7 @@
         "production_integration": false
       },
       "claimed_at": "2026-09-07T11:46:41.381779+00:00",
-      "finished_at": "2026-09-07T11:46:41.388244+00:00",
+      "finished_at": "2026-09-25T00:26:13+08:00",
       "evidence": {
         "action": "LEARNING_SLOT_OPENED",
         "source_boundary": "PUBLIC_ONLY",
@@ -381,7 +387,8 @@
           "contract_status": "LINKED",
           "previous_cut_audit_status": "AVAILABLE",
           "next_owner": "video_kingdom_shift"
-        }
+        },
+        "task_wall_triage": "TW-b729e28e0fe1bbd7"
       }
     },
     {
@@ -391,7 +398,7 @@
       "brief": "Visit one public source or shop, extract one bounded mechanism, and record a source hash and next probe.",
       "trigger": "ace_daemon_cycle",
       "created_at": "2026-09-08T00:05:35.834951+00:00",
-      "status": "HANDOFF_READY",
+      "status": "COMPLETED",
       "production_integration": false,
       "provider_calls": 0,
       "automatic_promotion": false,
@@ -429,7 +436,7 @@
         "production_integration": false
       },
       "claimed_at": "2026-09-08T00:11:51.691159+00:00",
-      "finished_at": "2026-09-08T00:11:51.727731+00:00",
+      "finished_at": "2026-09-25T00:26:13+08:00",
       "evidence": {
         "action": "LEARNING_SLOT_OPENED",
         "source_boundary": "PUBLIC_ONLY",
@@ -442,7 +449,1270 @@
           "contract_status": "LINKED",
           "previous_cut_audit_status": "AVAILABLE",
           "next_owner": "video_kingdom_shift"
-        }
+        },
+        "task_wall_triage": "TW-9719fdf228958b6e"
+      }
+    },
+    {
+      "task_id": "VK-LEARNING-5d26c576f8e99565",
+      "fingerprint": "5d26c576f8e99565",
+      "task_type": "LEARNING_RESULT",
+      "brief": "将已验证的外部矿源经验转成一次离线视频王国复测，不直接改生产默认。",
+      "created_at": "2026-09-20T17:13:37.520846+00:00",
+      "status": "COMPLETED",
+      "production_integration": false,
+      "provider_calls": 0,
+      "automatic_promotion": false,
+      "learning": {
+        "card_id": "CAP-RQ-20260921-003",
+        "source_task_id": "RQ-20260921-003",
+        "source_repository": "https://github.com/ZC89757/story-claw",
+        "card_sha256": "305084deefcd69efb79ec72a91af003610ecec8b94a8f877ac2bfbf4cf8643e1",
+        "capability_state": "RESEARCH_READY_NOT_PROMOTED",
+        "reuse_scope": [
+          "research",
+          "draft_contract",
+          "offline_ab_test"
+        ],
+        "blocked_scope": [
+          "production_default",
+          "provider_route",
+          "automatic_video_submit"
+        ],
+        "recommended_capabilities": [
+          {
+            "type": "INFERENCE",
+            "assessment": "概念兼容性较高。",
+            "reason": "阶段化资产、角色语音映射、片段质量门和五阶段流水线都可作为 ACE 视频王国中的候选流水线能力或可插拔节点。"
+          },
+          {
+            "type": "INFERENCE",
+            "assessment": "最值得优先验证的可吸收能力是“生成后质量门 + 失败重试”以及“按剧情状态维护角色和场景资产”。",
+            "reason": "这两项直接对应视频生产中的一致性和重复生成成本问题，并且能够形成明确的输入、评估、重试和结果记录链。"
+          },
+          {
+            "type": "INFERENCE",
+            "assessment": "本地 GPU 渲染路线与 ACE 的视频生产方向可能兼容，但只能作为后端适配候选。",
+            "reason": "给定证据只表明其使用 ComfyUI/LTX-2.3，未提供 ACE 所需的接口协议、任务编排方式、资源调度方式或跨平台支持。"
+          },
+          {
+            "type": "UNKNOWN",
+            "assessment": "与 ACE 现有 Continuity、Memory、State、Workflow、路由和权限协议的实际兼容性无法从给定证据确认。",
+            "reason": "证据没有提供代码结构、API、数据模型、状态持久化格式、任务边界或集成文档。"
+          }
+        ],
+        "next_verification": [
+          {
+            "priority": 1,
+            "action": "只读检查仓库 main 分支的目录树、package.json、工作流文件、入口脚本和文档，定位五阶段流程及其状态持久化实现。",
+            "success_criteria": "能够为每个候选能力找到具体文件、函数或配置入口；找不到的部分保持 UNKNOWN。"
+          },
+          {
+            "priority": 2,
+            "action": "建立一个最小隔离样例：单章、两个角色、一次场景状态变化、一个视频片段质量失败模拟。",
+            "success_criteria": "能够观察资产阶段生成、角色语音复用、质量评分、失败重试、最大重试和失败收据。"
+          },
+          {
+            "priority": 3,
+            "action": "检查依赖清单和许可证，分别记录仓库代码、模型、ComfyUI 节点、工作流、TTS/VLM/API 依赖的许可和运行条件。",
+            "success_criteria": "形成可审查的依赖矩阵；任何无法确认的商用或数据权限标记为 UNKNOWN。"
+          },
+          {
+            "priority": 4,
+            "action": "在 ACE 视频王国的沙箱中仅接入两个候选机制：质量门与阶段化资产索引，不接管核心路由或生产权限。",
+            "success_criteria": "与现有任务状态、收据、回滚和停止策略兼容，并在重复样例中显示可测量的质量或成本收益。"
+          },
+          {
+            "priority": 5,
+            "action": "对照基线记录至少重复运行多次的质量、失败率、重试次数、耗时、GPU 资源和人工介入次数。",
+            "success_criteria": "出现独立、可重复且可归因的收益后，才提交 Validator/Guardian 流程评估。"
+          }
+        ]
+      },
+      "linkage": {
+        "next_owner": "video_kingdom_shift",
+        "production_integration": false,
+        "source_boundary": "ACE_GUARDED_CAPABILITY_CARD"
+      },
+      "claimed_at": "2026-09-20T17:13:37.630880+00:00",
+      "claim_expires_at": "2026-09-20T17:43:37.630880+00:00",
+      "finished_at": "2026-09-25T00:26:13+08:00",
+      "evidence": {
+        "action": "LEARNING_RESULT_RECORDED",
+        "source_task_id": "RQ-20260921-003",
+        "capability_state": "RESEARCH_READY_NOT_PROMOTED",
+        "recommended_capabilities": [
+          {
+            "type": "INFERENCE",
+            "assessment": "概念兼容性较高。",
+            "reason": "阶段化资产、角色语音映射、片段质量门和五阶段流水线都可作为 ACE 视频王国中的候选流水线能力或可插拔节点。"
+          },
+          {
+            "type": "INFERENCE",
+            "assessment": "最值得优先验证的可吸收能力是“生成后质量门 + 失败重试”以及“按剧情状态维护角色和场景资产”。",
+            "reason": "这两项直接对应视频生产中的一致性和重复生成成本问题，并且能够形成明确的输入、评估、重试和结果记录链。"
+          },
+          {
+            "type": "INFERENCE",
+            "assessment": "本地 GPU 渲染路线与 ACE 的视频生产方向可能兼容，但只能作为后端适配候选。",
+            "reason": "给定证据只表明其使用 ComfyUI/LTX-2.3，未提供 ACE 所需的接口协议、任务编排方式、资源调度方式或跨平台支持。"
+          },
+          {
+            "type": "UNKNOWN",
+            "assessment": "与 ACE 现有 Continuity、Memory、State、Workflow、路由和权限协议的实际兼容性无法从给定证据确认。",
+            "reason": "证据没有提供代码结构、API、数据模型、状态持久化格式、任务边界或集成文档。"
+          }
+        ],
+        "next_verification": [
+          {
+            "priority": 1,
+            "action": "只读检查仓库 main 分支的目录树、package.json、工作流文件、入口脚本和文档，定位五阶段流程及其状态持久化实现。",
+            "success_criteria": "能够为每个候选能力找到具体文件、函数或配置入口；找不到的部分保持 UNKNOWN。"
+          },
+          {
+            "priority": 2,
+            "action": "建立一个最小隔离样例：单章、两个角色、一次场景状态变化、一个视频片段质量失败模拟。",
+            "success_criteria": "能够观察资产阶段生成、角色语音复用、质量评分、失败重试、最大重试和失败收据。"
+          },
+          {
+            "priority": 3,
+            "action": "检查依赖清单和许可证，分别记录仓库代码、模型、ComfyUI 节点、工作流、TTS/VLM/API 依赖的许可和运行条件。",
+            "success_criteria": "形成可审查的依赖矩阵；任何无法确认的商用或数据权限标记为 UNKNOWN。"
+          },
+          {
+            "priority": 4,
+            "action": "在 ACE 视频王国的沙箱中仅接入两个候选机制：质量门与阶段化资产索引，不接管核心路由或生产权限。",
+            "success_criteria": "与现有任务状态、收据、回滚和停止策略兼容，并在重复样例中显示可测量的质量或成本收益。"
+          },
+          {
+            "priority": 5,
+            "action": "对照基线记录至少重复运行多次的质量、失败率、重试次数、耗时、GPU 资源和人工介入次数。",
+            "success_criteria": "出现独立、可重复且可归因的收益后，才提交 Validator/Guardian 流程评估。"
+          }
+        ],
+        "reuse_scope": [
+          "research",
+          "draft_contract",
+          "offline_ab_test"
+        ],
+        "blocked_scope": [
+          "production_default",
+          "provider_route",
+          "automatic_video_submit"
+        ],
+        "provider_calls": 0,
+        "production_integration": false,
+        "linkage": {
+          "project_id": null,
+          "linked_artifacts": 0,
+          "hash_verified_artifacts": 0,
+          "contract_status": "UNKNOWN",
+          "previous_cut_audit_status": "UNKNOWN",
+          "next_owner": "video_kingdom_shift"
+        },
+        "task_wall_triage": "TW-28c63fb43cf1a083"
+      }
+    },
+    {
+      "task_id": "VK-LEARNING-5a177322150974cc",
+      "fingerprint": "5a177322150974cc",
+      "task_type": "LEARNING_RESULT",
+      "brief": "将已验证的外部矿源经验转成一次离线视频王国复测，不直接改生产默认。",
+      "created_at": "2026-09-20T17:13:37.542225+00:00",
+      "status": "COMPLETED",
+      "production_integration": false,
+      "provider_calls": 0,
+      "automatic_promotion": false,
+      "learning": {
+        "card_id": "CAP-RQ-20260921-004",
+        "source_task_id": "RQ-20260921-004",
+        "source_repository": "https://github.com/ZeroLu/awesome-seedance",
+        "card_sha256": "529bdf2f615c258cfa61590240a154c2d9a0ad5dc2d812a2685c83f8df979004",
+        "capability_state": "RESEARCH_READY_NOT_PROMOTED",
+        "reuse_scope": [
+          "research",
+          "draft_contract",
+          "offline_ab_test"
+        ],
+        "blocked_scope": [
+          "production_default",
+          "provider_route",
+          "automatic_video_submit"
+        ],
+        "recommended_capabilities": [
+          {
+            "overall": "CONDITIONALLY_COMPATIBLE",
+            "with_ace_video_kingdom": [
+              {
+                "type": "INFERENCE",
+                "statement": "其分类方式、镜头时间轴和结构化提示词格式可作为视频创作工作流的外部参考，适合吸收为提示词模板 schema 或创作编排样例。"
+              },
+              {
+                "type": "INFERENCE",
+                "statement": "“时长 → 分镜 → 摄影机/场景 → 动作 → 对白/声音 → 视觉效果”的组织方式与视频生成任务分解相容。"
+              },
+              {
+                "type": "INFERENCE",
+                "statement": "MIT 许可原则上允许复制、修改和再分发，但必须保留版权和许可声明；许可证并不自动解决示例内容中的第三方版权、商标、肖像或风格模仿问题。"
+              }
+            ],
+            "recommended_absorbable_capabilities": [
+              "结构化视频提示词模板",
+              "基于时间轴的镜头编排",
+              "镜头级动作、对白和视觉效果字段",
+              "按视频用途建立提示词分类索引",
+              "将提示词示例转化为可评测的实验输入"
+            ],
+            "not_yet_proven": [
+              "Seedance 2.0 提示词在 ACE 当前运行环境中的实际效果",
+              "这些提示词相较于 ACE 现有模板的质量或成本优势",
+              "第三方 API 指南的准确性、稳定性和长期可用性"
+            ]
+          }
+        ],
+        "next_verification": [
+          {
+            "step": 1,
+            "action": "以只读方式抓取完整仓库树、LICENSE、README 变体、脚本和依赖文件，确认是否存在可执行代码或额外许可证。",
+            "pass_condition": "完成文件级来源和许可证清单，未执行不受信任脚本。"
+          },
+          {
+            "step": 2,
+            "action": "从仓库中选择 3 至 5 个不依赖具体导演姓名、商标或第三方服务的提示词，转换为 ACE 内部模板格式。",
+            "pass_condition": "模板字段可解析，且不携带营销链接、未验证主张或不必要的第三方身份信息。"
+          },
+          {
+            "step": 3,
+            "action": "在固定模型、素材、时长、分辨率和随机种子条件下，与 ACE 现有模板进行盲测对比。",
+            "pass_condition": "至少重复多轮，并记录镜头一致性、动作遵循、对白准确性、失败率、成本和延迟。"
+          },
+          {
+            "step": 4,
+            "action": "对风格指令进行合规改写，改为可观察的摄影、色彩、剪辑、镜头运动和时代特征描述，移除具体在世创作者姓名。",
+            "pass_condition": "改写后仍能达到可接受的视频目标，且通过人工版权/安全审查。"
+          },
+          {
+            "step": 5,
+            "action": "将实验输入、输出、评分、失败案例和回滚位置记录到 ACE 外部矿源实验账本。",
+            "pass_condition": "形成可复查的 FACT → EVIDENCE → RESULT → EVALUATION 链。"
+          }
+        ]
+      },
+      "linkage": {
+        "next_owner": "video_kingdom_shift",
+        "production_integration": false,
+        "source_boundary": "ACE_GUARDED_CAPABILITY_CARD"
+      },
+      "claimed_at": "2026-09-20T17:16:04.682797+00:00",
+      "claim_expires_at": "2026-09-20T17:46:04.682797+00:00",
+      "finished_at": "2026-09-25T00:26:13+08:00",
+      "evidence": {
+        "action": "LEARNING_RESULT_RECORDED",
+        "source_task_id": "RQ-20260921-004",
+        "capability_state": "RESEARCH_READY_NOT_PROMOTED",
+        "recommended_capabilities": [
+          {
+            "overall": "CONDITIONALLY_COMPATIBLE",
+            "with_ace_video_kingdom": [
+              {
+                "type": "INFERENCE",
+                "statement": "其分类方式、镜头时间轴和结构化提示词格式可作为视频创作工作流的外部参考，适合吸收为提示词模板 schema 或创作编排样例。"
+              },
+              {
+                "type": "INFERENCE",
+                "statement": "“时长 → 分镜 → 摄影机/场景 → 动作 → 对白/声音 → 视觉效果”的组织方式与视频生成任务分解相容。"
+              },
+              {
+                "type": "INFERENCE",
+                "statement": "MIT 许可原则上允许复制、修改和再分发，但必须保留版权和许可声明；许可证并不自动解决示例内容中的第三方版权、商标、肖像或风格模仿问题。"
+              }
+            ],
+            "recommended_absorbable_capabilities": [
+              "结构化视频提示词模板",
+              "基于时间轴的镜头编排",
+              "镜头级动作、对白和视觉效果字段",
+              "按视频用途建立提示词分类索引",
+              "将提示词示例转化为可评测的实验输入"
+            ],
+            "not_yet_proven": [
+              "Seedance 2.0 提示词在 ACE 当前运行环境中的实际效果",
+              "这些提示词相较于 ACE 现有模板的质量或成本优势",
+              "第三方 API 指南的准确性、稳定性和长期可用性"
+            ]
+          }
+        ],
+        "next_verification": [
+          {
+            "step": 1,
+            "action": "以只读方式抓取完整仓库树、LICENSE、README 变体、脚本和依赖文件，确认是否存在可执行代码或额外许可证。",
+            "pass_condition": "完成文件级来源和许可证清单，未执行不受信任脚本。"
+          },
+          {
+            "step": 2,
+            "action": "从仓库中选择 3 至 5 个不依赖具体导演姓名、商标或第三方服务的提示词，转换为 ACE 内部模板格式。",
+            "pass_condition": "模板字段可解析，且不携带营销链接、未验证主张或不必要的第三方身份信息。"
+          },
+          {
+            "step": 3,
+            "action": "在固定模型、素材、时长、分辨率和随机种子条件下，与 ACE 现有模板进行盲测对比。",
+            "pass_condition": "至少重复多轮，并记录镜头一致性、动作遵循、对白准确性、失败率、成本和延迟。"
+          },
+          {
+            "step": 4,
+            "action": "对风格指令进行合规改写，改为可观察的摄影、色彩、剪辑、镜头运动和时代特征描述，移除具体在世创作者姓名。",
+            "pass_condition": "改写后仍能达到可接受的视频目标，且通过人工版权/安全审查。"
+          },
+          {
+            "step": 5,
+            "action": "将实验输入、输出、评分、失败案例和回滚位置记录到 ACE 外部矿源实验账本。",
+            "pass_condition": "形成可复查的 FACT → EVIDENCE → RESULT → EVALUATION 链。"
+          }
+        ],
+        "reuse_scope": [
+          "research",
+          "draft_contract",
+          "offline_ab_test"
+        ],
+        "blocked_scope": [
+          "production_default",
+          "provider_route",
+          "automatic_video_submit"
+        ],
+        "provider_calls": 0,
+        "production_integration": false,
+        "linkage": {
+          "project_id": null,
+          "linked_artifacts": 0,
+          "hash_verified_artifacts": 0,
+          "contract_status": "UNKNOWN",
+          "previous_cut_audit_status": "UNKNOWN",
+          "next_owner": "video_kingdom_shift"
+        },
+        "task_wall_triage": "TW-68794332d7e8a1d2"
+      }
+    },
+    {
+      "task_id": "VK-LEARNING-432b90696ddb881c",
+      "fingerprint": "432b90696ddb881c",
+      "task_type": "LEARNING_RESULT",
+      "brief": "将已验证的外部矿源经验转成一次离线视频王国复测，不直接改生产默认。",
+      "created_at": "2026-09-20T17:13:37.558812+00:00",
+      "status": "COMPLETED",
+      "production_integration": false,
+      "provider_calls": 0,
+      "automatic_promotion": false,
+      "learning": {
+        "card_id": "CAP-RQ-20260921-007",
+        "source_task_id": "RQ-20260921-007",
+        "source_repository": "https://github.com/ArcReel/ArcReel",
+        "card_sha256": "b0ec24493e37d4b18b75b02056123d0625bd1c4a8a7e8d47ff2951bd8f2e5200",
+        "capability_state": "RESEARCH_READY_NOT_PROMOTED",
+        "reuse_scope": [
+          "research",
+          "draft_contract",
+          "offline_ab_test"
+        ],
+        "blocked_scope": [
+          "production_default",
+          "provider_route",
+          "automatic_video_submit"
+        ],
+        "recommended_capabilities": [
+          {
+            "overall": "CONDITIONAL_CANDIDATE",
+            "score": "MEDIUM_TO_HIGH_FOR_WORKFLOW_RESEARCH",
+            "compatible_capabilities": [
+              {
+                "capability": "阶段化视频生产流水线",
+                "assessment": "适合作为 ACE 视频工作流编排的候选参考",
+                "confidence": "MEDIUM"
+              },
+              {
+                "capability": "角色、场景、道具和分镜资产关系",
+                "assessment": "可能补充 ACE 的视频资产组织模型",
+                "confidence": "MEDIUM"
+              },
+              {
+                "capability": "人工审核、重做和版本回滚",
+                "assessment": "与可验证、可中断、可回滚的生产流程目标一致",
+                "confidence": "MEDIUM"
+              },
+              {
+                "capability": "多供应商接入与费用追踪",
+                "assessment": "可能用于改进模型路由、成本记录和供应商适配研究",
+                "confidence": "MEDIUM"
+              },
+              {
+                "capability": "剪映草稿导出",
+                "assessment": "对面向中文短视频生产的交付链可能有价值，但需要验证格式、版本和版权边界",
+                "confidence": "LOW_TO_MEDIUM"
+              }
+            ],
+            "integration_constraints": [
+              "ACE 的身份、连续性锚点、任务池准入、路由策略和安全边界不能因引入 ArcReel 而改变。",
+              "应优先提取协议和机制，采用隔离适配器或外部实验节点，避免未经验证的代码直接进入 ACE 核心。",
+              "需要确认 ArcReel 的数据模型、任务状态、事件接口、供应商接口和媒体存储方式能否映射到 ACE 现有结构。",
+              "需要确认 AGPL-3.0 和 NOTICE 是否允许计划中的部署、链接、服务化和分发方式。"
+            ]
+          }
+        ],
+        "next_verification": [
+          {
+            "step": 1,
+            "action": "固定一个具体 commit 或 release，保存仓库快照、LICENSE、NOTICE、依赖清单和构建说明。",
+            "success_criteria": "能够将后续测试结果绑定到明确版本，并确认许可证和附加条款完整可审查。"
+          },
+          {
+            "step": 2,
+            "action": "在隔离环境中部署 ArcReel，绑定 localhost 或内部网络，使用测试 API 凭据和无敏感媒体。",
+            "success_criteria": "完成最小项目创建、内容分析、资产生成、分镜生成、视频任务提交和结果导出；没有公网暴露或凭据泄露。"
+          },
+          {
+            "step": 3,
+            "action": "对一个固定输入重复执行至少三轮，分别测试正常完成、中途停止后恢复、单个素材重做和历史版本回滚。",
+            "success_criteria": "任务状态、资产引用、输出文件和费用记录在重复运行中保持可解释且可复现。"
+          },
+          {
+            "step": 4,
+            "action": "审查并记录 ArcReel 的数据模型、任务状态机、事件接口、供应商适配接口和媒体存储接口。",
+            "success_criteria": "形成 ACE 到 ArcReel 的最小映射表，明确哪些能力可通过隔离适配器复用，哪些会触及 ACE 核心边界。"
+          },
+          {
+            "step": 5,
+            "action": "对 AGPL-3.0、NOTICE、网络服务部署、内部使用、修改、链接、分发和商业化场景进行专项合规审查。",
+            "success_criteria": "得到书面许可边界；在边界未明确前，不进行核心代码合并或公开服务化。"
+          },
+          {
+            "step": 6,
+            "action": "将可复用能力提炼成独立实验规格，例如资产引用协议、任务恢复协议、成本事件格式和人工审核状态机。",
+            "success_criteria": "机制能够在不引入 ArcReel 全部代码的情况下被 ACE 原型复现，并在独立测试中获得重复收益。"
+          },
+          {
+            "step": 7,
+            "action": "对 ACE 视频王国执行一次小范围端到端对照实验，与现有工作流比较完成率、人工返工次数、恢复成功率、成本记录准确性和总延迟。",
+            "success_criteria": "至少有独立基线和重复样本；只有在收益稳定且安全与许可证边界清晰时，才提交 Validator/Guardian 评估。"
+          }
+        ]
+      },
+      "linkage": {
+        "next_owner": "video_kingdom_shift",
+        "production_integration": false,
+        "source_boundary": "ACE_GUARDED_CAPABILITY_CARD"
+      },
+      "claimed_at": "2026-09-20T17:24:47.296100+00:00",
+      "claim_expires_at": "2026-09-20T17:54:47.296100+00:00",
+      "finished_at": "2026-09-25T00:26:13+08:00",
+      "evidence": {
+        "action": "LEARNING_RESULT_RECORDED",
+        "source_task_id": "RQ-20260921-007",
+        "capability_state": "RESEARCH_READY_NOT_PROMOTED",
+        "recommended_capabilities": [
+          {
+            "overall": "CONDITIONAL_CANDIDATE",
+            "score": "MEDIUM_TO_HIGH_FOR_WORKFLOW_RESEARCH",
+            "compatible_capabilities": [
+              {
+                "capability": "阶段化视频生产流水线",
+                "assessment": "适合作为 ACE 视频工作流编排的候选参考",
+                "confidence": "MEDIUM"
+              },
+              {
+                "capability": "角色、场景、道具和分镜资产关系",
+                "assessment": "可能补充 ACE 的视频资产组织模型",
+                "confidence": "MEDIUM"
+              },
+              {
+                "capability": "人工审核、重做和版本回滚",
+                "assessment": "与可验证、可中断、可回滚的生产流程目标一致",
+                "confidence": "MEDIUM"
+              },
+              {
+                "capability": "多供应商接入与费用追踪",
+                "assessment": "可能用于改进模型路由、成本记录和供应商适配研究",
+                "confidence": "MEDIUM"
+              },
+              {
+                "capability": "剪映草稿导出",
+                "assessment": "对面向中文短视频生产的交付链可能有价值，但需要验证格式、版本和版权边界",
+                "confidence": "LOW_TO_MEDIUM"
+              }
+            ],
+            "integration_constraints": [
+              "ACE 的身份、连续性锚点、任务池准入、路由策略和安全边界不能因引入 ArcReel 而改变。",
+              "应优先提取协议和机制，采用隔离适配器或外部实验节点，避免未经验证的代码直接进入 ACE 核心。",
+              "需要确认 ArcReel 的数据模型、任务状态、事件接口、供应商接口和媒体存储方式能否映射到 ACE 现有结构。",
+              "需要确认 AGPL-3.0 和 NOTICE 是否允许计划中的部署、链接、服务化和分发方式。"
+            ]
+          }
+        ],
+        "next_verification": [
+          {
+            "step": 1,
+            "action": "固定一个具体 commit 或 release，保存仓库快照、LICENSE、NOTICE、依赖清单和构建说明。",
+            "success_criteria": "能够将后续测试结果绑定到明确版本，并确认许可证和附加条款完整可审查。"
+          },
+          {
+            "step": 2,
+            "action": "在隔离环境中部署 ArcReel，绑定 localhost 或内部网络，使用测试 API 凭据和无敏感媒体。",
+            "success_criteria": "完成最小项目创建、内容分析、资产生成、分镜生成、视频任务提交和结果导出；没有公网暴露或凭据泄露。"
+          },
+          {
+            "step": 3,
+            "action": "对一个固定输入重复执行至少三轮，分别测试正常完成、中途停止后恢复、单个素材重做和历史版本回滚。",
+            "success_criteria": "任务状态、资产引用、输出文件和费用记录在重复运行中保持可解释且可复现。"
+          },
+          {
+            "step": 4,
+            "action": "审查并记录 ArcReel 的数据模型、任务状态机、事件接口、供应商适配接口和媒体存储接口。",
+            "success_criteria": "形成 ACE 到 ArcReel 的最小映射表，明确哪些能力可通过隔离适配器复用，哪些会触及 ACE 核心边界。"
+          },
+          {
+            "step": 5,
+            "action": "对 AGPL-3.0、NOTICE、网络服务部署、内部使用、修改、链接、分发和商业化场景进行专项合规审查。",
+            "success_criteria": "得到书面许可边界；在边界未明确前，不进行核心代码合并或公开服务化。"
+          },
+          {
+            "step": 6,
+            "action": "将可复用能力提炼成独立实验规格，例如资产引用协议、任务恢复协议、成本事件格式和人工审核状态机。",
+            "success_criteria": "机制能够在不引入 ArcReel 全部代码的情况下被 ACE 原型复现，并在独立测试中获得重复收益。"
+          },
+          {
+            "step": 7,
+            "action": "对 ACE 视频王国执行一次小范围端到端对照实验，与现有工作流比较完成率、人工返工次数、恢复成功率、成本记录准确性和总延迟。",
+            "success_criteria": "至少有独立基线和重复样本；只有在收益稳定且安全与许可证边界清晰时，才提交 Validator/Guardian 评估。"
+          }
+        ],
+        "reuse_scope": [
+          "research",
+          "draft_contract",
+          "offline_ab_test"
+        ],
+        "blocked_scope": [
+          "production_default",
+          "provider_route",
+          "automatic_video_submit"
+        ],
+        "provider_calls": 0,
+        "production_integration": false,
+        "linkage": {
+          "project_id": null,
+          "linked_artifacts": 0,
+          "hash_verified_artifacts": 0,
+          "contract_status": "UNKNOWN",
+          "previous_cut_audit_status": "UNKNOWN",
+          "next_owner": "video_kingdom_shift"
+        },
+        "task_wall_triage": "TW-bcaec9b77d6989d0"
+      }
+    },
+    {
+      "task_id": "VK-AUTO-b40ff93f13e1fe0f",
+      "fingerprint": "b40ff93f13e1fe0f",
+      "task_type": "CONTINUITY_REPAIR",
+      "brief": "Review patrol warnings, attribute each failure, and create the smallest repair experiment.",
+      "trigger": "ace_daemon_cycle",
+      "created_at": "2026-09-20T17:13:37.650298+00:00",
+      "status": "AUTO_TRIAGED",
+      "production_integration": false,
+      "provider_calls": 0,
+      "automatic_promotion": false,
+      "linkage": {
+        "project_id": "episode_007_virtual_data",
+        "evidence_refs": [
+          {
+            "name": "episode_contract",
+            "path": "episodes/episode_007_virtual_data.v1.json",
+            "exists": true,
+            "sha256": "f6a68f214f7d331511c513b3bfe45967f266c515d7bf82e29c651a11e74b4896"
+          },
+          {
+            "name": "six_module_contract",
+            "path": "episodes/episode_007_virtual_data.six_module.v1.json",
+            "exists": true,
+            "sha256": "f0aeab2e24a8022c21c5df9bf9da621cc4d84b3b3222be8077d12e194794bc02"
+          },
+          {
+            "name": "preflight",
+            "path": "research/episode_007_preflight_runtime_20260904.json",
+            "exists": true,
+            "sha256": "b7eee4b92db41531ee958aba1910d270611fc2848120ebcb8d1a4a59090473ba"
+          },
+          {
+            "name": "previous_cut_audit",
+            "path": "research/episode_007_previous_cut_audit_latest.json",
+            "exists": true,
+            "sha256": "4067bcf1e0eb2b1e7bd41e274dbb799719eb66a98ad71da4eb24d68c7f3d5bd5"
+          }
+        ],
+        "contract_status": "LINKED",
+        "previous_cut_audit_status": "AVAILABLE",
+        "next_owner": "video_kingdom_shift",
+        "production_integration": false
+      },
+      "claimed_at": "2026-09-20T17:28:35.197969+00:00",
+      "claim_expires_at": "2026-09-20T17:58:35.197969+00:00",
+      "finished_at": "2026-09-25T00:26:13+08:00",
+      "evidence": {
+        "action": "REPAIR_REVIEW_RECORDED",
+        "warning_count": 116,
+        "warning_digest": "2369046fc3b68c98af8b31c95c0f69c88707a22dd7030de73d7398843eb5298d",
+        "linkage": {
+          "project_id": "episode_007_virtual_data",
+          "linked_artifacts": 4,
+          "hash_verified_artifacts": 4,
+          "contract_status": "LINKED",
+          "previous_cut_audit_status": "AVAILABLE",
+          "next_owner": "video_kingdom_shift"
+        },
+        "task_wall_triage": "TW-615802fa8b5da620"
+      }
+    },
+    {
+      "task_id": "VK-LEARNING-44013cfbfda2d6c9",
+      "fingerprint": "44013cfbfda2d6c9",
+      "task_type": "LEARNING_RESULT",
+      "brief": "将已验证的外部矿源经验转成一次离线视频王国复测，不直接改生产默认。",
+      "created_at": "2026-09-20T17:16:02.756383+00:00",
+      "status": "COMPLETED",
+      "production_integration": false,
+      "provider_calls": 0,
+      "automatic_promotion": false,
+      "learning": {
+        "card_id": "CAP-RQ-20260921-009",
+        "source_task_id": "RQ-20260921-009",
+        "source_repository": "https://github.com/chatfire-AI/huobao-drama",
+        "card_sha256": "1bf003e20b938fdc6d4a89078722c23af8d836a57892577c5384b401a41b2b56",
+        "capability_state": "RESEARCH_READY_NOT_PROMOTED",
+        "reuse_scope": [
+          "research",
+          "draft_contract",
+          "offline_ab_test"
+        ],
+        "blocked_scope": [
+          "production_default",
+          "provider_route",
+          "automatic_video_submit"
+        ],
+        "recommended_capabilities": [
+          {
+            "overall": "UNKNOWN",
+            "reason": "任务未提供 ACE 视频王国的接口、资产模型、部署环境、现有能力基线或路由契约，不能确认可直接接入。",
+            "candidate_capabilities": [
+              {
+                "capability": "剧本改写、实体提取去重、分镜拆解、提示词生成的职责划分",
+                "classification": "INFERENCE",
+                "basis": [
+                  "F2",
+                  "F4"
+                ],
+                "potential_value": "可研究如何把视频生产分成可独立验证的阶段。",
+                "compatibility": "概念相关；数据契约和实际收益 UNKNOWN。",
+                "absorption_boundary": "先研究角色职责及阶段输入输出；复制代码、Skill 或提示词前需核实授权。"
+              },
+              {
+                "capability": "角色、场景、道具与分镜资产的关联管理",
+                "classification": "HYPOTHESIS",
+                "basis": [
+                  "F2",
+                  "F4",
+                  "F6"
+                ],
+                "potential_value": "可能改善素材复用和跨镜头一致性。",
+                "compatibility": "UNKNOWN；文档未证明稳定标识、版本追踪、引用完整性或一致性效果。"
+              },
+              {
+                "capability": "逐镜合成、字幕处理、整集拼接",
+                "classification": "INFERENCE",
+                "basis": [
+                  "F2",
+                  "F6"
+                ],
+                "potential_value": "可作为候选后处理流程接受独立验证。",
+                "compatibility": "UNKNOWN；需核对媒体格式、时间轴、音画同步及 ACE 导出契约。"
+              },
+              {
+                "capability": "多服务商适配与可编辑 Skill",
+                "classification": "INFERENCE",
+                "basis": [
+                  "F4",
+                  "F5"
+                ],
+                "potential_value": "可研究配置抽象和流程扩展方式。",
+                "compatibility": "UNKNOWN；服务商列表不能证明与 ACE 路由策略兼容，外部 Skill 不具有修改 ACE 权限或规则的效力。"
+              }
+            ]
+          }
+        ],
+        "next_verification": [
+          {
+            "order": 1,
+            "action": "由后续授权阶段固定提交 SHA，补齐完整 LICENSE、README、依赖清单与锁文件，记录证据来源和摘要。",
+            "pass_criterion": "证据可定位到同一版本，许可适用范围可供审核。",
+            "execution_status": "NOT_EXECUTED"
+          },
+          {
+            "order": 2,
+            "action": "核对完整许可与拟采用方式，包括内部研究、代码复用、商业使用及分发；必要时取得权利人授权或法律意见。",
+            "pass_criterion": "目标使用方式有明确授权依据；仅阅读研究与代码采用分别判定。",
+            "execution_status": "NOT_EXECUTED"
+          },
+          {
+            "order": 3,
+            "action": "选取一个候选阶段，对照 ACE 已提供的正式接口核对输入输出、资产标识、错误状态、权限及路由要求，并审阅密钥和 Skill 的处理路径。",
+            "pass_criterion": "能够形成不改变既有安全边界的隔离适配方案。",
+            "execution_status": "NOT_EXECUTED"
+          },
+          {
+            "order": 4,
+            "action": "在许可与边界检查通过后，用无敏感数据的短剧样例开展隔离验证；先验证模拟调用和本地合成，再在已授权预算内验证真实服务。覆盖提取、分镜、生成、字幕和导出，并注入超时及重启故障。",
+            "pass_criterion": "留存输入、配置、版本、输出、耗时、费用和失败记录；确认恢复行为及是否重复调用。测试前确定验收阈值。",
+            "execution_status": "NOT_EXECUTED"
+          },
+          {
+            "order": 5,
+            "action": "与 ACE 同类基线进行重复对照，记录质量、成本、延迟、人工返工、失败代价、影响范围、反事实后果、复发风险和可复用教训，提交既有 Validator/Guardian 流程。",
+            "pass_criterion": "具有可复查的重复收益、回滚方案和拟沉淀位置；单次成功不计为能力增长。",
+            "execution_status": "NOT_EXECUTED"
+          }
+        ]
+      },
+      "linkage": {
+        "next_owner": "video_kingdom_shift",
+        "production_integration": false,
+        "source_boundary": "ACE_GUARDED_CAPABILITY_CARD"
+      },
+      "claimed_at": "2026-09-20T17:34:03.548627+00:00",
+      "claim_expires_at": "2026-09-20T18:04:03.548627+00:00",
+      "finished_at": "2026-09-25T00:26:13+08:00",
+      "evidence": {
+        "action": "LEARNING_RESULT_RECORDED",
+        "source_task_id": "RQ-20260921-009",
+        "capability_state": "RESEARCH_READY_NOT_PROMOTED",
+        "recommended_capabilities": [
+          {
+            "overall": "UNKNOWN",
+            "reason": "任务未提供 ACE 视频王国的接口、资产模型、部署环境、现有能力基线或路由契约，不能确认可直接接入。",
+            "candidate_capabilities": [
+              {
+                "capability": "剧本改写、实体提取去重、分镜拆解、提示词生成的职责划分",
+                "classification": "INFERENCE",
+                "basis": [
+                  "F2",
+                  "F4"
+                ],
+                "potential_value": "可研究如何把视频生产分成可独立验证的阶段。",
+                "compatibility": "概念相关；数据契约和实际收益 UNKNOWN。",
+                "absorption_boundary": "先研究角色职责及阶段输入输出；复制代码、Skill 或提示词前需核实授权。"
+              },
+              {
+                "capability": "角色、场景、道具与分镜资产的关联管理",
+                "classification": "HYPOTHESIS",
+                "basis": [
+                  "F2",
+                  "F4",
+                  "F6"
+                ],
+                "potential_value": "可能改善素材复用和跨镜头一致性。",
+                "compatibility": "UNKNOWN；文档未证明稳定标识、版本追踪、引用完整性或一致性效果。"
+              },
+              {
+                "capability": "逐镜合成、字幕处理、整集拼接",
+                "classification": "INFERENCE",
+                "basis": [
+                  "F2",
+                  "F6"
+                ],
+                "potential_value": "可作为候选后处理流程接受独立验证。",
+                "compatibility": "UNKNOWN；需核对媒体格式、时间轴、音画同步及 ACE 导出契约。"
+              },
+              {
+                "capability": "多服务商适配与可编辑 Skill",
+                "classification": "INFERENCE",
+                "basis": [
+                  "F4",
+                  "F5"
+                ],
+                "potential_value": "可研究配置抽象和流程扩展方式。",
+                "compatibility": "UNKNOWN；服务商列表不能证明与 ACE 路由策略兼容，外部 Skill 不具有修改 ACE 权限或规则的效力。"
+              }
+            ]
+          }
+        ],
+        "next_verification": [
+          {
+            "order": 1,
+            "action": "由后续授权阶段固定提交 SHA，补齐完整 LICENSE、README、依赖清单与锁文件，记录证据来源和摘要。",
+            "pass_criterion": "证据可定位到同一版本，许可适用范围可供审核。",
+            "execution_status": "NOT_EXECUTED"
+          },
+          {
+            "order": 2,
+            "action": "核对完整许可与拟采用方式，包括内部研究、代码复用、商业使用及分发；必要时取得权利人授权或法律意见。",
+            "pass_criterion": "目标使用方式有明确授权依据；仅阅读研究与代码采用分别判定。",
+            "execution_status": "NOT_EXECUTED"
+          },
+          {
+            "order": 3,
+            "action": "选取一个候选阶段，对照 ACE 已提供的正式接口核对输入输出、资产标识、错误状态、权限及路由要求，并审阅密钥和 Skill 的处理路径。",
+            "pass_criterion": "能够形成不改变既有安全边界的隔离适配方案。",
+            "execution_status": "NOT_EXECUTED"
+          },
+          {
+            "order": 4,
+            "action": "在许可与边界检查通过后，用无敏感数据的短剧样例开展隔离验证；先验证模拟调用和本地合成，再在已授权预算内验证真实服务。覆盖提取、分镜、生成、字幕和导出，并注入超时及重启故障。",
+            "pass_criterion": "留存输入、配置、版本、输出、耗时、费用和失败记录；确认恢复行为及是否重复调用。测试前确定验收阈值。",
+            "execution_status": "NOT_EXECUTED"
+          },
+          {
+            "order": 5,
+            "action": "与 ACE 同类基线进行重复对照，记录质量、成本、延迟、人工返工、失败代价、影响范围、反事实后果、复发风险和可复用教训，提交既有 Validator/Guardian 流程。",
+            "pass_criterion": "具有可复查的重复收益、回滚方案和拟沉淀位置；单次成功不计为能力增长。",
+            "execution_status": "NOT_EXECUTED"
+          }
+        ],
+        "reuse_scope": [
+          "research",
+          "draft_contract",
+          "offline_ab_test"
+        ],
+        "blocked_scope": [
+          "production_default",
+          "provider_route",
+          "automatic_video_submit"
+        ],
+        "provider_calls": 0,
+        "production_integration": false,
+        "linkage": {
+          "project_id": null,
+          "linked_artifacts": 0,
+          "hash_verified_artifacts": 0,
+          "contract_status": "UNKNOWN",
+          "previous_cut_audit_status": "UNKNOWN",
+          "next_owner": "video_kingdom_shift"
+        },
+        "task_wall_triage": "TW-06ed601d6132af2d"
+      }
+    },
+    {
+      "task_id": "VK-LEARNING-0a171ff85003cdfa",
+      "fingerprint": "0a171ff85003cdfa",
+      "task_type": "LEARNING_RESULT",
+      "brief": "将已验证的外部矿源经验转成一次离线视频王国复测，不直接改生产默认。",
+      "created_at": "2026-09-20T17:24:45.347939+00:00",
+      "status": "COMPLETED",
+      "production_integration": false,
+      "provider_calls": 0,
+      "automatic_promotion": false,
+      "learning": {
+        "card_id": "CAP-RQ-20260921-011",
+        "source_task_id": "RQ-20260921-011",
+        "source_repository": "https://github.com/wushaojun321/ai-short-film",
+        "card_sha256": "2f5ca50c308a36b212c013d013df771cf458558ae7432c7fc53a99880afc643e",
+        "capability_state": "RESEARCH_READY_NOT_PROMOTED",
+        "reuse_scope": [
+          "research",
+          "draft_contract",
+          "offline_ab_test"
+        ],
+        "blocked_scope": [
+          "production_default",
+          "provider_route",
+          "automatic_video_submit"
+        ],
+        "recommended_capabilities": [
+          {
+            "overall": "条件兼容，暂不具备直接吸收依据",
+            "potentially_absorbable": [
+              "剧本到集、资产、分镜、镜头和合并的阶段化工作流",
+              "资产和分镜进入视频生成前的人工审核闸门",
+              "角色身份、造型和前后镜头帧的连续性引用思路",
+              "LLM、图像、视频和合并任务的异步队列隔离",
+              "基于原文区块回填素材、减少再次摘要的解析设计"
+            ],
+            "compatibility_conditions": [
+              "必须映射到 ACE 现有的视频任务、状态、权限和连续性协议",
+              "必须确认供应商调用可以被 ACE 的路由和安全边界包裹",
+              "必须确认资产、镜头、前一帧引用和任务结果的可迁移数据格式",
+              "必须保留人工审核、失败重试、回滚和人工升级路径"
+            ],
+            "current_conclusion": "只能吸收机制候选，不能据此吸收代码、依赖或供应商配置为 ACE 核心能力"
+          }
+        ],
+        "next_verification": [
+          {
+            "step": 1,
+            "action": "只读检查仓库根目录、LICENSE 文件、后端任务定义、数据模型、API 路由、前端状态轮询和 docker-compose.yml。",
+            "purpose": "验证 README 声称的模块、许可证和运行拓扑是否真实存在。",
+            "pass_condition": "关键声明均能定位到实现或明确标记为未实现。",
+            "fail_condition": "关键流程缺失、许可证无法确认或文档与代码明显冲突。"
+          },
+          {
+            "step": 2,
+            "action": "在隔离环境中运行不调用真实生成 API 的最小流程，覆盖剧本解析、任务入队、状态流转、人工审核阻断和失败重试。",
+            "purpose": "验证工作流骨架是否可运行以及审核闸门是否有效。",
+            "pass_condition": "任务状态可追踪，审核前不能进入视频生成，失败可以安全终止或重试。",
+            "fail_condition": "状态丢失、审核可绕过、重复执行造成不可控副作用或无法恢复。"
+          },
+          {
+            "step": 3,
+            "action": "使用受控样本验证角色资产、look-lock、前一镜头帧引用和跨镜头结果记录。",
+            "purpose": "验证其声称的视觉连续性机制是否具有可重复收益。",
+            "pass_condition": "同一输入和配置下，连续性引用被实际传递并能在结果记录中追踪。",
+            "fail_condition": "机制仅存在于提示词或文档中，无法证明传递、执行或改善结果。"
+          },
+          {
+            "step": 4,
+            "action": "将实际接口和状态模型与 ACE 视频王国现有协议做字段级映射。",
+            "purpose": "确认是否可以作为边界内的外部执行器或研究适配器接入。",
+            "pass_condition": "不改变 ACE 身份、准入、路由、安全边界和连续性锚点即可完成适配。",
+            "fail_condition": "需要放宽权限、替换核心协议、绕过审核或引入不可回滚的供应商绑定。"
+          },
+          {
+            "step": 5,
+            "action": "在许可证确认前，将项目限制为机制研究和隔离实验，不复制代码或纳入核心运行时。",
+            "purpose": "消除许可证冲突带来的吸收阻塞。",
+            "pass_condition": "获得仓库内正式许可证文件或权利人明确授权，并与 API 元数据冲突得到解释。",
+            "fail_condition": "许可证仍无法确认或授权范围不足。"
+          }
+        ]
+      },
+      "linkage": {
+        "next_owner": "video_kingdom_shift",
+        "production_integration": false,
+        "source_boundary": "ACE_GUARDED_CAPABILITY_CARD"
+      },
+      "claimed_at": "2026-09-20T17:39:31.459982+00:00",
+      "claim_expires_at": "2026-09-20T18:09:31.459982+00:00",
+      "finished_at": "2026-09-25T00:26:13+08:00",
+      "evidence": {
+        "action": "LEARNING_RESULT_RECORDED",
+        "source_task_id": "RQ-20260921-011",
+        "capability_state": "RESEARCH_READY_NOT_PROMOTED",
+        "recommended_capabilities": [
+          {
+            "overall": "条件兼容，暂不具备直接吸收依据",
+            "potentially_absorbable": [
+              "剧本到集、资产、分镜、镜头和合并的阶段化工作流",
+              "资产和分镜进入视频生成前的人工审核闸门",
+              "角色身份、造型和前后镜头帧的连续性引用思路",
+              "LLM、图像、视频和合并任务的异步队列隔离",
+              "基于原文区块回填素材、减少再次摘要的解析设计"
+            ],
+            "compatibility_conditions": [
+              "必须映射到 ACE 现有的视频任务、状态、权限和连续性协议",
+              "必须确认供应商调用可以被 ACE 的路由和安全边界包裹",
+              "必须确认资产、镜头、前一帧引用和任务结果的可迁移数据格式",
+              "必须保留人工审核、失败重试、回滚和人工升级路径"
+            ],
+            "current_conclusion": "只能吸收机制候选，不能据此吸收代码、依赖或供应商配置为 ACE 核心能力"
+          }
+        ],
+        "next_verification": [
+          {
+            "step": 1,
+            "action": "只读检查仓库根目录、LICENSE 文件、后端任务定义、数据模型、API 路由、前端状态轮询和 docker-compose.yml。",
+            "purpose": "验证 README 声称的模块、许可证和运行拓扑是否真实存在。",
+            "pass_condition": "关键声明均能定位到实现或明确标记为未实现。",
+            "fail_condition": "关键流程缺失、许可证无法确认或文档与代码明显冲突。"
+          },
+          {
+            "step": 2,
+            "action": "在隔离环境中运行不调用真实生成 API 的最小流程，覆盖剧本解析、任务入队、状态流转、人工审核阻断和失败重试。",
+            "purpose": "验证工作流骨架是否可运行以及审核闸门是否有效。",
+            "pass_condition": "任务状态可追踪，审核前不能进入视频生成，失败可以安全终止或重试。",
+            "fail_condition": "状态丢失、审核可绕过、重复执行造成不可控副作用或无法恢复。"
+          },
+          {
+            "step": 3,
+            "action": "使用受控样本验证角色资产、look-lock、前一镜头帧引用和跨镜头结果记录。",
+            "purpose": "验证其声称的视觉连续性机制是否具有可重复收益。",
+            "pass_condition": "同一输入和配置下，连续性引用被实际传递并能在结果记录中追踪。",
+            "fail_condition": "机制仅存在于提示词或文档中，无法证明传递、执行或改善结果。"
+          },
+          {
+            "step": 4,
+            "action": "将实际接口和状态模型与 ACE 视频王国现有协议做字段级映射。",
+            "purpose": "确认是否可以作为边界内的外部执行器或研究适配器接入。",
+            "pass_condition": "不改变 ACE 身份、准入、路由、安全边界和连续性锚点即可完成适配。",
+            "fail_condition": "需要放宽权限、替换核心协议、绕过审核或引入不可回滚的供应商绑定。"
+          },
+          {
+            "step": 5,
+            "action": "在许可证确认前，将项目限制为机制研究和隔离实验，不复制代码或纳入核心运行时。",
+            "purpose": "消除许可证冲突带来的吸收阻塞。",
+            "pass_condition": "获得仓库内正式许可证文件或权利人明确授权，并与 API 元数据冲突得到解释。",
+            "fail_condition": "许可证仍无法确认或授权范围不足。"
+          }
+        ],
+        "reuse_scope": [
+          "research",
+          "draft_contract",
+          "offline_ab_test"
+        ],
+        "blocked_scope": [
+          "production_default",
+          "provider_route",
+          "automatic_video_submit"
+        ],
+        "provider_calls": 0,
+        "production_integration": false,
+        "linkage": {
+          "project_id": null,
+          "linked_artifacts": 0,
+          "hash_verified_artifacts": 0,
+          "contract_status": "UNKNOWN",
+          "previous_cut_audit_status": "UNKNOWN",
+          "next_owner": "video_kingdom_shift"
+        },
+        "task_wall_triage": "TW-943df8955c0662e6"
+      }
+    },
+    {
+      "task_id": "VK-AUTO-c5fba9dbecb68475",
+      "fingerprint": "c5fba9dbecb68475",
+      "task_type": "CONTINUITY_REPAIR",
+      "brief": "Review patrol warnings, attribute each failure, and create the smallest repair experiment.",
+      "trigger": "ace_daemon_cycle",
+      "created_at": "2026-09-21T00:03:42.687365+00:00",
+      "status": "AUTO_TRIAGED",
+      "production_integration": false,
+      "provider_calls": 0,
+      "automatic_promotion": false,
+      "linkage": {
+        "project_id": "episode_007_virtual_data",
+        "evidence_refs": [
+          {
+            "name": "episode_contract",
+            "path": "episodes/episode_007_virtual_data.v1.json",
+            "exists": true,
+            "sha256": "f6a68f214f7d331511c513b3bfe45967f266c515d7bf82e29c651a11e74b4896"
+          },
+          {
+            "name": "six_module_contract",
+            "path": "episodes/episode_007_virtual_data.six_module.v1.json",
+            "exists": true,
+            "sha256": "f0aeab2e24a8022c21c5df9bf9da621cc4d84b3b3222be8077d12e194794bc02"
+          },
+          {
+            "name": "preflight",
+            "path": "research/episode_007_preflight_runtime_20260904.json",
+            "exists": true,
+            "sha256": "b7eee4b92db41531ee958aba1910d270611fc2848120ebcb8d1a4a59090473ba"
+          },
+          {
+            "name": "previous_cut_audit",
+            "path": "research/episode_007_previous_cut_audit_latest.json",
+            "exists": true,
+            "sha256": "4067bcf1e0eb2b1e7bd41e274dbb799719eb66a98ad71da4eb24d68c7f3d5bd5"
+          }
+        ],
+        "contract_status": "LINKED",
+        "previous_cut_audit_status": "AVAILABLE",
+        "next_owner": "video_kingdom_shift",
+        "production_integration": false
+      },
+      "claimed_at": "2026-09-21T00:09:15.431537+00:00",
+      "claim_expires_at": "2026-09-21T00:39:15.431537+00:00",
+      "finished_at": "2026-09-25T00:26:13+08:00",
+      "evidence": {
+        "action": "REPAIR_REVIEW_RECORDED",
+        "warning_count": 116,
+        "warning_digest": "2369046fc3b68c98af8b31c95c0f69c88707a22dd7030de73d7398843eb5298d",
+        "linkage": {
+          "project_id": "episode_007_virtual_data",
+          "linked_artifacts": 4,
+          "hash_verified_artifacts": 4,
+          "contract_status": "LINKED",
+          "previous_cut_audit_status": "AVAILABLE",
+          "next_owner": "video_kingdom_shift"
+        },
+        "task_wall_triage": "TW-520d625a60cf66d3"
+      }
+    },
+    {
+      "task_id": "VK-AUTO-36363c4358a37c39",
+      "fingerprint": "36363c4358a37c39",
+      "task_type": "CONTINUITY_REPAIR",
+      "brief": "Review patrol warnings, attribute each failure, and create the smallest repair experiment.",
+      "trigger": "ace_daemon_cycle",
+      "created_at": "2026-09-22T00:01:19.968264+00:00",
+      "status": "AUTO_TRIAGED",
+      "production_integration": false,
+      "provider_calls": 0,
+      "automatic_promotion": false,
+      "linkage": {
+        "project_id": "episode_007_virtual_data",
+        "evidence_refs": [
+          {
+            "name": "episode_contract",
+            "path": "episodes/episode_007_virtual_data.v1.json",
+            "exists": true,
+            "sha256": "f6a68f214f7d331511c513b3bfe45967f266c515d7bf82e29c651a11e74b4896"
+          },
+          {
+            "name": "six_module_contract",
+            "path": "episodes/episode_007_virtual_data.six_module.v1.json",
+            "exists": true,
+            "sha256": "f0aeab2e24a8022c21c5df9bf9da621cc4d84b3b3222be8077d12e194794bc02"
+          },
+          {
+            "name": "preflight",
+            "path": "research/episode_007_preflight_runtime_20260904.json",
+            "exists": true,
+            "sha256": "b7eee4b92db41531ee958aba1910d270611fc2848120ebcb8d1a4a59090473ba"
+          },
+          {
+            "name": "previous_cut_audit",
+            "path": "research/episode_007_previous_cut_audit_latest.json",
+            "exists": true,
+            "sha256": "4067bcf1e0eb2b1e7bd41e274dbb799719eb66a98ad71da4eb24d68c7f3d5bd5"
+          }
+        ],
+        "contract_status": "LINKED",
+        "previous_cut_audit_status": "AVAILABLE",
+        "next_owner": "video_kingdom_shift",
+        "production_integration": false
+      },
+      "claimed_at": "2026-09-22T00:06:53.925841+00:00",
+      "claim_expires_at": "2026-09-22T00:36:53.925841+00:00",
+      "finished_at": "2026-09-25T00:26:13+08:00",
+      "evidence": {
+        "action": "REPAIR_REVIEW_RECORDED",
+        "warning_count": 116,
+        "warning_digest": "2369046fc3b68c98af8b31c95c0f69c88707a22dd7030de73d7398843eb5298d",
+        "linkage": {
+          "project_id": "episode_007_virtual_data",
+          "linked_artifacts": 4,
+          "hash_verified_artifacts": 4,
+          "contract_status": "LINKED",
+          "previous_cut_audit_status": "AVAILABLE",
+          "next_owner": "video_kingdom_shift"
+        },
+        "task_wall_triage": "TW-dd023ad38207d288"
+      }
+    },
+    {
+      "task_id": "VK-AUTO-1023f2c281cc8b43",
+      "fingerprint": "1023f2c281cc8b43",
+      "task_type": "CONTINUITY_REPAIR",
+      "brief": "Review patrol warnings, attribute each failure, and create the smallest repair experiment.",
+      "trigger": "ace_daemon_cycle",
+      "created_at": "2026-09-23T00:00:58.171934+00:00",
+      "status": "AUTO_TRIAGED",
+      "production_integration": false,
+      "provider_calls": 0,
+      "automatic_promotion": false,
+      "linkage": {
+        "project_id": "episode_007_virtual_data",
+        "evidence_refs": [
+          {
+            "name": "episode_contract",
+            "path": "episodes/episode_007_virtual_data.v1.json",
+            "exists": true,
+            "sha256": "f6a68f214f7d331511c513b3bfe45967f266c515d7bf82e29c651a11e74b4896"
+          },
+          {
+            "name": "six_module_contract",
+            "path": "episodes/episode_007_virtual_data.six_module.v1.json",
+            "exists": true,
+            "sha256": "f0aeab2e24a8022c21c5df9bf9da621cc4d84b3b3222be8077d12e194794bc02"
+          },
+          {
+            "name": "preflight",
+            "path": "research/episode_007_preflight_runtime_20260904.json",
+            "exists": true,
+            "sha256": "b7eee4b92db41531ee958aba1910d270611fc2848120ebcb8d1a4a59090473ba"
+          },
+          {
+            "name": "previous_cut_audit",
+            "path": "research/episode_007_previous_cut_audit_latest.json",
+            "exists": true,
+            "sha256": "4067bcf1e0eb2b1e7bd41e274dbb799719eb66a98ad71da4eb24d68c7f3d5bd5"
+          }
+        ],
+        "contract_status": "LINKED",
+        "previous_cut_audit_status": "AVAILABLE",
+        "next_owner": "video_kingdom_shift",
+        "production_integration": false
+      },
+      "claimed_at": "2026-09-23T00:06:31.750065+00:00",
+      "claim_expires_at": "2026-09-23T00:36:31.750065+00:00",
+      "finished_at": "2026-09-25T00:26:13+08:00",
+      "evidence": {
+        "action": "REPAIR_REVIEW_RECORDED",
+        "warning_count": 116,
+        "warning_digest": "2369046fc3b68c98af8b31c95c0f69c88707a22dd7030de73d7398843eb5298d",
+        "linkage": {
+          "project_id": "episode_007_virtual_data",
+          "linked_artifacts": 4,
+          "hash_verified_artifacts": 4,
+          "contract_status": "LINKED",
+          "previous_cut_audit_status": "AVAILABLE",
+          "next_owner": "video_kingdom_shift"
+        },
+        "task_wall_triage": "TW-56a650c1cc1636b6"
+      }
+    },
+    {
+      "task_id": "VK-AUTO-c19c66e8dea829ce",
+      "fingerprint": "c19c66e8dea829ce",
+      "task_type": "CONTINUITY_REPAIR",
+      "brief": "Review patrol warnings, attribute each failure, and create the smallest repair experiment.",
+      "trigger": "ace_daemon_cycle",
+      "created_at": "2026-09-24T00:00:48.141292+00:00",
+      "status": "AUTO_TRIAGED",
+      "production_integration": false,
+      "provider_calls": 0,
+      "automatic_promotion": false,
+      "linkage": {
+        "project_id": "episode_007_virtual_data",
+        "evidence_refs": [
+          {
+            "name": "episode_contract",
+            "path": "episodes/episode_007_virtual_data.v1.json",
+            "exists": true,
+            "sha256": "f6a68f214f7d331511c513b3bfe45967f266c515d7bf82e29c651a11e74b4896"
+          },
+          {
+            "name": "six_module_contract",
+            "path": "episodes/episode_007_virtual_data.six_module.v1.json",
+            "exists": true,
+            "sha256": "f0aeab2e24a8022c21c5df9bf9da621cc4d84b3b3222be8077d12e194794bc02"
+          },
+          {
+            "name": "preflight",
+            "path": "research/episode_007_preflight_runtime_20260904.json",
+            "exists": true,
+            "sha256": "b7eee4b92db41531ee958aba1910d270611fc2848120ebcb8d1a4a59090473ba"
+          },
+          {
+            "name": "previous_cut_audit",
+            "path": "research/episode_007_previous_cut_audit_latest.json",
+            "exists": true,
+            "sha256": "4067bcf1e0eb2b1e7bd41e274dbb799719eb66a98ad71da4eb24d68c7f3d5bd5"
+          }
+        ],
+        "contract_status": "LINKED",
+        "previous_cut_audit_status": "AVAILABLE",
+        "next_owner": "video_kingdom_shift",
+        "production_integration": false
+      },
+      "claimed_at": "2026-09-24T00:06:18.840616+00:00",
+      "claim_expires_at": "2026-09-24T00:36:18.840616+00:00",
+      "finished_at": "2026-09-25T00:26:13+08:00",
+      "evidence": {
+        "action": "REPAIR_REVIEW_RECORDED",
+        "warning_count": 116,
+        "warning_digest": "2369046fc3b68c98af8b31c95c0f69c88707a22dd7030de73d7398843eb5298d",
+        "linkage": {
+          "project_id": "episode_007_virtual_data",
+          "linked_artifacts": 4,
+          "hash_verified_artifacts": 4,
+          "contract_status": "LINKED",
+          "previous_cut_audit_status": "AVAILABLE",
+          "next_owner": "video_kingdom_shift"
+        },
+        "task_wall_triage": "TW-2b645b5af932afe4"
       }
     }
   ]
