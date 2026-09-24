@@ -1,0 +1,39 @@
+{
+  "schema": "video_kingdom.asset_graph.v1",
+  "status": "DRAFT",
+  "authority": "DERIVED_CONTINUITY_INDEX",
+  "production_integration": false,
+  "project_id": "【项目ID】",
+  "source_policy": {
+    "source_of_truth": "剧本与已批准的角色/场景/道具资产包",
+    "unknown_policy": "没有来源的关系保持 UNKNOWN，不因图谱连线自动补写剧情。",
+    "public_view_policy": "网站按作品、单集、角色或场景筛选展示，不把全量图谱当成一张巨型画布。"
+  },
+  "node_types": [
+    "character",
+    "place",
+    "prop",
+    "rule",
+    "scene",
+    "episode",
+    "media"
+  ],
+  "edge_types": [
+    "appears_in",
+    "happens_at",
+    "bound_to",
+    "governed_by",
+    "changes",
+    "visualizes",
+    "continues",
+    "references"
+  ],
+  "nodes": [],
+  "edges": [],
+  "views": {
+    "world": ["character", "place", "rule"],
+    "assets": ["character", "place", "prop", "media"],
+    "story": ["episode", "scene", "character", "place", "prop"],
+    "production": ["episode", "scene", "media", "character", "place", "prop"]
+  }
+}
