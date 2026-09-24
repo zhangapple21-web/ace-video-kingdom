@@ -14,6 +14,14 @@ ROOT = Path(__file__).parents[1]
 REGISTRY = ROOT / "research" / "model_capability_registry.v1.json"
 
 
+def _healthy_remote_snapshot() -> dict:
+    return {
+        "shenwen": {"status": "HEALTHY", "health_score": 100.0},
+        "oneapi": {"status": "HEALTHY", "health_score": 100.0},
+        "_meta": {"loaded": True, "stale": False, "source_path": "test-fixture"},
+    }
+
+
 def test_natural_language_is_compiled_to_capabilities_without_a_model_name():
     requirements = infer_task_requirements("请分析 Episode 008 整个制作链，找出最大结构性风险")
 
@@ -101,6 +109,7 @@ def test_scoring_can_select_astra_only_when_a_separate_fixture_proves_it():
             "新项目策划和复杂制作流程，请做长链导演规划",
             scope="remote_shenwen",
             registry_path=fixture,
+            health_snapshot=_healthy_remote_snapshot(),
         )
     finally:
         fixture.unlink(missing_ok=True)
@@ -113,6 +122,7 @@ def test_auto_scope_selects_remote_astra_for_complex_work_without_changing_local
     receipt = route_model_demand(
         "新项目策划和复杂制作流程，请做长链导演规划",
         scope="auto",
+        health_snapshot=_healthy_remote_snapshot(),
     )
 
     assert receipt["status"] == "ROUTED"

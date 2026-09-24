@@ -9,6 +9,7 @@ from typing import Any
 
 
 REQUIRED = ("previous_end_frame_state", "next_initial_state", "camera_state", "lighting_state", "tail_frame_state", "enter_direction", "exit_direction")
+ASSET_KINDS = {"character", "scene", "prop", "clue", "ui_plate", "fx"}
 
 
 def validate_bridge(bridge: dict[str, Any]) -> dict[str, Any]:
@@ -30,8 +31,8 @@ def validate_bridge(bridge: dict[str, Any]) -> dict[str, Any]:
                 for key in ("asset_id", "kind", "initial", "change", "final"):
                     if not str(item.get(key) or "").strip():
                         errors.append(f"asset_register[{index}].{key} missing")
-                if item.get("kind") not in (None, "", "character", "scene", "prop"):
-                    errors.append(f"asset_register[{index}].kind must be character, scene or prop")
+                if item.get("kind") not in (None, "", *ASSET_KINDS):
+                    errors.append(f"asset_register[{index}].kind must be one of {sorted(ASSET_KINDS)}")
     world = str(bridge.get("world_position") or "").strip()
     screen = str(bridge.get("screen_left_right") or "").strip()
     if world and screen and world == screen:

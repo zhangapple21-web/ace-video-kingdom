@@ -85,25 +85,31 @@ def evaluate_project_selection(source_quality: Mapping[str, Any], profile: Mappi
     if not isinstance(selection_scores, Mapping):
         selection_scores = {}
     selection_ids = [item["id"] for item in matrix["project_selection_gate"]["criteria"]]
-    scores: dict[str, int | None] = {}
+    criteria: dict[str, dict[str, Any]] = {}
     missing: list[str] = []
     for key in selection_ids:
         result = selection_scores.get(key)
         if not isinstance(result, Mapping) or result.get("score") not in {0, 1, 2} or not str(result.get("evidence") or "").strip():
-            scores[key] = None
+            criteria[key] = {"score": None, "evidence": "UNKNOWN", "status": "UNKNOWN"}
             missing.append(key)
         else:
-            scores[key] = int(result["score"])
+            score = int(result["score"])
+            criteria[key] = {
+                "score": score,
+                "evidence": str(result["evidence"]).strip(),
+                "status": "PASS" if score == 2 else ("PARTIAL" if score == 1 else "FAIL"),
+            }
     if missing:
         return {
             "schema": "ace.video_kingdom.project_selection_assessment.v1",
             "status": "PENDING",
             "score": None,
             "max_score": 14,
-            "criteria": scores,
+            "criteria": criteria,
             "missing_evidence": missing,
             "reason": "项目取舍必须有独立逐项证据评分；不能由源头字段存在自动推断",
         }
+    scores = {key: item["score"] for key, item in criteria.items()}
     score = sum(scores.values())
     gate = matrix["project_selection_gate"]
     critical_zero = [key for key in gate["critical_zero_rejects"] if scores.get(key) == 0]
@@ -118,9 +124,78 @@ def evaluate_project_selection(source_quality: Mapping[str, Any], profile: Mappi
         "status": status,
         "score": score,
         "max_score": 14,
-        "criteria": scores,
+        "criteria": criteria,
         "critical_zero": critical_zero,
         "decision": "进入 T1" if status == "PASS" else ("先修源头" if status == "REWORK_REQUIRED" else "归档为研究，不烧 Provider"),
+        "reviewer": quality_review.get("reviewer") or "UNKNOWN",
+        "evidence_refs": quality_review.get("evidence_refs") or [],
+    }
+
+
+def validate_provider_spend_readiness(
+    receipt: Any,
+    *,
+    expected_script_hash: str,
+    project_root: Path,
+) -> dict[str, Any]:
+    """Fail closed unless evidence-backed source and project reviews pass for this script revision."""
+    errors: list[str] = []
+    if not isinstance(receipt, Mapping):
+        return {"status": "BLOCKED", "errors": ["workflow_policy receipt is required before provider spend"]}
+    try:
+        matrix, _, matrix_path = load_workflow_decision_matrix(project_root)
+    except (OSError, ValueError, json.JSONDecodeError) as exc:
+        return {"status": "BLOCKED", "errors": [f"workflow decision matrix unavailable: {exc}"]}
+
+    expected_matrix_hash = hashlib.sha256(matrix_path.read_bytes()).hexdigest()
+    if receipt.get("schema") != matrix["schema"]:
+        errors.append("workflow_policy.schema mismatch")
+    if receipt.get("sha256") != expected_matrix_hash:
+        errors.append("workflow_policy.sha256 is stale or does not match the active decision matrix")
+    actual_script_hash = str(receipt.get("reviewed_script_hash") or "").lower()
+    expected_script_hash = str(expected_script_hash or "").lower()
+    if len(expected_script_hash) != 64 or any(ch not in "0123456789abcdef" for ch in expected_script_hash):
+        errors.append("locked script_hash must be a 64-character SHA-256")
+    if actual_script_hash != expected_script_hash:
+        errors.append("workflow_policy.reviewed_script_hash must match the locked script_hash")
+
+    source = receipt.get("source_quality_assessment") if isinstance(receipt.get("source_quality_assessment"), Mapping) else {}
+    selection = receipt.get("project_selection_assessment") if isinstance(receipt.get("project_selection_assessment"), Mapping) else {}
+    source_criteria = source.get("criteria") if isinstance(source.get("criteria"), Mapping) else {}
+    selection_criteria = selection.get("criteria") if isinstance(selection.get("criteria"), Mapping) else {}
+    source_refs = source.get("evidence_refs") if isinstance(source.get("evidence_refs"), list) else []
+    selection_refs = selection.get("evidence_refs") if isinstance(selection.get("evidence_refs"), list) else []
+    refs = list(dict.fromkeys([str(ref).strip() for ref in [*source_refs, *selection_refs] if str(ref).strip()]))
+    reviewer = str(source.get("reviewer") or selection.get("reviewer") or "UNKNOWN").strip()
+    profile = {
+        "quality_review": {
+            "reviewer": reviewer,
+            "evidence_refs": refs,
+            "source_quality_criteria": source_criteria,
+            "project_selection_criteria": selection_criteria,
+        }
+    }
+    rebuilt_source = evaluate_source_quality(profile, matrix)
+    rebuilt_selection = evaluate_project_selection(rebuilt_source, profile, matrix)
+    if source.get("status") != "PASS" or rebuilt_source.get("status") != "PASS":
+        errors.append("source_quality_assessment must have current criterion evidence and status PASS")
+    if source.get("score") != rebuilt_source.get("score"):
+        errors.append("source_quality_assessment.score does not match its criterion evidence")
+    if selection.get("status") != "PASS" or rebuilt_selection.get("status") != "PASS":
+        errors.append("project_selection_assessment must have current criterion evidence and status PASS")
+    if selection.get("score") != rebuilt_selection.get("score"):
+        errors.append("project_selection_assessment.score does not match its criterion evidence")
+    if reviewer in {"", "UNKNOWN"}:
+        errors.append("workflow_policy quality reviewer is missing")
+    if not refs:
+        errors.append("workflow_policy reviewer evidence_refs are required")
+    return {
+        "status": "PASS" if not errors else "BLOCKED",
+        "errors": errors,
+        "source_quality_assessment": rebuilt_source,
+        "project_selection_assessment": rebuilt_selection,
+        "matrix_sha256": expected_matrix_hash,
+        "reviewed_script_hash": receipt.get("reviewed_script_hash"),
     }
 
 
@@ -216,7 +291,12 @@ def load_workflow_decision_matrix(project_root: Path) -> tuple[dict[str, Any], d
     return dict(matrix), check, path
 
 
-def build_workflow_policy_receipt(project_root: Path, *, creative_development: Mapping[str, Any] | None = None) -> dict[str, Any]:
+def build_workflow_policy_receipt(
+    project_root: Path,
+    *,
+    creative_development: Mapping[str, Any] | None = None,
+    reviewed_script_hash: str | None = None,
+) -> dict[str, Any]:
     matrix, check, path = load_workflow_decision_matrix(project_root)
     digest = hashlib.sha256(path.read_bytes()).hexdigest()
     source_quality = evaluate_source_quality(creative_development, matrix)
@@ -228,6 +308,7 @@ def build_workflow_policy_receipt(project_root: Path, *, creative_development: M
         "production_integration": matrix["production_integration"],
         "path": str(path),
         "sha256": digest,
+        "reviewed_script_hash": reviewed_script_hash,
         "stage_order": list(matrix["stage_order"]),
         "stages": matrix["stages"],
         "budget_priority_order": matrix["budget_priority_order"],
