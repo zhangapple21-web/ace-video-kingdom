@@ -21,6 +21,19 @@
 4. **影子验证**：同一角色/场景/分镜进行小样 A/B；记录连续性、失败率、耗时、成本和许可证边界。
 5. **采纳或拒绝**：只有在可复现实验中改善一个明确指标的候选，才进入下一轮；否则记录 REJECTED/DEFERRED，防止反复研究同一轮子。
 
+## 后台每日执行入口（已落地）
+
+后台任务使用 `tools/daily_external_learning.py`，每天只读取
+`research/external_learning_sources.v1.json` 中登记的公开一手来源。它会：
+
+1. 拉取仓库元数据和 README，保存来源内容 SHA-256、许可证判断和可观察章节；
+2. 与 `public_street_learning_ledger.v1.json` 去重，只把新版本或新来源写入学习账本；
+3. 读取本地失败复盘和能力账本的数量作为当日对照上下文；
+4. 生成 `research/external_learning_runs/EL-*.json` 收据，明确 `production_authority=NONE`、`promotion_status=NOT_PROMOTED` 和下一次隔离验证条件。
+
+这一步是“真实抓取和登记”，不是把外部观点直接变成生产规则。每日自动任务随后只允许对新收据做只读对比和本地小样验证；只有完整通过
+`Baseline → Change → Test → Evaluation → Compare → Promote / Rollback`，并附带六项痛苦复盘，才可调用 `tools/evolution_ledger.py` 晋升能力。没有新证据时记录 `UNCHANGED/NO_NEW_EVIDENCE`，不制造修改；许可证不明或限制较强的仓库永远停在 `RESEARCH_ONLY_LICENSE_REVIEW`。
+
 ## 已吸收：Toonflow-app 的工艺，不复制其应用
 
 来源：[HBAI-Ltd/Toonflow-app](https://github.com/HBAI-Ltd/Toonflow-app)，2026-09-01 公开元数据复核：活跃、Apache-2.0；README 另含补充商业分发条件，任何整体复用前需重新审查。

@@ -1,0 +1,201 @@
+{
+  "schema": "video_kingdom.external_learning_run.v1",
+  "run_id": "EL-20260924-c6a5ef7f",
+  "started_at": "2026-09-24T16:12:18.604245+00:00",
+  "source_boundary": "PUBLIC_PRIMARY_SOURCES_ONLY",
+  "local_context": {
+    "failure_replay_count": 2,
+    "promoted_capability_count": 0
+  },
+  "records": [
+    {
+      "source_id": "comfyui",
+      "status": "NEW_OR_CHANGED",
+      "api_url": "https://api.github.com/repos/Comfy-Org/ComfyUI",
+      "readme_url": "https://raw.githubusercontent.com/Comfy-Org/ComfyUI/master/README.md",
+      "repository_sha": "master:2026-09-24T16:01:40Z",
+      "readme_sha256": "224e65e44969e84401213f00765c69709b762a81566ef6123a26f495892d4797",
+      "source_content_key": "comfyui:224e65e44969e84401213f00765c69709b762a81566ef6123a26f495892d4797",
+      "license": "GPL-3.0",
+      "license_decision": "RESEARCH_ONLY_LICENSE_REVIEW",
+      "focus": "可复现图像/视频节点编排、队列和工作流证据",
+      "observable_headings": [
+        "ComfyUI",
+        "Get Started",
+        "Local",
+        "Cloud",
+        "Examples",
+        "Features",
+        "Release Process",
+        "Shortcuts"
+      ],
+      "production_authority": "NONE",
+      "promotion_status": "NOT_PROMOTED",
+      "next_probe": "用本地虚构样本做一次隔离 A/B；记录 baseline/change/test/evaluation/painful_review 后再决定"
+    },
+    {
+      "source_id": "pyscenedetect",
+      "status": "NEW_OR_CHANGED",
+      "api_url": "https://api.github.com/repos/Breakthrough/PySceneDetect",
+      "readme_url": "https://raw.githubusercontent.com/Breakthrough/PySceneDetect/main/README.md",
+      "repository_sha": "main:2026-09-21T04:44:36Z",
+      "readme_sha256": "f44617fdf56ec43eee44ed73709b1ea9edd6fcfb2b63f3fdf37278787693f420",
+      "source_content_key": "pyscenedetect:f44617fdf56ec43eee44ed73709b1ea9edd6fcfb2b63f3fdf37278787693f420",
+      "license": "BSD-3-Clause",
+      "license_decision": "ALLOW_FOR_RESEARCH",
+      "focus": "镜头边界和成片节奏的可测量审计",
+      "observable_headings": [
+        "Video Cut Detection and Analysis Tool",
+        "Latest Release: v0.7.1 (July 21, 2026)",
+        "Reference",
+        "Help & Contributing",
+        "Code Signing",
+        "License"
+      ],
+      "production_authority": "NONE",
+      "promotion_status": "NOT_PROMOTED",
+      "next_probe": "用本地虚构样本做一次隔离 A/B；记录 baseline/change/test/evaluation/painful_review 后再决定"
+    },
+    {
+      "source_id": "langgraph",
+      "status": "NEW_OR_CHANGED",
+      "api_url": "https://api.github.com/repos/langchain-ai/langgraph",
+      "readme_url": "https://raw.githubusercontent.com/langchain-ai/langgraph/main/README.md",
+      "repository_sha": "main:2026-09-23T23:26:50Z",
+      "readme_sha256": "3a13e257af1216962d53d72414a7f44ac1fc5cea34d994bdff60ea2a3b045933",
+      "source_content_key": "langgraph:3a13e257af1216962d53d72414a7f44ac1fc5cea34d994bdff60ea2a3b045933",
+      "license": "MIT",
+      "license_decision": "ALLOW_FOR_RESEARCH",
+      "focus": "可恢复任务、检查点和长任务状态持久化",
+      "observable_headings": [
+        "Why use LangGraph?",
+        "LangGraph ecosystem",
+        "Documentation",
+        "Additional resources",
+        "Acknowledgements"
+      ],
+      "production_authority": "NONE",
+      "promotion_status": "NOT_PROMOTED",
+      "next_probe": "用本地虚构样本做一次隔离 A/B；记录 baseline/change/test/evaluation/painful_review 后再决定"
+    },
+    {
+      "source_id": "remotion",
+      "status": "NEW_OR_CHANGED",
+      "api_url": "https://api.github.com/repos/remotion-dev/remotion",
+      "readme_url": "https://raw.githubusercontent.com/remotion-dev/remotion/main/README.md",
+      "repository_sha": "main:2026-09-24T16:10:07Z",
+      "readme_sha256": "c0aa4732decbd340d28ed59c805605820c3a6ade67b34933d2fad1c8bc0a603d",
+      "source_content_key": "remotion:c0aa4732decbd340d28ed59c805605820c3a6ade67b34933d2fad1c8bc0a603d",
+      "license": "NOASSERTION",
+      "license_decision": "RESEARCH_ONLY_LICENSE_REVIEW",
+      "focus": "程序化合成、时间轴和渲染验收",
+      "observable_headings": [
+        "Video Creation",
+        "Video Automation",
+        "Get started",
+        "Discover Remotion",
+        "Documentation",
+        "License",
+        "Contributing"
+      ],
+      "production_authority": "NONE",
+      "promotion_status": "NOT_PROMOTED",
+      "next_probe": "用本地虚构样本做一次隔离 A/B；记录 baseline/change/test/evaluation/painful_review 后再决定"
+    }
+  ],
+  "new_ledger_entries": [
+    {
+      "entry_id": "psl_20260924_comfyui_224e65e4",
+      "date": "2026-09-24",
+      "source_url": "https://raw.githubusercontent.com/Comfy-Org/ComfyUI/master/README.md",
+      "source_kind": "PUBLIC_OPEN_SOURCE_REPOSITORY",
+      "source_content_key": "comfyui:224e65e44969e84401213f00765c69709b762a81566ef6123a26f495892d4797",
+      "license_or_availability": "GPL-3.0",
+      "linked_public_repositories": [
+        "https://api.github.com/repos/Comfy-Org/ComfyUI"
+      ],
+      "problem_observed": "外部仓库公开文档出现可复核的工作流/审计/恢复机制候选，尚未证明适合本项目。",
+      "minimum_mechanism": "可复现图像/视频节点编排、队列和工作流证据",
+      "local_fit": "对照本地失败复盘与能力账本，先做影子验证，不进入生产控制面。",
+      "limitations": [
+        "仅采集公开元数据和 README",
+        "未执行外部代码",
+        "未证明对本项目有收益"
+      ],
+      "decision": "REVIEW_REQUIRED",
+      "next_verification": "用本地虚构样本做一次隔离 A/B；记录 baseline/change/test/evaluation/painful_review 后再决定",
+      "production_integration": false
+    },
+    {
+      "entry_id": "psl_20260924_pyscenedetect_f44617fd",
+      "date": "2026-09-24",
+      "source_url": "https://raw.githubusercontent.com/Breakthrough/PySceneDetect/main/README.md",
+      "source_kind": "PUBLIC_OPEN_SOURCE_REPOSITORY",
+      "source_content_key": "pyscenedetect:f44617fdf56ec43eee44ed73709b1ea9edd6fcfb2b63f3fdf37278787693f420",
+      "license_or_availability": "BSD-3-Clause",
+      "linked_public_repositories": [
+        "https://api.github.com/repos/Breakthrough/PySceneDetect"
+      ],
+      "problem_observed": "外部仓库公开文档出现可复核的工作流/审计/恢复机制候选，尚未证明适合本项目。",
+      "minimum_mechanism": "镜头边界和成片节奏的可测量审计",
+      "local_fit": "对照本地失败复盘与能力账本，先做影子验证，不进入生产控制面。",
+      "limitations": [
+        "仅采集公开元数据和 README",
+        "未执行外部代码",
+        "未证明对本项目有收益"
+      ],
+      "decision": "REVIEW_REQUIRED",
+      "next_verification": "用本地虚构样本做一次隔离 A/B；记录 baseline/change/test/evaluation/painful_review 后再决定",
+      "production_integration": false
+    },
+    {
+      "entry_id": "psl_20260924_langgraph_3a13e257",
+      "date": "2026-09-24",
+      "source_url": "https://raw.githubusercontent.com/langchain-ai/langgraph/main/README.md",
+      "source_kind": "PUBLIC_OPEN_SOURCE_REPOSITORY",
+      "source_content_key": "langgraph:3a13e257af1216962d53d72414a7f44ac1fc5cea34d994bdff60ea2a3b045933",
+      "license_or_availability": "MIT",
+      "linked_public_repositories": [
+        "https://api.github.com/repos/langchain-ai/langgraph"
+      ],
+      "problem_observed": "外部仓库公开文档出现可复核的工作流/审计/恢复机制候选，尚未证明适合本项目。",
+      "minimum_mechanism": "可恢复任务、检查点和长任务状态持久化",
+      "local_fit": "对照本地失败复盘与能力账本，先做影子验证，不进入生产控制面。",
+      "limitations": [
+        "仅采集公开元数据和 README",
+        "未执行外部代码",
+        "未证明对本项目有收益"
+      ],
+      "decision": "REVIEW_REQUIRED",
+      "next_verification": "用本地虚构样本做一次隔离 A/B；记录 baseline/change/test/evaluation/painful_review 后再决定",
+      "production_integration": false
+    },
+    {
+      "entry_id": "psl_20260924_remotion_c0aa4732",
+      "date": "2026-09-24",
+      "source_url": "https://raw.githubusercontent.com/remotion-dev/remotion/main/README.md",
+      "source_kind": "PUBLIC_OPEN_SOURCE_REPOSITORY",
+      "source_content_key": "remotion:c0aa4732decbd340d28ed59c805605820c3a6ade67b34933d2fad1c8bc0a603d",
+      "license_or_availability": "NOASSERTION",
+      "linked_public_repositories": [
+        "https://api.github.com/repos/remotion-dev/remotion"
+      ],
+      "problem_observed": "外部仓库公开文档出现可复核的工作流/审计/恢复机制候选，尚未证明适合本项目。",
+      "minimum_mechanism": "程序化合成、时间轴和渲染验收",
+      "local_fit": "对照本地失败复盘与能力账本，先做影子验证，不进入生产控制面。",
+      "limitations": [
+        "仅采集公开元数据和 README",
+        "未执行外部代码",
+        "未证明对本项目有收益"
+      ],
+      "decision": "REVIEW_REQUIRED",
+      "next_verification": "用本地虚构样本做一次隔离 A/B；记录 baseline/change/test/evaluation/painful_review 后再决定",
+      "production_integration": false
+    }
+  ],
+  "promotion": {
+    "status": "NONE",
+    "reason": "采集阶段不能自动晋升能力",
+    "production_integration": false
+  }
+}
