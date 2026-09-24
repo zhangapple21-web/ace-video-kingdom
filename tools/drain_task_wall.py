@@ -31,9 +31,29 @@ def _load(path: Path, default: Any) -> Any:
         return default
 
 
-def _latest_learning_run() -> Path | None:
-    runs = sorted(LEARNING_RUNS.glob("EL-*.json"), key=lambda p: p.stat().st_mtime, reverse=True) if LEARNING_RUNS.exists() else []
+def _latest_learning_run(runs_dir: Path = LEARNING_RUNS) -> Path | None:
+    runs = sorted(runs_dir.glob("EL-*.json"), key=lambda p: p.stat().st_mtime, reverse=True) if runs_dir.exists() else []
     return runs[0] if runs else None
+
+
+def _linked_learning_run(card: dict[str, Any], runs_dir: Path = LEARNING_RUNS) -> Path | None:
+    """Resolve a card's own receipt; never reuse a global latest run silently."""
+
+    evidence = card.get("evidence") if isinstance(card.get("evidence"), dict) else {}
+    linkage = card.get("linkage") if isinstance(card.get("linkage"), dict) else {}
+    raw = evidence.get("learning_run") or linkage.get("learning_run") or card.get("learning_run")
+    if not raw:
+        return None
+    candidate = Path(str(raw))
+    if not candidate.is_absolute():
+        candidate = runs_dir / candidate.name
+    try:
+        candidate = candidate.resolve()
+        if runs_dir.resolve() not in candidate.parents or not candidate.name.startswith("EL-") or candidate.suffix.lower() != ".json":
+            return None
+    except OSError:
+        return None
+    return candidate if candidate.is_file() else None
 
 
 def _receipt(card: dict[str, Any], action: str, next_action: str, evidence: dict[str, Any]) -> dict[str, Any]:
@@ -62,20 +82,26 @@ def plan(*, queue: dict[str, Any], limit: int) -> list[dict[str, Any]]:
     return candidates[: max(0, int(limit))]
 
 
-def drain(*, execute: bool = False, limit: int = 5, queue_path: Path = QUEUE, receipt_path: Path = RECEIPTS) -> dict[str, Any]:
+def drain(*, execute: bool = False, limit: int = 5, queue_path: Path = QUEUE, receipt_path: Path = RECEIPTS, learning_runs_dir: Path = LEARNING_RUNS) -> dict[str, Any]:
     queue = _load(queue_path, {})
     if not isinstance(queue, dict) or not isinstance(queue.get("cards"), list):
         raise ValueError("dispatch queue is missing or invalid")
     selected = plan(queue=queue, limit=limit)
     actions: list[dict[str, Any]] = []
-    latest = _latest_learning_run()
     for card in selected:
         kind = str(card.get("task_type"))
         if kind == "EXTERNAL_LEARNING":
-            action = "CLOSED_NO_NEW_EVIDENCE" if latest is None else "CLOSED_LEARNING_RECEIPT_LINKED"
-            next_action = "等待下一轮来源变化" if latest is None else "由每日学习任务读取最新收据并做最小验证"
-            evidence = {"learning_run": str(latest) if latest else None, "reason": "research-only card consumed without provider call"}
-            new_status = "COMPLETED"
+            linked = _linked_learning_run(card, learning_runs_dir)
+            if linked is None:
+                action = "REVIEW_REQUIRED_UNLINKED"
+                next_action = "补齐本卡对应的 EL-*.json 收据；禁止用全局 latest run 代替"
+                evidence = {"learning_run": None, "reason": "card has no verifiable receipt linkage"}
+                new_status = "REVIEW_REQUIRED"
+            else:
+                action = "CLOSED_LEARNING_RECEIPT_LINKED"
+                next_action = "由每日学习任务读取本卡收据并做最小验证"
+                evidence = {"learning_run": str(linked), "reason": "research-only card consumed without provider call"}
+                new_status = "COMPLETED"
         elif kind == "LEARNING_RESULT":
             action = "CLOSED_RESEARCH_HANDOFF"
             next_action = "若要晋升，必须提交独立 A/B、evolution ledger 和 painful_review"
