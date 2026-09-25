@@ -34,3 +34,11 @@ V3.3 把“求速成、穿墙、玻璃门”拆成了许多训练步骤，但把
 - 反向拆解收据位于 `D:\视频创作\temp\都市修仙速成班_reference_deconstruction.v1.json`，权限保持 `RESEARCH_ONLY`，没有直接晋升规则。
 - 新规则候选必须经过两次独立三拍实验，具备 baseline/change/test/evaluation/compare 和完整 painful review 后，才能进入生产默认层。
 - 在新剧本通过三拍创作门、所有参考来源可达、每镜字段隔离且完整镜头集合齐全前，不再生成整集。
+
+## 本次收口后的物理修复
+
+- 项目批处理在扩批前强制读取 `receipts/creative_slice_receipt.json`；缺失或非 `PASS` 直接退出，不发 Provider 请求。
+- 统一成片入口 `tools/run_comedy_episode.py` 同样识别 `new_drama`（含镜头级标记），强制要求 `acceptance.creative_slice_receipt`，防止换窗口绕过创作小样门。
+- 参考图在提交前做可达性预检；HTTP 404 不再重复消耗重试轮次。
+- 故事动作门现在要求戏剧功能、可见改变、可见后果，并把人物动作和摄影机动作分开；不满足则 `REWORK_REQUIRED`。
+- 以上修复已用 489 个仓库测试验证，并推送到公开远程 `75f091b`；外部研究仍保持 `RESEARCH_ONLY`，没有自动晋升生产规则。
