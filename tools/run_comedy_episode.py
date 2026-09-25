@@ -21,6 +21,7 @@ except ImportError:  # pragma: no cover
     from tools.runtime.provider_admission import delivery_gate  # type: ignore
 
 from tools.replace_audio_track import replace_audio_track, strip_audio_track
+from tools.validate_creative_slice import load_and_validate
 
 
 def _append_option(command: list[str], flag: str, value: object | None) -> None:
@@ -182,6 +183,57 @@ def _contract_shots(episode: dict) -> dict[str, dict]:
     return {str(row.get("shot_id")): row for row in contract.get("shots", []) if isinstance(row, dict) and row.get("shot_id")}
 
 
+def _episode_is_new_drama(episode: dict) -> bool:
+    """Detect new-drama semantics without trusting a single legacy marker."""
+    if episode.get("new_drama") is True or str(episode.get("production_semantics") or "") == "new_drama":
+        return True
+    brief = episode.get("creator_brief") if isinstance(episode.get("creator_brief"), dict) else {}
+    if str(brief.get("production_semantics") or "") == "new_drama":
+        return True
+    shots = episode.get("shots") if isinstance(episode.get("shots"), list) else []
+    return any(
+        isinstance(shot, dict)
+        and (shot.get("new_drama") is True or str(shot.get("production_semantics") or "") == "new_drama")
+        for shot in shots
+    )
+
+
+def _validate_episode_creative_slice(episode: dict) -> dict:
+    """Require a passed three-beat creative slice before new-drama expansion.
+
+    This is intentionally an admission gate, not a creative evaluator.  The
+    slice must already contain a local evidence clip and remain independent of
+    Provider completion; without it the canonical executor must not fan out
+    into a full episode.
+    """
+    if not _episode_is_new_drama(episode):
+        return {"status": "SKIPPED", "reason": "episode is not marked new_drama"}
+    acceptance = episode.get("acceptance") if isinstance(episode.get("acceptance"), dict) else {}
+    candidates = [
+        episode.get("creative_slice_receipt"),
+        acceptance.get("creative_slice_receipt"),
+    ]
+    receipt_value = next((item for item in candidates if isinstance(item, str) and item.strip()), None)
+    if not receipt_value:
+        return {
+            "status": "BLOCKED",
+            "errors": ["new_drama episode requires acceptance.creative_slice_receipt before expansion"],
+        }
+    episode_path = Path(str(episode.get("__episode_path"))).resolve()
+    receipt_path = (episode_path.parent / receipt_value).resolve()
+    try:
+        receipt_path.relative_to(episode_path.parent)
+    except ValueError:
+        return {"status": "BLOCKED", "errors": ["creative_slice_receipt escapes episode directory"]}
+    if not receipt_path.is_file():
+        return {"status": "BLOCKED", "errors": [f"creative_slice_receipt does not exist: {receipt_path}"]}
+    try:
+        result = load_and_validate(receipt_path)
+    except (OSError, UnicodeError, json.JSONDecodeError) as error:
+        return {"status": "BLOCKED", "errors": [f"creative_slice_receipt unreadable: {error}"]}
+    return {"status": result.get("status", "BLOCKED"), "receipt": str(receipt_path), "errors": result.get("errors", [])}
+
+
 def _audio_tracks(shot: dict) -> tuple[dict, list[dict], list[dict]]:
     audio = shot.get("audio_contract") if isinstance(shot.get("audio_contract"), dict) else {}
     dialogue = [item for item in audio.get("dialogue_tracks", []) if isinstance(item, dict)]
@@ -298,6 +350,12 @@ def main() -> int:
     contract_identity = json.loads(args.identity_contract.read_text(encoding="utf-8"))
     if episode_identity.get("project_id") != contract_identity.get("project_id"):
         raise SystemExit("identity contract project_id does not match episode; no provider request submitted")
+    creative_slice = _validate_episode_creative_slice(episode_identity)
+    if creative_slice.get("status") not in {"PASS", "SKIPPED"}:
+        raise SystemExit(
+            "creative slice admission is BLOCKED; no provider request submitted. "
+            + "; ".join(str(item) for item in creative_slice.get("errors", []))
+        )
     preflight_output = args.preflight_output or args.manifest.with_name(args.manifest.stem + ".preflight.json")
     preflight = subprocess.run([
         sys.executable, str(Path(__file__).with_name("preflight_episode.py")), "--episode", str(args.episode),
