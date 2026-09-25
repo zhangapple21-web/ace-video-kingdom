@@ -12,7 +12,7 @@ def probe(path: Path) -> dict:
     result = subprocess.run(
         ["ffprobe", "-v", "error", "-show_entries",
          "format=duration:stream=codec_type,width,height", "-of", "json", str(path)],
-        check=True, capture_output=True, text=True,
+        check=True, capture_output=True, text=True, encoding="utf-8", errors="replace",
     )
     data = json.loads(result.stdout)
     video = next((s for s in data.get("streams", []) if s.get("codec_type") == "video"), None)
@@ -30,10 +30,10 @@ def scene_cuts(path: Path, threshold: float) -> list[float]:
     result = subprocess.run(
         ["ffmpeg", "-hide_banner", "-i", str(path), "-filter:v",
          f"select='gt(scene,{threshold})',showinfo", "-f", "null", "NUL"],
-        check=False, capture_output=True, text=True,
+        check=False, capture_output=True, text=True, encoding="utf-8", errors="replace",
     )
     times: list[float] = []
-    for line in result.stderr.splitlines():
+    for line in (result.stderr or "").splitlines():
         match = re.search(r"pts_time:([0-9.]+)", line)
         if match:
             times.append(float(match.group(1)))

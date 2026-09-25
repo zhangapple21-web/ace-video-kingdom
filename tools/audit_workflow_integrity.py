@@ -113,7 +113,7 @@ def audit(episode_contracts: Path | None = None) -> dict[str, Any]:
         "schema": "video_kingdom.state_contract.v1",
         "identity_ref": "sample",
         "episode_state": {"costume": "sample"},
-        "scene_state": {"location": "room", "time": "night", "lighting": "lamp", "space": "room", "physical_layout": "floor desk chair", "interaction_surface": "desk", "scene_mode": "LIVE_DIEGETIC_SPACE"},
+        "scene_state": {"scene_id": "SCENE_AUDIT_BASELINE", "location": "room", "time": "night", "lighting": "lamp", "space": "room", "physical_layout": "floor desk chair", "interaction_surface": "desk", "scene_mode": "LIVE_DIEGETIC_SPACE"},
         "shot_state": {"start_pose": "standing", "primary_action": "pick up cup", "emotion_start_end": "calm to alert", "camera": "medium shot", "end_state": "holds cup"},
         "approved_for_next_shot": False,
     }
