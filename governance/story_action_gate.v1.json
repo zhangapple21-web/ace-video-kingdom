@@ -1,0 +1,18 @@
+{
+  "schema": "video_kingdom.story_action_gate.v1",
+  "status": "ACTIVE",
+  "authority": "PRODUCTION_PRE_PROVIDER",
+  "purpose": "阻止只有走位、站立或镜头运动而没有剧情改变的镜头进入新剧 Provider 生产。",
+  "required_fields": [
+    "shot_rhythm.dramatic_function",
+    "shot_rhythm.visible_change",
+    "shot_rhythm.visible_consequence",
+    "shot_rhythm.script_annotations.action",
+    "shot_rhythm.performance_beats.speaker_hands_body",
+    "shot_rhythm.performance_beats.listener_reaction"
+  ],
+  "separation_rule": "人物动作只写在 script_annotations.action / performance_beats.speaker_hands_body；摄影机动作只写在 camera / photography，不得互相污染。",
+  "transition_rule": "走路、到场、站立可以是过渡，但必须写清这一镜改变的空间、目标、关系或信息；单独移动不构成戏剧动作。",
+  "expansion_rule": "新剧批量扩展前必须有三拍垂直切片收据（目标→阻碍→反转/回收）且状态为 PASS；Provider COMPLETED 不替代创作验收。",
+  "on_failure": "BLOCK_PROVIDER_AND_PRESERVE_EVIDENCE"
+}

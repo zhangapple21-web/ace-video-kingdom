@@ -29,6 +29,10 @@
     "watchable_change_not_still_photo",
     "none_is_not_freeze_frame",
     "action_before_camera",
+    "dramatic_function_required",
+    "visible_change_required",
+    "visible_consequence_required",
+    "actor_action_separate_from_camera",
     "poison_no_natural_micro_motion",
     "identity_refs_not_keyframes",
     "identity_pack_not_i2v_source",
@@ -86,6 +90,11 @@
     "subtext",
     "motivation",
     "atmosphere"
+  ],
+  "story_action_fields": [
+    "dramatic_function",
+    "visible_change",
+    "visible_consequence"
   ],
   "performance_beats": [
     "speaker_hands_body",

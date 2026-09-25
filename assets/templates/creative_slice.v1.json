@@ -1,0 +1,24 @@
+{
+  "schema": "video_kingdom.creative_slice.v1",
+  "status": "PENDING",
+  "project_id": "PROJECT_ID",
+  "beats": {
+    "goal": "角色此刻主动要什么",
+    "obstacle": "镜头内可见的阻碍或反作用",
+    "reversal": "目标、关系或信息如何改变"
+  },
+  "viewer_change": "观众看完三拍后能明确说出发生了什么变化",
+  "evidence": {
+    "video_path": "creative_slice.mp4",
+    "qc_receipt": "creative_slice_qc.json"
+  },
+  "promotion": {
+    "baseline": "",
+    "change": "",
+    "test": "",
+    "evaluation": "",
+    "compare": "",
+    "painful_review": [],
+    "promoted_to_default": false
+  }
+}

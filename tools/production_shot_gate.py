@@ -20,6 +20,7 @@ from tools.validate_new_drama_semantics import is_new_drama, validate_new_drama_
 from tools.validate_state_contract import validate_state_contract
 from tools.validate_audio_contract import validate_audio_contract
 from tools.validate_shot_lineage import validate_lineage_ref
+from tools.validate_story_action import validate_story_action_packet
 from pathlib import Path
 import json
 
@@ -142,6 +143,9 @@ def validate_production_shot(canonical_shot: dict[str, Any], contract_prompt: st
     motion_check = validate_shot_rhythm(canonical_shot)
     if motion_check["status"] == "BLOCKED":
         raise ValueError("motion evidence failed: " + ";".join(motion_check["errors"]))
+    story_action_check = validate_story_action_packet(canonical_shot, enforce=is_new_drama(canonical_shot))
+    if story_action_check["status"] == "BLOCKED":
+        raise ValueError("story action gate failed: " + ";".join(story_action_check["errors"]))
     # Identity sheets describe who the character is. They are never an
     # animation source or a substitute for a shot-state composition frame.
     identity_usage = str(rhythm_packet.get("identity_usage") or "").strip().lower()
@@ -195,5 +199,6 @@ def validate_production_shot(canonical_shot: dict[str, Any], contract_prompt: st
         "director": director_check,
         "rhythm": rhythm_check,
         "motion_evidence": motion_check,
+        "story_action": story_action_check,
         "new_drama": new_drama_check,
     }

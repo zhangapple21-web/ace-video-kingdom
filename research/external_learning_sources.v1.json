@@ -33,6 +33,38 @@
       "readme_url": "https://raw.githubusercontent.com/remotion-dev/remotion/main/README.md",
       "focus": "程序化合成、时间轴和渲染验收",
       "license_policy": "RESEARCH_ONLY_NON_DEFAULT"
+    },
+    {
+      "source_id": "libtv_video_agent",
+      "kind": "github_repository",
+      "api_url": "https://api.github.com/repos/PomeloR611/libtv-video-agent",
+      "readme_url": "https://raw.githubusercontent.com/PomeloR611/libtv-video-agent/main/README.md",
+      "focus": "故事板先行、定版资产、分批小步生成、抽帧自查和批次预览",
+      "license_policy": "RESEARCH_ONLY_NON_DEFAULT"
+    },
+    {
+      "source_id": "video_agent_skills",
+      "kind": "github_repository",
+      "api_url": "https://api.github.com/repos/chenyuxiaojin/video-agent-skills",
+      "readme_url": "https://raw.githubusercontent.com/chenyuxiaojin/video-agent-skills/main/README.zh-CN.md",
+      "focus": "制片人编排、专职角色分工、人工检查点、时间轴和发布交付",
+      "license_policy": "RESEARCH_ONLY_NON_DEFAULT"
+    },
+    {
+      "source_id": "director_skills",
+      "kind": "github_repository",
+      "api_url": "https://api.github.com/repos/kangarooking/director-skills",
+      "readme_url": "https://raw.githubusercontent.com/kangarooking/director-skills/main/README.md",
+      "focus": "资产提示词、动作因果链、运镜参数闸门、任务轮询和媒体读回",
+      "license_policy": "RESEARCH_ONLY_NON_DEFAULT"
+    },
+    {
+      "source_id": "libtv_skill_pro",
+      "kind": "github_repository",
+      "api_url": "https://api.github.com/repos/Qiuxiangxiang/libtv-skill-pro",
+      "readme_url": "https://raw.githubusercontent.com/Qiuxiangxiang/libtv-skill-pro/main/README.md",
+      "focus": "统一命令入口、dry-run、结构化错误、多模型路由、批量监控和可恢复会话",
+      "license_policy": "RESEARCH_ONLY_NON_DEFAULT"
     }
   ]
 }
