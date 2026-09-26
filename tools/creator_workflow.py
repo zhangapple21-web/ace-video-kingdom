@@ -67,6 +67,59 @@ def _text(value: Any) -> str:
     return str(value or "").strip()
 
 
+def resolve_renderer_capability(creative_mode: str) -> dict[str, Any]:
+    """Report whether a creative mode has a declared execution path.
+
+    This is planning evidence only: it never authorizes a provider submission.
+    The mode registry is the source of truth so that a brief cannot silently
+    present a research-only compositor as an implemented renderer.
+    """
+    mode = _text(creative_mode) or "live_action"
+    registry_path = Path(__file__).resolve().parents[1] / "research" / "creative_modes.v1.json"
+    try:
+        registry = json.loads(registry_path.read_text(encoding="utf-8"))
+    except (OSError, json.JSONDecodeError):
+        registry = None
+
+    modes = registry.get("modes") if isinstance(registry, dict) else None
+    row = modes.get(mode) if isinstance(modes, dict) else None
+    if not isinstance(row, dict):
+        readiness = "UNKNOWN_MODE_OR_REGISTRY"
+        renderer = None
+        renderer_status = "UNKNOWN"
+        reason = "创作模式或模式注册表不可验证；不得据此提交媒体任务。"
+    else:
+        renderer = _text(row.get("renderer")) or None
+        renderer_status = _text(row.get("renderer_status")) or "UNSPECIFIED"
+        if mode == "audit_only" or renderer == "none":
+            readiness = "NON_RENDERING_MODE"
+            reason = "此模式只用于审计，不生成媒体。"
+        elif renderer_status == "REFERENCE_BOUNDARY_ONLY":
+            readiness = "ADAPTER_NOT_IMPLEMENTED"
+            reason = "此模式目前只有参考边界，没有已验证的生产合成器适配器。"
+        elif mode == "live_action" and renderer == "agnes-video-2.5-flash":
+            readiness = "ROUTE_DECLARED_NOT_SUBMITTED"
+            reason = "真人视频路由已登记；本简报不代表审查、准入或 Provider 提交已完成。"
+        elif renderer == "provider_or_specialized_compositor":
+            readiness = "RENDERER_UNVERIFIED"
+            reason = "该模式允许多种执行路径，但当前没有可验证的唯一渲染器。"
+        else:
+            readiness = "RENDERER_STATUS_UNSPECIFIED"
+            reason = "注册表未声明可验证的生产就绪状态。"
+
+    return {
+        "schema": "video_kingdom.renderer_capability.v1",
+        "creative_mode": mode,
+        "renderer": renderer,
+        "renderer_status": renderer_status,
+        "production_readiness": readiness,
+        "creative_planning_allowed": True,
+        "provider_submission_authorized": False,
+        "source": "research/creative_modes.v1.json",
+        "reason": reason,
+    }
+
+
 def classify_creator_input(text: str) -> str:
     """Classify a supplied idea without inventing story facts."""
     value = _text(text)
@@ -275,6 +328,9 @@ def build_creator_brief(
         "ending_hook": _text(ending_hook),
         "style": _text(style),
         "creative_mode": creative_mode if creative_mode in CREATIVE_MODES else "live_action",
+        "renderer_capability": resolve_renderer_capability(
+            creative_mode if creative_mode in CREATIVE_MODES else "live_action"
+        ),
         "publish_goal": _text(publish_goal),
         "creative_development": creative_development or build_creative_development_profile(
             title=title,
@@ -307,14 +363,22 @@ def validate_creator_brief(brief: dict[str, Any], *, require_ready: bool = False
         development_check = validate_creative_development_profile(development)
         if development_check["status"] == "FAIL":
             errors.extend(f"creative_development: {item}" for item in development_check["errors"])
+    renderer_capability = resolve_renderer_capability(str(brief.get("creative_mode", "live_action")))
     if require_ready and errors:
-        return {"schema": "ace.video_kingdom.creator_brief_conformance.v1", "status": "FAIL", "verdict": "BLOCKED", "errors": errors}
+        return {
+            "schema": "ace.video_kingdom.creator_brief_conformance.v1",
+            "status": "FAIL",
+            "verdict": "BLOCKED",
+            "errors": errors,
+            "renderer_capability": renderer_capability,
+        }
     return {
         "schema": "ace.video_kingdom.creator_brief_conformance.v1",
         "status": "PASS" if not errors else "PENDING",
         "verdict": "PASS" if not errors else "REVIEW_REQUIRED",
         "errors": errors,
         "required_fields": list(BRIEF_REQUIRED),
+        "renderer_capability": renderer_capability,
         "creative_development": validate_creative_development_profile(brief.get("creative_development") or build_creative_development_profile()),
     }
 
