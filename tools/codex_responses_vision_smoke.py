@@ -16,7 +16,7 @@ from production_control.model_transport import post_responses
 
 
 ROOT = Path(__file__).resolve().parents[1]
-PUBLIC_REFERENCE = "https://raw.githubusercontent.com/zhangapple21-web/-/main/ace-video-kingdom/wenji-episode-006/SCENE_02_typing_log_anchor.png"
+PUBLIC_REFERENCE = "https://raw.githubusercontent.com/zhangapple21-web/ace-video-assets/main/references/wenji-episode-006/SCENE_02_typing_log_anchor.png"
 
 
 def main(argv: list[str] | None = None) -> int:

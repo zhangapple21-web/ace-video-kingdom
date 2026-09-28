@@ -7,7 +7,7 @@ import json
 from pathlib import Path
 
 
-PUBLIC = "https://raw.githubusercontent.com/zhangapple21-web/-/main/ace-video-kingdom/wenji-episode-006/"
+PUBLIC = "https://raw.githubusercontent.com/zhangapple21-web/ace-video-assets/main/references/wenji-episode-006/"
 
 
 def asset(asset_id: str, path: Path, provider_ref: str, asset_type: str = "scene") -> dict:

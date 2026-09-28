@@ -61,7 +61,7 @@ def test_model_boundary_rejects_inline_and_accepts_asset_reference(tmp_path: Pat
 
 
 def test_openai_nested_image_content_is_projected_then_resolved_at_provider_edge(tmp_path: Path):
-    public_url = "https://raw.githubusercontent.com/zhangapple21-web/-/main/ace-video-kingdom/wenji-episode-006/SCENE_02_typing_log_anchor.png"
+    public_url = "https://raw.githubusercontent.com/zhangapple21-web/ace-video-assets/main/references/wenji-episode-006/SCENE_02_typing_log_anchor.png"
     payload, model_request = build_chat_payload(
         model="gpt-5.4",
         messages=[
@@ -84,7 +84,7 @@ def test_openai_nested_image_content_is_projected_then_resolved_at_provider_edge
 
 
 def test_responses_payload_uses_public_reference_not_inline_image(tmp_path: Path):
-    public_url = "https://raw.githubusercontent.com/zhangapple21-web/-/main/ace-video-kingdom/wenji-episode-006/SCENE_02_typing_log_anchor.png"
+    public_url = "https://raw.githubusercontent.com/zhangapple21-web/ace-video-assets/main/references/wenji-episode-006/SCENE_02_typing_log_anchor.png"
     payload, model_request = build_responses_payload(
         model="gpt-5.4-mini",
         messages=[{"role": "user", "content": [{"type": "text", "text": "描述"}, {"type": "image_url", "image_url": {"url": public_url}}]}],

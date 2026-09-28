@@ -51,7 +51,7 @@
         "aspect_ratio": "9:16",
         "n": 1,
         "images": [
-          "https://raw.githubusercontent.com/zhangapple21-web/-/main/ace-video-kingdom/wenji-episode-006/SCENE_02_typing_log_anchor.png"
+          "https://raw.githubusercontent.com/zhangapple21-web/ace-video-assets/main/references/wenji-episode-006/SCENE_02_typing_log_anchor.png"
         ]
       },
       "generation_fingerprint": "ff2b4add9fa1bde0d00cdc5e3698ed47f1bfadb7e3bf283da55bf2a58d1c72dc",
@@ -129,8 +129,8 @@
         "size": "720P",
         "aspect_ratio": "9:16",
         "n": 1,
-        "first_frame": "https://raw.githubusercontent.com/zhangapple21-web/-/main/ace-video-kingdom/wenji-episode-006/SCENE_05_phone_close_anchor.png",
-        "last_frame": "https://raw.githubusercontent.com/zhangapple21-web/-/main/ace-video-kingdom/wenji-episode-006/SCENE_06_consultation_lobby_anchor.png"
+        "first_frame": "https://raw.githubusercontent.com/zhangapple21-web/ace-video-assets/main/references/wenji-episode-006/SCENE_05_phone_close_anchor.png",
+        "last_frame": "https://raw.githubusercontent.com/zhangapple21-web/ace-video-assets/main/references/wenji-episode-006/SCENE_06_consultation_lobby_anchor.png"
       },
       "generation_fingerprint": "c2afa8af07c97f9af858d9c2293f869fb8916c12d1d30f8e43a1e61ca812ab6e",
       "asset_bindings": [
@@ -218,7 +218,7 @@
         "aspect_ratio": "9:16",
         "n": 1,
         "images": [
-          "https://raw.githubusercontent.com/zhangapple21-web/-/main/ace-video-kingdom/wenji-episode-006/SCENE_06_consultation_lobby_anchor.png"
+          "https://raw.githubusercontent.com/zhangapple21-web/ace-video-assets/main/references/wenji-episode-006/SCENE_06_consultation_lobby_anchor.png"
         ]
       },
       "generation_fingerprint": "826bd4e73cb702eefd36384de6ee7947202c8b4632bf2b37e702ab474e507736",
@@ -297,7 +297,7 @@
         "aspect_ratio": "9:16",
         "n": 1,
         "images": [
-          "https://raw.githubusercontent.com/zhangapple21-web/-/main/ace-video-kingdom/wenji-episode-006/SCENE_02_typing_log_anchor.png"
+          "https://raw.githubusercontent.com/zhangapple21-web/ace-video-assets/main/references/wenji-episode-006/SCENE_02_typing_log_anchor.png"
         ]
       },
       "generation_fingerprint": "a5dc9e3998c57d959ab7f9576c0fbfeb785aeb2c63ec9cbce9fc89fc4f9e8c13",
@@ -376,7 +376,7 @@
         "aspect_ratio": "9:16",
         "n": 1,
         "images": [
-          "https://raw.githubusercontent.com/zhangapple21-web/-/main/ace-video-kingdom/wenji-episode-006/SCENE_02_typing_log_anchor.png"
+          "https://raw.githubusercontent.com/zhangapple21-web/ace-video-assets/main/references/wenji-episode-006/SCENE_02_typing_log_anchor.png"
         ]
       },
       "generation_fingerprint": "8f87c6fd3d33c0a6624a85b0e609bfb20942cdaa7bee74e044cac4af9c067772",

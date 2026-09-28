@@ -60,7 +60,7 @@
       {
         "asset_id": "SCENE_02",
         "asset_type": "scene",
-        "provider_ref": "https://raw.githubusercontent.com/zhangapple21-web/-/main/ace-video-kingdom/wenji-episode-006/SCENE_02_typing_log_anchor.png",
+        "provider_ref": "https://raw.githubusercontent.com/zhangapple21-web/ace-video-assets/main/references/wenji-episode-006/SCENE_02_typing_log_anchor.png",
         "scope": "episode",
         "sha256": "e5015c19d9f75b3164aeace2542892f893914cd3c7cd630c4cd69db28c7473a3",
         "version": 1
