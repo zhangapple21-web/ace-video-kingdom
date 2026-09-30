@@ -1714,6 +1714,576 @@
         },
         "task_wall_triage": "TW-2b645b5af932afe4"
       }
+    },
+    {
+      "task_id": "VK-AUTO-8d4483105126d72c",
+      "fingerprint": "8d4483105126d72c",
+      "task_type": "CONTINUITY_REPAIR",
+      "brief": "Review patrol warnings, attribute each failure, and create the smallest repair experiment.",
+      "trigger": "ace_daemon_cycle",
+      "created_at": "2026-09-25T00:00:13.647804+00:00",
+      "status": "REVIEW_REQUIRED",
+      "production_integration": false,
+      "provider_calls": 0,
+      "automatic_promotion": false,
+      "linkage": {
+        "project_id": "episode_007_virtual_data",
+        "evidence_refs": [
+          {
+            "name": "episode_contract",
+            "path": "episodes/episode_007_virtual_data.v1.json",
+            "exists": true,
+            "sha256": "f6a68f214f7d331511c513b3bfe45967f266c515d7bf82e29c651a11e74b4896"
+          },
+          {
+            "name": "six_module_contract",
+            "path": "episodes/episode_007_virtual_data.six_module.v1.json",
+            "exists": true,
+            "sha256": "f0aeab2e24a8022c21c5df9bf9da621cc4d84b3b3222be8077d12e194794bc02"
+          },
+          {
+            "name": "preflight",
+            "path": "research/episode_007_preflight_runtime_20260904.json",
+            "exists": true,
+            "sha256": "b7eee4b92db41531ee958aba1910d270611fc2848120ebcb8d1a4a59090473ba"
+          },
+          {
+            "name": "previous_cut_audit",
+            "path": "research/episode_007_previous_cut_audit_latest.json",
+            "exists": true,
+            "sha256": "4067bcf1e0eb2b1e7bd41e274dbb799719eb66a98ad71da4eb24d68c7f3d5bd5"
+          }
+        ],
+        "contract_status": "LINKED",
+        "previous_cut_audit_status": "AVAILABLE",
+        "next_owner": "video_kingdom_shift",
+        "production_integration": false
+      },
+      "claimed_at": "2026-09-25T00:05:48.335812+00:00",
+      "claim_expires_at": "2026-09-25T00:35:48.335812+00:00",
+      "finished_at": "2026-09-25T14:17:48+08:00",
+      "evidence": {
+        "action": "REPAIR_REVIEW_RECORDED",
+        "warning_count": 116,
+        "warning_digest": "2369046fc3b68c98af8b31c95c0f69c88707a22dd7030de73d7398843eb5298d",
+        "linkage": {
+          "project_id": "episode_007_virtual_data",
+          "linked_artifacts": 4,
+          "hash_verified_artifacts": 4,
+          "contract_status": "LINKED",
+          "previous_cut_audit_status": "AVAILABLE",
+          "next_owner": "video_kingdom_shift"
+        },
+        "task_wall_triage": "TW-261612f04ba128e2"
+      }
+    },
+    {
+      "task_id": "VK-AUTO-19940fcadcccf66a",
+      "fingerprint": "19940fcadcccf66a",
+      "task_type": "CONTINUITY_REPAIR",
+      "brief": "Review patrol warnings, attribute each failure, and create the smallest repair experiment.",
+      "trigger": "ace_daemon_cycle",
+      "created_at": "2026-09-26T00:02:48.202431+00:00",
+      "status": "REVIEW_REQUIRED",
+      "production_integration": false,
+      "provider_calls": 0,
+      "automatic_promotion": false,
+      "linkage": {
+        "project_id": "episode_007_virtual_data",
+        "evidence_refs": [
+          {
+            "name": "episode_contract",
+            "path": "episodes/episode_007_virtual_data.v1.json",
+            "exists": true,
+            "sha256": "f6a68f214f7d331511c513b3bfe45967f266c515d7bf82e29c651a11e74b4896"
+          },
+          {
+            "name": "six_module_contract",
+            "path": "episodes/episode_007_virtual_data.six_module.v1.json",
+            "exists": true,
+            "sha256": "f0aeab2e24a8022c21c5df9bf9da621cc4d84b3b3222be8077d12e194794bc02"
+          },
+          {
+            "name": "preflight",
+            "path": "research/episode_007_preflight_runtime_20260904.json",
+            "exists": true,
+            "sha256": "b7eee4b92db41531ee958aba1910d270611fc2848120ebcb8d1a4a59090473ba"
+          },
+          {
+            "name": "previous_cut_audit",
+            "path": "research/episode_007_previous_cut_audit_latest.json",
+            "exists": true,
+            "sha256": "4067bcf1e0eb2b1e7bd41e274dbb799719eb66a98ad71da4eb24d68c7f3d5bd5"
+          }
+        ],
+        "contract_status": "LINKED",
+        "previous_cut_audit_status": "AVAILABLE",
+        "next_owner": "video_kingdom_shift",
+        "production_integration": false
+      },
+      "claimed_at": "2026-09-26T00:08:36.219932+00:00",
+      "claim_expires_at": "2026-09-26T00:38:36.219932+00:00",
+      "finished_at": "2026-09-27T03:03:38+08:00",
+      "evidence": {
+        "action": "REPAIR_REVIEW_RECORDED",
+        "warning_count": 116,
+        "warning_digest": "2369046fc3b68c98af8b31c95c0f69c88707a22dd7030de73d7398843eb5298d",
+        "linkage": {
+          "project_id": "episode_007_virtual_data",
+          "linked_artifacts": 4,
+          "hash_verified_artifacts": 4,
+          "contract_status": "LINKED",
+          "previous_cut_audit_status": "AVAILABLE",
+          "next_owner": "video_kingdom_shift"
+        },
+        "task_wall_triage": "TW-b91f4b87b50238a4"
+      }
+    },
+    {
+      "task_id": "VK-AUTO-8c0368ad7c3424ff",
+      "fingerprint": "8c0368ad7c3424ff",
+      "task_type": "CONTINUITY_REPAIR",
+      "brief": "Review patrol warnings, attribute each failure, and create the smallest repair experiment.",
+      "trigger": "ace_daemon_cycle",
+      "created_at": "2026-09-27T00:00:47.337932+00:00",
+      "status": "REVIEW_REQUIRED",
+      "production_integration": false,
+      "provider_calls": 0,
+      "automatic_promotion": false,
+      "linkage": {
+        "project_id": "episode_007_virtual_data",
+        "evidence_refs": [
+          {
+            "name": "episode_contract",
+            "path": "episodes/episode_007_virtual_data.v1.json",
+            "exists": true,
+            "sha256": "f6a68f214f7d331511c513b3bfe45967f266c515d7bf82e29c651a11e74b4896"
+          },
+          {
+            "name": "six_module_contract",
+            "path": "episodes/episode_007_virtual_data.six_module.v1.json",
+            "exists": true,
+            "sha256": "f0aeab2e24a8022c21c5df9bf9da621cc4d84b3b3222be8077d12e194794bc02"
+          },
+          {
+            "name": "preflight",
+            "path": "research/episode_007_preflight_runtime_20260904.json",
+            "exists": true,
+            "sha256": "b7eee4b92db41531ee958aba1910d270611fc2848120ebcb8d1a4a59090473ba"
+          },
+          {
+            "name": "previous_cut_audit",
+            "path": "research/episode_007_previous_cut_audit_latest.json",
+            "exists": true,
+            "sha256": "4067bcf1e0eb2b1e7bd41e274dbb799719eb66a98ad71da4eb24d68c7f3d5bd5"
+          }
+        ],
+        "contract_status": "LINKED",
+        "previous_cut_audit_status": "AVAILABLE",
+        "next_owner": "video_kingdom_shift",
+        "production_integration": false
+      },
+      "claimed_at": "2026-09-27T00:06:54.220359+00:00",
+      "claim_expires_at": "2026-09-27T00:36:54.220359+00:00",
+      "finished_at": "2026-09-28T13:08:42+08:00",
+      "evidence": {
+        "action": "REPAIR_REVIEW_RECORDED",
+        "warning_count": 116,
+        "warning_digest": "2369046fc3b68c98af8b31c95c0f69c88707a22dd7030de73d7398843eb5298d",
+        "linkage": {
+          "project_id": "episode_007_virtual_data",
+          "linked_artifacts": 4,
+          "hash_verified_artifacts": 4,
+          "contract_status": "LINKED",
+          "previous_cut_audit_status": "AVAILABLE",
+          "next_owner": "video_kingdom_shift"
+        },
+        "task_wall_triage": "TW-843cceaa818eb789"
+      }
+    },
+    {
+      "task_id": "VK-LEARNING-7e553298c418fdf0",
+      "fingerprint": "7e553298c418fdf0",
+      "task_type": "LEARNING_RESULT",
+      "brief": "将已验证的外部矿源经验转成一次离线视频王国复测，不直接改生产默认。",
+      "created_at": "2026-09-27T16:06:30.894974+00:00",
+      "status": "COMPLETED",
+      "production_integration": false,
+      "provider_calls": 0,
+      "automatic_promotion": false,
+      "learning": {
+        "card_id": "CAP-RQ-20260928-001",
+        "source_task_id": "RQ-20260928-001",
+        "source_repository": "https://api.github.com/repos/chenyuxiaojin/video-agent-skills",
+        "card_sha256": "8992d57b890453636a7283378caa0e813dc6b7357fd36dff42d8d2170e15d7c5",
+        "capability_state": "RESEARCH_READY_NOT_PROMOTED",
+        "reuse_scope": [
+          "research",
+          "draft_contract",
+          "offline_ab_test"
+        ],
+        "blocked_scope": [
+          "production_default",
+          "provider_route",
+          "automatic_video_submit"
+        ],
+        "recommended_capabilities": [],
+        "next_verification": []
+      },
+      "linkage": {
+        "next_owner": "video_kingdom_shift",
+        "production_integration": false,
+        "source_boundary": "ACE_GUARDED_CAPABILITY_CARD"
+      },
+      "claimed_at": "2026-09-27T16:06:34.162938+00:00",
+      "claim_expires_at": "2026-09-27T16:36:34.162938+00:00",
+      "finished_at": "2026-09-28T13:08:42+08:00",
+      "evidence": {
+        "action": "LEARNING_RESULT_RECORDED",
+        "source_task_id": "RQ-20260928-001",
+        "capability_state": "RESEARCH_READY_NOT_PROMOTED",
+        "recommended_capabilities": [],
+        "next_verification": [],
+        "reuse_scope": [
+          "research",
+          "draft_contract",
+          "offline_ab_test"
+        ],
+        "blocked_scope": [
+          "production_default",
+          "provider_route",
+          "automatic_video_submit"
+        ],
+        "provider_calls": 0,
+        "production_integration": false,
+        "linkage": {
+          "project_id": null,
+          "linked_artifacts": 0,
+          "hash_verified_artifacts": 0,
+          "contract_status": "UNKNOWN",
+          "previous_cut_audit_status": "UNKNOWN",
+          "next_owner": "video_kingdom_shift"
+        },
+        "task_wall_triage": "TW-89a22d2fe29cd454"
+      }
+    },
+    {
+      "task_id": "VK-AUTO-631113cf67de00df",
+      "fingerprint": "631113cf67de00df",
+      "task_type": "CONTINUITY_REPAIR",
+      "brief": "Review patrol warnings, attribute each failure, and create the smallest repair experiment.",
+      "trigger": "ace_daemon_cycle",
+      "created_at": "2026-09-28T00:04:31.707193+00:00",
+      "status": "REVIEW_REQUIRED",
+      "production_integration": false,
+      "provider_calls": 0,
+      "automatic_promotion": false,
+      "linkage": {
+        "project_id": "episode_007_virtual_data",
+        "evidence_refs": [
+          {
+            "name": "episode_contract",
+            "path": "episodes/episode_007_virtual_data.v1.json",
+            "exists": true,
+            "sha256": "f6a68f214f7d331511c513b3bfe45967f266c515d7bf82e29c651a11e74b4896"
+          },
+          {
+            "name": "six_module_contract",
+            "path": "episodes/episode_007_virtual_data.six_module.v1.json",
+            "exists": true,
+            "sha256": "f0aeab2e24a8022c21c5df9bf9da621cc4d84b3b3222be8077d12e194794bc02"
+          },
+          {
+            "name": "preflight",
+            "path": "research/episode_007_preflight_runtime_20260904.json",
+            "exists": true,
+            "sha256": "b7eee4b92db41531ee958aba1910d270611fc2848120ebcb8d1a4a59090473ba"
+          },
+          {
+            "name": "previous_cut_audit",
+            "path": "research/episode_007_previous_cut_audit_latest.json",
+            "exists": true,
+            "sha256": "4067bcf1e0eb2b1e7bd41e274dbb799719eb66a98ad71da4eb24d68c7f3d5bd5"
+          }
+        ],
+        "contract_status": "LINKED",
+        "previous_cut_audit_status": "AVAILABLE",
+        "next_owner": "video_kingdom_shift",
+        "production_integration": false
+      },
+      "claimed_at": "2026-09-28T00:10:09.049771+00:00",
+      "claim_expires_at": "2026-09-28T00:40:09.049771+00:00",
+      "finished_at": "2026-09-28T13:08:42+08:00",
+      "evidence": {
+        "action": "REPAIR_REVIEW_RECORDED",
+        "warning_count": 116,
+        "warning_digest": "2369046fc3b68c98af8b31c95c0f69c88707a22dd7030de73d7398843eb5298d",
+        "linkage": {
+          "project_id": "episode_007_virtual_data",
+          "linked_artifacts": 4,
+          "hash_verified_artifacts": 4,
+          "contract_status": "LINKED",
+          "previous_cut_audit_status": "AVAILABLE",
+          "next_owner": "video_kingdom_shift"
+        },
+        "task_wall_triage": "TW-3826c43deeb4bc21"
+      }
+    },
+    {
+      "task_id": "VK-LEARNING-84828ee094422179",
+      "fingerprint": "84828ee094422179",
+      "task_type": "LEARNING_RESULT",
+      "brief": "将已验证的外部矿源经验转成一次离线视频王国复测，不直接改生产默认。",
+      "created_at": "2026-09-28T16:06:12.631819+00:00",
+      "status": "COMPLETED",
+      "production_integration": false,
+      "provider_calls": 0,
+      "automatic_promotion": false,
+      "learning": {
+        "card_id": "CAP-RQ-20260929-001",
+        "source_task_id": "RQ-20260929-001",
+        "source_repository": "https://api.github.com/repos/Comfy-Org/ComfyUI",
+        "card_sha256": "1f7ec70124a1f859ce7b4df337f5a913e21a28751863102092b260b97ffc70ea",
+        "capability_state": "RESEARCH_READY_NOT_PROMOTED",
+        "reuse_scope": [
+          "research",
+          "draft_contract",
+          "offline_ab_test"
+        ],
+        "blocked_scope": [
+          "production_default",
+          "provider_route",
+          "automatic_video_submit"
+        ],
+        "recommended_capabilities": [],
+        "next_verification": []
+      },
+      "linkage": {
+        "next_owner": "video_kingdom_shift",
+        "production_integration": false,
+        "source_boundary": "ACE_GUARDED_CAPABILITY_CARD"
+      },
+      "claimed_at": "2026-09-28T16:06:14.926409+00:00",
+      "claim_expires_at": "2026-09-28T16:36:14.926409+00:00",
+      "finished_at": "2026-09-29T10:28:42+08:00",
+      "evidence": {
+        "action": "LEARNING_RESULT_RECORDED",
+        "source_task_id": "RQ-20260929-001",
+        "capability_state": "RESEARCH_READY_NOT_PROMOTED",
+        "recommended_capabilities": [],
+        "next_verification": [],
+        "reuse_scope": [
+          "research",
+          "draft_contract",
+          "offline_ab_test"
+        ],
+        "blocked_scope": [
+          "production_default",
+          "provider_route",
+          "automatic_video_submit"
+        ],
+        "provider_calls": 0,
+        "production_integration": false,
+        "linkage": {
+          "project_id": null,
+          "linked_artifacts": 0,
+          "hash_verified_artifacts": 0,
+          "contract_status": "UNKNOWN",
+          "previous_cut_audit_status": "UNKNOWN",
+          "next_owner": "video_kingdom_shift"
+        },
+        "task_wall_triage": "TW-9724cd3338707664"
+      }
+    },
+    {
+      "task_id": "VK-AUTO-71d3c336bee04eb7",
+      "fingerprint": "71d3c336bee04eb7",
+      "task_type": "CONTINUITY_REPAIR",
+      "brief": "Review patrol warnings, attribute each failure, and create the smallest repair experiment.",
+      "trigger": "ace_daemon_cycle",
+      "created_at": "2026-09-29T00:02:07.342274+00:00",
+      "status": "REVIEW_REQUIRED",
+      "production_integration": false,
+      "provider_calls": 0,
+      "automatic_promotion": false,
+      "linkage": {
+        "project_id": "episode_007_virtual_data",
+        "evidence_refs": [
+          {
+            "name": "episode_contract",
+            "path": "episodes/episode_007_virtual_data.v1.json",
+            "exists": true,
+            "sha256": "f6a68f214f7d331511c513b3bfe45967f266c515d7bf82e29c651a11e74b4896"
+          },
+          {
+            "name": "six_module_contract",
+            "path": "episodes/episode_007_virtual_data.six_module.v1.json",
+            "exists": true,
+            "sha256": "f0aeab2e24a8022c21c5df9bf9da621cc4d84b3b3222be8077d12e194794bc02"
+          },
+          {
+            "name": "preflight",
+            "path": "research/episode_007_preflight_runtime_20260904.json",
+            "exists": true,
+            "sha256": "b7eee4b92db41531ee958aba1910d270611fc2848120ebcb8d1a4a59090473ba"
+          },
+          {
+            "name": "previous_cut_audit",
+            "path": "research/episode_007_previous_cut_audit_latest.json",
+            "exists": true,
+            "sha256": "4067bcf1e0eb2b1e7bd41e274dbb799719eb66a98ad71da4eb24d68c7f3d5bd5"
+          }
+        ],
+        "contract_status": "LINKED",
+        "previous_cut_audit_status": "AVAILABLE",
+        "next_owner": "video_kingdom_shift",
+        "production_integration": false
+      },
+      "claimed_at": "2026-09-29T00:07:50.957958+00:00",
+      "claim_expires_at": "2026-09-29T00:37:50.957958+00:00",
+      "finished_at": "2026-09-29T10:28:42+08:00",
+      "evidence": {
+        "action": "REPAIR_REVIEW_RECORDED",
+        "warning_count": 116,
+        "warning_digest": "2369046fc3b68c98af8b31c95c0f69c88707a22dd7030de73d7398843eb5298d",
+        "linkage": {
+          "project_id": "episode_007_virtual_data",
+          "linked_artifacts": 4,
+          "hash_verified_artifacts": 4,
+          "contract_status": "LINKED",
+          "previous_cut_audit_status": "AVAILABLE",
+          "next_owner": "video_kingdom_shift"
+        },
+        "task_wall_triage": "TW-4bee61021d99b90c"
+      }
+    },
+    {
+      "task_id": "VK-LEARNING-f2889c48887a114f",
+      "fingerprint": "f2889c48887a114f",
+      "task_type": "LEARNING_RESULT",
+      "brief": "将已验证的外部矿源经验转成一次离线视频王国复测，不直接改生产默认。",
+      "created_at": "2026-09-29T16:01:32.383659+00:00",
+      "status": "COMPLETED",
+      "production_integration": false,
+      "provider_calls": 0,
+      "automatic_promotion": false,
+      "learning": {
+        "card_id": "CAP-RQ-20260930-001",
+        "source_task_id": "RQ-20260930-001",
+        "source_repository": "https://api.github.com/repos/PomeloR611/libtv-video-agent",
+        "card_sha256": "d89b2d1ea5b85db647d06bce120c422b0c676acbd71507bedc76e76494140070",
+        "capability_state": "RESEARCH_READY_NOT_PROMOTED",
+        "reuse_scope": [
+          "research",
+          "draft_contract",
+          "offline_ab_test"
+        ],
+        "blocked_scope": [
+          "production_default",
+          "provider_route",
+          "automatic_video_submit"
+        ],
+        "recommended_capabilities": [],
+        "next_verification": []
+      },
+      "linkage": {
+        "next_owner": "video_kingdom_shift",
+        "production_integration": false,
+        "source_boundary": "ACE_GUARDED_CAPABILITY_CARD"
+      },
+      "claimed_at": "2026-09-29T16:01:34.288852+00:00",
+      "claim_expires_at": "2026-09-29T16:31:34.288852+00:00",
+      "finished_at": "2026-09-30T10:42:45+08:00",
+      "evidence": {
+        "action": "LEARNING_RESULT_RECORDED",
+        "source_task_id": "RQ-20260930-001",
+        "capability_state": "RESEARCH_READY_NOT_PROMOTED",
+        "recommended_capabilities": [],
+        "next_verification": [],
+        "reuse_scope": [
+          "research",
+          "draft_contract",
+          "offline_ab_test"
+        ],
+        "blocked_scope": [
+          "production_default",
+          "provider_route",
+          "automatic_video_submit"
+        ],
+        "provider_calls": 0,
+        "production_integration": false,
+        "linkage": {
+          "project_id": null,
+          "linked_artifacts": 0,
+          "hash_verified_artifacts": 0,
+          "contract_status": "UNKNOWN",
+          "previous_cut_audit_status": "UNKNOWN",
+          "next_owner": "video_kingdom_shift"
+        },
+        "task_wall_triage": "TW-c310857312720636"
+      }
+    },
+    {
+      "task_id": "VK-AUTO-caf9848c6b63b587",
+      "fingerprint": "caf9848c6b63b587",
+      "task_type": "CONTINUITY_REPAIR",
+      "brief": "Review patrol warnings, attribute each failure, and create the smallest repair experiment.",
+      "trigger": "ace_daemon_cycle",
+      "created_at": "2026-09-30T00:01:04.856540+00:00",
+      "status": "REVIEW_REQUIRED",
+      "production_integration": false,
+      "provider_calls": 0,
+      "automatic_promotion": false,
+      "linkage": {
+        "project_id": "episode_007_virtual_data",
+        "evidence_refs": [
+          {
+            "name": "episode_contract",
+            "path": "episodes/episode_007_virtual_data.v1.json",
+            "exists": true,
+            "sha256": "f6a68f214f7d331511c513b3bfe45967f266c515d7bf82e29c651a11e74b4896"
+          },
+          {
+            "name": "six_module_contract",
+            "path": "episodes/episode_007_virtual_data.six_module.v1.json",
+            "exists": true,
+            "sha256": "f0aeab2e24a8022c21c5df9bf9da621cc4d84b3b3222be8077d12e194794bc02"
+          },
+          {
+            "name": "preflight",
+            "path": "research/episode_007_preflight_runtime_20260904.json",
+            "exists": true,
+            "sha256": "b7eee4b92db41531ee958aba1910d270611fc2848120ebcb8d1a4a59090473ba"
+          },
+          {
+            "name": "previous_cut_audit",
+            "path": "research/episode_007_previous_cut_audit_latest.json",
+            "exists": true,
+            "sha256": "4067bcf1e0eb2b1e7bd41e274dbb799719eb66a98ad71da4eb24d68c7f3d5bd5"
+          }
+        ],
+        "contract_status": "LINKED",
+        "previous_cut_audit_status": "AVAILABLE",
+        "next_owner": "video_kingdom_shift",
+        "production_integration": false
+      },
+      "claimed_at": "2026-09-30T00:06:31.851023+00:00",
+      "claim_expires_at": "2026-09-30T00:36:31.851023+00:00",
+      "finished_at": "2026-09-30T10:42:45+08:00",
+      "evidence": {
+        "action": "REPAIR_REVIEW_RECORDED",
+        "warning_count": 116,
+        "warning_digest": "2369046fc3b68c98af8b31c95c0f69c88707a22dd7030de73d7398843eb5298d",
+        "linkage": {
+          "project_id": "episode_007_virtual_data",
+          "linked_artifacts": 4,
+          "hash_verified_artifacts": 4,
+          "contract_status": "LINKED",
+          "previous_cut_audit_status": "AVAILABLE",
+          "next_owner": "video_kingdom_shift"
+        },
+        "task_wall_triage": "TW-dd1ea7858d7efdbf"
+      }
     }
   ]
 }

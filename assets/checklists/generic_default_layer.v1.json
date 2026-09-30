@@ -292,6 +292,87 @@
       "also": "director_preflight.camera.reverse_shot_policy",
       "severity": "advisory",
       "new_drama": "advisory"
+    },
+    {
+      "id": "A33",
+      "item": "剧本是唯一创作真源；镜头、资产、音频和提示词必须标明派生关系",
+      "file": "research/creative_collaboration_contract.v1.json",
+      "field": "canonical_artifacts.script / shot_contract / receipts",
+      "also": "research/shared_information_hub.v1.json#source_of_truth",
+      "severity": "advisory",
+      "new_drama": "advisory"
+    },
+    {
+      "id": "A34",
+      "item": "实质修改必须生成新版本并保留父版本、哈希、改动摘要；禁止静默覆盖",
+      "file": "research/creative_collaboration_contract.v1.json",
+      "field": "revision_policy.required_fields / overwrite_policy",
+      "also": "production_control.workflow_contract.v1.json#generation_gate.request_lineage",
+      "severity": "advisory",
+      "new_drama": "advisory"
+    },
+    {
+      "id": "A35",
+      "item": "批注必须锚定段落/字段/镜头；高风险未解决批注阻断锁稿，批注本身不等于批准",
+      "file": "research/creative_collaboration_contract.v1.json",
+      "field": "annotation_policy",
+      "also": "research/shared_information_hub.v1.json#record_requirements.annotation_rule",
+      "severity": "advisory",
+      "new_drama": "advisory"
+    },
+    {
+      "id": "A36",
+      "item": "按最小权限交接：作者写创作、审阅者提风险、导演派生镜头、执行者只消费批准快照",
+      "file": "research/creative_collaboration_contract.v1.json",
+      "field": "roles_and_permissions",
+      "also": "research/shared_information_hub.v1.json#default_roles",
+      "severity": "advisory",
+      "new_drama": "advisory"
+    },
+    {
+      "id": "A37",
+      "item": "AI只能整理/标注/审计/提出候选；核心主题、动机、结局和最终取舍必须由人采用",
+      "file": "research/creative_collaboration_contract.v1.json",
+      "field": "ai_authority",
+      "also": "creator_workflow.py#creator_brief_and_publish_recap",
+      "severity": "advisory",
+      "new_drama": "advisory"
+    },
+    {
+      "id": "A38",
+      "item": "交接只消费已批准快照；候选稿、失败分支和 Provider completed 不得冒充成片",
+      "file": "research/creative_collaboration_contract.v1.json",
+      "field": "principles / canonical_artifacts.approved_state",
+      "also": "roles/planner.md; roles/executor.md",
+      "severity": "advisory",
+      "new_drama": "advisory"
+    },
+    {
+      "id": "A39",
+      "item": "剧本默认留在本地工作区；外部上传须用户明确授权，密钥不得进入协作材料",
+      "file": "research/creative_collaboration_contract.v1.json",
+      "field": "security",
+      "also": "production_control/privacy_scan.py",
+      "severity": "advisory",
+      "new_drama": "advisory"
+    },
+    {
+      "id": "A40",
+      "item": "人格DNA六维可作为创作层输入，只映射到 persona_card 的性格/动机候选；不得绕过视觉/语音锁、双审和五关",
+      "file": "assets/schema/persona_dna.v1.json",
+      "field": "root_will / trauma / desire / fear / behavior_pattern / personality_conflict",
+      "also": "tools/validate_persona_dna.py",
+      "severity": "advisory",
+      "new_drama": "advisory"
+    },
+    {
+      "id": "A41",
+      "item": "冲突驱动场景引擎：关键冲突场先建双方目标与收场变化，不是把台词拉长；旧合同缺省不阻断",
+      "file": "docs/CONFLICT_DRIVEN_SCENE_ENGINE.v1.md",
+      "field": "scene_class / goals / change_at_end / speech_intent_readable / completes_in_picture",
+      "also": "tools/validate_conflict_driven_scene.py",
+      "severity": "advisory",
+      "new_drama": "required"
     }
   ],
   "new_drama_production_semantics": {

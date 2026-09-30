@@ -14,6 +14,7 @@
 | `LingyunStudio/AgnesStudio` | Agnes 2.5 请求形状、`video_id` 轮询方式 | 桌面 UI/Rust 状态层不引入 |
 | `AgnesAI-Labs/skills` | 官方技能组织方式和字段变化线索 | 当前默认仍为 2.0，不能覆盖本项目 2.5 约束 |
 | `C:\Users\Administrator\Desktop\AI 短剧制作完整工作流.md.txt` | 八阶段短剧管线、资产先行、结构化分镜、阶段验收、先小样后全量 | 作为编排/质检参考；不直接复制其模型选型或外部服务依赖 |
+| 用户提供的“AI沙盒人格矩阵短剧流水线”（自用完整版 + 工业级 V2.0） | 人格六维DNA、种子开局不锁死、沙盒涌现剧情、卡壳招聘新人、文本层防OOC | 只作创作层输入；不换入口/Provider；不把95%/98%/日产50集当硬门；产出必须再进双审五关 |
 | 用户提供的“扣子视频制作公开流程（完整版）” | 需求→资产→剧本/分镜分层、对白归属、素材绑定、按项目配音、题材触发手机专项、审片局部重做；四步双审是本项目门禁 | 不接入扣子插件/故事板/画布/积分；不把状态机建成新文件；聊天 UI 合成器仅显式 `chat_ui` 模式 |
 
 ## 吃矿规则
@@ -155,6 +156,16 @@
 - 落地：memory/L3_experience.jsonl；research/soul_shot_ledger.v1.jsonl；SKILL「导演当魂」。
 - 不升默认：六层意图路由、词库选择器、无安全壳、自动改剧情。
 
+## 本次吸收：墨契式剧本协作与版本管理（2026-09-19）
+
+- 吸收点：把剧本当作唯一创作真源；结构化数据、批注、版本分支和权限交接服务于创作，不替代创作。
+- 默认落地：`research/creative_collaboration_contract.v1.json`、`research/shared_information_hub.v1.json`、`run_idea_pipeline.py` 的协作快照，以及通用默认层 A33–A39。
+- 版本规则：实质改动必须带 `revision_id`、`parent_revision_id`、`script_hash`、改动摘要和 `supersedes` 关系；剧本改动回到编剧审核，提示词改动重做导演审核。
+- 批注规则：评论必须绑定段落/字段/镜头；高风险未解决评论阻断锁稿，但评论本身不能批准生成或交付。
+- 权限规则：固定四档 `OWNER → AUTHORING → REVIEW → EXECUTION`；作者/制片掌握核心取舍，审阅者负责风险，导演负责镜头派生，执行者只消费 Approved State 并写收据。
+- AI边界：允许整理、抽取、检查、比较和提出标注候选；禁止静默改写、无标注补事实、自我批准或改变 Provider 路由。
+- 不吸收：不接入“墨契”平台、不上传本地剧本、不把其权限模型当安全证明、不新增生产入口或审批层；现有双审、五关收据和 Agnes 主链保持不变。
+
 
 ## 本次纠正：灵魂不在 Agnes 即兴（2026-09-18）
 
@@ -204,3 +215,57 @@
 - dispatch_kernel 仍是 FREE_ZONE_RESEARCH_ONLY，禁止升生产硬门。
 - 空 Scene State 在 continuity_bridge 只 warning，不 BLOCK 旧桥。
 
+## 本次吸收：沙盒人格矩阵流水线（2026-09-20）
+
+- 吸收人格六维DNA、种子只写当下、沙盒自主涌现、剧情卡壳才招聘新人、文本层防人设崩坏。
+- 落地：`assets/schema/persona_dna.v1.json`、`tools/validate_persona_dna.py`、方法项 A40。
+- 映射：DNA → persona_card 性格/动机候选 → 人确认剧本 → 编剧导演双审 → video_kingdom_entry → Agnes。
+- 不吸收五层工业架构、产能KPI、未锁定生成API、用三个校验Agent替代双审、单句15字硬切。
+- 冲突禁用：C23。对照见 `research/persona_sandbox_pipeline_absorption_20260920.md`。
+
+## 本次审计：沙盒人格矩阵短剧管线外部清单（2026-09-21）
+
+- 核验了 `AMAP-ML/DreamX-World`、`ZeroLu/awesome-seedance`、`Tencent-Hunyuan/HY-Motion-1.0`、`ZC89757/story-claw`、`chatfire-AI/huobao-drama`、`yihao-meng/CausalCine`、`ArcReel/ArcReel` 等公开仓库。
+- 只吸收 Story Claw 的阶段化资产/voice map/VLM 首尾帧复核思路、awesome-seedance 的提示词组织方法、ArcReel 的可恢复/版本/成本收据思路；不复制外部代码、不新增入口、不切换 Agnes。
+- `Toonflow.NET` 和清单所称 `AI168` 渲染管线未找到可核验对应；DreamX/HY-Motion 是高显存研究模型；Huobao 为 CC BY-NC-SA；ArcReel 为 AGPL-3.0；CausalCine 无可核验开源许可；Mixamo 不能按 CC0 登记。
+- 详细证据与边界见 `research/external_sandbox_pipeline_audit_20260921.md`。
+
+
+## 本次吸收：用户提供文章《鬼灭之刃》破圈机制（2026-09-21）
+
+- 来源：澎湃新闻/湃客 GQ报道，https://m.thepaper.cn/baijiahao_11567766。
+- 吸收：简单入口承载深层亲情/孤独/和解；主角以守护和活下去为行动理由；对立者有可追溯因果；温柔落到行动；基本因果清晰、情绪负担可控；美与险并置。
+- 落地：仅进入《残荷诡影》CREATOR_LIVE 的 DNA 对照实验，不修改 Agnes、video_kingdom_entry、Beat、Shot 或生产 Provider。
+- 边界：不复制原作角色/剧情/术语/视觉符号；不把宽恕、商业发行或“前世记忆预知”设为硬规则。详见 `research/creator_references/残荷诡影_鬼灭之刃参考提炼_v1.md`。
+
+
+## 本次吸收：Quartz v5 与听荷轩世界档案馆架构（2026-09-21)
+
+- 来源：`jackyzha0/quartz`（MIT，Quartz v5，静态 Markdown 数字花园/知识站点生成器）以及用户提供的《听荷轩世界档案馆 V1.1》架构讨论。
+- 吸收：Markdown 发布、内部链接、反向链接、全文搜索、Graph/Canvas 导航和可自定义页面布局。
+- 不吸收：不把 Quartz 当世界数据库；不由页面链接推断家族关系；不让 Quartz 直接读取 CREATOR_LIVE 工作区；不把默认 Quartz 主题当作听荷轩视觉风格。
+- 结构决策：听荷轩采用世界真相层、创作演化层、公开呈现层、生产溯源层四平面；未来 Cloudflare Pages/Workers/D1/R2/KV 各司其职，当前不部署、不接域名。
+- 本地落地：`tools/build_creator_encyclopedia.py` 与 `research/creator_encyclopedia/听荷轩世界档案馆_V1.1_核心数据与发布协议.md`。
+
+
+## 本次吸收：冲突驱动场景引擎（2026-09-22）
+
+- 吸收：短剧对话要冲突持续、情绪升级、关系变化、悬念保留；潜台词/压力层/信息差；A/B/C 三类场；接到配音 intent 与画面反应。
+- 落地：docs/CONFLICT_DRIVEN_SCENE_ENGINE.v1.md、governance/conflict_driven_scene_engine.v1.json、tools/validate_conflict_driven_scene.py、方法项 A41。
+- 不吸收：台词拉长器、每场机械套「挑衅-隐忍-爆发」、用堆重复辱骂冒充升级、把林墨/周培示例写进残荷正史。
+- 缺省不阻断旧合同。不换 video_kingdom_entry / Provider。
+
+## 本次吸收：AI 漫剧工业化创作流程（2026-09-24）
+
+- 来源：用户提供的《AI漫剧创作智能体》可见工作流程与输出规范；来源记录见 `research/sources/ai_drama_creator_workflow_20260924.md`，项目化框架见 `docs/CREATIVE_DEVELOPMENT_FRAMEWORK.v1.md`。
+- 吸收：输入分类、人物全集与关系/阵营/冲突图、角色十项记忆提示、角色标签到行为/表情/台词/镜头、角色成长弧线、视觉世界规则、单集钩子/冲突/信息变化/结尾问题检查。
+- 落地：`tools/creator_workflow.py` 生成并校验 `creative_development_profile.v1`；`tools/run_idea_pipeline.py` 在唯一入口编译、写入计划、项目文件和创作层收据；模板为 `assets/templates/creative_development_profile.v1.json`；回归覆盖 `tests/test_creative_development.py`。
+- 映射：角色数据进入 Character Identity/State；视觉世界进入 Scene State；剧集结构进入剧本审查与 Shot State；质量检查进入编剧/导演/反例/连续性审计线索。
+- 不吸收：固定 40/60/80 集、每集固定 120 秒、英文提示词硬要求、把十项清单或角色扫描变成每镜硬门、改变 Provider/入口或绕过五关。该层 `production_integration=false`，只提供创作规划和审计信息。
+
+## 本次拆解：外部成熟视频 Agent 的小步生产纪律（2026-09-25）
+
+- 一手来源：`PomeloR611/libtv-video-agent`、`chenyuxiaojin/video-agent-skills`、`kangarooking/director-skills`、`Qiuxiangxiang/libtv-skill-pro`；仓库、许可证和 README 哈希见 `research/creator_references/short_drama_workflow_deconstruction_20260925.md`。
+- 吸收：定版资产与故事板先行；3–5 镜小批次预览；Producer/编剧/分镜/配音/视觉/剪辑职责分离但共享结构化项目包；动作因果链和环境反馈；dry-run、结构化错误、轮询和 MP4 读回。
+- 本地落地：`tools/validate_story_action.py`、`tools/validate_creative_slice.py`、`assets/templates/creative_slice.v1.json`、`governance/story_action_gate.v1.json`；试拍批处理在参考图失效时 fail-fast，缺三拍创作收据不扩批。
+- 不吸收：外部平台 CLI、模型、额度、首帧槽位和人工确认方式；不替换 `video_kingdom_entry.py`、Agnes 或 ACE 路由。所有候选仍需两次独立实验和 painful review 才能晋升。

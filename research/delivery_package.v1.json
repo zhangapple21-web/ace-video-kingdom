@@ -11,5 +11,17 @@
     "provider_completed_is_not_approved_master",
     "temporary_preview_is_not_publish_package",
     "missing_rights_receipt_blocks_publish_package"
-  ]
+  ],
+  "closure": {
+    "source_of_truth": "CLOSURE_MANIFEST.v1.md",
+    "required_after_delivery": true,
+    "terminal_outcome": "DELIVERED_CLOSED",
+    "alternatives_when_not_delivered": ["BLOCKED", "PAUSED", "ARCHIVED"],
+    "required_receipt_fields": [
+      "closure_id", "run_id", "project_id", "script_hash", "contract_hash",
+      "selected_takes", "excluded_candidates", "qc", "rights_receipts",
+      "outputs", "final_confirmation", "known_limits", "recovery", "closure_hash"
+    ],
+    "post_close": "immutable; rework or republish creates a new revision/run"
+  }
 }

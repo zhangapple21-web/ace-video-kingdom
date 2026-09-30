@@ -59,3 +59,13 @@ research/promotion_gate_runs/*.json
 experiments/*.admission.json
 research/*_smoke_latest.json
 research/admission_receipts/shot_*.json
+
+# Historical project exports and migration snapshots are not ACE runtime source.
+# Keep them out of the public canonical branch unless a separate publication
+# decision records licensing and provenance.
+.migration_backups/
+research/persona_dna_library/**/world_live_watchdog.log
+research/persona_dna_library/**/world_live_cycle_*.log
+research/persona_dna_library/**/sandbox_*/
+sites/tinghe-archive/.wrangler/
+sites/tinghe-archive/**/app.js.bak-*

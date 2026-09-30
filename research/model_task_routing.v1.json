@@ -6,14 +6,14 @@
   "task_classes": {
     "DIRECTOR": {
       "purpose": "剧本深读、剧情重构、导演级分镜、角色行为弧",
-      "primary": {"provider": "shenwen_grok", "model": "grok-4.6", "status": "configured_external_channel"},
+      "primary": {"provider": "shenwen_grok", "model": "grok-4.7", "status": "configured_external_channel"},
       "challenge": {"provider": "shenwen_grok", "model": "grok-4.5", "status": "configured_external_channel"},
       "formal_reviewer": {"provider": "codex", "model": "gpt-5.6-terra", "status": "current_codex_route"},
       "escalation": {"provider": "codex", "model": "gpt-5.6-terra", "status": "current_codex_route"}
     },
     "RESEARCH": {
       "purpose": "公开资料比较、反例、能力测绘和实验假设",
-      "primary": {"provider": "shenwen_grok", "model": "grok-4.6", "status": "configured_external_channel"},
+      "primary": {"provider": "shenwen_grok", "model": "grok-4.7", "status": "configured_external_channel"},
       "challenge": {"provider": "shenwen_grok", "model": "grok-4.5", "status": "configured_external_channel"}
     },
     "UTILITY": {

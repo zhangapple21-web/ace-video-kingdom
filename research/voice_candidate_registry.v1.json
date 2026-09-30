@@ -15,6 +15,11 @@
     "ACTIVE_PRODUCTION",
     "RETIRED"
   ],
+  "reference_evidence_states": [
+    "creator_described",
+    "audibly_inspected",
+    "unverified"
+  ],
   "promotion_gate": [
     "样音来源、权利范围、期限和撤回方式已登记",
     "三句真实中文台词生成成功，字词准确且无漏字",
@@ -31,6 +36,7 @@
       "source_dataset": "ATH-MaaS/CSEMOTIONS (AIDC-AI alias)",
       "license": "Apache-2.0 dataset; speaker/rightsholder clearance still required",
       "status": "RESEARCH_ONLY_PENDING_RIGHTS",
+      "reference_evidence_status": "creator_described",
       "local_sample": "D:/视频创作/voice_research/CSEMOTIONS_20260920/samples/female001_neutral.wav",
       "probe_receipt": "D:/视频创作/voice_research/CSEMOTIONS_20260920/cosyvoice_outputs/receipt.json",
       "role_fit": ["女主", "旁白候选"],
@@ -43,6 +49,7 @@
       "source_dataset": "ATH-MaaS/CSEMOTIONS (AIDC-AI alias)",
       "license": "Apache-2.0 dataset; speaker/rightsholder clearance still required",
       "status": "RESEARCH_ONLY_PENDING_RIGHTS",
+      "reference_evidence_status": "creator_described",
       "local_sample": "D:/视频创作/voice_research/CSEMOTIONS_20260920/samples/male001_neutral.wav",
       "probe_receipt": "D:/视频创作/voice_research/CSEMOTIONS_20260920/cosyvoice_outputs/receipt.json",
       "role_fit": ["男主", "旁白候选"],
@@ -55,6 +62,7 @@
       "source_dataset": "ATH-MaaS/CSEMOTIONS (AIDC-AI alias)",
       "license": "Apache-2.0 dataset; speaker/rightsholder clearance still required",
       "status": "RESEARCH_ONLY_PENDING_RIGHTS",
+      "reference_evidence_status": "creator_described",
       "local_sample": "D:/视频创作/voice_research/CSEMOTIONS_20260920/samples/female001_happy.wav",
       "probe_receipt": "D:/视频创作/voice_research/CSEMOTIONS_20260920/emotion_outputs/receipt.json",
       "role_fit": ["女主对白", "撒娇", "俏皮回应"],
@@ -67,6 +75,7 @@
       "source_dataset": "ATH-MaaS/CSEMOTIONS (AIDC-AI alias)",
       "license": "Apache-2.0 dataset; speaker/rightsholder clearance still required",
       "status": "RESEARCH_ONLY_PENDING_RIGHTS",
+      "reference_evidence_status": "creator_described",
       "local_sample": "D:/视频创作/voice_research/CSEMOTIONS_20260920/samples/male001_playfulness.wav",
       "probe_receipt": "D:/视频创作/voice_research/CSEMOTIONS_20260920/emotion_outputs/receipt.json",
       "role_fit": ["男主对白", "沉稳调侃", "逗女主"],
@@ -79,6 +88,7 @@
       "source": "https://github.com/2noise/ChatTTS",
       "license": "AGPLv3+ code; CC BY-NC 4.0 model",
       "status": "RESEARCH_ONLY",
+      "reference_evidence_status": "creator_described",
       "local_probe": "D:/视频创作/voice_research/ChatTTS_20260920/probe_outputs/receipt.json",
       "role_fit": ["节奏 A/B 对照", "非商用研究"],
       "selection_notes": "可用于停顿/口语化参数研究，不得作为生产或商业交付默认音色"

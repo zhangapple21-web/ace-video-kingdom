@@ -1,5 +1,116 @@
 {
   "schema": "video_kingdom.capability_growth.v1",
   "purpose": "只统计经过 baseline→change→test→evaluation→compare 后晋升的能力",
-  "capabilities": {}
+  "capabilities": {
+    "镜头动作遵循": {
+      "promoted_events": 5,
+      "evidence": [
+        {
+          "evolution_id": "EV-test-000",
+          "comparison": {
+            "comparable_metrics": 1,
+            "deltas": {
+              "success_rate": {
+                "before": 0.5,
+                "after": 0.75,
+                "delta": 0.25,
+                "direction": "higher",
+                "improved": true,
+                "regressed": false
+              }
+            },
+            "improvements": [
+              "success_rate"
+            ],
+            "regressions": [],
+            "improved": true
+          }
+        },
+        {
+          "evolution_id": "EV-test-001",
+          "comparison": {
+            "comparable_metrics": 1,
+            "deltas": {
+              "success_rate": {
+                "before": 0.5,
+                "after": 0.75,
+                "delta": 0.25,
+                "direction": "higher",
+                "improved": true,
+                "regressed": false
+              }
+            },
+            "improvements": [
+              "success_rate"
+            ],
+            "regressions": [],
+            "improved": true
+          }
+        },
+        {
+          "evolution_id": "EV-test-002",
+          "comparison": {
+            "comparable_metrics": 1,
+            "deltas": {
+              "success_rate": {
+                "before": 0.5,
+                "after": 0.75,
+                "delta": 0.25,
+                "direction": "higher",
+                "improved": true,
+                "regressed": false
+              }
+            },
+            "improvements": [
+              "success_rate"
+            ],
+            "regressions": [],
+            "improved": true
+          }
+        },
+        {
+          "evolution_id": "EV-test-003",
+          "comparison": {
+            "comparable_metrics": 1,
+            "deltas": {
+              "success_rate": {
+                "before": 0.5,
+                "after": 0.75,
+                "delta": 0.25,
+                "direction": "higher",
+                "improved": true,
+                "regressed": false
+              }
+            },
+            "improvements": [
+              "success_rate"
+            ],
+            "regressions": [],
+            "improved": true
+          }
+        },
+        {
+          "evolution_id": "EV-test-004",
+          "comparison": {
+            "comparable_metrics": 1,
+            "deltas": {
+              "success_rate": {
+                "before": 0.5,
+                "after": 0.75,
+                "delta": 0.25,
+                "direction": "higher",
+                "improved": true,
+                "regressed": false
+              }
+            },
+            "improvements": [
+              "success_rate"
+            ],
+            "regressions": [],
+            "improved": true
+          }
+        }
+      ]
+    }
+  }
 }

@@ -1,5 +1,56 @@
 # 收口清单（CLOSURE_MANIFEST.v1）
 
+## 统一收口机制（唯一正本）
+
+本文件是视频项目“什么时候算结束、结束时留下什么”的唯一正本；不新增收口入口、Provider、审批层或第二套收据系统。运行时收口写入现有 `production_control` 的同一份 run JSON，通过事件链和 `state_hash` 保护；`delivery` 只表示交付已获确认，不等于项目已经收口。
+
+### 终态
+
+- `DELIVERED_CLOSED`：成片已交付、证据包完整、最终确认已登记，当前 run 不再接受静默修改。
+- `BLOCKED`：存在未决失败、未知、审查项或硬门缺口；必须留下原因和恢复方法。
+- `PAUSED`：用户/制片明确暂停；必须留下暂停原因、已完成边界和恢复方法。
+- `ARCHIVED`：有意归档（可为未交付历史分支）；必须保留可检索证据和是否可恢复说明。
+
+旧的 `DELIVERED` 是交付状态；只有调用现有控制面的 `close_run`/`record_closure`，并产生 `RUN_CLOSED` 事件后，才算真正收口。
+
+### `DELIVERED_CLOSED` 的收口条件
+
+1. `run_id`、`project_id`、`script_hash`、`contract_hash` 已锁定；
+2. 计划内每个镜头都有一个明确选中的 Take，Take 哈希与 QC 绑定，且没有未解决的 `UNKNOWN`/`FAILED` 执行结果；
+3. 技术、创作、连续性、音频、字幕、版权/权利和交付 QC 均为 `PASS`；不得存在 `REVIEW_REQUIRED`、`UNKNOWN`、`FAIL` 或未决 Provider 任务；
+4. 交付已先经过 `DELIVERY_READY`，再由授权目标确认成 `DELIVERED`；
+5. 最终成片、字幕/字幕收据、主音轨、版本/镜头 manifest、验收/QC 收据和哈希齐全；
+6. 有人工最终确认（`confirmed_by`），并留下排除候选、已知限制、恢复/重开说明和权利收据。
+
+### 收口收据最小字段
+
+`closure_id`、`run_id`、项目/剧本/合同版本及哈希、选中 Take（镜头号/Take/产物哈希）、排除候选、QC 结果、权利收据、输出路径及哈希、人工最终确认、已知限制、恢复方法、关闭原因、`closed_at` 和 `closure_hash`。
+
+输出角色至少覆盖：`final_master`、`subtitle`、`master_audio`、`manifest`、`acceptance_receipt`。文件必须在 run 根目录内，逐个重算 SHA-256；权利收据若有文件引用也必须哈希绑定。
+
+### 收口后规则
+
+- 收口收据不可静默修改；任何更正必须新建 `run_id`/revision，旧收据只读保留为历史。
+- 重新制作、替换镜头、补发版本都必须走新 revision，不得在已收口 run 上直接写回。
+- “交付完成”与“发布复盘”分离：复盘只影响下一轮简报/经验，不改写本轮收据、不反向批准本轮镜头。
+- `BLOCKED`、`PAUSED`、`ARCHIVED` 同样必须留下可重建的证据包；没有恢复方法不得假装完成。
+
+## 2026-09-20：沙盒人格矩阵流水线（创作层，不是新入口）
+
+- 来源：用户粘贴的自用完整版 + 工业级 V2.0；原文存 `research/sources/persona_sandbox_pipeline_zhangningjing_20260920.txt`。
+- 吸收六维DNA、种子开局校验、候选 overlay；校验器 `tools/validate_persona_dna.py`。
+- 方法项 A40；系统冲突 C23。
+- 无本轮剧本，停在编剧审核前。不换入口、不换 Provider、不替代双审五关。
+
+## 2026-09-24：AI 漫剧工业化创作流程（创作开发层）
+
+- 来源：用户提供的 AI 漫剧创作智能体可见工作流程；来源记录见 `research/sources/ai_drama_creator_workflow_20260924.md`，项目化对照见 `docs/CREATIVE_DEVELOPMENT_FRAMEWORK.v1.md`。
+- 吸收：输入分类、人物全集/关系图、角色十项记忆提示、角色行为映射、成长弧线、视觉世界规则、单集钩子与信息变化检查。
+- 真实落地：`creator_workflow.py` 生成/校验 `creative_development_profile.v1`；`run_idea_pipeline.py` 唯一入口编译、持久化并写入创作层收据；模板和回归测试已加入。
+- 边界：`production_integration=false`。角色仍由 Identity/State 管理，场景由 Scene State，镜头由 Shot State；双审、五关、音频主时钟、Agnes 主链不变。
+- 不升默认：不强制 40/60/80 集、120 秒、英文提示词或十项清单全填；不新增入口、不切 Provider、不允许创作层自我批准生产。
+
+
 ## 2026-09-18：新剧生产语义（压缩，不是新规则堆）
 
 - 新剧唯一语义链：新剧 → 剧本 → 角色资产 → 场景资产 → 道具资产 → Shot → A01/A02/A06/A09/A13/A14 → 真实 Agnes。
@@ -7,6 +58,15 @@
 - 旧合同无 production_semantics=new_drama 时 SKIPPED，不阻断。
 - 不换入口、不换 Provider、不改现役镜头合同、不替代双审与五关。
 - 校验器：tools/validate_new_drama_semantics.py，挂在 production_shot_gate.py 的新剧分支。
+
+## 2026-09-19：通用剧本协作与版本管理默认层
+
+- 来源：用户介绍的“墨契”式 AI 编剧协作思路；本地只吸收方法，不接入外部平台。
+- 新增 `research/creative_collaboration_contract.v1.json`：剧本真源、版本血缘、锚定批注、最小权限、AI 创作边界、隐私默认和交接生命周期。
+- 扩展 `research/shared_information_hub.v1.json` 与 `tools/run_idea_pipeline.py`：每个新计划和协作快照都绑定该合同及其哈希证据。
+- 通用默认层新增 A33–A39：剧本派生关系、append-only 版本、批注解决、角色权限、AI 仅候选、Approved State 交接、默认本地保密。
+- 权限模型固定为四档：`OWNER`、`AUTHORING`、`REVIEW`、`EXECUTION`；角色席位可以多于权限档，但不得越权。
+- 这些是 DEFAULT_METHOD/advisory，不是新 Provider、新入口、新审批层；不改变 `script_prompt_review` 双审、`production_shot_gate` 五关或 Agnes 主链。
 
 ## 2026-09-17：ai-film-skills A/B/C 方法层落地
 

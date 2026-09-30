@@ -22,8 +22,8 @@
     {"role_id": "arbiter", "model": "gpt-6-astra", "fallback_models": [], "authority": "arbitration_only", "use_when": "仅在重大分歧、返工代价高或安全边界不清时启用；不可静默降级。"},
     {"role_id": "director_convergence", "model": "gpt-5.6-terra", "fallback_models": ["gpt-5.5"], "authority": "candidate", "use_when": "在候选意见齐备后做结构化导演收敛，不绕过验收。"},
     {"role_id": "ideation_branch", "model": "gpt-5.6-terra", "fallback_models": ["glm-4-flash"], "authority": "candidate", "use_when": "快速生成钩子、结尾或风格分支，供主笔择优。"},
-    {"role_id": "reality_reviewer", "model": "grok-4.6", "fallback_models": ["gpt-5.5"], "authority": "candidate", "use_when": "复杂项目的现实感、受众误读和外部视角复核。"},
-    {"role_id": "contrarian_auditor", "model": "grok-4.6", "fallback_models": ["gpt-5.5"], "authority": "blocking_candidate", "use_when": "挑现实性、连续性、伦理、镜头可执行性和违规画面风险；降级后仍可阻断。"}
+    {"role_id": "reality_reviewer", "model": "grok-4.7", "fallback_models": ["gpt-5.5"], "authority": "candidate", "use_when": "复杂项目的现实感、受众误读和外部视角复核。"},
+    {"role_id": "contrarian_auditor", "model": "grok-4.7", "fallback_models": ["gpt-5.5"], "authority": "blocking_candidate", "use_when": "挑现实性、连续性、伦理、镜头可执行性和违规画面风险；降级后仍可阻断。"}
   ],
   "rules": [
     "角色输出只能形成候选稿，不能直接提交图像或视频任务。",

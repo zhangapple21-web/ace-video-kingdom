@@ -1,8 +1,14 @@
 {
   "schema": "ace.video_kingdom.shared_information_hub.v1",
-  "purpose": "跨窗口协作的唯一共享研究上下文和证据索引",
+  "purpose": "跨窗口协作的唯一共享研究上下文、创作决定和证据索引",
   "scope": "FREE_ZONE_RESEARCH_ONLY",
   "source_of_truth": "仓库根目录 research/；项目运行收据位于 episodes/generated/<project_id>/research/",
+  "creative_collaboration_contract": {
+    "path": "research/creative_collaboration_contract.v1.json",
+    "authority": "DEFAULT_METHOD_ONLY",
+    "principle": "剧本为真源；AI整理和审计，创作决定由人采用；每次实质修改产生新版本",
+    "permission_tiers": "research/creative_collaboration_contract.v1.json#permission_tiers"
+  },
   "default_roles": {
     "planner": {
       "contract": "roles/planner.md",
@@ -14,16 +20,30 @@
       "reads": ["计划快照", "研究引用", "资产哈希"],
       "writes": ["执行收据", "媒体验收", "失败证据"],
       "forbidden": ["改变规划标准", "计划外镜头", "伪造成功"]
+    },
+    "reviewer": {
+      "contract": "research/creative_collaboration_contract.v1.json#roles_and_permissions.reviewer",
+      "writes": ["批注", "风险", "审计意见", "解决状态"],
+      "forbidden": ["静默改写剧本", "绕过双审或交付门"]
+    },
+    "producer": {
+      "contract": "research/creative_collaboration_contract.v1.json#roles_and_permissions.producer",
+      "writes": ["范围决定", "最终创作取舍", "交付授权"],
+      "forbidden": ["删除历史版本", "绕过硬门"]
     }
   },
   "record_requirements": {
     "minimum_fields": ["schema", "project_id", "recorded_at", "status", "evidence"],
     "evidence_rule": "事实必须带路径或收据引用；媒体引用必须带 SHA-256；UNKNOWN 不得写成 PASS",
     "append_only": true,
+    "revision_requirements": ["revision_id", "parent_revision_id", "script_hash", "change_summary", "status"],
+    "annotation_rule": "评论必须绑定段落/字段/镜头；高风险未解决评论阻断锁稿，评论本身不等于批准",
+    "ai_boundary": "AI只可整理、抽取、检查和提出标注为候选的方案；核心创作必须由人采用",
     "private_materials_allowed": false
   },
   "handoff": {
-    "sequence": ["planner", "research", "executor", "research"],
+    "sequence": ["producer", "planner", "writer", "reviewer", "director", "executor", "reviewer", "producer"],
+    "artifact_rule": "每次交接只消费已批准快照；版本变化必须显式 supersedes，不得原地覆盖",
     "execution_gate": "tools/run_idea_pipeline.py::execution_conformance_check",
     "plan_mutation": "new_version_required"
   }

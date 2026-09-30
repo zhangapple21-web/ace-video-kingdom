@@ -173,6 +173,116 @@
       "decision": "REVIEW_REQUIRED",
       "next_verification": "用本地虚构样本做一次隔离 A/B；记录 baseline/change/test/evaluation/painful_review 后再决定",
       "production_integration": false
+    },
+    {
+      "entry_id": "psl_20260925_libtv_video_agent_5993fce5",
+      "date": "2026-09-25",
+      "source_url": "https://raw.githubusercontent.com/PomeloR611/libtv-video-agent/main/README.md",
+      "source_kind": "PUBLIC_OPEN_SOURCE_REPOSITORY",
+      "source_content_key": "libtv_video_agent:5993fce5e6ea10d91b22379b23b3415e2161655b620d66d61799607cd7e026dd",
+      "license_or_availability": "MIT",
+      "linked_public_repositories": [
+        "https://api.github.com/repos/PomeloR611/libtv-video-agent"
+      ],
+      "problem_observed": "外部仓库公开文档出现可复核的工作流/审计/恢复机制候选，尚未证明适合本项目。",
+      "minimum_mechanism": "故事板先行、定版资产、分批小步生成、抽帧自查和批次预览",
+      "local_fit": "对照本地失败复盘与能力账本，先做影子验证，不进入生产控制面。",
+      "limitations": [
+        "仅采集公开元数据和 README",
+        "未执行外部代码",
+        "未证明对本项目有收益"
+      ],
+      "decision": "REVIEW_REQUIRED",
+      "next_verification": "用本地虚构样本做一次隔离 A/B；记录 baseline/change/test/evaluation/painful_review 后再决定",
+      "production_integration": false
+    },
+    {
+      "entry_id": "psl_20260925_video_agent_skills_a26e0699",
+      "date": "2026-09-25",
+      "source_url": "https://raw.githubusercontent.com/chenyuxiaojin/video-agent-skills/main/README.zh-CN.md",
+      "source_kind": "PUBLIC_OPEN_SOURCE_REPOSITORY",
+      "source_content_key": "video_agent_skills:a26e0699757a9a63692fc2c7b5f1fe8796f4a140feca64893871d526fec9025b",
+      "license_or_availability": "MIT",
+      "linked_public_repositories": [
+        "https://api.github.com/repos/chenyuxiaojin/video-agent-skills"
+      ],
+      "problem_observed": "外部仓库公开文档出现可复核的工作流/审计/恢复机制候选，尚未证明适合本项目。",
+      "minimum_mechanism": "制片人编排、专职角色分工、人工检查点、时间轴和发布交付",
+      "local_fit": "对照本地失败复盘与能力账本，先做影子验证，不进入生产控制面。",
+      "limitations": [
+        "仅采集公开元数据和 README",
+        "未执行外部代码",
+        "未证明对本项目有收益"
+      ],
+      "decision": "REVIEW_REQUIRED",
+      "next_verification": "用本地虚构样本做一次隔离 A/B；记录 baseline/change/test/evaluation/painful_review 后再决定",
+      "production_integration": false
+    },
+    {
+      "entry_id": "psl_20260925_director_skills_3f8074ab",
+      "date": "2026-09-25",
+      "source_url": "https://raw.githubusercontent.com/kangarooking/director-skills/main/README.md",
+      "source_kind": "PUBLIC_OPEN_SOURCE_REPOSITORY",
+      "source_content_key": "director_skills:3f8074aba6143bb4119bccf4075efa487e70c04a9235f7de3539c8539ab49862",
+      "license_or_availability": "MIT",
+      "linked_public_repositories": [
+        "https://api.github.com/repos/kangarooking/director-skills"
+      ],
+      "problem_observed": "外部仓库公开文档出现可复核的工作流/审计/恢复机制候选，尚未证明适合本项目。",
+      "minimum_mechanism": "资产提示词、动作因果链、运镜参数闸门、任务轮询和媒体读回",
+      "local_fit": "对照本地失败复盘与能力账本，先做影子验证，不进入生产控制面。",
+      "limitations": [
+        "仅采集公开元数据和 README",
+        "未执行外部代码",
+        "未证明对本项目有收益"
+      ],
+      "decision": "REVIEW_REQUIRED",
+      "next_verification": "用本地虚构样本做一次隔离 A/B；记录 baseline/change/test/evaluation/painful_review 后再决定",
+      "production_integration": false
+    },
+    {
+      "entry_id": "psl_20260925_libtv_skill_pro_819802b0",
+      "date": "2026-09-25",
+      "source_url": "https://raw.githubusercontent.com/Qiuxiangxiang/libtv-skill-pro/main/README.md",
+      "source_kind": "PUBLIC_OPEN_SOURCE_REPOSITORY",
+      "source_content_key": "libtv_skill_pro:819802b0c4895e15b5bf5555e5568b7460d0ff105183c7094ca184069845eae3",
+      "license_or_availability": "MIT-0",
+      "linked_public_repositories": [
+        "https://api.github.com/repos/Qiuxiangxiang/libtv-skill-pro"
+      ],
+      "problem_observed": "外部仓库公开文档出现可复核的工作流/审计/恢复机制候选，尚未证明适合本项目。",
+      "minimum_mechanism": "统一命令入口、dry-run、结构化错误、多模型路由、批量监控和可恢复会话",
+      "local_fit": "对照本地失败复盘与能力账本，先做影子验证，不进入生产控制面。",
+      "limitations": [
+        "仅采集公开元数据和 README",
+        "未执行外部代码",
+        "未证明对本项目有收益"
+      ],
+      "decision": "REVIEW_REQUIRED",
+      "next_verification": "用本地虚构样本做一次隔离 A/B；记录 baseline/change/test/evaluation/painful_review 后再决定",
+      "production_integration": false
+    },
+    {
+      "entry_id": "psl_20260927_comfyui_9e373023",
+      "date": "2026-09-27",
+      "source_url": "https://raw.githubusercontent.com/Comfy-Org/ComfyUI/master/README.md",
+      "source_kind": "PUBLIC_OPEN_SOURCE_REPOSITORY",
+      "source_content_key": "comfyui:9e3730235b5e88ca5db52c62c0116235bd8064c4b2dffb81e410eebb64d0c555",
+      "license_or_availability": "GPL-3.0",
+      "linked_public_repositories": [
+        "https://api.github.com/repos/Comfy-Org/ComfyUI"
+      ],
+      "problem_observed": "外部仓库公开文档出现可复核的工作流/审计/恢复机制候选，尚未证明适合本项目。",
+      "minimum_mechanism": "可复现图像/视频节点编排、队列和工作流证据",
+      "local_fit": "对照本地失败复盘与能力账本，先做影子验证，不进入生产控制面。",
+      "limitations": [
+        "仅采集公开元数据和 README",
+        "未执行外部代码",
+        "未证明对本项目有收益"
+      ],
+      "decision": "REVIEW_REQUIRED",
+      "next_verification": "用本地虚构样本做一次隔离 A/B；记录 baseline/change/test/evaluation/painful_review 后再决定",
+      "production_integration": false
     }
   ]
 }
