@@ -13,12 +13,22 @@
 - 单集节奏检查：开场钩子、早期冲突、信息变化、情绪升级、反转/回收、结尾问题、角色记忆度和生成可行性。
 - 长线 40/60/80 集规划作为可选输入，不强迫每个项目扩写集数。
 
+## 创作职责协议（固化版）
+
+创作开发档案现在固定记录一条职责顺序，但它不是七个后台任务，也不新增 Provider：
+
+`角色专家 → 世界与考据专家（导游） → 剧本专家 → 冲突与情绪专家 → 镜头专家 → 连续性审校专家 → 导演收敛专家`
+
+其中角色、世界与考据负责先定人和事实；冲突与情绪负责检查人物是否互相施压、对白是否产生关系变化；连续性与导演收敛继续复用现有审计席位。世界研究只能提供有来源的候选事实，不能把 UNKNOWN 静默写成正史。
+
 ## 与现有生产链的映射
 
 ```text
 creative_development_profile
   ├─ character_roster / signatures / arcs
   │    └─ Character Identity + persona card + State
+  ├─ creative_roles
+  │    └─ 角色/考据/剧本/冲突/镜头/连续性/导演职责编排（规划层）
   ├─ visual_world
   │    └─ Scene State（场景默认动态构建，按需使用构图静帧）
   ├─ episode_structure
@@ -26,6 +36,8 @@ creative_development_profile
   └─ quality_review
        └─ 编剧、导演、反例、连续性审计与五关收据
 ```
+
+世界观与资产图谱使用 `assets/templates/asset_graph.v1.json`，由 `tools/validate_asset_graph.py` 校验。它是从剧本与资产包派生的连续性索引，不是新的正史来源或生产准入；边必须可回溯到来源，缺证时保留 UNKNOWN。公开页按作品/单集/角色/场景过滤，不直接渲染无筛选的全量节点网络。
 
 角色包仍然锁定身份，不锁死一张构图；本镜起始状态由 Shot State 决定；场景由 Scene State 动态构建。视频生产仍走 `Video → agnes-video-2.5-flash`，图像资产按需走已验证图像路由和受证据约束的降级。
 

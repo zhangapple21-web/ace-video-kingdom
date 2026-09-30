@@ -63,6 +63,7 @@ def build_canonical_generation_request(
     model: str | None = None,
     scope: str = "production",
     request_kind: str = "shot",
+    source_contract: dict[str, Any] | None = None,
 ) -> dict[str, Any]:
     """Project any runner's payload into one stable request shape.
 
@@ -162,7 +163,7 @@ def build_canonical_generation_request(
         "generation_parameters": generation_parameters,
         "provider_payload": deepcopy(payload),
         "contract_fingerprint": shot.get("contract_fingerprint"),
-        "source_contract": shot_contract or contract,
+        "source_contract": source_contract or shot_contract or contract,
         "state": state,
         "medium_lock": shot.get("medium_lock"),
         "production_contract": production_contract,

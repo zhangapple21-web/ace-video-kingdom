@@ -14,13 +14,13 @@ def _load(rel: str):
 
 def test_a16_b9_c11_counts():
     checks = _load('assets/checklists/generic_default_layer.v1.json')['checks']
-    assert [row['id'] for row in checks] == [f'A{i:02d}' for i in range(1, 33)]
+    assert [row['id'] for row in checks] == [f'A{i:02d}' for i in range(1, 42)]
     mines = (ROOT / 'research/REFERENCE_MINES.md').read_text(encoding='utf-8')
     assert '参考层' in mines
     for i in range(1, 10):
         assert f'B{i:02d}' in mines
     items = _load('governance/system_conflict_constraints.v1.json')['items']
-    assert [row['id'] for row in items] == [f'C{i:02d}' for i in range(1, 23)]
+    assert [row['id'] for row in items] == [f'C{i:02d}' for i in range(1, 24)]
     assert all(row['status'] == 'DISABLED_SYSTEM_CONFLICT' for row in items)
     assert _load('governance/system_conflict_constraints.v1.json')['mark'] == '系统级冲突，禁用'
 
@@ -48,6 +48,21 @@ def test_scene_and_prop_templates_exist():
     assert scene.get('origin') == 'dynamic_scene_state_not_image_library'
     assert character['long_term_asset'] is True
     assert 'scene_state' in scene
+
+
+def test_default_creative_collaboration_contract_is_generic_and_non_authoritative():
+    contract = _load('research/creative_collaboration_contract.v1.json')
+    assert contract['status'] == 'LOCKED'
+    assert contract['layer'] == 'DEFAULT_METHOD'
+    assert contract['integration_boundaries']['default_scope'] == 'all_video_projects'
+    assert contract['integration_boundaries']['production_gate_change'] is False
+    assert [row['name'] for row in contract['permission_tiers']] == ['OWNER', 'AUTHORING', 'REVIEW', 'EXECUTION']
+    assert 'script_change' in contract['revision_policy']['invalidation']
+    assert contract['annotation_policy']['authority'] == 'annotations_are_context_not_approval'
+    assert 'silent_overwrite' in contract['ai_authority']['forbidden']
+    hub = _load('research/shared_information_hub.v1.json')
+    assert hub['creative_collaboration_contract']['path'] == 'research/creative_collaboration_contract.v1.json'
+    assert hub['handoff']['sequence'][-1] == 'producer'
 
 
 def test_old_shot_rhythm_not_blocked_without_photography():

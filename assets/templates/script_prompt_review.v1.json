@@ -12,7 +12,20 @@
     "unfilmable_risks": "【拍不了或会穿帮的点】",
     "verdict": "通过",
     "reason": "",
-    "reviewed_at": "2026-09-17T00:00:00+08:00"
+    "reviewed_at": "2026-09-17T00:00:00+08:00",
+    "conflict_driven_scene": {
+      "optional": true,
+      "scene_class": "A",
+      "goals": {
+        "a": "【角色A要什么】",
+        "b": "【角色B为什么不让】"
+      },
+      "change_at_end": {
+        "kind": "choice",
+        "what": "【这场改了什么】"
+      },
+      "not": "dialogue lengthener"
+    }
   },
   "prompt_review": {
     "role": "导演",

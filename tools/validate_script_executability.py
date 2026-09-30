@@ -62,6 +62,258 @@ INHERIT_KEYS = {
     "costume", "prop_state", "eyeline", "lighting_direction",
     "spatial_position", "weather_time", "identity",
 }
+REF_PURPOSES = {
+    "身份", "造型状态", "地理", "构图", "尺度", "效果", "起始帧", "结束帧", "风格",
+}
+
+
+def _creator_text(value: Any) -> str:
+    return str(value or "").strip()
+
+
+def _creator_list(value: Any) -> list[dict[str, Any]]:
+    return [item for item in value if isinstance(item, dict)] if isinstance(value, list) else []
+
+
+def _creator_ref_path(value: dict[str, Any]) -> str:
+    return _creator_text(value.get("path") or value.get("reference_path") or value.get("locator"))
+
+
+def _creator_inside(path: Path, root: Path) -> bool:
+    try:
+        path.resolve().relative_to(root.resolve())
+    except ValueError:
+        return False
+    return True
+
+
+def validate_creator_document_contract(contract: Any, *, project_dir: Path | None = None) -> list[str]:
+    """Cross-check a compact creator-document projection at the existing gate.
+
+    This deliberately validates references *to* creator documents instead of
+    introducing a Markdown workflow.  The projection is optional for legacy
+    plans; when present it binds screenplay scenes/lines, visual entries,
+    storyboard shots and video motions through stable IDs and exact source
+    text.  One source may feed many downstream entries, but no downstream
+    reference may be dangling or silently reworded.
+    """
+    if contract in (None, {}):
+        return []
+    if not isinstance(contract, dict):
+        return ["creator_document_contract must be an object"]
+    errors: list[str] = []
+    required = ("screenplay", "visual_setting", "storyboard", "video_prompts")
+    docs = contract.get("documents") if isinstance(contract.get("documents"), dict) else contract
+    for name in required:
+        if not isinstance(docs.get(name), dict):
+            errors.append(f"creator documents missing {name}")
+    if errors:
+        return errors
+
+    root = (project_dir or Path.cwd()).resolve()
+    document_text: dict[str, str] = {}
+    for name in required:
+        document = docs[name]
+        path_value = _creator_text(document.get("path"))
+        if path_value:
+            candidate = (root / path_value).resolve() if not Path(path_value).is_absolute() else Path(path_value).resolve()
+            if not _creator_inside(candidate, root):
+                errors.append(f"creator documents {name}.path escapes project root")
+            elif not candidate.is_file():
+                errors.append(f"creator documents {name}.path missing: {path_value}")
+            else:
+                try:
+                    document_text[name] = candidate.read_text(encoding="utf-8")
+                except OSError as exc:
+                    errors.append(f"creator documents {name}.path unreadable: {exc}")
+        elif not _creator_text(document.get("text")):
+            errors.append(f"creator documents {name} requires path or text")
+        else:
+            document_text[name] = _creator_text(document.get("text"))
+
+    screenplay = docs["screenplay"]
+    scenes = _creator_list(screenplay.get("scenes"))
+    lines = _creator_list(screenplay.get("lines") or screenplay.get("dialogue"))
+    scene_ids = {_creator_text(row.get("scene_id") or row.get("id")) for row in scenes}
+    line_ids = {_creator_text(row.get("line_id") or row.get("id")) for row in lines}
+    scene_ids.discard("")
+    line_ids.discard("")
+    if len(scene_ids) != len(scenes):
+        errors.append("screenplay scenes require unique scene_id")
+    if len(line_ids) != len(lines):
+        errors.append("screenplay lines require unique line_id")
+    line_by_id = {
+        _creator_text(row.get("line_id") or row.get("id")): row
+        for row in lines if _creator_text(row.get("line_id") or row.get("id"))
+    }
+    structured_script_text = "\n".join([
+        _creator_text(row.get("text") or row.get("content"))
+        for row in scenes + lines
+    ])
+
+    visual = docs["visual_setting"]
+    visual_rows = _creator_list(visual.get("entries") or visual.get("assets"))
+    visual_ids = {_creator_text(row.get("entry_id") or row.get("asset_id") or row.get("id")) for row in visual_rows}
+    visual_ids.discard("")
+    characters = _creator_list(visual.get("characters"))
+    character_ids = {_creator_text(row.get("character_id") or row.get("id")) for row in characters}
+    character_ids.discard("")
+    character_by_id = {
+        _creator_text(row.get("character_id") or row.get("id")): row
+        for row in characters if _creator_text(row.get("character_id") or row.get("id"))
+    }
+    for row in characters:
+        if not _creator_text(row.get("character_id") or row.get("id")):
+            errors.append("visual_setting.characters require character_id")
+
+    storyboard = docs["storyboard"]
+    shots = _creator_list(storyboard.get("shots"))
+    shot_ids = {_creator_text(row.get("shot_id") or row.get("id")) for row in shots}
+    shot_ids.discard("")
+    if len(shot_ids) != len(shots):
+        errors.append("storyboard shots require unique shot_id")
+    shot_by_id = {
+        _creator_text(row.get("shot_id") or row.get("id")): row
+        for row in shots if _creator_text(row.get("shot_id") or row.get("id"))
+    }
+
+    # A downstream document must not make its own copied quote look like an
+    # upstream source.  Keep the source chain explicit: SHOT quotes come from
+    # screenplay/visual setting; MOTION quotes may additionally come from the
+    # storyboard and its shot-level source text.
+    upstream_text = "\n".join([
+        document_text.get("screenplay", ""),
+        document_text.get("visual_setting", ""),
+        structured_script_text,
+    ])
+
+    def check_text_refs(values: Any, owner: str, source_text: str | None = None) -> None:
+        for value in values if isinstance(values, list) else []:
+            quote = _creator_text(value.get("text") if isinstance(value, dict) else value)
+            if len(quote) >= 4 and quote not in (source_text if source_text is not None else upstream_text):
+                errors.append(f"{owner}: explicit quote not found verbatim upstream: {quote}")
+
+    def check_slots(values: Any, owner: str) -> set[str]:
+        slots = _creator_list(values)
+        seen: set[str] = set()
+        orders: list[int] = []
+        for row in slots:
+            slot_id = _creator_text(row.get("slot_id") or row.get("id"))
+            if not slot_id or slot_id in seen:
+                errors.append(f"{owner}: reference slot id missing or duplicated")
+            seen.add(slot_id)
+            try:
+                orders.append(int(row.get("order")))
+            except (TypeError, ValueError):
+                errors.append(f"{owner}: reference slot {slot_id or '?'} requires numeric order")
+            purpose = _creator_text(row.get("purpose") or row.get("role"))
+            if purpose and purpose not in REF_PURPOSES:
+                errors.append(f"{owner}: reference slot {slot_id or '?'} has invalid purpose")
+            may = {_creator_text(item) for item in (row.get("may_control") or row.get("control") or [])}
+            must = {_creator_text(item) for item in (row.get("must_not_control") or row.get("not_control") or row.get("must_not") or [])}
+            may.discard(""); must.discard("")
+            if not may or not must:
+                errors.append(f"{owner}: reference slot {slot_id or '?'} requires control and must_not_control")
+            if may & must:
+                errors.append(f"{owner}: reference slot {slot_id or '?'} control overlaps must_not_control")
+            kind = _creator_text(row.get("kind") or row.get("type")).upper()
+            locator = _creator_ref_path(row)
+            if kind == "PLAN" or slot_id.upper().startswith("PLAN-"):
+                if not locator:
+                    errors.append(f"{owner}: PLAN slot {slot_id or '?'} requires a locator")
+            elif not locator:
+                errors.append(f"{owner}: REF slot {slot_id or '?'} requires a path")
+            else:
+                candidate = (root / locator).resolve() if not Path(locator).is_absolute() else Path(locator).resolve()
+                if not _creator_inside(candidate, root) or not candidate.is_file():
+                    errors.append(f"{owner}: REF slot {slot_id or '?'} path missing or outside project")
+        if orders and sorted(orders) != list(range(1, len(orders) + 1)):
+            errors.append(f"{owner}: reference slot order must be unique and contiguous")
+        return seen
+
+    motion_rows = _creator_list(docs["video_prompts"].get("motions"))
+    motion_ids = {_creator_text(row.get("motion_id") or row.get("id")) for row in motion_rows}
+    motion_ids.discard("")
+    if len(motion_ids) != len(motion_rows):
+        errors.append("video_prompts motions require unique motion_id")
+    for shot in shots:
+        owner = _creator_text(shot.get("shot_id") or shot.get("id")) or "SHOT"
+        for scene_id in shot.get("scene_ids") or shot.get("source_scene_ids") or []:
+            if _creator_text(scene_id) not in scene_ids:
+                errors.append(f"{owner}: unknown screenplay scene_id {scene_id}")
+        for line_id in shot.get("source_line_ids") or []:
+            if _creator_text(line_id) not in line_ids:
+                errors.append(f"{owner}: unknown screenplay line_id {line_id}")
+        for entry_id in shot.get("visual_basis_ids") or shot.get("visual_refs") or []:
+            if _creator_text(entry_id) not in visual_ids:
+                errors.append(f"{owner}: unknown visual basis entry {entry_id}")
+        check_text_refs(shot.get("explicit_quotes") or shot.get("source_quotes"), owner)
+        check_slots(shot.get("reference_slots") or shot.get("references"), owner)
+
+    for motion in motion_rows:
+        owner = _creator_text(motion.get("motion_id") or motion.get("id")) or "MOTION"
+        linked_shots = motion.get("shot_ids") or motion.get("shot_refs") or []
+        for shot_id in linked_shots:
+            if _creator_text(shot_id) not in shot_ids:
+                errors.append(f"{owner}: unknown storyboard shot_id {shot_id}")
+        if not linked_shots:
+            errors.append(f"{owner}: requires at least one storyboard shot reference")
+        shot_slots: set[str] = set()
+        shot_lines: set[str] = set()
+        shot_visuals: set[str] = set()
+        for shot_id in linked_shots:
+            linked_shot = shot_by_id.get(_creator_text(shot_id), {})
+            shot_slots.update(check_slots(linked_shot.get("reference_slots"), f"{owner}/{shot_id}"))
+            shot_lines.update(_creator_text(value) for value in linked_shot.get("source_line_ids") or [])
+            shot_visuals.update(_creator_text(value) for value in linked_shot.get("visual_basis_ids") or linked_shot.get("visual_refs") or [])
+            shot_duration = linked_shot.get("duration_seconds")
+            motion_duration = motion.get("duration_seconds")
+            if shot_duration is not None and motion_duration is not None and float(shot_duration) != float(motion_duration):
+                errors.append(f"{owner}: duration does not match storyboard shot {shot_id}")
+        motion_slots = check_slots(motion.get("reference_slots") or motion.get("references"), owner)
+        if shot_slots and motion_slots and not shot_slots.issubset(motion_slots):
+            errors.append(f"{owner}: motion reference slots do not cover storyboard slots")
+        motion_lines = {_creator_text(value) for value in motion.get("source_line_ids") or []}
+        if motion_lines and not motion_lines.issubset(shot_lines):
+            errors.append(f"{owner}: motion source lines are not covered by storyboard shots")
+        motion_visuals = {_creator_text(value) for value in motion.get("visual_basis_ids") or motion.get("visual_refs") or []}
+        if motion_visuals and not motion_visuals.issubset(shot_visuals):
+            errors.append(f"{owner}: motion visual basis is not covered by storyboard shots")
+        motion_upstream_text = "\n".join([
+            upstream_text,
+            document_text.get("storyboard", ""),
+            "\n".join([
+                _creator_text(shot_by_id.get(_creator_text(shot_id), {}).get("text") or shot_by_id.get(_creator_text(shot_id), {}).get("content"))
+                for shot_id in linked_shots
+            ]),
+        ])
+        check_text_refs(motion.get("explicit_quotes") or motion.get("source_quotes"), owner, motion_upstream_text)
+        for entry_id in motion.get("visual_basis_ids") or motion.get("visual_refs") or []:
+            if _creator_text(entry_id) not in visual_ids:
+                errors.append(f"{owner}: unknown visual basis entry {entry_id}")
+        for audio in _creator_list(motion.get("reference_audio") or motion.get("audio_references")):
+            character_id = _creator_text(audio.get("character_id") or audio.get("speaker_id") or audio.get("character"))
+            if character_id not in character_ids:
+                errors.append(f"{owner}: reference audio character is not in visual_setting: {character_id}")
+                continue
+            line_refs = audio.get("source_line_ids") or motion.get("source_line_ids") or []
+            speakers = {
+                _creator_text(line_by_id.get(_creator_text(line_id), {}).get("speaker") or line_by_id.get(_creator_text(line_id), {}).get("character_id"))
+                for line_id in line_refs
+            }
+            if not line_refs:
+                errors.append(f"{owner}: reference audio requires bound source_line_ids: {character_id}")
+            elif character_id not in speakers:
+                errors.append(f"{owner}: reference audio character does not speak a bound line: {character_id}")
+            character = character_by_id.get(character_id, {})
+            voice_reference = character.get("voice_reference")
+            registered = _creator_ref_path(voice_reference if isinstance(voice_reference, dict) else {"path": voice_reference or character.get("voice_reference_path")})
+            bound = _creator_ref_path(audio)
+            if not registered:
+                errors.append(f"{owner}: visual_setting has no registered voice reference for {character_id}")
+            elif not bound or Path(registered).as_posix() != Path(bound).as_posix():
+                errors.append(f"{owner}: reference audio path does not match visual_setting registration for {character_id}")
+    return errors
 
 
 def _load(path: Path) -> Any:
@@ -259,6 +511,9 @@ def validate(plan: dict[str, Any], *, project_dir: Path | None = None) -> dict[s
     hard_failures: list[str] = []
     rework: list[str] = []
     hard_failures.extend(validate_medium_lock(plan))
+    creator_contract = plan.get("creator_document_contract")
+    if creator_contract is not None:
+        rework.extend(validate_creator_document_contract(creator_contract, project_dir=project_dir))
     shots = plan.get("shots") if isinstance(plan.get("shots"), list) else []
     if not shots:
         rework.append("plan has no shots")

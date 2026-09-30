@@ -7,6 +7,7 @@ from tools.validate_script_executability import (
     compile_continuity_bridge,
     compile_persona_card,
     compile_shot_prompt,
+    validate_creator_document_contract,
     validate,
 )
 
@@ -174,3 +175,50 @@ def test_char_001_dossier_has_persona_card():
     assert dossier["persona_card"]["makeup_sheet"]["naming_rule"] == "{character_id}_{expression}_{angle}"
     for field in ("visual", "negative_constraints", "behavioral", "relational"):
         assert dossier["identity_invariants"][field]
+
+
+def _creator_contract(tmp_path: Path) -> dict:
+    (tmp_path / "script.md").write_text("SC-01\n这是一个测试台词", encoding="utf-8")
+    (tmp_path / "visual.md").write_text("CHAR-1\n江晨", encoding="utf-8")
+    (tmp_path / "storyboard.md").write_text("SHOT-1\n这是一个测试台词", encoding="utf-8")
+    (tmp_path / "video.md").write_text("MOTION-1\n这是一个测试台词", encoding="utf-8")
+    (tmp_path / "ref.png").write_bytes(b"reference")
+    (tmp_path / "audio.wav").write_bytes(b"audio")
+    return {
+        "documents": {
+            "screenplay": {"path": "script.md", "scenes": [{"scene_id": "SC-01"}], "lines": [{"line_id": "L1", "speaker": "C1", "text": "这是一个测试台词", "character_id": "C1"}]},
+            "visual_setting": {"path": "visual.md", "entries": [{"entry_id": "CHAR-1"}], "characters": [{"character_id": "C1", "voice_reference_path": "audio.wav"}]},
+            "storyboard": {"path": "storyboard.md", "shots": [{"shot_id": "SHOT-1", "scene_ids": ["SC-01"], "source_line_ids": ["L1"], "visual_basis_ids": ["CHAR-1"], "explicit_quotes": ["这是一个测试台词"], "reference_slots": [{"slot_id": "REF-1", "kind": "REF", "order": 1, "purpose": "身份", "path": "ref.png", "may_control": ["身份"], "must_not_control": ["动作"]}]}]},
+            "video_prompts": {"path": "video.md", "motions": [{"motion_id": "MOTION-1", "shot_ids": ["SHOT-1"], "source_line_ids": ["L1"], "visual_basis_ids": ["CHAR-1"], "explicit_quotes": ["这是一个测试台词"], "reference_slots": [{"slot_id": "REF-1", "kind": "REF", "order": 1, "purpose": "身份", "path": "ref.png", "may_control": ["身份"], "must_not_control": ["动作"]}], "reference_audio": [{"character_id": "C1", "path": "audio.wav", "source_line_ids": ["L1"]}]}]},
+        }
+    }
+
+
+def test_creator_document_contract_closes_cross_document_references(tmp_path: Path):
+    assert validate_creator_document_contract(_creator_contract(tmp_path), project_dir=tmp_path) == []
+
+
+def test_creator_document_contract_rejects_dangling_quote_and_voice_binding(tmp_path: Path):
+    contract = _creator_contract(tmp_path)
+    contract["documents"]["video_prompts"]["motions"][0]["explicit_quotes"] = ["不存在的台词"]
+    contract["documents"]["video_prompts"]["motions"][0]["reference_audio"][0]["path"] = "other.wav"
+    errors = validate_creator_document_contract(contract, project_dir=tmp_path)
+    assert any("explicit quote not found" in error for error in errors)
+    assert any("reference audio path does not match" in error for error in errors)
+
+
+def test_creator_document_contract_does_not_treat_video_prompt_as_its_own_quote_source(tmp_path: Path):
+    contract = _creator_contract(tmp_path)
+    contract["documents"]["screenplay"]["lines"][0]["text"] = "上游合法台词"
+    (tmp_path / "script.md").write_text("SC-01\n上游合法台词", encoding="utf-8")
+    (tmp_path / "storyboard.md").write_text("SHOT-1", encoding="utf-8")
+    contract["documents"]["video_prompts"]["motions"][0]["explicit_quotes"] = ["这是一个测试台词"]
+    errors = validate_creator_document_contract(contract, project_dir=tmp_path)
+    assert any("explicit quote not found" in error for error in errors)
+
+
+def test_voice_reference_evidence_status_is_separate_from_lifecycle():
+    registry = json.loads((ROOT / "research" / "voice_candidate_registry.v1.json").read_text(encoding="utf-8"))
+    assert set(registry["reference_evidence_states"]) == {"creator_described", "audibly_inspected", "unverified"}
+    assert all(item["status"] in registry["candidate_states"] for item in registry["candidates"])
+    assert all(item["reference_evidence_status"] in registry["reference_evidence_states"] for item in registry["candidates"])

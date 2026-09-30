@@ -432,14 +432,24 @@ def normalize_request(request: dict[str, Any]) -> dict[str, Any]:
     return result
 
 
-def _plan_requests(plan: dict[str, Any]) -> list[tuple[str, dict[str, Any]]]:
-    """Extract immutable per-shot generation requests without inventing them."""
+def _plan_requests(
+    plan: dict[str, Any],
+    *,
+    shot_ids: list[str] | None = None,
+    active_shot_id: str | None = None,
+) -> list[tuple[str, dict[str, Any]]]:
+    """Extract immutable requests for the explicitly allowed shot subset."""
+    allowed = set(shot_ids) if shot_ids is not None else None
     rows: list[tuple[str, dict[str, Any]]] = []
     for shot in plan.get("shots", []) if isinstance(plan.get("shots"), list) else []:
         if not isinstance(shot, dict):
             continue
         shot_id = str(shot.get("shot_id") or "")
         request = shot.get("generation_request")
+        if allowed is not None and shot_id not in allowed:
+            continue
+        if active_shot_id is not None and shot_id != active_shot_id:
+            continue
         if shot_id and isinstance(request, dict) and request:
             rows.append((shot_id, dict(request)))
     return rows
@@ -611,7 +621,12 @@ def route(request: dict[str, Any] | Path | str, *, root: Path | None = None) -> 
     if not run_path.exists():
         if goal not in {"PRODUCE", "RESUME"} or plan_path is None or not plan_path.is_file():
             return finish(_result(status="BLOCKED", goal=goal, run=run_path, reason="RUN_NOT_FOUND"))
-        boot = bootstrap(plan_path, run_path, mode=str(req.get("mode") or "PRODUCTION").upper())
+        boot = bootstrap(
+            plan_path,
+            run_path,
+            mode=str(req.get("mode") or "PRODUCTION").upper(),
+            scope=req.get("scope"),
+        )
         actions.append("bootstrap")
         if boot.get("status") == "BLOCKED":
             snapshot = {
@@ -659,7 +674,15 @@ def route(request: dict[str, Any] | Path | str, *, root: Path | None = None) -> 
     if snapshot.get("stage") == "ASSETS_READY":
         if plan_path is None or not plan_path.is_file():
             return finish(_result(status="BLOCKED", goal=goal, run=run_path, snapshot=snapshot, actions=actions, reason="PLAN_REQUIRED_FOR_SHOT_LOCK"))
-        lock_plan_shots(run_path, plan_path)
+        lock_plan_shots(
+            run_path,
+            plan_path,
+            scope=(
+                snapshot.get("scope")
+                if snapshot.get("mode") == "PRODUCTION"
+                else None
+            ),
+        )
         actions.append("lock_plan_shots")
         snapshot = run.snapshot()
 
@@ -669,7 +692,22 @@ def route(request: dict[str, Any] | Path | str, *, root: Path | None = None) -> 
         # continue polling or ingesting receipts.
         if plan_path is not None and plan_path.is_file():
             plan = _read_json(plan_path)
-            requests = _plan_requests(plan)
+            scope = snapshot.get("scope") if snapshot.get("mode") == "PRODUCTION" else None
+            plan_ids = [
+                str(shot.get("shot_id") or "")
+                for shot in plan.get("shots", [])
+                if isinstance(shot, dict) and str(shot.get("shot_id") or "")
+            ]
+            staged_scope = (
+                snapshot.get("mode") == "PRODUCTION"
+                and snapshot.get("scope_explicit", False)
+                and isinstance(scope, dict)
+            )
+            requests = _plan_requests(
+                plan,
+                shot_ids=(scope or {}).get("shot_ids") if staged_scope else None,
+                active_shot_id=(scope or {}).get("active_shot_id") if staged_scope else None,
+            )
             if not requests:
                 return finish(_result(status="BLOCKED", goal=goal, run=run_path, snapshot=snapshot, actions=actions, reason="GENERATION_REQUESTS_MISSING"))
             locked = set(snapshot.get("shots", {}))

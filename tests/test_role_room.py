@@ -5,6 +5,8 @@ import json
 import urllib.error
 from pathlib import Path
 
+from tools.validate_role_audit import validate_role_audit
+
 
 MODULE_PATH = Path(__file__).parents[1] / "tools" / "role_room.py"
 SPEC = importlib.util.spec_from_file_location("role_room", MODULE_PATH)
@@ -37,7 +39,10 @@ def test_role_room_dry_run_does_not_call_provider(tmp_path, monkeypatch):
     monkeypatch.setattr(ROLE_ROOM, "_call", lambda *_args: (_ for _ in ()).throw(AssertionError("called")))
     out = tmp_path / "receipt.json"
     assert ROLE_ROOM.main(["--idea", "test", "--out", str(out)]) == 0
-    assert json.loads(out.read_text(encoding="utf-8"))["status"] == "DRY_RUN"
+    receipt = json.loads(out.read_text(encoding="utf-8"))
+    assert receipt["status"] == "DRY_RUN"
+    for row in receipt["roles"]:
+        assert set(row["attempt_order"]).issubset(row["declared_models"])
 
 
 def test_role_room_records_gateway_model_rewrite(tmp_path, monkeypatch):
@@ -51,3 +56,4 @@ def test_role_room_records_gateway_model_rewrite(tmp_path, monkeypatch):
     assert "grok-4.6" not in first["declared_models"]
     assert first["route_rewritten"] is True
     assert first["degraded"] is True
+    assert any("unapproved gateway rewrite" in error for error in validate_role_audit(json.loads(out.read_text(encoding="utf-8")))["errors"])

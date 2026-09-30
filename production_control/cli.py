@@ -6,7 +6,32 @@ import sys
 from pathlib import Path
 
 from .engine import ProductionControl, WorkflowError
-from .workflow import preflight_plan
+from .workflow import bootstrap, lock_plan_shots, preflight_plan
+
+
+def _scope_from_args(args: argparse.Namespace) -> dict | list[str] | None:
+    if getattr(args, "scope_file", None):
+        try:
+            value = json.loads(args.scope_file.read_text(encoding="utf-8"))
+        except (OSError, json.JSONDecodeError) as exc:
+            raise WorkflowError(f"JSON_INPUT_INVALID:{args.scope_file}:{exc}") from exc
+        if not isinstance(value, (dict, list)):
+            raise WorkflowError(f"JSON_SCOPE_INPUT_INVALID:{args.scope_file}")
+        return value
+    shot_ids = list(getattr(args, "shot_id", None) or [])
+    if shot_ids:
+        return {
+            "kind": "SHOT_SUBSET",
+            "shot_ids": shot_ids,
+            "active_shot_id": args.active_shot or shot_ids[0],
+        }
+    return None
+
+
+def _add_scope_args(parser: argparse.ArgumentParser) -> None:
+    parser.add_argument("--scope-file", type=Path)
+    parser.add_argument("--shot-id", action="append")
+    parser.add_argument("--active-shot")
 
 
 def main(argv: list[str] | None = None) -> int:
@@ -17,9 +42,20 @@ def main(argv: list[str] | None = None) -> int:
     init.add_argument("--run-id")
     init.add_argument("--mode", choices=("PRODUCTION", "SANDBOX"), default="PRODUCTION")
     init.add_argument("--root", type=Path)
+    _add_scope_args(init)
     preflight = sub.add_parser("preflight")
     preflight.add_argument("plan_path", type=Path)
     preflight.add_argument("--mode", choices=("PRODUCTION", "SANDBOX"), default="PRODUCTION")
+    _add_scope_args(preflight)
+    bootstrap_cmd = sub.add_parser("bootstrap")
+    bootstrap_cmd.add_argument("plan_path", type=Path)
+    bootstrap_cmd.add_argument("run_path", type=Path)
+    bootstrap_cmd.add_argument("--mode", choices=("PRODUCTION", "SANDBOX"), default="PRODUCTION")
+    _add_scope_args(bootstrap_cmd)
+    lock_plan = sub.add_parser("lock-plan-shots")
+    lock_plan.add_argument("run_path", type=Path)
+    lock_plan.add_argument("plan_path", type=Path)
+    _add_scope_args(lock_plan)
     status = sub.add_parser("status")
     status.add_argument("run_path", type=Path)
     verify = sub.add_parser("verify")
@@ -80,16 +116,80 @@ def main(argv: list[str] | None = None) -> int:
     delivered.add_argument("run_path", type=Path)
     delivered.add_argument("destination")
     delivered.add_argument("--authorized", action="store_true", help="explicitly confirm the destination is authorized")
+    close = sub.add_parser("close")
+    close.add_argument("run_path", type=Path)
+    close.add_argument("manifest", type=Path, help="closure manifest JSON; stored in the existing run receipt")
+    advance = sub.add_parser("advance-active-shot")
+    advance.add_argument("run_path", type=Path)
+    advance.add_argument("next_shot_id")
+    expand = sub.add_parser("expand-scope")
+    expand.add_argument("run_path", type=Path)
+    expand.add_argument("next_shot_id")
+    verify_frame = sub.add_parser("verify-frame-proof")
+    verify_frame.add_argument("run_path", type=Path)
+    verify_frame.add_argument("take_id")
+    continuity_evidence = sub.add_parser("update-continuity-evidence")
+    continuity_evidence.add_argument("run_path", type=Path)
+    continuity_evidence.add_argument("edge_id")
+    continuity_evidence.add_argument("previous_take_id")
+    continuity_evidence.add_argument("current_take_id")
+    owner = sub.add_parser("assign-owner")
+    owner.add_argument("run_path", type=Path)
+    owner.add_argument("owner")
+    owner.add_argument("action_id")
+    owner.add_argument("--executor-kind", default="external_provider")
     args = parser.parse_args(argv)
     try:
         if args.command == "preflight":
-            result = preflight_plan(args.plan_path, mode=args.mode)
+            result = preflight_plan(
+                args.plan_path,
+                mode=args.mode,
+                scope=_scope_from_args(args),
+            )
+        elif args.command == "bootstrap":
+            result = bootstrap(
+                args.plan_path,
+                args.run_path,
+                mode=args.mode,
+                scope=_scope_from_args(args),
+            )
         elif args.command == "init":
-            run = ProductionControl.create(args.run_path, run_id=args.run_id, mode=args.mode, root=args.root)
+            scope = _scope_from_args(args)
+            run = ProductionControl.create(
+                args.run_path,
+                run_id=args.run_id,
+                mode=args.mode,
+                root=args.root,
+                scope=scope if isinstance(scope, dict) else None,
+            )
             result = run.snapshot()
         else:
             run = ProductionControl(args.run_path)
-            if args.command == "status":
+            if args.command == "lock-plan-shots":
+                result = lock_plan_shots(
+                    args.run_path,
+                    args.plan_path,
+                    scope=_scope_from_args(args),
+                )
+            elif args.command == "advance-active-shot":
+                result = run.advance_active_shot(args.next_shot_id)
+            elif args.command == "expand-scope":
+                result = run.expand_scope(args.next_shot_id)
+            elif args.command == "verify-frame-proof":
+                result = run.verify_frame_proof(args.take_id)
+            elif args.command == "update-continuity-evidence":
+                result = run.update_continuity_evidence(
+                    args.edge_id,
+                    previous_take_id=args.previous_take_id,
+                    current_take_id=args.current_take_id,
+                )
+            elif args.command == "assign-owner":
+                result = run.assign_execution_owner(
+                    owner=args.owner,
+                    action_id=args.action_id,
+                    executor_kind=args.executor_kind,
+                )
+            elif args.command == "status":
                 result = run.snapshot()
             elif args.command == "verify":
                 result = run.verify_event_chain()
@@ -115,6 +215,8 @@ def main(argv: list[str] | None = None) -> int:
                 result = run.record_assembly(args.artifact_path, ordered_shots=args.ordered_shots)
             elif args.command == "delivery":
                 result = run.promote_delivery(args.path)
+            elif args.command == "close":
+                result = run.close_run(manifest=_json_file(args.manifest))
             else:
                 result = run.mark_delivered(destination=args.destination, authorized=args.authorized)
         print(json.dumps(result, ensure_ascii=False, indent=2))

@@ -168,18 +168,24 @@ def _default_collaboration_context() -> dict[str, Any]:
     planner = ROLE_DIR / "planner.md"
     executor = ROLE_DIR / "executor.md"
     hub = RESEARCH_DIR / "shared_information_hub.v1.json"
-    missing = [str(path.relative_to(ROOT)) for path in (planner, executor, hub) if not path.is_file()]
+    contract = RESEARCH_DIR / "creative_collaboration_contract.v1.json"
+    missing = [str(path.relative_to(ROOT)) for path in (planner, executor, hub, contract) if not path.is_file()]
     if missing:
         raise RuntimeError("default collaboration contract is incomplete: " + ", ".join(missing))
     return {
         "mode": "DEFAULT_MULTI_WINDOW",
+        "contract": "research/creative_collaboration_contract.v1.json",
+        "creative_authority": "HUMAN_ADOPTED_DECISIONS",
+        "ai_boundary": "ASSIST_STRUCTURE_ANNOTATE_AUDIT; NEVER_SILENTLY_AUTHORIZE",
+        "revision_policy": "APPEND_ONLY_EXPLICIT_SUPERSEDES",
+        "annotation_policy": "ANCHORED_COMMENT_RESOLUTION_REQUIRED_FOR_HIGH_RISK",
         "planner": {"role_id": "planner", "contract": "roles/planner.md"},
         "executor": {"role_id": "executor", "contract": "roles/executor.md"},
         "shared_research": {
             "root": "research/",
             "contract": "research/shared_information_hub.v1.json",
         },
-        "handoff": ["planner", "research", "executor", "research"],
+        "handoff": ["producer", "planner", "writer", "reviewer", "director", "executor", "reviewer", "producer"],
         "execution_check": "tools/run_idea_pipeline.py::execution_conformance_check",
     }
 
@@ -211,6 +217,13 @@ def _planning_conformance_check(plan: dict[str, Any]) -> dict[str, Any]:
     collaboration = plan.get("collaboration")
     if not isinstance(collaboration, dict) or collaboration.get("mode") != "DEFAULT_MULTI_WINDOW":
         errors.append("plan must declare DEFAULT_MULTI_WINDOW collaboration")
+    else:
+        if collaboration.get("contract") != "research/creative_collaboration_contract.v1.json":
+            errors.append("plan must bind the default creative collaboration contract")
+        if collaboration.get("creative_authority") != "HUMAN_ADOPTED_DECISIONS":
+            errors.append("plan must keep core creative authority with human-adopted decisions")
+        if collaboration.get("revision_policy") != "APPEND_ONLY_EXPLICIT_SUPERSEDES":
+            errors.append("plan must use append-only explicit revision lineage")
     shots = plan.get("shots") if isinstance(plan.get("shots"), list) else []
     if not shots:
         errors.append("plan must contain at least one shot")
@@ -1004,6 +1017,7 @@ def main() -> int:
             "planner_role": {"path": "roles/planner.md", "sha256": _sha256(ROLE_DIR / "planner.md")},
             "executor_role": {"path": "roles/executor.md", "sha256": _sha256(ROLE_DIR / "executor.md")},
             "shared_hub": {"path": "research/shared_information_hub.v1.json", "sha256": _sha256(RESEARCH_DIR / "shared_information_hub.v1.json")},
+            "creative_collaboration_contract": {"path": "research/creative_collaboration_contract.v1.json", "sha256": _sha256(RESEARCH_DIR / "creative_collaboration_contract.v1.json")},
         },
         "handoff": collaboration["handoff"],
     }

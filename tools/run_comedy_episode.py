@@ -143,6 +143,24 @@ def _run_continuity_audit(video: Path, output: Path) -> dict:
     return report
 
 
+def _run_repetition_audit(video: Path, output: Path) -> dict:
+    """Run the conservative rendered-motion repetition signal."""
+    output.parent.mkdir(parents=True, exist_ok=True)
+    result = subprocess.run([
+        sys.executable, str(Path(__file__).with_name("audit_video_repetition.py")),
+        "--video", str(video), "--output", str(output),
+    ], cwd=Path(__file__).resolve().parents[1], text=True, capture_output=True)
+    if output.is_file():
+        try:
+            report = json.loads(output.read_text(encoding="utf-8"))
+        except (OSError, json.JSONDecodeError):
+            report = {"status": "FAIL", "error": "repetition audit did not produce valid JSON"}
+    else:
+        report = {"status": "FAIL", "error": result.stderr[-1000:] or "repetition audit did not produce a report"}
+    report["returncode"] = result.returncode
+    return report
+
+
 def _review_continuity(shot_id: str, pacing_report: dict, continuity_report: dict) -> dict:
     """Separate conservative frame spikes from an actual internal re-cut.
 
@@ -166,6 +184,15 @@ def _review_continuity(shot_id: str, pacing_report: dict, continuity_report: dic
             "spike_count": spikes,
         }
     return {"status": "PASS", "reason": "no frame spikes detected", "spike_count": 0}
+
+
+def _review_repetition(report: dict) -> dict:
+    status = str(report.get("status") or "UNKNOWN").upper()
+    if status == "PASS":
+        return {"status": "PASS", "reason": "no strong periodic or near-static sequence detected"}
+    if status in {"REVIEW_REQUIRED", "UNKNOWN", "FAIL"}:
+        return {"status": status, "reason": "rendered repetition signal requires review", "findings": report.get("findings", [])}
+    return {"status": "UNKNOWN", "reason": f"unrecognized repetition audit status: {status}"}
 
 
 def _contract_shots(episode: dict) -> dict[str, dict]:
@@ -467,12 +494,19 @@ def main() -> int:
             args.media_dir / f"{shot_id}.mp4", pacing_dir.parent / "continuity_audits" / f"{shot_id}.json"
         )
         continuity_review = _review_continuity(shot_id, pacing_report, continuity_report)
-        print(json.dumps({"status": "SHOT_ACCEPTANCE_AUDIT", "shot_id": shot_id, "pacing": pacing_report.get("status"), "continuity": continuity_report.get("status"), "internal_scene_cut_count": pacing_report.get("internal_scene_cut_count"), "tts_duration_seconds": tts_duration}, ensure_ascii=False), flush=True)
+        repetition_report = _run_repetition_audit(
+            args.media_dir / f"{shot_id}.mp4", pacing_dir.parent / "repetition_audits" / f"{shot_id}.json"
+        )
+        repetition_review = _review_repetition(repetition_report)
+        print(json.dumps({"status": "SHOT_ACCEPTANCE_AUDIT", "shot_id": shot_id, "pacing": pacing_report.get("status"), "continuity": continuity_report.get("status"), "repetition": repetition_report.get("status"), "internal_scene_cut_count": pacing_report.get("internal_scene_cut_count"), "tts_duration_seconds": tts_duration}, ensure_ascii=False), flush=True)
         if pacing_report.get("status") != "PASS":
             print(json.dumps({"status": "STOPPED", "failed_shot": shot_id, "reason": "audit_video_pacing failed"}, ensure_ascii=False))
             return 1
         if continuity_review.get("status") != "PASS":
             print(json.dumps({"status": "STOPPED", "failed_shot": shot_id, "reason": "frame continuity audit failed"}, ensure_ascii=False))
+            return 1
+        if repetition_review.get("status") != "PASS":
+            print(json.dumps({"status": "STOPPED", "failed_shot": shot_id, "reason": "rendered repetition audit requires review"}, ensure_ascii=False))
             return 1
     duration_window = episode.get("acceptance", {}).get("duration_window_seconds", [45, 60])
     assembly_command = [
@@ -497,9 +531,11 @@ def main() -> int:
             return 1
         shot_pacing = []
         shot_continuity = []
+        shot_repetition = []
         for shot_id in shot_ids:
             pacing_path = pacing_dir / f"{shot_id}.json"
             continuity_path = pacing_dir.parent / "continuity_audits" / f"{shot_id}.json"
+            repetition_path = pacing_dir.parent / "repetition_audits" / f"{shot_id}.json"
             try:
                 pacing = json.loads(pacing_path.read_text(encoding="utf-8"))
             except (OSError, json.JSONDecodeError):
@@ -508,8 +544,13 @@ def main() -> int:
                 continuity = json.loads(continuity_path.read_text(encoding="utf-8"))
             except (OSError, json.JSONDecodeError):
                 continuity = {"status": "FAIL", "error": "missing continuity receipt"}
+            try:
+                repetition = json.loads(repetition_path.read_text(encoding="utf-8"))
+            except (OSError, json.JSONDecodeError):
+                repetition = {"status": "UNKNOWN", "error": "missing repetition receipt"}
             shot_pacing.append({"shot_id": shot_id, "status": pacing.get("status"), "receipt": str(pacing_path)})
             shot_continuity.append({"shot_id": shot_id, "status": continuity.get("status"), "spike_count": continuity.get("spike_count"), "receipt": str(continuity_path)})
+            shot_repetition.append({"shot_id": shot_id, "status": repetition.get("status"), "findings": repetition.get("findings", []), "receipt": str(repetition_path)})
         # Assembly boundaries can legitimately create a cross-shot luminance
         # spike.  The continuity gate therefore keys delivery on the
         # single-shot audits; the full-cut audit remains recorded for review.
@@ -517,6 +558,7 @@ def main() -> int:
         for shot_id in shot_ids:
             pacing_path = pacing_dir / f"{shot_id}.json"
             continuity_path = pacing_dir.parent / "continuity_audits" / f"{shot_id}.json"
+            repetition_path = pacing_dir.parent / "repetition_audits" / f"{shot_id}.json"
             try:
                 pacing = json.loads(pacing_path.read_text(encoding="utf-8"))
             except (OSError, json.JSONDecodeError):
@@ -525,8 +567,25 @@ def main() -> int:
                 continuity = json.loads(continuity_path.read_text(encoding="utf-8"))
             except (OSError, json.JSONDecodeError):
                 continuity = {"status": "FAIL"}
-            reviewed_shots.append({"shot_id": shot_id, **_review_continuity(shot_id, pacing, continuity)})
+            try:
+                repetition = json.loads(repetition_path.read_text(encoding="utf-8"))
+            except (OSError, json.JSONDecodeError):
+                repetition = {"status": "UNKNOWN"}
+            reviewed_shots.append({
+                "shot_id": shot_id,
+                **_review_continuity(shot_id, pacing, continuity),
+                "repetition": _review_repetition(repetition),
+            })
         continuity_review = "PASS" if all(item["status"] == "PASS" for item in reviewed_shots) else "REVIEW_REQUIRED"
+        repetition_statuses = {item["repetition"]["status"] for item in reviewed_shots}
+        if "FAIL" in repetition_statuses:
+            repetition_review = "FAIL"
+        elif "UNKNOWN" in repetition_statuses:
+            repetition_review = "UNKNOWN"
+        elif repetition_statuses == {"PASS"}:
+            repetition_review = "PASS"
+        else:
+            repetition_review = "REVIEW_REQUIRED"
         contract_sidecars = list(contract_shots.values())
         audio_status = "PASS" if all(
             (item.get("script", {}).get("audio_status") in {"MEASURED", "NO_DIALOGUE"})
@@ -535,6 +594,7 @@ def main() -> int:
         delivery = delivery_gate({
             "media_integrity": "PASS" if final_report.get("status") == "PASS" else "FAIL",
             "continuity": continuity_review,
+            "repetition": repetition_review,
             "subtitle": episode.get("subtitle_status", "UNKNOWN"),
             "audio": episode.get("audio_status", audio_status),
             "creative": episode.get("creative_status", "UNKNOWN"),
@@ -546,6 +606,7 @@ def main() -> int:
             "output": str(args.output),
             "pacing": {"status": final_report.get("status"), "receipt": str(pacing_dir / "final.json"), "shots": shot_pacing},
             "continuity": {"status": continuity_review, "final_receipt": str(pacing_dir.parent / "continuity_audits" / "final.json"), "shots": shot_continuity, "review": reviewed_shots},
+            "repetition": {"status": repetition_review, "shots": shot_repetition},
             "subtitle": delivery["statuses"]["subtitle"],
             "audio": delivery["statuses"]["audio"],
             "creative": delivery["statuses"]["creative"],
@@ -555,6 +616,7 @@ def main() -> int:
                 "每镜必须绑定 measured TTS 与 TTS+recovery hold 时长",
                 "shot contract 锁定 single_action/max_primary_actions=1/internal_cuts_allowed=0",
                 "逐帧连续性按单镜门禁；任何 spike 都保持 REVIEW_REQUIRED，等待显式导演决定",
+                "成片强周期或近冻结序列进入 repetition REVIEW_REQUIRED，不把 Provider completed 当作表演通过",
             ],
         }
         acceptance_path = args.output.with_name("acceptance_receipt.json")

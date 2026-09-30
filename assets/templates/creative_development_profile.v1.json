@@ -41,6 +41,90 @@
     "policy": "让观众通过轮廓、色彩、动作和语言认出角色；十项是设计提示，不是每镜硬门。"
   },
   "character_arcs": [],
+  "creative_roles": {
+    "order": [
+      "character_expert",
+      "world_research_expert",
+      "script_expert",
+      "conflict_emotion_expert",
+      "shot_expert",
+      "continuity_auditor",
+      "director_convergence"
+    ],
+    "definitions": [
+      {
+        "role_id": "character_expert",
+        "title": "角色专家",
+        "stage": "pre_script",
+        "responsibilities": ["人物欲望、底线、关系、成长", "标志动作、语言、信物和可表演状态"],
+        "maps_to": ["character_roster", "relationship_graph", "character_signature_system", "character_arcs"],
+        "authority": "candidate_only"
+      },
+      {
+        "role_id": "world_research_expert",
+        "title": "世界与考据专家",
+        "alias": "导游专家",
+        "stage": "pre_script",
+        "responsibilities": ["时代、地点、生活细节与文化资料", "把外部研究转成可采用的场景事实，保留来源与 UNKNOWN"],
+        "maps_to": ["visual_world", "source_policy", "scene_state"],
+        "authority": "research_only"
+      },
+      {
+        "role_id": "script_expert",
+        "title": "剧本专家",
+        "stage": "script",
+        "responsibilities": ["故事结构、场景对白、潜台词和结尾牵引"],
+        "maps_to": ["episode_structure", "episode_script"],
+        "authority": "candidate_only"
+      },
+      {
+        "role_id": "conflict_emotion_expert",
+        "title": "冲突与情绪专家",
+        "stage": "script_review",
+        "responsibilities": ["双方目标、施压升级、情绪价值和关系变化", "阻止把对话写成信息传递或无意义拉长"],
+        "maps_to": ["quality_review", "conflict_driven_scene_engine"],
+        "authority": "advisory"
+      },
+      {
+        "role_id": "shot_expert",
+        "title": "镜头专家",
+        "stage": "shot_plan",
+        "responsibilities": ["画面构图、机位、动作、听者反应和视觉语言"],
+        "maps_to": ["shot_plan", "production_mapping"],
+        "authority": "candidate_only"
+      },
+      {
+        "role_id": "continuity_auditor",
+        "title": "连续性审校专家",
+        "stage": "audit",
+        "responsibilities": ["因果、人物状态、资产绑定、时间线和信息权限"],
+        "maps_to": ["quality_review", "production_mapping"],
+        "authority": "review_only"
+      },
+      {
+        "role_id": "director_convergence",
+        "title": "导演收敛专家",
+        "stage": "convergence",
+        "responsibilities": ["把已审方案收敛为可拍、可演、可验收的执行稿"],
+        "maps_to": ["production_mapping", "quality_review"],
+        "authority": "candidate_only"
+      }
+    ],
+    "execution_policy": "职责协议只组织创作判断，不新增调度器、Provider 或生产准入；同一职责由现有席位承接，外部研究必须先留在研究层。"
+  },
+  "asset_graph": {
+    "schema": "video_kingdom.asset_graph.v1",
+    "status": "DRAFT",
+    "authority": "DERIVED_CONTINUITY_INDEX",
+    "production_integration": false,
+    "nodes": [],
+    "edges": [],
+    "source_policy": {
+      "source_of_truth": "剧本与已批准的角色/场景/道具资产包",
+      "unknown_policy": "没有来源的关系保持 UNKNOWN，不因图谱连线自动补写剧情。",
+      "public_view_policy": "网站按作品、单集、角色或场景筛选展示，不把全量图谱当成一张巨型画布。"
+    }
+  },
   "visual_world": {
     "era": "UNKNOWN",
     "geography": "UNKNOWN",

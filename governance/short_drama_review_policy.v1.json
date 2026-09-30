@@ -2,16 +2,16 @@
   "contract_version": "ace.video_kingdom.review_policy.v1",
   "scope": "FREE_ZONE_RESEARCH_ONLY",
   "production_integration": false,
-  "review_order": ["deterministic_preflight", "gpt-5.6-terra primary review", "grok-4.6 high-cognition review when available", "gpt-5.6-terra escalation only", "gpt-5.6-terra packaging only"],
+  "review_order": ["deterministic_preflight", "gpt-5.6-terra primary review", "grok-4.7 high-cognition review when available", "gpt-5.6-terra escalation only", "gpt-5.6-terra packaging only"],
   "model_roles": {
     "formal_primary_reviewer": {"model_id": "gpt-5.6-terra", "provider": "codex", "authority": "formal_review_only"},
     "formal_escalation_reviewer": {"model_id": "gpt-5.6-terra", "provider": "codex", "authority": "disagreement_arbitration_only"},
-    "high_cognition_research": {"model_id": "grok-4.6", "provider": "shenwen_grok", "authority": "research_candidate_output"},
+    "high_cognition_research": {"model_id": "grok-4.7", "provider": "shenwen_grok", "authority": "research_candidate_output"},
     "utility_worker": {"model_id": "glm-4-flash", "provider": "zhipu", "authority": "free_zone_housekeeping"}
   },
   "roles": {
     "gpt-5.6-terra_primary": "Formal primary narrative and production review: causal chain, character intent, emotional beat, shot objective, and prompt clarity.",
-    "grok-4.6": "High-cognition research review: script comprehension, director-level shot planning, continuity, motives, viewer confusion, cliches, and missing causal bridges. Output is a candidate packet, not a production write.",
+    "grok-4.7": "High-cognition research review: script comprehension, director-level shot planning, continuity, motives, viewer confusion, cliches, and missing causal bridges. Output is a candidate packet, not a production write.",
     "gpt-5.6-terra_escalation": "Arbitrates only material disagreement between Terra and Grok reviews; it does not replace deterministic safety or asset gates.",
     "gpt-5.6-terra_packaging": "Formats approved packets and reports; it may not approve, reject, submit provider work, or publish assets."
   },

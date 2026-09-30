@@ -256,9 +256,13 @@ def _bind_project_asset_manifest(canonical_shot: dict, payload: dict, contract_p
             raise ValueError(
                 "provider admission blocked: this project only uses original character pack images; no Provider POST"
             )
-        if len(identity_urls) != 1 or contract_urls != identity_urls:
+        # A filmed shot may show one or two on-screen characters.  Keep
+        # original-pack order, but never force a two-person scene through a
+        # single-face reference slot (that creates identity drift and
+        # "two living photos" composition failures).
+        if len(identity_urls) not in {1, 2} or contract_urls != identity_urls:
             raise ValueError(
-                "provider admission blocked: exactly one original pack image for the on-screen character; no Provider POST"
+                "provider admission blocked: one or two original pack images are required for on-screen characters; no Provider POST"
             )
     elif identity_policy == "COMPOSITION_STILL_PLUS_IDENTITY":
         composition = canonical_shot.get("composition_reference") if isinstance(canonical_shot.get("composition_reference"), dict) else {}

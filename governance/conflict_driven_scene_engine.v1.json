@@ -1,0 +1,45 @@
+{
+  "schema": "video_kingdom.conflict_driven_scene.v1",
+  "layer": "DEFAULT_METHOD",
+  "name": "Conflict-Driven Scene Engine",
+  "name_zh": "冲突驱动场景引擎",
+  "not": "dialogue lengthener",
+  "production_integration": false,
+  "blocks_old_contracts_by_default": false,
+  "entry_lock": "video_kingdom_entry only",
+  "docs": "docs/CONFLICT_DRIVEN_SCENE_ENGINE.v1.md",
+  "validator": "tools/validate_conflict_driven_scene.py",
+  "checklist_id": "A41",
+  "role_room_hints_only": [
+    "primary_writer",
+    "contrarian_auditor"
+  ],
+  "never_paste_full_protocol_into_role_room": true,
+  "scene_classes": {
+    "A": "high_conflict_expand",
+    "B": "plot_advance_control",
+    "C": "action_transition_few_words"
+  },
+  "required_change_one_of": [
+    "relation",
+    "information",
+    "choice",
+    "action"
+  ],
+  "mechanisms": [
+    "subtext",
+    "pressure_layers",
+    "information_gap"
+  ],
+  "review_questions": 8,
+  "production_hooks": [
+    "speech_intent_readable",
+    "completes_in_picture"
+  ],
+  "canon_split": {
+    "canhe": "因果见光、守界归位",
+    "cold_payoff_desk": "规矩反噬只给退席/试工",
+    "ghost_desk": "日常异化，不抄骑手厨房奶奶吃绝户"
+  },
+  "optional_script_review_field": "script_review.conflict_driven_scene"
+}

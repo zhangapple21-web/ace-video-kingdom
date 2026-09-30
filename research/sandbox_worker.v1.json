@@ -1,0 +1,22 @@
+{
+  "schema": "video_kingdom.sandbox_worker.v1",
+  "production_integration": false,
+  "media_submission_forbidden": true,
+  "note": "创作层沙盒矿工。不替换 oneapi_role_room 生产席位，不进 video_kingdom_entry。",
+  "miner": {
+    "role_id": "sandbox_miner",
+    "model": "deepseek-v4.1-flash",
+    "fallback_models": [
+      "glm-4-flash"
+    ],
+    "use_when": "长期免费矿工：人格推演、续写、候选剧本扩写。"
+  },
+  "auditor": {
+    "role_id": "sandbox_auditor",
+    "model": "grok-4.6",
+    "fallback_models": [
+      "deepseek-v4.1-flash"
+    ],
+    "use_when": "人设/逻辑候选校验；失败不得补写成成功。"
+  }
+}

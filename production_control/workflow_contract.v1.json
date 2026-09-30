@@ -21,6 +21,10 @@
     "ASSEMBLED",
     "DELIVERY_READY",
     "DELIVERED",
+    "DELIVERED_CLOSED",
+    "BLOCKED",
+    "PAUSED",
+    "ARCHIVED",
     "FAILED"
   ],
   "asset_gate": {
@@ -49,6 +53,13 @@
     "continuity_review": "every REVIEW_REQUIRED shot must have PASS_REVIEWED_NO_INTERNAL_CUTS before promotion",
     "authorization": "production delivery confirmation requires an explicit authorized=true acknowledgement",
     "reality_rule": "only DELIVERY_READY or DELIVERED may cross the reality boundary"
+  },
+  "closure_gate": {
+    "source_of_truth": "research/CLOSURE_MANIFEST.v1.md",
+    "event": "RUN_CLOSED",
+    "terminal_outcomes": ["DELIVERED_CLOSED", "BLOCKED", "PAUSED", "ARCHIVED"],
+    "post_close_rule": "closed run is immutable; rework or republish creates a new revision/run",
+    "required_evidence": ["run_id", "project_id", "script_hash", "contract_hash", "selected_takes", "excluded_candidates", "qc", "rights_receipts", "outputs_with_sha256", "final_confirmation", "recovery"]
   },
   "evidence": {
     "format": "single persistent JSON run with append-only hash-chained events",

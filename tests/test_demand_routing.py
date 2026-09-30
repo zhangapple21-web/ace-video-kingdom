@@ -19,6 +19,21 @@ def _write(path: Path, payload: bytes = b"x" * 5000) -> str:
     return hashlib.sha256(payload).hexdigest()
 
 
+def _fake_production_frames(artifact: Path, output_dir: Path) -> dict:
+    output_dir.mkdir(parents=True, exist_ok=True)
+    first = output_dir / "first.png"
+    last = output_dir / "last.png"
+    first.write_bytes(b"first-frame")
+    last.write_bytes(b"last-frame")
+    return {
+        "tool": "test-ffmpeg",
+        "tool_path": "test-ffmpeg",
+        "tool_version": "test",
+        "first_frame": {"path": str(first), "sha256": hashlib.sha256(first.read_bytes()).hexdigest()},
+        "last_frame": {"path": str(last), "sha256": hashlib.sha256(last.read_bytes()).hexdigest()},
+    }
+
+
 def _plan(root: Path, *, bridge: bool) -> Path:
     asset = root / "assets" / "scene.bin"
     asset_hash = _write(asset)
@@ -34,6 +49,8 @@ def _plan(root: Path, *, bridge: bool) -> Path:
             {
                 "shot_id": "S01",
                 "action": "hold",
+                "generation_allowed": True,
+                "five_gate_receipt": {"status": "PASS"},
                 "render": {"seconds": 4},
                 "shot_contract": {"single_action": True},
                 "continuity_evidence_path": "bridges/S01-S02.json" if bridge else None,
@@ -42,6 +59,8 @@ def _plan(root: Path, *, bridge: bool) -> Path:
             {
                 "shot_id": "S02",
                 "action": "look",
+                "generation_allowed": True,
+                "five_gate_receipt": {"status": "PASS"},
                 "render": {"seconds": 4},
                 "shot_contract": {"single_action": True},
                 "generation_request": {"model": "test", "prompt": "look"},
@@ -245,6 +264,7 @@ def test_production_success_ingest_requires_owner_and_action_binding(tmp_path: P
         "executor_owner": "window-A",
     }), encoding="utf-8")
     monkeypatch.setattr(engine, "_probe_media", lambda path: {"duration_seconds": 1.0, "width": 720, "height": 1280, "fps": 24.0})
+    monkeypatch.setattr(engine, "_extract_frames", _fake_production_frames)
     with pytest.raises(WorkflowError, match="EXECUTION_BINDING_REQUIRED"):
         ingest_execution(run_path, project)
     run.assign_execution_owner(owner="window-A", action_id="action-1")

@@ -115,6 +115,21 @@ def test_payload_fingerprint_input_is_stable():
     assert payload["mode"] == "reference"
 
 
+def test_agnes_25_negative_prompt_is_blocked_not_silently_dropped():
+    import argparse
+
+    args = argparse.Namespace(model="agnes-video-2.5-flash", prompt="a distinct action", seconds=7,
+                              size="720P", aspect_ratio="9:16", flash_mode="reference",
+                              seed=None, flash_first_frame_url=None, flash_last_frame_url=None,
+                              flash_reference_image_url=["https://example.invalid/anchor.png"],
+                              flash_reference_audio_url=[], reference_video_url=[], reference_video_require_audio=False,
+                              image=None, keyframe_image=None, width=1152, height=768, num_frames=121,
+                              frame_rate=24, negative_prompt="no readable text, no subtitles")
+
+    with pytest.raises(ValueError, match="does not support --negative-prompt"):
+        _build_payload(args)
+
+
 def test_local_image_reference_is_path_hash_metadata_and_bounded_webp(tmp_path: Path):
     from PIL import Image
     import argparse

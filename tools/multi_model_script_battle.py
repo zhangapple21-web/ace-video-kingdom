@@ -84,7 +84,7 @@ def main() -> int:
         "哪些信息可能被误读为现实指控；然后给出不超过6条可执行的修订指令。保持原创，不调用工具。"
     )
     try:
-        critic, critic_ms = call("grok-4.6", critic_prompt, 900, timeout=75)
+        critic, critic_ms = call("grok-4.7", critic_prompt, 900, timeout=75)
     except Exception as exc:
         critic, critic_ms = "", 0
         errors.append({"stage": "critic", "error": type(exc).__name__ + ": " + str(exc)})
@@ -108,7 +108,7 @@ def main() -> int:
         "production": False,
         "gateway": BASE_URL,
         "roles": ["draft_writer", "contrarian", "convergence_editor"],
-        "models": ["gpt-5.4-mini", "grok-4.6", "gpt-5.4"],
+        "models": ["gpt-5.4-mini", "grok-4.7", "gpt-5.4"],
         "activation_decision_ref": "research/episode_008_role_activation_decision.v1.json",
         "errors": errors,
         "latency_ms": {"writer": writer_ms, "critic": critic_ms, "director": director_ms},

@@ -1,0 +1,34 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "video_kingdom.persona_dna.v1",
+  "description": "Creative-layer persona DNA from the sandbox personality-matrix pipeline. Drives personality/motivation candidates only; never replaces persona_card visual/voice locks or production gates.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema",
+    "character_id",
+    "root_will",
+    "trauma",
+    "desire",
+    "fear",
+    "behavior_pattern",
+    "personality_conflict",
+    "source",
+    "production_integration"
+  ],
+  "properties": {
+    "schema": { "const": "video_kingdom.persona_dna.v1" },
+    "character_id": { "type": "string", "minLength": 1 },
+    "root_will": { "type": "string", "minLength": 4 },
+    "trauma": { "type": "string", "minLength": 4 },
+    "desire": { "type": "string", "minLength": 4 },
+    "fear": { "type": "string", "minLength": 4 },
+    "behavior_pattern": { "type": "string", "minLength": 4 },
+    "personality_conflict": { "type": "string", "minLength": 4 },
+    "tags": { "type": "array", "items": { "type": "string", "minLength": 1 } },
+    "source": { "enum": ["extract", "original", "hybrid", "recruited"] },
+    "parent_ids": { "type": "array", "items": { "type": "string", "minLength": 1 } },
+    "version": { "type": "string", "minLength": 1 },
+    "production_integration": { "const": false }
+  }
+}

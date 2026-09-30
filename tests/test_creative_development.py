@@ -17,6 +17,15 @@ def test_default_development_profile_is_explicit_and_non_authoritative():
     assert profile["input_classification"]["kind"] == "ORIGINAL_STORY"
     assert profile["input_classification"]["source_text_hash"]
     assert len(profile["character_signature_system"]["fields"]) == 10
+    assert profile["creative_roles"]["order"] == [
+        "character_expert",
+        "world_research_expert",
+        "script_expert",
+        "conflict_emotion_expert",
+        "shot_expert",
+        "continuity_auditor",
+        "director_convergence",
+    ]
     assert validate_creative_development_profile(profile)["status"] == "PASS"
 
 

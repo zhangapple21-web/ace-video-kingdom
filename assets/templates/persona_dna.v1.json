@@ -1,0 +1,15 @@
+{
+  "schema": "video_kingdom.persona_dna.v1",
+  "character_id": "C001",
+  "root_will": "【重大抉择时优先保护什么】",
+  "trauma": "【抽象创伤，不复述具体情节】",
+  "desire": "【最本质的追求】",
+  "fear": "【最害怕发生的事】",
+  "behavior_pattern": "【压力下的反应、社交与强弱处境变化】",
+  "personality_conflict": "【内部冲突，例如渴望信任却本能防备】",
+  "tags": ["隐忍型"],
+  "source": "original",
+  "parent_ids": [],
+  "version": "1",
+  "production_integration": false
+}

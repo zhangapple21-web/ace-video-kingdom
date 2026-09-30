@@ -138,6 +138,12 @@
       "title": "把失败先降摄影做成全剧近景静帧证件照，或把身份裁图放进 input_images[0] 当画面",
       "why": "降摄影只降 camera_motion_level。身份裁图锁的是人，不是构图。场地参考绑了却用脸裁图当第一张输入图，空间进不了画面。系统级冲突，禁用。",
       "status": "DISABLED_SYSTEM_CONFLICT"
+    },
+    {
+      "id": "C23",
+      "title": "把沙盒人格矩阵工业化管线当成新生产入口、新审批层，或替代双审/五关收据",
+      "why": "人格DNA、沙盒推演、自动招聘只是创作层候选。生产仍只走 $video-kingdom → video_kingdom_entry.py → 开拍总流程 → Agnes。禁止把良品率95%、人脸98%、日产50集、未锁定的图像/视频API或三个文本校验Agent写成生产硬门。",
+      "status": "DISABLED_SYSTEM_CONFLICT"
     }
   ]
 }

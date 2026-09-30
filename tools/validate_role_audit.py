@@ -59,4 +59,9 @@ def validate_role_audit(receipt: dict[str, Any], *, minimum_profile: str = "stan
         evaluation = row.get("evaluation") if isinstance(row.get("evaluation"), dict) else {}
         if evaluation and evaluation.get("status") != "PASS":
             errors.append(f"role audit seat {role_id} evaluation is not PASS")
+        if row.get("route_rewritten") is True:
+            actual_model = str(row.get("model") or "")
+            allowed_rewrites = row.get("allowed_gateway_rewrites") if isinstance(row.get("allowed_gateway_rewrites"), list) else []
+            if actual_model not in {str(model) for model in allowed_rewrites}:
+                errors.append(f"role audit seat {role_id} has an unapproved gateway rewrite to {actual_model or 'missing model'}")
     return {"status": "PASS" if not errors else "BLOCKED", "errors": errors, "profile": profile, "required_roles": sorted(required)}

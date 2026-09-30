@@ -11,9 +11,23 @@ from contextlib import contextmanager
 from pathlib import Path
 from typing import Any, Iterator
 
+try:
+    from tools.validate_continuity_bridge import validate_bridge
+except ImportError:  # pragma: no cover - package used as a script outside repo root
+    from validate_continuity_bridge import validate_bridge  # type: ignore
+
 
 SCHEMA = "video_kingdom.production_control_run.v1"
-TERMINAL_STAGES = {"DELIVERED", "FAILED"}
+_CLOSURE_SCHEMA = "video_kingdom.closure_manifest.v1"
+_FRAME_READY_CONTINUITY_STATUSES = {"READY", "PASS", "VERIFIED"}
+TERMINAL_STAGES = {
+    "DELIVERED",
+    "DELIVERED_CLOSED",
+    "FAILED",
+    "BLOCKED",
+    "PAUSED",
+    "ARCHIVED",
+}
 STAGE_ORDER = {
     "DRAFT": 0,
     "ASSETS_BLOCKED": 1,
@@ -26,8 +40,13 @@ STAGE_ORDER = {
     "ASSEMBLED": 8,
     "DELIVERY_READY": 9,
     "DELIVERED": 10,
+    "PAUSED": 97,
+    "BLOCKED": 98,
     "FAILED": 99,
+    "ARCHIVED": 100,
+    "DELIVERED_CLOSED": 101,
 }
+CLOSURE_OUTCOMES = {"DELIVERED_CLOSED", "BLOCKED", "PAUSED", "ARCHIVED"}
 QC_LAYERS = ("picture", "motion", "camera", "continuity", "director")
 MIN_PRODUCTION_ASSET_BYTES = 4096
 STALE_LOCK_SECONDS = 60.0
@@ -78,6 +97,22 @@ def _contained_path(root: Path, value: str | Path) -> Path:
 
 def _utc_now() -> str:
     return time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime())
+
+
+def _pre_provider_continuity_ready(evidence: dict[str, Any]) -> bool:
+    """True when a registered bridge may admit generation without frame proof.
+
+    Frame-ready statuses remain valid. A structurally complete
+    ``PENDING_FRAME_PROOF`` prose bridge is also allowed so the next locked
+    shot can be admitted before either take exists. A READY file without
+    verified frames is still blocked by ``validate_bridge``.
+    """
+    status = evidence.get("status")
+    if status in _FRAME_READY_CONTINUITY_STATUSES:
+        return True
+    if status != "PENDING_FRAME_PROOF":
+        return False
+    return validate_bridge(evidence).get("status") == "PASS"
 
 
 @contextmanager
@@ -207,6 +242,10 @@ class ProductionControl:
         request_hash: str | None = None,
         scope: dict[str, Any] | None = None,
         plan_shot_ids: list[str] | None = None,
+        scope_explicit: bool | None = None,
+        project_id: str | None = None,
+        script_hash: str | None = None,
+        contract_hash: str | None = None,
     ) -> "ProductionControl":
         if mode not in {"PRODUCTION", "SANDBOX"}:
             raise WorkflowError(f"INVALID_MODE:{mode}")
@@ -223,9 +262,15 @@ class ProductionControl:
             "request_id": request_id,
             "executor_thread_id": executor_thread_id,
             "request_hash": request_hash,
+            "identity": {
+                "project_id": str(project_id).strip() if project_id else None,
+                "script_hash": str(script_hash).strip() if script_hash else None,
+                "contract_hash": str(contract_hash).strip() if contract_hash else None,
+            },
             "mode": mode,
             "root": str(root),
             "scope": scope,
+            "scope_explicit": bool(scope_explicit),
             "plan_shot_ids": list(plan_shot_ids or []),
             "total_plan_shots": len(plan_shot_ids or []),
             "revision": 0,
@@ -245,8 +290,25 @@ class ProductionControl:
             "qc": {},
             "assembly": None,
             "delivery": None,
+            "closure": None,
             "events": [],
         }
+        if isinstance(scope, dict):
+            event_body = {
+                "event": "SCOPE_BOUND",
+                "revision": 1,
+                "at": _utc_now(),
+                "data": {
+                    "scope": dict(scope),
+                    "plan_shot_ids": list(plan_shot_ids or []),
+                },
+                "prev_event_hash": "GENESIS",
+            }
+            event_body["event_hash"] = _hash_bytes(
+                _canonical(event_body).encode("utf-8")
+            )
+            payload["events"].append(event_body)
+            payload["revision"] = 1
         payload["state_hash"] = _state_digest(payload)
         cls(run_path)._write(payload)
         return cls(run_path)
@@ -303,7 +365,13 @@ class ProductionControl:
             if integrity["status"] != "PASS":
                 raise WorkflowError("RUN_INTEGRITY_INVALID")
             payload = self._load()
-            if payload.get("stage") in TERMINAL_STAGES:
+            if payload.get("closure") is not None:
+                raise WorkflowError("RUN_ALREADY_CLOSED")
+            # A delivered run is still allowed one and only one explicit
+            # close event.  All other mutations remain blocked at terminal
+            # stages.  This keeps delivery and closure separate without
+            # opening a post-delivery editing path.
+            if payload.get("stage") in TERMINAL_STAGES and event != "RUN_CLOSED":
                 raise WorkflowError(f"TERMINAL_STAGE:{payload['stage']}")
             before = payload.get("revision", 0)
             result = fn(payload)
@@ -320,6 +388,9 @@ class ProductionControl:
     @staticmethod
     def _advance(payload: dict[str, Any], stage: str) -> None:
         current = payload["stage"]
+        if current == "DELIVERED" and stage == "DELIVERED_CLOSED":
+            payload["stage"] = stage
+            return
         if current in TERMINAL_STAGES and current != stage:
             raise WorkflowError(f"TERMINAL_STAGE:{current}")
         if STAGE_ORDER[stage] < STAGE_ORDER[current]:
@@ -437,7 +508,7 @@ class ProductionControl:
                     if not isinstance(evidence_payload, dict):
                         errors.append({"edge_id": edge_id, "reason": "CONTINUITY_EVIDENCE_INVALID"})
                     else:
-                        if evidence_payload.get("status") not in {"PASS", "READY"}:
+                        if not _pre_provider_continuity_ready(evidence_payload):
                             errors.append({"edge_id": edge_id, "reason": "CONTINUITY_EVIDENCE_NOT_READY", "status": evidence_payload.get("status")})
                         if str(evidence_payload.get("from_shot")) != str(edge.get("from_shot")) or str(evidence_payload.get("to_shot")) != str(edge.get("to_shot")):
                             errors.append({"edge_id": edge_id, "reason": "CONTINUITY_EDGE_MISMATCH"})
@@ -531,12 +602,215 @@ class ProductionControl:
 
     def _require_active_shot(self, payload: dict[str, Any], shot_id: str) -> None:
         scoped = self._scoped_shots(payload)
-        if scoped is None or payload.get("mode") != "PRODUCTION":
+        if (
+            scoped is None
+            or payload.get("mode") != "PRODUCTION"
+            or not payload.get("scope_explicit", False)
+        ):
             return
         if shot_id not in scoped:
             raise WorkflowError(f"SHOT_OUTSIDE_SCOPE:{shot_id}")
         if shot_id != payload.get("scope", {}).get("active_shot_id"):
             raise WorkflowError(f"SHOT_NOT_ACTIVE:{shot_id}")
+
+    @staticmethod
+    def _take_frame_proof(
+        payload: dict[str, Any],
+        take: dict[str, Any],
+        *,
+        frame: str | None = None,
+        require_verified: bool = True,
+    ) -> dict[str, Any]:
+        if payload.get("mode") != "PRODUCTION":
+            return {}
+        if require_verified and take.get("frame_proof_status") != "VERIFIED":
+            raise WorkflowError(f"FRAME_PROOF_NOT_VERIFIED:{take.get('take_id')}")
+        proof = take.get("frame_proof")
+        if not isinstance(proof, dict):
+            raise WorkflowError(f"FRAME_PROOF_MISSING:{take.get('take_id')}")
+        keys = (frame,) if frame else ("first_frame", "last_frame")
+        result: dict[str, Any] = {}
+        for key in keys:
+            row = proof.get(key)
+            if not isinstance(row, dict) or not row.get("path") or not row.get("sha256"):
+                raise WorkflowError(f"FRAME_PROOF_MISSING:{take.get('take_id')}:{key}")
+            candidate = _contained_path(Path(str(payload.get("root") or "")), str(row["path"]))
+            if not candidate.is_file() or sha256_file(candidate) != row.get("sha256"):
+                raise WorkflowError(f"FRAME_PROOF_DRIFT:{take.get('take_id')}:{key}")
+            if proof.get("artifact_sha256") != take.get("artifact_sha256"):
+                raise WorkflowError(f"FRAME_PROOF_LINEAGE_MISMATCH:{take.get('take_id')}")
+            if proof.get("generation_id") != take.get("generation_id"):
+                raise WorkflowError(f"FRAME_PROOF_LINEAGE_MISMATCH:{take.get('take_id')}")
+            if proof.get("admission_request_hash") != take.get("admission_request_hash"):
+                raise WorkflowError(f"FRAME_PROOF_LINEAGE_MISMATCH:{take.get('take_id')}")
+            result[key] = {"path": str(row["path"]), "sha256": str(row["sha256"])}
+        return result
+
+    def _find_take(self, payload: dict[str, Any], take_id: str, shot_id: str | None = None) -> dict[str, Any] | None:
+        return next(
+            (
+                row for row in payload.get("takes", [])
+                if row.get("take_id") == take_id
+                and (shot_id is None or row.get("shot_id") == shot_id)
+            ),
+            None,
+        )
+
+    def _continuity_file_ready(
+        self,
+        payload: dict[str, Any],
+        edge: dict[str, Any],
+        *,
+        allow_pending_structure: bool = False,
+    ) -> None:
+        candidate = _contained_path(self._root(payload), Path(str(edge.get("evidence_path") or "")))
+        if not candidate.is_file():
+            raise WorkflowError(f"CONTINUITY_EVIDENCE_REQUIRED:{edge.get('from_shot')}->{edge.get('to_shot')}")
+        try:
+            evidence = json.loads(candidate.read_text(encoding="utf-8"))
+        except (OSError, UnicodeDecodeError, json.JSONDecodeError) as exc:
+            raise WorkflowError(f"CONTINUITY_EVIDENCE_INVALID:{edge.get('from_shot')}->{edge.get('to_shot')}") from exc
+        if not isinstance(evidence, dict):
+            raise WorkflowError(f"CONTINUITY_EVIDENCE_NOT_READY:{edge.get('from_shot')}->{edge.get('to_shot')}")
+        ready = (
+            _pre_provider_continuity_ready(evidence)
+            if allow_pending_structure
+            else evidence.get("status") in _FRAME_READY_CONTINUITY_STATUSES
+        )
+        if not ready:
+            raise WorkflowError(f"CONTINUITY_EVIDENCE_NOT_READY:{edge.get('from_shot')}->{edge.get('to_shot')}")
+        if str(evidence.get("from_shot")) != str(edge.get("from_shot")) or str(evidence.get("to_shot")) != str(edge.get("to_shot")):
+            raise WorkflowError(f"CONTINUITY_EDGE_MISMATCH:{edge.get('edge_id')}")
+
+    def update_continuity_evidence(
+        self,
+        edge_id: str,
+        *,
+        previous_take_id: str,
+        current_take_id: str,
+    ) -> dict[str, Any]:
+        """Bind real adjacent take frames to an already verified bridge.
+
+        This method only records evidence that already exists. It never promotes
+        a prose bridge by itself and never creates a frame proof.
+        """
+        def apply(payload: dict[str, Any]) -> dict[str, Any]:
+            edge = payload.get("continuity", {}).get(edge_id)
+            if not isinstance(edge, dict):
+                raise WorkflowError(f"CONTINUITY_EDGE_NOT_FOUND:{edge_id}")
+            self._continuity_file_ready(payload, edge)
+            previous = self._find_take(payload, previous_take_id, str(edge.get("from_shot")))
+            current = self._find_take(payload, current_take_id, str(edge.get("to_shot")))
+            if not previous or not current:
+                raise WorkflowError(f"CONTINUITY_TAKES_REQUIRED:{edge_id}")
+            if not previous.get("selected") or previous.get("stale") or current.get("stale"):
+                raise WorkflowError(f"CONTINUITY_SELECTED_TAKES_REQUIRED:{edge_id}")
+            previous_proof = self._take_frame_proof(payload, previous, frame="last_frame", require_verified=False)
+            current_proof = self._take_frame_proof(payload, current, frame="first_frame", require_verified=False)
+            previous_request_hash = previous.get("admission_request_hash")
+            current_request_hash = current.get("admission_request_hash")
+            if not previous_request_hash or not current_request_hash:
+                raise WorkflowError(f"CONTINUITY_REQUEST_HASH_REQUIRED:{edge_id}")
+            current_admission = next(
+                (
+                    row for row in reversed(payload.get("generation_admissions", []))
+                    if row.get("shot_id") == current.get("shot_id")
+                    and not row.get("invalidated")
+                    and row.get("request_hash") == current_request_hash
+                ),
+                None,
+            )
+            if not current_admission:
+                raise WorkflowError(f"CONTINUITY_CURRENT_REQUEST_HASH_MISMATCH:{edge_id}")
+            if edge.get("request_hash") and edge.get("request_hash") != previous_request_hash:
+                raise WorkflowError(f"CONTINUITY_REQUEST_HASH_MISMATCH:{edge_id}")
+            if edge.get("current_request_hash") and edge.get("current_request_hash") != current_request_hash:
+                raise WorkflowError(f"CONTINUITY_CURRENT_REQUEST_HASH_MISMATCH:{edge_id}")
+            previous["frame_proof_status"] = "VERIFIED"
+            current["frame_proof_status"] = "VERIFIED"
+            edge.update({
+                "previous_take_id": previous_take_id,
+                "previous_last_frame": previous_proof["last_frame"],
+                "current_take_id": current_take_id,
+                "current_first_frame": current_proof["first_frame"],
+                "request_hash": previous_request_hash,
+                "current_request_hash": current_request_hash,
+                "frame_proof_status": "VERIFIED",
+                "status": "READY",
+                "verified_at": _utc_now(),
+            })
+            return dict(edge)
+        return self._mutate("CONTINUITY_EVIDENCE_VERIFIED", {"edge_id": edge_id, "previous_take_id": previous_take_id, "current_take_id": current_take_id}, apply)
+
+    def verify_frame_proof(self, take_id: str) -> dict[str, Any]:
+        """Explicitly promote extracted frame evidence after lineage checks."""
+        def apply(payload: dict[str, Any]) -> dict[str, Any]:
+            take = self._find_take(payload, take_id)
+            if not take or take.get("stale"):
+                raise WorkflowError(f"TAKE_NOT_FOUND:{take_id}")
+            self._take_frame_proof(payload, take, require_verified=False)
+            take["frame_proof_status"] = "VERIFIED"
+            take["frame_proof_verified_at"] = _utc_now()
+            return dict(take)
+        return self._mutate("FRAME_PROOF_VERIFIED", {"take_id": take_id}, apply)
+
+    def expand_scope(self, next_shot_id: str) -> dict[str, Any]:
+        next_shot_id = str(next_shot_id).strip()
+        if not next_shot_id:
+            raise WorkflowError("SCOPE_SHOT_REQUIRED")
+        def apply(payload: dict[str, Any]) -> dict[str, Any]:
+            scope = payload.get("scope")
+            plan_ids = list(payload.get("plan_shot_ids") or [])
+            if payload.get("mode") != "PRODUCTION" or not isinstance(scope, dict) or not plan_ids:
+                raise WorkflowError("SCOPED_PRODUCTION_RUN_REQUIRED")
+            current_ids = list(scope.get("shot_ids") or [])
+            if not current_ids or current_ids != plan_ids[:len(current_ids)]:
+                raise WorkflowError("SCOPE_INVALID")
+            if len(current_ids) >= len(plan_ids) or next_shot_id != plan_ids[len(current_ids)]:
+                raise WorkflowError("SCOPE_MUST_EXPAND_BY_NEXT_PLAN_SHOT")
+            active_shot_id = str(scope.get("active_shot_id") or "")
+            if active_shot_id != current_ids[-1]:
+                raise WorkflowError("SCOPE_EXPANSION_REQUIRES_ACTIVE_SCOPE_TAIL")
+            active_state = payload.get("shots", {}).get(active_shot_id, {})
+            selected_take_id = active_state.get("selected_take_id")
+            selected_take = (
+                self._find_take(payload, str(selected_take_id), active_shot_id)
+                if selected_take_id
+                else None
+            )
+            if not selected_take or selected_take.get("stale"):
+                raise WorkflowError(f"ACTIVE_SHOT_GENERATION_NOT_READY:{active_shot_id}")
+            if payload.get("qc", {}).get(selected_take_id, {}).get("status") != "PASS":
+                raise WorkflowError(f"ACTIVE_SHOT_QC_NOT_READY:{active_shot_id}")
+            updated = dict(scope)
+            updated["shot_ids"] = current_ids + [next_shot_id]
+            canonical = {"kind": "SHOT_SUBSET", "shot_ids": updated["shot_ids"], "active_shot_id": updated.get("active_shot_id")}
+            updated["scope_id"] = _hash_bytes(_canonical(canonical).encode("utf-8"))[:16]
+            payload["scope"] = updated
+            return dict(updated)
+        return self._mutate("SCOPE_EXPANDED", {"next_shot_id": next_shot_id}, apply)
+
+    def advance_active_shot(self, next_shot_id: str) -> dict[str, Any]:
+        next_shot_id = str(next_shot_id).strip()
+        def apply(payload: dict[str, Any]) -> dict[str, Any]:
+            scope = payload.get("scope")
+            scoped = self._scoped_shots(payload)
+            if payload.get("mode") != "PRODUCTION" or not isinstance(scope, dict) or not scoped:
+                raise WorkflowError("SCOPED_PRODUCTION_RUN_REQUIRED")
+            current = str(scope.get("active_shot_id") or "")
+            if current not in scoped or next_shot_id not in scoped:
+                raise WorkflowError("ACTIVE_SHOT_SCOPE_INVALID")
+            current_index = scoped.index(current)
+            next_index = current_index + 1
+            if next_index >= len(scoped) or next_shot_id != scoped[next_index]:
+                raise WorkflowError("ACTIVE_SHOT_MUST_ADVANCE_TO_NEXT")
+            selected_id = payload.get("shots", {}).get(current, {}).get("selected_take_id")
+            selected = self._find_take(payload, str(selected_id), current) if selected_id else None
+            if not selected or selected.get("stale") or payload.get("qc", {}).get(selected_id, {}).get("status") != "PASS":
+                raise WorkflowError(f"ACTIVE_SHOT_QC_NOT_READY:{current}")
+            scope["active_shot_id"] = next_shot_id
+            return {"active_shot_id": next_shot_id, "scope": dict(scope)}
+        return self._mutate("ACTIVE_SHOT_ADVANCED", {"next_shot_id": next_shot_id}, apply)
 
     def lock_shot(self, shot_id: str, contract: dict[str, Any]) -> dict[str, Any]:
         def apply(payload: dict[str, Any]) -> dict[str, Any]:
@@ -588,8 +862,50 @@ class ProductionControl:
         def apply(payload: dict[str, Any]) -> dict[str, Any]:
             if self._evaluate_asset_gate_payload(payload, mutate_stage=False).get("status") != "READY":
                 raise WorkflowError("ASSET_GATE_NOT_READY")
+            self._require_active_shot(payload, shot_id)
             if shot_id not in payload["shots"]:
                 raise WorkflowError(f"SHOT_NOT_LOCKED:{shot_id}")
+            locked_contract = payload["shots"][shot_id]
+            if payload.get("mode") == "PRODUCTION":
+                if locked_contract.get("generation_allowed") is not True:
+                    raise WorkflowError(f"GENERATION_NOT_ALLOWED:{shot_id}")
+                if locked_contract.get("rebuild_required") is True:
+                    raise WorkflowError(f"SHOT_REBUILD_REQUIRED:{shot_id}")
+                gate = locked_contract.get("five_gate_receipt") or locked_contract.get("quality_gate")
+                if isinstance(gate, dict) and gate.get("status") not in {"PASS", "READY"}:
+                    raise WorkflowError(f"FIVE_GATE_NOT_READY:{shot_id}")
+            scoped = self._scoped_shots(payload)
+            if (
+                payload.get("mode") == "PRODUCTION"
+                and payload.get("scope_explicit", False)
+                and scoped
+            ):
+                shot_index = scoped.index(shot_id)
+                if shot_index > 0:
+                    previous_shot_id = scoped[shot_index - 1]
+                    previous_state = payload.get("shots", {}).get(previous_shot_id, {})
+                    previous_take_id = previous_state.get("selected_take_id")
+                    previous = self._find_take(payload, str(previous_take_id), previous_shot_id) if previous_take_id else None
+                    if not previous or previous.get("stale"):
+                        raise WorkflowError(f"PREVIOUS_SHOT_GENERATION_REQUIRED:{previous_shot_id}")
+                    self._take_frame_proof(payload, previous, frame="last_frame")
+                    edge_id = f"{previous_shot_id}->{shot_id}"
+                    edge = payload.get("continuity", {}).get(edge_id)
+                    if not isinstance(edge, dict):
+                        raise WorkflowError(f"CONTINUITY_EVIDENCE_REQUIRED:{edge_id}")
+                    self._continuity_file_ready(payload, edge, allow_pending_structure=True)
+                    previous_request_hash = next(
+                        (
+                            row.get("request_hash")
+                            for row in reversed(payload.get("generation_admissions", []))
+                            if row.get("shot_id") == previous_shot_id and not row.get("invalidated")
+                        ),
+                        None,
+                    )
+                    if not previous_request_hash:
+                        raise WorkflowError(f"PREVIOUS_SHOT_REQUEST_HASH_REQUIRED:{previous_shot_id}")
+                    if edge.get("request_hash") and edge.get("request_hash") != previous_request_hash:
+                        raise WorkflowError(f"CONTINUITY_REQUEST_HASH_MISMATCH:{edge_id}")
             prior = [row for row in payload["generation_admissions"] if row.get("shot_id") == shot_id and not row.get("invalidated")]
             if prior:
                 if prior[-1].get("request_hash") == request_hash and prior[-1].get("resume_video_id") == resume_video_id:
@@ -646,7 +962,46 @@ class ProductionControl:
                 raise WorkflowError("MEDIA_PROBE_UNKNOWN")
             if payload.get("mode") == "PRODUCTION" and (not probed.get("duration_seconds") or not probed.get("width") or not probed.get("height")):
                 raise WorkflowError("MEDIA_METADATA_INCOMPLETE")
-            record = {"shot_id": shot_id, "take_id": take_id, "video_id": video_id, "artifact_path": str(artifact_path), "artifact_sha256": actual_hash, "metadata": metadata, "probed_media": probed, "status": "GENERATED_PENDING_QC", "recorded_at": _utc_now()}
+            frame_proof: dict[str, Any] = {}
+            frame_proof_status = "PENDING"
+            if payload.get("mode") == "PRODUCTION":
+                frame_dir = _contained_path(
+                    root,
+                    Path(".control") / "frames" / str(shot_id) / str(take_id),
+                )
+                extracted = _extract_frames(candidate, frame_dir)
+                frame_proof = {
+                    "tool": extracted["tool"],
+                    "tool_path": extracted["tool_path"],
+                    "tool_version": extracted["tool_version"],
+                    "first_frame": {
+                        **extracted["first_frame"],
+                        "path": str(Path(extracted["first_frame"]["path"]).resolve().relative_to(root)),
+                    },
+                    "last_frame": {
+                        **extracted["last_frame"],
+                        "path": str(Path(extracted["last_frame"]["path"]).resolve().relative_to(root)),
+                    },
+                    "artifact_sha256": actual_hash,
+                    "generation_id": video_id,
+                    "admission_request_hash": admission.get("request_hash"),
+                }
+                frame_proof_status = "PENDING"
+            record = {
+                "shot_id": shot_id,
+                "take_id": take_id,
+                "video_id": video_id,
+                "generation_id": video_id,
+                "artifact_path": str(artifact_path),
+                "artifact_sha256": actual_hash,
+                "admission_request_hash": admission.get("request_hash"),
+                "metadata": metadata,
+                "probed_media": probed,
+                "frame_proof": frame_proof,
+                "frame_proof_status": frame_proof_status,
+                "status": "GENERATED_PENDING_QC",
+                "recorded_at": _utc_now(),
+            }
             payload["takes"].append(record)
             for outcome in payload.get("execution_outcomes", []):
                 if outcome.get("shot_id") == shot_id and outcome.get("status") in {"UNKNOWN", "FAILED"} and not outcome.get("resolved"):
@@ -791,8 +1146,14 @@ class ProductionControl:
                 raise WorkflowError("ASSEMBLY_REQUIRES_SHOTS")
             if len(ordered_shots) != len(set(ordered_shots)):
                 raise WorkflowError("ASSEMBLY_DUPLICATE_SHOTS")
-            expected_shots = list(payload.get("shots", {}).keys())
-            if set(ordered_shots) != set(expected_shots):
+            plan_shots = list(payload.get("plan_shot_ids") or [])
+            if plan_shots:
+                expected_shots = plan_shots
+                if list(payload.get("scope", {}).get("shot_ids") or []) != plan_shots:
+                    raise WorkflowError("ASSEMBLY_REQUIRES_FULL_PLAN_SCOPE")
+            else:
+                expected_shots = list(payload.get("shots", {}).keys())
+            if ordered_shots != expected_shots:
                 raise WorkflowError("ASSEMBLY_SHOT_SET_MISMATCH")
             selected_takes: dict[str, dict[str, str]] = {}
             for shot_id in ordered_shots:
@@ -816,7 +1177,16 @@ class ProductionControl:
                 raise WorkflowError("ASSEMBLY_PATH_ESCAPE") from exc
             if not candidate.is_file():
                 raise WorkflowError(f"ASSEMBLY_ARTIFACT_NOT_FOUND:{artifact_path}")
-            record = {"artifact_path": str(artifact_path), "artifact_sha256": sha256_file(candidate), "ordered_shots": ordered_shots, "selected_takes": selected_takes, "metadata": metadata, "recorded_at": _utc_now()}
+            record = {
+                "artifact_path": str(artifact_path),
+                "artifact_sha256": sha256_file(candidate),
+                "ordered_shots": ordered_shots,
+                "selected_takes": selected_takes,
+                "plan_shot_ids": list(plan_shots),
+                "total_plan_shots": len(plan_shots),
+                "metadata": metadata,
+                "recorded_at": _utc_now(),
+            }
             if payload.get("assembly"):
                 if payload["assembly"].get("artifact_sha256") == record["artifact_sha256"] and payload["assembly"].get("ordered_shots") == ordered_shots:
                     return payload["assembly"]
@@ -950,3 +1320,209 @@ class ProductionControl:
             self._advance(payload, "DELIVERED")
             return payload["delivery"]
         return self._mutate("DELIVERY_CONFIRMED", {"destination": destination}, apply)
+
+    def close_run(
+        self,
+        *,
+        outcome: str = "DELIVERED_CLOSED",
+        closure_id: str | None = None,
+        manifest: dict[str, Any] | None = None,
+        project_id: str | None = None,
+        script_hash: str | None = None,
+        contract_hash: str | None = None,
+        final_confirmation: dict[str, Any] | None = None,
+        final_qc: dict[str, Any] | None = None,
+        outputs: list[dict[str, Any]] | None = None,
+        rights_receipts: list[dict[str, Any]] | None = None,
+        excluded_candidates: list[Any] | None = None,
+        known_limits: list[Any] | None = None,
+        recovery: dict[str, Any] | str | None = None,
+        reason: str | None = None,
+    ) -> dict[str, Any]:
+        """Close a run with one immutable, evidence-bearing terminal receipt.
+
+        Delivery confirmation answers "may this artifact cross the boundary?";
+        closure answers "is this run finished, and what must survive it?".
+        The receipt is stored in the existing run state (not a second control
+        plane or a pile of sidecar files) and is protected by the same event
+        chain/state digest as every other transition.
+        """
+        supplied = dict(manifest or {})
+        outcome = str(supplied.get("outcome") or outcome).upper().strip()
+        if outcome not in CLOSURE_OUTCOMES:
+            raise WorkflowError(f"INVALID_CLOSURE_OUTCOME:{outcome}")
+        closure_id = str(supplied.get("closure_id") or closure_id or f"closure_{uuid.uuid4().hex[:12]}").strip()
+        if not closure_id:
+            raise WorkflowError("CLOSURE_ID_REQUIRED")
+
+        def apply(payload: dict[str, Any]) -> dict[str, Any]:
+            if payload.get("closure") is not None:
+                raise WorkflowError("RUN_ALREADY_CLOSED")
+            delivery = payload.get("delivery") if isinstance(payload.get("delivery"), dict) else {}
+            if outcome == "DELIVERED_CLOSED":
+                if payload.get("stage") != "DELIVERED" or delivery.get("status") != "DELIVERED":
+                    raise WorkflowError("DELIVERY_NOT_CONFIRMED")
+
+            identity = dict(payload.get("identity") or {})
+            supplied_identity = supplied.get("identity") if isinstance(supplied.get("identity"), dict) else {}
+            identity.update({key: value for key, value in supplied_identity.items() if value is not None})
+            identity.update({
+                "project_id": project_id or supplied.get("project_id") or identity.get("project_id"),
+                "script_hash": script_hash or supplied.get("script_hash") or identity.get("script_hash"),
+                "contract_hash": contract_hash or supplied.get("contract_hash") or identity.get("contract_hash"),
+            })
+            identity = {key: str(value).strip() if value is not None else None for key, value in identity.items()}
+            if outcome == "DELIVERED_CLOSED" and any(not identity.get(key) for key in ("project_id", "script_hash", "contract_hash")):
+                raise WorkflowError("CLOSURE_IDENTITY_INCOMPLETE")
+
+            expected_shots = list(payload.get("plan_shot_ids") or payload.get("shots", {}).keys())
+            selected_rows = [row for row in payload.get("takes", []) if row.get("selected")]
+            selected_by_shot = {row.get("shot_id"): row for row in selected_rows}
+            unresolved = [
+                row for row in payload.get("execution_outcomes", [])
+                if row.get("status") in {"UNKNOWN", "FAILED"} and not row.get("resolved")
+            ]
+            if outcome == "DELIVERED_CLOSED":
+                if unresolved:
+                    raise WorkflowError("CLOSURE_UNRESOLVED_EXECUTION")
+                if set(selected_by_shot) != set(expected_shots):
+                    raise WorkflowError("CLOSURE_SHOT_SELECTION_INCOMPLETE")
+                for shot_id in expected_shots:
+                    row = selected_by_shot.get(shot_id)
+                    if not row or row.get("stale") or payload.get("qc", {}).get(row.get("take_id"), {}).get("status") != "PASS":
+                        raise WorkflowError(f"CLOSURE_SELECTED_TAKE_NOT_READY:{shot_id}")
+
+            confirmation = supplied.get("final_confirmation")
+            if not isinstance(confirmation, dict):
+                confirmation = dict(final_confirmation or {})
+            else:
+                confirmation = dict(confirmation)
+            confirmer = str(confirmation.get("confirmed_by") or confirmation.get("approved_by") or "").strip()
+            if outcome == "DELIVERED_CLOSED" and not confirmer:
+                raise WorkflowError("CLOSURE_FINAL_CONFIRMATION_REQUIRED")
+            if confirmer:
+                confirmation["confirmed_by"] = confirmer
+                confirmation.setdefault("confirmed_at", _utc_now())
+                confirmation["confirmed"] = True
+
+            qc = supplied.get("final_qc") if isinstance(supplied.get("final_qc"), dict) else dict(final_qc or {})
+            if not qc:
+                qc = {
+                    "selected_takes": {
+                        str(take_id): dict(receipt)
+                        for take_id, receipt in (payload.get("qc") or {}).items()
+                        if take_id in {row.get("take_id") for row in selected_rows}
+                    },
+                    "delivery_status": delivery.get("status"),
+                }
+            serialized_qc = _canonical(qc).upper()
+            if outcome == "DELIVERED_CLOSED" and any(token in serialized_qc for token in ("UNKNOWN", "REVIEW_REQUIRED", '"FAIL"', '"BLOCKED"')):
+                raise WorkflowError("CLOSURE_QC_NOT_CLEAR")
+
+            closure_outputs = supplied.get("outputs") if isinstance(supplied.get("outputs"), list) else list(outputs or [])
+            if outcome == "DELIVERED_CLOSED" and not closure_outputs:
+                raise WorkflowError("CLOSURE_OUTPUTS_REQUIRED")
+            checked_outputs: list[dict[str, Any]] = []
+            root = self._root(payload)
+            for item in closure_outputs:
+                if not isinstance(item, dict) or not str(item.get("role") or "").strip() or not str(item.get("path") or "").strip():
+                    raise WorkflowError("CLOSURE_OUTPUT_REFERENCE_INVALID")
+                path = Path(str(item["path"]))
+                try:
+                    candidate = _contained_path(root, path)
+                except WorkflowError as exc:
+                    raise WorkflowError("CLOSURE_OUTPUT_PATH_ESCAPE") from exc
+                if not candidate.is_file():
+                    raise WorkflowError(f"CLOSURE_OUTPUT_NOT_FOUND:{path}")
+                actual_hash = sha256_file(candidate)
+                declared_hash = str(item.get("sha256") or item.get("artifact_sha256") or "")
+                if not declared_hash or declared_hash != actual_hash:
+                    raise WorkflowError(f"CLOSURE_OUTPUT_HASH_MISMATCH:{item.get('role')}")
+                checked_outputs.append({**item, "path": str(path), "sha256": actual_hash})
+            if outcome == "DELIVERED_CLOSED":
+                roles = {str(item.get("role") or "").lower() for item in checked_outputs}
+                aliases = {
+                    "final_master": {"final_master", "master", "video"},
+                    "subtitle": {"subtitle", "subtitles", "caption_files", "subtitle_receipt"},
+                    "master_audio": {"master_audio", "audio", "audio_files"},
+                    "manifest": {"manifest", "version_manifest", "shot_manifest"},
+                    "acceptance_receipt": {"acceptance_receipt", "qc_report", "delivery_receipt"},
+                }
+                missing = [name for name, accepted in aliases.items() if not roles.intersection(accepted)]
+                if missing:
+                    raise WorkflowError("CLOSURE_OUTPUT_ROLES_MISSING:" + ",".join(missing))
+
+            rights = supplied.get("rights_receipts") if isinstance(supplied.get("rights_receipts"), list) else list(rights_receipts or [])
+            if outcome == "DELIVERED_CLOSED" and not rights:
+                raise WorkflowError("CLOSURE_RIGHTS_RECEIPTS_REQUIRED")
+            checked_rights: list[dict[str, Any]] = []
+            for item in rights:
+                if not isinstance(item, dict):
+                    raise WorkflowError("CLOSURE_RIGHTS_RECEIPT_INVALID")
+                right = dict(item)
+                if right.get("path"):
+                    try:
+                        candidate = _contained_path(root, Path(str(right["path"])))
+                    except WorkflowError as exc:
+                        raise WorkflowError("CLOSURE_RIGHTS_PATH_ESCAPE") from exc
+                    if not candidate.is_file():
+                        raise WorkflowError(f"CLOSURE_RIGHTS_RECEIPT_NOT_FOUND:{right['path']}")
+                    actual_hash = sha256_file(candidate)
+                    if str(right.get("sha256") or "") != actual_hash:
+                        raise WorkflowError("CLOSURE_RIGHTS_HASH_MISMATCH")
+                    right["sha256"] = actual_hash
+                checked_rights.append(right)
+
+            close_reason = str(supplied.get("reason") or reason or "").strip()
+            if outcome in {"BLOCKED", "PAUSED", "ARCHIVED"} and not close_reason:
+                raise WorkflowError("CLOSURE_REASON_REQUIRED")
+            known = supplied.get("known_limits") if isinstance(supplied.get("known_limits"), list) else list(known_limits or [])
+            recovery_plan = supplied.get("recovery") if supplied.get("recovery") is not None else recovery
+            if outcome in {"BLOCKED", "PAUSED"} and not recovery_plan:
+                raise WorkflowError("CLOSURE_RECOVERY_REQUIRED")
+            excluded = supplied.get("excluded_candidates") if isinstance(supplied.get("excluded_candidates"), list) else list(excluded_candidates or [])
+            excluded_ids = {str(item.get("take_id")) for item in payload.get("takes", []) if not item.get("selected") and item.get("take_id")}
+            excluded_ids.update(str(item) for item in excluded)
+
+            closure = {
+                "schema": _CLOSURE_SCHEMA,
+                "closure_id": closure_id,
+                "outcome": outcome,
+                "run_id": str(payload.get("run_id") or ""),
+                "project_id": identity.get("project_id"),
+                "script_hash": identity.get("script_hash"),
+                "contract_hash": identity.get("contract_hash"),
+                "selected_takes": [
+                    {
+                        "shot_id": row.get("shot_id"),
+                        "take_id": row.get("take_id"),
+                        "artifact_path": row.get("artifact_path"),
+                        "artifact_sha256": row.get("artifact_sha256"),
+                    }
+                    for row in selected_rows
+                ],
+                "excluded_candidates": sorted(excluded_ids),
+                "qc": qc,
+                "rights_receipts": checked_rights,
+                "outputs": checked_outputs,
+                "final_confirmation": confirmation,
+                "known_limits": known,
+                "recovery": recovery_plan,
+                "reason": close_reason or None,
+                "closed_at": _utc_now(),
+            }
+            closure["closure_hash"] = _hash_bytes(_canonical(closure).encode("utf-8"))
+            payload["identity"] = identity
+            payload["closure"] = closure
+            self._advance(payload, outcome)
+            return closure
+
+        return self._mutate(
+            "RUN_CLOSED",
+            {"closure_id": closure_id, "outcome": outcome},
+            apply,
+        )
+
+    # Explicit aliases keep callers from inventing a second closure path.
+    record_closure = close_run
+    close = close_run

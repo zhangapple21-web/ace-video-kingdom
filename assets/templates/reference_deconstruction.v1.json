@@ -1,0 +1,52 @@
+{
+  "schema": "video_kingdom.reference_deconstruction.v1",
+  "deconstruction_id": "RDX-YYYYMMDD-UNIQUE",
+  "status": "OBSERVED",
+  "authority": "RESEARCH_ONLY",
+  "production_authority": "NONE",
+  "source": {
+    "kind": "FAILED_TAKE",
+    "locator": "D:\\视频创作\\projects\\<project>\\<clip>.mp4",
+    "duration_seconds": null,
+    "sha256": "",
+    "project_id": null,
+    "run_id": null,
+    "shot_id": null
+  },
+  "observations": [
+    {
+      "id": "OBS-01",
+      "time_start_seconds": 0.0,
+      "time_end_seconds": 2.0,
+      "channel": "VISUAL",
+      "dimension": "ACTION_PERFORMANCE",
+      "observable_fact": "写看得到/听得到的事实，不猜模型内部原因。",
+      "confidence": 1.0
+    }
+  ],
+  "inferences": [
+    {
+      "id": "INF-01",
+      "claim": "把可能根因明确标成假设。",
+      "observation_ids": ["OBS-01"],
+      "confidence": 0.5,
+      "status": "HYPOTHESIS"
+    }
+  ],
+  "candidate_rules": [],
+  "comparison": {
+    "target_project_id": null,
+    "target_run_id": null,
+    "target_shot_id": null,
+    "contract_ref": null,
+    "gaps": []
+  },
+  "learning": {
+    "baseline": "",
+    "change": "",
+    "evaluation": "",
+    "independent_repetitions": 0,
+    "outcome": "UNTESTED",
+    "promoted_to_default": false
+  }
+}

@@ -17,7 +17,7 @@ def test_default_roles_and_shared_hub_are_present():
     assert (ROOT / "roles" / "executor.md").is_file()
     hub = json.loads((ROOT / "research" / "shared_information_hub.v1.json").read_text(encoding="utf-8"))
     assert hub["schema"] == "ace.video_kingdom.shared_information_hub.v1"
-    assert hub["handoff"]["sequence"][0:3] == ["planner", "research", "executor"]
+    assert hub["handoff"]["sequence"] == ["producer", "planner", "writer", "reviewer", "director", "executor", "reviewer", "producer"]
 
 
 def test_compiled_plan_records_default_collaboration(tmp_path):
@@ -25,6 +25,9 @@ def test_compiled_plan_records_default_collaboration(tmp_path):
     check = _planning_conformance_check(plan)
     assert check["status"] == "PASS"
     assert plan["collaboration"]["mode"] == "DEFAULT_MULTI_WINDOW"
+    assert plan["collaboration"]["contract"] == "research/creative_collaboration_contract.v1.json"
+    assert plan["collaboration"]["creative_authority"] == "HUMAN_ADOPTED_DECISIONS"
+    assert plan["collaboration"]["revision_policy"] == "APPEND_ONLY_EXPLICIT_SUPERSEDES"
     assert plan["collaboration"]["shared_research"]["root"] == "research/"
 
 

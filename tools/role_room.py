@@ -24,6 +24,10 @@ MATRIX = ROOT / "research" / "oneapi_role_room.v1.json"
 if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 from production_control.model_transport import post_chat_completion
+try:
+    from tools.free_miner_router import resource_candidates
+except ImportError:  # pragma: no cover - script execution from tools/
+    from free_miner_router import resource_candidates  # type: ignore
 
 try:
     from tools.memory_context import build_memory_context, render_memory_context
@@ -50,9 +54,9 @@ def _prompt(role_id: str, source: str, context: str, memory_text: str = "") -> s
     tasks = {
         "outline_structurer": "把创意整理成结构化简报、角色表、场景表和硬约束清单。",
         "format_editor": "检查 JSON 字段完整性、对白/独白格式、字幕长度和交接可执行性。",
-        "primary_writer": "写出故事主方案、角色目标、冲突和完整对白/独白草案。",
+        "primary_writer": "写出故事主方案、角色目标、冲突和完整对白/独白草案。冲突驱动：不是拉长台词。先写清双方要什么、为什么不让，再写试探/施压/反击；收场必须改关系、信息、选择或行动之一。A类高冲突允许多轮铺垫，B类推进简洁留个性，C类动作转场少废话。",
         "storyboarder": "把故事拆成可拍镜头，给出景别、机位、动作完成点、切镜理由和声音。",
-        "contrarian_auditor": "从现实性、连续性、伦理、镜头可执行性和违规画面风险挑错。",
+        "contrarian_auditor": "从现实性、连续性、伦理、镜头可执行性和违规画面风险挑错。审冲突：双方目标是否对撞；有无潜台词或信息差；有无无效重复；结束是否有效变化；情绪是否撑得住配音与反应镜头。缺冲突先改人物目标，不准靠堆台词过关。",
         "continuity_editor": "检查角色、道具、时间线、对白长度、字幕安全区和镜头前后衔接；发现断层时输出断点、风险等级、最小补桥候选和 NEEDS_CLARIFICATION 条件。",
         "director_convergence": "综合候选意见，收敛成一版可拍但仍需人工创作验收的镜头稿。",
         "ideation_branch": "提出多个开场钩子、结尾悬念或风格分支，标出各自的风险和适用场景。",
@@ -76,7 +80,20 @@ def _call(base_url: str, api_key: str, model: str, prompt: str, timeout: float) 
         temperature=0.3,
         timeout=timeout,
     )
-    return str(data["choices"][0]["message"]["content"]), str(data.get("model") or model)
+    message = data["choices"][0].get("message")
+    content = message.get("content") if isinstance(message, dict) else None
+    if isinstance(content, list):
+        # Some compatible gateways return text as content blocks rather than
+        # one string. Preserve only actual text blocks; never stringify null
+        # or an arbitrary object into a candidate such as "None".
+        content = "".join(
+            str(block.get("text") or "")
+            for block in content
+            if isinstance(block, dict) and isinstance(block.get("text"), str)
+        )
+    if not isinstance(content, str):
+        content = ""
+    return content.strip(), str(data.get("model") or model)
 
 
 def _normalize_base_url(value: str) -> str:
@@ -193,14 +210,28 @@ def main(argv: list[str] | None = None) -> int:
             continue
         primary_model = item["model"]
         fallback_models = list(item.get("fallback_models", []))
-        record: dict[str, Any] = {"role_id": role_id, "span_id": uuid.uuid4().hex, "model": primary_model, "requested_model": primary_model, "declared_models": [primary_model, *fallback_models], "status": "PLANNED", "attempts": []}
+        # The room reads the same unified ACE pool as the standalone router.
+        # Only locally reachable free candidates are executed through this
+        # gateway; paid primaries and their declared fallbacks remain intact.
+        free_first_roles = {"outline_structurer", "format_editor", "ideation_branch"}
+        task_class = "routine" if role_id in free_first_roles else ("final_review" if item.get("authority") in {"blocking_candidate", "arbitration_only"} else "high_value")
+        unified_plan = resource_candidates("simple", task_class=task_class, requested_model=primary_model)
+        free_local = [x["model"] for x in unified_plan if x["resource_class"] == "free" and x["provider"] == "oneapi_local"] if role_id in free_first_roles else []
+        paid_order = [x["model"] for x in unified_plan if x["resource_class"] == "paid"]
+        attempt_order = list(dict.fromkeys([*free_local, *paid_order, primary_model, *fallback_models]))
+        # Every model this router may explicitly attempt must be declared in
+        # the receipt. Otherwise a legitimate unified-pool fallback (for
+        # example grok-4.5) succeeds but the production audit later rejects
+        # the receipt as an undeclared route. Gateway-side rewrites remain
+        # separate and are still rejected unless explicitly declared.
+        record: dict[str, Any] = {"role_id": role_id, "span_id": uuid.uuid4().hex, "model": primary_model, "requested_model": primary_model, "declared_models": attempt_order, "attempt_order": attempt_order, "free_first": bool(free_local), "task_class": task_class, "selection_factors": ["task_capability_match", "model_quality", "current_availability", "historical_performance", "cost"], "resource_pool_unified": True, "status": "PLANNED", "attempts": []}
         if args.execute:
             if not api_key:
                 record.update({"status": "FAILED", "error": "缺少 ONEAPI_LOCAL_MASTER_KEY/ONEAPI_API_KEY/OPENAI_API_KEY"})
             else:
                 output = None
                 last_error = None
-                for attempt_model in [primary_model, *fallback_models]:
+                for attempt_model in attempt_order:
                     print(f"[role-room] {role_id}: trying {attempt_model}", file=sys.stderr, flush=True)
                     try:
                         text, actual_model = _invoke_call(args.base_url, api_key, attempt_model, _prompt(role_id, source, context, memory_text), args.timeout)

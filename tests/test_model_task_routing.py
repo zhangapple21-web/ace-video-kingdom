@@ -16,5 +16,5 @@ def test_routing_keeps_five_simple_task_classes_and_cloud_only_models():
 def test_director_and_utility_roles_are_not_swapped():
     path = Path(__file__).parents[1] / "research" / "model_task_routing.v1.json"
     data = json.loads(path.read_text(encoding="utf-8"))
-    assert data["task_classes"]["DIRECTOR"]["primary"]["model"] == "grok-4.6"
+    assert data["task_classes"]["DIRECTOR"]["primary"]["model"] == "grok-4.7"
     assert data["task_classes"]["UTILITY"]["primary"]["model"] == "glm-4-flash"

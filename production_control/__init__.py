@@ -14,7 +14,7 @@ from .demand import (
     load_provider_health_snapshot,
     select_fallback_labor,
 )
-from .workflow import preflight_plan
+from .workflow import normalize_scope, preflight_plan
 from .media_routing import classify_media_intent, route_media_demand
 from .media_executor import execute_media_task
 from .project import discover_project, manifest_hash
@@ -33,6 +33,7 @@ __all__ = [
     "load_provider_health_snapshot",
     "select_fallback_labor",
     "preflight_plan",
+    "normalize_scope",
     "classify_media_intent",
     "route_media_demand",
     "execute_media_task",

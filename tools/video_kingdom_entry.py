@@ -30,6 +30,7 @@ from production_control.semantic_context import build_semantic_context
 from production_control.collaboration import load_default_collaboration_context
 from tools import role_room
 from tools.creator_workflow import build_creative_development_profile, validate_creative_development_profile
+from tools.reference_deconstruction import load_and_validate_reference_deconstruction
 from tools.workflow_decision_matrix import build_workflow_policy_receipt
 
 
@@ -272,10 +273,23 @@ def poll_agnes_video(
     return last
 
 
-def dispatch(*, text: str, out: Path, profile: str = "standard", project_id: str = "", execute: bool = False) -> dict[str, Any]:
+def dispatch(
+    *,
+    text: str,
+    out: Path,
+    profile: str = "standard",
+    project_id: str = "",
+    execute: bool = False,
+    reference_deconstruction: Path | None = None,
+) -> dict[str, Any]:
     source = str(text or "").strip()
     if not source:
         raise ValueError("ENTRY_TEXT_REQUIRED")
+    reference_analysis = (
+        load_and_validate_reference_deconstruction(reference_deconstruction)
+        if reference_deconstruction is not None
+        else None
+    )
     entry_id = "ENTRY-" + uuid.uuid4().hex[:12]
     detected_media_intent = classify_media_intent(source)
     # A request to develop/audit narrative must reach the writer/director room
@@ -320,6 +334,10 @@ def dispatch(*, text: str, out: Path, profile: str = "standard", project_id: str
         # This does not replace the existing script/director/provider gates.
         "collaboration": load_default_collaboration_context(ROOT),
     }
+    if reference_analysis is not None:
+        # This is evidence context only. It cannot authorize media submission,
+        # bypass the review gates, or promote a candidate rule to baseline.
+        receipt["reference_deconstruction"] = reference_analysis
     if intent:
         route = route_media_demand(source, scope="current_control_plane")
         receipt.update({"dispatch": "media_route", "media_intent": intent, "route": route, "status": route.get("status") if route else "BLOCKED"})
@@ -345,10 +363,22 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("--out", type=Path, required=True)
     parser.add_argument("--profile", choices=("rapid", "standard", "full_audit"), default="standard")
     parser.add_argument("--project-id", default="")
+    parser.add_argument(
+        "--reference-deconstruction",
+        type=Path,
+        help="可选：绑定已验证的参考片/失败片反向拆解收据；仅研究证据，不授权生产",
+    )
     parser.add_argument("--execute", action="store_true", help="仅对角色房间执行 OneAPI；媒体仍只生成路由收据")
     args = parser.parse_args(argv)
     try:
-        receipt = dispatch(text=args.text, out=args.out, profile=args.profile, project_id=args.project_id, execute=args.execute)
+        receipt = dispatch(
+            text=args.text,
+            out=args.out,
+            profile=args.profile,
+            project_id=args.project_id,
+            execute=args.execute,
+            reference_deconstruction=args.reference_deconstruction,
+        )
     except (OSError, ValueError, json.JSONDecodeError) as exc:
         print(f"BLOCKED: {exc}", file=sys.stderr)
         return 2

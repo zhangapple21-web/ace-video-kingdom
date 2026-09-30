@@ -1,0 +1,17 @@
+{
+  "schema": "video_kingdom.keep_hard_road_arc.v1",
+  "name": "守择弧光引擎",
+  "status": "ADVISORY",
+  "production_shot_gate": false,
+  "not_a_lengthener": true,
+  "not_a_fill_in_blank": true,
+  "rings": ["立困", "加压", "守择", "深耕", "破局", "证道", "余韵"],
+  "shorthand": "卡死→劝退→守住→做实→见光→归位→留白",
+  "scene_vs_arc": "single_scene_does_not_need_all_rings",
+  "tracks": {
+    "canhe": {"break": "因果见光", "prove": "守界归位", "forbid": ["现世报", "金句证道", "围观打脸"]},
+    "lengshuang": {"break": "规矩反噬", "prove": "一句短原则", "forbid": ["战神归来", "系统金手指"]},
+    "ghost": {"break": "认知无法装没看见", "prove": "日常异化", "forbid": ["地府阎王"]}
+  },
+  "docs": "docs/KEEP_HARD_ROAD_ARC.v1.md"
+}

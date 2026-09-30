@@ -16,6 +16,21 @@ def _write(path: Path, data: bytes = b"fixture") -> str:
     return hashlib.sha256(data).hexdigest()
 
 
+def _fake_production_frames(artifact: Path, output_dir: Path) -> dict:
+    output_dir.mkdir(parents=True, exist_ok=True)
+    first = output_dir / "first.png"
+    last = output_dir / "last.png"
+    first.write_bytes(b"first-frame")
+    last.write_bytes(b"last-frame")
+    return {
+        "tool": "test-ffmpeg",
+        "tool_path": "test-ffmpeg",
+        "tool_version": "test",
+        "first_frame": {"path": str(first), "sha256": hashlib.sha256(first.read_bytes()).hexdigest()},
+        "last_frame": {"path": str(last), "sha256": hashlib.sha256(last.read_bytes()).hexdigest()},
+    }
+
+
 def test_media_probe_honors_explicit_ffprobe_binary(monkeypatch, tmp_path: Path):
     calls = []
 
@@ -82,6 +97,51 @@ def test_fail_closed_asset_gate_and_recovery(tmp_path: Path):
     assert snapshot["stage"] == "DELIVERED"
     assert len(snapshot["events"]) >= 10
     assert all(snapshot["events"][i]["prev_event_hash"] == ("GENESIS" if i == 0 else snapshot["events"][i - 1]["event_hash"]) for i in range(len(snapshot["events"])))
+
+
+def test_closure_manifest_is_single_immutable_terminal_receipt(tmp_path: Path):
+    run = ProductionControl.create(
+        tmp_path / "run" / "state.json",
+        run_id="closed-run",
+        mode="SANDBOX",
+        project_id="project-1",
+        script_hash="script-sha",
+        contract_hash="contract-sha",
+    )
+    asset = tmp_path / "run" / "asset.bin"
+    _write(asset, b"asset")
+    run.register_asset("A", "asset.bin")
+    run.evaluate_asset_gate()
+    run.lock_shot("S01", {"duration_seconds": {"min": 1, "max": 2}, "primary_action": "hold"})
+    run.admit_generation("S01", {"model": "test"})
+    clip = tmp_path / "run" / "clip.mp4"
+    clip_hash = _write(clip, b"clip")
+    run.record_generation("S01", "T1", video_id="v1", artifact_path="clip.mp4")
+    run.record_qc("T1", {key: "PASS" for key in ("picture", "motion", "camera", "continuity", "director")})
+    run.select_take("S01", "T1")
+    final = tmp_path / "run" / "final.mp4"
+    final_hash = _write(final, b"final")
+    run.record_assembly("final.mp4", ordered_shots=["S01"])
+    run.promote_delivery()
+    run.mark_delivered(destination="sandbox://demo")
+    receipt = run.close_run(
+        outputs=[
+            {"role": "final_master", "path": "final.mp4", "sha256": final_hash},
+            {"role": "subtitle", "path": "final.mp4", "sha256": final_hash},
+            {"role": "master_audio", "path": "final.mp4", "sha256": final_hash},
+            {"role": "manifest", "path": "final.mp4", "sha256": final_hash},
+            {"role": "acceptance_receipt", "path": "final.mp4", "sha256": final_hash},
+        ],
+        rights_receipts=[{"asset": "clip", "status": "PASS", "sha256": clip_hash}],
+        final_confirmation={"confirmed_by": "producer"},
+    )
+    assert receipt["schema"] == "video_kingdom.closure_manifest.v1"
+    assert receipt["outcome"] == "DELIVERED_CLOSED"
+    assert run.snapshot()["stage"] == "DELIVERED_CLOSED"
+    with pytest.raises(WorkflowError, match="RUN_ALREADY_CLOSED"):
+        run.close_run(outputs=[], rights_receipts=[])
+    with pytest.raises(WorkflowError, match="RUN_ALREADY_CLOSED"):
+        run.register_asset("B", "asset.bin")
 
 
 def test_scope_metadata_is_persisted_on_production_run(tmp_path: Path):
@@ -239,18 +299,26 @@ def test_qc_refuses_drifted_take_before_writing_pass(tmp_path: Path):
 
 def test_production_delivery_requires_final_acceptance_receipt(tmp_path: Path, monkeypatch: pytest.MonkeyPatch):
     monkeypatch.setattr(engine, "_probe_media", lambda path: {"duration_seconds": 1.0, "width": 720, "height": 1280, "fps": 24.0})
-    run = ProductionControl.create(tmp_path / "run" / "state.json", mode="PRODUCTION")
+    monkeypatch.setattr(engine, "_extract_frames", _fake_production_frames)
+    run = ProductionControl.create(
+        tmp_path / "run" / "state.json",
+        mode="PRODUCTION",
+        scope={"kind": "SHOT_SUBSET", "shot_ids": ["S01"], "active_shot_id": "S01", "scope_id": "scope-s01"},
+        plan_shot_ids=["S01"],
+    )
     _write(tmp_path / "run" / "asset.bin", b"x" * 5000)
     run.register_asset("A", "asset.bin", expected_sha256=hashlib.sha256(b"x" * 5000).hexdigest())
     run.evaluate_asset_gate()
-    run.lock_shot("S01", {"duration_seconds": {"min": 1, "max": 2}, "primary_action": "hold"})
+    run.lock_shot("S01", {"duration_seconds": {"min": 1, "max": 2}, "primary_action": "hold", "generation_allowed": True, "five_gate_receipt": {"status": "PASS"}})
     admission = run.admit_generation("S01", {"model": "test"})
     _write(tmp_path / "run" / "s01.mp4", b"video")
     run.record_generation("S01", "T1", video_id="v1", artifact_path="s01.mp4", metadata={"request_hash": admission["request_hash"]})
     run.record_qc("T1", {key: "PASS" for key in ("picture", "motion", "camera", "continuity", "director")})
     run.select_take("S01", "T1")
     _write(tmp_path / "run" / "final.mp4", b"final")
-    run.record_assembly("final.mp4", ordered_shots=["S01"])
+    assembly = run.record_assembly("final.mp4", ordered_shots=["S01"])
+    assert assembly["plan_shot_ids"] == ["S01"]
+    assert assembly["total_plan_shots"] == 1
     with pytest.raises(WorkflowError, match="ACCEPTANCE_RECEIPT_REQUIRED"):
         run.promote_delivery()
 
@@ -319,11 +387,12 @@ def test_delivery_rejects_selection_drift_after_assembly(tmp_path: Path):
 
 def test_production_acceptance_requires_all_lanes_and_output_hash(tmp_path: Path, monkeypatch: pytest.MonkeyPatch):
     monkeypatch.setattr(engine, "_probe_media", lambda path: {"duration_seconds": 1.0, "width": 720, "height": 1280, "fps": 24.0})
+    monkeypatch.setattr(engine, "_extract_frames", _fake_production_frames)
     run = ProductionControl.create(tmp_path / "run" / "state.json", mode="PRODUCTION")
     _write(tmp_path / "run" / "asset.bin", b"x" * 5000)
     run.register_asset("A", "asset.bin", expected_sha256=hashlib.sha256(b"x" * 5000).hexdigest())
     run.evaluate_asset_gate()
-    run.lock_shot("S01", {"duration_seconds": {"min": 1, "max": 2}, "primary_action": "hold"})
+    run.lock_shot("S01", {"duration_seconds": {"min": 1, "max": 2}, "primary_action": "hold", "generation_allowed": True, "five_gate_receipt": {"status": "PASS"}})
     admission = run.admit_generation("S01", {"model": "test"})
     _write(tmp_path / "run" / "s01.mp4", b"video")
     run.record_generation("S01", "T1", video_id="v1", artifact_path="s01.mp4", metadata={"request_hash": admission["request_hash"]})
@@ -345,7 +414,7 @@ def test_production_acceptance_requires_all_lanes_and_output_hash(tmp_path: Path
     _write(tmp_path / "valid" / "asset.bin", b"x" * 5000)
     valid.register_asset("A", "asset.bin", expected_sha256=hashlib.sha256(b"x" * 5000).hexdigest())
     valid.evaluate_asset_gate()
-    valid.lock_shot("S01", {"duration_seconds": {"min": 1, "max": 2}, "primary_action": "hold"})
+    valid.lock_shot("S01", {"duration_seconds": {"min": 1, "max": 2}, "primary_action": "hold", "generation_allowed": True, "five_gate_receipt": {"status": "PASS"}})
     admission = valid.admit_generation("S01", {"model": "test"})
     _write(tmp_path / "valid" / "s01.mp4", b"video")
     valid.record_generation("S01", "T1", video_id="v1", artifact_path="s01.mp4", metadata={"request_hash": admission["request_hash"]})
@@ -386,7 +455,7 @@ def test_production_generation_requires_admission_hash_and_contained_artifact(tm
     asset_hash = _write(asset, b"x" * 5000)
     run.register_asset("A", "asset.bin", expected_sha256=asset_hash)
     run.evaluate_asset_gate()
-    run.lock_shot("S01", {"duration_seconds": {"min": 1, "max": 2}, "primary_action": "hold"})
+    run.lock_shot("S01", {"duration_seconds": {"min": 1, "max": 2}, "primary_action": "hold", "generation_allowed": True, "five_gate_receipt": {"status": "PASS"}})
     admission = run.admit_generation("S01", {"model": "test"})
     _write(tmp_path / "run" / "clip.mp4", b"clip")
     with pytest.raises(WorkflowError, match="GENERATION_REQUEST_HASH_REQUIRED"):
@@ -397,11 +466,12 @@ def test_production_generation_requires_admission_hash_and_contained_artifact(tm
 
 def test_production_delivery_rechecks_per_shot_continuity_review(tmp_path: Path, monkeypatch: pytest.MonkeyPatch):
     monkeypatch.setattr(engine, "_probe_media", lambda path: {"duration_seconds": 1.0, "width": 720, "height": 1280, "fps": 24.0})
+    monkeypatch.setattr(engine, "_extract_frames", _fake_production_frames)
     run = ProductionControl.create(tmp_path / "run" / "state.json", mode="PRODUCTION")
     asset_hash = _write(tmp_path / "run" / "asset.bin", b"x" * 5000)
     run.register_asset("A", "asset.bin", expected_sha256=asset_hash)
     run.evaluate_asset_gate()
-    run.lock_shot("S01", {"duration_seconds": {"min": 1, "max": 2}, "primary_action": "hold"})
+    run.lock_shot("S01", {"duration_seconds": {"min": 1, "max": 2}, "primary_action": "hold", "generation_allowed": True, "five_gate_receipt": {"status": "PASS"}})
     admission = run.admit_generation("S01", {"model": "test"})
     _write(tmp_path / "run" / "s01.mp4", b"video")
     run.record_generation("S01", "T1", video_id="v1", artifact_path="s01.mp4", metadata={"request_hash": admission["request_hash"]})
@@ -421,3 +491,103 @@ def test_production_delivery_rechecks_per_shot_continuity_review(tmp_path: Path,
     })
     with pytest.raises(WorkflowError, match="ACCEPTANCE_CONTINUITY_REVIEW_REQUIRED"):
         run.promote_delivery()
+
+
+def _pending_structure_bridge(from_shot: str, to_shot: str) -> dict:
+    return {
+        "status": "PENDING_FRAME_PROOF",
+        "from_shot": from_shot,
+        "to_shot": to_shot,
+        "previous_end_frame_state": "previous end",
+        "next_initial_state": "next start",
+        "camera_state": "medium hold",
+        "lighting_state": "locked exposure",
+        "tail_frame_state": "hold pose",
+        "enter_direction": "cut in",
+        "exit_direction": "cut out",
+        "frame_proof_status": "PENDING",
+    }
+
+
+def test_production_pending_structure_bridge_keeps_asset_gate_ready(tmp_path: Path):
+    run = ProductionControl.create(tmp_path / "run" / "state.json", mode="PRODUCTION")
+    asset_hash = _write(tmp_path / "run" / "asset.bin", b"x" * 5000)
+    bridge = tmp_path / "run" / "bridge.json"
+    bridge.write_text(json.dumps(_pending_structure_bridge("S01", "S02")), encoding="utf-8")
+    run.register_asset("A", "asset.bin", expected_sha256=asset_hash)
+    run.register_continuity(
+        "S01->S02",
+        from_shot="S01",
+        to_shot="S02",
+        evidence_path="bridge.json",
+        expected_sha256=hashlib.sha256(bridge.read_bytes()).hexdigest(),
+    )
+    result = run.evaluate_asset_gate()
+    assert result["status"] == "READY"
+    assert result["errors"] == []
+
+
+def test_production_incomplete_pending_bridge_still_blocks(tmp_path: Path):
+    run = ProductionControl.create(tmp_path / "run" / "state.json", mode="PRODUCTION")
+    asset_hash = _write(tmp_path / "run" / "asset.bin", b"x" * 5000)
+    bridge = tmp_path / "run" / "bridge.json"
+    bridge.write_text(json.dumps({
+        "status": "PENDING_FRAME_PROOF",
+        "from_shot": "S01",
+        "to_shot": "S02",
+        "frame_proof_status": "PENDING",
+    }), encoding="utf-8")
+    run.register_asset("A", "asset.bin", expected_sha256=asset_hash)
+    run.register_continuity(
+        "S01->S02",
+        from_shot="S01",
+        to_shot="S02",
+        evidence_path="bridge.json",
+        expected_sha256=hashlib.sha256(bridge.read_bytes()).hexdigest(),
+    )
+    result = run.evaluate_asset_gate()
+    assert result["status"] == "BLOCKED"
+    assert any(item["reason"] == "CONTINUITY_EVIDENCE_NOT_READY" for item in result["errors"])
+
+
+def test_scoped_second_shot_admit_accepts_pending_structure_bridge(tmp_path: Path, monkeypatch: pytest.MonkeyPatch):
+    monkeypatch.setattr(engine, "_probe_media", lambda path: {"duration_seconds": 1.0, "width": 720, "height": 1280, "fps": 24.0})
+    monkeypatch.setattr(engine, "_extract_frames", _fake_production_frames)
+    run = ProductionControl.create(
+        tmp_path / "run" / "state.json",
+        mode="PRODUCTION",
+        scope={"kind": "SHOT_SUBSET", "shot_ids": ["S01", "S02"], "active_shot_id": "S01", "scope_id": "scope-s01s02"},
+        plan_shot_ids=["S01", "S02"],
+        scope_explicit=True,
+    )
+    asset_hash = _write(tmp_path / "run" / "asset.bin", b"x" * 5000)
+    run.register_asset("A", "asset.bin", expected_sha256=asset_hash)
+    run.evaluate_asset_gate()
+    contract = {
+        "duration_seconds": {"min": 1, "max": 2},
+        "primary_action": "hold",
+        "generation_allowed": True,
+        "five_gate_receipt": {"status": "PASS"},
+    }
+    run.lock_shot("S01", contract)
+    first = run.admit_generation("S01", {"model": "test"})
+    _write(tmp_path / "run" / "s01.mp4", b"video")
+    run.record_generation("S01", "T1", video_id="v1", artifact_path="s01.mp4", metadata={"request_hash": first["request_hash"]})
+    run.verify_frame_proof("T1")
+    run.record_qc("T1", {key: "PASS" for key in ("picture", "motion", "camera", "continuity", "director")})
+    run.select_take("S01", "T1")
+    run.advance_active_shot("S02")
+    bridge = tmp_path / "run" / "bridge.json"
+    bridge.write_text(json.dumps(_pending_structure_bridge("S01", "S02")), encoding="utf-8")
+    run.register_continuity(
+        "S01->S02",
+        from_shot="S01",
+        to_shot="S02",
+        evidence_path="bridge.json",
+        expected_sha256=hashlib.sha256(bridge.read_bytes()).hexdigest(),
+    )
+    run.lock_shot("S02", contract)
+    second = run.admit_generation("S02", {"model": "test-s02"})
+    assert second["shot_id"] == "S02"
+    with pytest.raises(WorkflowError, match="CONTINUITY_EVIDENCE_NOT_READY"):
+        run.update_continuity_evidence("S01->S02", previous_take_id="T1", current_take_id="T2")

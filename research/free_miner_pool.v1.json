@@ -1,0 +1,292 @@
+{
+  "schema": "ace.free_miner_pool.v1",
+  "source_receipt": "C:/tmp/free_models_liveness_20260921.json",
+  "unavailable_models": {
+    "nim_timeout": [
+      "google/gemma-4-31b-it",
+      "meta/llama-3.2-90b-vision-instruct",
+      "meta/llama-guard-4-12b",
+      "mistralai/mistral-nemotron",
+      "moonshotai/kimi-k3",
+      "nvidia/llama-3.1-nemoguard-8b-content-safety",
+      "nvidia/nemotron-3-ultra-550b-a55b",
+      "nvidia/nemotron-3.5-lightning-30b-a3b",
+      "z-ai/glm-5.3"
+    ]
+  },
+  "unknown_models": [
+    "deepseek-ai/deepseek-v4-flash-0731",
+    "gemma-4-31B-it",
+    "meta/muse-glimmer-30b",
+    "google/diffusiongemma-26b-a4b-it"
+  ],
+  "policy": {
+    "free_first": "task_dependent",
+    "paid_fallback_only_after_pool_exhausted": false,
+    "paid_after_free_only_for": [
+      "simple",
+      "batch",
+      "extract",
+      "routine",
+      "ideation",
+      "world_state_update"
+    ],
+    "paid_can_be_first_for": [
+      "high_value",
+      "architecture",
+      "deep_reasoning",
+      "final_review",
+      "specified_model",
+      "image_generation",
+      "video_generation"
+    ],
+    "unified_resource_pool": true,
+    "free_is_expansion_not_replacement": true,
+    "selection_factors": [
+      "task_capability_match",
+      "model_quality",
+      "current_availability",
+      "historical_performance",
+      "cost"
+    ],
+    "free_preferred_task_classes": [
+      "simple",
+      "batch",
+      "extract",
+      "routine",
+      "ideation",
+      "world_state_update"
+    ],
+    "paid_preferred_task_classes": [
+      "high_value",
+      "architecture",
+      "deep_reasoning",
+      "final_review",
+      "specified_model",
+      "image_generation",
+      "video_generation"
+    ],
+    "never_infer_capability_from_http_200": true,
+    "uncertain_deepseek_v4_1_flash_is_not_free": true,
+    "failed_sources": {
+      "github_models": "410_retirement_brownout",
+      "huggingface": "token_expired",
+      "ollama": "connection_refused",
+      "modelscope": "missing_key"
+    }
+  },
+  "pools": {
+    "simple": [
+      "glm-4-flash",
+      "glm-4.5-flash",
+      "openai/gpt-oss-20b",
+      "z-ai/glm-5.3-flash"
+    ],
+    "reasoning": [
+      "deepseek-ai/deepseek-v4-flash-0731",
+      "nvidia/nemotron-3-super-120b-a12b",
+      "nvidia/nemotron-3-nano-omni-30b-a3b-reasoning",
+      "MiniMax-M2.7",
+      "gemma-4-31B-it",
+      "openai/gpt-oss-20b",
+      "meta/muse-glimmer-30b"
+    ],
+    "calibration": [
+      "nvidia/ising-calibration-1.5-31b"
+    ],
+    "vision": [
+      "meta/llama-3.2-11b-vision-instruct",
+      "nvidia/nemotron-3-nano-omni-30b-a3b-reasoning",
+      "google/diffusiongemma-26b-a4b-it"
+    ],
+    "translation": [
+      "nvidia/riva-translate-4b-instruct-v1.1",
+      "nvidia/riva-translate-4b-instruct-v2"
+    ],
+    "safety": [
+      "nvidia/llama-3.1-nemotron-safety-guard-8b-v3",
+      "nvidia/nemotron-3.5-content-safety"
+    ]
+  },
+  "providers": {
+    "oneapi_local": {
+      "base_url_env": "ONEAPI_BASE_URL",
+      "default_base_url": "http://127.0.0.1:3000/v1",
+      "key_env": "ONEAPI_API_KEY",
+      "models": [
+        "glm-4-flash"
+      ]
+    },
+    "zhipu": {
+      "base_url_env": "ZHIPU_BASE_URL",
+      "default_base_url": "https://open.bigmodel.cn/api/paas/v4",
+      "key_env": "ZHIPU_API_KEY",
+      "models": [
+        "glm-4.5-flash"
+      ]
+    },
+    "nim": {
+      "base_url_env": "NIM_BASE_URL",
+      "default_base_url": "https://integrate.api.nvidia.com/v1",
+      "key_env": "NIM_KEY_1"
+    },
+    "sambanova": {
+      "base_url_env": "SAMBANOVA_BASE_URL",
+      "default_base_url": "https://api.sambanova.ai/v1",
+      "key_env": "SAMBANOVA_API_KEY"
+    },
+    "oneapi_paid": {
+      "base_url_env": "ONEAPI_BASE_URL",
+      "default_base_url": "http://127.0.0.1:3000/v1",
+      "key_env": "ONEAPI_API_KEY",
+      "models": [
+        "gpt-5.4-mini",
+        "gpt-5.4",
+        "gpt-5.5",
+        "gpt-5.6-terra",
+        "grok-4.5",
+        "grok-4.6",
+        "gpt-6-astra",
+        "grok-4.7"
+      ]
+    }
+  },
+  "paid_fallbacks": [
+    "gpt-5.4-mini",
+    "gpt-5.4",
+    "gpt-5.5",
+    "gpt-5.6-terra",
+    "grok-4.5",
+    "grok-4.6",
+    "gpt-6-astra",
+    "grok-4.7"
+  ],
+  "paid_resources": [
+    {
+      "model": "grok-4.7",
+      "provider": "oneapi_paid",
+      "status": "available",
+      "capabilities": [
+        "simple",
+        "reasoning",
+        "world_state_update"
+      ],
+      "reason": "writing_paid_fallback_cheaper_than_deepseek_and_retired_grok_4_6"
+    },
+    {
+      "model": "deepseek-v4.1-flash",
+      "provider": "oneapi_paid",
+      "status": "available",
+      "capabilities": [
+        "simple",
+        "reasoning",
+        "world_state_update"
+      ]
+    },
+    {
+      "model": "grok-4.6",
+      "provider": "oneapi_paid",
+      "status": "unavailable",
+      "capabilities": [
+        "reasoning",
+        "deep_reasoning",
+        "final_review"
+      ],
+      "reason": "retired_use_grok_4_7"
+    },
+    {
+      "model": "gpt-5.4-mini",
+      "provider": "oneapi_paid",
+      "status": "unavailable",
+      "capabilities": [
+        "simple",
+        "batch",
+        "extract",
+        "routine",
+        "reasoning"
+      ],
+      "reason": "not_on_local_oneapi"
+    },
+    {
+      "model": "gpt-5.4",
+      "provider": "oneapi_paid",
+      "status": "unavailable",
+      "capabilities": [
+        "reasoning",
+        "architecture",
+        "deep_reasoning"
+      ],
+      "reason": "not_on_local_oneapi"
+    },
+    {
+      "model": "gpt-5.5",
+      "provider": "oneapi_paid",
+      "status": "available",
+      "capabilities": [
+        "reasoning",
+        "architecture",
+        "deep_reasoning",
+        "final_review",
+        "specified_model"
+      ]
+    },
+    {
+      "model": "gpt-5.6-terra",
+      "provider": "oneapi_paid",
+      "status": "available",
+      "capabilities": [
+        "reasoning",
+        "architecture",
+        "deep_reasoning",
+        "final_review",
+        "specified_model"
+      ]
+    },
+    {
+      "model": "grok-4.5",
+      "provider": "oneapi_paid",
+      "status": "available",
+      "capabilities": [
+        "reasoning",
+        "deep_reasoning",
+        "final_review",
+        "specified_model"
+      ]
+    },
+    {
+      "model": "gpt-6-astra",
+      "provider": "oneapi_paid",
+      "status": "available",
+      "capabilities": [
+        "reasoning",
+        "architecture",
+        "deep_reasoning",
+        "final_review",
+        "specified_model",
+        "image_generation",
+        "video_generation"
+      ]
+    }
+  ],
+  "specialized_resources": [
+    {
+      "capability": "image_generation",
+      "cost_tier": "paid",
+      "status": "available",
+      "selection": "paid_required"
+    },
+    {
+      "capability": "video_generation",
+      "cost_tier": "paid",
+      "status": "available",
+      "selection": "paid_required"
+    }
+  ],
+  "status_legend": {
+    "free": "免费额度或本地免费资源",
+    "paid": "原有付费资源",
+    "specialized": "必须使用专项能力",
+    "unknown": "已登记但当前可用性未证实",
+    "unavailable": "已知不可用，禁止默认调用"
+  }
+}

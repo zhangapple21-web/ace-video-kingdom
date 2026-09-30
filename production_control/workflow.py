@@ -293,6 +293,7 @@ def bootstrap(
         request_hash=plan_hash,
         scope=normalized_scope,
         plan_shot_ids=plan_shot_ids,
+        scope_explicit=scope is not None,
     )
     for row in _all_assets(plan):
         asset_id = str(row["asset_id"])
@@ -307,11 +308,14 @@ def bootstrap(
         shot_id = str(shot.get("shot_id") or f"SHOT_{index + 1:03d}")
         next_shot = shots[index + 1] if index + 1 < len(shots) and isinstance(shots[index + 1], dict) else None
         if next_shot:
-            edge_id = f"{shot_id}->{next_shot.get('shot_id', f'SHOT_{index + 2:03d}') }"
+            next_shot_id = str(next_shot.get("shot_id") or f"SHOT_{index + 2:03d}")
+            if shot_id not in normalized_scope["shot_ids"] or next_shot_id not in normalized_scope["shot_ids"]:
+                continue
+            edge_id = f"{shot_id}->{next_shot_id}"
             evidence = _continuity_evidence(root, shot)
             # A missing path is intentional: it preserves the blocker in the
             # state machine and prevents a textual bridge from becoming proof.
-            run.register_continuity(edge_id, from_shot=shot_id, to_shot=str(next_shot.get("shot_id")), evidence_path=evidence or f".control/missing_continuity/{edge_id}.json")
+            run.register_continuity(edge_id, from_shot=shot_id, to_shot=next_shot_id, evidence_path=evidence or f".control/missing_continuity/{edge_id}.json")
 
     gate = run.evaluate_asset_gate()
     snapshot = run.snapshot()
@@ -342,9 +346,49 @@ def lock_plan_shots(
         raise WorkflowError("SCOPE_RUN_MISMATCH")
     if snapshot.get("plan_shot_ids") and snapshot["plan_shot_ids"] != _plan_shot_ids(plan):
         raise WorkflowError("PLAN_SHOT_IDS_MISMATCH")
-    if snapshot.get("asset_gate", {}).get("status") != "READY":
+    initial_gate = snapshot.get("asset_gate", {})
+    if initial_gate.get("status") != "READY":
         raise WorkflowError("ASSET_GATE_NOT_READY")
     scoped_ids = list(normalized_scope["shot_ids"])
+    root = plan_path.resolve().parent
+    shots = plan.get("shots") if isinstance(plan.get("shots"), list) else []
+    shot_rows = {
+        str(shot.get("shot_id") or f"SHOT_{index + 1:03d}"): shot
+        for index, shot in enumerate(shots)
+        if isinstance(shot, dict)
+    }
+    continuity = dict(snapshot.get("continuity") or {})
+    for index in range(len(scoped_ids) - 1):
+        from_shot = scoped_ids[index]
+        to_shot = scoped_ids[index + 1]
+        edge_id = f"{from_shot}->{to_shot}"
+        evidence = _continuity_evidence(root, shot_rows.get(from_shot, {}))
+        evidence_path = evidence or f".control/missing_continuity/{edge_id}.json"
+        existing = continuity.get(edge_id)
+        if existing is None:
+            run.register_continuity(
+                edge_id,
+                from_shot=from_shot,
+                to_shot=to_shot,
+                evidence_path=evidence_path,
+            )
+            continuity[edge_id] = {
+                "edge_id": edge_id,
+                "from_shot": from_shot,
+                "to_shot": to_shot,
+                "evidence_path": evidence_path,
+                "expected_sha256": None,
+            }
+        elif (
+            existing.get("from_shot") != from_shot
+            or existing.get("to_shot") != to_shot
+            or Path(str(existing.get("evidence_path") or "")) != Path(evidence_path)
+        ):
+            raise WorkflowError(f"CONTINUITY_CONFLICT:{edge_id}")
+    snapshot = run.snapshot()
+    gate = run.evaluate_asset_gate()
+    if gate.get("status") != "READY":
+        raise WorkflowError("ASSET_GATE_NOT_READY")
     locked: list[str] = []
     for shot in plan.get("shots", []) if isinstance(plan.get("shots"), list) else []:
         if not isinstance(shot, dict):
@@ -391,12 +435,40 @@ def lock_plan_shots(
                     "cut_motivation": "PENDING_ROLE_ROOM",
                 },
             }
-        contract = {**contract, "shot_rhythm": shot["shot_rhythm"]}
+        contract = {
+            **contract,
+            "shot_rhythm": shot["shot_rhythm"],
+            **{
+                key: shot[key]
+                for key in (
+                    "status",
+                    "generation_allowed",
+                    "rebuild_required",
+                    "generation_permission_basis",
+                    "quality_gate",
+                    "five_gate_receipt",
+                    "script_prompt_review",
+                    "role_audit",
+                    "audio_contract",
+                    "continuity_bridge",
+                    "medium_lock",
+                )
+                if key in shot
+            },
+        }
         if not shot_id:
             raise WorkflowError("SHOT_ID_REQUIRED")
         run.lock_shot(shot_id, contract)
         locked.append(shot_id)
-    return {"status": "SHOT_LOCKED", "locked_shots": locked, "next_action": next_action(run.snapshot())}
+    final_snapshot = run.snapshot()
+    return {
+        "status": "SHOT_LOCKED",
+        "locked_shots": locked,
+        "scope": final_snapshot.get("scope"),
+        "active_shot_id": (final_snapshot.get("scope") or {}).get("active_shot_id"),
+        "plan_shot_ids": list(final_snapshot.get("plan_shot_ids") or []),
+        "next_action": next_action(final_snapshot),
+    }
 
 
 def ingest_execution(run_path: Path, project_dir: Path) -> dict[str, Any]:
