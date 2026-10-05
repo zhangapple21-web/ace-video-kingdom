@@ -736,6 +736,8 @@ def main() -> int:
                         help="canonical one-shot JSON; required before any Provider POST")
     parser.add_argument("--output", type=Path, required=True)
     parser.add_argument("--timeout", type=int, default=360)
+    parser.add_argument("--force", action="store_true",
+                        help="allow overwriting existing output file")
     parser.add_argument("--model", choices=["agnes-video-2.5-flash", "agnes-video-2.5", "agnes-video-v2.0"], default="agnes-video-2.5-flash")
     parser.add_argument("--image", help="Public URL or local image; local files are converted to WebP under 500KB and sent as path/hash metadata")
     parser.add_argument("--keyframe-image", action="append", help="Repeat for two or more keyframe references")
@@ -882,7 +884,7 @@ def main() -> int:
         })
         existing = {"shot_id": args.shot_id, "model_id": args.model, "status": "CREATING", "fallback_history": history}
     record = existing or {"shot_id": args.shot_id, "model_id": args.model, "status": "CREATING"}
-    if args.output.exists() and not (existing and existing.get("artifact_path") == str(args.output)):
+    if args.output.exists() and not (existing and existing.get("artifact_path") == str(args.output)) and not getattr(args, 'force', False):
         raise SystemExit(f"refusing to overwrite existing output: {args.output}")
     record.update({
         "model_id": args.model,
