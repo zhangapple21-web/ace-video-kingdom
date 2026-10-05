@@ -98,7 +98,7 @@ def _child(args: argparse.Namespace) -> int:
         manifest_path=Path(args.manifest),
         take_id=args.take_id,
         output_path=Path(args.output) if args.output else None,
-        api_key="provider-free-test",
+        api_key=os.environ["VK_API_KEY"],
         timeout=5,
         poll_delay=1,
         session=session,
