@@ -98,7 +98,23 @@ def _write(path: Path, text: str) -> None:
 
 
 def _dump(path: Path, obj: Any) -> None:
-    path.write_text(json.dumps(obj, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    # Bug #5 fix: atomic write via tempfile + os.replace to prevent partial
+    # JSON that causes 99.6% receipt_parse_failed in the watchdog.
+    import os as _os
+    import tempfile as _tempfile
+    path.parent.mkdir(parents=True, exist_ok=True)
+    fd, tmp = _tempfile.mkstemp(
+        prefix="." + path.name + ".", suffix=".tmp", dir=str(path.parent)
+    )
+    try:
+        with _os.fdopen(fd, "w", encoding="utf-8") as handle:
+            json.dump(obj, handle, ensure_ascii=False, indent=2)
+            handle.write("\n")
+            handle.flush()
+            _os.fsync(handle.fileno())
+        _os.replace(tmp, path)
+    finally:
+        Path(tmp).unlink(missing_ok=True)
 
 
 def _bounded_text(text: str, limit: int) -> str:

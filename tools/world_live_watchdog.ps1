@@ -109,7 +109,7 @@ while ($true) {
     $receiptPath = Join-Path $libPath "world_live_receipt.v1.json"
     if (Test-Path -LiteralPath $receiptPath) {
         try {
-            $receipt = Get-Content -Raw -LiteralPath $receiptPath | ConvertFrom-Json
+            $receipt = Get-Content -Raw -LiteralPath $receiptPath -Encoding UTF8 | ConvertFrom-Json
             $complete = ($receipt.status -eq "COMPLETED") -and (($receipt.closed_by_world -eq $true) -or ([int]$receipt.waves_run -ge $Total))
             Write-WatchLog ("EXIT cycle={0} code={1} status={2} waves={3} closed={4}" -f $cycle, $exitCode, $receipt.status, $receipt.waves_run, $receipt.closed_by_world)
         } catch {
