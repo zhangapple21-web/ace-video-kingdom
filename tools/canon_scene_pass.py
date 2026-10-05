@@ -520,6 +520,7 @@ def publish_state() -> dict[str, Any]:
         text=True,
         encoding="utf-8",
         errors="replace",
+        timeout=120,
     )
     if proc.returncode != 0:
         raise RuntimeError("publish_tinghe_story_state failed: " + (proc.stderr or proc.stdout or ""))

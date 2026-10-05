@@ -116,7 +116,7 @@ def _run_pacing_audit(
         command.extend(["--tts-duration", str(tts_duration)])
     if expected_duration is not None:
         command.extend(["--expected-duration", str(expected_duration)])
-    result = subprocess.run(command, cwd=Path(__file__).resolve().parents[1], text=True, capture_output=True)
+    result = subprocess.run(command, cwd=Path(__file__).resolve().parents[1], text=True, capture_output=True, timeout=300)
     if output.is_file():
         try:
             report = json.loads(output.read_text(encoding="utf-8"))
@@ -133,8 +133,8 @@ def _run_continuity_audit(video: Path, output: Path) -> dict:
     output.parent.mkdir(parents=True, exist_ok=True)
     result = subprocess.run([
         sys.executable, str(Path(__file__).with_name("audit_frame_continuity.py")),
-        "--video", str(video), "--output", str(output),
-    ], cwd=Path(__file__).resolve().parents[1], text=True, capture_output=True)
+        "--video", str(video),         "--output", str(output),
+    ], cwd=Path(__file__).resolve().parents[1], text=True, capture_output=True, timeout=120)
     if output.is_file():
         try:
             report = json.loads(output.read_text(encoding="utf-8"))
@@ -151,8 +151,8 @@ def _run_repetition_audit(video: Path, output: Path) -> dict:
     output.parent.mkdir(parents=True, exist_ok=True)
     result = subprocess.run([
         sys.executable, str(Path(__file__).with_name("audit_video_repetition.py")),
-        "--video", str(video), "--output", str(output),
-    ], cwd=Path(__file__).resolve().parents[1], text=True, capture_output=True)
+        "--video", str(video),         "--output", str(output),
+    ], cwd=Path(__file__).resolve().parents[1], text=True, capture_output=True, timeout=120)
     if output.is_file():
         try:
             report = json.loads(output.read_text(encoding="utf-8"))
@@ -372,7 +372,7 @@ def main() -> int:
     contract_check = subprocess.run([
         sys.executable, str(Path(__file__).with_name("validate_short_drama_contract.py")),
         str(args.identity_contract),
-    ], cwd=Path(__file__).resolve().parents[1])
+    ], cwd=Path(__file__).resolve().parents[1], timeout=60)
     if contract_check.returncode:
         raise SystemExit("identity contract is invalid; no provider request submitted")
     episode_identity = json.loads(args.episode.read_text(encoding="utf-8"))
@@ -390,7 +390,7 @@ def main() -> int:
     preflight = subprocess.run([
         sys.executable, str(Path(__file__).with_name("preflight_episode.py")), "--episode", str(args.episode),
         "--output", str(preflight_output), "--require-formal", "--require-measured-tts",
-    ], cwd=Path(__file__).resolve().parents[1])
+    ], cwd=Path(__file__).resolve().parents[1], timeout=120)
     if preflight.returncode:
         raise SystemExit(
             "episode preflight is BLOCKED/REWORK; no provider request submitted. "
@@ -440,7 +440,7 @@ def main() -> int:
         _append_option(command, "--flash-last-frame-url", render.get("flash_last_frame_url"))
         _append_repeated_option(command, "--flash-reference-image-url", render.get("reference_image_urls"))
         _append_repeated_option(command, "--flash-reference-audio-url", render.get("reference_audio_urls"))
-        result = subprocess.run(command)
+        result = subprocess.run(command, timeout=300)
         fallback_model = render.get("fallback_model")
         fallback_reason = _quota_exhausted(args.manifest, shot_id)
         fallback_on_failure = bool(render.get("fallback_on_failure"))
@@ -462,7 +462,7 @@ def main() -> int:
             # run_short_clip reads the persisted manifest first: a task that
             # received a video_id resumes polling instead of submitting a
             # duplicate provider request.
-            result = subprocess.run(command)
+            result = subprocess.run(command, timeout=300)
         if result.returncode:
             print(json.dumps({"status": "STOPPED", "failed_shot": shot_id}, ensure_ascii=False))
             return result.returncode
@@ -519,7 +519,7 @@ def main() -> int:
     ]
     if args.review_output:
         assembly_command.extend(["--review-output", str(args.review_output)])
-    result = subprocess.run(assembly_command)
+    result = subprocess.run(assembly_command, timeout=300)
     if result.returncode == 0:
         pacing_dir = args.pacing_audit_dir or args.manifest.parent / "pacing_audits"
         final_report = _run_pacing_audit(

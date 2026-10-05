@@ -106,7 +106,7 @@ def file_sha(path: Path) -> str:
 def probe_duration(path: Path) -> float:
     result = subprocess.run(
         ["ffprobe", "-v", "error", "-show_entries", "format=duration", "-of", "default=nw=1:nk=1", str(path)],
-        check=True, capture_output=True, text=True,
+        check=True, capture_output=True, text=True, timeout=60,
     )
     return float(result.stdout.strip())
 
@@ -114,7 +114,7 @@ def probe_duration(path: Path) -> float:
 def probe_streams(path: Path) -> list[dict[str, str]]:
     result = subprocess.run(
         ["ffprobe", "-v", "error", "-show_entries", "stream=index,codec_type,codec_name", "-of", "json", str(path)],
-        check=True, capture_output=True, text=True,
+        check=True, capture_output=True, text=True, timeout=60,
     )
     return json.loads(result.stdout).get("streams", [])
 
@@ -541,19 +541,19 @@ def mix_clip(
             "ffmpeg", "-y", "-i", str(provider), "-map", "0:a:0",
             "-af", "volume=0.075,aresample=48000", "-t", f"{seconds:.3f}",
             "-c:a", "pcm_s16le", str(environment),
-        ], check=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+        ], check=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL, timeout=120)
     else:
         subprocess.run([
             "ffmpeg", "-y", "-f", "lavfi", "-i", "anullsrc=r=48000:cl=stereo",
             "-t", f"{seconds:.3f}", "-c:a", "pcm_s16le", str(environment),
-        ], check=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+        ], check=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL, timeout=120)
     command = [
         "ffmpeg", "-y", *inputs, "-filter_complex", graph,
         "-map", "0:v:0", "-map", "[a]", "-t", f"{seconds:.3f}",
         "-c:v", "copy", "-c:a", "aac", "-ar", "48000", "-ac", "2",
         "-movflags", "+faststart", str(final),
     ]
-    subprocess.run(command, check=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+    subprocess.run(command, check=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL, timeout=120)
     return {
         "status": "MIXED_SINGLE_EXTERNAL_MASTER" if master else "MIXED_PROVIDER_AMBIENCE_NO_DIALOGUE",
         "final": str(final),
@@ -751,13 +751,13 @@ def assemble() -> int:
     normalized = []
     for index, shot_id, source in items:
         target = normalized_dir / f"{index:02d}_{shot_id}.mp4"
-        subprocess.run(["ffmpeg", "-y", "-i", str(source), "-map", "0:v:0", "-map", "0:a:0", "-c:v", "libx264", "-preset", "fast", "-crf", "18", "-pix_fmt", "yuv420p", "-c:a", "aac", "-ar", "48000", "-ac", "2", "-movflags", "+faststart", str(target)], check=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+        subprocess.run(["ffmpeg", "-y", "-i", str(source), "-map", "0:v:0", "-map", "0:a:0", "-c:v", "libx264", "-preset", "fast", "-crf", "18", "-pix_fmt", "yuv420p", "-c:a", "aac", "-ar", "48000", "-ac", "2", "-movflags", "+faststart", str(target)], check=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL, timeout=120)
         normalized.append((shot_id, target, probe_duration(target)))
     concat = OUT_DIR / "EP01_R3_concat.txt"
     concat_content = "\n".join("file '" + path.resolve().as_posix().replace("'", "'\\''") + "'" for _, path, _ in normalized) + "\n"
     atomic_write_text(concat, concat_content)
     base = OUT_DIR / "EP01_R3_BASE.mp4"
-    subprocess.run(["ffmpeg", "-y", "-f", "concat", "-safe", "0", "-i", str(concat), "-c", "copy", "-movflags", "+faststart", str(base)], check=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+    subprocess.run(["ffmpeg", "-y", "-f", "concat", "-safe", "0", "-i", str(concat), "-c", "copy", "-movflags", "+faststart", str(base)], check=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL, timeout=120)
     events = []
     offset = 0.0
     for shot_id, _, duration in normalized:
@@ -784,7 +784,7 @@ def assemble() -> int:
     subprocess.run([
         "ffmpeg", "-y", "-i", str(base), "-c", "copy",
         "-movflags", "+faststart", str(clean),
-    ], check=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+    ], check=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL, timeout=120)
     review = OUT_DIR / "EP01_R3_delivery_review.json"
     subtitle_review = OUT_DIR / "EP01_R3_subtitle_review.json"
     delivery = {
@@ -827,7 +827,7 @@ def assemble() -> int:
         "--input", str(base), "--srt", str(srt), "--output", str(final),
         "--review-output", str(subtitle_review), "--delivery-review", str(review),
         "--fps", "24", "--font-size", "10", "--margin-v", "80",
-    ], capture_output=True, text=True)
+    ], capture_output=True, text=True, timeout=120)
     if burn.returncode != 0:
         detail = (burn.stderr or burn.stdout or "subtitle burn failed").strip()[-1600:]
         raise SystemExit(detail)

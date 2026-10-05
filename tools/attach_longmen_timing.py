@@ -28,7 +28,7 @@ def main() -> int:
         for row in measured.values():
             wav = Path(str(row["wav"]))
             tmp = wav.with_suffix(".tempo.wav")
-            subprocess.run(["ffmpeg", "-y", "-loglevel", "error", "-i", str(wav), "-filter:a", f"atempo={tempo}", str(tmp)], check=True)
+            subprocess.run(["ffmpeg", "-y", "-loglevel", "error", "-i", str(wav), "-filter:a", f"atempo={tempo}", str(tmp)], check=True, timeout=60)
             tmp.replace(wav)
         (root / "tts_measurements.json").write_text(json.dumps(document, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
         measured, document = measure_dialogue(pairs, audio_dir=root / "audio", manifest_path=root / "tts_measurements.json", synthesize=False)

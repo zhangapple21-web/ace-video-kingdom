@@ -60,7 +60,7 @@ def main() -> int:
     concat = args.output.with_suffix(".concat.txt")
     concat.write_text("\n".join("file '" + str(path).replace("'", "'\\''") + "'" for path in clips) + "\n", encoding="utf-8")
     try:
-        subprocess.run(["ffmpeg", "-y", "-f", "concat", "-safe", "0", "-i", str(concat), "-c", "copy", str(args.output)], check=True)
+        subprocess.run(["ffmpeg", "-y", "-f", "concat", "-safe", "0", "-i", str(concat), "-c", "copy", str(args.output)], check=True, timeout=120)
     finally:
         concat.unlink(missing_ok=True)
     try:
