@@ -114,13 +114,17 @@ OneAPI 角色房间使用 `tools/role_room.py`：主笔、分镜、反例审计�
 
 第 5 步五关明细（本轮收据，不是另一套流程）：连续性=`role_room.py --execute` 本镜 + `continuity_bridge`；角色资产=两张锚图固定顺序；音频口型=正式对白短剧先锁配音再算 seconds，只对白进口型，独白后期闭嘴叠；时长=实测音频+动作完成，反应留白默认建议 0.4–0.6s（非绝对值）；装不下则拆镜/延长/改写，不加速吞词；多出来且无观看任务则缩短请求或后期剪掉死气，禁止无信息垫秒；快速小样/无对白例外；运镜=合同 `camera.movement` 原句进提交 prompt「镜头：」（原句=一条具体运动+一句理由；等级见 `docs/SHOT_RHYTHM_GUIDE.v1.md` 的 `camera_motion_level` / `camera_motion_reason`；禁止「电影感推进」「自然微动作」；「镜头：」先写可命名动作和听者/道具可见变化，再一条运动+一句理由；身份锚图是 reference 不是 keyframe；对白短剧默认 flash_mode=reference，本镜 images[] 只绑出场人物原图身份板，禁止 CROP/工位/空镜进 images[]，场景图按需不强制每场一张，禁止只塞脸裁图，禁止把身份包当 first_frame/ti2vid；只把 Approved State 传下一镜；NONE 不等于静帧，画面必须有可看变化；失败先降摄影不改剧情、不塌景别成证件照；CROP/工位/空镜整列不得进入 images[]；看见环境不是远距离说话图；MCUSTATIC 不是默认）；闭环=`video_kingdom_entry` → `production_shot_gate` → 读回 QC。
 
-硬禁止（高于运镜细节）：《张铁铁的沙雕日常》及电话剧情默认启用手机专项——已接通、后盖朝镜头，禁拨号/亮屏/震动/看见屏幕；手机屏幕/聊天UI/画中画/视频通话、单 clip 内切镜、独白对口型。正反打拆 clip 后期拼。通话过程只写持机/贴耳/放下，不写亮屏内容。其他题材仅当剧本涉及手机/通话/界面时启用；不涉及则 phone_state 可写「本镜不涉及手机」，不写无关露屏禁令。中文对白文字不交给视频模型生成。参考图必须绑定公网 URL，不能只在提示词里写「参考这张图」。正式对白短剧走独立配音时间轴；快速小样允许模型内置声音；无对白动作镜可只做环境声/音效/BGM。额度只认本机密钥 + Agnes 锁定，不引入扣子积分/套餐门。聊天 UI / Remotion 文字方案仅 `chat_ui` 等显式模式；《张铁铁的沙雕日常》仍禁聊天 UI。
+硬禁止（高于运镜细节）：**措辞以 `governance/script_prompt_review_gate.v1.json` 为唯一真源**，机器执行见 `tools/validate_script_prompt_review.py`。本段只列适用范围，冲突时以真源为准。
+
+《张铁铁的沙雕日常》及电话剧情默认启用手机专项。其他题材仅当剧本涉及手机/通话/界面时启用；不涉及则 phone_state 可写「本镜不涉及手机」，不写无关露屏禁令。中文对白文字不交给视频模型生成。参考图必须绑定公网 URL，不能只在提示词里写「参考这张图」。正式对白短剧走独立配音时间轴；快速小样允许模型内置声音；无对白动作镜可只做环境声/音效/BGM。额度只认本机密钥 + Agnes 锁定，不引入扣子积分/套餐门。聊天 UI / Remotion 文字方案仅 `chat_ui` 等显式模式。
 
 机器证据：镜头合同 `script_prompt_review` 绑定本镜 `shot_id`、本轮 `run_id`、`script_hash`、当前提示词 `prompt_hash`。入口 `tools/validate_script_prompt_review.py`，由 `production_shot_gate` 阻断。提示词一改必须重做导演审核；剧本一改必须从编剧审核重跑。开拍前唯一检查表：`governance/script_prompt_review_gate.v1.md`。
 
 逐句血缘证据：正式新合同可绑定 `lineage_contract`，统一追踪 `剧本.md → 剧本结构.json → 分镜.json → 提示词合同.json → 角色/场景/道具资产清单 → 配音时间轴.json → 审核记录.json → 生成收据.json → 成片版本`。使用 `tools/build_shot_lineage.py` 编译，使用 `tools/validate_shot_lineage.py --production` 交付审计；一旦镜头声明该引用，`production_shot_gate` 在 Provider POST 前强制校验。旧合同不伪造血缘，保留为 `LEGACY_MISSING/BLOCKED`。详见 `docs/SHOT_LINEAGE_GUIDE.v1.md`。
 
 ## 本集覆盖：《接粉风云》第1镜（第3层，不是全局默认）
+
+晋级门六问（`assets/checklists/generic_default_layer.v1.json#promotion_gate`）判定：本节全部条目 Q1 或 Q3 为否，**不属通用默认层**，只约束本集。
 
 - 第一镜只拍**已接通**：侧脸贴耳、手机后盖朝镜头、老张先说话。禁止完整拨号/亮屏/震动/看见屏幕；提交和口述都不用「接听过程」当动作链。
 - 三段只允许：①老张贴耳开口（明天准备接粉）②文姬已贴耳立刻说好哒 ③慢慢放下后叠独白（闭嘴、不对口型）。
