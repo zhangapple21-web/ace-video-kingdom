@@ -1,0 +1,65 @@
+{
+  "schema": "ace.video_kingdom.creative_reference_cards.v1",
+  "layer": "CREATIVE_REFERENCE",
+  "production_integration": false,
+  "note": "M-01/D。创作层参考卡，人读专用：不进 pipeline、不接门禁、不改任何 validator。生产层真源仍是 governance/script_prompt_review_gate.v1.json#hard_prohibitions 与 assets/checklists/generic_default_layer.v1.json#promotion_gate。本文件不新增目录体系，位置依 research/REFERENCE_MINES.md 对 soul_shot_ledger 的规定。",
+  "derivation": {
+    "source_file": "research/soul_shot_ledger.v1.jsonl",
+    "source_kind_filter": "kind=alive（用户判定有灵魂的真实案例）与 kind=dead 且 observed 含用户原话的真实失败",
+    "external_courses_used": false,
+    "external_courses_note": "本轮明确不蒸外部课程。先用自己 ledger 里已有真实案例，避免引入别人的画面标准。",
+    "no_long_script_quotes": "每卡最多引用一两句台词用于定位，不摘录剧本长段落。"
+  },
+  "cards": [
+    {
+      "id": "R1",
+      "title": "可命名动作 + 听者反应：魂在两句都写出来",
+      "three_questions": {
+        "why_stop_here": "话说完之前，听者那边必须先有一个变化出现，否则这句台词只是信息传递，不是戏。停的位置由听者的反应到达决定，不由台词字数决定。",
+        "why_action_like_this": "说话人同时在做一个可命名的手上的事（放下手里的东西、挪开视线），这个动作不是修饰，是把台词的意图变成可见的欲望。两个动作同时发生，画面才有信息密度。",
+        "how_listener_changes": "听者要有一个具体的、被命名的微反应（眉心一收、视线先落在说话人手上再回到脸上），让观众看到这句话落到了哪里。"
+      },
+      "how_to_use_in_submit_line": "顺序固定：可命名动作 → 听者/道具可见变化 → 一条运镜 + 一句理由。缺听者变化这一段，提交句退回「台词 + 运镜」，那就是两张图互挪。",
+      "source_cases": [
+        "soul_shot_ledger kind=alive pattern=named_action_plus_listener：observed「说话时放手中物 + 听者眉头一紧」"
+      ],
+      "boundary": "不要把这条当万能公式套到每一句。它适用于有人际张力的对白；独白段没有听者，改用信息落地后的停顿（见 R2）。",
+      "promotion_gate_note": "六问里 Q6 通过（ledger 有 alive 记录），但本卡刻意只作创作参考，不申请进默认层：Q2 无机器判据，靠人读。"
+    },
+    {
+      "id": "R2",
+      "title": "有吸引力的停 ≠ 垫秒：停要有落点",
+      "three_questions": {
+        "why_stop_here": "信息刚落地的那一下值得停，因为观众正在消化。停在这里是多出来的秒唯一合法的理由；没有信息落地的停顿就是垫秒，应当剪掉。",
+        "why_action_like_this": "停的时候给一个眼神或手的余势（手停在半途、眼神不移开），让这段时间里有可看的东西。固定机位 NONE 也能做到，因为变化发生在人身上。",
+        "how_listener_changes": "如果这一段有听者，停靠听者接收后的反应；如果没有，停靠说话人自己的余势。两种都必须能命名。"
+      },
+      "how_to_use_in_submit_line": "写清 hold_reason：这句话的信息落在什么上。有 hold_reason 的停顿是表演，没写 hold_reason 的停顿是偷时长。",
+      "source_cases": [
+        "soul_shot_ledger kind=alive pattern=attractive_hold_is_watchable：observed「信息落地后的眼神或手」",
+        "soul_shot_ledger kind=dead pattern=unmotivated_pad：observed「两句台词垫到 5-6 秒无观看任务」"
+      ],
+      "boundary": "0.4–0.6 秒是默认建议值不是下限也不是上限，判据是「这一秒有没有观看任务」，不是秒数本身。",
+      "promotion_gate_note": "同 R1，只作人读参考；秒数规则本身在 A20 与 SHOT_RHYTHM_GUIDE，属生产层，不在本卡重复。"
+    },
+    {
+      "id": "R3",
+      "title": "看见环境 = 中景表演，不是把静帧拉远",
+      "three_questions": {
+        "why_stop_here": "双人/对白段落必须有一镜让观众确认这两人在同一个真实空间里做事，否则观众读不出关系距离。这一镜的作用是建立空间，不是展示环境。",
+        "why_action_like_this": "腰以上、手与桌面同框，人在里面做事。环境是靠人物与道具的位置关系带出来的，不是靠把画面拉宽。",
+        "how_listener_changes": "这一镜里听者必须在场且有反应，不能只留说话人的正脸。对白/电话段落至少有一镜做到这件事。"
+      },
+      "how_to_use_in_submit_line": "先写这一镜的可命名动作（人怎么转身、怎么拿东西），再写景别。失败时只降 camera_motion_level，禁止把景别塌成证件照、也禁止用「拉远」冒充看见环境。",
+      "source_cases": [
+        "soul_shot_ledger kind=dead pattern=wide_workstation_still_lip_sync：SHOT_03A ENV2 用 WORKSTATION_POSE 当 images[0]，用户判定「still a talking photo, just farther, worse than MCU crop」",
+        "soul_shot_ledger kind=dead pattern=original_pack_only_not_distant_talking_photo：只交 PACK_ORIGINAL 仍是远距离说话图，用户判定不合格",
+        "soul_shot_ledger kind=dead pattern=mcustatic_id_photo_dialogue：SHOT_02 MCUSTATIC + PACK_FRONT_CROP 当 images[0]，只能摇头对口型"
+      ],
+      "boundary": "MCU/中近景合法可用，不是全剧默认，也不是「第一镜必须建立镜头」。合法特写仍然允许。",
+      "promotion_gate_note": "Q6 有三条真实失败收据，是三张卡里证据最硬的；但仍不进默认层，因为它的判定需要人眼看画面是否可看，不是机器判据。"
+    }
+  ],
+  "usage_rule": "写「镜头：」时先读这三张卡问自己三件事：这句为什么停、动作为什么这样、听者怎么变。答不出就先回剧本或分镜改，不要交给 Agnes 自己想。",
+  "not_a_gate": "这些卡不阻断任何提交，也不参与 production_shot_gate。它们回答「这样演对不对」，门禁回答「能不能交」。"
+}
