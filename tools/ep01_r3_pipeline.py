@@ -15,6 +15,7 @@ from datetime import datetime, timezone, timedelta
 from pathlib import Path
 from typing import Any
 from tools.atomic_io import atomic_write_json, atomic_write_text
+from tools.vklogging import vklog
 
 sys.stdout.reconfigure(encoding="utf-8")  # Bug #1 fix: prevent UnicodeEncodeError on GBK console
 
@@ -443,6 +444,7 @@ def validate_shot(shot: dict[str, Any], path: Path) -> dict[str, Any]:
 
 
 def build() -> int:
+    vklog("INFO", "ep01_r3 build starting")
     RUN_DIR.mkdir(parents=True, exist_ok=True)
     CONTRACT_DIR.mkdir(parents=True, exist_ok=True)
     OUT_DIR.mkdir(parents=True, exist_ok=True)

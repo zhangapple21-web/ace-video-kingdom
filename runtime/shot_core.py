@@ -28,6 +28,7 @@ from .provider_admission import (
     build_canonical_generation_request,
 )
 from tools.medium_lock import validate_medium_lock
+from tools.vklogging import vklog
 import sys
 
 sys.stdout.reconfigure(encoding="utf-8")  # Bug #1 fix: prevent UnicodeEncodeError on GBK console
@@ -783,6 +784,7 @@ def run_take(
     key = api_key or os.environ.get("AGNES_API_KEY")
     if not key:
         raise RuntimeError("AGNES_API_KEY is not available")
+    vklog("SHOT_CORE", "run_take starting", shot_id=shot.get("shot_id"), timeout=timeout)
     client = session or requests.Session()
     manifest = load_manifest(manifest_path)
     shot_id = shot["shot_id"]

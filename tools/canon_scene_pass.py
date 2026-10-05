@@ -19,6 +19,7 @@ from pathlib import Path
 from typing import Any
 
 from tools.atomic_io import atomic_write_json
+from tools.vklogging import vklog
 
 sys.stdout.reconfigure(encoding="utf-8")  # Bug #1 fix: prevent UnicodeEncodeError on GBK console
 
@@ -566,6 +567,7 @@ def write_receipt(lib: Path, payload: dict[str, Any], rejected: bool) -> Path:
     n = payload.get("scene") or payload.get("n") or "unknown"
     path = folder / ("scene_%s_%s.json" % (n, datetime.now().strftime("%Y%m%dT%H%M%S")))
     _write_json(path, payload)
+    vklog("RECEIPT", "canon_pass_receipt written", path=str(path), rejected=rejected)
     return path
 
 

@@ -14,6 +14,7 @@ import sys
 import tempfile
 import time
 from tools.atomic_io import atomic_write_json
+from tools.vklogging import vklog
 from pathlib import Path
 
 try:
@@ -624,6 +625,7 @@ def main() -> int:
         }
         acceptance_path = args.output.with_name("acceptance_receipt.json")
         atomic_write_json(acceptance_path, acceptance)
+        vklog("ACCEPTANCE", "delivery approval processed", shot_id=shot["shot_id"], approved=delivery["delivery_approved"])
         print(json.dumps({"status": "ACCEPTANCE_RECEIPT", "acceptance": acceptance["status"], "receipt": str(acceptance_path)}, ensure_ascii=False), flush=True)
         if not delivery["delivery_approved"]:
             return 1

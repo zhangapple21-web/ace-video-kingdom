@@ -17,6 +17,7 @@ if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
 from production_control.model_transport import post_chat_completion
+from tools.vklogging import vklog
 
 sys.stdout.reconfigure(encoding="utf-8")  # Bug #1 fix: prevent UnicodeEncodeError on GBK console
 
@@ -1085,6 +1086,7 @@ def _main_impl() -> int:
             closed=closed,
         )
         _dump(LIB / "world_live_receipt.v1.json", running)
+        vklog("RECEIPT", "world_live_receipt updated", wave=wave, status="RUNNING")
         # Keep a readable derived script current even if the watchdog has to
         # resume before the final summary step.
         assemble_full_script()

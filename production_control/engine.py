@@ -11,6 +11,7 @@ from contextlib import contextmanager
 from pathlib import Path
 from typing import Any, Iterator
 from tools.atomic_io import atomic_write_json
+from tools.vklogging import vklog
 
 try:
     from tools.validate_continuity_bridge import validate_bridge
@@ -312,6 +313,7 @@ class ProductionControl:
             payload["revision"] = 1
         payload["state_hash"] = _state_digest(payload)
         cls(run_path)._write(payload)
+        vklog("PC_INIT", "production control initialized", run_id=run_id, mode=mode)
         return cls(run_path)
 
     def snapshot(self) -> dict[str, Any]:

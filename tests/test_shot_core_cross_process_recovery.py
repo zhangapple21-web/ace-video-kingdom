@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import json
+import os
 import subprocess
 import sys
 import tempfile
@@ -12,9 +13,11 @@ ROOT = Path(__file__).resolve().parents[1]
 
 def test_cross_process_recovery_rehearsal_is_poll_only_and_persists_checkpoint():
     script = ROOT / "tools" / "run_shot_core_cross_process_recovery.py"
+    env = os.environ.copy()
+    env["VK_API_KEY"] = "provider-free-test"
     with tempfile.TemporaryDirectory(prefix="shot-core-receipt-") as temp:
         receipt_path = Path(temp) / "shot_core_cross_process_recovery.v1.json"
-        result = subprocess.run([sys.executable, str(script), "--receipt", str(receipt_path)], cwd=ROOT, text=True, capture_output=True, check=False)
+        result = subprocess.run([sys.executable, str(script), "--receipt", str(receipt_path)], cwd=ROOT, text=True, capture_output=True, check=False, env=env, timeout=60)
         assert result.returncode == 0, result.stdout + result.stderr
         receipt = json.loads(receipt_path.read_text(encoding="utf-8"))
     assert all(receipt["assertions"].values())
