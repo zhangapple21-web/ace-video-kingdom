@@ -5,6 +5,7 @@ import json
 import os
 import shutil
 import subprocess
+import sys
 import time
 import uuid
 from contextlib import contextmanager
@@ -12,6 +13,8 @@ from pathlib import Path
 from typing import Any, Iterator
 from tools.atomic_io import atomic_write_json
 from tools.vklogging import vklog
+
+sys.stdout.reconfigure(encoding="utf-8")  # Bug #1 fix: prevent UnicodeEncodeError on GBK console
 
 try:
     from tools.validate_continuity_bridge import validate_bridge
@@ -171,6 +174,7 @@ def _probe_media(path: Path) -> dict[str, Any] | None:
             check=True,
             capture_output=True,
             text=True,
+            timeout=60,
         )
         payload = json.loads(proc.stdout)
         streams = payload.get("streams") or []
@@ -205,13 +209,13 @@ def _extract_frames(artifact: Path, output_dir: Path) -> dict[str, Any]:
     )
     try:
         for command in commands:
-            subprocess.run(command, check=True, capture_output=True, text=True)
+            subprocess.run(command, check=True, capture_output=True, text=True, timeout=120)
     except (OSError, subprocess.SubprocessError) as exc:
         raise WorkflowError("FRAME_EXTRACTION_FAILED") from exc
     if not first.is_file() or not last.is_file() or not first.stat().st_size or not last.stat().st_size:
         raise WorkflowError("FRAME_EXTRACTION_INCOMPLETE")
     try:
-        version = subprocess.run([ffmpeg, "-version"], check=True, capture_output=True, text=True).stdout.splitlines()[0]
+        version = subprocess.run([ffmpeg, "-version"], check=True, capture_output=True, text=True, timeout=30).stdout.splitlines()[0]
     except (OSError, subprocess.SubprocessError, IndexError):
         version = str(ffmpeg)
     return {

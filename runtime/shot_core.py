@@ -659,7 +659,7 @@ def _retry_after(response: requests.Response, default: int = 60) -> int:
 
 
 def _probe(path: Path) -> dict[str, Any]:
-    result = subprocess.run(["ffprobe", "-v", "error", "-show_entries", "format=duration:stream=codec_type,codec_name,width,height,r_frame_rate,avg_frame_rate,start_time,duration,sample_rate,channels,display_aspect_ratio", "-of", "json", str(path)], check=True, capture_output=True, text=True)
+    result = subprocess.run(["ffprobe", "-v", "error", "-show_entries", "format=duration:stream=codec_type,codec_name,width,height,r_frame_rate,avg_frame_rate,start_time,duration,sample_rate,channels,display_aspect_ratio", "-of", "json", str(path)], check=True, capture_output=True, text=True, timeout=60)
     data = json.loads(result.stdout)
     video = next((s for s in data.get("streams", []) if s.get("codec_type") == "video"), None)
     if not video:
@@ -686,7 +686,7 @@ def _probe(path: Path) -> dict[str, Any]:
 
 
 def _run_media_filter(path: Path, vf: str) -> str:
-    result = subprocess.run(["ffmpeg", "-hide_banner", "-i", str(path), "-vf", vf, "-an", "-f", "null", "-"], capture_output=True, text=True, check=False)
+    result = subprocess.run(["ffmpeg", "-hide_banner", "-i", str(path), "-vf", vf, "-an", "-f", "null", "-"], capture_output=True, text=True, check=False, timeout=300)
     if result.returncode != 0:
         raise subprocess.CalledProcessError(result.returncode, result.args, output=result.stdout, stderr=result.stderr)
     return (result.stderr or "") + (result.stdout or "")
