@@ -26,7 +26,7 @@
 | 路径/模式 | 分类 | 是否阻断核心复活 | 处理 |
 |---|---|---:|---|
 | `.migration_backups/` | `ARCHAEOLOGY_ONLY` | 否 | 已加入忽略；需要历史考古时从本地/私有归档恢复 |
-| `research/persona_dna_library/` 中的剧本、波次、世界状态和收据 | `OPTIONAL_PRIVATE_KNOWLEDGE` | 否 | 项目内容和创作实验，不是当前 ACE 运行时；需保留时进入私有对象存储并登记 hash |
+| `research/persona_dna_library/` 中的剧本、波次、世界状态和收据 | `OPTIONAL_PRIVATE_KNOWLEDGE` | 否 | 项目内容和创作实验，不是当前 ACE 运行时；**已落私有仓 `zhangapple21-web/ace-video-corpus`（PRIVATE, commit `ff9bf2e`，5,791 文件 / 51.7 MB），hash 清单 `research/persona_dna_library.sha256`，位置说明 `research/CORPUS_POINTER.md`**。被 `tools/canon_scene_pass.py:25`、`tools/world_live_evolve.py:34`、`tools/republish_chapter_bodies.py:32`、`sites/tinghe-archive/build_reader.py:8`、`sites/tinghe-archive/repair_chapters.py:41` 活引用，不可删；`DEPLOY_PREP.md:103` 的 c198 未修复缺陷真源在 `world_live_full_script.v1.md` |
 | `research/persona_dna_library/**/world_live_watchdog.log`（约 2.79 GiB） | `REBUILDABLE / LOCAL_ONLY_NONCORE` | 否 | 不上传；已加入忽略，日志可重新生成 |
 | `creator_encyclopedia/exports/` | `OPTIONAL_PRIVATE_KNOWLEDGE` | 否 | 生成式项目百科导出；公开仓库不作为 ACE 能力真源 |
 | `research/external_learning_runs/*.json` | `OPTIONAL_KNOWLEDGE` | 否 | 可从公开研究和已提交协议重建；需要历史连续性时另行归档 |
