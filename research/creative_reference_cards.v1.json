@@ -23,6 +23,8 @@
       "source_cases": [
         "soul_shot_ledger kind=alive pattern=named_action_plus_listener：observed「说话时放手中物 + 听者眉头一紧」"
       ],
+      "use_when": "这一镜有别人在场听这句话，且说话人手上有事可做（拿、放、挪开视线之类）——来源案例正是「说话时放手中物 + 听者眉头一紧」。",
+      "not_this_card": "台词已说完、时长还多出来、这一秒没有听者可等时，用 R2；这一镜的任务是让人看出两人在同一空间做事时，用 R3。",
       "boundary": "不要把这条当万能公式套到每一句。它适用于有人际张力的对白；独白段没有听者，改用信息落地后的停顿（见 R2）。",
       "promotion_gate_note": "六问里 Q6 通过（ledger 有 alive 记录），但本卡刻意只作创作参考，不申请进默认层：Q2 无机器判据，靠人读。"
     },
@@ -39,6 +41,8 @@
         "soul_shot_ledger kind=alive pattern=attractive_hold_is_watchable：observed「信息落地后的眼神或手」",
         "soul_shot_ledger kind=dead pattern=unmotivated_pad：observed「两句台词垫到 5-6 秒无观看任务」"
       ],
+      "use_when": "台词已经说完、这一镜的秒数比话长——来源案例是「信息落地后的眼神或手」（该停）与「两句台词垫到 5-6 秒无观看任务」（该剪）。独白段没有听者可等，也归这里。",
+      "not_this_card": "还有人正在听这句话、要把反应拍出来时，用 R1；这一镜的任务是建立空间关系时，用 R3。",
       "boundary": "0.4–0.6 秒是默认建议值不是下限也不是上限，判据是「这一秒有没有观看任务」，不是秒数本身。",
       "promotion_gate_note": "同 R1，只作人读参考；秒数规则本身在 A20 与 SHOT_RHYTHM_GUIDE，属生产层，不在本卡重复。"
     },
@@ -56,6 +60,8 @@
         "soul_shot_ledger kind=dead pattern=original_pack_only_not_distant_talking_photo：只交 PACK_ORIGINAL 仍是远距离说话图，用户判定不合格",
         "soul_shot_ledger kind=dead pattern=mcustatic_id_photo_dialogue：SHOT_02 MCUSTATIC + PACK_FRONT_CROP 当 images[0]，只能摇头对口型"
       ],
+      "use_when": "这一镜只交了角色包身份板，画面读不出两人在哪、离多远——来源案例是 SHOT_03A ENV2 只交 PACK_ORIGINAL 仍被判「远距离说话图」，以及 SHOT_02 MCUSTATIC 让 Agnes 只能摇头对口型。",
+      "not_this_card": "空间已经建立、这镜的任务是听者反应或台词余势时，用 R1 或 R2。",
       "boundary": "MCU/中近景合法可用，不是全剧默认，也不是「第一镜必须建立镜头」。合法特写仍然允许。",
       "promotion_gate_note": "Q6 有三条真实失败收据，是三张卡里证据最硬的；但仍不进默认层，因为它的判定需要人眼看画面是否可看，不是机器判据。"
     }
