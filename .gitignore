@@ -138,3 +138,16 @@ runtime/continue_gate_runtime_receipts.jsonl
 research/sources/persona_sandbox_pipeline_zhangningjing_20260920.txt
 research/R1_PERSONA_MATRIX_INDEX.md
 research/persona_sandbox_pipeline_absorption_20260920.md
+
+# 每日外部学习运行收据：每日新增、内容重复（同一模板反复重跑，15 份的 promotion
+# 全为 NONE、production_integration 全为 false）、不含本地路径。已跟踪的两份是
+# 有实质 ledger 变更的那次，作为样本证据保留。完整历史在本地，本目录体积极小。
+research/external_learning_runs/EL-2026*.json
+
+# 本地 harness 任务定义与 Cloudflare 本地状态，不是项目真源。
+.opencode/
+.wrangler/
+
+# 一次性运维脚本，等稳定后再决定是否入仓。
+run_tasks.ps1
+run_tasks_hidden.vbs
