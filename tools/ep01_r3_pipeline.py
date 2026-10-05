@@ -914,6 +914,179 @@ def qc() -> int:
     return 0 if checks["status"] == "PASS" else 1
 
 
+def map_episode_plan_to_pipeline_shot(episode_shot_id: str, order: list[str]) -> str | None:
+    """Map an episode_plan shot ID (e.g. 'S01A') to a pipeline shot ID (e.g. 'SHOT_01A_ZHANG_R3').
+
+    The episode plan uses a compact naming schema (S01A, S02A, S035C) while the
+    pipeline ORDER uses verbose names with character and version suffixes. This
+    function performs a prefix match to bridge the two naming schemas.
+    """
+    import re as _re
+    m = _re.match(r"S(\d+)([A-Za-z]+)", episode_shot_id)
+    if not m:
+        return None
+    shot_num = m.group(1)
+    shot_letter = m.group(2)
+    for pid in order:
+        m2 = _re.match(r"SHOT_(\d+)([A-Za-z]+)_", pid)
+        if not m2:
+            continue
+        if m2.group(1) == shot_num and m2.group(2) == shot_letter:
+            return pid
+    return None
+
+
+def map_pipeline_to_episode_plan(pipeline_shot_id: str) -> str | None:
+    """Map a pipeline shot ID (e.g. 'SHOT_01A_ZHANG_R3') to an episode_plan ID (e.g. 'S01A').
+
+    Inverse of map_episode_plan_to_pipeline_shot.
+    """
+    import re as _re
+    m = _re.match(r"SHOT_(\d+)([A-Za-z]+)_", pipeline_shot_id)
+    if not m:
+        return None
+    return f"S{m.group(1)}{m.group(2)}"
+
+
+def check_frame_evidence(
+    shot_id: str,
+    frame_proof_dir: Path,
+    *,
+    frame_videos_dir: Path,
+    qc_dir: Path,
+    continuity_dir: Path,
+    lip_sync_dir: Path,
+) -> dict[str, Any]:
+    """Check whether frame-level evidence exists and passes for a shot.
+
+    Validates the three unresolved items from Bug #4:
+    1. Provider frames exist (video file present and non-empty)
+    2. Frame-level PASS/READY continuity evidence per adjacent shot
+    3. Frame-level dynamic, identity, lip-sync, and shot QC
+    """
+    result: dict[str, Any] = {
+        "shot_id": shot_id,
+        "provider_video": False,
+        "frame_qc_pass": False,
+        "continuity_evidence": False,
+        "lip_sync_qc": False,
+        "all_pass": False,
+        "missing": [],
+    }
+
+    video_path = frame_videos_dir / f"{shot_id}.mp4"
+    if video_path.is_file() and video_path.stat().st_size > 1000:
+        result["provider_video"] = True
+    else:
+        result["missing"].append("provider_video")
+
+    qc_file = qc_dir / f"{shot_id}" / "video_qc_report.json"
+    if qc_file.is_file():
+        qc_data = json.loads(qc_file.read_text(encoding="utf-8"))
+        if (qc_data.get("technical_status") == "PASS"
+                and qc_data.get("creative_status") == "PASS"
+                and qc_data.get("provider_status") == "SUCCESS"):
+            result["frame_qc_pass"] = True
+        else:
+            result["missing"].append("frame_qc_pass")
+    else:
+        result["missing"].append("frame_qc_pass")
+
+    continuity_file = continuity_dir / f"{shot_id}_pass_ready.json"
+    if continuity_file.is_file():
+        cont_data = json.loads(continuity_file.read_text(encoding="utf-8"))
+        if cont_data.get("status") == "PASS" and cont_data.get("ready_for_next"):
+            result["continuity_evidence"] = True
+        else:
+            result["missing"].append("continuity_evidence")
+    else:
+        result["missing"].append("continuity_evidence")
+
+    lip_sync_file = lip_sync_dir / f"{shot_id}_qc.json"
+    if lip_sync_file.is_file():
+        ls_data = json.loads(lip_sync_file.read_text(encoding="utf-8"))
+        if ls_data.get("status") == "PASS":
+            result["lip_sync_qc"] = True
+        else:
+            result["missing"].append("lip_sync_qc")
+    else:
+        result["missing"].append("lip_sync_qc")
+
+    result["all_pass"] = (
+        result["provider_video"]
+        and result["frame_qc_pass"]
+        and result["continuity_evidence"]
+        and result["lip_sync_qc"]
+    )
+    return result
+
+
+def advance_frame_proof(
+    plan_file: Path,
+    root_dir: Path,
+    *,
+    frame_videos_dir: Path,
+    qc_base: Path,
+    continuity_base: Path,
+    lip_sync_base: Path,
+) -> dict[str, Any]:
+    """Advance shots from COMPILED_PENDING_FRAME_PROOF to READY when frame evidence passes.
+
+    Reads an episode_plan.json, checks frame evidence for each shot, and updates
+    the plan in-place. Shots with complete frame evidence advance to 'READY';
+    shots without evidence remain at COMPILED_PENDING_FRAME_PROOF with the
+    missing evidence listed.
+    """
+    plan = json.loads(plan_file.read_text(encoding="utf-8"))
+    shots = plan.get("shots", [])
+    total = len(shots)
+    advanced: list[dict[str, Any]] = []
+    stuck: list[dict[str, Any]] = []
+    skipped: list[dict[str, Any]] = []
+
+    for shot in shots:
+        ep_shot_id = shot.get("shot_id", "")
+        pipeline_id = map_episode_plan_to_pipeline_shot(ep_shot_id, ORDER)
+        if pipeline_id is None:
+            skipped.append({"episode_shot_id": ep_shot_id, "reason": "no_pipeline_mapping"})
+            continue
+
+        evidence = check_frame_evidence(
+            pipeline_id, root_dir,
+            frame_videos_dir=frame_videos_dir,
+            qc_dir=qc_base,
+            continuity_dir=continuity_base,
+            lip_sync_dir=lip_sync_base,
+        )
+
+        if evidence["all_pass"]:
+            shot["status"] = "READY"
+            shot["frame_evidence"] = evidence
+            advanced.append({
+                "episode_shot_id": ep_shot_id,
+                "pipeline_shot_id": pipeline_id,
+            })
+        else:
+            stuck.append({
+                "episode_shot_id": ep_shot_id,
+                "pipeline_shot_id": pipeline_id,
+                "missing_evidence": evidence["missing"],
+            })
+
+    if advanced:
+        plan["status"] = "READY" if not stuck else "PARTIALLY_ADVANCED"
+    atomic_write_json(plan_file, plan)
+
+    return {
+        "total": total,
+        "advanced": len(advanced),
+        "stuck": len(stuck),
+        "advanced_shots": advanced,
+        "stuck_shots": stuck,
+        "skipped_shots": skipped,
+    }
+
+
 def main() -> int:
     parser = argparse.ArgumentParser()
     sub = parser.add_subparsers(dest="command", required=True)
@@ -926,6 +1099,12 @@ def main() -> int:
     remix_parser.add_argument("--audio-override", type=Path)
     sub.add_parser("assemble")
     sub.add_parser("qc")
+    fp_parser = sub.add_parser("advance-frame-proof")
+    fp_parser.add_argument("--plan", type=Path, default=RUN_DIR / "episode_plan.json")
+    fp_parser.add_argument("--frame-videos", type=Path, default=PROJECT / "成片" / "测试" / "ep01_r3")
+    fp_parser.add_argument("--qc", type=Path, default=RUN_DIR / "frame_qc")
+    fp_parser.add_argument("--continuity", type=Path, default=RUN_DIR / "continuity")
+    fp_parser.add_argument("--lip-sync", type=Path, default=RUN_DIR / "lip_sync")
     args = parser.parse_args()
     if args.command == "build":
         return build()
@@ -935,6 +1114,16 @@ def main() -> int:
         return remix_existing(args.audio_override)
     if args.command == "assemble":
         return assemble()
+    if args.command == "advance-frame-proof":
+        result = advance_frame_proof(
+            args.plan, ROOT,
+            frame_videos_dir=args.frame_videos,
+            qc_base=args.qc,
+            continuity_base=args.continuity,
+            lip_sync_base=args.lip_sync,
+        )
+        print(json.dumps(result, ensure_ascii=False, indent=2))
+        return 0 if result["stuck"] == 0 else 1
     return qc()
 
 
