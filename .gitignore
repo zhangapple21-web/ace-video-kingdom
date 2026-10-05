@@ -111,3 +111,30 @@ debug-wenji-voice-load.md
 #
 # 只排内容目录，不排规则文档：ALIVE_SCRIPT_GATE.v1.md 和本目录 README.md 仍跟踪。
 research/original_desk/*/
+
+# ---------------------------------------------------------------------------
+# M-01/A：内容类产物不入主仓，位置见 research/CONTENT_LOCATION.md。
+# 这批路径已于 2026-10-05 从公开历史中移除（force-push），文件全部保留在本地，
+# 逐字节副本在私有仓 zhangapple21-web/ace-video-corpus 的
+# removed_from_public_history/（含 sha256_manifest.txt，57 文件）。
+# 旧 sha 已失效；不向 GitHub Support 申请清理，残余风险是旧 sha 可能通过
+# PR ref 与缓存直链被访问。
+# ---------------------------------------------------------------------------
+
+# 渲染成片与参考图。逐集黑名单已废，改排整目录。
+media_staging/
+
+# 单集巨型 manifest：体积大、机器生成、非正本。
+research/longmen_s01a_wide_reference_r1_manifest.json
+research/longmen_s01a_wide_reference_r2_manifest.json
+research/longmen_s01a_wide_reference_r3_manifest.json
+research/E_S05_shotcore_manifest.v1.json
+research/E_S05_shotcore_manifest.v1.S05A.admission.json
+
+# 运行时收据流水：可重跑生成，不是正本。
+runtime/continue_gate_runtime_receipts.jsonl
+
+# 外部来源材料与派生索引。zhangningjing 一律清，未读其内容。
+research/sources/persona_sandbox_pipeline_zhangningjing_20260920.txt
+research/R1_PERSONA_MATRIX_INDEX.md
+research/persona_sandbox_pipeline_absorption_20260920.md

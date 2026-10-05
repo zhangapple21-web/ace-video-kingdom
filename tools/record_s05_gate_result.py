@@ -27,6 +27,15 @@ def main() -> int:
     args = parser.parse_args()
     root = args.repo_root.resolve()
     manifest_path = root / "research" / "E_S05_shotcore_manifest.v1.json"
+    if not manifest_path.is_file():
+        raise SystemExit(
+            f"missing required content artifact: {manifest_path}\n"
+            "E_S05_shotcore_manifest.v1.json is a content artifact and is no longer\n"
+            "tracked in this PUBLIC repo (removed from history 2026-10-05).\n"
+            "Byte-identical copy: private repo zhangapple21-web/ace-video-corpus ->\n"
+            "  removed_from_public_history/head/research/E_S05_shotcore_manifest.v1.json\n"
+            "See research/CONTENT_LOCATION.md for how to restore it."
+        )
     artifact = root / "episodes/generated/E_S05_HARDENING_20260906/S05A_T01.mp4"
     qc_dir = root / "episodes/generated/E_S05_HARDENING_20260906/qc"
     receipt_path = root / "research" / "admission_receipts" / "E_S05A_candidate_gate_receipt.v1.json"

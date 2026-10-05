@@ -31,6 +31,15 @@ def main() -> int:
     out_dir.mkdir(parents=True, exist_ok=True)
     manifest_path = root / "research" / "E_S05_shotcore_manifest.v1.json"
     fixture_path = root / "research" / "E_S05_shotcore_fixture.v1.json"
+    if not manifest_path.is_file():
+        raise SystemExit(
+            f"missing required content artifact: {manifest_path}\n"
+            "E_S05_shotcore_manifest.v1.json is a content artifact and is no longer\n"
+            "tracked in this PUBLIC repo (removed from history 2026-10-05).\n"
+            "Byte-identical copy: private repo zhangapple21-web/ace-video-corpus ->\n"
+            "  removed_from_public_history/head/research/E_S05_shotcore_manifest.v1.json\n"
+            "See research/CONTENT_LOCATION.md for how to restore it."
+        )
     if manifest_path.exists() and json.loads(manifest_path.read_text(encoding="utf-8")).get("takes"):
         raise SystemExit("refusing to reuse a non-empty E/S05 manifest")
 

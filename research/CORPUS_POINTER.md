@@ -43,6 +43,12 @@
 `persona_dna_library/**/world_live_watchdog.log`（2.6 GB）——超 GitHub 单文件 100 MB
 硬限，且 `REBUILDABLE / LOCAL_ONLY_NONCORE`，只在本地盘上。
 
+**待办（2026-10-05，未做）**：这个日志会一直长，下次又会变成"隐形的大文件"。
+在写它的脚本（`tools/world_live_evolve.py` 一侧）加按大小轮转，例如超过 100 MB
+切一份、只留最近 N 份。**不要靠定期手动删**——那正是它涨到 2.6 GB 的原因。
+在轮转落地前，这个文件既不在 git 里也不在任何备份里，删掉即永久丢失；
+它的分类是可重建，所以丢了的唯一代价是失去"当时到底跑到哪"的追溯。
+
 ## 怎么校验没被改
 
 `research/persona_dna_library.sha256`（777 KB / 5,791 行）是判据。每行格式：
