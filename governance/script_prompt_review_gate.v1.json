@@ -32,6 +32,44 @@
     "new script body starts this round from script review; old COMPLETED/run_id are history not approval; do not delete receipts",
     "prompt-only edits re-run director review only"
   ],
+  "hard_prohibitions": {
+    "note": "M-01/C: 本节是硬禁止措辞的唯一真源。gate.md / AGENTS.md(两处) / SKILL.md 只写「一句话 + 引用」，不复制全文。措辞漂移由 tests/test_hard_prohibition_consistency.py 判失败。",
+    "items": [
+      {
+        "id": "P1",
+        "text": "已接通：通话镜从已接通状态开始，不拍拨号过程",
+        "machine": "validate_script_prompt_review.py 毒句表「完整接听 / 接听过程 / 正在接听 / 拨号」"
+      },
+      {
+        "id": "P2",
+        "text": "后盖朝镜头，不出现屏幕内容",
+        "machine": "validate_script_prompt_review.py 毒句表「亮屏」"
+      },
+      {
+        "id": "P3",
+        "text": "禁止手机屏幕、聊天 UI、画中画、视频通话界面、单 clip 内切镜",
+        "machine": "validate_script_prompt_review.py 毒句表 + production_shot_gate.py"
+      },
+      {
+        "id": "P4",
+        "text": "独白不对口型：后期闭嘴叠，不进对白口型轨",
+        "machine": "validate_script_prompt_review.py monologue_handling 检查"
+      },
+      {
+        "id": "P5",
+        "text": "正反打拆 clip 后期拼，不拆成两张角色包对口型；通话过程只写持机/贴耳/放下",
+        "machine": "validate_script_prompt_review.py"
+      },
+      {
+        "id": "P6",
+        "text": "中文对白文字不交给视频模型生成",
+        "machine": "validate_script_prompt_review.py 毒句表「男声说 / 女声说」"
+      }
+    ],
+    "phone_state_escape_prefix": "本镜不涉及手机",
+    "scope": "P1-P6 仅在剧本涉及手机/通话/界面时启用；《张铁铁的沙雕日常》及电话剧情默认启用。不涉及时 phone_state 写「本镜不涉及手机」，跳过电话类高风险词，仍扫描「男声说 / 女声说」。",
+    "conflict_precedence": "validate_script_prompt_review.py 实际执行行为 > 本文件 > script_prompt_review_gate.v1.md > AGENTS.md > SKILL.md"
+  },
   "high_risk_prompt_terms": [
     "完整接听",
     "接听过程",

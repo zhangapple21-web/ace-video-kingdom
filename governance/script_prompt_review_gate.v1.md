@@ -6,6 +6,23 @@
 
 本文件是开拍前的唯一检查表，不是旁路。它把编剧导演双审、开拍五关和扣子公开链路映射到现有入口。四步双审是本项目门禁，不是扣子未公开的后台原流程。对话层和机器门禁都必须遵守。旧 COMPLETED、旧审核意见、其他镜头或其他 run_id 一律不得冒充本轮已审。没有新剧本时停在剧本审核之前。不接入扣子插件/官方故事板，不引入扣子积分/套餐硬门。
 
+## 硬禁止措辞：唯一真源
+
+措辞以 `script_prompt_review_gate.v1.json` 的 `hard_prohibitions` 节为**唯一真源**，机器执行见 `tools/validate_script_prompt_review.py`。本文件、两处 `AGENTS.md`、`SKILL.md` 只列适用范围，不复制全文。漂移由 `tests/test_hard_prohibition_consistency.py` 判失败。
+
+| id | 禁止 | 机器执行 |
+|---|---|---|
+| P1 | 已接通 | 毒句表「完整接听/接听过程/正在接听/拨号」 |
+| P2 | 后盖朝镜头，不出现屏幕内容 | 毒句表「亮屏」 |
+| P3 | 禁手机屏幕/聊天 UI/画中画/视频通话/单 clip 内切镜 | 毒句表 + `production_shot_gate.py` |
+| P4 | 独白不对口型：后期闭嘴叠 | `monologue_handling` 检查 |
+| P5 | 正反打拆 clip 后期拼，至少一侧过肩或半身 | `validate_script_prompt_review.py` |
+| P6 | 中文对白不交给视频模型生成 | 毒句表「男声说/女声说」 |
+
+适用范围：P1-P6 仅在剧本涉及手机/通话/界面时启用；《张铁铁的沙雕日常》及电话剧情默认启用。不涉及时 `phone_state` 写「本镜不涉及手机」，跳过电话类高风险词，仍扫描「男声说/女声说」。
+
+冲突取舍：`validate_script_prompt_review.py` 实际行为 > 本 `.v1.json` > 本 `.md` > `AGENTS.md` > `SKILL.md`。
+
 ## 不允许跳步
 
 1. 规格与素材先齐：主题、平台、画幅（创建后不改）、风格、对白/字幕/BGM、角色锚图、场景道具、音色。资产须清晰、无遮挡、绑定正确镜头，肖像/品牌/版权落到角色包 + 公网 URL + privacy_scan。落到创作简报和角色包，不另建素材库。
