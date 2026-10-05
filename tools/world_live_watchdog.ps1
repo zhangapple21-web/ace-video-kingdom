@@ -3,7 +3,9 @@ param(
     [string]$PriorLib = "",
     [int]$Total = 32,
     [int]$CooldownSeconds = 20,
-    [int]$MaxCycles = 0
+    [int]$MaxCycles = 0,
+    [int64]$MaxLogMB = 100,
+    [int]$KeepRotations = 3
 )
 
 $ErrorActionPreference = "Stop"
@@ -12,9 +14,38 @@ $libPath = (Resolve-Path $Lib).Path
 $watchLog = Join-Path $libPath "world_live_watchdog.log"
 $cycle = 0
 
+# M-01/E2: rotate the watch log by size so it cannot silently grow without
+# bound again. It reached 2.6 GB because rotation did not exist, and manual
+# deletion is exactly what let that happen. The live file is never deleted, only
+# renamed to .1; older rotations beyond $KeepRotations are pruned.
+function Invoke-LogRotation {
+    if ($MaxLogMB -le 0) { return }
+    $limitBytes = $MaxLogMB * 1MB
+    if (-not (Test-Path -LiteralPath $watchLog)) { return }
+    if ((Get-Item -LiteralPath $watchLog).Length -lt $limitBytes) { return }
+
+    # shift .N -> .N+1, oldest dropped
+    if ($KeepRotations -gt 0) {
+        $oldest = "{0}.{1}" -f $watchLog, $KeepRotations
+        if (Test-Path -LiteralPath $oldest) {
+            Remove-Item -LiteralPath $oldest -Force
+        }
+        for ($i = $KeepRotations - 1; $i -ge 1; $i--) {
+            $from = "{0}.{1}" -f $watchLog, $i
+            $to = "{0}.{1}" -f $watchLog, ($i + 1)
+            if (Test-Path -LiteralPath $from) {
+                Move-Item -LiteralPath $from -Destination $to -Force
+            }
+        }
+    }
+    Move-Item -LiteralPath $watchLog -Destination ("{0}.1" -f $watchLog) -Force
+    Add-Content -LiteralPath $watchLog -Value ("[{0}] ROTATED at {1} MB, keeping {2}" -f (Get-Date -Format "yyyy-MM-dd HH:mm:ss"), $MaxLogMB, $KeepRotations) -Encoding UTF8
+}
+
 function Write-WatchLog([string]$Message) {
     $line = "[{0}] {1}" -f (Get-Date -Format "yyyy-MM-dd HH:mm:ss"), $Message
     Add-Content -LiteralPath $watchLog -Value $line -Encoding UTF8
+    Invoke-LogRotation
 }
 
 function Test-CanonQuotaBlocks {
