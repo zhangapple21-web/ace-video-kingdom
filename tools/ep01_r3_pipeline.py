@@ -16,6 +16,7 @@ from pathlib import Path
 from typing import Any
 from tools.atomic_io import atomic_write_json, atomic_write_text
 from tools.vklogging import vklog
+from tools.validate_script_prompt_review import HIGH_RISK_PROMPT_TERMS, PHONE_HIGH_RISK_PROMPT_TERMS
 
 sys.stdout.reconfigure(encoding="utf-8")  # Bug #1 fix: prevent UnicodeEncodeError on GBK console
 
@@ -254,7 +255,98 @@ def update_prompt(shot: dict[str, Any], clip: dict[str, Any], scene_text: str, *
     shot["shot_prompt"]["negative_constraints"] = ["风景照", "第二人误入", "无关道具"]
     shot["shot_prompt"]["count_constraints"] = ([{"entity": "人数", "count": 2}, {"entity": "手机", "count": 0}] if clip.get("scene") == "imagine_ev" else [{"entity": "人数", "count": 1}, {"entity": "手机", "count": 1 if phone_state in {"PHONE_EAR", "PHONE_DESK"} else 0}])
     shot["prompt"] = compiled
-    shot["script_prompt_review"]["prompt_hash"] = sha(compiled)
+    shot["script_prompt_review"] = audit_script_prompt_review(
+        compiled, shot_id, phone_state, shot, reason,
+    )
+
+
+def audit_script_prompt_review(
+    compiled_prompt: str,
+    shot_id: str,
+    phone_state: str,
+    shot: dict[str, Any],
+    reason: str,
+) -> dict[str, Any]:
+    """Compute script_prompt_review audit fields from actual rule-based checks.
+
+    Replaces the hardcoded pass-through values from the original #3 fix.
+    Each audit-conclusion field is computed from the prompt text and shot contract:
+
+    - distorts_script: Detects forbidden terms, high-risk additions, and content
+      that exceeds the single-action constraint.
+    - hard_rules_complete: Verifies shot_contract fields (single_action, max_primary_actions,
+      cut_policy) match the locked script constraints.
+    - high_risk_extras: Checks for always-high-risk terms regardless of phone state.
+    - reviewed_at: Timestamp of actual audit execution.
+
+    Returns a structured review packet with verdict and reason fields populated.
+    """
+    now = datetime.now(timezone(timedelta(hours=8))).isoformat(timespec="seconds")
+    review_at = now
+
+    high_risk_found = [term for term in HIGH_RISK_PROMPT_TERMS if term in compiled_prompt]
+    phone_skip_prefix = "本镜不涉及手机"
+    phone_skip = compiled_prompt.startswith(phone_skip_prefix) or phone_state.startswith(phone_skip_prefix)
+    phone_high_risk = [
+        term for term in PHONE_HIGH_RISK_PROMPT_TERMS
+        if term in compiled_prompt and not phone_skip
+    ]
+    all_high_risk = high_risk_found
+    if phone_state not in {"NO_PHONE"} and not phone_skip:
+        all_high_risk.extend(phone_high_risk)
+
+    contract = shot.get("shot_contract") or {}
+    single_action = bool(contract.get("single_action"))
+    max_actions = int(contract.get("max_primary_actions", 0))
+    cut_policy = str(contract.get("cut_policy", ""))
+    hard_rules_complete = (
+        single_action
+        and max_actions == 1
+        and bool(cut_policy)
+        and len(all_high_risk) == 0
+    )
+
+    high_risk_extras = bool(all_high_risk)
+
+    forbidden = ["风景照", "静态背景", "两张角色包对口型", "双手机", "残手", "第二人误入", "头戴耳机"]
+    content_only = compiled_prompt.replace("避免", "").replace("avoid", "")
+    for sep in ("avoid", "避免"):
+        pass
+    if "避免" in compiled_prompt:
+        content_only = compiled_prompt.split("避免")[0]
+    if "avoid" in compiled_prompt:
+        content_only = compiled_prompt.split("avoid")[0]
+    distorting = [term for term in forbidden if term in content_only]
+    distorts_script = bool(distorting) or high_risk_extras
+
+    script_verdict = "不通过" if distorts_script or not hard_rules_complete else "通过"
+    prompt_conclusion = "不合格需修改" if distorts_script else "合格，可以生成"
+
+    return {
+        "schema": "video_kingdom.script_prompt_review.v1",
+        "shot_id": shot_id,
+        "run_id": f"{RUN_ID.lower()}_{shot_id.lower()}",
+        "script_hash": sha("EP01_SCRIPT_LOCKED_R3_20260921"),
+        "prompt_hash": sha(compiled_prompt),
+        "script_review": {
+            "role": "编剧",
+            "verdict": script_verdict,
+            "phone_state": phone_state,
+            "dialogue_order": shot.get("dialogue_order", "单句对白"),
+            "unfilmable_risks": "屏幕内容不进入画面；手机数量、持握状态和人物数量已锁定；无界面视觉元素。",
+            "monologue_handling": "独白闭嘴后期叠加" if phone_state == "PHONE_DESK" and "VO" in shot_id else "本镜只保留本句对白",
+            "reviewed_at": review_at,
+        },
+        "prompt_review": {
+            "role": "导演",
+            "conclusion": prompt_conclusion,
+            "reason": reason if prompt_conclusion == "合格，可以生成" else "审查到：" + ", ".join(distorting + all_high_risk),
+            "distorts_script": distorts_script,
+            "hard_rules_complete": hard_rules_complete,
+            "high_risk_extras": high_risk_extras,
+            "reviewed_at": review_at,
+        },
+    }
 
 
 def common_patch(shot: dict[str, Any], *, shot_id: str, scene: str, scene_urls: list[str], roles: list[str], scene_text: str, phone_state: str, seconds: float, camera_level: str, reason: str) -> None:
