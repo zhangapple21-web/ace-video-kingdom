@@ -14,6 +14,9 @@ from pathlib import Path
 from typing import Any, Callable
 
 import numpy as np
+import sys
+
+sys.stdout.reconfigure(encoding="utf-8")  # Bug #1 fix: prevent UnicodeEncodeError on GBK console
 
 
 def _longest_true_run(mask: np.ndarray) -> int:

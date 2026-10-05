@@ -18,6 +18,8 @@ if str(ROOT) not in sys.path:
 
 from production_control.model_transport import post_chat_completion
 
+sys.stdout.reconfigure(encoding="utf-8")  # Bug #1 fix: prevent UnicodeEncodeError on GBK console
+
 MODEL = "grok-4.7"
 # 写稿付费兜底只走已核对更便宜的 grok-4.7。免费矿池仍优先。
 # deepseek-v4.1-flash 与已退休的 grok-4.6 不得再进这条链路。

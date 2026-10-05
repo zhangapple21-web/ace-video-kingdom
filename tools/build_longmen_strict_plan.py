@@ -24,6 +24,8 @@ except ImportError:
 from runtime.provider_admission import admit_provider_request, assert_admission, build_canonical_generation_request
 from tools.medium_lock import character_performance_lock
 
+sys.stdout.reconfigure(encoding="utf-8")  # Bug #1 fix: prevent UnicodeEncodeError on GBK console
+
 ROOT = Path(__file__).resolve().parents[1]
 IMAGE_MAX_BYTES = 500 * 1024
 SOURCE = Path(r"C:\tmp\小说题材\龙门战神.txt")

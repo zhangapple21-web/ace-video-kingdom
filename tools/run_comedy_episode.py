@@ -23,6 +23,8 @@ except ImportError:  # pragma: no cover
 from tools.replace_audio_track import replace_audio_track, strip_audio_track
 from tools.validate_creative_slice import load_and_validate
 
+sys.stdout.reconfigure(encoding="utf-8")  # Bug #1 fix: prevent UnicodeEncodeError on GBK console
+
 
 def _append_option(command: list[str], flag: str, value: object | None) -> None:
     if value is not None and value != "":

@@ -21,6 +21,8 @@ sys.path.insert(0, str(ROOT / "CosyVoice" / "third_party" / "Matcha-TTS"))
 import torchaudio  # noqa: E402
 from cosyvoice.cli.cosyvoice import CosyVoice3  # noqa: E402
 
+sys.stdout.reconfigure(encoding="utf-8")  # Bug #1 fix: prevent UnicodeEncodeError on GBK console
+
 MODEL = ROOT / "model_cache" / "FunAudioLLM" / "Fun-CosyVoice3-0___5B-2512"
 SOURCE_DIR = Path(r"D:\视频创作\专门放声音的")
 OUT = Path(r"D:\视频创作\projects\张铁铁的沙雕日常\张铁铁的沙雕日常\项目文件\voice_clones_20260917")

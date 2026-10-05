@@ -8,6 +8,9 @@ import tempfile
 import time
 from pathlib import Path
 from typing import Any, Mapping
+import sys
+
+sys.stdout.reconfigure(encoding="utf-8")  # Bug #1 fix: prevent UnicodeEncodeError on GBK console
 
 
 STATES = (

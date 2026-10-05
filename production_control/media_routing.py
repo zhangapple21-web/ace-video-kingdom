@@ -11,6 +11,9 @@ from typing import Any, Mapping
 
 from .project import discover_project
 from .semantic_context import build_semantic_context
+import sys
+
+sys.stdout.reconfigure(encoding="utf-8")  # Bug #1 fix: prevent UnicodeEncodeError on GBK console
 
 
 REGISTRY_PATH = Path(__file__).resolve().parents[1] / "research" / "capability_registry.v2.json"

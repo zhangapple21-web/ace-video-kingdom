@@ -11,6 +11,9 @@ import argparse
 import json
 from pathlib import Path
 from typing import Any
+import sys
+
+sys.stdout.reconfigure(encoding="utf-8")  # Bug #1 fix: prevent UnicodeEncodeError on GBK console
 
 
 def _number(value: Any) -> float | None:

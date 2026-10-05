@@ -12,6 +12,8 @@ import json
 import sys
 from pathlib import Path
 
+sys.stdout.reconfigure(encoding="utf-8")  # Bug #1 fix: prevent UnicodeEncodeError on GBK console
+
 
 def image_reference(path: Path) -> dict[str, object]:
     digest = hashlib.sha256(path.read_bytes()).hexdigest()

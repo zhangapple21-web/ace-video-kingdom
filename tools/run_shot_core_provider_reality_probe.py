@@ -34,6 +34,8 @@ from runtime.shot_core import (  # noqa: E402
     save_manifest,
 )
 
+sys.stdout.reconfigure(encoding="utf-8")  # Bug #1 fix: prevent UnicodeEncodeError on GBK console
+
 
 class RecordingSession(requests.Session):
     """Real HTTP session that records method/URL, never headers or key."""

@@ -14,6 +14,9 @@ import json
 import re
 from pathlib import Path
 from typing import Any
+import sys
+
+sys.stdout.reconfigure(encoding="utf-8")  # Bug #1 fix: prevent UnicodeEncodeError on GBK console
 
 
 LABELS = ("主体", "动作", "环境", "光线", "镜头", "风格")

@@ -13,6 +13,9 @@ import json
 from datetime import datetime
 from pathlib import Path
 from typing import Any
+import sys
+
+sys.stdout.reconfigure(encoding="utf-8")  # Bug #1 fix: prevent UnicodeEncodeError on GBK console
 
 
 SCHEMA = "video_kingdom.script_prompt_review.v1"

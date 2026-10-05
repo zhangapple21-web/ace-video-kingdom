@@ -16,6 +16,8 @@ from runtime.provider_admission import (
 from tools.medium_lock import character_performance_lock
 from tools.run_idea_pipeline import _materialize_image_response
 
+sys.stdout.reconfigure(encoding="utf-8")  # Bug #1 fix: prevent UnicodeEncodeError on GBK console
+
 root = repo_root / "media_staging" / "episode_007_virtual_data" / "anchors" / "scene_action"
 root.mkdir(parents=True, exist_ok=True)
 base = os.environ.get(

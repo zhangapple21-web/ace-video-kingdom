@@ -1,5 +1,8 @@
 import json, subprocess
 from pathlib import Path
+import sys
+
+sys.stdout.reconfigure(encoding="utf-8")  # Bug #1 fix: prevent UnicodeEncodeError on GBK console
 
 root=Path(__file__).resolve().parents[1]
 directory=root/'media_staging/episode_007_virtual_data/video_camera_grammar_v2'

@@ -3,6 +3,9 @@ from __future__ import annotations
 import argparse, json
 from pathlib import Path
 from typing import Any
+import sys
+
+sys.stdout.reconfigure(encoding="utf-8")  # Bug #1 fix: prevent UnicodeEncodeError on GBK console
 
 ALLOWED_CHANGE_CHANNELS = {"body", "hands", "face", "prop", "scene"}
 MOTION_HARD_BANS = (

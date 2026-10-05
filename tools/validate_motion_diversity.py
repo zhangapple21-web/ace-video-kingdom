@@ -11,6 +11,9 @@ import argparse
 import json
 import re
 from pathlib import Path
+import sys
+
+sys.stdout.reconfigure(encoding="utf-8")  # Bug #1 fix: prevent UnicodeEncodeError on GBK console
 
 WORD_RE = re.compile(r"[A-Za-z0-9_\u4e00-\u9fff]+")
 GENERIC = {"wenji", "vertical", "cinematic", "natural", "motion", "preserve", "same", "exact", "one", "person", "scene", "anchor"}

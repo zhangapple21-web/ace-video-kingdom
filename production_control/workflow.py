@@ -19,6 +19,8 @@ from typing import Any
 
 from .engine import ProductionControl, WorkflowError, sha256_file
 
+sys.stdout.reconfigure(encoding="utf-8")  # Bug #1 fix: prevent UnicodeEncodeError on GBK console
+
 try:
     from tools.medium_lock import validate_medium_lock
 except ImportError:  # pragma: no cover - package used as a script outside repo root

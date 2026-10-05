@@ -1,5 +1,8 @@
 import json, re
 from pathlib import Path
+import sys
+
+sys.stdout.reconfigure(encoding="utf-8")  # Bug #1 fix: prevent UnicodeEncodeError on GBK console
 ROOT = Path('D:/') / '\u89c6\u9891\u521b\u4f5c' / 'ace-video-kingdom'
 SRC = ROOT / 'creator_encyclopedia' / 'exports' / '20260920_canheguiying_reincarnation_v2_v3' / 'data'
 DST = ROOT / 'sites' / 'tinghe-archive' / 'public'

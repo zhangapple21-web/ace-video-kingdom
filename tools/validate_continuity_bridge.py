@@ -6,6 +6,9 @@ import argparse
 import json
 from pathlib import Path
 from typing import Any
+import sys
+
+sys.stdout.reconfigure(encoding="utf-8")  # Bug #1 fix: prevent UnicodeEncodeError on GBK console
 
 
 REQUIRED = ("previous_end_frame_state", "next_initial_state", "camera_state", "lighting_state", "tail_frame_state", "enter_direction", "exit_direction")

@@ -23,6 +23,8 @@ if str(ROOT) not in sys.path:
 
 from production_control import load_provider_health_snapshot, route_model_demand
 
+sys.stdout.reconfigure(encoding="utf-8")  # Bug #1 fix: prevent UnicodeEncodeError on GBK console
+
 
 DEFAULT_STATE = Path(r"C:\tmp\ace_core\06_RUNTIME\ace\data\miner_pool\provider_watchdog\watchdog_state.json")
 

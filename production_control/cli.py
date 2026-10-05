@@ -8,6 +8,8 @@ from pathlib import Path
 from .engine import ProductionControl, WorkflowError
 from .workflow import bootstrap, lock_plan_shots, preflight_plan
 
+sys.stdout.reconfigure(encoding="utf-8")  # Bug #1 fix: prevent UnicodeEncodeError on GBK console
+
 
 def _scope_from_args(args: argparse.Namespace) -> dict | list[str] | None:
     if getattr(args, "scope_file", None):

@@ -12,6 +12,9 @@ from pathlib import Path
 
 import cv2
 import numpy as np
+import sys
+
+sys.stdout.reconfigure(encoding="utf-8")  # Bug #1 fix: prevent UnicodeEncodeError on GBK console
 
 
 def audit(path: Path, spike_factor: float = 3.0) -> dict:

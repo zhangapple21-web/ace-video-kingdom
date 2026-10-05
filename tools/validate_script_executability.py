@@ -24,6 +24,8 @@ import sys
 from pathlib import Path
 from typing import Any
 
+sys.stdout.reconfigure(encoding="utf-8")  # Bug #1 fix: prevent UnicodeEncodeError on GBK console
+
 try:
     from medium_lock import validate_medium_lock
     from validate_shot_prompt import validate_prompt

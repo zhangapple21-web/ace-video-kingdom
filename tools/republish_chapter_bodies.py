@@ -25,6 +25,8 @@ sys.path.insert(0, str(ROOT))
 
 from tools.canon_scene_pass import META_LINE_PATTERNS, _strip_meta_blocks  # noqa: E402
 
+sys.stdout.reconfigure(encoding="utf-8")  # Bug #1 fix: prevent UnicodeEncodeError on GBK console
+
 CHAPTERS_DIR = ROOT / "sites" / "tinghe-archive" / "public" / "data" / "chapters"
 SOURCE = (
     ROOT

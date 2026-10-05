@@ -38,6 +38,8 @@ from tools.validate_director_manifest import validate_manifest as validate_direc
 from tools.validate_shot_prompt import validate_prompt
 from tools.production_shot_gate import validate_production_shot
 
+sys.stdout.reconfigure(encoding="utf-8")  # Bug #1 fix: prevent UnicodeEncodeError on GBK console
+
 try:
     from runtime.provider_admission import admit_provider_request, assert_admission, build_canonical_generation_request, canonical_hash
 except ModuleNotFoundError:  # pragma: no cover - direct invocation from repo root

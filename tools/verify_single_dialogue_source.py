@@ -19,6 +19,8 @@ import sys
 from pathlib import Path
 from typing import Any
 
+sys.stdout.reconfigure(encoding="utf-8")  # Bug #1 fix: prevent UnicodeEncodeError on GBK console
+
 SAMPLE_RATE = 16000
 
 

@@ -11,6 +11,9 @@ import json
 import shutil
 from datetime import datetime, timezone
 from pathlib import Path
+import sys
+
+sys.stdout.reconfigure(encoding="utf-8")  # Bug #1 fix: prevent UnicodeEncodeError on GBK console
 
 try:
     from validate_decision_record import validate

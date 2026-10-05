@@ -14,6 +14,8 @@ if str(Path(__file__).resolve().parents[1]) not in sys.path:
 
 from production_control.model_transport import post_responses
 
+sys.stdout.reconfigure(encoding="utf-8")  # Bug #1 fix: prevent UnicodeEncodeError on GBK console
+
 
 ROOT = Path(__file__).resolve().parents[1]
 PUBLIC_REFERENCE = "https://raw.githubusercontent.com/zhangapple21-web/ace-video-assets/main/references/wenji-episode-006/SCENE_02_typing_log_anchor.png"

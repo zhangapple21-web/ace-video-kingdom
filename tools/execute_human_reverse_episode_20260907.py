@@ -10,6 +10,8 @@ import subprocess
 import sys
 from pathlib import Path
 
+sys.stdout.reconfigure(encoding="utf-8")  # Bug #1 fix: prevent UnicodeEncodeError on GBK console
+
 
 ROOT = Path(__file__).resolve().parents[1]
 PROJECT = ROOT / "episodes" / "generated" / "reverse_system_human_20260907"

@@ -21,6 +21,8 @@ import zipfile
 from pathlib import Path
 from typing import Any, Callable
 
+sys.stdout.reconfigure(encoding="utf-8")  # Bug #1 fix: prevent UnicodeEncodeError on GBK console
+
 ROOT = Path(__file__).resolve().parents[1]
 CHAPTERS = ROOT / "sites" / "tinghe-archive" / "public" / "data" / "chapters"
 DEFAULT_BACKUP_DIR = ROOT / ".migration_backups" / "strip_chapter_meta"

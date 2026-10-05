@@ -2,6 +2,9 @@
 from __future__ import annotations
 import json, sys
 from pathlib import Path
+import sys
+
+sys.stdout.reconfigure(encoding="utf-8")  # Bug #1 fix: prevent UnicodeEncodeError on GBK console
 
 def main() -> int:
     root = Path(sys.argv[1]).resolve()

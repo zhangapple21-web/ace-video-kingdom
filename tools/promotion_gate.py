@@ -33,6 +33,8 @@ from tools.evolution_ledger import (
 from tools.failure_replay import record_failure
 from tools.failure_replay import DEFAULT_PATH as DEFAULT_FAILURE_REPLAY
 
+sys.stdout.reconfigure(encoding="utf-8")  # Bug #1 fix: prevent UnicodeEncodeError on GBK console
+
 
 DEFAULT_QUEUE = ROOT / "research" / "evolution_candidates.v1.jsonl"
 DEFAULT_RECEIPTS = ROOT / "research" / "promotion_gate_runs"

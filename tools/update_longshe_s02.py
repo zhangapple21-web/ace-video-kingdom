@@ -1,6 +1,9 @@
 from __future__ import annotations
 import json, sys
 from pathlib import Path
+import sys
+
+sys.stdout.reconfigure(encoding="utf-8")  # Bug #1 fix: prevent UnicodeEncodeError on GBK console
 
 def main() -> int:
     root=Path(sys.argv[1]).resolve(); cp=root/'six_module_contract.json'; d=json.loads(cp.read_text(encoding='utf-8')); s=d['shots'][1]

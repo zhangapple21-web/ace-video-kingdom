@@ -22,6 +22,8 @@ from tools.daily_external_learning import collect, persist
 from tools.publish_ace_learning_packet import publish
 from tools.promotion_gate import run as run_promotion_gate
 
+sys.stdout.reconfigure(encoding="utf-8")  # Bug #1 fix: prevent UnicodeEncodeError on GBK console
+
 def run(*, limit: int = 5) -> dict[str, object]:
     collected = collect()
     run_path = persist(collected)

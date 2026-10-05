@@ -10,6 +10,9 @@ import argparse
 import json
 from pathlib import Path
 from typing import Any
+import sys
+
+sys.stdout.reconfigure(encoding="utf-8")  # Bug #1 fix: prevent UnicodeEncodeError on GBK console
 
 SCHEMA = "video_kingdom.conflict_driven_scene.v1"
 SCENE_CLASSES = {"A", "B", "C"}

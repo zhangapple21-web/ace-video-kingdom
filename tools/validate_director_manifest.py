@@ -14,6 +14,9 @@ from typing import Any
 
 from tools.validate_creative_constraints import validate_creative_constraints
 from tools.validate_role_audit import validate_role_audit
+import sys
+
+sys.stdout.reconfigure(encoding="utf-8")  # Bug #1 fix: prevent UnicodeEncodeError on GBK console
 
 
 SPATIAL_FIELDS = ("foreground", "midground", "background", "camera_start", "allowed_content", "forbidden_additions")

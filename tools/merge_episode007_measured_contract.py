@@ -1,5 +1,8 @@
 import json
 from pathlib import Path
+import sys
+
+sys.stdout.reconfigure(encoding="utf-8")  # Bug #1 fix: prevent UnicodeEncodeError on GBK console
 
 root=Path(__file__).resolve().parents[1]
 contract=json.loads((root/'research/external_research/episode007_six_module_contract_filled_20260903.json').read_text(encoding='utf-8'))

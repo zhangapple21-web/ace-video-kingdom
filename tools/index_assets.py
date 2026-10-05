@@ -14,6 +14,8 @@ from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any, Iterable
 
+sys.stdout.reconfigure(encoding="utf-8")  # Bug #1 fix: prevent UnicodeEncodeError on GBK console
+
 
 CANONICAL_NAME_RE = re.compile(
     r"^(?P<kind>CHAR|SCN|PROP|SHOT|AUDIO|BOARD|STYLE)_[A-Z0-9]+(?:_[A-Z0-9]+)*_V(?P<version>\d+)\.[A-Z0-9]+$",

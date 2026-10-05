@@ -14,6 +14,8 @@ if str(ROOT) not in sys.path:
 
 from runtime.provider_admission import admit_provider_request, build_canonical_generation_request, canonical_hash, delivery_gate
 
+sys.stdout.reconfigure(encoding="utf-8")  # Bug #1 fix: prevent UnicodeEncodeError on GBK console
+
 
 def sha256_file(path: Path) -> str:
     digest = hashlib.sha256()

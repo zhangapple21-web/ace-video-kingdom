@@ -20,6 +20,8 @@ if str(ROOT) not in sys.path:
 
 from tools.validate_state_contract import validate_state_contract
 
+sys.stdout.reconfigure(encoding="utf-8")  # Bug #1 fix: prevent UnicodeEncodeError on GBK console
+
 
 REGISTRY = ROOT / "research" / "capability_registry.v2.json"
 ROLE_REGISTRY = ROOT / "research" / "oneapi_role_room.v1.json"

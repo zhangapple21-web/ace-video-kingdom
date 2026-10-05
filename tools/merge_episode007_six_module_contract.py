@@ -10,6 +10,9 @@ import argparse
 import json
 from pathlib import Path
 from typing import Any
+import sys
+
+sys.stdout.reconfigure(encoding="utf-8")  # Bug #1 fix: prevent UnicodeEncodeError on GBK console
 
 
 DIALOGUE_SHOTS = {"S01C", "S02B", "S03A", "S04A", "S05A", "S06A"}

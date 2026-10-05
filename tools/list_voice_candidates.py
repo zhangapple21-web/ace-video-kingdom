@@ -3,6 +3,9 @@
 import argparse
 import json
 from pathlib import Path
+import sys
+
+sys.stdout.reconfigure(encoding="utf-8")  # Bug #1 fix: prevent UnicodeEncodeError on GBK console
 
 
 DEFAULT_REGISTRY = Path(__file__).resolve().parents[1] / "research" / "voice_candidate_registry.v1.json"

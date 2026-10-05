@@ -28,6 +28,9 @@ from .provider_admission import (
     build_canonical_generation_request,
 )
 from tools.medium_lock import validate_medium_lock
+import sys
+
+sys.stdout.reconfigure(encoding="utf-8")  # Bug #1 fix: prevent UnicodeEncodeError on GBK console
 
 
 CREATE_URL = "https://apihub.agnes-ai.com/v1/videos"

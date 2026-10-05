@@ -24,6 +24,8 @@ MATRIX = ROOT / "research" / "oneapi_role_room.v1.json"
 if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 from production_control.model_transport import post_chat_completion
+
+sys.stdout.reconfigure(encoding="utf-8")  # Bug #1 fix: prevent UnicodeEncodeError on GBK console
 try:
     from tools.free_miner_router import resource_candidates
 except ImportError:  # pragma: no cover - script execution from tools/

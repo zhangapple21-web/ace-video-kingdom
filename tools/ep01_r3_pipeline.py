@@ -15,6 +15,8 @@ from datetime import datetime, timezone, timedelta
 from pathlib import Path
 from typing import Any
 
+sys.stdout.reconfigure(encoding="utf-8")  # Bug #1 fix: prevent UnicodeEncodeError on GBK console
+
 
 ROOT = Path(r"D:\视频创作")
 PROJECT = ROOT / "projects" / "张铁铁的沙雕日常" / "张铁铁的沙雕日常"

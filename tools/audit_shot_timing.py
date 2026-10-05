@@ -14,6 +14,9 @@ import json
 import subprocess
 from pathlib import Path
 from typing import Any, Callable
+import sys
+
+sys.stdout.reconfigure(encoding="utf-8")  # Bug #1 fix: prevent UnicodeEncodeError on GBK console
 
 
 def _load(path: Path) -> Any:

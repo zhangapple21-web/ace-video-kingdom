@@ -14,6 +14,9 @@ import shutil
 import subprocess
 from pathlib import Path
 from typing import Any
+import sys
+
+sys.stdout.reconfigure(encoding="utf-8")  # Bug #1 fix: prevent UnicodeEncodeError on GBK console
 
 
 def probe_audio(path: Path) -> float:

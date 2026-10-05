@@ -5,6 +5,9 @@ from __future__ import annotations
 import json
 from pathlib import Path
 from typing import Any
+import sys
+
+sys.stdout.reconfigure(encoding="utf-8")  # Bug #1 fix: prevent UnicodeEncodeError on GBK console
 
 
 REQUIRED_BEATS = ("goal", "obstacle", "reversal")

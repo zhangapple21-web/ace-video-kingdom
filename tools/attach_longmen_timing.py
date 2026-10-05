@@ -8,6 +8,8 @@ from pathlib import Path
 
 from measure_tts import measure_dialogue
 
+sys.stdout.reconfigure(encoding="utf-8")  # Bug #1 fix: prevent UnicodeEncodeError on GBK console
+
 
 def main() -> int:
     if len(sys.argv) not in (2, 3):

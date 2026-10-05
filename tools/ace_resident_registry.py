@@ -10,6 +10,9 @@ import argparse
 import json
 from datetime import datetime, timezone
 from pathlib import Path
+import sys
+
+sys.stdout.reconfigure(encoding="utf-8")  # Bug #1 fix: prevent UnicodeEncodeError on GBK console
 
 
 STATES = ("DISCOVERED", "PROBED", "ACTIVE", "DEGRADED", "RETIRED")

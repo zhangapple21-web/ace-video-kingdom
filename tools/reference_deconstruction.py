@@ -16,6 +16,8 @@ import sys
 from pathlib import Path
 from typing import Any
 
+sys.stdout.reconfigure(encoding="utf-8")  # Bug #1 fix: prevent UnicodeEncodeError on GBK console
+
 
 SCHEMA = "video_kingdom.reference_deconstruction.v1"
 SHA256_RE = re.compile(r"^[0-9a-f]{64}$", re.IGNORECASE)

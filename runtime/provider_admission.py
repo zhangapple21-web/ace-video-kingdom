@@ -21,6 +21,9 @@ from copy import deepcopy
 from pathlib import Path
 from typing import Any
 from urllib.parse import urlparse
+import sys
+
+sys.stdout.reconfigure(encoding="utf-8")  # Bug #1 fix: prevent UnicodeEncodeError on GBK console
 
 try:
     from tools.medium_lock import validate_medium_lock

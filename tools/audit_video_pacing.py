@@ -6,6 +6,9 @@ import json
 import re
 import subprocess
 from pathlib import Path
+import sys
+
+sys.stdout.reconfigure(encoding="utf-8")  # Bug #1 fix: prevent UnicodeEncodeError on GBK console
 
 
 def probe(path: Path) -> dict:

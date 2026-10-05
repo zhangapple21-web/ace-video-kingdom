@@ -12,6 +12,8 @@ import subprocess
 import sys
 from pathlib import Path
 
+sys.stdout.reconfigure(encoding="utf-8")  # Bug #1 fix: prevent UnicodeEncodeError on GBK console
+
 
 def _load(path: Path) -> dict:
     value = json.loads(path.read_text(encoding="utf-8"))

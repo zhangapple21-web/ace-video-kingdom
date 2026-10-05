@@ -5,6 +5,8 @@ import json
 from pathlib import Path
 import sys
 
+sys.stdout.reconfigure(encoding="utf-8")  # Bug #1 fix: prevent UnicodeEncodeError on GBK console
+
 
 def main() -> int:
     if len(sys.argv) != 2:

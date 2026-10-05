@@ -2,6 +2,9 @@
 from __future__ import annotations
 import argparse, json, time
 from pathlib import Path
+import sys
+
+sys.stdout.reconfigure(encoding="utf-8")  # Bug #1 fix: prevent UnicodeEncodeError on GBK console
 
 MEDIA={".mp4",".mov",".webm",".png",".jpg",".jpeg",".wav",".mp3"}
 def candidates(root: Path, older_days: int):

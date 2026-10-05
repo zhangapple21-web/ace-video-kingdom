@@ -19,6 +19,8 @@ if str(Path(__file__).resolve().parents[1]) not in sys.path:
 
 from runtime.provider_admission import admit_provider_request, assert_admission, build_canonical_generation_request
 
+sys.stdout.reconfigure(encoding="utf-8")  # Bug #1 fix: prevent UnicodeEncodeError on GBK console
+
 
 BASE_URL = os.getenv("ONEAPI_BASE_URL", "http://127.0.0.1:3000/v1").rstrip("/")
 API_KEY = os.getenv("ONEAPI_LOCAL_MASTER_KEY") or os.getenv("ONEAPI_KEY")

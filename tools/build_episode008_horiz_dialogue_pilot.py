@@ -4,6 +4,9 @@ import hashlib
 import json
 import subprocess
 from pathlib import Path
+import sys
+
+sys.stdout.reconfigure(encoding="utf-8")  # Bug #1 fix: prevent UnicodeEncodeError on GBK console
 
 ROOT = Path(__file__).resolve().parents[1]
 PILOT = ROOT / "media_staging" / "episode_008_rule_seat_system" / "revision_pilot"

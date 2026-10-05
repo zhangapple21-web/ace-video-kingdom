@@ -11,6 +11,8 @@ import json
 import sys
 from pathlib import Path
 
+sys.stdout.reconfigure(encoding="utf-8")  # Bug #1 fix: prevent UnicodeEncodeError on GBK console
+
 
 VIDEO_ROOT = Path(__file__).resolve().parents[1]
 ACE_CORE_ROOT = Path(r"C:\tmp\ace_core")

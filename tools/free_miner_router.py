@@ -14,6 +14,9 @@ import urllib.error
 import urllib.request
 from pathlib import Path
 from typing import Any
+import sys
+
+sys.stdout.reconfigure(encoding="utf-8")  # Bug #1 fix: prevent UnicodeEncodeError on GBK console
 
 ROOT = Path(__file__).resolve().parents[1]
 CONFIG = ROOT / "research" / "free_miner_pool.v1.json"

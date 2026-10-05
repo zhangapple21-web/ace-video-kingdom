@@ -33,6 +33,8 @@ from tools.creator_workflow import build_creative_development_profile, validate_
 from tools.reference_deconstruction import load_and_validate_reference_deconstruction
 from tools.workflow_decision_matrix import build_workflow_policy_receipt
 
+sys.stdout.reconfigure(encoding="utf-8")  # Bug #1 fix: prevent UnicodeEncodeError on GBK console
+
 
 # Agnes' V2.5 Flash contract is deliberately kept here, at the public
 # workflow boundary, so that all adapters use one request shape.  The

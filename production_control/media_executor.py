@@ -14,6 +14,9 @@ from .project import discover_project
 from .image_assets import AssetStore
 from .projection import project_messages
 from .task_state import TERMINAL, complete, create, load, progress
+import sys
+
+sys.stdout.reconfigure(encoding="utf-8")  # Bug #1 fix: prevent UnicodeEncodeError on GBK console
 
 
 Runner = Callable[[Mapping[str, Any], str, Path], str | Path]

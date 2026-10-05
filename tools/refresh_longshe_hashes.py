@@ -1,6 +1,9 @@
 from __future__ import annotations
 import hashlib, json, sys
 from pathlib import Path
+import sys
+
+sys.stdout.reconfigure(encoding="utf-8")  # Bug #1 fix: prevent UnicodeEncodeError on GBK console
 
 def sha(p: Path) -> str:
     h = hashlib.sha256(); h.update(p.read_bytes()); return h.hexdigest()

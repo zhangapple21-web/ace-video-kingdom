@@ -3,6 +3,9 @@ import hashlib, json
 from datetime import datetime, timezone
 from pathlib import Path
 from urllib.request import Request, urlopen
+import sys
+
+sys.stdout.reconfigure(encoding="utf-8")  # Bug #1 fix: prevent UnicodeEncodeError on GBK console
 
 ROOT = Path(__file__).resolve().parents[1]
 PROJECT = ROOT / "episodes" / "generated" / "reverse_system_human_v3_20260907"
