@@ -118,6 +118,66 @@
 - CosyVoice 3 保持正式默认；RVC 保持隔离精修备选。
 - 三路路由和降级顺序已写入 `research/voice_runtime_routes.v1.json`。
 
+## 2026-10-05：M-01 公开历史清理 + cangjie-skill 三点吸收
+
+不是视频生产 run，没有成片、没有 Take、没有 QC 包，因此**不适用** `DELIVERED_CLOSED`。
+按本清单的终态语义，本轮以 **ARCHIVED** 收口：证据可检索、可恢复说明已留下、不再接受静默修改。
+
+### 收口依据
+
+| 项 | 值 |
+|---|---|
+| 主仓重写后 main | `3049a96`（旧 `77189f6` 已失效） |
+| 备份分支 | `7bb7477`（旧 `688379f` 已失效） |
+| commit 数 | main 217 → 211，backup 129 → 124 |
+| 移除路径 | 14 个；`diskUsage` 45,208 → 2,929 KB |
+| 关闭原因 | 主仓是 PUBLIC，历史混入原创小说、渲染成片、参考图与单集巨型 manifest |
+| `closed_at` | 2026-10-05 |
+| 人工确认 | zhangapple21-web（GitHub 账号所有者，force-push 授权） |
+
+### 三份退路（均可恢复）
+
+- 盘外私有镜像（重写前完整历史）：`zhangapple21-web/ace-video-history-backup`（PRIVATE，heads+tags）
+- 逐字节内容副本：`zhangapple21-web/ace-video-corpus`（PRIVATE）→ `removed_from_public_history/`（57 文件 / 60.1 MB，`sha256_manifest.txt` 复验 0 问题）
+- 本地归档：`D:\视频创作\archive\T-01\mirror_backup_20261005.git` + `mirror_backup_20261005.refs.txt`
+
+本地语料与创作内容原位保留：语料 5,791 文件、original_desk 26 文件、media_staging 36 文件、
+`world_live_watchdog.log` 2.60 GB（按红线不删）。
+
+### 验收摘要
+
+A6 五项全过：辨识句 5×3 refs = 0 命中；密钥扫描重写后 ⊆ 重写前（新增 0，`sk-`/`gho_`/`AKIA` = 0）；
+白名单 main HEAD 26/26、backup 分支存在集重写前后全同；A1 范围外零删除且 blob 哈希一致（穷举）；
+新 clone 测试 0 failed。测试总数 501 → **511 passed**。
+
+### 已知限制与残余风险
+
+- `refs/pull/1/head`（`b025e76`，来自 MERGED 的 PR #1）不可 push，旧历史可能经此 ref 触达。
+- 未向 GitHub Support 申请清理；旧 sha 可能通过缓存直链访问。已被抓取的第三方内容无法撤回。
+- 本机只有一块物理盘（C:、D: 同盘），本地镜像只防误操作，防不了盘坏。
+- GitHub 网页代码搜索在本机不可用（对照组亦返回 0），「网页搜不到」未能验证；权威证据是 API 树直查 + `git grep` 全历史 0 命中。
+
+### 恢复方法
+
+内容缺失 → 从 `ace-video-corpus` 的 `removed_from_public_history/` 按 `sha256_manifest.txt` 取回并重算校验。
+旧历史需要 → `git clone` `ace-video-history-backup`。位置说明见 `research/CONTENT_LOCATION.md`。
+任何更正必须新建 revision，旧收据只读保留。
+
+### cangjie-skill 吸收（研究层，非生产入口）
+
+- 来源：https://github.com/kangarooking/cangjie-skill。仅借鉴其晋级门结构，未安装、未接入 Provider、未换入口。
+- 晋级门六问：`assets/checklists/generic_default_layer.v1.json#promotion_gate`。前 3 问为原版骨架，
+  第 6 问「来源证据」与「4/5 不过降题材层」为本项目补充；**措辞为本项目改写，非原文照搬**。
+- 硬禁止单一事实源：`governance/script_prompt_review_gate.v1.json#hard_prohibitions`（P1–P6）为唯一真源，
+  一致性测试 `tests/test_hard_prohibition_consistency.py` 含实证负例。
+- 创作层参考卡：`research/creative_reference_cards.v1.json`（R1–R3），源自本项目 `soul_shot_ledger`
+  真实案例，`production_integration=false`，不进 pipeline、不接门禁。
+- 降级 4 条（仅改层级归属，未改措辞、未删规则）：第 1 镜三段（两处 AGENTS.md）、接粉词 → 单集微调；
+  A18 提交「镜头：」→ 题材触发层。因机器门禁执行而保留：A06、A22、手机专项。缺来源待补：A09。
+  下一批候选：A04、A05、A40。
+- 边界：以上全部为研究/治理层。`script_prompt_review` 双审、`production_shot_gate` 五关、
+  Agnes 主链、音频主时钟均未改动。
+
 ## 2026-09-14：技能工程化优化
 
 - 新增 `production_control/privacy_scan.py` 和 `tools/scan_sensitive_content.py`，并接入 `preflight_episode.py`；命中密钥/Token/密码/联系方式/身份证号时硬阻断为 `BLOCKED_PRIVACY`，收据只保留脱敏片段。
