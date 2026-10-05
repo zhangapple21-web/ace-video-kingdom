@@ -20,7 +20,7 @@ from tools.vklogging import vklog
 sys.stdout.reconfigure(encoding="utf-8")  # Bug #1 fix: prevent UnicodeEncodeError on GBK console
 
 
-ROOT = Path(r"D:\视频创作")
+ROOT = Path(__file__).resolve().parents[1]  # Bug #8 fix: no hardcoded path
 PROJECT = ROOT / "projects" / "张铁铁的沙雕日常" / "张铁铁的沙雕日常"
 CONTROL = ROOT / "ace-video-kingdom"
 PROJECT_FILES = PROJECT / "项目文件"

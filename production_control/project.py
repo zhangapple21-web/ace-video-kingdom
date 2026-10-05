@@ -8,8 +8,8 @@ from pathlib import Path
 from typing import Any
 
 
-DEFAULT_CANONICAL_ROOT = Path(r"D:\视频创作\ace-video-kingdom")
-DEFAULT_COMPAT_ROOT = Path(r"D:\tmp\ace-video-kingdom")
+DEFAULT_CANONICAL_ROOT = Path(__file__).resolve().parents[1]  # Bug #8 fix: derived from file location
+DEFAULT_COMPAT_ROOT = DEFAULT_CANONICAL_ROOT.parent / "tmp" / "ace-video-kingdom"
 
 
 def _load_manifest(root: Path) -> dict[str, Any]:

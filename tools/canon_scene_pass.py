@@ -532,8 +532,8 @@ def publish_state() -> dict[str, Any]:
 
 
 def find_wrangler() -> list[str] | None:
-    node = Path(r"C:\Users\Administrator\.cache\codex-runtimes\codex-primary-runtime\dependencies\node\bin\node.exe")
-    wjs = Path(r"C:\Users\Administrator\AppData\Local\npm-cache\_npx\32026684e21afda6\node_modules\wrangler\bin\wrangler.js")
+    node = Path(os.environ.get("VK_NODE_PATH", r"C:\Users\Administrator\.cache\codex-runtimes\codex-primary-runtime\dependencies\node\bin\node.exe"))
+    wjs = Path(os.environ.get("VK_WRANGLER_PATH", r"C:\Users\Administrator\AppData\Local\npm-cache\_npx\32026684e21afda6\node_modules\wrangler\bin\wrangler.js"))
     if node.exists() and wjs.exists():
         return [str(node), str(wjs)]
     return None
