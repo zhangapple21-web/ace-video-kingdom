@@ -42,8 +42,41 @@
 ## 为什么这样分
 
 - 本仓库是 **PUBLIC**。原创剧本和创作实验是 IP，不适合公开。
-- 本仓库的历史里**仍然含有**已取消跟踪的内容（见下），这不是疏忽，是权衡记录。
-- `git rm --cached` 只让版本不再跟踪，**不会**把已进入历史的内容删掉。
+- `git rm --cached` 只让版本不再跟踪，**不会**把已进入历史的内容删掉——所以做了历史重写，见下。
+
+## 历史重写记录（2026-10-05）
+
+公开历史里的内容类产物已通过 `git filter-repo --invert-paths` **移出**，并 force-push。
+
+| 项 | 值 |
+|---|---|
+| 重写日期 | 2026-10-05 |
+| 旧 main（失效） | `77189f6` |
+| 旧 backup 分支（失效） | `688379f` |
+| 新 main | `ca45b43`（随后 A7 收尾 commit `a575a9d`） |
+| 新 backup 分支 | `7bb7477` |
+| commit 数 | main 217 → 211，backup 129 → 124 |
+| 移除路径 | 14 个（4 个小说项目目录、`media_staging/`、5 个单集巨型 manifest、runtime 收据流水、3 个来源/索引文档） |
+
+**旧 sha 已失效。** 三份退路（都不在本仓库）：
+
+| 退路 | 位置 |
+|---|---|
+| 盘外私有镜像（重写前的完整历史） | `github.com/zhangapple21-web/ace-video-history-backup`（PRIVATE） |
+| 逐字节内容副本 | `github.com/zhangapple21-web/ace-video-corpus`（PRIVATE）→ `removed_from_public_history/`（57 文件，含 `sha256_manifest.txt`） |
+| 本地归档 | `D:\视频创作\archive\T-01\mirror_backup_20261005.git` + `D:\视频创作\ace-video-kingdom\research\persona_dna_library\` 原位 |
+
+`removed_from_public_history/` 下分两类来源：
+
+- `head/` —— 从重写前的 `main@77189f6` 导出（`media_staging/`、5 个 manifest、runtime 收据、3 个来源/索引文档）
+- `local/` —— 4 个小说项目，从本地工作目录导出（它们在 77189f6 时已取消跟踪）
+
+### 残余风险（已知，不申请处理）
+
+- **不向 GitHub Support 申请清理。** 残余风险：旧 sha 可能通过 PR ref 与缓存直链被访问。
+- PR #1（`backup/system-reinstall-20260908-video`）状态为 **MERGED**，无法关闭；`refs/pull/1/head`（`b025e76`）不可 push，旧历史可能经此 ref 触达。
+- 本机只有一块物理盘（C:、D: 同盘），本地镜像只能防误操作，防不了盘坏。真正的盘外是上面两个私有仓。
+- GitHub 网页代码搜索在本机不可用（对照组亦返回 0），故"网页搜不到"未能验证；权威证据是 GitHub API 树直查 + `git grep` 全历史 0 命中。
 
 ## 测试怎么在新 clone 上跑
 
