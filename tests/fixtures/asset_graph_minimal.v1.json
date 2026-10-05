@@ -1,0 +1,650 @@
+{
+  "schema": "video_kingdom.asset_graph.v1",
+  "authority": "DERIVED_CONTINUITY_INDEX",
+  "production_integration": false,
+  "fixture": true,
+  "fixture_note": "Synthetic, content-free graph used only by tests/test_asset_graph.py. Not creative material, not a canon source. Real project graphs live outside this PUBLIC repo; see research/CONTENT_LOCATION.md.",
+  "reuse_priority_levels": {
+    "P0_CORE": "fixture meaning of P0_CORE",
+    "P1_RECURRING": "fixture meaning of P1_RECURRING",
+    "P2_SUPPORT": "fixture meaning of P2_SUPPORT",
+    "P3_EXPERIMENTAL": "fixture meaning of P3_EXPERIMENTAL"
+  },
+  "key_line_catalog": [
+    {
+      "id": "KL01",
+      "name": "fixture key line 01"
+    },
+    {
+      "id": "KL02",
+      "name": "fixture key line 02"
+    },
+    {
+      "id": "KL03",
+      "name": "fixture key line 03"
+    },
+    {
+      "id": "KL04",
+      "name": "fixture key line 04"
+    },
+    {
+      "id": "KL05",
+      "name": "fixture key line 05"
+    },
+    {
+      "id": "KL06",
+      "name": "fixture key line 06"
+    }
+  ],
+  "field_audit": {
+    "required_node_fields": [
+      "id",
+      "type",
+      "name",
+      "status",
+      "reuse_priority",
+      "key_lines"
+    ],
+    "required_edge_fields": [
+      "from",
+      "type",
+      "to",
+      "source_ref"
+    ],
+    "missing_fields": [
+      "fixture_note"
+    ]
+  },
+  "nodes": [
+    {
+      "id": "character_01",
+      "type": "character",
+      "name": "fixture character 01",
+      "status": "CANON",
+      "reuse_priority": "P1_RECURRING",
+      "key_lines": [
+        "KL02",
+        "KL04"
+      ],
+      "source_refs": [
+        "fixture_source_character_01.md"
+      ],
+      "asset_refs": [
+        "fixture_asset_character_01.png"
+      ],
+      "missing_fields": []
+    },
+    {
+      "id": "character_02",
+      "type": "character",
+      "name": "fixture character 02",
+      "status": "CANON",
+      "reuse_priority": "P2_SUPPORT",
+      "key_lines": [
+        "KL03",
+        "KL05"
+      ],
+      "source_refs": [
+        "fixture_source_character_02.md"
+      ],
+      "asset_refs": [
+        "fixture_asset_character_02.png"
+      ],
+      "missing_fields": []
+    },
+    {
+      "id": "character_03",
+      "type": "character",
+      "name": "fixture character 03",
+      "status": "CANON",
+      "reuse_priority": "P3_EXPERIMENTAL",
+      "key_lines": [
+        "KL04",
+        "KL06"
+      ],
+      "source_refs": [
+        "fixture_source_character_03.md"
+      ],
+      "asset_refs": [
+        "fixture_asset_character_03.png"
+      ],
+      "missing_fields": []
+    },
+    {
+      "id": "character_04",
+      "type": "character",
+      "name": "fixture character 04",
+      "status": "CANON",
+      "reuse_priority": "P0_CORE",
+      "key_lines": [
+        "KL05",
+        "KL01"
+      ],
+      "source_refs": [
+        "fixture_source_character_04.md"
+      ],
+      "asset_refs": [
+        "fixture_asset_character_04.png"
+      ],
+      "missing_fields": [
+        "fixture_note"
+      ]
+    },
+    {
+      "id": "place_01",
+      "type": "place",
+      "name": "fixture place 01",
+      "status": "CANON",
+      "reuse_priority": "P2_SUPPORT",
+      "key_lines": [
+        "KL02",
+        "KL04"
+      ],
+      "source_refs": [
+        "fixture_source_place_01.md"
+      ],
+      "asset_refs": [
+        "fixture_asset_place_01.png"
+      ],
+      "missing_fields": []
+    },
+    {
+      "id": "place_02",
+      "type": "place",
+      "name": "fixture place 02",
+      "status": "CANON",
+      "reuse_priority": "P3_EXPERIMENTAL",
+      "key_lines": [
+        "KL03",
+        "KL05"
+      ],
+      "source_refs": [
+        "fixture_source_place_02.md"
+      ],
+      "asset_refs": [
+        "fixture_asset_place_02.png"
+      ],
+      "missing_fields": []
+    },
+    {
+      "id": "place_03",
+      "type": "place",
+      "name": "fixture place 03",
+      "status": "CANON",
+      "reuse_priority": "P0_CORE",
+      "key_lines": [
+        "KL04",
+        "KL06"
+      ],
+      "source_refs": [
+        "fixture_source_place_03.md"
+      ],
+      "asset_refs": [
+        "fixture_asset_place_03.png"
+      ],
+      "missing_fields": []
+    },
+    {
+      "id": "place_04",
+      "type": "place",
+      "name": "fixture place 04",
+      "status": "CANON",
+      "reuse_priority": "P1_RECURRING",
+      "key_lines": [
+        "KL05",
+        "KL01"
+      ],
+      "source_refs": [
+        "fixture_source_place_04.md"
+      ],
+      "asset_refs": [
+        "fixture_asset_place_04.png"
+      ],
+      "missing_fields": [
+        "fixture_note"
+      ]
+    },
+    {
+      "id": "prop_01",
+      "type": "prop",
+      "name": "fixture prop 01",
+      "status": "CANON",
+      "reuse_priority": "P3_EXPERIMENTAL",
+      "key_lines": [
+        "KL02",
+        "KL04"
+      ],
+      "source_refs": [
+        "fixture_source_prop_01.md"
+      ],
+      "asset_refs": [
+        "fixture_asset_prop_01.png"
+      ],
+      "missing_fields": []
+    },
+    {
+      "id": "prop_02",
+      "type": "prop",
+      "name": "fixture prop 02",
+      "status": "CANON",
+      "reuse_priority": "P0_CORE",
+      "key_lines": [
+        "KL03",
+        "KL05"
+      ],
+      "source_refs": [
+        "fixture_source_prop_02.md"
+      ],
+      "asset_refs": [
+        "fixture_asset_prop_02.png"
+      ],
+      "missing_fields": []
+    },
+    {
+      "id": "prop_03",
+      "type": "prop",
+      "name": "fixture prop 03",
+      "status": "CANON",
+      "reuse_priority": "P1_RECURRING",
+      "key_lines": [
+        "KL04",
+        "KL06"
+      ],
+      "source_refs": [
+        "fixture_source_prop_03.md"
+      ],
+      "asset_refs": [
+        "fixture_asset_prop_03.png"
+      ],
+      "missing_fields": []
+    },
+    {
+      "id": "prop_04",
+      "type": "prop",
+      "name": "fixture prop 04",
+      "status": "CANON",
+      "reuse_priority": "P2_SUPPORT",
+      "key_lines": [
+        "KL05",
+        "KL01"
+      ],
+      "source_refs": [
+        "fixture_source_prop_04.md"
+      ],
+      "asset_refs": [
+        "fixture_asset_prop_04.png"
+      ],
+      "missing_fields": [
+        "fixture_note"
+      ]
+    },
+    {
+      "id": "rule_01",
+      "type": "rule",
+      "name": "fixture rule 01",
+      "status": "CANON",
+      "reuse_priority": "P0_CORE",
+      "key_lines": [
+        "KL02",
+        "KL04"
+      ],
+      "source_refs": [
+        "fixture_source_rule_01.md"
+      ],
+      "asset_refs": [
+        "fixture_asset_rule_01.png"
+      ],
+      "missing_fields": []
+    },
+    {
+      "id": "rule_02",
+      "type": "rule",
+      "name": "fixture rule 02",
+      "status": "CANON",
+      "reuse_priority": "P1_RECURRING",
+      "key_lines": [
+        "KL03",
+        "KL05"
+      ],
+      "source_refs": [
+        "fixture_source_rule_02.md"
+      ],
+      "asset_refs": [
+        "fixture_asset_rule_02.png"
+      ],
+      "missing_fields": []
+    },
+    {
+      "id": "rule_03",
+      "type": "rule",
+      "name": "fixture rule 03",
+      "status": "CANON",
+      "reuse_priority": "P2_SUPPORT",
+      "key_lines": [
+        "KL04",
+        "KL06"
+      ],
+      "source_refs": [
+        "fixture_source_rule_03.md"
+      ],
+      "asset_refs": [
+        "fixture_asset_rule_03.png"
+      ],
+      "missing_fields": []
+    },
+    {
+      "id": "rule_04",
+      "type": "rule",
+      "name": "fixture rule 04",
+      "status": "CANON",
+      "reuse_priority": "P3_EXPERIMENTAL",
+      "key_lines": [
+        "KL05",
+        "KL01"
+      ],
+      "source_refs": [
+        "fixture_source_rule_04.md"
+      ],
+      "asset_refs": [
+        "fixture_asset_rule_04.png"
+      ],
+      "missing_fields": [
+        "fixture_note"
+      ]
+    },
+    {
+      "id": "scene_01",
+      "type": "scene",
+      "name": "fixture scene 01",
+      "status": "CANON",
+      "reuse_priority": "P1_RECURRING",
+      "key_lines": [
+        "KL02",
+        "KL04"
+      ],
+      "source_refs": [
+        "fixture_source_scene_01.md"
+      ],
+      "asset_refs": [
+        "fixture_asset_scene_01.png"
+      ],
+      "missing_fields": []
+    },
+    {
+      "id": "scene_02",
+      "type": "scene",
+      "name": "fixture scene 02",
+      "status": "CANON",
+      "reuse_priority": "P2_SUPPORT",
+      "key_lines": [
+        "KL03",
+        "KL05"
+      ],
+      "source_refs": [
+        "fixture_source_scene_02.md"
+      ],
+      "asset_refs": [
+        "fixture_asset_scene_02.png"
+      ],
+      "missing_fields": []
+    },
+    {
+      "id": "scene_03",
+      "type": "scene",
+      "name": "fixture scene 03",
+      "status": "CANON",
+      "reuse_priority": "P3_EXPERIMENTAL",
+      "key_lines": [
+        "KL04",
+        "KL06"
+      ],
+      "source_refs": [
+        "fixture_source_scene_03.md"
+      ],
+      "asset_refs": [
+        "fixture_asset_scene_03.png"
+      ],
+      "missing_fields": []
+    },
+    {
+      "id": "scene_04",
+      "type": "scene",
+      "name": "fixture scene 04",
+      "status": "CANON",
+      "reuse_priority": "P0_CORE",
+      "key_lines": [
+        "KL05",
+        "KL01"
+      ],
+      "source_refs": [
+        "fixture_source_scene_04.md"
+      ],
+      "asset_refs": [
+        "fixture_asset_scene_04.png"
+      ],
+      "missing_fields": [
+        "fixture_note"
+      ]
+    },
+    {
+      "id": "episode_01",
+      "type": "episode",
+      "name": "fixture episode 01",
+      "status": "CANON",
+      "reuse_priority": "P2_SUPPORT",
+      "key_lines": [
+        "KL02",
+        "KL04"
+      ],
+      "source_refs": [
+        "fixture_source_episode_01.md"
+      ],
+      "asset_refs": [
+        "fixture_asset_episode_01.png"
+      ],
+      "missing_fields": []
+    },
+    {
+      "id": "episode_02",
+      "type": "episode",
+      "name": "fixture episode 02",
+      "status": "CANON",
+      "reuse_priority": "P3_EXPERIMENTAL",
+      "key_lines": [
+        "KL03",
+        "KL05"
+      ],
+      "source_refs": [
+        "fixture_source_episode_02.md"
+      ],
+      "asset_refs": [
+        "fixture_asset_episode_02.png"
+      ],
+      "missing_fields": []
+    },
+    {
+      "id": "episode_03",
+      "type": "episode",
+      "name": "fixture episode 03",
+      "status": "CANON",
+      "reuse_priority": "P0_CORE",
+      "key_lines": [
+        "KL04",
+        "KL06"
+      ],
+      "source_refs": [
+        "fixture_source_episode_03.md"
+      ],
+      "asset_refs": [
+        "fixture_asset_episode_03.png"
+      ],
+      "missing_fields": []
+    },
+    {
+      "id": "episode_04",
+      "type": "episode",
+      "name": "fixture episode 04",
+      "status": "CANON",
+      "reuse_priority": "P1_RECURRING",
+      "key_lines": [
+        "KL05",
+        "KL01"
+      ],
+      "source_refs": [
+        "fixture_source_episode_04.md"
+      ],
+      "asset_refs": [
+        "fixture_asset_episode_04.png"
+      ],
+      "missing_fields": [
+        "fixture_note"
+      ]
+    }
+  ],
+  "edges": [
+    {
+      "from": "character_01",
+      "type": "happens_at",
+      "to": "episode_02",
+      "source_ref": "fixture_source_character_01.md"
+    },
+    {
+      "from": "character_02",
+      "type": "bound_to",
+      "to": "episode_03",
+      "source_ref": "fixture_source_character_02.md"
+    },
+    {
+      "from": "character_03",
+      "type": "governed_by",
+      "to": "episode_04",
+      "source_ref": "fixture_source_character_03.md"
+    },
+    {
+      "from": "character_04",
+      "type": "appears_in",
+      "to": "episode_01",
+      "source_ref": "fixture_source_character_04.md"
+    },
+    {
+      "from": "place_01",
+      "type": "happens_at",
+      "to": "episode_02",
+      "source_ref": "fixture_source_place_01.md"
+    },
+    {
+      "from": "place_02",
+      "type": "bound_to",
+      "to": "episode_03",
+      "source_ref": "fixture_source_place_02.md"
+    },
+    {
+      "from": "place_03",
+      "type": "governed_by",
+      "to": "episode_04",
+      "source_ref": "fixture_source_place_03.md"
+    },
+    {
+      "from": "place_04",
+      "type": "appears_in",
+      "to": "episode_01",
+      "source_ref": "fixture_source_place_04.md"
+    },
+    {
+      "from": "prop_01",
+      "type": "happens_at",
+      "to": "episode_02",
+      "source_ref": "fixture_source_prop_01.md"
+    },
+    {
+      "from": "prop_02",
+      "type": "bound_to",
+      "to": "episode_03",
+      "source_ref": "fixture_source_prop_02.md"
+    },
+    {
+      "from": "prop_03",
+      "type": "governed_by",
+      "to": "episode_04",
+      "source_ref": "fixture_source_prop_03.md"
+    },
+    {
+      "from": "prop_04",
+      "type": "appears_in",
+      "to": "episode_01",
+      "source_ref": "fixture_source_prop_04.md"
+    },
+    {
+      "from": "rule_01",
+      "type": "happens_at",
+      "to": "episode_02",
+      "source_ref": "fixture_source_rule_01.md"
+    },
+    {
+      "from": "rule_02",
+      "type": "bound_to",
+      "to": "episode_03",
+      "source_ref": "fixture_source_rule_02.md"
+    },
+    {
+      "from": "rule_03",
+      "type": "governed_by",
+      "to": "episode_04",
+      "source_ref": "fixture_source_rule_03.md"
+    },
+    {
+      "from": "rule_04",
+      "type": "appears_in",
+      "to": "episode_01",
+      "source_ref": "fixture_source_rule_04.md"
+    },
+    {
+      "from": "scene_01",
+      "type": "happens_at",
+      "to": "episode_02",
+      "source_ref": "fixture_source_scene_01.md"
+    },
+    {
+      "from": "scene_02",
+      "type": "bound_to",
+      "to": "episode_03",
+      "source_ref": "fixture_source_scene_02.md"
+    },
+    {
+      "from": "scene_03",
+      "type": "governed_by",
+      "to": "episode_04",
+      "source_ref": "fixture_source_scene_03.md"
+    },
+    {
+      "from": "scene_04",
+      "type": "appears_in",
+      "to": "episode_01",
+      "source_ref": "fixture_source_scene_04.md"
+    },
+    {
+      "from": "episode_01",
+      "type": "happens_at",
+      "to": "episode_02",
+      "source_ref": "fixture_source_episode_01.md"
+    },
+    {
+      "from": "episode_02",
+      "type": "bound_to",
+      "to": "episode_03",
+      "source_ref": "fixture_source_episode_02.md"
+    },
+    {
+      "from": "episode_03",
+      "type": "governed_by",
+      "to": "episode_01",
+      "source_ref": "fixture_source_episode_03.md"
+    },
+    {
+      "from": "episode_04",
+      "type": "appears_in",
+      "to": "episode_02",
+      "source_ref": "fixture_source_episode_04.md"
+    }
+  ]
+}

@@ -102,3 +102,12 @@ creator_encyclopedia/build_failures/
 # One-off scratch notes from interactive debugging.
 research/_dq.txt
 debug-wenji-voice-load.md
+
+# ---------------------------------------------------------------------------
+# 剧本与创作语料不入主仓。主仓只放流程、技能、代码和规则；内容类产物一律
+# 本地保留，需要备份就放私有仓 ace-video-corpus（见 research/CONTENT_LOCATION.md）。
+# 本条只对尚未被跟踪的文件生效；已跟踪的创作内容已用 git rm --cached 取消，
+# 它们仍留在历史里，只是不再增长。
+#
+# 只排内容目录，不排规则文档：ALIVE_SCRIPT_GATE.v1.md 和本目录 README.md 仍跟踪。
+research/original_desk/*/
