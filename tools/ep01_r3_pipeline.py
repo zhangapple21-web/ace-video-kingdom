@@ -14,6 +14,7 @@ import time
 from datetime import datetime, timezone, timedelta
 from pathlib import Path
 from typing import Any
+from tools.atomic_io import atomic_write_json, atomic_write_text
 
 sys.stdout.reconfigure(encoding="utf-8")  # Bug #1 fix: prevent UnicodeEncodeError on GBK console
 
@@ -464,7 +465,7 @@ def build() -> int:
         except Exception as exc:
             status = "FAIL"
             result = {"status": "FAIL", "errors": [str(exc)]}
-        path.write_text(json.dumps(shot, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+        atomic_write_json(path, shot)
         row = {"shot_id": shot["shot_id"], "file": str(path), "seconds": shot["render"]["seconds"], "gate": status, "images": shot["render"]["reference_image_urls"], "audio": shot["render"].get("reference_audio_urls", []), "audio_sha256": (shot.get("audio_contract") or {}).get("audio_sha256", "")}
         if status != "PASS":
             row["detail"] = result
@@ -472,7 +473,7 @@ def build() -> int:
         rows.append(row)
         print(status, shot["shot_id"], shot["render"]["seconds"], flush=True)
     manifest = {"schema": "video_kingdom.ep01_r3_contract_manifest.v1", "run_id": RUN_ID, "built_at": datetime.now(timezone(timedelta(hours=8))).isoformat(timespec="seconds"), "count": len(rows), "failures": failures, "rows": rows, "old_runs_not_reusable": ["R2", "V9"]}
-    MANIFEST.write_text(json.dumps(manifest, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    atomic_write_json(MANIFEST, manifest)
     print(json.dumps({"status": "PASS" if not failures else "BLOCKED", "count": len(rows), "failures": len(failures), "manifest": str(MANIFEST)}, ensure_ascii=False))
     return 0 if not failures else 1
 
@@ -614,7 +615,7 @@ def remix_existing(audio_override: Path | None = None) -> int:
         "override_shot_count": len(override_map) if isinstance(override_map, dict) else 0,
         "output_dir": str(OUT_DIR),
     }
-    (OUT_DIR / "EP01_R3_remix_result.json").write_text(json.dumps(result, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    atomic_write_json(OUT_DIR / "EP01_R3_remix_result.json", result)
     print(json.dumps(result, ensure_ascii=False))
     return 0 if not failures else 1
 
@@ -627,7 +628,7 @@ def submit_one(row: dict[str, Any], *, force: bool = False) -> int:
     prompt_path = OUT_DIR / f"{shot_id}.prompt.txt"
     provider = OUT_DIR / f"{shot_id}.provider.mp4"
     final = OUT_DIR / f"{shot_id}.mp4"
-    prompt_path.write_text(shot["shot_prompt"]["compiled_prompt"], encoding="utf-8")
+    atomic_write_text(prompt_path, shot["shot_prompt"]["compiled_prompt"])
     if final.exists() and final.stat().st_size > 10000 and not force:
         print(f"SKIP {shot_id}", flush=True)
         return 0
@@ -693,7 +694,7 @@ def submit(args: argparse.Namespace) -> int:
                     failures.pop()
                     break
     result = {"schema": "video_kingdom.ep01_r3_queue_result.v1", "status": "COMPLETED" if not failures else "COMPLETED_WITH_FAILURES", "count": len(rows), "completed": len(rows) - len(failures), "failures": failures, "run_id": RUN_ID, "output_dir": str(OUT_DIR)}
-    QUEUE.write_text(json.dumps(result, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    atomic_write_json(QUEUE, result)
     print(json.dumps(result, ensure_ascii=False))
     return 0 if not failures else 1
 
@@ -753,7 +754,8 @@ def assemble() -> int:
         subprocess.run(["ffmpeg", "-y", "-i", str(source), "-map", "0:v:0", "-map", "0:a:0", "-c:v", "libx264", "-preset", "fast", "-crf", "18", "-pix_fmt", "yuv420p", "-c:a", "aac", "-ar", "48000", "-ac", "2", "-movflags", "+faststart", str(target)], check=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
         normalized.append((shot_id, target, probe_duration(target)))
     concat = OUT_DIR / "EP01_R3_concat.txt"
-    concat.write_text("\n".join("file '" + path.resolve().as_posix().replace("'", "'\\''") + "'" for _, path, _ in normalized) + "\n", encoding="utf-8")
+    concat_content = "\n".join("file '" + path.resolve().as_posix().replace("'", "'\\''") + "'" for _, path, _ in normalized) + "\n"
+    atomic_write_text(concat, concat_content)
     base = OUT_DIR / "EP01_R3_BASE.mp4"
     subprocess.run(["ffmpeg", "-y", "-f", "concat", "-safe", "0", "-i", str(concat), "-c", "copy", "-movflags", "+faststart", str(base)], check=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
     events = []
@@ -776,7 +778,7 @@ def assemble() -> int:
         def ts(value: float) -> str:
             total = int(round(max(0, value) * 1000)); h, rem = divmod(total, 3600000); m, rem = divmod(rem, 60000); s, ms = divmod(rem, 1000); return f"{h:02d}:{m:02d}:{s:02d},{ms:03d}"
         rows += [str(number), f"{ts(start)} --> {ts(end)}", subtitle_text(text), ""]
-    srt.write_text("\n".join(rows), encoding="utf-8")
+    atomic_write_text(srt, "\n".join(rows))
     final = OUT_DIR / "EP01_R3_FINAL.mp4"
     clean = OUT_DIR / "EP01_R3_FINAL_NO_SUBTITLES.mp4"
     subprocess.run([
@@ -819,7 +821,7 @@ def assemble() -> int:
     # burn_subtitles validates source_sha256 against the exact base cut and then
     # overwrites --delivery-review with its own receipt, so the approval record
     # is written first and re-asserted afterwards with the rendered hashes.
-    review.write_text(json.dumps(delivery, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    atomic_write_json(review, delivery)
     burn = subprocess.run([
         sys.executable, str(CONTROL / "tools" / "burn_subtitles.py"),
         "--input", str(base), "--srt", str(srt), "--output", str(final),
@@ -832,7 +834,7 @@ def assemble() -> int:
     delivery["final_media_sha256"] = file_sha(final)
     delivery["final_no_subtitles_media_sha256"] = file_sha(clean)
     delivery["final_media_duration_seconds"] = round(probe_duration(final), 3)
-    review.write_text(json.dumps(delivery, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    atomic_write_json(review, delivery)
     print(json.dumps({"base": str(base), "final": str(final), "clean": str(clean), "srt": str(srt)}, ensure_ascii=False))
     return 0
 
@@ -889,7 +891,7 @@ def qc() -> int:
     if checks["failures"]:
         checks["status"] = "BLOCKED"
     report = OUT_DIR / "EP01_R3_qc_report.json"
-    report.write_text(json.dumps(checks, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    atomic_write_json(report, checks)
     print(json.dumps({"status": checks["status"], "failures": checks["failures"], "report": str(report)}, ensure_ascii=False))
     return 0 if checks["status"] == "PASS" else 1
 

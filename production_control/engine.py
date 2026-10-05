@@ -10,6 +10,7 @@ import uuid
 from contextlib import contextmanager
 from pathlib import Path
 from typing import Any, Iterator
+from tools.atomic_io import atomic_write_json
 
 try:
     from tools.validate_continuity_bridge import validate_bridge
@@ -352,9 +353,7 @@ class ProductionControl:
         return payload
 
     def _write(self, payload: dict[str, Any]) -> None:
-        temp = self.run_path.with_name(self.run_path.name + ".tmp")
-        temp.write_text(json.dumps(payload, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
-        os.replace(temp, self.run_path)
+        atomic_write_json(self.run_path, payload)
 
     def _root(self, payload: dict[str, Any]) -> Path:
         return Path(str(payload.get("root") or self.root)).resolve()

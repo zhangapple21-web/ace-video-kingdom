@@ -18,6 +18,8 @@ from datetime import datetime
 from pathlib import Path
 from typing import Any
 
+from tools.atomic_io import atomic_write_json
+
 sys.stdout.reconfigure(encoding="utf-8")  # Bug #1 fix: prevent UnicodeEncodeError on GBK console
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -139,8 +141,7 @@ def _read_json(path: Path) -> dict[str, Any]:
 
 
 def _write_json(path: Path, obj: Any) -> None:
-    path.parent.mkdir(parents=True, exist_ok=True)
-    path.write_text(json.dumps(obj, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    atomic_write_json(path, obj)
 
 
 def numeric_chapters(book: dict[str, Any]) -> list[dict[str, Any]]:

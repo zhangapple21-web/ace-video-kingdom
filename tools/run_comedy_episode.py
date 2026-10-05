@@ -13,6 +13,7 @@ import subprocess
 import sys
 import tempfile
 import time
+from tools.atomic_io import atomic_write_json
 from pathlib import Path
 
 try:
@@ -622,7 +623,7 @@ def main() -> int:
             ],
         }
         acceptance_path = args.output.with_name("acceptance_receipt.json")
-        acceptance_path.write_text(json.dumps(acceptance, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+        atomic_write_json(acceptance_path, acceptance)
         print(json.dumps({"status": "ACCEPTANCE_RECEIPT", "acceptance": acceptance["status"], "receipt": str(acceptance_path)}, ensure_ascii=False), flush=True)
         if not delivery["delivery_approved"]:
             return 1
