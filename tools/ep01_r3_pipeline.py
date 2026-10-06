@@ -256,7 +256,8 @@ def update_prompt(shot: dict[str, Any], clip: dict[str, Any], scene_text: str, *
     shot["shot_prompt"]["count_constraints"] = ([{"entity": "人数", "count": 2}, {"entity": "手机", "count": 0}] if clip.get("scene") == "imagine_ev" else [{"entity": "人数", "count": 1}, {"entity": "手机", "count": 1 if phone_state in {"PHONE_EAR", "PHONE_DESK"} else 0}])
     shot["prompt"] = compiled
     shot["script_prompt_review"] = audit_script_prompt_review(
-        compiled, shot_id, phone_state, shot, reason,
+        compiled, shot["shot_id"], phone_state, shot,
+        shot["shot_rhythm"]["camera_motion_reason"],
     )
 
 
