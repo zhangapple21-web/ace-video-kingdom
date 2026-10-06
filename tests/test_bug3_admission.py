@@ -134,23 +134,40 @@ def test_reviewed_at_must_be_iso8601():
     assert any("reviewed_at" in e for e in result["errors"])
 
 
+def _computed_review():
+    """Audit packet computed by the pipeline's rule-based audit."""
+    import tools.ep01_r3_pipeline as pipeline
+    compiled = "主体：测试场景。避免风景照、静止背景。"
+    shot = {
+        "shot_contract": {
+            "single_action": True,
+            "max_primary_actions": 1,
+            "cut_policy": "match_locked_script",
+        },
+        "dialogue_order": "单句对白",
+    }
+    return pipeline.audit_script_prompt_review(
+        compiled, "S01A", "NO_PHONE", shot, "测试运镜原因",
+    )
+
+
 def test_ep01_r3_pipeline_sets_all_required_fields():
-    """Verify ep01_r3_pipeline.py sets all required fields in source code."""
-    source = (ROOT / "tools" / "ep01_r3_pipeline.py").read_text(encoding="utf-8")
-    assert '"schema": "video_kingdom.script_prompt_review.v1"' in source
-    assert '"role": "编剧"' in source
-    assert '"role": "导演"' in source
-    assert '"distorts_script": False' in source
-    assert '"hard_rules_complete": True' in source
-    assert '"high_risk_extras": False' in source
-    assert '"reviewed_at"' in source
-    assert '"dialogue_order"' in source
+    """Verify the computed audit packet sets all required fields."""
+    review = _computed_review()
+    assert review["schema"] == "video_kingdom.script_prompt_review.v1"
+    assert review["script_review"]["role"] == "编剧"
+    assert review["prompt_review"]["role"] == "导演"
+    assert review["prompt_review"]["distorts_script"] is False
+    assert review["prompt_review"]["hard_rules_complete"] is True
+    assert review["prompt_review"]["high_risk_extras"] is False
+    assert "reviewed_at" in review["script_review"]
+    assert "reviewed_at" in review["prompt_review"]
+    assert review["script_review"]["dialogue_order"] == "单句对白"
 
 
 def test_garbled_verdict_fixed():
-    """The verdict value in ep01_r3_pipeline.py must match PASS_SCRIPT exactly."""
+    """The computed script verdict must match PASS_SCRIPT exactly."""
     from tools.validate_script_prompt_review import PASS_SCRIPT
     assert PASS_SCRIPT == "通过"
-    source = (ROOT / "tools" / "ep01_r3_pipeline.py").read_text(encoding="utf-8")
-    # Should NOT have garbled verdict
-    assert '"verdict": "通过"' in source
+    review = _computed_review()
+    assert review["script_review"]["verdict"] == PASS_SCRIPT

@@ -411,31 +411,6 @@ def common_patch(shot: dict[str, Any], *, shot_id: str, scene: str, scene_urls: 
     shot["shot_rhythm"]["seconds"] = int(math.ceil(seconds))
     shot["shot_rhythm"]["underfill_policy"] = "trim_or_shorten_never_pad"
     shot["shot_rhythm"]["hold_reason"] = "动作落地后的眼神、手部或听者反应"
-    shot["script_prompt_review"] = {
-        "schema": "video_kingdom.script_prompt_review.v1",
-        "shot_id": shot_id,
-        "run_id": run_id,
-        "script_hash": sha("EP01_SCRIPT_LOCKED_R3_20260921"),
-        "prompt_hash": sha(compiled),
-        "script_review": {
-            "role": "编剧",
-            "verdict": "通过",
-            "phone_state": phone_state,
-            "dialogue_order": shot.get("dialogue_order", "单句对白"),
-            "unfilmable_risks": "屏幕内容不进入画面；手机数量、持握状态和人物数量已锁定；无界面视觉元素。",
-            "monologue_handling": "独白闭嘴后期叠加" if phone_state == "PHONE_DESK" and "VO" in shot_id else "本镜只保留本句对白",
-            "reviewed_at": datetime.now(timezone(timedelta(hours=8))).isoformat(timespec="seconds"),
-        },
-        "prompt_review": {
-            "role": "导演",
-            "conclusion": "合格，可以生成",
-            "reason": "空间、身份、道具数量、表演节拍、音频主时钟和镜头运动均已锁定。",
-            "distorts_script": False,
-            "hard_rules_complete": True,
-            "high_risk_extras": False,
-            "reviewed_at": datetime.now(timezone(timedelta(hours=8))).isoformat(timespec="seconds"),
-        },
-    }
     shot["five_gates"] = {
         "role_room_execute": "THIS_ROUND_R3",
         "continuity_bridge": "THIS_ROUND_R3",
