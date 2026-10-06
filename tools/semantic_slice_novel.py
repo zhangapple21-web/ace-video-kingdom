@@ -33,6 +33,7 @@ sys.stdout.reconfigure(encoding="utf-8")  # Bug #1 fix: prevent UnicodeEncodeErr
 
 if str(Path(__file__).resolve().parents[1]) not in sys.path:
     sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
+from tools.atomic_io import atomic_write_text
 
 try:
     from runtime.provider_admission import admit_provider_request, assert_admission, build_canonical_generation_request
@@ -379,7 +380,7 @@ def slice_novel(
         "created_at": datetime.now(timezone.utc).isoformat(),
     }
     output.parent.mkdir(parents=True, exist_ok=True)
-    output.write_text(json.dumps(package, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    atomic_write_text(output, json.dumps(package, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     return package
 
 

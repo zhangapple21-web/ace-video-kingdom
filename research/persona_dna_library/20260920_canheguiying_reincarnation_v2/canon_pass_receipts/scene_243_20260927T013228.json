@@ -1,0 +1,68 @@
+{
+  "schema": "video_kingdom.canon_scene_pass.v1",
+  "at": "2026-09-27T01:32:07+08:00",
+  "lib": "D:\\视频创作\\ace-video-kingdom\\research\\persona_dna_library\\20260920_canheguiying_reincarnation_v2",
+  "next": 243,
+  "quota_used": 0,
+  "max_per_day": 2,
+  "scene": 243,
+  "heading": "第243场｜日｜外｜北门官渡",
+  "wave": "wave_39",
+  "verdict": "PASS",
+  "fails": [],
+  "reasons": [],
+  "alive": {
+    "q1_person_not_manual": true,
+    "q2_not_ai": true,
+    "q3_will_not_settle": true
+  },
+  "conflict": {
+    "status": "PASS",
+    "errors": [],
+    "notes": [],
+    "scene_class": "B"
+  },
+  "forbidden_hits": [],
+  "quote_count": 12,
+  "packet": {
+    "schema": "video_kingdom.conflict_driven_scene.v1",
+    "scene_class": "B",
+    "goals": {
+      "a": "ask_or_press",
+      "b": "hold_boundary"
+    },
+    "change_at_end": {
+      "kind": "information",
+      "what": "本场变化：世界：清江浦来信与韩九思画押在渡口被确认，县衙要纸缩小成韩九思要先看页。关系：陆卷改口不进户房，走在前面守手，仍拒替人画押。物件：影摹页随合扣箱子离船登岸，渡口未启、未交。未决：页进县衙后丁怀山与韩九思谁先碰到箱扣。"
+    },
+    "lengthener": false,
+    "speech_intent_readable": true,
+    "completes_in_picture": true
+  },
+  "failure_mode_signals": {
+    "dialogue_density": 0.5,
+    "sensory_rate": 0.9166666666666666,
+    "near_dup": 0,
+    "alt_pingpong": 4,
+    "mono_speaker_share": 0.4166666666666667,
+    "empty_paragraphs": 0,
+    "dialogue_only": 0,
+    "short_dialogue_runs": 0,
+    "lines": 24,
+    "dialogue_turns": 12,
+    "narration_turns": 12
+  },
+  "failure_mode_fails": [],
+  "publish": {
+    "source_chapter": "c243",
+    "completed_scenes": 243,
+    "published_units": 244,
+    "check_only": false
+  },
+  "deploy": {
+    "status": "OK",
+    "code": 0,
+    "stdout": "\n ⛅️ wrangler 4.132.0\n────────────────────\nUploading... (273/276)\nUploading... (274/276)\nUploading... (275/276)\nUploading... (276/276)\n✨ Success! Uploaded 3 files (273 already uploaded) (1.64 sec)\n\n✨ Uploading _headers\n🌎 Deploying...\n✨ Deployment complete! Take a peek over at https://52dd4456.tinghe-archive.pages.dev\n",
+    "stderr": ""
+  }
+}

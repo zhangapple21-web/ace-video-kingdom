@@ -1,0 +1,504 @@
+{
+  "schema": "video_kingdom.creator_event_branch_pool.v1",
+  "layer": "CREATOR_MIDDLE",
+  "production_integration": false,
+  "not_production_state_contract": true,
+  "overwrite_true_source": false,
+  "agnes": "NOT_PERFORMED",
+  "beat": "NOT_PERFORMED",
+  "shot": "NOT_PERFORMED",
+  "full_script": "NOT_PERFORMED",
+  "true_source": "research/persona_dna_library/20260920_canheguiying/evolve_candidate.v1.md",
+  "human_mainline": "NOT_DECIDED",
+  "events": [
+    {
+      "event_id": "E01",
+      "scene_id": "S01",
+      "who_did_what": "周培盖住园契、吩咐备酒再买一坛；对福伯搁置园名；对吴妈所报井边女人鞋印不接话，扣窗并禁止往后园。福伯搬酒，吴妈收拾后离开。林墨未出场。",
+      "why_from_scene_only": "当场对白：中介催园名不定则文书不好递；周培“先搁着。园名空着，人又不会没处住。”“酒放阴凉处，不要甜的。再买一坛。”“今晚都早些睡，别往后园去。”正文未另写内心独白。",
+      "world_change": "契仍空但被翻面压住；酒被要求备齐；后园被口头禁入；未请人。",
+      "relationship_change": "主仆：福伯催、周培搁；吴妈报异、周培不接。与林墨无同场变化。",
+      "new_info": "井边有湿的女人鞋印（吴妈转述，未验证）。周培要酒不要甜的。",
+      "left_open": "园名；文书；脚印来源；备酒之后她会不会来。",
+      "possible_next_from_this_event": "他等待备酒是否算数。此句来自【事件走向】，不是已发生。"
+    },
+    {
+      "event_id": "E02",
+      "scene_id": "S02",
+      "who_did_what": "林墨提白瓷酒壶来访，把酒定为第一件债；拒绝白日来，立夜来晓走、不欠白日不欠银钱；点评荷花图后于晨雾中离开。周培不逼白日之请，送到门边说我备酒。",
+      "why_from_scene_only": "林墨：“第一件债。”“五个莲蓬，五件。酒抵一件。”“不能。夜里来，天亮走。”“债没清，我会来。”“备酒是你的事。”周培：“若我请你白日来，这债是不是能还快些？”",
+      "world_change": "五件债成立；第一件（酒）已抵；来访规则绑定夜晚。",
+      "relationship_change": "债主/欠债关系成立；“来”被她拒绝说成情分。",
+      "new_info": "五莲蓬=五件；酒=第一件；她点评：墨色怯，怕别人说学倪瓒。",
+      "left_open": "其余四件；下次何时带第二件。",
+      "possible_next_from_this_event": "【事件走向】称下一场她带他认园中旧物。待S03正文确认。"
+    },
+    {
+      "event_id": "E03",
+      "scene_id": "S03",
+      "who_did_what": "林墨带周培走荷塘旧径至引水口拨枯叶，绕开藏书楼；把认园/护活水称为第二件；声明承认水不承认契；说明夜不必等。周培跟半步，指出她绕开藏书楼，问是否承认他住这里。",
+      "why_from_scene_only": "林墨：“那不是怕。活人挂的匾，死人不能碰。”“第二件：教你认园子。……别把活水堵死。”“我承认水，不承认契。”“明夜不必等。债不按你的钟点还。”",
+      "world_change": "周培获得活水不可堵死的园中知识；藏书楼仍未进；契仍不被承认。",
+      "relationship_change": "知识交付与名分划开同时发生。",
+      "new_info": "活人匾死人不能碰；第二件被她称为认园。",
+      "left_open": "匾未见面、未揭；下一次来访时间。",
+      "possible_next_from_this_event": "【事件走向】称周培开始查旧纸。待S04正文确认。"
+    },
+    {
+      "event_id": "E04",
+      "scene_id": "S04",
+      "who_did_what": "周培白天翻旧纸，看见诗笺“静逸”不念出并压在书下；拒绝给园名、先不签；禁止请人与声张。吴妈报脚印再现与女子笑，并把后园小门插上。福伯退下后去前院。",
+      "why_from_scene_only": "周培：“中介若再催，就说我在看旧图，没空。”“还没想好。先不签。”“不要请人，不要声张。”吴妈：“昨夜还听见女子笑。要不要请个……”",
+      "world_change": "仍不签；后园小门插上；私下接触到“静逸”字样。",
+      "relationship_change": "对仆人维持封锁；对林墨仍无同场，但开始接触其字。",
+      "new_info": "旧纸诗笺有“静逸”。吴妈称脚印又有、昨夜女子笑。存在一封内容未知的信。",
+      "left_open": "信；诗笺全文；脚印/笑来源；园名。",
+      "possible_next_from_this_event": "【事件走向】称下一场林墨撞见这些旧纸。待S05确认。"
+    },
+    {
+      "event_id": "E05",
+      "scene_id": "S05",
+      "who_did_what": "林墨在书斋撞见林氏旧谱，责周培查她。周培不藏纸、停查、不写契，承认怕她不来，把抽屉钥匙放到她面前。林墨不拿钥匙，称第二件算过了、明夜不一定来，转身入夜。",
+      "why_from_scene_only": "林墨：“你查我。”“你还要写进契里，证明这园姓林？”“停查不是认。你只是怕我不来。”“第二件算过了。明夜我不一定来。”“死人烧不了活人的纸。”周培：“不写契。我停查。”“是。”",
+      "world_change": "旧谱进抽屉未烧；停查成为当面承诺；钥匙未被拿走。",
+      "relationship_change": "信任受挫：查与被查。他承认怕她不来。她不断绝也不许诺。",
+      "new_info": "她确认字为静逸。停查不等于认。死人烧不了活人的纸。",
+      "left_open": "明夜来不来；名分/认；旧谱其余内容。",
+      "possible_next_from_this_event": "【事件走向】称下一场雨夜守石。待S06确认。"
+    },
+    {
+      "event_id": "E06",
+      "scene_id": "S06",
+      "who_did_what": "周培雨夜在太湖石备酒，允许她只喝不进屋。林墨现身不进屋，追问查的是她还是园子；在他承认先查园后查她之后取酒离开，不答明日还来吗。",
+      "why_from_scene_only": "周培：“你若来，只喝酒，不必进屋。”“先查园子，后来查你。”“明日还来吗？”林墨：“债没清，我会来。今夜不进屋。”“倒是实话。”没有答明日。",
+      "world_change": "石上酒被取走，留空壶与淡青水痕；她未进屋。",
+      "relationship_change": "距离维持；他给出“先园后她”的实话；明日来访未获回答。",
+      "new_info": "肩上没有雨痕。杯沿淡青水痕。她称此时债没清。",
+      "left_open": "明日来不来；债尚未清。",
+      "possible_next_from_this_event": "【事件走向】称她还要问一个与园名无关的问题。待S07确认。"
+    },
+    {
+      "event_id": "E07",
+      "scene_id": "S07",
+      "who_did_what": "林墨雨后从门进入听荷轩，放下旧莲蓬壳称第三件；问买园原因与园名用途，并问“我来，算别人吗”。周培答图清净、为了不让别人来、你算债主；翻画不给看背面。林墨饮尽，说债主也会走，并允许残荷留下但禁止题园名。",
+      "why_from_scene_only": "林墨：“第三件。”“你为什么买这里？”“清净要园名做什么？”“我来，算别人吗？”“债主也会走。”“这张可以留。别题园名。”周培：“图清净。”“为了不让别人来。”“你算债主。”",
+      "world_change": "第三件被她定为莲壳；残荷画获得“可留、不可题园名”的当场限制。",
+      "relationship_change": "她把自己是不是“别人”摆上台面；他用债主挡开。",
+      "new_info": "买园当场理由：图清净。园名当场理由：不让别人来。",
+      "left_open": "背面草稿；她是否算别人（未改口）；本场未写她离开。",
+      "possible_next_from_this_event": "【事件走向】称下一场到藏书楼旧匾下。待S08确认。"
+    },
+    {
+      "event_id": "E08",
+      "scene_id": "S08",
+      "who_did_what": "周培在藏书楼前要揭蒙布旧匾，林墨阻止并说明她不能自己揭。她把揭匾绑定认一个名字。周培手停：认你，园名未定。她说认我不够、名分不是人情，不答怎么才够，走入暗处。布仍在。",
+      "why_from_scene_only": "林墨：“别揭。”“我想。可我不能自己揭。活人挂的，活人才能动。”“揭了，你就得认一个名字。你认吗？”“认我不够。名分不是人情。”周培：“我认你。园名未定。”“那你说，怎么才够？”",
+      "world_change": "旧匾仍蒙，未揭。",
+      "relationship_change": "认人与认园被她拆开；名分僵持。",
+      "new_info": "揭匾在她处等于认一个名字。名分不是人情。",
+      "left_open": "匾字；怎么才够；园名。",
+      "possible_next_from_this_event": "【事件走向】称下一场白天文书压力回来。待S09确认。"
+    },
+    {
+      "event_id": "E09",
+      "scene_id": "S09",
+      "who_did_what": "白天福伯转述中介税契压力，吴妈追问荷园还是周园。周培维持空名、残荷不落款、旧事不入契。吴妈发现少一坛酒没问；后园门开了又插上。",
+      "why_from_scene_only": "福伯转述文书递不上去、税契也麻烦，并问旧事要不要写契。周培：“空着。”“先住人，后住名。”“不写。旧事不是给契纸看的。”",
+      "world_change": "契仍空；对外名称未定；酒坛少一坛（原因未写）；后园门最终插上。",
+      "relationship_change": "周培对仆人承担空名，不把林家旧事交给契纸。与林墨无同场。",
+      "new_info": "中介警告税契麻烦。酒坛少了一坛。",
+      "left_open": "税契是否发生；少酒去向；园名。",
+      "possible_next_from_this_event": "【事件走向】称下一场夜里债要清。待S10确认。"
+    },
+    {
+      "event_id": "E10",
+      "scene_id": "S10",
+      "who_did_what": "林墨在残荷月下把五枚莲蓬壳摆正，宣布五件债今夜清了并当场枚举。周培问明日，她答明日无债；他声明备酒不是债，她把备酒与来访分开。他不追。她入荷雾。天亮酒壶未开，五壳沾露。",
+      "why_from_scene_only": "林墨：“五件债，今夜清了。”“一壶酒，一段旧径，一枚莲壳，一场雨，一句实话。”“你说你怕我不来。”“明日无债。”“备酒是你的事，来不来是我的事。”“空着好。空着，谁都还没赢。”周培：“我备酒，不是债。”没有追。",
+      "world_change": "债由头结束。园名仍空。酒留石上未开。五壳留在石上被晨露打湿。林墨不在场。",
+      "relationship_change": "不再以债约束来访。名分仍空，谁都还没赢。",
+      "new_info": "五件的当场命名与实话所指。明日无债。",
+      "left_open": "她来不来；园名；名分；匾；契。",
+      "possible_next_from_this_event": "【事件走向】称等她按自己的规矩决定来不来。不是已发生。"
+    }
+  ],
+  "branches": [
+    {
+      "branch_id": "B01",
+      "scene_id": "S01",
+      "fork": "园契/园名是否现在定下",
+      "options": [
+        { "option_id": "B01A", "label": "先搁着，园名空着", "evidence": "先搁着。园名空着，人又不会没处住。", "sandbox_adopted": true },
+        { "option_id": "B01B", "label": "现在定园名以便递文书", "evidence": "中介那边催得紧，说园名不定，文书不好递。", "sandbox_adopted": false }
+      ],
+      "evolve_choice": "B01A",
+      "human_decision": "PENDING"
+    },
+    {
+      "branch_id": "B02",
+      "scene_id": "S01",
+      "fork": "是否备酒",
+      "options": [
+        { "option_id": "B02A", "label": "备酒：阴凉、不要甜的、再买一坛", "evidence": "酒放阴凉处，不要甜的。再买一坛。", "sandbox_adopted": true },
+        { "option_id": "B02B", "label": "不备酒", "evidence": "当场未走此路；无对白主张不备。", "sandbox_adopted": false, "note": "对立即“备酒”这一已发生选择，原文未另写反对句。" }
+      ],
+      "evolve_choice": "B02A",
+      "human_decision": "PENDING"
+    },
+    {
+      "branch_id": "B03",
+      "scene_id": "S01",
+      "fork": "对井边脚印是否请人/追查",
+      "options": [
+        { "option_id": "B03A", "label": "不接话、不请人，扣窗，禁止往后园", "evidence": "笑了一下，不接话……今晚都早些睡，别往后园去。", "sandbox_adopted": true },
+        { "option_id": "B03B", "label": "请人驱邪或追查脚印", "evidence": "本场吴妈只报脚印，未直接说请人；请人驱邪出现在【事件走向】与S04吴妈“要不要请个”。", "sandbox_adopted": false }
+      ],
+      "evolve_choice": "B03A",
+      "human_decision": "PENDING"
+    },
+    {
+      "branch_id": "B04",
+      "scene_id": "S02",
+      "fork": "是否白日来以加快还债",
+      "options": [
+        { "option_id": "B04A", "label": "夜里来，天亮走；不欠白日，不欠银钱", "evidence": "不能。夜里来，天亮走。不欠白日，不欠银钱。", "sandbox_adopted": true },
+        { "option_id": "B04B", "label": "请她白日来，债还快些", "evidence": "若我请你白日来，这债是不是能还快些？", "sandbox_adopted": false }
+      ],
+      "evolve_choice": "B04A",
+      "human_decision": "PENDING"
+    },
+    {
+      "branch_id": "B05",
+      "scene_id": "S02",
+      "fork": "“来”是债还是情分",
+      "options": [
+        { "option_id": "B05A", "label": "债没清才会来；备酒是你的事", "evidence": "债没清，我会来。……备酒是你的事。", "sandbox_adopted": true },
+        { "option_id": "B05B", "label": "把“来”说成情分", "evidence": "仅【事件走向】写她拒绝把“来”说成情分；分场用债来回答“那你还来不来”。", "sandbox_adopted": false }
+      ],
+      "evolve_choice": "B05A",
+      "human_decision": "PENDING"
+    },
+    {
+      "branch_id": "B06",
+      "scene_id": "S03",
+      "fork": "藏书楼去还是绕",
+      "options": [
+        { "option_id": "B06A", "label": "绕开；死人不能碰活人挂的匾", "evidence": "你总绕开。……那不是怕。活人挂的匾，死人不能碰。", "sandbox_adopted": true },
+        { "option_id": "B06B", "label": "进入/碰匾", "evidence": "当场未走。", "sandbox_adopted": false }
+      ],
+      "evolve_choice": "B06A",
+      "human_decision": "PENDING"
+    },
+    {
+      "branch_id": "B07",
+      "scene_id": "S03",
+      "fork": "是否承认他住在这里/承认契",
+      "options": [
+        { "option_id": "B07A", "label": "承认水，不承认契", "evidence": "我承认水，不承认契。", "sandbox_adopted": true },
+        { "option_id": "B07B", "label": "承认他住这里/承认契", "evidence": "那你承认我住这里？", "sandbox_adopted": false }
+      ],
+      "evolve_choice": "B07A",
+      "human_decision": "PENDING"
+    },
+    {
+      "branch_id": "B08",
+      "scene_id": "S03",
+      "fork": "来访是否按周培钟点",
+      "options": [
+        { "option_id": "B08A", "label": "明夜不必等；债不按你的钟点还", "evidence": "明夜不必等。债不按你的钟点还。", "sandbox_adopted": true },
+        { "option_id": "B08B", "label": "按他的钟点等候", "evidence": "被当场否定。", "sandbox_adopted": false }
+      ],
+      "evolve_choice": "B08A",
+      "human_decision": "PENDING"
+    },
+    {
+      "branch_id": "B09",
+      "scene_id": "S04",
+      "fork": "白天是否给出园名并签字",
+      "options": [
+        { "option_id": "B09A", "label": "还没想好，先不签", "evidence": "还没想好。先不签。", "sandbox_adopted": true },
+        { "option_id": "B09B", "label": "说句准话，定园名", "evidence": "先生说句准话，园名到底叫什么？", "sandbox_adopted": false }
+      ],
+      "evolve_choice": "B09A",
+      "human_decision": "PENDING"
+    },
+    {
+      "branch_id": "B10",
+      "scene_id": "S04",
+      "fork": "脚印与女子笑是否请人声张",
+      "options": [
+        { "option_id": "B10A", "label": "不要请人，不要声张", "evidence": "不要请人，不要声张。你们夜里关好自己门窗就行。", "sandbox_adopted": true },
+        { "option_id": "B10B", "label": "请人", "evidence": "要不要请个……", "sandbox_adopted": false }
+      ],
+      "evolve_choice": "B10A",
+      "human_decision": "PENDING"
+    },
+    {
+      "branch_id": "B11",
+      "scene_id": "S04",
+      "fork": "“静逸”是否当众念出",
+      "options": [
+        { "option_id": "B11A", "label": "不念出来，压在书下", "evidence": "他不念出来，只把纸压在书下。", "sandbox_adopted": true },
+        { "option_id": "B11B", "label": "念出/告知仆人", "evidence": "当场未走。", "sandbox_adopted": false }
+      ],
+      "evolve_choice": "B11A",
+      "human_decision": "PENDING"
+    },
+    {
+      "branch_id": "B12",
+      "scene_id": "S05",
+      "fork": "被撞见旧谱时藏还是不藏",
+      "options": [
+        { "option_id": "B12A", "label": "不藏，只把纸推远", "evidence": "他没有藏，只把纸推远。", "sandbox_adopted": true },
+        { "option_id": "B12B", "label": "藏起来", "evidence": "当场未走。", "sandbox_adopted": false }
+      ],
+      "evolve_choice": "B12A",
+      "human_decision": "PENDING"
+    },
+    {
+      "branch_id": "B13",
+      "scene_id": "S05",
+      "fork": "是否把静逸写进契、继续查",
+      "options": [
+        { "option_id": "B13A", "label": "不写契，停查", "evidence": "不写契。我停查。", "sandbox_adopted": true },
+        { "option_id": "B13B", "label": "写进契里证明这园姓林", "evidence": "你还要写进契里，证明这园姓林？", "sandbox_adopted": false }
+      ],
+      "evolve_choice": "B13A",
+      "human_decision": "PENDING"
+    },
+    {
+      "branch_id": "B14",
+      "scene_id": "S05",
+      "fork": "怕她不来是否承认",
+      "options": [
+        { "option_id": "B14A", "label": "承认：是", "evidence": "沉默一瞬，承认。“是。”", "sandbox_adopted": true },
+        { "option_id": "B14B", "label": "否认停查是怕她不来", "evidence": "停查不是认。你只是怕我不来。", "sandbox_adopted": false }
+      ],
+      "evolve_choice": "B14A",
+      "human_decision": "PENDING"
+    },
+    {
+      "branch_id": "B15",
+      "scene_id": "S05",
+      "fork": "旧纸烧不烧",
+      "options": [
+        { "option_id": "B15A", "label": "她不拿钥匙；死人烧不了活人的纸", "evidence": "不拿钥匙……死人烧不了活人的纸。", "sandbox_adopted": true },
+        { "option_id": "B15B", "label": "烧掉", "evidence": "你若要烧，我不挡。", "sandbox_adopted": false }
+      ],
+      "evolve_choice": "B15A",
+      "human_decision": "PENDING"
+    },
+    {
+      "branch_id": "B16",
+      "scene_id": "S05",
+      "fork": "冲突后是否许诺明夜必来",
+      "options": [
+        { "option_id": "B16A", "label": "明夜我不一定来（不断绝）", "evidence": "第二件算过了。明夜我不一定来。", "sandbox_adopted": true },
+        { "option_id": "B16B", "label": "许诺明夜来或当场断绝", "evidence": "正文未走；【事件走向】：没有断绝，也没有许诺。", "sandbox_adopted": false }
+      ],
+      "evolve_choice": "B16A",
+      "human_decision": "PENDING"
+    },
+    {
+      "branch_id": "B17",
+      "scene_id": "S06",
+      "fork": "雨夜进屋还是只取酒",
+      "options": [
+        { "option_id": "B17A", "label": "今夜不进屋，只取酒", "evidence": "今夜不进屋。……石上只剩空壶", "sandbox_adopted": true },
+        { "option_id": "B17B", "label": "进屋", "evidence": "你若来，只喝酒，不必进屋。", "sandbox_adopted": false }
+      ],
+      "evolve_choice": "B17A",
+      "human_decision": "PENDING"
+    },
+    {
+      "branch_id": "B18",
+      "scene_id": "S06",
+      "fork": "查的是她还是园子",
+      "options": [
+        { "option_id": "B18A", "label": "先查园子，后来查你（她称为实话）", "evidence": "先查园子，后来查你。……倒是实话。", "sandbox_adopted": true },
+        { "option_id": "B18B", "label": "只查园或只查人等其他答法", "evidence": "你查的是我，还是园子？", "sandbox_adopted": false }
+      ],
+      "evolve_choice": "B18A",
+      "human_decision": "PENDING"
+    },
+    {
+      "branch_id": "B19",
+      "scene_id": "S06",
+      "fork": "是否回答明日还来",
+      "options": [
+        { "option_id": "B19A", "label": "不答，离开", "evidence": "没有答。等周培再回头，石上只剩空壶", "sandbox_adopted": true },
+        { "option_id": "B19B", "label": "回答明日来或不来", "evidence": "明日还来吗？", "sandbox_adopted": false }
+      ],
+      "evolve_choice": "B19A",
+      "human_decision": "PENDING"
+    },
+    {
+      "branch_id": "B20",
+      "scene_id": "S07",
+      "fork": "“我来，算别人吗”怎么答",
+      "options": [
+        { "option_id": "B20A", "label": "你算债主（故意笑）", "evidence": "故意笑。“你算债主。”", "sandbox_adopted": true },
+        { "option_id": "B20B", "label": "直接回答她算不算别人", "evidence": "我来，算别人吗？", "sandbox_adopted": false }
+      ],
+      "evolve_choice": "B20A",
+      "human_decision": "PENDING"
+    },
+    {
+      "branch_id": "B21",
+      "scene_id": "S07",
+      "fork": "残荷背面草稿给不给看",
+      "options": [
+        { "option_id": "B21A", "label": "翻过来，不让她看背面草稿", "evidence": "把画翻过来，不让她看背面草稿。", "sandbox_adopted": true },
+        { "option_id": "B21B", "label": "给看背面", "evidence": "当场未走。", "sandbox_adopted": false }
+      ],
+      "evolve_choice": "B21A",
+      "human_decision": "PENDING"
+    },
+    {
+      "branch_id": "B22",
+      "scene_id": "S07",
+      "fork": "残荷是否题园名",
+      "options": [
+        { "option_id": "B22A", "label": "这张可以留。别题园名", "evidence": "这张可以留。别题园名。", "sandbox_adopted": true },
+        { "option_id": "B22B", "label": "题园名", "evidence": "当场未走。", "sandbox_adopted": false }
+      ],
+      "evolve_choice": "B22A",
+      "human_decision": "PENDING"
+    },
+    {
+      "branch_id": "B23",
+      "scene_id": "S08",
+      "fork": "旧匾揭不揭",
+      "options": [
+        { "option_id": "B23A", "label": "手停，未揭；布仍在匾上", "evidence": "手停在布边。……手没有落下。……布仍在匾上", "sandbox_adopted": true },
+        { "option_id": "B23B", "label": "揭开", "evidence": "伸手要揭布。……那你让我揭，我就揭。", "sandbox_adopted": false }
+      ],
+      "evolve_choice": "B23A",
+      "human_decision": "PENDING"
+    },
+    {
+      "branch_id": "B24",
+      "scene_id": "S08",
+      "fork": "揭匾所绑的“认一个名字”",
+      "options": [
+        { "option_id": "B24A", "label": "我认你。园名未定", "evidence": "我认你。园名未定。", "sandbox_adopted": true },
+        { "option_id": "B24B", "label": "认一个园名/名字以换揭匾", "evidence": "揭了，你就得认一个名字。你认吗？", "sandbox_adopted": false }
+      ],
+      "evolve_choice": "B24A",
+      "human_decision": "PENDING"
+    },
+    {
+      "branch_id": "B25",
+      "scene_id": "S08",
+      "fork": "名分怎样才够是否回答",
+      "options": [
+        { "option_id": "B25A", "label": "不答，转身入暗处", "evidence": "不答，转身走进暗处。", "sandbox_adopted": true },
+        { "option_id": "B25B", "label": "说出怎么才够", "evidence": "那你说，怎么才够？", "sandbox_adopted": false }
+      ],
+      "evolve_choice": "B25A",
+      "human_decision": "PENDING"
+    },
+    {
+      "branch_id": "B26",
+      "scene_id": "S09",
+      "fork": "中介税契压力下是否定园名",
+      "options": [
+        { "option_id": "B26A", "label": "空着；先住人，后住名", "evidence": "空着。……先住人，后住名。", "sandbox_adopted": true },
+        { "option_id": "B26B", "label": "现在定名以便递文书/避税契麻烦", "evidence": "再不定园名，文书递不上去，后头税契也麻烦。", "sandbox_adopted": false }
+      ],
+      "evolve_choice": "B26A",
+      "human_decision": "PENDING"
+    },
+    {
+      "branch_id": "B27",
+      "scene_id": "S09",
+      "fork": "林家旧事是否写入契纸",
+      "options": [
+        { "option_id": "B27A", "label": "不写。旧事不是给契纸看的", "evidence": "不写。旧事不是给契纸看的。", "sandbox_adopted": true },
+        { "option_id": "B27B", "label": "在契上写清楚", "evidence": "那林家的旧事，要不要在契上写清楚？", "sandbox_adopted": false }
+      ],
+      "evolve_choice": "B27A",
+      "human_decision": "PENDING"
+    },
+    {
+      "branch_id": "B28",
+      "scene_id": "S09",
+      "fork": "少一坛酒问不问",
+      "options": [
+        { "option_id": "B28A", "label": "吴妈嘴动了动，没问", "evidence": "发现酒坛少了一坛，嘴动了动，没问。", "sandbox_adopted": true },
+        { "option_id": "B28B", "label": "问少酒去向", "evidence": "当场未走。", "sandbox_adopted": false }
+      ],
+      "evolve_choice": "B28A",
+      "human_decision": "PENDING"
+    },
+    {
+      "branch_id": "B29",
+      "scene_id": "S09",
+      "fork": "后园小门开着还是插上",
+      "options": [
+        { "option_id": "B29A", "label": "开着，想了想又插上", "evidence": "把后园小门开着，想了想又插上。", "sandbox_adopted": true },
+        { "option_id": "B29B", "label": "保持开着", "evidence": "中间态：曾开着，最终未采用。", "sandbox_adopted": false }
+      ],
+      "evolve_choice": "B29A",
+      "human_decision": "PENDING"
+    },
+    {
+      "branch_id": "B30",
+      "scene_id": "S10",
+      "fork": "债清之后明日还来不来",
+      "options": [
+        { "option_id": "B30A", "label": "明日无债；来不来是我的事", "evidence": "明日无债。……备酒是你的事，来不来是我的事。", "sandbox_adopted": true },
+        { "option_id": "B30B", "label": "承诺明日再来", "evidence": "那明日呢？", "sandbox_adopted": false }
+      ],
+      "evolve_choice": "B30A",
+      "human_decision": "PENDING"
+    },
+    {
+      "branch_id": "B31",
+      "scene_id": "S10",
+      "fork": "备酒还是不是债",
+      "options": [
+        { "option_id": "B31A", "label": "我备酒，不是债；她把备酒与来访分开", "evidence": "我备酒，不是债。……备酒是你的事，来不来是我的事。", "sandbox_adopted": true },
+        { "option_id": "B31B", "label": "继续用酒作债由头", "evidence": "五件债，今夜清了。", "sandbox_adopted": false }
+      ],
+      "evolve_choice": "B31A",
+      "human_decision": "PENDING"
+    },
+    {
+      "branch_id": "B32",
+      "scene_id": "S10",
+      "fork": "是否追入荷雾",
+      "options": [
+        { "option_id": "B32A", "label": "没有追", "evidence": "周培：没有追，只看那五枚莲蓬壳。", "sandbox_adopted": true },
+        { "option_id": "B32B", "label": "追", "evidence": "当场未走。", "sandbox_adopted": false }
+      ],
+      "evolve_choice": "B32A",
+      "human_decision": "PENDING"
+    },
+    {
+      "branch_id": "B33",
+      "scene_id": "S10",
+      "fork": "此刻是否定园名",
+      "options": [
+        { "option_id": "B33A", "label": "空着好。空着，谁都还没赢", "evidence": "园名还空着。……空着好。空着，谁都还没赢。", "sandbox_adopted": true },
+        { "option_id": "B33B", "label": "现在定名", "evidence": "当场未走。", "sandbox_adopted": false }
+      ],
+      "evolve_choice": "B33A",
+      "human_decision": "PENDING"
+    },
+    {
+      "branch_id": "B34",
+      "scene_id": "S10",
+      "fork": "石上酒开不开",
+      "options": [
+        { "option_id": "B34A", "label": "酒壶未开", "evidence": "天光亮起，酒壶未开，五枚莲蓬壳被晨露打湿。", "sandbox_adopted": true },
+        { "option_id": "B34B", "label": "开酒", "evidence": "当场未走。", "sandbox_adopted": false }
+      ],
+      "evolve_choice": "B34A",
+      "human_decision": "PENDING"
+    }
+  ],
+  "sandbox_path_adopted": ["B01A", "B02A", "B03A", "B04A", "B05A", "B06A", "B07A", "B08A", "B09A", "B10A", "B11A", "B12A", "B13A", "B14A", "B15A", "B16A", "B17A", "B18A", "B19A", "B20A", "B21A", "B22A", "B23A", "B24A", "B25A", "B26A", "B27A", "B28A", "B29A", "B30A", "B31A", "B32A", "B33A", "B34A"],
+  "human_selection": [],
+  "note": "evolve_choice 只标记沙盒已走。human_decision 全部 PENDING。未采用项保留。不自动替人工决定主线。"
+}

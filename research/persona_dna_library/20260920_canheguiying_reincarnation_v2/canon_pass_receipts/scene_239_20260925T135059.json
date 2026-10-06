@@ -1,0 +1,68 @@
+{
+  "schema": "video_kingdom.canon_scene_pass.v1",
+  "at": "2026-09-25T13:50:43+08:00",
+  "lib": "D:\\视频创作\\ace-video-kingdom\\research\\persona_dna_library\\20260920_canheguiying_reincarnation_v2",
+  "next": 239,
+  "quota_used": 0,
+  "max_per_day": 2,
+  "scene": 239,
+  "heading": "第239场｜日｜外｜荷园墙外·官河纤道",
+  "wave": "wave_38",
+  "verdict": "PASS",
+  "fails": [],
+  "reasons": [],
+  "alive": {
+    "q1_person_not_manual": true,
+    "q2_not_ai": true,
+    "q3_will_not_settle": true
+  },
+  "conflict": {
+    "status": "PASS",
+    "errors": [],
+    "notes": [],
+    "scene_class": "B"
+  },
+  "forbidden_hits": [],
+  "quote_count": 8,
+  "packet": {
+    "schema": "video_kingdom.conflict_driven_scene.v1",
+    "scene_class": "B",
+    "goals": {
+      "a": "ask_or_press",
+      "b": "hold_boundary"
+    },
+    "change_at_end": {
+      "kind": "choice",
+      "what": "本场变化：世界：丁怀山履行“冬至前不进园”，改在墙外把水门浅滩画成“或属官河”，与“闸坏水浅”两句并存，锁的归属被推到界上。关系：陶婶为活水开口，阿寿守令不泄锁；丁怀山用界址施压，不必翻墙。物件：田亩册草图水门描深、墙缺残荷。未决：冬至后浅"
+    },
+    "lengthener": false,
+    "speech_intent_readable": true,
+    "completes_in_picture": true
+  },
+  "failure_mode_signals": {
+    "dialogue_density": 0.2857142857142857,
+    "sensory_rate": 0.7142857142857143,
+    "near_dup": 0,
+    "alt_pingpong": 0,
+    "mono_speaker_share": 0.0,
+    "empty_paragraphs": 0,
+    "dialogue_only": 0,
+    "short_dialogue_runs": 2,
+    "lines": 7,
+    "dialogue_turns": 2,
+    "narration_turns": 5
+  },
+  "failure_mode_fails": [],
+  "publish": {
+    "source_chapter": "c239",
+    "completed_scenes": 239,
+    "published_units": 240,
+    "check_only": false
+  },
+  "deploy": {
+    "status": "OK",
+    "code": 0,
+    "stdout": "\n ⛅️ wrangler 4.132.0\n────────────────────\nUploading... (269/272)\nUploading... (270/272)\nUploading... (271/272)\nUploading... (272/272)\n✨ Success! Uploaded 3 files (269 already uploaded) (2.21 sec)\n\n✨ Uploading _headers\n🌎 Deploying...\n✨ Deployment complete! Take a peek over at https://70e37ba7.tinghe-archive.pages.dev\n",
+    "stderr": ""
+  }
+}

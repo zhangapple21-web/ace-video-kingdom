@@ -14,6 +14,7 @@ import subprocess
 from datetime import datetime, timezone
 from pathlib import Path
 import sys
+from tools.atomic_io import atomic_write_text
 
 sys.stdout.reconfigure(encoding="utf-8")  # Bug #1 fix: prevent UnicodeEncodeError on GBK console
 
@@ -91,7 +92,7 @@ def main() -> int:
     if not all(item["exists"] for item in result["bases"].values()):
         result["status"] = "HANDSHAKE_PARTIAL"
     args.output.parent.mkdir(parents=True, exist_ok=True)
-    args.output.write_text(json.dumps(result, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    atomic_write_text(args.output, json.dumps(result, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     print(f"{result['status']} output={args.output}")
     return 0
 

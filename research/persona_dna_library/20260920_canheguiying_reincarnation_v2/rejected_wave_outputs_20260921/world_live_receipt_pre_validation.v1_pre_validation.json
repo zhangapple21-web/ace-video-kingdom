@@ -1,0 +1,1018 @@
+{
+  "schema": "video_kingdom.world_live_receipt.v1",
+  "status": "RUNNING",
+  "layer": "CREATOR_LIVE",
+  "production_integration": false,
+  "script_locked": false,
+  "agnes": "NOT_PERFORMED",
+  "beat": "NOT_PERFORMED",
+  "shot": "NOT_PERFORMED",
+  "model": "deepseek-v4.1-flash",
+  "gateway": "http://localhost:3000/v1",
+  "trace_id": "1559d4c7c65b441499804d8bc71f2c98",
+  "waves_planned": 32,
+  "waves_run": 9,
+  "closed_by_world": false,
+  "elapsed_seconds": 771.6,
+  "files": {
+    "script": "research/persona_dna_library/20260920_canheguiying/world_live_script.v1.md",
+    "summary": "research/persona_dna_library/20260920_canheguiying/world_live_summary.v1.md",
+    "waves_dir": "research/persona_dna_library/20260920_canheguiying/world_live_waves"
+  },
+  "completed_waves": [
+    {
+      "wave": 1,
+      "status": "COMPLETED",
+      "model": "deepseek-v4.1-flash",
+      "requested_model": "deepseek-v4.1-flash",
+      "finish_reason": "length",
+      "latency_ms": 52311,
+      "usage": {
+        "completion_tokens": 8191,
+        "prompt_tokens": 3794,
+        "total_tokens": 11985,
+        "prompt_tokens_details": {
+          "cached_tokens": 1152
+        }
+      },
+      "file": "research\\persona_dna_library\\20260920_canheguiying_reincarnation_v2\\world_live_waves\\wave_01.md",
+      "closed": false,
+      "scene_headings": [
+        "第11场｜日｜外｜荷园太湖石畔",
+        "第12场｜日｜内｜荷园前厅",
+        "第13场｜夜｜外｜荷园西北墙外小径",
+        "第14场｜夜｜内｜荷园书斋",
+        "第15场｜日｜外｜荷塘东小径·老梅树下",
+        "第16场｜日｜外｜城北甜水井巷口",
+        "第17场｜拂晓｜外｜荷园东小径·老梅树下",
+        "第18场｜日｜外｜荷园前厅·门房",
+        "第19场｜夜｜内｜荷园书斋"
+      ],
+      "attempts": [
+        {
+          "kind": "primary",
+          "finish_reason": "length",
+          "content_len": 3073,
+          "reasoning_len": 7956,
+          "usage": {
+            "completion_tokens": 8191,
+            "prompt_tokens": 13345,
+            "total_tokens": 21536,
+            "prompt_tokens_details": {
+              "cached_tokens": 1280
+            }
+          },
+          "latency_ms": 58275,
+          "transport_retries": []
+        },
+        {
+          "kind": "continue",
+          "finish_reason": "length",
+          "content_len": 3009,
+          "reasoning_len": 9037,
+          "usage": {
+            "completion_tokens": 8191,
+            "prompt_tokens": 3794,
+            "total_tokens": 11985,
+            "prompt_tokens_details": {
+              "cached_tokens": 1152
+            }
+          },
+          "latency_ms": 52311,
+          "transport_retries": []
+        }
+      ]
+    },
+    {
+      "wave": 2,
+      "status": "COMPLETED",
+      "model": "deepseek-v4.1-flash",
+      "requested_model": "deepseek-v4.1-flash",
+      "finish_reason": "stop",
+      "latency_ms": 29413,
+      "usage": {
+        "completion_tokens": 3795,
+        "prompt_tokens": 3632,
+        "total_tokens": 7427,
+        "prompt_tokens_details": {
+          "cached_tokens": 1152
+        }
+      },
+      "file": "research\\persona_dna_library\\20260920_canheguiying_reincarnation_v2\\world_live_waves\\wave_02.md",
+      "closed": false,
+      "scene_headings": [
+        "第20场｜日｜内｜城西钱伯昇宅·东厢",
+        "第21场｜日｜内｜县衙户房",
+        "第22场｜夜｜外｜荷园后门·西北墙下",
+        "第23场｜夜｜内｜荷园听荷轩",
+        "第24场｜日｜内｜县衙二堂",
+        "第25场｜夜｜外｜甜水井巷·包氏旧屋",
+        "第26场｜夜｜外｜荷园西北墙外·水塘埂"
+      ],
+      "attempts": [
+        {
+          "kind": "primary",
+          "finish_reason": "length",
+          "content_len": 2818,
+          "reasoning_len": 7723,
+          "usage": {
+            "completion_tokens": 8189,
+            "prompt_tokens": 17388,
+            "total_tokens": 25577,
+            "prompt_tokens_details": {
+              "cached_tokens": 11776
+            }
+          },
+          "latency_ms": 52923,
+          "transport_retries": []
+        },
+        {
+          "kind": "continue",
+          "finish_reason": "stop",
+          "content_len": 4183,
+          "reasoning_len": 605,
+          "usage": {
+            "completion_tokens": 3795,
+            "prompt_tokens": 3632,
+            "total_tokens": 7427,
+            "prompt_tokens_details": {
+              "cached_tokens": 1152
+            }
+          },
+          "latency_ms": 29413,
+          "transport_retries": []
+        }
+      ]
+    },
+    {
+      "wave": 3,
+      "status": "COMPLETED",
+      "model": "deepseek-v4.1-flash",
+      "requested_model": "deepseek-v4.1-flash",
+      "finish_reason": "length",
+      "latency_ms": 53913,
+      "usage": {
+        "completion_tokens": 8192,
+        "prompt_tokens": 2813,
+        "total_tokens": 11005,
+        "prompt_tokens_details": {
+          "cached_tokens": 1152
+        }
+      },
+      "file": "research\\persona_dna_library\\20260920_canheguiying_reincarnation_v2\\world_live_waves\\wave_03.md",
+      "closed": false,
+      "scene_headings": [
+        "第27场｜日｜内｜荷园听荷轩",
+        "第28场｜日｜外｜荷塘北岸·柳下石凳",
+        "第29场｜夜｜外｜甜水井巷·包氏旧屋外",
+        "第30场｜晨｜外｜荷塘北墙外·窄巷尽头",
+        "第31场｜日｜外｜城东涵洞·石桥下"
+      ],
+      "attempts": [
+        {
+          "kind": "primary",
+          "finish_reason": "length",
+          "content_len": 1876,
+          "reasoning_len": 9644,
+          "usage": {
+            "completion_tokens": 8191,
+            "prompt_tokens": 18841,
+            "total_tokens": 27032,
+            "prompt_tokens_details": {
+              "cached_tokens": 11776
+            }
+          },
+          "latency_ms": 57562,
+          "transport_retries": []
+        },
+        {
+          "kind": "continue",
+          "finish_reason": "length",
+          "content_len": 2665,
+          "reasoning_len": 9064,
+          "usage": {
+            "completion_tokens": 8192,
+            "prompt_tokens": 2813,
+            "total_tokens": 11005,
+            "prompt_tokens_details": {
+              "cached_tokens": 1152
+            }
+          },
+          "latency_ms": 53913,
+          "transport_retries": []
+        }
+      ]
+    },
+    {
+      "wave": 4,
+      "status": "COMPLETED",
+      "model": "deepseek-v4.1-flash",
+      "requested_model": "deepseek-v4.1-flash",
+      "finish_reason": "length",
+      "latency_ms": 55724,
+      "usage": {
+        "completion_tokens": 8190,
+        "prompt_tokens": 3777,
+        "total_tokens": 11967,
+        "prompt_tokens_details": {
+          "cached_tokens": 1152
+        }
+      },
+      "file": "research\\persona_dna_library\\20260920_canheguiying_reincarnation_v2\\world_live_waves\\wave_04.md",
+      "closed": false,
+      "scene_headings": [
+        "第32场｜日｜内｜福安客栈·临街小房",
+        "第33场｜夜｜内｜荷园听荷轩",
+        "第34场｜夜｜外｜城南·太平桥桥洞下",
+        "第35场｜日｜外｜荷园二门外·榆树下",
+        "第36场｜夜｜外｜荷园后门·砖阶前",
+        "第37场｜日｜外｜塘东·旧闸屋前",
+        "第38场｜夜｜内｜荷园灶房",
+        "第39场｜晨｜外｜荷园荷塘边"
+      ],
+      "attempts": [
+        {
+          "kind": "primary",
+          "finish_reason": "length",
+          "content_len": 3051,
+          "reasoning_len": 12996,
+          "usage": {
+            "completion_tokens": 8192,
+            "prompt_tokens": 17844,
+            "total_tokens": 26036,
+            "prompt_tokens_details": {
+              "cached_tokens": 11776
+            }
+          },
+          "latency_ms": 51840,
+          "transport_retries": []
+        },
+        {
+          "kind": "continue",
+          "finish_reason": "length",
+          "content_len": 2678,
+          "reasoning_len": 7826,
+          "usage": {
+            "completion_tokens": 8190,
+            "prompt_tokens": 3777,
+            "total_tokens": 11967,
+            "prompt_tokens_details": {
+              "cached_tokens": 1152
+            }
+          },
+          "latency_ms": 55724,
+          "transport_retries": []
+        }
+      ]
+    },
+    {
+      "wave": 5,
+      "status": "COMPLETED",
+      "model": "deepseek-v4.1-flash",
+      "requested_model": "deepseek-v4.1-flash",
+      "finish_reason": "stop",
+      "latency_ms": 29911,
+      "usage": {
+        "completion_tokens": 3750,
+        "prompt_tokens": 4347,
+        "total_tokens": 8097,
+        "prompt_tokens_details": {
+          "cached_tokens": 1152
+        }
+      },
+      "file": "research\\persona_dna_library\\20260920_canheguiying_reincarnation_v2\\world_live_waves\\wave_05.md",
+      "closed": false,
+      "scene_headings": [
+        "第40场｜日｜内｜沈家老宅·西厢",
+        "第41场｜日｜内｜县衙户房",
+        "第42场｜夜｜内｜荷园听荷轩",
+        "第43场｜日｜外｜城北·甜水井巷",
+        "第44场｜夜｜内｜荷园后罩房·客房",
+        "第45场｜日｜外｜城北·甜水井巷·李家旧院",
+        "第46场｜日｜内｜沈氏宗祠·享堂",
+        "第47场｜夜｜内｜荷园听荷轩",
+        "第48场｜日｜外｜城北·甜水井巷·李家旧院",
+        "第49场｜夜｜外｜城南·七眼石桥"
+      ],
+      "attempts": [
+        {
+          "kind": "primary",
+          "finish_reason": "length",
+          "content_len": 3727,
+          "reasoning_len": 6922,
+          "usage": {
+            "completion_tokens": 8186,
+            "prompt_tokens": 20480,
+            "total_tokens": 28666,
+            "prompt_tokens_details": {
+              "cached_tokens": 11776
+            }
+          },
+          "latency_ms": 52768,
+          "transport_retries": []
+        },
+        {
+          "kind": "continue",
+          "finish_reason": "stop",
+          "content_len": 4381,
+          "reasoning_len": 196,
+          "usage": {
+            "completion_tokens": 3750,
+            "prompt_tokens": 4347,
+            "total_tokens": 8097,
+            "prompt_tokens_details": {
+              "cached_tokens": 1152
+            }
+          },
+          "latency_ms": 29911,
+          "transport_retries": []
+        }
+      ]
+    },
+    {
+      "wave": 6,
+      "status": "COMPLETED",
+      "model": "deepseek-v4.1-flash",
+      "requested_model": "deepseek-v4.1-flash",
+      "finish_reason": "stop",
+      "latency_ms": 28890,
+      "usage": {
+        "completion_tokens": 3752,
+        "prompt_tokens": 6215,
+        "total_tokens": 9967,
+        "prompt_tokens_details": {
+          "cached_tokens": 1152
+        }
+      },
+      "file": "research\\persona_dna_library\\20260920_canheguiying_reincarnation_v2\\world_live_waves\\wave_06.md",
+      "closed": false,
+      "scene_headings": [],
+      "attempts": [
+        {
+          "kind": "primary",
+          "finish_reason": "length",
+          "content_len": 6253,
+          "reasoning_len": 4467,
+          "usage": {
+            "completion_tokens": 8192,
+            "prompt_tokens": 25218,
+            "total_tokens": 33410,
+            "prompt_tokens_details": {
+              "cached_tokens": 11776
+            }
+          },
+          "latency_ms": 57124,
+          "transport_retries": []
+        },
+        {
+          "kind": "continue",
+          "finish_reason": "stop",
+          "content_len": 4293,
+          "reasoning_len": 391,
+          "usage": {
+            "completion_tokens": 3752,
+            "prompt_tokens": 6215,
+            "total_tokens": 9967,
+            "prompt_tokens_details": {
+              "cached_tokens": 1152
+            }
+          },
+          "latency_ms": 28890,
+          "transport_retries": []
+        }
+      ]
+    },
+    {
+      "wave": 7,
+      "status": "COMPLETED",
+      "model": "deepseek-v4.1-flash",
+      "requested_model": "deepseek-v4.1-flash",
+      "finish_reason": "stop",
+      "latency_ms": 45008,
+      "usage": {
+        "completion_tokens": 6110,
+        "prompt_tokens": 28514,
+        "total_tokens": 34624,
+        "prompt_tokens_details": {
+          "cached_tokens": 11776
+        }
+      },
+      "file": "research\\persona_dna_library\\20260920_canheguiying_reincarnation_v2\\world_live_waves\\wave_07.md",
+      "closed": false,
+      "scene_headings": [],
+      "attempts": [
+        {
+          "kind": "primary",
+          "finish_reason": "stop",
+          "content_len": 4976,
+          "reasoning_len": 2765,
+          "usage": {
+            "completion_tokens": 6110,
+            "prompt_tokens": 28514,
+            "total_tokens": 34624,
+            "prompt_tokens_details": {
+              "cached_tokens": 11776
+            }
+          },
+          "latency_ms": 45008,
+          "transport_retries": []
+        }
+      ]
+    },
+    {
+      "wave": 8,
+      "status": "COMPLETED",
+      "model": "deepseek-v4.1-flash",
+      "requested_model": "deepseek-v4.1-flash",
+      "finish_reason": "stop",
+      "latency_ms": 41384,
+      "usage": {
+        "completion_tokens": 5412,
+        "prompt_tokens": 20904,
+        "total_tokens": 26316,
+        "prompt_tokens_details": {
+          "cached_tokens": 20736
+        }
+      },
+      "file": "research\\persona_dna_library\\20260920_canheguiying_reincarnation_v2\\world_live_waves\\wave_08.md",
+      "closed": false,
+      "scene_headings": [],
+      "attempts": [
+        {
+          "kind": "primary",
+          "finish_reason": "length",
+          "content_len": 0,
+          "reasoning_len": 10603,
+          "usage": {
+            "completion_tokens": 8192,
+            "prompt_tokens": 20852,
+            "total_tokens": 29044,
+            "prompt_tokens_details": {
+              "cached_tokens": 11776
+            }
+          },
+          "latency_ms": 55402,
+          "transport_retries": []
+        },
+        {
+          "kind": "force_body_1",
+          "finish_reason": "stop",
+          "content_len": 5155,
+          "reasoning_len": 1476,
+          "usage": {
+            "completion_tokens": 5412,
+            "prompt_tokens": 20904,
+            "total_tokens": 26316,
+            "prompt_tokens_details": {
+              "cached_tokens": 20736
+            }
+          },
+          "latency_ms": 41384,
+          "transport_retries": []
+        }
+      ]
+    },
+    {
+      "wave": 9,
+      "status": "COMPLETED",
+      "model": "deepseek-v4.1-flash",
+      "requested_model": "deepseek-v4.1-flash",
+      "finish_reason": "stop",
+      "latency_ms": 48974,
+      "usage": {
+        "completion_tokens": 7503,
+        "prompt_tokens": 18313,
+        "total_tokens": 25816,
+        "prompt_tokens_details": {
+          "cached_tokens": 11776
+        }
+      },
+      "file": "research\\persona_dna_library\\20260920_canheguiying_reincarnation_v2\\world_live_waves\\wave_09.md",
+      "closed": false,
+      "scene_headings": [
+        "第55场｜日｜外｜荷园·塘东水口",
+        "第56场｜夜｜内｜荷园·听荷轩后间",
+        "第57场｜日｜内｜城里·钱家后院",
+        "第58场｜夜｜外｜荷园·塘西枯苇荡",
+        "第59场｜日｜内｜沈家老宅·正房东暖阁"
+      ],
+      "attempts": [
+        {
+          "kind": "primary",
+          "finish_reason": "stop",
+          "content_len": 3721,
+          "reasoning_len": 5694,
+          "usage": {
+            "completion_tokens": 7503,
+            "prompt_tokens": 18313,
+            "total_tokens": 25816,
+            "prompt_tokens_details": {
+              "cached_tokens": 11776
+            }
+          },
+          "latency_ms": 48974,
+          "transport_retries": []
+        }
+      ]
+    }
+  ],
+  "waves": [
+    {
+      "wave": 1,
+      "status": "COMPLETED",
+      "model": "deepseek-v4.1-flash",
+      "requested_model": "deepseek-v4.1-flash",
+      "finish_reason": "length",
+      "latency_ms": 52311,
+      "usage": {
+        "completion_tokens": 8191,
+        "prompt_tokens": 3794,
+        "total_tokens": 11985,
+        "prompt_tokens_details": {
+          "cached_tokens": 1152
+        }
+      },
+      "file": "research\\persona_dna_library\\20260920_canheguiying_reincarnation_v2\\world_live_waves\\wave_01.md",
+      "closed": false,
+      "scene_headings": [
+        "第11场｜日｜外｜荷园太湖石畔",
+        "第12场｜日｜内｜荷园前厅",
+        "第13场｜夜｜外｜荷园西北墙外小径",
+        "第14场｜夜｜内｜荷园书斋",
+        "第15场｜日｜外｜荷塘东小径·老梅树下",
+        "第16场｜日｜外｜城北甜水井巷口",
+        "第17场｜拂晓｜外｜荷园东小径·老梅树下",
+        "第18场｜日｜外｜荷园前厅·门房",
+        "第19场｜夜｜内｜荷园书斋"
+      ],
+      "attempts": [
+        {
+          "kind": "primary",
+          "finish_reason": "length",
+          "content_len": 3073,
+          "reasoning_len": 7956,
+          "usage": {
+            "completion_tokens": 8191,
+            "prompt_tokens": 13345,
+            "total_tokens": 21536,
+            "prompt_tokens_details": {
+              "cached_tokens": 1280
+            }
+          },
+          "latency_ms": 58275,
+          "transport_retries": []
+        },
+        {
+          "kind": "continue",
+          "finish_reason": "length",
+          "content_len": 3009,
+          "reasoning_len": 9037,
+          "usage": {
+            "completion_tokens": 8191,
+            "prompt_tokens": 3794,
+            "total_tokens": 11985,
+            "prompt_tokens_details": {
+              "cached_tokens": 1152
+            }
+          },
+          "latency_ms": 52311,
+          "transport_retries": []
+        }
+      ]
+    },
+    {
+      "wave": 2,
+      "status": "COMPLETED",
+      "model": "deepseek-v4.1-flash",
+      "requested_model": "deepseek-v4.1-flash",
+      "finish_reason": "stop",
+      "latency_ms": 29413,
+      "usage": {
+        "completion_tokens": 3795,
+        "prompt_tokens": 3632,
+        "total_tokens": 7427,
+        "prompt_tokens_details": {
+          "cached_tokens": 1152
+        }
+      },
+      "file": "research\\persona_dna_library\\20260920_canheguiying_reincarnation_v2\\world_live_waves\\wave_02.md",
+      "closed": false,
+      "scene_headings": [
+        "第20场｜日｜内｜城西钱伯昇宅·东厢",
+        "第21场｜日｜内｜县衙户房",
+        "第22场｜夜｜外｜荷园后门·西北墙下",
+        "第23场｜夜｜内｜荷园听荷轩",
+        "第24场｜日｜内｜县衙二堂",
+        "第25场｜夜｜外｜甜水井巷·包氏旧屋",
+        "第26场｜夜｜外｜荷园西北墙外·水塘埂"
+      ],
+      "attempts": [
+        {
+          "kind": "primary",
+          "finish_reason": "length",
+          "content_len": 2818,
+          "reasoning_len": 7723,
+          "usage": {
+            "completion_tokens": 8189,
+            "prompt_tokens": 17388,
+            "total_tokens": 25577,
+            "prompt_tokens_details": {
+              "cached_tokens": 11776
+            }
+          },
+          "latency_ms": 52923,
+          "transport_retries": []
+        },
+        {
+          "kind": "continue",
+          "finish_reason": "stop",
+          "content_len": 4183,
+          "reasoning_len": 605,
+          "usage": {
+            "completion_tokens": 3795,
+            "prompt_tokens": 3632,
+            "total_tokens": 7427,
+            "prompt_tokens_details": {
+              "cached_tokens": 1152
+            }
+          },
+          "latency_ms": 29413,
+          "transport_retries": []
+        }
+      ]
+    },
+    {
+      "wave": 3,
+      "status": "COMPLETED",
+      "model": "deepseek-v4.1-flash",
+      "requested_model": "deepseek-v4.1-flash",
+      "finish_reason": "length",
+      "latency_ms": 53913,
+      "usage": {
+        "completion_tokens": 8192,
+        "prompt_tokens": 2813,
+        "total_tokens": 11005,
+        "prompt_tokens_details": {
+          "cached_tokens": 1152
+        }
+      },
+      "file": "research\\persona_dna_library\\20260920_canheguiying_reincarnation_v2\\world_live_waves\\wave_03.md",
+      "closed": false,
+      "scene_headings": [
+        "第27场｜日｜内｜荷园听荷轩",
+        "第28场｜日｜外｜荷塘北岸·柳下石凳",
+        "第29场｜夜｜外｜甜水井巷·包氏旧屋外",
+        "第30场｜晨｜外｜荷塘北墙外·窄巷尽头",
+        "第31场｜日｜外｜城东涵洞·石桥下"
+      ],
+      "attempts": [
+        {
+          "kind": "primary",
+          "finish_reason": "length",
+          "content_len": 1876,
+          "reasoning_len": 9644,
+          "usage": {
+            "completion_tokens": 8191,
+            "prompt_tokens": 18841,
+            "total_tokens": 27032,
+            "prompt_tokens_details": {
+              "cached_tokens": 11776
+            }
+          },
+          "latency_ms": 57562,
+          "transport_retries": []
+        },
+        {
+          "kind": "continue",
+          "finish_reason": "length",
+          "content_len": 2665,
+          "reasoning_len": 9064,
+          "usage": {
+            "completion_tokens": 8192,
+            "prompt_tokens": 2813,
+            "total_tokens": 11005,
+            "prompt_tokens_details": {
+              "cached_tokens": 1152
+            }
+          },
+          "latency_ms": 53913,
+          "transport_retries": []
+        }
+      ]
+    },
+    {
+      "wave": 4,
+      "status": "COMPLETED",
+      "model": "deepseek-v4.1-flash",
+      "requested_model": "deepseek-v4.1-flash",
+      "finish_reason": "length",
+      "latency_ms": 55724,
+      "usage": {
+        "completion_tokens": 8190,
+        "prompt_tokens": 3777,
+        "total_tokens": 11967,
+        "prompt_tokens_details": {
+          "cached_tokens": 1152
+        }
+      },
+      "file": "research\\persona_dna_library\\20260920_canheguiying_reincarnation_v2\\world_live_waves\\wave_04.md",
+      "closed": false,
+      "scene_headings": [
+        "第32场｜日｜内｜福安客栈·临街小房",
+        "第33场｜夜｜内｜荷园听荷轩",
+        "第34场｜夜｜外｜城南·太平桥桥洞下",
+        "第35场｜日｜外｜荷园二门外·榆树下",
+        "第36场｜夜｜外｜荷园后门·砖阶前",
+        "第37场｜日｜外｜塘东·旧闸屋前",
+        "第38场｜夜｜内｜荷园灶房",
+        "第39场｜晨｜外｜荷园荷塘边"
+      ],
+      "attempts": [
+        {
+          "kind": "primary",
+          "finish_reason": "length",
+          "content_len": 3051,
+          "reasoning_len": 12996,
+          "usage": {
+            "completion_tokens": 8192,
+            "prompt_tokens": 17844,
+            "total_tokens": 26036,
+            "prompt_tokens_details": {
+              "cached_tokens": 11776
+            }
+          },
+          "latency_ms": 51840,
+          "transport_retries": []
+        },
+        {
+          "kind": "continue",
+          "finish_reason": "length",
+          "content_len": 2678,
+          "reasoning_len": 7826,
+          "usage": {
+            "completion_tokens": 8190,
+            "prompt_tokens": 3777,
+            "total_tokens": 11967,
+            "prompt_tokens_details": {
+              "cached_tokens": 1152
+            }
+          },
+          "latency_ms": 55724,
+          "transport_retries": []
+        }
+      ]
+    },
+    {
+      "wave": 5,
+      "status": "COMPLETED",
+      "model": "deepseek-v4.1-flash",
+      "requested_model": "deepseek-v4.1-flash",
+      "finish_reason": "stop",
+      "latency_ms": 29911,
+      "usage": {
+        "completion_tokens": 3750,
+        "prompt_tokens": 4347,
+        "total_tokens": 8097,
+        "prompt_tokens_details": {
+          "cached_tokens": 1152
+        }
+      },
+      "file": "research\\persona_dna_library\\20260920_canheguiying_reincarnation_v2\\world_live_waves\\wave_05.md",
+      "closed": false,
+      "scene_headings": [
+        "第40场｜日｜内｜沈家老宅·西厢",
+        "第41场｜日｜内｜县衙户房",
+        "第42场｜夜｜内｜荷园听荷轩",
+        "第43场｜日｜外｜城北·甜水井巷",
+        "第44场｜夜｜内｜荷园后罩房·客房",
+        "第45场｜日｜外｜城北·甜水井巷·李家旧院",
+        "第46场｜日｜内｜沈氏宗祠·享堂",
+        "第47场｜夜｜内｜荷园听荷轩",
+        "第48场｜日｜外｜城北·甜水井巷·李家旧院",
+        "第49场｜夜｜外｜城南·七眼石桥"
+      ],
+      "attempts": [
+        {
+          "kind": "primary",
+          "finish_reason": "length",
+          "content_len": 3727,
+          "reasoning_len": 6922,
+          "usage": {
+            "completion_tokens": 8186,
+            "prompt_tokens": 20480,
+            "total_tokens": 28666,
+            "prompt_tokens_details": {
+              "cached_tokens": 11776
+            }
+          },
+          "latency_ms": 52768,
+          "transport_retries": []
+        },
+        {
+          "kind": "continue",
+          "finish_reason": "stop",
+          "content_len": 4381,
+          "reasoning_len": 196,
+          "usage": {
+            "completion_tokens": 3750,
+            "prompt_tokens": 4347,
+            "total_tokens": 8097,
+            "prompt_tokens_details": {
+              "cached_tokens": 1152
+            }
+          },
+          "latency_ms": 29911,
+          "transport_retries": []
+        }
+      ]
+    },
+    {
+      "wave": 6,
+      "status": "COMPLETED",
+      "model": "deepseek-v4.1-flash",
+      "requested_model": "deepseek-v4.1-flash",
+      "finish_reason": "stop",
+      "latency_ms": 28890,
+      "usage": {
+        "completion_tokens": 3752,
+        "prompt_tokens": 6215,
+        "total_tokens": 9967,
+        "prompt_tokens_details": {
+          "cached_tokens": 1152
+        }
+      },
+      "file": "research\\persona_dna_library\\20260920_canheguiying_reincarnation_v2\\world_live_waves\\wave_06.md",
+      "closed": false,
+      "scene_headings": [],
+      "attempts": [
+        {
+          "kind": "primary",
+          "finish_reason": "length",
+          "content_len": 6253,
+          "reasoning_len": 4467,
+          "usage": {
+            "completion_tokens": 8192,
+            "prompt_tokens": 25218,
+            "total_tokens": 33410,
+            "prompt_tokens_details": {
+              "cached_tokens": 11776
+            }
+          },
+          "latency_ms": 57124,
+          "transport_retries": []
+        },
+        {
+          "kind": "continue",
+          "finish_reason": "stop",
+          "content_len": 4293,
+          "reasoning_len": 391,
+          "usage": {
+            "completion_tokens": 3752,
+            "prompt_tokens": 6215,
+            "total_tokens": 9967,
+            "prompt_tokens_details": {
+              "cached_tokens": 1152
+            }
+          },
+          "latency_ms": 28890,
+          "transport_retries": []
+        }
+      ]
+    },
+    {
+      "wave": 7,
+      "status": "COMPLETED",
+      "model": "deepseek-v4.1-flash",
+      "requested_model": "deepseek-v4.1-flash",
+      "finish_reason": "stop",
+      "latency_ms": 45008,
+      "usage": {
+        "completion_tokens": 6110,
+        "prompt_tokens": 28514,
+        "total_tokens": 34624,
+        "prompt_tokens_details": {
+          "cached_tokens": 11776
+        }
+      },
+      "file": "research\\persona_dna_library\\20260920_canheguiying_reincarnation_v2\\world_live_waves\\wave_07.md",
+      "closed": false,
+      "scene_headings": [],
+      "attempts": [
+        {
+          "kind": "primary",
+          "finish_reason": "stop",
+          "content_len": 4976,
+          "reasoning_len": 2765,
+          "usage": {
+            "completion_tokens": 6110,
+            "prompt_tokens": 28514,
+            "total_tokens": 34624,
+            "prompt_tokens_details": {
+              "cached_tokens": 11776
+            }
+          },
+          "latency_ms": 45008,
+          "transport_retries": []
+        }
+      ]
+    },
+    {
+      "wave": 8,
+      "status": "COMPLETED",
+      "model": "deepseek-v4.1-flash",
+      "requested_model": "deepseek-v4.1-flash",
+      "finish_reason": "stop",
+      "latency_ms": 41384,
+      "usage": {
+        "completion_tokens": 5412,
+        "prompt_tokens": 20904,
+        "total_tokens": 26316,
+        "prompt_tokens_details": {
+          "cached_tokens": 20736
+        }
+      },
+      "file": "research\\persona_dna_library\\20260920_canheguiying_reincarnation_v2\\world_live_waves\\wave_08.md",
+      "closed": false,
+      "scene_headings": [],
+      "attempts": [
+        {
+          "kind": "primary",
+          "finish_reason": "length",
+          "content_len": 0,
+          "reasoning_len": 10603,
+          "usage": {
+            "completion_tokens": 8192,
+            "prompt_tokens": 20852,
+            "total_tokens": 29044,
+            "prompt_tokens_details": {
+              "cached_tokens": 11776
+            }
+          },
+          "latency_ms": 55402,
+          "transport_retries": []
+        },
+        {
+          "kind": "force_body_1",
+          "finish_reason": "stop",
+          "content_len": 5155,
+          "reasoning_len": 1476,
+          "usage": {
+            "completion_tokens": 5412,
+            "prompt_tokens": 20904,
+            "total_tokens": 26316,
+            "prompt_tokens_details": {
+              "cached_tokens": 20736
+            }
+          },
+          "latency_ms": 41384,
+          "transport_retries": []
+        }
+      ]
+    },
+    {
+      "wave": 9,
+      "status": "COMPLETED",
+      "model": "deepseek-v4.1-flash",
+      "requested_model": "deepseek-v4.1-flash",
+      "finish_reason": "stop",
+      "latency_ms": 48974,
+      "usage": {
+        "completion_tokens": 7503,
+        "prompt_tokens": 18313,
+        "total_tokens": 25816,
+        "prompt_tokens_details": {
+          "cached_tokens": 11776
+        }
+      },
+      "file": "research\\persona_dna_library\\20260920_canheguiying_reincarnation_v2\\world_live_waves\\wave_09.md",
+      "closed": false,
+      "scene_headings": [
+        "第55场｜日｜外｜荷园·塘东水口",
+        "第56场｜夜｜内｜荷园·听荷轩后间",
+        "第57场｜日｜内｜城里·钱家后院",
+        "第58场｜夜｜外｜荷园·塘西枯苇荡",
+        "第59场｜日｜内｜沈家老宅·正房东暖阁"
+      ],
+      "attempts": [
+        {
+          "kind": "primary",
+          "finish_reason": "stop",
+          "content_len": 3721,
+          "reasoning_len": 5694,
+          "usage": {
+            "completion_tokens": 7503,
+            "prompt_tokens": 18313,
+            "total_tokens": 25816,
+            "prompt_tokens_details": {
+              "cached_tokens": 11776
+            }
+          },
+          "latency_ms": 48974,
+          "transport_retries": []
+        }
+      ]
+    }
+  ],
+  "true_source_untouched": "evolve_candidate.v1.md",
+  "note": "活体演化候选。不是锁稿。未进生产。resume-safe。"
+}

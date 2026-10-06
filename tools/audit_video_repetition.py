@@ -15,6 +15,7 @@ from typing import Any, Callable
 
 import numpy as np
 import sys
+from tools.atomic_io import atomic_write_text
 
 sys.stdout.reconfigure(encoding="utf-8")  # Bug #1 fix: prevent UnicodeEncodeError on GBK console
 
@@ -134,7 +135,7 @@ def main() -> int:
     report = audit(args.video, sample_fps=args.sample_fps)
     if args.output:
         args.output.parent.mkdir(parents=True, exist_ok=True)
-        args.output.write_text(json.dumps(report, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+        atomic_write_text(args.output, json.dumps(report, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     print(json.dumps(report, ensure_ascii=False))
     return 0 if report.get("status") == "PASS" else 1
 

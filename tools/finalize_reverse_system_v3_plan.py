@@ -3,6 +3,7 @@ from __future__ import annotations
 import json
 from pathlib import Path
 import sys
+from tools.atomic_io import atomic_write_text
 
 sys.stdout.reconfigure(encoding="utf-8")  # Bug #1 fix: prevent UnicodeEncodeError on GBK console
 
@@ -30,8 +31,8 @@ def main() -> int:
     plan["gates"]["formal_run_allowed"] = True
     plan["gates"]["reference_probe"] = {"status": "PASS", "shot_id": "S01", "artifact": "provider_reference_probe/S01.mp4", "creative_identity": "PASS", "payload_mode": "reference", "reference_count": 4}
     plan["gates"]["reason"] = "S01 bounded reference-mode probe carried four public URLs, completed, and passed female identity/wardrobe/scene frame inspection. URLs are temporary and must be refreshed before any delayed submission."
-    path.write_text(json.dumps(plan, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
-    (PROJECT / "asset_gate_preflight.json").write_text(json.dumps({"status": "READY_FOR_FORMAL_RUN", "local_hashes": 4, "provider_reference_reads": 4, "provider_reference_gate": "PASS_TEMPORARY_URL_AND_IDENTITY_PROBE", "continuity_edges": len(plan["shots"]) - 1, "run_created": False}, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    atomic_write_text(path, json.dumps(plan, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    atomic_write_text((PROJECT / "asset_gate_preflight.json"), json.dumps({"status": "READY_FOR_FORMAL_RUN", "local_hashes": 4, "provider_reference_reads": 4, "provider_reference_gate": "PASS_TEMPORARY_URL_AND_IDENTITY_PROBE", "continuity_edges": len(plan["shots"]) - 1, "run_created": False}, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     print(json.dumps({"status": "READY_FOR_FORMAL_RUN", "plan": str(path)}, ensure_ascii=False, indent=2))
     return 0
 

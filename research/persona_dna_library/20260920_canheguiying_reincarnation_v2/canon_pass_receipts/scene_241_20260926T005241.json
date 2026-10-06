@@ -1,0 +1,68 @@
+{
+  "schema": "video_kingdom.canon_scene_pass.v1",
+  "at": "2026-09-26T00:52:19+08:00",
+  "lib": "D:\\视频创作\\ace-video-kingdom\\research\\persona_dna_library\\20260920_canheguiying_reincarnation_v2",
+  "next": 241,
+  "quota_used": 0,
+  "max_per_day": 2,
+  "scene": 241,
+  "heading": "第241场｜夜｜内｜清江浦·长庚锁记",
+  "wave": "wave_38",
+  "verdict": "PASS",
+  "fails": [],
+  "reasons": [],
+  "alive": {
+    "q1_person_not_manual": true,
+    "q2_not_ai": true,
+    "q3_will_not_settle": true
+  },
+  "conflict": {
+    "status": "PASS",
+    "errors": [],
+    "notes": [],
+    "scene_class": "B"
+  },
+  "forbidden_hits": [],
+  "quote_count": 16,
+  "packet": {
+    "schema": "video_kingdom.conflict_driven_scene.v1",
+    "scene_class": "B",
+    "goals": {
+      "a": "ask_or_press",
+      "b": "hold_boundary"
+    },
+    "change_at_end": {
+      "kind": "information",
+      "what": "本场变化：世界：顾良证实第四齿空留是故意——防抬闸见天；最后一笔酬是戴手套女人送的空莲蓬，师父拒收钥匙匣。关系：周培与顾良再次确认“不见锁、不完工、三个月可熔”，把匠人线彻底挡在税契之外。物件：干莲蓬仍在锁记抽屉、三角料仍待熔、影摹页将随周"
+    },
+    "lengthener": false,
+    "speech_intent_readable": true,
+    "completes_in_picture": true
+  },
+  "failure_mode_signals": {
+    "dialogue_density": 0.631578947368421,
+    "sensory_rate": 0.7894736842105263,
+    "near_dup": 1,
+    "alt_pingpong": 0,
+    "mono_speaker_share": 0.0,
+    "empty_paragraphs": 0,
+    "dialogue_only": 0,
+    "short_dialogue_runs": 1,
+    "lines": 19,
+    "dialogue_turns": 12,
+    "narration_turns": 7
+  },
+  "failure_mode_fails": [],
+  "publish": {
+    "source_chapter": "c241",
+    "completed_scenes": 241,
+    "published_units": 242,
+    "check_only": false
+  },
+  "deploy": {
+    "status": "OK",
+    "code": 0,
+    "stdout": "\n ⛅️ wrangler 4.132.0\n────────────────────\nUploading... (271/274)\nUploading... (272/274)\nUploading... (273/274)\nUploading... (274/274)\n✨ Success! Uploaded 3 files (271 already uploaded) (1.86 sec)\n\n✨ Uploading _headers\n🌎 Deploying...\n✨ Deployment complete! Take a peek over at https://f0bd17fa.tinghe-archive.pages.dev\n",
+    "stderr": ""
+  }
+}

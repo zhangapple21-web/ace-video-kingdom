@@ -1,0 +1,8 @@
+{
+  "schema": "video_kingdom.creator_encyclopedia_latest_export.v1",
+  "status": "LOCAL_ONLY",
+  "export": "exports/20260920_canheguiying_reincarnation_v2_v3",
+  "production_integration": false,
+  "deployment": "NOT_PERFORMED",
+  "source_run": "research/persona_dna_library/20260920_canheguiying_reincarnation_v2"
+}

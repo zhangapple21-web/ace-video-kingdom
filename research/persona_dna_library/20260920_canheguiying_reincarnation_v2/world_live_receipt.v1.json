@@ -1,0 +1,1010 @@
+{
+  "schema": "video_kingdom.world_live_receipt.v1",
+  "status": "COMPLETED",
+  "layer": "CREATOR_LIVE",
+  "production_integration": false,
+  "script_locked": false,
+  "agnes": "NOT_PERFORMED",
+  "beat": "NOT_PERFORMED",
+  "shot": "NOT_PERFORMED",
+  "model": "grok-4.7",
+  "gateway": "http://localhost:3000/v1",
+  "trace_id": "9ec3fc22581b4e7cb8b5624007013a55",
+  "waves_planned": 32,
+  "waves_run": 32,
+  "closed_by_world": false,
+  "elapsed_seconds": 30.4,
+  "files": {
+    "script": "research/persona_dna_library/20260920_canheguiying_reincarnation_v2/world_live_script.v1.md",
+    "summary": "research/persona_dna_library/20260920_canheguiying_reincarnation_v2/world_live_summary.v1.md",
+    "waves_dir": "research/persona_dna_library/20260920_canheguiying_reincarnation_v2/world_live_waves"
+  },
+  "completed_waves": [
+    {
+      "wave": 1,
+      "status": "COMPLETED",
+      "file": "research\\persona_dna_library\\20260920_canheguiying_reincarnation_v2\\world_live_waves\\wave_01.md",
+      "closed": false,
+      "scene_headings": [
+        "第11场｜日｜外｜荷园太湖石畔",
+        "第12场｜日｜内｜荷园前厅",
+        "第13场｜夜｜外｜荷园西北墙外小径",
+        "第14场｜夜｜内｜荷园书斋",
+        "第15场｜日｜外｜荷塘东小径·老梅树下",
+        "第16场｜日｜外｜城北甜水井巷口",
+        "第17场｜拂晓｜外｜荷园东小径·老梅树下",
+        "第18场｜日｜外｜荷园前厅·门房",
+        "第19场｜夜｜内｜荷园书斋"
+      ],
+      "resumed": true
+    },
+    {
+      "wave": 2,
+      "status": "COMPLETED",
+      "file": "research\\persona_dna_library\\20260920_canheguiying_reincarnation_v2\\world_live_waves\\wave_02.md",
+      "closed": false,
+      "scene_headings": [
+        "第20场｜日｜内｜城西钱伯昇宅·东厢",
+        "第21场｜日｜内｜县衙户房",
+        "第22场｜夜｜外｜荷园后门·西北墙下",
+        "第23场｜夜｜内｜荷园听荷轩",
+        "第24场｜日｜内｜县衙二堂",
+        "第25场｜夜｜外｜甜水井巷·包氏旧屋",
+        "第26场｜夜｜外｜荷园西北墙外·水塘埂"
+      ],
+      "resumed": true
+    },
+    {
+      "wave": 3,
+      "status": "COMPLETED",
+      "file": "research\\persona_dna_library\\20260920_canheguiying_reincarnation_v2\\world_live_waves\\wave_03.md",
+      "closed": false,
+      "scene_headings": [
+        "第27场｜日｜内｜荷园听荷轩",
+        "第28场｜日｜外｜荷塘北岸·柳下石凳",
+        "第29场｜夜｜外｜甜水井巷·包氏旧屋外",
+        "第30场｜晨｜外｜荷塘北墙外·窄巷尽头",
+        "第31场｜日｜外｜城东涵洞·石桥下"
+      ],
+      "resumed": true
+    },
+    {
+      "wave": 4,
+      "status": "COMPLETED",
+      "file": "research\\persona_dna_library\\20260920_canheguiying_reincarnation_v2\\world_live_waves\\wave_04.md",
+      "closed": false,
+      "scene_headings": [
+        "第32场｜日｜内｜福安客栈·临街小房",
+        "第33场｜夜｜内｜荷园听荷轩",
+        "第34场｜夜｜外｜城南·太平桥桥洞下",
+        "第35场｜日｜外｜荷园二门外·榆树下",
+        "第36场｜夜｜外｜荷园后门·砖阶前",
+        "第37场｜日｜外｜塘东·旧闸屋前",
+        "第38场｜夜｜内｜荷园灶房",
+        "第39场｜晨｜外｜荷园荷塘边"
+      ],
+      "resumed": true
+    },
+    {
+      "wave": 5,
+      "status": "COMPLETED",
+      "file": "research\\persona_dna_library\\20260920_canheguiying_reincarnation_v2\\world_live_waves\\wave_05.md",
+      "closed": false,
+      "scene_headings": [
+        "第40场｜日｜内｜沈家老宅·西厢",
+        "第41场｜日｜内｜县衙户房",
+        "第42场｜夜｜内｜荷园听荷轩",
+        "第43场｜日｜外｜城北·甜水井巷",
+        "第44场｜夜｜内｜荷园后罩房·客房",
+        "第45场｜日｜外｜城北·甜水井巷·李家旧院",
+        "第46场｜日｜内｜沈氏宗祠·享堂",
+        "第47场｜夜｜内｜荷园听荷轩",
+        "第48场｜日｜外｜城北·甜水井巷·李家旧院",
+        "第49场｜夜｜外｜城南·七眼石桥"
+      ],
+      "resumed": true
+    },
+    {
+      "wave": 6,
+      "status": "COMPLETED",
+      "file": "research\\persona_dna_library\\20260920_canheguiying_reincarnation_v2\\world_live_waves\\wave_06.md",
+      "closed": false,
+      "scene_headings": [
+        "第50场｜夜｜外｜荷园·塘东水口",
+        "第51场｜日｜外｜城南·河下游·旧渡口",
+        "第52场｜日｜内｜县衙·库房",
+        "第53场｜夜｜内｜荷园·听荷轩",
+        "第54场｜日｜内｜沈家老宅·账房"
+      ],
+      "resumed": true
+    },
+    {
+      "wave": 7,
+      "status": "COMPLETED",
+      "file": "research\\persona_dna_library\\20260920_canheguiying_reincarnation_v2\\world_live_waves\\wave_07.md",
+      "closed": false,
+      "scene_headings": [
+        "第55场｜日｜外｜城西·官道茶亭",
+        "第56场｜夜｜外｜荷园·塘东水口",
+        "第57场｜日｜内｜县衙·户房",
+        "第58场｜夜｜内｜城东·阮记旧铜铺",
+        "第59场｜夜｜内｜荷园·听荷轩"
+      ],
+      "resumed": true
+    },
+    {
+      "wave": 8,
+      "status": "COMPLETED",
+      "file": "research\\persona_dna_library\\20260920_canheguiying_reincarnation_v2\\world_live_waves\\wave_08.md",
+      "closed": false,
+      "scene_headings": [
+        "第60场｜晨｜外｜荷园·塘东水口",
+        "第61场｜日｜内｜荷园·听荷轩",
+        "第62场｜夜｜内｜沈家老宅·佛堂后院",
+        "第63场｜日｜外｜城东·阮记旧铜铺外巷",
+        "第64场｜夜｜外｜荷园·塘东水口"
+      ],
+      "resumed": true
+    },
+    {
+      "wave": 9,
+      "status": "COMPLETED",
+      "file": "research\\persona_dna_library\\20260920_canheguiying_reincarnation_v2\\world_live_waves\\wave_09.md",
+      "closed": false,
+      "scene_headings": [
+        "第65场｜夜｜外｜荷园·塘东涵洞口",
+        "第66场｜日｜外｜城北·甜水井巷口",
+        "第67场｜日｜内｜荷园·听荷轩",
+        "第68场｜夜｜内｜沈家老宅·佛堂后院",
+        "第69场｜晨｜外｜荷园·塘东水口"
+      ],
+      "resumed": true
+    },
+    {
+      "wave": 10,
+      "status": "COMPLETED",
+      "file": "research\\persona_dna_library\\20260920_canheguiying_reincarnation_v2\\world_live_waves\\wave_10.md",
+      "closed": false,
+      "scene_headings": [
+        "第70场｜日｜内｜县衙·户房前廊",
+        "第71场｜日｜外｜城北·李家旧坟北·河埂",
+        "第72场｜夜｜内｜沈家老宅·佛堂后院",
+        "第73场｜日｜内｜县衙·户房前廊",
+        "第74场｜夜｜外｜荷园·塘东水口"
+      ],
+      "resumed": true
+    },
+    {
+      "wave": 11,
+      "status": "COMPLETED",
+      "file": "research\\persona_dna_library\\20260920_canheguiying_reincarnation_v2\\world_live_waves\\wave_11.md",
+      "closed": false,
+      "scene_headings": [
+        "第75场｜日｜外｜沈家老宅后巷·角门",
+        "第76场｜夜｜外｜城北·河埂·焦十九船屋",
+        "第77场｜日｜外｜荷园·二门外·塘东小径",
+        "第78场｜夜｜外｜荷园·塘东水口·闸屋前",
+        "第79场｜日｜内｜县衙·户房前廊",
+        "第80场｜夜｜内｜沈家老宅·正堂",
+        "第81场｜夜｜内｜荷园·西厢",
+        "第82场｜夜｜内｜县衙·二堂值房"
+      ],
+      "resumed": true
+    },
+    {
+      "wave": 12,
+      "status": "COMPLETED",
+      "file": "research\\persona_dna_library\\20260920_canheguiying_reincarnation_v2\\world_live_waves\\wave_12.md",
+      "closed": false,
+      "scene_headings": [
+        "第83场｜日｜内｜县衙·二堂",
+        "第84场｜夜｜外｜沈家老宅·后巷·韩老吏角门外",
+        "第85场｜日｜外｜荷园·二门内·门廊",
+        "第86场｜夜｜内｜荷园·听荷轩"
+      ],
+      "resumed": true
+    },
+    {
+      "wave": 13,
+      "status": "COMPLETED",
+      "file": "research\\persona_dna_library\\20260920_canheguiying_reincarnation_v2\\world_live_waves\\wave_13.md",
+      "closed": false,
+      "scene_headings": [
+        "第87场｜日｜内｜县衙·户房东厢",
+        "第88场｜日｜外｜城西·甜水井废银铺",
+        "第89场｜夜｜外｜荷园·塘东涵洞口",
+        "第90场｜夜｜内｜沈家老宅·正堂后内室",
+        "第91场｜夜｜内｜荷园·听荷轩"
+      ],
+      "resumed": true
+    },
+    {
+      "wave": 14,
+      "status": "COMPLETED",
+      "file": "research\\persona_dna_library\\20260920_canheguiying_reincarnation_v2\\world_live_waves\\wave_14.md",
+      "closed": false,
+      "scene_headings": [
+        "第92场｜夜｜外｜荷园·塘东涵洞口",
+        "第93场｜日｜外｜城西·甜水井废银铺",
+        "第94场｜日｜外｜城北·夏家旧坟坡",
+        "第95场｜夜｜内｜荷园·听荷轩",
+        "第96场｜夜｜内｜沈家老宅·正堂后内室"
+      ],
+      "resumed": true
+    },
+    {
+      "wave": 15,
+      "status": "COMPLETED",
+      "file": "research\\persona_dna_library\\20260920_canheguiying_reincarnation_v2\\world_live_waves\\wave_15.md",
+      "closed": false,
+      "scene_headings": [
+        "第97场｜日｜外｜荷园·塘东涵洞口",
+        "第98场｜日｜内｜城东·永和粮行",
+        "第99场｜夜｜外｜荷园·死塘南岸",
+        "第100场｜日｜外｜荷园·听荷轩前院",
+        "第101场｜夜｜内｜沈家老宅·偏厅"
+      ],
+      "resumed": true
+    },
+    {
+      "wave": 16,
+      "status": "COMPLETED",
+      "file": "research\\persona_dna_library\\20260920_canheguiying_reincarnation_v2\\world_live_waves\\wave_16.md",
+      "closed": false,
+      "scene_headings": [
+        "第102场｜日｜外｜荷园后门外窄巷",
+        "第103场｜日｜内｜荷园·听荷轩",
+        "第104场｜夜｜外｜荷园·死塘南岸",
+        "第105场｜日｜外｜县衙·二堂前石阶",
+        "第106场｜日｜内｜县衙·二堂"
+      ],
+      "resumed": true
+    },
+    {
+      "wave": 17,
+      "status": "COMPLETED",
+      "file": "research\\persona_dna_library\\20260920_canheguiying_reincarnation_v2\\world_live_waves\\wave_17.md",
+      "closed": false,
+      "scene_headings": [
+        "第107场｜日｜外｜城北甜水井巷",
+        "第108场｜日｜内｜沈家老宅偏厅",
+        "第109场｜日｜外｜荷园·死塘南岸",
+        "第110场｜夜｜外｜荷园后门外窄巷",
+        "第111场｜日｜内｜县衙·二堂"
+      ],
+      "resumed": true
+    },
+    {
+      "wave": 18,
+      "status": "COMPLETED",
+      "file": "research\\persona_dna_library\\20260920_canheguiying_reincarnation_v2\\world_live_waves\\wave_18.md",
+      "closed": false,
+      "scene_headings": [
+        "第112场｜日｜内｜县衙·二堂",
+        "第113场｜日｜内｜县衙·后堂偏房",
+        "第114场｜夜｜外｜荷园·死塘南岸",
+        "第115场｜日｜内｜城北甜水井巷·董家",
+        "第116场｜夜｜内｜荷园·听荷轩",
+        "第117场｜日｜内｜县衙·二堂",
+        "第118场｜夜｜内｜城北甜水井巷·董家",
+        "第119场｜夜｜内｜荷园·听荷轩",
+        "第120场｜夜｜外｜荷园·死塘南岸"
+      ],
+      "resumed": true
+    },
+    {
+      "wave": 19,
+      "status": "COMPLETED",
+      "file": "research\\persona_dna_library\\20260920_canheguiying_reincarnation_v2\\world_live_waves\\wave_19.md",
+      "closed": false,
+      "scene_headings": [
+        "第121场｜日｜内｜城北甜水井巷·董家",
+        "第122场｜日｜外｜城北·义地",
+        "第123场｜夜｜外｜荷园·死塘南岸",
+        "第124场｜日｜内｜县衙·二堂",
+        "第125场｜夜｜内｜荷园·听荷轩",
+        "第126场｜日｜外｜城南·宋家巷石作"
+      ],
+      "resumed": true
+    },
+    {
+      "wave": 20,
+      "status": "COMPLETED",
+      "file": "research\\persona_dna_library\\20260920_canheguiying_reincarnation_v2\\world_live_waves\\wave_20.md",
+      "closed": false,
+      "scene_headings": [
+        "第127场｜夜｜内｜沈家老宅·佛堂",
+        "第128场｜日｜外｜城南·宋家巷石作",
+        "第129场｜昏｜外｜荷园·死塘南岸",
+        "第130场｜夜｜内｜沈家老宅·正堂",
+        "第131场｜夜｜内｜荷园·听荷轩"
+      ],
+      "resumed": true
+    },
+    {
+      "wave": 21,
+      "status": "COMPLETED",
+      "file": "research\\persona_dna_library\\20260920_canheguiying_reincarnation_v2\\world_live_waves\\wave_21.md",
+      "closed": false,
+      "scene_headings": [
+        "第132场｜日｜外｜城北·甜水井巷",
+        "第133场｜日｜外｜城北义地",
+        "第134场｜夜｜内｜沈家老宅·佛堂",
+        "第135场｜夜｜内｜荷园·听荷轩",
+        "第136场｜夜｜内｜沈家老宅·佛堂"
+      ],
+      "resumed": true
+    },
+    {
+      "wave": 22,
+      "status": "COMPLETED",
+      "file": "research\\persona_dna_library\\20260920_canheguiying_reincarnation_v2\\world_live_waves\\wave_22.md",
+      "closed": false,
+      "scene_headings": [
+        "第137场｜夜｜内｜沈家老宅·正堂",
+        "第138场｜日｜外｜城南宋家巷石作",
+        "第139场｜日｜外｜荷园·二门外前院",
+        "第140场｜日｜外｜城北义地",
+        "第141场｜夜｜内/外｜荷园·听荷轩与后堂旧匾处"
+      ],
+      "resumed": true
+    },
+    {
+      "wave": 23,
+      "status": "COMPLETED",
+      "file": "research\\persona_dna_library\\20260920_canheguiying_reincarnation_v2\\world_live_waves\\wave_23.md",
+      "closed": false,
+      "scene_headings": [
+        "第142场｜日｜外｜荷园·塘东涵洞口",
+        "第143场｜夜｜内｜沈家老宅·祠堂",
+        "第144场｜日｜内｜县衙户房前廊",
+        "第145场｜夜｜外｜荷园·二门外石阶",
+        "第146场｜夜｜外｜荷园·塘东船屋外"
+      ],
+      "resumed": true
+    },
+    {
+      "wave": 24,
+      "status": "COMPLETED",
+      "file": "research\\persona_dna_library\\20260920_canheguiying_reincarnation_v2\\world_live_waves\\wave_24.md",
+      "closed": false,
+      "scene_headings": [
+        "第147场｜日｜外｜荷园·塘东水口",
+        "第148场｜夜｜内｜沈家老宅·后院佛堂",
+        "第149场｜日｜内｜城北·旧香铺后院",
+        "第150场｜日｜内｜荷园·听荷轩",
+        "第151场｜夜｜外｜荷园·后堂门外"
+      ],
+      "resumed": true
+    },
+    {
+      "wave": 25,
+      "status": "COMPLETED",
+      "file": "research\\persona_dna_library\\20260920_canheguiying_reincarnation_v2\\world_live_waves\\wave_25.md",
+      "closed": false,
+      "scene_headings": [
+        "第152场｜日｜外｜荷园·塘东船屋",
+        "第153场｜夜｜外｜城北·郑家巷口",
+        "第154场｜日｜内｜荷园·听荷轩",
+        "第155场｜夜｜外｜荷园·塘东水口",
+        "第156场｜日｜内｜沈家老宅·后院佛堂"
+      ],
+      "resumed": true
+    },
+    {
+      "wave": 26,
+      "status": "COMPLETED",
+      "file": "research\\persona_dna_library\\20260920_canheguiying_reincarnation_v2\\world_live_waves\\wave_26.md",
+      "closed": false,
+      "scene_headings": [
+        "第157场｜日｜内｜县衙·户房前廊",
+        "第158场｜日｜外｜城北·郑家巷口炭铺",
+        "第159场｜夜｜内｜荷园·听荷轩",
+        "第160场｜日｜内｜沈家老宅·后院佛堂外间",
+        "第161场｜日｜外｜荷园·后堂门外"
+      ],
+      "resumed": true
+    },
+    {
+      "wave": 27,
+      "status": "COMPLETED",
+      "file": "research\\persona_dna_library\\20260920_canheguiying_reincarnation_v2\\world_live_waves\\wave_27.md",
+      "closed": false,
+      "scene_headings": [
+        "第162场｜夜｜内｜沈家老宅·正房外间",
+        "第163场｜日｜外｜城北·郑家巷黑漆门前",
+        "第164场｜日｜内｜县衙·户房后间",
+        "第165场｜夜｜内｜荷园·听荷轩",
+        "第166场｜日｜内｜县衙·户房后间"
+      ],
+      "resumed": true
+    },
+    {
+      "wave": 28,
+      "status": "COMPLETED",
+      "file": "research\\persona_dna_library\\20260920_canheguiying_reincarnation_v2\\world_live_waves\\wave_28.md",
+      "closed": false,
+      "scene_headings": [
+        "第167场｜夜｜外｜荷园·塘东涵洞口",
+        "第168场｜夜｜内｜沈家老宅·后院佛堂外间",
+        "第169场｜日｜外｜城北·郑家巷黑漆门前",
+        "第170场｜日｜内｜县衙·户房后间",
+        "第171场｜夜｜内｜荷园·听荷轩",
+        "第172场｜日｜外｜城北·小庙山门外",
+        "第173场｜日｜内｜荷园·前院门房",
+        "第174场｜夜｜内｜荷园·后堂廊下",
+        "第175场｜夜｜外｜荷园·塘东界石边"
+      ],
+      "resumed": true
+    },
+    {
+      "wave": 29,
+      "status": "COMPLETED",
+      "file": "research\\persona_dna_library\\20260920_canheguiying_reincarnation_v2\\world_live_waves\\wave_29.md",
+      "closed": false,
+      "scene_headings": [
+        "第176场｜日｜外｜城西·连氏院门前巷口",
+        "第177场｜夜｜内｜沈家老宅·后院佛堂",
+        "第178场｜夜｜外｜荷园·西墙下至后堂门",
+        "第179场｜日｜内｜县衙·户房后间",
+        "第180场｜日｜内｜荷园·听荷轩"
+      ],
+      "resumed": true
+    },
+    {
+      "wave": 30,
+      "status": "COMPLETED",
+      "file": "research\\persona_dna_library\\20260920_canheguiying_reincarnation_v2\\world_live_waves\\wave_30.md",
+      "closed": false,
+      "scene_headings": [
+        "第181场｜日｜内｜县衙·户房后间",
+        "第182场｜夜｜外｜城北·郑家巷黑漆门外",
+        "第183场｜日｜内｜城南·连氏院",
+        "第184场｜夜｜内｜荷园·前院门房",
+        "第185场｜夜｜外｜荷园·塘东界石边",
+        "第186场｜日｜内｜沈家老宅·后院佛堂"
+      ],
+      "resumed": true
+    },
+    {
+      "wave": 31,
+      "status": "COMPLETED",
+      "file": "research\\persona_dna_library\\20260920_canheguiying_reincarnation_v2\\world_live_waves\\wave_31.md",
+      "closed": false,
+      "scene_headings": [
+        "第187场｜日｜外｜荷园·塘东界石边",
+        "第188场｜日｜内｜沈家老宅·后院佛堂",
+        "第189场｜夜｜内｜荷园·后院厨房",
+        "第190场｜夜｜外｜城北·郑家巷黑漆门外",
+        "第191场｜夜｜外｜荷园·塘东界石边"
+      ],
+      "resumed": true
+    },
+    {
+      "wave": 32,
+      "status": "COMPLETED",
+      "file": "research\\persona_dna_library\\20260920_canheguiying_reincarnation_v2\\world_live_waves\\wave_32.md",
+      "closed": false,
+      "scene_headings": [
+        "第192场｜日｜内｜县衙户房后间",
+        "第193场｜日｜外｜荷园·塘东界石边",
+        "第194场｜夜｜内｜沈家老宅·后院佛堂",
+        "第195场｜夜｜外｜荷园·塘东界石边",
+        "第196场｜日｜内｜县衙户房后间",
+        "第197场｜夜｜外｜城北·郑家巷黑漆门外",
+        "第198场｜日｜外｜荷园·塘东界石边"
+      ],
+      "resumed": true
+    }
+  ],
+  "waves": [
+    {
+      "wave": 1,
+      "status": "COMPLETED",
+      "file": "research\\persona_dna_library\\20260920_canheguiying_reincarnation_v2\\world_live_waves\\wave_01.md",
+      "closed": false,
+      "scene_headings": [
+        "第11场｜日｜外｜荷园太湖石畔",
+        "第12场｜日｜内｜荷园前厅",
+        "第13场｜夜｜外｜荷园西北墙外小径",
+        "第14场｜夜｜内｜荷园书斋",
+        "第15场｜日｜外｜荷塘东小径·老梅树下",
+        "第16场｜日｜外｜城北甜水井巷口",
+        "第17场｜拂晓｜外｜荷园东小径·老梅树下",
+        "第18场｜日｜外｜荷园前厅·门房",
+        "第19场｜夜｜内｜荷园书斋"
+      ],
+      "resumed": true
+    },
+    {
+      "wave": 2,
+      "status": "COMPLETED",
+      "file": "research\\persona_dna_library\\20260920_canheguiying_reincarnation_v2\\world_live_waves\\wave_02.md",
+      "closed": false,
+      "scene_headings": [
+        "第20场｜日｜内｜城西钱伯昇宅·东厢",
+        "第21场｜日｜内｜县衙户房",
+        "第22场｜夜｜外｜荷园后门·西北墙下",
+        "第23场｜夜｜内｜荷园听荷轩",
+        "第24场｜日｜内｜县衙二堂",
+        "第25场｜夜｜外｜甜水井巷·包氏旧屋",
+        "第26场｜夜｜外｜荷园西北墙外·水塘埂"
+      ],
+      "resumed": true
+    },
+    {
+      "wave": 3,
+      "status": "COMPLETED",
+      "file": "research\\persona_dna_library\\20260920_canheguiying_reincarnation_v2\\world_live_waves\\wave_03.md",
+      "closed": false,
+      "scene_headings": [
+        "第27场｜日｜内｜荷园听荷轩",
+        "第28场｜日｜外｜荷塘北岸·柳下石凳",
+        "第29场｜夜｜外｜甜水井巷·包氏旧屋外",
+        "第30场｜晨｜外｜荷塘北墙外·窄巷尽头",
+        "第31场｜日｜外｜城东涵洞·石桥下"
+      ],
+      "resumed": true
+    },
+    {
+      "wave": 4,
+      "status": "COMPLETED",
+      "file": "research\\persona_dna_library\\20260920_canheguiying_reincarnation_v2\\world_live_waves\\wave_04.md",
+      "closed": false,
+      "scene_headings": [
+        "第32场｜日｜内｜福安客栈·临街小房",
+        "第33场｜夜｜内｜荷园听荷轩",
+        "第34场｜夜｜外｜城南·太平桥桥洞下",
+        "第35场｜日｜外｜荷园二门外·榆树下",
+        "第36场｜夜｜外｜荷园后门·砖阶前",
+        "第37场｜日｜外｜塘东·旧闸屋前",
+        "第38场｜夜｜内｜荷园灶房",
+        "第39场｜晨｜外｜荷园荷塘边"
+      ],
+      "resumed": true
+    },
+    {
+      "wave": 5,
+      "status": "COMPLETED",
+      "file": "research\\persona_dna_library\\20260920_canheguiying_reincarnation_v2\\world_live_waves\\wave_05.md",
+      "closed": false,
+      "scene_headings": [
+        "第40场｜日｜内｜沈家老宅·西厢",
+        "第41场｜日｜内｜县衙户房",
+        "第42场｜夜｜内｜荷园听荷轩",
+        "第43场｜日｜外｜城北·甜水井巷",
+        "第44场｜夜｜内｜荷园后罩房·客房",
+        "第45场｜日｜外｜城北·甜水井巷·李家旧院",
+        "第46场｜日｜内｜沈氏宗祠·享堂",
+        "第47场｜夜｜内｜荷园听荷轩",
+        "第48场｜日｜外｜城北·甜水井巷·李家旧院",
+        "第49场｜夜｜外｜城南·七眼石桥"
+      ],
+      "resumed": true
+    },
+    {
+      "wave": 6,
+      "status": "COMPLETED",
+      "file": "research\\persona_dna_library\\20260920_canheguiying_reincarnation_v2\\world_live_waves\\wave_06.md",
+      "closed": false,
+      "scene_headings": [
+        "第50场｜夜｜外｜荷园·塘东水口",
+        "第51场｜日｜外｜城南·河下游·旧渡口",
+        "第52场｜日｜内｜县衙·库房",
+        "第53场｜夜｜内｜荷园·听荷轩",
+        "第54场｜日｜内｜沈家老宅·账房"
+      ],
+      "resumed": true
+    },
+    {
+      "wave": 7,
+      "status": "COMPLETED",
+      "file": "research\\persona_dna_library\\20260920_canheguiying_reincarnation_v2\\world_live_waves\\wave_07.md",
+      "closed": false,
+      "scene_headings": [
+        "第55场｜日｜外｜城西·官道茶亭",
+        "第56场｜夜｜外｜荷园·塘东水口",
+        "第57场｜日｜内｜县衙·户房",
+        "第58场｜夜｜内｜城东·阮记旧铜铺",
+        "第59场｜夜｜内｜荷园·听荷轩"
+      ],
+      "resumed": true
+    },
+    {
+      "wave": 8,
+      "status": "COMPLETED",
+      "file": "research\\persona_dna_library\\20260920_canheguiying_reincarnation_v2\\world_live_waves\\wave_08.md",
+      "closed": false,
+      "scene_headings": [
+        "第60场｜晨｜外｜荷园·塘东水口",
+        "第61场｜日｜内｜荷园·听荷轩",
+        "第62场｜夜｜内｜沈家老宅·佛堂后院",
+        "第63场｜日｜外｜城东·阮记旧铜铺外巷",
+        "第64场｜夜｜外｜荷园·塘东水口"
+      ],
+      "resumed": true
+    },
+    {
+      "wave": 9,
+      "status": "COMPLETED",
+      "file": "research\\persona_dna_library\\20260920_canheguiying_reincarnation_v2\\world_live_waves\\wave_09.md",
+      "closed": false,
+      "scene_headings": [
+        "第65场｜夜｜外｜荷园·塘东涵洞口",
+        "第66场｜日｜外｜城北·甜水井巷口",
+        "第67场｜日｜内｜荷园·听荷轩",
+        "第68场｜夜｜内｜沈家老宅·佛堂后院",
+        "第69场｜晨｜外｜荷园·塘东水口"
+      ],
+      "resumed": true
+    },
+    {
+      "wave": 10,
+      "status": "COMPLETED",
+      "file": "research\\persona_dna_library\\20260920_canheguiying_reincarnation_v2\\world_live_waves\\wave_10.md",
+      "closed": false,
+      "scene_headings": [
+        "第70场｜日｜内｜县衙·户房前廊",
+        "第71场｜日｜外｜城北·李家旧坟北·河埂",
+        "第72场｜夜｜内｜沈家老宅·佛堂后院",
+        "第73场｜日｜内｜县衙·户房前廊",
+        "第74场｜夜｜外｜荷园·塘东水口"
+      ],
+      "resumed": true
+    },
+    {
+      "wave": 11,
+      "status": "COMPLETED",
+      "file": "research\\persona_dna_library\\20260920_canheguiying_reincarnation_v2\\world_live_waves\\wave_11.md",
+      "closed": false,
+      "scene_headings": [
+        "第75场｜日｜外｜沈家老宅后巷·角门",
+        "第76场｜夜｜外｜城北·河埂·焦十九船屋",
+        "第77场｜日｜外｜荷园·二门外·塘东小径",
+        "第78场｜夜｜外｜荷园·塘东水口·闸屋前",
+        "第79场｜日｜内｜县衙·户房前廊",
+        "第80场｜夜｜内｜沈家老宅·正堂",
+        "第81场｜夜｜内｜荷园·西厢",
+        "第82场｜夜｜内｜县衙·二堂值房"
+      ],
+      "resumed": true
+    },
+    {
+      "wave": 12,
+      "status": "COMPLETED",
+      "file": "research\\persona_dna_library\\20260920_canheguiying_reincarnation_v2\\world_live_waves\\wave_12.md",
+      "closed": false,
+      "scene_headings": [
+        "第83场｜日｜内｜县衙·二堂",
+        "第84场｜夜｜外｜沈家老宅·后巷·韩老吏角门外",
+        "第85场｜日｜外｜荷园·二门内·门廊",
+        "第86场｜夜｜内｜荷园·听荷轩"
+      ],
+      "resumed": true
+    },
+    {
+      "wave": 13,
+      "status": "COMPLETED",
+      "file": "research\\persona_dna_library\\20260920_canheguiying_reincarnation_v2\\world_live_waves\\wave_13.md",
+      "closed": false,
+      "scene_headings": [
+        "第87场｜日｜内｜县衙·户房东厢",
+        "第88场｜日｜外｜城西·甜水井废银铺",
+        "第89场｜夜｜外｜荷园·塘东涵洞口",
+        "第90场｜夜｜内｜沈家老宅·正堂后内室",
+        "第91场｜夜｜内｜荷园·听荷轩"
+      ],
+      "resumed": true
+    },
+    {
+      "wave": 14,
+      "status": "COMPLETED",
+      "file": "research\\persona_dna_library\\20260920_canheguiying_reincarnation_v2\\world_live_waves\\wave_14.md",
+      "closed": false,
+      "scene_headings": [
+        "第92场｜夜｜外｜荷园·塘东涵洞口",
+        "第93场｜日｜外｜城西·甜水井废银铺",
+        "第94场｜日｜外｜城北·夏家旧坟坡",
+        "第95场｜夜｜内｜荷园·听荷轩",
+        "第96场｜夜｜内｜沈家老宅·正堂后内室"
+      ],
+      "resumed": true
+    },
+    {
+      "wave": 15,
+      "status": "COMPLETED",
+      "file": "research\\persona_dna_library\\20260920_canheguiying_reincarnation_v2\\world_live_waves\\wave_15.md",
+      "closed": false,
+      "scene_headings": [
+        "第97场｜日｜外｜荷园·塘东涵洞口",
+        "第98场｜日｜内｜城东·永和粮行",
+        "第99场｜夜｜外｜荷园·死塘南岸",
+        "第100场｜日｜外｜荷园·听荷轩前院",
+        "第101场｜夜｜内｜沈家老宅·偏厅"
+      ],
+      "resumed": true
+    },
+    {
+      "wave": 16,
+      "status": "COMPLETED",
+      "file": "research\\persona_dna_library\\20260920_canheguiying_reincarnation_v2\\world_live_waves\\wave_16.md",
+      "closed": false,
+      "scene_headings": [
+        "第102场｜日｜外｜荷园后门外窄巷",
+        "第103场｜日｜内｜荷园·听荷轩",
+        "第104场｜夜｜外｜荷园·死塘南岸",
+        "第105场｜日｜外｜县衙·二堂前石阶",
+        "第106场｜日｜内｜县衙·二堂"
+      ],
+      "resumed": true
+    },
+    {
+      "wave": 17,
+      "status": "COMPLETED",
+      "file": "research\\persona_dna_library\\20260920_canheguiying_reincarnation_v2\\world_live_waves\\wave_17.md",
+      "closed": false,
+      "scene_headings": [
+        "第107场｜日｜外｜城北甜水井巷",
+        "第108场｜日｜内｜沈家老宅偏厅",
+        "第109场｜日｜外｜荷园·死塘南岸",
+        "第110场｜夜｜外｜荷园后门外窄巷",
+        "第111场｜日｜内｜县衙·二堂"
+      ],
+      "resumed": true
+    },
+    {
+      "wave": 18,
+      "status": "COMPLETED",
+      "file": "research\\persona_dna_library\\20260920_canheguiying_reincarnation_v2\\world_live_waves\\wave_18.md",
+      "closed": false,
+      "scene_headings": [
+        "第112场｜日｜内｜县衙·二堂",
+        "第113场｜日｜内｜县衙·后堂偏房",
+        "第114场｜夜｜外｜荷园·死塘南岸",
+        "第115场｜日｜内｜城北甜水井巷·董家",
+        "第116场｜夜｜内｜荷园·听荷轩",
+        "第117场｜日｜内｜县衙·二堂",
+        "第118场｜夜｜内｜城北甜水井巷·董家",
+        "第119场｜夜｜内｜荷园·听荷轩",
+        "第120场｜夜｜外｜荷园·死塘南岸"
+      ],
+      "resumed": true
+    },
+    {
+      "wave": 19,
+      "status": "COMPLETED",
+      "file": "research\\persona_dna_library\\20260920_canheguiying_reincarnation_v2\\world_live_waves\\wave_19.md",
+      "closed": false,
+      "scene_headings": [
+        "第121场｜日｜内｜城北甜水井巷·董家",
+        "第122场｜日｜外｜城北·义地",
+        "第123场｜夜｜外｜荷园·死塘南岸",
+        "第124场｜日｜内｜县衙·二堂",
+        "第125场｜夜｜内｜荷园·听荷轩",
+        "第126场｜日｜外｜城南·宋家巷石作"
+      ],
+      "resumed": true
+    },
+    {
+      "wave": 20,
+      "status": "COMPLETED",
+      "file": "research\\persona_dna_library\\20260920_canheguiying_reincarnation_v2\\world_live_waves\\wave_20.md",
+      "closed": false,
+      "scene_headings": [
+        "第127场｜夜｜内｜沈家老宅·佛堂",
+        "第128场｜日｜外｜城南·宋家巷石作",
+        "第129场｜昏｜外｜荷园·死塘南岸",
+        "第130场｜夜｜内｜沈家老宅·正堂",
+        "第131场｜夜｜内｜荷园·听荷轩"
+      ],
+      "resumed": true
+    },
+    {
+      "wave": 21,
+      "status": "COMPLETED",
+      "file": "research\\persona_dna_library\\20260920_canheguiying_reincarnation_v2\\world_live_waves\\wave_21.md",
+      "closed": false,
+      "scene_headings": [
+        "第132场｜日｜外｜城北·甜水井巷",
+        "第133场｜日｜外｜城北义地",
+        "第134场｜夜｜内｜沈家老宅·佛堂",
+        "第135场｜夜｜内｜荷园·听荷轩",
+        "第136场｜夜｜内｜沈家老宅·佛堂"
+      ],
+      "resumed": true
+    },
+    {
+      "wave": 22,
+      "status": "COMPLETED",
+      "file": "research\\persona_dna_library\\20260920_canheguiying_reincarnation_v2\\world_live_waves\\wave_22.md",
+      "closed": false,
+      "scene_headings": [
+        "第137场｜夜｜内｜沈家老宅·正堂",
+        "第138场｜日｜外｜城南宋家巷石作",
+        "第139场｜日｜外｜荷园·二门外前院",
+        "第140场｜日｜外｜城北义地",
+        "第141场｜夜｜内/外｜荷园·听荷轩与后堂旧匾处"
+      ],
+      "resumed": true
+    },
+    {
+      "wave": 23,
+      "status": "COMPLETED",
+      "file": "research\\persona_dna_library\\20260920_canheguiying_reincarnation_v2\\world_live_waves\\wave_23.md",
+      "closed": false,
+      "scene_headings": [
+        "第142场｜日｜外｜荷园·塘东涵洞口",
+        "第143场｜夜｜内｜沈家老宅·祠堂",
+        "第144场｜日｜内｜县衙户房前廊",
+        "第145场｜夜｜外｜荷园·二门外石阶",
+        "第146场｜夜｜外｜荷园·塘东船屋外"
+      ],
+      "resumed": true
+    },
+    {
+      "wave": 24,
+      "status": "COMPLETED",
+      "file": "research\\persona_dna_library\\20260920_canheguiying_reincarnation_v2\\world_live_waves\\wave_24.md",
+      "closed": false,
+      "scene_headings": [
+        "第147场｜日｜外｜荷园·塘东水口",
+        "第148场｜夜｜内｜沈家老宅·后院佛堂",
+        "第149场｜日｜内｜城北·旧香铺后院",
+        "第150场｜日｜内｜荷园·听荷轩",
+        "第151场｜夜｜外｜荷园·后堂门外"
+      ],
+      "resumed": true
+    },
+    {
+      "wave": 25,
+      "status": "COMPLETED",
+      "file": "research\\persona_dna_library\\20260920_canheguiying_reincarnation_v2\\world_live_waves\\wave_25.md",
+      "closed": false,
+      "scene_headings": [
+        "第152场｜日｜外｜荷园·塘东船屋",
+        "第153场｜夜｜外｜城北·郑家巷口",
+        "第154场｜日｜内｜荷园·听荷轩",
+        "第155场｜夜｜外｜荷园·塘东水口",
+        "第156场｜日｜内｜沈家老宅·后院佛堂"
+      ],
+      "resumed": true
+    },
+    {
+      "wave": 26,
+      "status": "COMPLETED",
+      "file": "research\\persona_dna_library\\20260920_canheguiying_reincarnation_v2\\world_live_waves\\wave_26.md",
+      "closed": false,
+      "scene_headings": [
+        "第157场｜日｜内｜县衙·户房前廊",
+        "第158场｜日｜外｜城北·郑家巷口炭铺",
+        "第159场｜夜｜内｜荷园·听荷轩",
+        "第160场｜日｜内｜沈家老宅·后院佛堂外间",
+        "第161场｜日｜外｜荷园·后堂门外"
+      ],
+      "resumed": true
+    },
+    {
+      "wave": 27,
+      "status": "COMPLETED",
+      "file": "research\\persona_dna_library\\20260920_canheguiying_reincarnation_v2\\world_live_waves\\wave_27.md",
+      "closed": false,
+      "scene_headings": [
+        "第162场｜夜｜内｜沈家老宅·正房外间",
+        "第163场｜日｜外｜城北·郑家巷黑漆门前",
+        "第164场｜日｜内｜县衙·户房后间",
+        "第165场｜夜｜内｜荷园·听荷轩",
+        "第166场｜日｜内｜县衙·户房后间"
+      ],
+      "resumed": true
+    },
+    {
+      "wave": 28,
+      "status": "COMPLETED",
+      "file": "research\\persona_dna_library\\20260920_canheguiying_reincarnation_v2\\world_live_waves\\wave_28.md",
+      "closed": false,
+      "scene_headings": [
+        "第167场｜夜｜外｜荷园·塘东涵洞口",
+        "第168场｜夜｜内｜沈家老宅·后院佛堂外间",
+        "第169场｜日｜外｜城北·郑家巷黑漆门前",
+        "第170场｜日｜内｜县衙·户房后间",
+        "第171场｜夜｜内｜荷园·听荷轩",
+        "第172场｜日｜外｜城北·小庙山门外",
+        "第173场｜日｜内｜荷园·前院门房",
+        "第174场｜夜｜内｜荷园·后堂廊下",
+        "第175场｜夜｜外｜荷园·塘东界石边"
+      ],
+      "resumed": true
+    },
+    {
+      "wave": 29,
+      "status": "COMPLETED",
+      "file": "research\\persona_dna_library\\20260920_canheguiying_reincarnation_v2\\world_live_waves\\wave_29.md",
+      "closed": false,
+      "scene_headings": [
+        "第176场｜日｜外｜城西·连氏院门前巷口",
+        "第177场｜夜｜内｜沈家老宅·后院佛堂",
+        "第178场｜夜｜外｜荷园·西墙下至后堂门",
+        "第179场｜日｜内｜县衙·户房后间",
+        "第180场｜日｜内｜荷园·听荷轩"
+      ],
+      "resumed": true
+    },
+    {
+      "wave": 30,
+      "status": "COMPLETED",
+      "file": "research\\persona_dna_library\\20260920_canheguiying_reincarnation_v2\\world_live_waves\\wave_30.md",
+      "closed": false,
+      "scene_headings": [
+        "第181场｜日｜内｜县衙·户房后间",
+        "第182场｜夜｜外｜城北·郑家巷黑漆门外",
+        "第183场｜日｜内｜城南·连氏院",
+        "第184场｜夜｜内｜荷园·前院门房",
+        "第185场｜夜｜外｜荷园·塘东界石边",
+        "第186场｜日｜内｜沈家老宅·后院佛堂"
+      ],
+      "resumed": true
+    },
+    {
+      "wave": 31,
+      "status": "COMPLETED",
+      "file": "research\\persona_dna_library\\20260920_canheguiying_reincarnation_v2\\world_live_waves\\wave_31.md",
+      "closed": false,
+      "scene_headings": [
+        "第187场｜日｜外｜荷园·塘东界石边",
+        "第188场｜日｜内｜沈家老宅·后院佛堂",
+        "第189场｜夜｜内｜荷园·后院厨房",
+        "第190场｜夜｜外｜城北·郑家巷黑漆门外",
+        "第191场｜夜｜外｜荷园·塘东界石边"
+      ],
+      "resumed": true
+    },
+    {
+      "wave": 32,
+      "status": "COMPLETED",
+      "file": "research\\persona_dna_library\\20260920_canheguiying_reincarnation_v2\\world_live_waves\\wave_32.md",
+      "closed": false,
+      "scene_headings": [
+        "第192场｜日｜内｜县衙户房后间",
+        "第193场｜日｜外｜荷园·塘东界石边",
+        "第194场｜夜｜内｜沈家老宅·后院佛堂",
+        "第195场｜夜｜外｜荷园·塘东界石边",
+        "第196场｜日｜内｜县衙户房后间",
+        "第197场｜夜｜外｜城北·郑家巷黑漆门外",
+        "第198场｜日｜外｜荷园·塘东界石边"
+      ],
+      "resumed": true
+    }
+  ],
+  "true_source_untouched": "evolve_candidate.v1.md",
+  "note": "活体演化候选。不是锁稿。未进生产。resume-safe。",
+  "summary": {
+    "status": "COMPLETED",
+    "attempt": 1,
+    "model": "glm-4-flash",
+    "latency_ms": 15476,
+    "usage": {
+      "completion_tokens": 689,
+      "prompt_tokens": 15060,
+      "total_tokens": 15749
+    },
+    "finish_reason": "stop",
+    "prompt_chars": 18002,
+    "transport_retries": [],
+    "attempts": [
+      {
+        "attempt": 1,
+        "model": "glm-4-flash",
+        "latency_ms": 15476,
+        "usage": {
+          "completion_tokens": 689,
+          "prompt_tokens": 15060,
+          "total_tokens": 15749
+        },
+        "finish_reason": "stop",
+        "prompt_chars": 18002,
+        "content_len": 772,
+        "transport_retries": []
+      }
+    ]
+  }
+}

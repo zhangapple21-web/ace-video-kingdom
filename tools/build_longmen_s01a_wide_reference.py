@@ -11,6 +11,7 @@ import hashlib
 import json
 import sys
 from pathlib import Path
+from tools.atomic_io import atomic_write_text
 
 sys.stdout.reconfigure(encoding="utf-8")  # Bug #1 fix: prevent UnicodeEncodeError on GBK console
 
@@ -77,9 +78,7 @@ def main() -> int:
     fixture["source_plan"] = "S01A wide reference rework r1; prior takes retained"
     fixture["shots"] = [shot]
     out.mkdir(parents=True, exist_ok=True)
-    (out / "fixture.json").write_text(
-        json.dumps(fixture, ensure_ascii=False, indent=2) + "\n", encoding="utf-8"
-    )
+    atomic_write_text((out / "fixture.json"), json.dumps(fixture, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     print(
         json.dumps(
             {

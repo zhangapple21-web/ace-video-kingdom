@@ -24,6 +24,7 @@ import requests
 ROOT = Path(__file__).resolve().parents[1]
 if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
+from tools.atomic_io import atomic_write_text
 
 from production_control.media_routing import build_image_model_plan, choose_image_strategy, classify_media_intent, route_media_demand
 from production_control.semantic_context import build_semantic_context
@@ -308,10 +309,8 @@ def dispatch(
     workflow_policy = build_workflow_policy_receipt(ROOT, creative_development=creative_development)
     out.parent.mkdir(parents=True, exist_ok=True)
     creative_development_path = out.with_name(out.stem + ".creative_development_profile.v1.json")
-    creative_development_path.write_text(
-        json.dumps(creative_development, ensure_ascii=False, indent=2) + "\n",
-        encoding="utf-8",
-    )
+    atomic_write_text(creative_development_path, json.dumps(creative_development, ensure_ascii=False, indent=2) + "\n",
+        encoding="utf-8",)
     receipt: dict[str, Any] = {
         "schema": "video_kingdom.unified_entry_receipt.v1",
         "entry_id": entry_id,
@@ -355,7 +354,7 @@ def dispatch(
             role_args.append("--execute")
         role_status = role_room.main(role_args)
         receipt.update({"dispatch": "role_room", "role_receipt": str(role_receipt), "role_exit_code": role_status, "status": "COMPLETED" if role_status == 0 else "BLOCKED"})
-    out.write_text(json.dumps(receipt, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    atomic_write_text(out, json.dumps(receipt, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     return receipt
 
 

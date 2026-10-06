@@ -8,6 +8,7 @@ import json
 from pathlib import Path
 from typing import Any
 import sys
+from tools.atomic_io import atomic_write_text
 
 sys.stdout.reconfigure(encoding="utf-8")  # Bug #1 fix: prevent UnicodeEncodeError on GBK console
 
@@ -178,7 +179,7 @@ def build_lineage(episode_path: Path, manifest_path: Path, *, review_path: Path 
     }
     if output_path:
         output_path.parent.mkdir(parents=True, exist_ok=True)
-        output_path.write_text(json.dumps(document, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+        atomic_write_text(output_path, json.dumps(document, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     return document
 
 

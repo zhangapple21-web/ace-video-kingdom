@@ -1,0 +1,212 @@
+{
+  "schema": "video_kingdom.external_learning_run.v1",
+  "run_id": "EL-20260928-c941e4f1",
+  "started_at": "2026-09-28T13:08:35.723717+08:00",
+  "source_boundary": "PUBLIC_PRIMARY_SOURCES_ONLY",
+  "local_context": {
+    "failure_replay_count": 3,
+    "promoted_capability_count": 1
+  },
+  "records": [
+    {
+      "source_id": "comfyui",
+      "status": "UNCHANGED",
+      "api_url": "https://api.github.com/repos/Comfy-Org/ComfyUI",
+      "readme_url": "https://raw.githubusercontent.com/Comfy-Org/ComfyUI/master/README.md",
+      "repository_sha": "master:2026-09-27T22:45:21Z",
+      "readme_sha256": "9e3730235b5e88ca5db52c62c0116235bd8064c4b2dffb81e410eebb64d0c555",
+      "source_content_key": "comfyui:9e3730235b5e88ca5db52c62c0116235bd8064c4b2dffb81e410eebb64d0c555",
+      "license": "GPL-3.0",
+      "license_decision": "RESEARCH_ONLY_LICENSE_REVIEW",
+      "focus": "可复现图像/视频节点编排、队列和工作流证据",
+      "observable_headings": [
+        "ComfyUI",
+        "Get Started",
+        "Local",
+        "Cloud",
+        "Examples",
+        "Features",
+        "Release Process",
+        "Shortcuts"
+      ],
+      "production_authority": "NONE",
+      "promotion_status": "NOT_PROMOTED",
+      "next_probe": "用本地虚构样本做一次隔离 A/B；记录 baseline/change/test/evaluation/painful_review 后再决定"
+    },
+    {
+      "source_id": "pyscenedetect",
+      "status": "UNCHANGED",
+      "api_url": "https://api.github.com/repos/Breakthrough/PySceneDetect",
+      "readme_url": "https://raw.githubusercontent.com/Breakthrough/PySceneDetect/main/README.md",
+      "repository_sha": "main:2026-09-21T04:44:36Z",
+      "readme_sha256": "f44617fdf56ec43eee44ed73709b1ea9edd6fcfb2b63f3fdf37278787693f420",
+      "source_content_key": "pyscenedetect:f44617fdf56ec43eee44ed73709b1ea9edd6fcfb2b63f3fdf37278787693f420",
+      "license": "BSD-3-Clause",
+      "license_decision": "ALLOW_FOR_RESEARCH",
+      "focus": "镜头边界和成片节奏的可测量审计",
+      "observable_headings": [
+        "Video Cut Detection and Analysis Tool",
+        "Latest Release: v0.7.1 (July 21, 2026)",
+        "Reference",
+        "Help & Contributing",
+        "Code Signing",
+        "License"
+      ],
+      "production_authority": "NONE",
+      "promotion_status": "NOT_PROMOTED",
+      "next_probe": "用本地虚构样本做一次隔离 A/B；记录 baseline/change/test/evaluation/painful_review 后再决定"
+    },
+    {
+      "source_id": "langgraph",
+      "status": "UNCHANGED",
+      "api_url": "https://api.github.com/repos/langchain-ai/langgraph",
+      "readme_url": "https://raw.githubusercontent.com/langchain-ai/langgraph/main/README.md",
+      "repository_sha": "main:2026-09-27T21:34:56Z",
+      "readme_sha256": "3a13e257af1216962d53d72414a7f44ac1fc5cea34d994bdff60ea2a3b045933",
+      "source_content_key": "langgraph:3a13e257af1216962d53d72414a7f44ac1fc5cea34d994bdff60ea2a3b045933",
+      "license": "MIT",
+      "license_decision": "ALLOW_FOR_RESEARCH",
+      "focus": "可恢复任务、检查点和长任务状态持久化",
+      "observable_headings": [
+        "Why use LangGraph?",
+        "LangGraph ecosystem",
+        "Documentation",
+        "Additional resources",
+        "Acknowledgements"
+      ],
+      "production_authority": "NONE",
+      "promotion_status": "NOT_PROMOTED",
+      "next_probe": "用本地虚构样本做一次隔离 A/B；记录 baseline/change/test/evaluation/painful_review 后再决定"
+    },
+    {
+      "source_id": "remotion",
+      "status": "UNCHANGED",
+      "api_url": "https://api.github.com/repos/remotion-dev/remotion",
+      "readme_url": "https://raw.githubusercontent.com/remotion-dev/remotion/main/README.md",
+      "repository_sha": "main:2026-09-27T19:51:06Z",
+      "readme_sha256": "c0aa4732decbd340d28ed59c805605820c3a6ade67b34933d2fad1c8bc0a603d",
+      "source_content_key": "remotion:c0aa4732decbd340d28ed59c805605820c3a6ade67b34933d2fad1c8bc0a603d",
+      "license": "NOASSERTION",
+      "license_decision": "RESEARCH_ONLY_LICENSE_REVIEW",
+      "focus": "程序化合成、时间轴和渲染验收",
+      "observable_headings": [
+        "Video Creation",
+        "Video Automation",
+        "Get started",
+        "Discover Remotion",
+        "Documentation",
+        "License",
+        "Contributing"
+      ],
+      "production_authority": "NONE",
+      "promotion_status": "NOT_PROMOTED",
+      "next_probe": "用本地虚构样本做一次隔离 A/B；记录 baseline/change/test/evaluation/painful_review 后再决定"
+    },
+    {
+      "source_id": "libtv_video_agent",
+      "status": "UNCHANGED",
+      "api_url": "https://api.github.com/repos/PomeloR611/libtv-video-agent",
+      "readme_url": "https://raw.githubusercontent.com/PomeloR611/libtv-video-agent/main/README.md",
+      "repository_sha": "main:2026-09-08T03:14:59Z",
+      "readme_sha256": "5993fce5e6ea10d91b22379b23b3415e2161655b620d66d61799607cd7e026dd",
+      "source_content_key": "libtv_video_agent:5993fce5e6ea10d91b22379b23b3415e2161655b620d66d61799607cd7e026dd",
+      "license": "MIT",
+      "license_decision": "ALLOW_FOR_RESEARCH",
+      "focus": "故事板先行、定版资产、分批小步生成、抽帧自查和批次预览",
+      "observable_headings": [
+        "LibTV 视频制作 Agent",
+        "案例视频",
+        "目录结构",
+        "一、前置：配置 LibTV（任何工具都要做一次）",
+        "1. 安装 CLI",
+        "Windows PowerShell",
+        "macOS / Linux",
+        "2. 登录（浏览器同源，必须）"
+      ],
+      "production_authority": "NONE",
+      "promotion_status": "NOT_PROMOTED",
+      "next_probe": "用本地虚构样本做一次隔离 A/B；记录 baseline/change/test/evaluation/painful_review 后再决定"
+    },
+    {
+      "source_id": "video_agent_skills",
+      "status": "UNCHANGED",
+      "api_url": "https://api.github.com/repos/chenyuxiaojin/video-agent-skills",
+      "readme_url": "https://raw.githubusercontent.com/chenyuxiaojin/video-agent-skills/main/README.zh-CN.md",
+      "repository_sha": "main:2026-06-08T12:12:50Z",
+      "readme_sha256": "a26e0699757a9a63692fc2c7b5f1fe8796f4a140feca64893871d526fec9025b",
+      "source_content_key": "video_agent_skills:a26e0699757a9a63692fc2c7b5f1fe8796f4a140feca64893871d526fec9025b",
+      "license": "MIT",
+      "license_decision": "ALLOW_FOR_RESEARCH",
+      "focus": "制片人编排、专职角色分工、人工检查点、时间轴和发布交付",
+      "observable_headings": [
+        "video-agent-skills",
+        "为什么做这个",
+        "功能",
+        "流水线技能（10 个技能，顺序执行）",
+        "独立分支技能（1 个技能，独立使用）",
+        "安装",
+        "… 按需重复",
+        "使用方式"
+      ],
+      "production_authority": "NONE",
+      "promotion_status": "NOT_PROMOTED",
+      "next_probe": "用本地虚构样本做一次隔离 A/B；记录 baseline/change/test/evaluation/painful_review 后再决定"
+    },
+    {
+      "source_id": "director_skills",
+      "status": "UNCHANGED",
+      "api_url": "https://api.github.com/repos/kangarooking/director-skills",
+      "readme_url": "https://raw.githubusercontent.com/kangarooking/director-skills/main/README.md",
+      "repository_sha": "main:2026-09-18T02:51:22Z",
+      "readme_sha256": "3f8074aba6143bb4119bccf4075efa487e70c04a9235f7de3539c8539ab49862",
+      "source_content_key": "director_skills:3f8074aba6143bb4119bccf4075efa487e70c04a9235f7de3539c8539ab49862",
+      "license": "MIT",
+      "license_decision": "ALLOW_FOR_RESEARCH",
+      "focus": "资产提示词、动作因果链、运镜参数闸门、任务轮询和媒体读回",
+      "observable_headings": [
+        "📋 Skills",
+        "🔎 Skills 说明",
+        "`cinematic-asset-prompts`",
+        "`action-fight-prompt`",
+        "`miora-video-studio`",
+        "🎬 一个导演Skill 应该做什么",
+        "🗂️ 仓库结构",
+        "📦 安装方式"
+      ],
+      "production_authority": "NONE",
+      "promotion_status": "NOT_PROMOTED",
+      "next_probe": "用本地虚构样本做一次隔离 A/B；记录 baseline/change/test/evaluation/painful_review 后再决定"
+    },
+    {
+      "source_id": "libtv_skill_pro",
+      "status": "UNCHANGED",
+      "api_url": "https://api.github.com/repos/Qiuxiangxiang/libtv-skill-pro",
+      "readme_url": "https://raw.githubusercontent.com/Qiuxiangxiang/libtv-skill-pro/main/README.md",
+      "repository_sha": "main:2026-05-14T10:34:09Z",
+      "readme_sha256": "819802b0c4895e15b5bf5555e5568b7460d0ff105183c7094ca184069845eae3",
+      "source_content_key": "libtv_skill_pro:819802b0c4895e15b5bf5555e5568b7460d0ff105183c7094ca184069845eae3",
+      "license": "MIT-0",
+      "license_decision": "RESEARCH_ONLY_LICENSE_REVIEW",
+      "focus": "统一命令入口、dry-run、结构化错误、多模型路由、批量监控和可恢复会话",
+      "observable_headings": [
+        "libtv-skill-pro",
+        "是什么",
+        "安装",
+        "方式 1：ClawHub CLI（推荐）",
+        "安装后可用 openclaw skills info libtv-skill-pro 查看 skill 详情",
+        "方式 2：从 GitHub 克隆（开发者）",
+        "方式 3：Claude Code / Cursor 用户",
+        "快速开始"
+      ],
+      "production_authority": "NONE",
+      "promotion_status": "NOT_PROMOTED",
+      "next_probe": "用本地虚构样本做一次隔离 A/B；记录 baseline/change/test/evaluation/painful_review 后再决定"
+    }
+  ],
+  "new_ledger_entries": [],
+  "promotion": {
+    "status": "NONE",
+    "reason": "采集阶段不能自动晋升能力",
+    "production_integration": false
+  }
+}

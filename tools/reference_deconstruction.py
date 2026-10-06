@@ -15,6 +15,7 @@ import re
 import sys
 from pathlib import Path
 from typing import Any
+from tools.atomic_io import atomic_write_text
 
 sys.stdout.reconfigure(encoding="utf-8")  # Bug #1 fix: prevent UnicodeEncodeError on GBK console
 
@@ -275,7 +276,7 @@ def main(argv: list[str] | None = None) -> int:
         return 2
     report = validate_reference_deconstruction(payload, source_path=args.source_file)
     args.out.parent.mkdir(parents=True, exist_ok=True)
-    args.out.write_text(json.dumps(report, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    atomic_write_text(args.out, json.dumps(report, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     print(json.dumps({"status": report["status"], "out": str(args.out)}, ensure_ascii=False))
     return 0 if report["status"] == "PASS" else 2
 

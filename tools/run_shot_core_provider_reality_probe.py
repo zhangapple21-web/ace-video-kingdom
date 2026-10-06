@@ -20,6 +20,7 @@ import requests
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
+from tools.atomic_io import atomic_write_text
 
 from runtime.shot_core import (  # noqa: E402
     CREATE_URL,
@@ -143,7 +144,7 @@ def main() -> int:
     if not key:
         evidence["global_status"] = "BLOCKED_NO_API_KEY"
         evidence["samples"] = [{"shot_id": s["shot_id"], "status": "NOT_SENT", "reason": "AGNES_API_KEY_NOT_AVAILABLE", "request": _sample_row(s, build_payload(s))} for s in samples]
-        evidence_path.write_text(json.dumps(evidence, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+        atomic_write_text(evidence_path, json.dumps(evidence, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
         print(json.dumps(evidence, ensure_ascii=False, indent=2))
         return 2
 
@@ -201,7 +202,7 @@ def main() -> int:
         evidence["resume_probe"] = {"status": "NOT_PROVEN", "reason": "NO_EXISTING_PILOT_VIDEO_ID"}
 
     evidence["global_status"] = "PARTIAL_PROVIDER_BLOCK" if global_block else "COMPLETED_ATTEMPTS"
-    evidence_path.write_text(json.dumps(evidence, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    atomic_write_text(evidence_path, json.dumps(evidence, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     print(json.dumps(evidence, ensure_ascii=False, indent=2))
     return 0
 

@@ -12,6 +12,7 @@ import json
 import subprocess
 import sys
 from pathlib import Path
+from tools.atomic_io import atomic_write_text
 
 sys.stdout.reconfigure(encoding="utf-8")  # Bug #1 fix: prevent UnicodeEncodeError on GBK console
 
@@ -30,7 +31,7 @@ def _load(path: Path) -> list[dict]:
 
 def _write(path: Path, rows: list[dict]) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
-    path.write_text(json.dumps(rows, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    atomic_write_text(path, json.dumps(rows, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
 
 
 def main() -> int:
@@ -67,7 +68,7 @@ def main() -> int:
         print(json.dumps({"status": "FAILED", "reason": "task_not_consumable", "task_id": args.task_id}, ensure_ascii=False))
         return 2
     card["status"] = "PROVIDER_RUNNING"
-    queue_path.write_text(json.dumps({"contract_version": "ace.video_kingdom.dispatch_queue.v1", "production_integration": False, "cards": cards[-100:]}, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    atomic_write_text(queue_path, json.dumps({"contract_version": "ace.video_kingdom.dispatch_queue.v1", "production_integration": False, "cards": cards[-100:]}, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
 
     cmd = [sys.executable, str(root / "tools" / "run_short_clip.py"), "--shot-id", args.shot_id,
            "--prompt", args.prompt, "--manifest", str(manifest), "--output", str(output),
@@ -76,7 +77,7 @@ def main() -> int:
     contract = args.episode_contract or (Path(str(card.get("canonical_contract_path"))) if card.get("canonical_contract_path") else None)
     if contract:
         cmd.extend(["--episode-contract", str(contract)])
-    completed = subprocess.run(cmd, cwd=root, check=False)
+    completed = subprocess.run(cmd, cwd=root, check=False, timeout=300)
     rows = _load(manifest)
     receipt = next((row for row in rows if row.get("shot_id") == args.shot_id), None)
     provider_ok = bool(completed.returncode == 0 and receipt and receipt.get("video_id") and receipt.get("status") == "COMPLETED" and output.is_file())
@@ -92,7 +93,7 @@ def main() -> int:
     else:
         card["status"] = "PROVIDER_FAILED"
         card["provider_error"] = {"returncode": completed.returncode, "manifest_status": receipt.get("status") if receipt else None}
-    queue_path.write_text(json.dumps({"contract_version": "ace.video_kingdom.dispatch_queue.v1", "production_integration": False, "cards": cards[-100:]}, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    atomic_write_text(queue_path, json.dumps({"contract_version": "ace.video_kingdom.dispatch_queue.v1", "production_integration": False, "cards": cards[-100:]}, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     print(json.dumps({"status": "PROVIDER_COMPLETED" if provider_ok else "PROVIDER_FAILED", "task_id": args.task_id,
                       "shot_id": args.shot_id, "provider_calls": card.get("provider_calls", 0),
                       "video_id": receipt.get("video_id") if receipt else None}, ensure_ascii=False))

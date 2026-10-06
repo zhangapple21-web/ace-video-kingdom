@@ -1,0 +1,50 @@
+{
+  "schema": "video_kingdom.creator_live_integrity_check.v1",
+  "checked_at": "2026-09-21T02:08:42.205506+08:00",
+  "layer": "CREATOR_LIVE",
+  "production_integration": false,
+  "source_of_truth": "evolve_candidate.v1.md",
+  "run": {
+    "status": "COMPLETED",
+    "waves_planned": 32,
+    "waves_run": 32,
+    "closed_by_world": false,
+    "summary_status": "COMPLETED"
+  },
+  "continuity": {
+    "wave_files": 32,
+    "scene_count": 188,
+    "first_scene": 11,
+    "last_scene": 198,
+    "continuous": true,
+    "bad_files": []
+  },
+  "resume": {
+    "next_scene": 199,
+    "world_open": true,
+    "seed_file": "next_live_seed.v1.json"
+  },
+  "provider": {
+    "model": "deepseek-v4.1-flash",
+    "gateway": "http://localhost:3000/v1",
+    "transport_retries": 2
+  },
+  "production_gates": {
+    "agnes": "NOT_PERFORMED",
+    "beat": "NOT_PERFORMED",
+    "shot": "NOT_PERFORMED",
+    "script_locked": false
+  },
+  "repairs_kept_out_of_truth": [
+    "rejected_wave_outputs_20260921/wave_03_pre_validation.md",
+    "rejected_wave_outputs_20260921/wave_11_pre_warning_repair.md",
+    "rejected_wave_outputs_20260921/wave_18_pre_warning_repair.md"
+  ],
+  "artifacts": {
+    "evolve_candidate.v1.md": "7945f3f995ef7a73052b34e193ac55a77c6dbe9eb2df0368d911be3fcbc46c1d",
+    "world_live_full_script.v1.md": "759d33f66084d59e50d45d7373747bf20609cc2eb249c788874d0d387d1a93de",
+    "world_live_receipt.v1.json": "d31e2736f73ee8ee09246c4386a28f2c4f5e56179a1d951d9dc81dc8076ed734",
+    "world_live_summary.v1.md": "40298a733a268165afe9bbb29d0ba650f99020c90dbeed1169e7cd54ee73c43c",
+    "next_live_seed.v1.json": "009ef08ec9946334da12fa2abb9bafa3d8b6277608fcd39ff61f6987387c2fdb"
+  }
+}

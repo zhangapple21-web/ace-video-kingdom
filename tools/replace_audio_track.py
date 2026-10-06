@@ -29,7 +29,7 @@ def _probe(path: Path) -> dict[str, Any]:
     result = subprocess.run(
         ["ffprobe", "-v", "error", "-show_entries", "format=duration:stream=codec_type",
          "-of", "json", str(path)], check=True, capture_output=True, text=True,
-    )
+    timeout=300 )
     payload = json.loads(result.stdout)
     duration = float(payload.get("format", {}).get("duration") or 0)
     if duration <= 0 or not any(item.get("codec_type") == "video" for item in payload.get("streams", [])):
@@ -56,7 +56,7 @@ def replace_audio_track(video: Path, audio: Path, output: Path) -> dict[str, Any
             "-map", "0:v:0", "-map", "[a]", "-t", str(video_info["duration_seconds"]),
             "-c:v", "copy", "-c:a", "aac", "-ar", "48000", "-ac", "2", "-movflags", "+faststart",
             str(temp),
-        ], check=True)
+        ], check=True, timeout=300)
         os.replace(temp, output)
     finally:
         temp.unlink(missing_ok=True)
@@ -80,7 +80,7 @@ def strip_audio_track(video: Path, output: Path) -> dict[str, Any]:
         raise ValueError(f"video artifact missing: {video}")
     _probe(video)
     output.parent.mkdir(parents=True, exist_ok=True)
-    subprocess.run(["ffmpeg", "-y", "-v", "error", "-i", str(video), "-map", "0:v:0", "-an", "-c:v", "copy", str(output)], check=True)
+    subprocess.run(["ffmpeg", "-y", "-v", "error", "-i", str(video), "-map", "0:v:0", "-an", "-c:v", "copy", str(output)], check=True, timeout=300)
     return {
         "status": "PROVIDER_AUDIO_STRIPPED_NO_DIALOGUE",
         "video_source": str(video),

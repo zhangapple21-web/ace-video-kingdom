@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 400" preserveAspectRatio="xMidYMid slice" role="img" aria-label="园林水门">
+  <defs>
+    <linearGradient id="a" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#e6d3ac"/><stop offset=".5" stop-color="#cbbb96"/><stop offset="1" stop-color="#8e9c86"/>
+    </linearGradient>
+    <linearGradient id="w" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#4a6a62"/><stop offset="1" stop-color="#25443f"/>
+    </linearGradient>
+  </defs>
+  <rect width="640" height="400" fill="url(#a)"/>
+  <circle cx="112" cy="78" r="38" fill="#fdf3d2" opacity=".55"/>
+  <g fill="#1f5145" opacity=".9">
+    <path d="M60 150h240l-30-26H90Z"/>
+    <path d="M96 124h168l-26-24H122Z"/>
+    <rect x="76" y="150" width="14" height="82"/>
+    <rect x="270" y="150" width="14" height="82"/>
+    <rect x="168" y="150" width="14" height="82"/>
+    <rect x="96" y="196" width="168" height="10" opacity=".55"/>
+  </g>
+  <g fill="#123a31">
+    <rect x="0" y="232" width="640" height="10"/>
+    <rect x="380" y="242" width="260" height="158" fill="url(#w)"/>
+  </g>
+  <g fill="none" stroke="#dfe7d2" stroke-opacity=".28" stroke-width="2.4">
+    <path d="M398 282h200M410 306h180M400 330h210M424 354h168"/>
+  </g>
+  <g fill="#1f5145" opacity=".95">
+    <path d="M452 214c0-4 30-4 30 0 0 6-6 10-15 10s-15-4-15-10Z"/>
+    <rect x="464" y="150" width="5" height="66" rx="2.5"/>
+    <path d="M467 156c-16-12-22-34-14-52 14 8 20 28 14 52Z" fill="#a64938"/>
+    <path d="M560 214c0-4 26-4 26 0 0 6-5 10-13 10s-13-4-13-10Z"/>
+    <rect x="570" y="164" width="5" height="52" rx="2.5"/>
+    <path d="M573 170c-14-10-19-28-12-44 12 7 17 24 12 44Z" fill="#7d6a48"/>
+  </g>
+  <g stroke="#b6814e" stroke-width="3" fill="none" stroke-opacity=".6" stroke-linecap="round">
+    <path d="M0 262h380"/>
+  </g>
+</svg>

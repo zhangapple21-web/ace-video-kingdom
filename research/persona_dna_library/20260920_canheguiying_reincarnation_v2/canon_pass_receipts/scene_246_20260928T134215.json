@@ -1,0 +1,68 @@
+{
+  "schema": "video_kingdom.canon_scene_pass.v1",
+  "at": "2026-09-28T13:42:03+08:00",
+  "lib": "D:\\视频创作\\ace-video-kingdom\\research\\persona_dna_library\\20260920_canheguiying_reincarnation_v2",
+  "next": 246,
+  "quota_used": 1,
+  "max_per_day": 2,
+  "scene": 246,
+  "heading": "第246场｜晨｜外｜荷园墙外·浅滩旧桩",
+  "wave": "wave_39",
+  "verdict": "PASS",
+  "fails": [],
+  "reasons": [],
+  "alive": {
+    "q1_person_not_manual": true,
+    "q2_not_ai": true,
+    "q3_will_not_settle": true
+  },
+  "conflict": {
+    "status": "PASS",
+    "errors": [],
+    "notes": [],
+    "scene_class": "B"
+  },
+  "forbidden_hits": [],
+  "quote_count": 13,
+  "packet": {
+    "schema": "video_kingdom.conflict_driven_scene.v1",
+    "scene_class": "B",
+    "goals": {
+      "a": "ask_or_press",
+      "b": "hold_boundary"
+    },
+    "change_at_end": {
+      "kind": "information",
+      "what": "本场变化：缩小：浅滩旧桩仍咬在墙根里侧，与墙外冰面隔着半步，重丈可画的河界被看窄，但未画押、未入册。选择：周培拒把当票举成界，今日不进户房，纸与信仍在袖。关系：林墨许他看桩，拒当证人，也不让他碰锁。未决：户房空口销名会不会把这半步写成河；信"
+    },
+    "lengthener": false,
+    "speech_intent_readable": true,
+    "completes_in_picture": true
+  },
+  "failure_mode_signals": {
+    "dialogue_density": 0.5555555555555556,
+    "sensory_rate": 0.8148148148148148,
+    "near_dup": 1,
+    "alt_pingpong": 0,
+    "mono_speaker_share": 0.0,
+    "empty_paragraphs": 0,
+    "dialogue_only": 0,
+    "short_dialogue_runs": 1,
+    "lines": 27,
+    "dialogue_turns": 15,
+    "narration_turns": 12
+  },
+  "failure_mode_fails": [],
+  "publish": {
+    "source_chapter": "c246",
+    "completed_scenes": 246,
+    "published_units": 247,
+    "check_only": false
+  },
+  "deploy": {
+    "status": "OK",
+    "code": 0,
+    "stdout": "\n ⛅️ wrangler 4.132.0 (update available 4.142.0)\n───────────────────────────────────────────────\nUploading... (307/310)\nUploading... (308/310)\nUploading... (309/310)\nUploading... (310/310)\n✨ Success! Uploaded 3 files (307 already uploaded) (1.41 sec)\n\n✨ Uploading _headers\n🌎 Deploying...\n✨ Deployment complete! Take a peek over at https://2100df6e.tinghe-archive.pages.dev\n",
+    "stderr": ""
+  }
+}

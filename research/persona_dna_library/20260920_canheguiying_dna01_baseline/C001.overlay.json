@@ -1,0 +1,38 @@
+{
+  "tool": "validate_persona_dna",
+  "production_integration": false,
+  "dna_receipt": {
+    "status": "PASS",
+    "errors": [],
+    "warnings": []
+  },
+  "persona_card_overlay": {
+    "status": "CANDIDATE",
+    "errors": [],
+    "warnings": [],
+    "overlay": {
+      "schema": "video_kingdom.persona_card_overlay.v1",
+      "character_id": "C001",
+      "personality": "日常淡泊、回避应酬；面对超常或冒犯不先逃，而是好奇观察、言语试探甚至调侃；一旦被一个懂自己的人勾住，会反复守候、茶饭无心；矛盾点：嘴上厌世避人，却极容易被懂自己审美的人留下，把避世变成守候",
+      "motivation": "一块不被打扰的清净，能把审美、阅读和收藏安放其中；根意志：先守住自己的拙与静，再谈归属和热闹",
+      "dna_ref": {
+        "schema": "video_kingdom.persona_dna.v1",
+        "character_id": "C001",
+        "source": "extract",
+        "version": "1"
+      },
+      "missing_production_fields": [
+        "appearance",
+        "catchphrase",
+        "voice_lock",
+        "costume_lock",
+        "makeup_sheet"
+      ],
+      "production_integration": false,
+      "note": "候选 overlay。必须另填 persona_card 视觉/语音锁，并走编剧导演双审，才能进入 video_kingdom_entry。",
+      "creator_variant_id": "dna01_baseline",
+      "creator_variant_bias": {},
+      "creator_variant_note": "不增加额外偏置；用于对照。保持当前创者层基调，允许自然涌现。"
+    }
+  }
+}

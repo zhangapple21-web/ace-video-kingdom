@@ -15,6 +15,7 @@ from .image_assets import AssetStore
 from .projection import project_messages
 from .task_state import TERMINAL, complete, create, load, progress
 import sys
+from tools.atomic_io import atomic_write_text
 
 sys.stdout.reconfigure(encoding="utf-8")  # Bug #1 fix: prevent UnicodeEncodeError on GBK console
 
@@ -40,10 +41,8 @@ def _dry_run_runner(route: Mapping[str, Any], request: str, output_dir: Path) ->
     output_dir.mkdir(parents=True, exist_ok=True)
     capability = str(route["capability"])
     artifact = output_dir / (capability.replace(".", "_") + ".dry-run.txt")
-    artifact.write_text(
-        f"DRY_RUN\ncapability={capability}\nprovider={route['provider']}\nmodel={route['model']}\nrequest={request}\n",
-        encoding="utf-8",
-    )
+    atomic_write_text(artifact, f"DRY_RUN\ncapability={capability}\nprovider={route['provider']}\nmodel={route['model']}\nrequest={request}\n",
+        encoding="utf-8",)
     return artifact
 
 

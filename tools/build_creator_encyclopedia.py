@@ -13,6 +13,7 @@ import re
 from pathlib import Path
 from typing import Any
 import sys
+from tools.atomic_io import atomic_write_text
 
 sys.stdout.reconfigure(encoding="utf-8")  # Bug #1 fix: prevent UnicodeEncodeError on GBK console
 
@@ -29,7 +30,7 @@ def read(path: Path) -> str:
 
 def write(path: Path, text: str) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
-    path.write_text(text, encoding="utf-8")
+    atomic_write_text(path, text, encoding="utf-8")
 
 
 def dump(path: Path, obj: Any) -> None:

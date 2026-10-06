@@ -1,0 +1,147 @@
+{
+  "schema": "video_kingdom.version_ledger.v1",
+  "layer": "CREATOR",
+  "production_integration": false,
+  "human_choose": "PENDING",
+  "do_not_overwrite": true,
+  "versions": [
+    {
+      "file": "research/persona_dna_library/20260920_canheguiying/opening_given.v1.md",
+      "role": "user_opening_seed",
+      "current": true,
+      "sha256": "60aa15c0ec409ce976dae663255f8cefe2e78615fe423046bbd7c3c60af4ff6f",
+      "bytes": 7499
+    },
+    {
+      "file": "research/persona_dna_library/20260920_canheguiying/evolve_candidate.v1.md",
+      "role": "sandbox_evolve_true_source_s01_s10",
+      "current": true,
+      "sha256": "7945f3f995ef7a73052b34e193ac55a77c6dbe9eb2df0368d911be3fcbc46c1d",
+      "bytes": 12167
+    },
+    {
+      "file": "research/persona_dna_library/20260920_canheguiying/script_candidate_sandbox.v1.md",
+      "role": "failed_sandbox_not_true_source",
+      "current": false,
+      "sha256": "0ce551a01a8c1c02084a6d8b7d41c152baabd939109e2fc273723bbeaa42abab",
+      "bytes": 2570
+    },
+    {
+      "file": "research/persona_dna_library/20260920_canheguiying/world_live_script.v1.md",
+      "role": "live_concat_candidate_not_locked",
+      "current": true,
+      "sha256": "25aa93eb4a5d647ad7d9dbf0825c17b163ff9d7d44d9885bfa166c94ef63090d",
+      "bytes": 134461
+    },
+    {
+      "file": "research/persona_dna_library/20260920_canheguiying/world_live_waves/wave_01.md",
+      "role": "live_true_source_wave",
+      "current": true,
+      "sha256": "1dac6306775fd34e65bb626fb255d65ab87e7f43fd00427f512f9af5fd53151c",
+      "bytes": 20648
+    },
+    {
+      "file": "research/persona_dna_library/20260920_canheguiying/world_live_waves/wave_02.md",
+      "role": "live_true_source_wave",
+      "current": true,
+      "sha256": "8a2934359d3df914903aed0134f62dc2b5cf883eb92049b6ad71c3e714fc7bd0",
+      "bytes": 23103
+    },
+    {
+      "file": "research/persona_dna_library/20260920_canheguiying/world_live_waves/wave_03.md",
+      "role": "live_true_source_wave",
+      "current": true,
+      "sha256": "8e557213ac2cd98bf9e6dd61f4e327045a8629e5a1b67d3228da4b6ad0f56e00",
+      "bytes": 14943
+    },
+    {
+      "file": "research/persona_dna_library/20260920_canheguiying/world_live_waves/wave_04.md",
+      "role": "live_true_source_wave",
+      "current": true,
+      "sha256": "785e1e0fe0686070a0bf22c4ebba7e61d3861e536f8812e9b27e4512dfb64105",
+      "bytes": 12342
+    },
+    {
+      "file": "research/persona_dna_library/20260920_canheguiying/world_live_waves/wave_05.md",
+      "role": "live_true_source_wave",
+      "current": true,
+      "sha256": "5c158d68851ecaef5a084a6f65d038db9876fb624351263a21d53126d109e19a",
+      "bytes": 17264
+    },
+    {
+      "file": "research/persona_dna_library/20260920_canheguiying/world_live_waves/wave_06.md",
+      "role": "live_true_source_wave",
+      "current": true,
+      "sha256": "60239cda1bc3b6f085dcca7a15916d4e3ee423ae8116caf55c67611a02ba98b4",
+      "bytes": 15872
+    },
+    {
+      "file": "research/persona_dna_library/20260920_canheguiying/world_live_waves/wave_07.md",
+      "role": "live_true_source_wave",
+      "current": true,
+      "sha256": "7c63f30203752bf9e34a1e95633e3767c32758ebdb959163c0e7c3ca2b8043a5",
+      "bytes": 14838
+    },
+    {
+      "file": "research/persona_dna_library/20260920_canheguiying/world_live_waves/wave_08.md",
+      "role": "live_true_source_wave",
+      "current": true,
+      "sha256": "31e59af411ef6b4b51f871941f254f985181ed8bb804fbbf6ead969d68f262ef",
+      "bytes": 14930
+    },
+    {
+      "file": "research/persona_dna_library/20260920_canheguiying/creator_world_state.v1.json",
+      "role": "middle_extract_s01_s10",
+      "current": true,
+      "sha256": "69754eca46aa3813d469f4f1b998922cb3a042c11e87f20f406a2aff514bdd5f",
+      "bytes": 35190
+    },
+    {
+      "file": "research/persona_dna_library/20260920_canheguiying/creator_event_branch_pool.v1.json",
+      "role": "middle_extract_s01_s10",
+      "current": true,
+      "sha256": "442341b2f65a8f10df624c675bcb4a17ac86a3c29cacb162ec81e3e373616b3d",
+      "bytes": 29144
+    },
+    {
+      "file": "research/persona_dna_library/20260920_canheguiying/physical_world.v1.json",
+      "role": "creator_middle_live_object",
+      "current": true,
+      "sha256": "766019de566778ad9ac6f2716dc0bcad9d69148eb902fe15f7c3afec37eb3797",
+      "bytes": 164912
+    },
+    {
+      "file": "research/persona_dna_library/20260920_canheguiying/live_event_pool.v1.json",
+      "role": "creator_middle_live_object",
+      "current": true,
+      "sha256": "5ca1fe4ed0af16a2122823c8d3a20838e0e5ada0b0b814085fb38242e460168f",
+      "bytes": 66423
+    },
+    {
+      "file": "research/persona_dna_library/20260920_canheguiying/character_continuity_audit.v1.json",
+      "role": "creator_middle_live_object",
+      "current": true,
+      "sha256": "14800eaf1183fa57010665261728c3b33de50eecc6245a66f20ec81e08cdfe33",
+      "bytes": 1857
+    },
+    {
+      "file": "research/persona_dna_library/20260920_canheguiying/next_live_seed.v1.json",
+      "role": "creator_middle_live_object",
+      "current": true,
+      "sha256": "eeaf58e63a5a306f3bc28adb098371c4f32bbf81df2879d1ef9c7b1f08b60d40",
+      "bytes": 5195
+    },
+    {
+      "file": "research/persona_dna_library/20260920_canheguiying/creator_experience.jsonl",
+      "role": "creator_middle_live_object",
+      "current": true,
+      "sha256": "b1dfb8a37ec3b5fda3134b5fb45af6f46895425db58bacb9bc186653aaaa661b",
+      "bytes": 1998
+    }
+  ],
+  "compare_notes": [
+    "sandbox_run=FAILED，script_candidate_sandbox 不是11场后真源。",
+    "活体真源是分波 wave_*.md，摘要不可替代。",
+    "本轮不择优覆盖任何真源。"
+  ]
+}

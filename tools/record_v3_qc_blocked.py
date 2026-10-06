@@ -2,6 +2,7 @@ from __future__ import annotations
 import json, subprocess
 from pathlib import Path
 import sys
+from tools.atomic_io import atomic_write_text
 
 sys.stdout.reconfigure(encoding="utf-8")  # Bug #1 fix: prevent UnicodeEncodeError on GBK console
 
@@ -26,8 +27,8 @@ def main() -> int:
     for shot_id, layers in rows.items():
         take = next(row for row in run["takes"] if row["shot_id"] == shot_id)
         path = PROJECT / "qc" / f"{shot_id}-layers.json"
-        path.write_text(json.dumps(layers, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
-        result = subprocess.run(["python", "-m", "production_control.cli", "qc", str(RUN), take["take_id"], str(path), "--notes", notes[shot_id]], cwd=ROOT)
+        atomic_write_text(path, json.dumps(layers, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+        result = subprocess.run(["python", "-m", "production_control.cli", "qc", str(RUN), take["take_id"], str(path), "--notes", notes[shot_id]], cwd=ROOT, timeout=300)
         if result.returncode:
             return result.returncode
     print(json.dumps({"status": "QC_BLOCKED", "reason": "identity_continuity_and_scene_wardrobe_drift", "shots": list(rows)}, ensure_ascii=False, indent=2))

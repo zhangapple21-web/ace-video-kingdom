@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from pathlib import Path
 import re
+from tools.atomic_io import atomic_write_text
 
 def H(s):
     return "".join(chr(int(x, 16)) for x in s.split())
@@ -132,7 +133,7 @@ print("REC_SUBS", n)
 if n != 1:
     raise SystemExit("rec_block_not_found")
 src = src2
-p.write_text(src, encoding="utf-8")
+atomic_write_text(p, src, encoding="utf-8")
 compile(src, str(p), "exec")
 print("PATCHED", p.stat().st_size)
 print("HAS_FORCE", "_force_wave" in src)

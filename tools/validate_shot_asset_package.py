@@ -15,6 +15,7 @@ import json
 import sys
 from pathlib import Path
 from typing import Any
+from tools.atomic_io import atomic_write_text
 
 sys.stdout.reconfigure(encoding="utf-8")  # Bug #1 fix: prevent UnicodeEncodeError on GBK console
 
@@ -158,7 +159,7 @@ def main(argv: list[str] | None = None) -> int:
     if args.write_receipt:
         output = repo_root / "research" / "admission_receipts" / "E_S05_asset_gate_receipt.v1.json"
         output.parent.mkdir(parents=True, exist_ok=True)
-        output.write_text(json.dumps(receipt, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+        atomic_write_text(output, json.dumps(receipt, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
         print(f"receipt={output}")
     print(f"status={receipt['status']} gaps={receipt['gap_count']} errors={receipt['error_count']} video_id={receipt['compatible_video_id_status']}")
     return 0 if receipt["status"] == "READY" else 2

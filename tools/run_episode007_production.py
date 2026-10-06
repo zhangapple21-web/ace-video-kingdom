@@ -16,7 +16,7 @@ prior_audit = root / "research/episode_007_previous_cut_audit_latest.json"
 audit = subprocess.run([
     sys.executable, str(root / "tools/audit_previous_cut.py"),
     "--root", str(root), "--output", str(prior_audit),
-], cwd=root, check=False)
+], cwd=root, check=False, timeout=300)
 if audit.returncode:
     raise SystemExit(f"previous-cut audit failed; no provider request submitted. See {prior_audit}")
 gate = subprocess.run([
@@ -25,7 +25,7 @@ gate = subprocess.run([
     "--policy", str(root / "governance/short_drama_review_policy.v1.json"),
     "--output", str(preflight),
     "--require-formal",
-], cwd=root, check=False)
+], cwd=root, check=False, timeout=300)
 if gate.returncode:
     raise SystemExit(
         "episode preflight is BLOCKED/REWORK; no provider request submitted. "
@@ -66,7 +66,7 @@ for shot in plan["shots"]:
          "--episode-contract", str(episode_path), "--admission-scope", "production",
          "--manifest", str(manifest), "--output", str(outdir/f"{sid}.mp4"), "--model", "agnes-video-2.5-flash",
          "--image", str(anchor), "--width", "704", "--height", "1280", "--num-frames", "241", "--frame-rate", "24", "--timeout", "900"]
-    result = subprocess.run(cmd, cwd=root, check=False)
+    result = subprocess.run(cmd, cwd=root, check=False, timeout=300)
     if result.returncode:
         raise SystemExit(result.returncode)
 

@@ -7,6 +7,7 @@ import sys
 from datetime import datetime, timezone
 from pathlib import Path
 from urllib.request import Request, urlopen
+from tools.atomic_io import atomic_write_text
 
 sys.stdout.reconfigure(encoding="utf-8")  # Bug #1 fix: prevent UnicodeEncodeError on GBK console
 
@@ -36,8 +37,8 @@ def main() -> int:
         by_id[asset_id]["provider_url"] = url
     registry["status"] = "PROVIDER_REFERENCE_VERIFIED_TEMPORARY" if result["status"] == "PASS" else "BLOCKED"
     registry["provider_reference_receipt"] = "provider_reference_transport_receipt.json"
-    (root / "asset_registry.json").write_text(json.dumps(registry, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
-    (root / "provider_reference_transport_receipt.json").write_text(json.dumps(result, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    atomic_write_text((root / "asset_registry.json"), json.dumps(registry, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    atomic_write_text((root / "provider_reference_transport_receipt.json"), json.dumps(result, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     plan_path = root / "episode_plan.json"
     plan = json.loads(plan_path.read_text(encoding="utf-8"))
     for asset in plan["assets"]:
@@ -50,9 +51,9 @@ def main() -> int:
     plan["gates"]["provider_reference_gate"] = result["status"]
     plan["gates"]["formal_run_allowed"] = False
     plan["gates"]["reason"] = "Temporary public URLs are GET/hash verified, but a bounded Provider reference-mode probe must still confirm that the model request carries and uses the images before formal Run creation."
-    plan_path.write_text(json.dumps(plan, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    atomic_write_text(plan_path, json.dumps(plan, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     preflight = {"status": plan["status"], "local_hashes": len(by_id), "provider_reference_reads": len(result["assets"]), "provider_reference_receipt": "provider_reference_transport_receipt.json", "continuity_edges": len(plan["shots"]) - 1, "run_created": False}
-    (root / "asset_gate_preflight.json").write_text(json.dumps(preflight, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    atomic_write_text((root / "asset_gate_preflight.json"), json.dumps(preflight, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     print(json.dumps({"status": result["status"], "receipt": str(root / "provider_reference_transport_receipt.json"), "assets": len(result["assets"]), "formal_run_allowed": False}, ensure_ascii=False, indent=2))
     return 0 if result["status"] == "PASS" else 1
 

@@ -13,6 +13,7 @@ from collections import defaultdict
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any, Iterable
+from tools.atomic_io import atomic_write_text
 
 sys.stdout.reconfigure(encoding="utf-8")  # Bug #1 fix: prevent UnicodeEncodeError on GBK console
 
@@ -261,7 +262,7 @@ def write_outputs(repo_root: Path, index: dict[str, Any]) -> tuple[Path, Path]:
     out_dir.mkdir(parents=True, exist_ok=True)
     json_path = out_dir / "asset_index.v1.json"
     csv_path = out_dir / "asset_index.csv"
-    json_path.write_text(json.dumps(index, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    atomic_write_text(json_path, json.dumps(index, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     fields = ["record_id", "asset_id", "suggested_asset_id", "asset_type", "asset_state", "usage", "naming_status", "evidence_status", "rights_status", "source_path", "sha256", "bytes", "width", "height"]
     with csv_path.open("w", encoding="utf-8-sig", newline="") as handle:
         writer = csv.DictWriter(handle, fieldnames=fields)

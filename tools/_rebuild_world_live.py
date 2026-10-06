@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 from pathlib import Path
+from tools.atomic_io import atomic_write_text
 
 def H(s):
     return "".join(chr(int(x, 16)) for x in s.split())
@@ -136,7 +137,7 @@ a("")
 out = head + NL.join(lines) + main
 if not out.endswith(NL):
     out += NL
-p.write_text(out, encoding="utf-8")
+atomic_write_text(p, out, encoding="utf-8")
 compile(out, str(p), "exec")
 print("REBUILT", p.stat().st_size)
 print("HAS_FORCE", "_force_wave" in out)

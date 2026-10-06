@@ -1,0 +1,8 @@
+{
+  "id": "role-pack",
+  "work_id": "shuangdu",
+  "title": "角色包",
+  "html": "<div class='note'>《霜渡》角色包。这里先锁‘谁’，再让人物进入每一场的 Scene State；本页不承担剧情正文。乔霜、裴渡已更新为主角定妆 v2。</div>\n<h2>角色定妆</h2>\n<ul class='cast cast-people'>\n<li><figure><img src='assets/originals/shuangdu/qiao-shuang-v2.png' alt='乔霜'><figcaption><b>乔霜</b><br>验票人 · 要人名还在，不肯亮灯救人或作废真票。绑定：灭灯钩。</figcaption></figure></li>\n<li><figure><img src='assets/originals/shuangdu/pei-du-v2.png' alt='裴渡'><figcaption><b>裴渡</b><br>守船人 · 要重名不上船，不肯为运粮亮灯。绑定：铜铃。</figcaption></figure></li>\n<li><figure><img src='assets/originals/shuangdu/chen-san.png' alt='陈三'><figcaption><b>陈三</b><br>同一名两体 · 要过河、影回来，不肯承认自己先没。绑定：霜票。</figcaption></figure></li>\n</ul>\n<h2>未单独定妆的人</h2>\n<div class='pack-people'><div><b>陈三姐</b><span>来买票的女人。要弟弟回家，不肯接受两个人都过不去。绑定：热霜票。</span></div><div><b>河班老贾</b><span>末班河班。要把粮运过去，不肯无灯撞浅滩。绑定：火折子。</span></div></div>\n<h2>角色连续性锚点</h2>\n<p>身份包只锁脸、体型、服装和长期绑定道具；湿发、哭过、站在跳板哪一侧，留给具体镜头的 Shot State，不写死在角色包里。</p>"
+}
+
+

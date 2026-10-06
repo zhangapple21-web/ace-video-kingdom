@@ -66,7 +66,7 @@ def audit(episode_contracts: Path | None = None) -> dict[str, Any]:
             capture_output=True,
             text=True,
             check=False,
-        )
+        timeout=300 )
         if git_probe.returncode == 0:
             for path in required_runtime:
                 relative = path.relative_to(ROOT).as_posix()
@@ -76,7 +76,7 @@ def audit(episode_contracts: Path | None = None) -> dict[str, Any]:
                     capture_output=True,
                     text=True,
                     check=False,
-                )
+                timeout=300 )
                 if tracked.returncode != 0:
                     errors.append(f"production runtime dependency is not tracked: {relative}")
         else:

@@ -1,0 +1,26 @@
+{
+  "schema": "video_kingdom.persona_dna.v1",
+  "character_id": "C001",
+  "root_will": "先守住自己的拙与静，再谈归属和热闹",
+  "trauma": "长期活在互相表演的社交场里，发现亲近也可以被拿来交易后，对被人看见本身产生厌倦",
+  "desire": "一块不被打扰的清净，能把审美、阅读和收藏安放其中",
+  "fear": "清净之地再次被喧嚣、应酬和虚伪人情侵入",
+  "behavior_pattern": "日常淡泊、回避应酬；面对超常或冒犯不先逃，而是好奇观察、言语试探甚至调侃；一旦被一个懂自己的人勾住，会反复守候、茶饭无心",
+  "personality_conflict": "嘴上厌世避人，却极容易被懂自己审美的人留下，把避世变成守候",
+  "tags": [
+    "隐忍型",
+    "审美型"
+  ],
+  "source": "extract",
+  "parent_ids": [],
+  "version": "1",
+  "production_integration": false,
+  "creator_variant_id": "dna04_ensemble",
+  "creator_variant_label": "群像街巷版",
+  "creator_variant_bias": {
+    "ensemble_pressure": "high",
+    "third_party_action": "high",
+    "core_duo_same_scene": "not_required"
+  },
+  "creator_variant_note": "提高第三方和群体的自然行动权：街坊、旧邻、官府、守灵人、孤魂、行旅者可因自身利益和秘密登场、离场；周培与林墨不必每场同场，任何新角色必须自带动机并能改变世界。"
+}

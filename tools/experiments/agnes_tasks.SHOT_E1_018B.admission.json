@@ -1,0 +1,1074 @@
+{
+  "canonical_request": {
+    "action": "他不做口型，左手停在半空又放回桌面，视线躲回桌面；那缕细白烟仍然在冒。；老张这一拍不换新动作：手与道具都停在刚落定的位置，胸口随吸气起了一次又落回去，视线还压在同一个方向。",
+    "audio_contract": {
+      "candidate_tracks": [],
+      "dialogue_text_authority": "",
+      "dialogue_tracks": [
+        {
+          "duration_seconds": 5,
+          "local_path": "deliveries/EP001/exact_audio/SHOT_E1_018B.wav",
+          "public_url": "https://raw.githubusercontent.com/zhangapple21-web/ace-video-assets/ep001-suite-audio-20260929T133742Z/audio/ep001_suite_20260929T133742Z/E1_L018_WENJI_96a0074793e0.wav",
+          "speaker": "老张",
+          "text": "早就不想上那个破号了。正好甩锅给被盗。",
+          "track_id": "LINE_18B",
+          "track_type": "DIALOGUE"
+        }
+      ],
+      "duration_policy": "AUDIO_DRIVEN_DYNAMIC_WITH_MOTIVATED_ACTION_WINDOW",
+      "lip_sync_intended": false,
+      "master_field": "https://raw.githubusercontent.com/zhangapple21-web/ace-video-assets/ep001-suite-audio-20260929T133742Z/audio/ep001_suite_20260929T133742Z/E1_L018_WENJI_96a0074793e0.wav",
+      "monologue_lip_sync": false,
+      "provider_submission": "NOT_PERFORMED",
+      "schema": "video_kingdom.audio_contract.v1",
+      "status": "MEASURED",
+      "workflow_profile": "FORMAL"
+    },
+    "camera": {
+      "camera_motion_level": "SUBTLE",
+      "framing": "中近景，机位在老张正前方偏右，把冒烟的桌面右下角带进画面。",
+      "internal_cuts": 0,
+      "motion_reason": "轻微手持；那缕烟在他这边抖，镜头跟着抖一下才像真的有人在场。",
+      "movement": "轻微手持；那缕烟在他这边抖，镜头跟着抖一下才像真的有人在场。"
+    },
+    "contract_fingerprint": null,
+    "duration": 5,
+    "endpoint": "https://apihub.agnes-ai.com/v1/videos",
+    "episode_id": "zhang_tietie_suite_ep001",
+    "first_frame": null,
+    "generation_parameters": {
+      "aspect_ratio": "9:16",
+      "audios": [
+        "https://raw.githubusercontent.com/zhangapple21-web/ace-video-assets/ep001-suite-audio-20260929T133742Z/audio/ep001_suite_20260929T133742Z/E1_L018_WENJI_96a0074793e0.wav"
+      ],
+      "client_token": "vk-7700289285368c473027f0140560e98472f577ce45ac264e1babfc3928c10",
+      "input_images": [
+        "https://raw.githubusercontent.com/zhangapple21-web/ace-video-assets/main/references/ZHANG_TIETIE_PACK_ORIGINAL.png"
+      ],
+      "mode": "reference",
+      "n": 1,
+      "seconds": "5",
+      "size": "720P"
+    },
+    "last_frame": null,
+    "medium_lock": {
+      "output_medium": "CHARACTER_PERFORMANCE",
+      "schema": "video_kingdom.medium_lock.v1",
+      "signed": true,
+      "signed_by": "contract_compiler",
+      "source_kind": "ORIGINAL_STORY"
+    },
+    "model": "agnes-video-2.5-flash",
+    "negative_prompt": "",
+    "payload_schema": "agnes-video-cli.v1",
+    "production_contract": {
+      "continuity_bridge": {
+        "asset_register": [
+          {
+            "asset_id": "ZHANG_TIETIE_PACK_ORIGINAL",
+            "change": "只允许表演变化，不改变身份",
+            "final": "批准帧待生成",
+            "initial": "锁定身份/场景状态",
+            "kind": "character"
+          }
+        ],
+        "camera_state": "中近景，机位在老张正前方偏右，把冒烟的桌面右下角带进画面。；分段窗口 11–14 秒",
+        "enter_direction": "hold",
+        "evidence_basis": "EP001 剧本.md + 分镜.md + 视频提示词.md；本轮未生成任何实际帧",
+        "exit_direction": "hold",
+        "frame_proof_status": "PENDING",
+        "from_shot": "SHOT_E1_018A",
+        "lighting_state": "9:16 竖屏中近景，机位在人物正前方偏右，桌面右下角入画；不变事实是老张穿深灰色宽松棉质圆领短袖 T 恤、那只泛黄作业",
+        "next_initial_state": "本段第一帧承接同镜上一段（SHOT_E1_018A）在父镜 11 秒处的末帧，本段 0.0 秒即父镜 11 秒：他的左手抬到桌面上方，往自己这边扇了扇烟，扇两下扇不开，烟顺着他的手绕过去继续往上走；机位、景别、光位、持机手与道具位置与该末帧一致，不另起一帧、不重新起幅。批准帧待生成。",
+        "previous_end_frame_state": "前一段（SHOT_E1_018A）批准帧证据尚未产生；本段首帧按其末帧状态从父镜 11 秒处续入：他的左手抬到桌面上方，往自己这边扇了扇烟，扇两下扇不开，烟顺着他的手绕过去继续往上走。",
+        "scene_state": "老张小工作室·深夜",
+        "schema": "video_kingdom.continuity_bridge.v1",
+        "status": "PENDING_FRAME_PROOF",
+        "tail_frame_state": "手停在半空又放下，烟还在冒，他的视线躲回桌面。",
+        "to_shot": "SHOT_E1_018B"
+      },
+      "creative_constraints": {
+        "deferred": [
+          "实际生成后的帧证据",
+          "镜头级口型与身份 QC",
+          "最终拼接与全片 QC"
+        ],
+        "flexible": {
+          "cut_timing": "后期只在信息结束处剪切",
+          "duration": "provider 4–12 秒；本镜/本段 5 秒"
+        },
+        "hard": {
+          "identity_reference": {
+            "rules": [
+              "角色身份只认 ZHANG_TIETIE_PACK_ORIGINAL 原图，身份图只锁身份不锁构图"
+            ],
+            "status": "LOCKED"
+          },
+          "narrative_order": {
+            "rules": [
+              "对白与独白严格按 EP001 剧本.md 顺序，一条台词全片只响一次"
+            ],
+            "status": "LOCKED"
+          },
+          "performance_and_audio": {
+            "rules": [
+              "画内说话者口型只承担本镜剧本台词；内心独白以 VO 轨后期叠且画面人物闭嘴不对口型；无实测音频不得提交 Provider"
+            ],
+            "status": "LOCKED"
+          },
+          "spatial_relationship": {
+            "rules": [
+              "老张与文姬任何一镜不同框、不共享背景与视线轴；本镜地点锁定为 老张小工作室"
+            ],
+            "status": "LOCKED"
+          },
+          "visibility_and_exclusions": {
+            "rules": [
+              "手机屏幕与界面永不入画、永不点亮；不出现耳机/免提/外放；无第二人；无画面分割"
+            ],
+            "status": "LOCKED"
+          }
+        },
+        "negative_constraints_policy": {
+          "evidence": [
+            "motion_evidence.action_beats",
+            "frame_proof_status=PENDING"
+          ],
+          "evidence_required": true,
+          "genre_hard_bans_always_written": true
+        },
+        "negatives": [
+          "禁止音频覆盖静态照片",
+          "禁止首尾帧角色板变形",
+          "禁止静态口播"
+        ],
+        "schema": "video_kingdom.creative_constraints.v1"
+      },
+      "director_preflight": {
+        "camera": {
+          "camera_end": "动作信息完成后停在人物反应，不继续新增事件",
+          "camera_motion_level": "SUBTLE",
+          "camera_motion_reason": "轻微手持；那缕烟在他这边抖，镜头跟着抖一下才像真的有人在场。",
+          "main_motion": "缓推/轻微手持",
+          "tracking_subject": "老张、老张·深灰宽松T恤"
+        },
+        "lighting": {
+          "direction": "按场景动机从主体一侧稳定照明",
+          "exposure_lock": true,
+          "key_source": "桌面台灯/小灯串或窗帘缝日光（见静态视觉锚点）",
+          "motivation": "夜间/清晨室内实际灯光（深夜）",
+          "recompute_on_camera_change": true,
+          "white_balance_lock": true
+        },
+        "performance": {
+          "edit_intent": "本段/本镜信息完成后交给后期切点",
+          "end_when_no_new_info": true,
+          "force_and_contact": "不适用",
+          "hold_reason": "信息落地",
+          "listener_expression": "手停在半空又放下，烟还在冒，他的视线躲回桌面。",
+          "monologue_mouth_state": "内心独白以 VO 轨后期叠，画面人物闭嘴不对口型",
+          "pause_points": "按实测音频停顿；信息结束即停",
+          "speaker_action": "他不做口型，左手停在半空又放回桌面，视线躲回桌面；那缕细白烟仍然在冒。；老张这一拍不换新动作：手与道具都停在刚落定的位置，胸口随吸气起了一次又落回去，视线还压在同一个方向。",
+          "visible_event": "他不做口型，左手停在半空又放回桌面，视线躲回桌面；那缕细白烟仍然在冒。；老张这一拍不换新动作：手与道具都停在刚落定的位置，胸口随吸气起了一次又落回去，视线还压在同一个方向。"
+        },
+        "spatial_audit": {
+          "allowed_content": "只允许 老张、老张·深灰宽松T恤 完成本镜可观察动作与剧本台词",
+          "background": "老张小工作室·深夜",
+          "camera_start": "分段窗口首帧承接前段终点状态",
+          "forbidden_additions": "第二人物、第二张脸、画面分割、叠加窗口、任何屏幕界面、无剧本道具",
+          "foreground": "人物手部与必要道具（手机/纸杯/笔/纸卡/纸飞机）位于前景",
+          "locked_shot_no_added_beats": true,
+          "midground": "老张、老张·深灰宽松T恤 位于中景主体",
+          "screen_left_right": "人物按本镜构图在画面中的左右（换机位后须重算）",
+          "subjects_present": true,
+          "world_not_equal_screen": true,
+          "world_position": "老张、老张·深灰宽松T恤 在 老张小工作室 内的固定位置（世界坐标）"
+        }
+      },
+      "generation_allowed": true,
+      "identity_policy": "ORIGINAL_PACK_ONLY",
+      "medium_lock": {
+        "output_medium": "CHARACTER_PERFORMANCE",
+        "schema": "video_kingdom.medium_lock.v1",
+        "signed": true,
+        "signed_by": "contract_compiler",
+        "source_kind": "ORIGINAL_STORY"
+      },
+      "role_audit": {
+        "production_submission": "NOT_PERFORMED",
+        "profile": "full_audit",
+        "roles": [
+          {
+            "declared_models": [
+              "qwen-max"
+            ],
+            "evaluation": {
+              "status": "PASS"
+            },
+            "model": "qwen-max",
+            "role_id": "outline_structurer",
+            "route_rewritten": false,
+            "status": "COMPLETED"
+          },
+          {
+            "declared_models": [
+              "qwen-max"
+            ],
+            "evaluation": {
+              "status": "PASS"
+            },
+            "model": "qwen-max",
+            "role_id": "ideation_branch",
+            "route_rewritten": false,
+            "status": "COMPLETED"
+          },
+          {
+            "declared_models": [
+              "qwen-max"
+            ],
+            "evaluation": {
+              "status": "PASS"
+            },
+            "model": "qwen-max",
+            "role_id": "primary_writer",
+            "route_rewritten": false,
+            "status": "COMPLETED"
+          },
+          {
+            "declared_models": [
+              "qwen-vl-plus"
+            ],
+            "evaluation": {
+              "status": "PASS"
+            },
+            "model": "qwen-vl-plus",
+            "role_id": "storyboarder",
+            "route_rewritten": false,
+            "status": "COMPLETED"
+          },
+          {
+            "declared_models": [
+              "qwen-max"
+            ],
+            "evaluation": {
+              "status": "PASS"
+            },
+            "model": "qwen-max",
+            "role_id": "contrarian_auditor",
+            "route_rewritten": false,
+            "status": "COMPLETED"
+          },
+          {
+            "declared_models": [
+              "qwen-max"
+            ],
+            "evaluation": {
+              "status": "PASS"
+            },
+            "model": "qwen-max",
+            "role_id": "reality_reviewer",
+            "route_rewritten": false,
+            "status": "COMPLETED"
+          },
+          {
+            "declared_models": [
+              "qwen-max"
+            ],
+            "evaluation": {
+              "status": "PASS"
+            },
+            "model": "qwen-max",
+            "role_id": "continuity_editor",
+            "route_rewritten": false,
+            "status": "COMPLETED"
+          },
+          {
+            "declared_models": [
+              "qwen-max"
+            ],
+            "evaluation": {
+              "status": "PASS"
+            },
+            "model": "qwen-max",
+            "role_id": "format_editor",
+            "route_rewritten": false,
+            "status": "COMPLETED"
+          },
+          {
+            "declared_models": [
+              "qwen-max"
+            ],
+            "evaluation": {
+              "status": "PASS"
+            },
+            "model": "qwen-max",
+            "role_id": "director_convergence",
+            "route_rewritten": false,
+            "status": "COMPLETED"
+          },
+          {
+            "declared_models": [
+              "qwen-max"
+            ],
+            "evaluation": {
+              "status": "PASS"
+            },
+            "model": "qwen-max",
+            "role_id": "arbiter",
+            "route_rewritten": false,
+            "status": "COMPLETED"
+          }
+        ],
+        "schema": "video_kingdom.oneapi_role_room.v2",
+        "status": "COMPLETED"
+      },
+      "script_prompt_review": {
+        "prompt_hash": "38ecbc44967633a6ff49d379573c726450a83711b29430817343c7ab266efdc4",
+        "prompt_review": {
+          "comment": "画面描述准确，无高危词，reference 模式配置正确",
+          "conclusion": "合格，可以生成",
+          "distorts_script": false,
+          "hard_rules_complete": true,
+          "high_risk_extras": false,
+          "reasons_for_generation_allowed": "提示词忠实分镜原稿；屏幕守卫已写入且不含高危词；音频已绑定公网 URL",
+          "reviewed_at": "2026-10-01T06:09:48.286437",
+          "role": "导演"
+        },
+        "run_id": "EP001_SUITE_CONTRACTS_V1",
+        "schema": "video_kingdom.script_prompt_review.v1",
+        "script_hash": "287eda6b75361b5deb3415b861cb0ed0963ff52212b03cd88de60a88c29ce380",
+        "script_review": {
+          "comment": "台词与动作符合原著沙雕拌嘴风格，笑点保留完整",
+          "dialogue_order": "台词顺序与剧本一致，VO 按闭嘴处理",
+          "monologue_handling": "独白闭嘴后期叠 VO",
+          "phone_state": "默认启用电话剧情；本集通话均为贴耳手机",
+          "reviewed_at": "2026-10-01T06:09:48.286437",
+          "role": "编剧",
+          "unfilmable_risks": "无",
+          "verdict": "通过"
+        },
+        "shot_id": "SHOT_E1_018B"
+      },
+      "shot_rhythm": {
+        "asset_books_binding": "本镜绑定角色身份包；场景按 Scene State 执行",
+        "audio_anchor": "当前轮本地音色参考：输入/声音/老张-音色参考_V1.wav（尚未实测为对白轨）",
+        "camera_motion_level": "SUBTLE",
+        "camera_motion_reason": "轻微手持；那缕烟在他这边抖，镜头跟着抖一下才像真的有人在场。",
+        "color_temperature_k": "UNKNOWN；仅锁定夜/晨暖冷场景关系",
+        "composition_still_role": "lookdev_reference_not_i2v_source",
+        "dramatic_function": "让观众看见他被抓现行以后只能把锅甩给剧情，这是全集最便宜的一句谎。",
+        "duration_policy": "AUDIO_DRIVEN_DYNAMIC_WITH_MOTIVATED_ACTION_WINDOW",
+        "flash_mode_default": "reference",
+        "hold_reason": "信息落地",
+        "identity_policy": "ORIGINAL_PACK_ONLY",
+        "identity_usage": "full_identity_lock_not_i2v_source",
+        "media_role": "identity_reference_not_keyframe",
+        "movement": "named_visible_performance",
+        "movement_motivation": "他不做口型，左手停在半空又放回桌面，视线躲回桌面；那缕细白烟仍然在冒。；老张这一拍不换新动作：手与道具都停在刚落定的位置，胸口随吸气起了一次又落回去，视线还压在同一个方向。",
+        "overflow_policy": "split_or_extend_never_swallow",
+        "performance_beats": {
+          "cut_motivation": "本镜可见信息完成后交给后期切点",
+          "inner_voice_mouth_state": "内心独白以 VO 轨后期叠，画面人物闭嘴不对口型",
+          "listener_reaction": "手停在半空又放下，烟还在冒，他的视线躲回桌面。",
+          "pause_point": "按实测音频停顿；信息结束即停",
+          "speaker_hands_body": "他不做口型，左手停在半空又放回桌面，视线躲回桌面；那缕细白烟仍然在冒。；老张这一拍不换新动作：手与道具都停在刚落定的位置，胸口随吸气起了一次又落回去，视线还压在同一个方向。"
+        },
+        "photography": {
+          "camera_height": "按本镜机位（见景别/机位）",
+          "camera_path": "slow_push",
+          "focal_length": "UNKNOWN；以 Provider 实际构图校验",
+          "focus_handoff": "none",
+          "landing": "人物表演完成后的稳定反应",
+          "speed": "slow"
+        },
+        "requested_seconds": 5.0,
+        "scale": "medium",
+        "scene_prep_policy": "dynamic_scene_state_not_image_library",
+        "schema": "video_kingdom.shot_rhythm_contract.v1",
+        "script_annotations": {
+          "action": "他不做口型，左手停在半空又放回桌面，视线躲回桌面；那缕细白烟仍然在冒。；老张这一拍不换新动作：手与道具都停在刚落定的位置，胸口随吸气起了一次又落回去，视线还压在同一个方向。",
+          "atmosphere": "老张小工作室·深夜",
+          "dialogue": "无",
+          "emotion": "恼火与不服",
+          "inner_voice": "早就不想上那个破号了。正好甩锅给被盗。",
+          "motivation": "让观众看见他被抓现行以后只能把锅甩给剧情，这是全集最便宜的一句谎。",
+          "subtext": "让观众看见他被抓现行以后只能把锅甩给剧情，这是全集最便宜的一句谎。"
+        },
+        "shot_purpose": "让观众看见他被抓现行以后只能把锅甩给剧情，这是全集最便宜的一句谎。",
+        "timing_basis": "AUDIO_DRIVEN",
+        "transition_intent": "分段续接：前段终点状态即本段起点",
+        "underfill_policy": "trim_or_shorten_never_pad",
+        "unit": "shot_not_sequence",
+        "visible_change": "他不做口型，左手停在半空又放回桌面，视线躲回桌面；那缕细白烟仍然在冒。；老张这一拍不换新动作：手与道具都停在刚落定的位置，胸口随吸气起了一次又落回去，视线还压在同一个方向。",
+        "visible_consequence": "手停在半空又放下，烟还在冒，他的视线躲回桌面。"
+      },
+      "state_contract": {
+        "approval_reason": "本轮实际生成帧与连续性证据尚未产生",
+        "approved_for_next_shot": false,
+        "episode_state": {
+          "condition": "深夜",
+          "costume": "老张·深灰宽松T恤",
+          "episode": "接粉风云_EP001",
+          "hair_makeup": "全集不卸妆不换衣",
+          "run_id": "EP001_SUITE_CONTRACTS_V1",
+          "script_version": "EP001-suite-final",
+          "source_authority": "EP001 剧本.md 语义与对白顺序"
+        },
+        "identity_policy": "ORIGINAL_PACK_ONLY",
+        "identity_ref": "ZHANG_TIETIE_PACK_ORIGINAL",
+        "scene_state": {
+          "environment_props": [
+            "纸飞机",
+            "老张的旧黑手机"
+          ],
+          "interaction_surface": "人物实际接触的桌面、手机、纸杯/笔/纸卡/纸飞机等道具承托面",
+          "lighting": "9:16 竖屏中近景，机位在人物正前方偏右，桌面右下角入画；不变事实是老张穿深灰色宽松棉质圆领短袖 T 恤、那只泛黄作业纸折成的纸飞机烧缺机翼并冒烟、金属台灯暖",
+          "location": "老张小工作室",
+          "physical_layout": "真实可进入的工作/居家空间：桌面、座椅/椅背、窗/灯与地面道具承托面",
+          "scene_id": "ZHANG_STUDIO",
+          "scene_mode": "LIVE_DIEGETIC_SPACE",
+          "space": "老张、老张·深灰宽松T恤 所在的独立空间，按本镜动作允许移动",
+          "time": "深夜"
+        },
+        "schema": "video_kingdom.state_contract.v1",
+        "shot_state": {
+          "camera": "中近景，机位在老张正前方偏右，把冒烟的桌面右下角带进画面。；轻微手持；那缕烟在他这边抖，镜头跟着抖一下才像真的有人在场。",
+          "emotion_start_end": "恼火与不服",
+          "end_state": "手停在半空又放下，烟还在冒，他的视线躲回桌面。",
+          "primary_action": "他不做口型，左手停在半空又放回桌面，视线躲回桌面；那缕细白烟仍然在冒。；老张这一拍不换新动作：手与道具都停在刚落定的位置，胸口随吸气起了一次又落回去，视线还压在同一个方向。",
+          "start_pose": "本段第一帧承接同镜上一段（SHOT_E1_018A）在父镜 11 秒处的末帧，本段 0.0 秒即父镜 11 秒：他的左手抬到桌面上方，往自己这边扇了扇烟，扇两下扇不开，烟顺着他的手绕过去继续往上走；机位、景别、光位、持机手与道具位置与该末帧一致，不另起一帧、不重新起幅。批准帧待生成。"
+        }
+      },
+      "status": "READY_FOR_GENERATION",
+      "visual_mode": "FILM_NARRATIVE"
+    },
+    "prompt": "主体：老张、老张·深灰宽松T恤；身份由 ZHANG_TIETIE_PACK_ORIGINAL 锁脸型、发型、体态与年龄感，参考图不锁构图；文姬不得入画、不出现第二张脸\n环境：老张小工作室·深夜；道具：纸飞机、老张的旧黑手机\n动作：他不做口型，左手停在半空又放回桌面，视线躲回桌面；那缕细白烟仍然在冒。；老张这一拍不换新动作：手与道具都停在刚落定的位置，胸口随吸气起了一次又落回去，视线还压在同一个方向。\n光线：桌面金属台灯暖光约 3000K 为主光，画外机器的冷光只照亮下半张脸\n镜头：中近景，机位在老张正前方偏右，把冒烟的桌面右下角带进画面。；运镜：轻微手持；那缕烟在他这边抖，镜头跟着抖一下才像真的有人在场。\n风格：真人电影感竖屏摄影，真实皮肤质感与织物褶皱，柔和自然景深，写实非插画\n声音分段：本段是《分镜.md》SHOT-EP001-018 的第 2/2 段（B），父镜时钟 11–14 秒、本段时钟 0.0–5 秒；本段只承担这个窗口内的台词与 VO，以下声音时间线即本段实测主轨，父镜窗口之外的台词由同镜其他段承担，本段一句也不重播。\n竖屏 9:16 中近景，机位在人物正前方偏右，把冒烟的桌面右下角带进画面；真人电影感竖屏摄影，真实皮肤质感与织物褶皱，柔和自然景深，写实非插画。镜头轻微手持，抖量只到那缕烟在画面里晃一下。\n起始：本段第一帧承接同镜上一段（SHOT_E1_018A）在父镜 11 秒处的末帧，本段 0.0 秒即父镜 11 秒：他的左手抬到桌面上方，往自己这边扇了扇烟，扇两下扇不开，烟顺着他的手绕过去继续往上走；机位、景别、光位、持机手与道具位置与该末帧一致，不另起一帧、不重新起幅\n0–3 秒，他不做口型，左手停在半空又放回桌面，视线躲回桌面；那缕细白烟仍然在冒。\n3–5 秒，老张这一拍不换新动作：手与道具都停在刚落定的位置，胸口随吸气起了一次又落回去，视线还压在同一个方向。\n声音时间线，本段实测音频锁定，全镜中文口语，逐句不重叠：0–3.64 秒老张的内心独白以 VO 轨叠在画面上，说：「早就不想上那个破号了。正好甩锅给被盗。」，这条轨在画面上表现为闭嘴、不对口型；3.64–5 秒无人说话，只有房间底声。本段共 1 条人声（含 VO），除此之外只有底声，无非画内配乐；这些台词在本段之外的单元不再重复。\n全镜任何时刻都不生成非画内字幕、caption、对白文字叠加，不生成手机屏幕、界面、通知、火焰或任何可读文字。\n屏幕硬约束：画面内没有任何电子屏幕、显示面或发光面板，桌面上的器物全都不自发光；任何一帧出现屏幕自发光、界面、字符、光标或反光字幕即视为废帧，重新生成；本镜画面内没有任何可读文字，桌角那只电子钟不在本镜登记里、不得被画进任何一帧，数码管与发光数字都不允许出现。\n本镜台词全部来自画外电话或 VO，画内人物在本镜一句也不说：全程不做台词口型、不重复那句话，嘴部只按正文已经写到的笑、吸气、抿嘴这类不出词的动作走，没写到的口部动作一律不加；只用眼神、呼吸与身体接住它；画外说话的人不得进入画面、不得出现第二张嘴。",
+    "provider": "agnes",
+    "provider_payload": {
+      "aspect_ratio": "9:16",
+      "audios": [
+        "https://raw.githubusercontent.com/zhangapple21-web/ace-video-assets/ep001-suite-audio-20260929T133742Z/audio/ep001_suite_20260929T133742Z/E1_L018_WENJI_96a0074793e0.wav"
+      ],
+      "client_token": "vk-7700289285368c473027f0140560e98472f577ce45ac264e1babfc3928c10",
+      "input_images": [
+        "https://raw.githubusercontent.com/zhangapple21-web/ace-video-assets/main/references/ZHANG_TIETIE_PACK_ORIGINAL.png"
+      ],
+      "mode": "reference",
+      "model": "agnes-video-2.5-flash",
+      "n": 1,
+      "prompt": "主体：老张、老张·深灰宽松T恤；身份由 ZHANG_TIETIE_PACK_ORIGINAL 锁脸型、发型、体态与年龄感，参考图不锁构图；文姬不得入画、不出现第二张脸\n环境：老张小工作室·深夜；道具：纸飞机、老张的旧黑手机\n动作：他不做口型，左手停在半空又放回桌面，视线躲回桌面；那缕细白烟仍然在冒。；老张这一拍不换新动作：手与道具都停在刚落定的位置，胸口随吸气起了一次又落回去，视线还压在同一个方向。\n光线：桌面金属台灯暖光约 3000K 为主光，画外机器的冷光只照亮下半张脸\n镜头：中近景，机位在老张正前方偏右，把冒烟的桌面右下角带进画面。；运镜：轻微手持；那缕烟在他这边抖，镜头跟着抖一下才像真的有人在场。\n风格：真人电影感竖屏摄影，真实皮肤质感与织物褶皱，柔和自然景深，写实非插画\n声音分段：本段是《分镜.md》SHOT-EP001-018 的第 2/2 段（B），父镜时钟 11–14 秒、本段时钟 0.0–5 秒；本段只承担这个窗口内的台词与 VO，以下声音时间线即本段实测主轨，父镜窗口之外的台词由同镜其他段承担，本段一句也不重播。\n竖屏 9:16 中近景，机位在人物正前方偏右，把冒烟的桌面右下角带进画面；真人电影感竖屏摄影，真实皮肤质感与织物褶皱，柔和自然景深，写实非插画。镜头轻微手持，抖量只到那缕烟在画面里晃一下。\n起始：本段第一帧承接同镜上一段（SHOT_E1_018A）在父镜 11 秒处的末帧，本段 0.0 秒即父镜 11 秒：他的左手抬到桌面上方，往自己这边扇了扇烟，扇两下扇不开，烟顺着他的手绕过去继续往上走；机位、景别、光位、持机手与道具位置与该末帧一致，不另起一帧、不重新起幅\n0–3 秒，他不做口型，左手停在半空又放回桌面，视线躲回桌面；那缕细白烟仍然在冒。\n3–5 秒，老张这一拍不换新动作：手与道具都停在刚落定的位置，胸口随吸气起了一次又落回去，视线还压在同一个方向。\n声音时间线，本段实测音频锁定，全镜中文口语，逐句不重叠：0–3.64 秒老张的内心独白以 VO 轨叠在画面上，说：「早就不想上那个破号了。正好甩锅给被盗。」，这条轨在画面上表现为闭嘴、不对口型；3.64–5 秒无人说话，只有房间底声。本段共 1 条人声（含 VO），除此之外只有底声，无非画内配乐；这些台词在本段之外的单元不再重复。\n全镜任何时刻都不生成非画内字幕、caption、对白文字叠加，不生成手机屏幕、界面、通知、火焰或任何可读文字。\n屏幕硬约束：画面内没有任何电子屏幕、显示面或发光面板，桌面上的器物全都不自发光；任何一帧出现屏幕自发光、界面、字符、光标或反光字幕即视为废帧，重新生成；本镜画面内没有任何可读文字，桌角那只电子钟不在本镜登记里、不得被画进任何一帧，数码管与发光数字都不允许出现。\n本镜台词全部来自画外电话或 VO，画内人物在本镜一句也不说：全程不做台词口型、不重复那句话，嘴部只按正文已经写到的笑、吸气、抿嘴这类不出词的动作走，没写到的口部动作一律不加；只用眼神、呼吸与身体接住它；画外说话的人不得进入画面、不得出现第二张嘴。",
+      "seconds": "5",
+      "size": "720P"
+    },
+    "reference_assets": [
+      {
+        "asset_id": "ZHANG_TIETIE_PACK_ORIGINAL",
+        "asset_type": "character",
+        "local_sha256": "d2c4701dae2ed3a6ebb5d89f02605cf845fbe27a9affd386882ccdabb2c9ffc9",
+        "manifest_path": "D:\\视频创作\\projects\\张铁铁的沙雕日常\\套件版_接粉风云\\交付\\EP001\\合同\\user_character_pack_manifest_20260915.json",
+        "mime": "image/png",
+        "path": "D:\\视频创作\\projects\\张铁铁的沙雕日常\\套件版_接粉风云\\输入\\参考图\\老张-角色包原图.png",
+        "provider_mime": "image/png",
+        "provider_ref": "https://raw.githubusercontent.com/zhangapple21-web/ace-video-assets/main/references/ZHANG_TIETIE_PACK_ORIGINAL.png",
+        "role": "ZHANG_TIETIE",
+        "scope": "project",
+        "sha256": "d2c4701dae2ed3a6ebb5d89f02605cf845fbe27a9affd386882ccdabb2c9ffc9",
+        "size_bytes": 2077351,
+        "transport_sha256": "d2c4701dae2ed3a6ebb5d89f02605cf845fbe27a9affd386882ccdabb2c9ffc9",
+        "version": "user_pack_20260915"
+      }
+    ],
+    "request_kind": "shot",
+    "schema": "video_kingdom.canonical_generation_request.v1",
+    "scope": "production",
+    "shot_id": "SHOT_E1_018B",
+    "source_contract": {
+      "__contract_path": "D:\\视频创作\\projects\\张铁铁的沙雕日常\\套件版_接粉风云\\交付\\EP001\\合同\\SHOT_E1_018B.json",
+      "action": "他不做口型，左手停在半空又放回桌面，视线躲回桌面；那缕细白烟仍然在冒。；老张这一拍不换新动作：手与道具都停在刚落定的位置，胸口随吸气起了一次又落回去，视线还压在同一个方向。",
+      "asset_refs": [
+        {
+          "asset_id": "ZHANG_TIETIE_PACK_ORIGINAL",
+          "asset_type": "character",
+          "local_sha256": "d2c4701dae2ed3a6ebb5d89f02605cf845fbe27a9affd386882ccdabb2c9ffc9",
+          "manifest_path": "D:\\视频创作\\projects\\张铁铁的沙雕日常\\套件版_接粉风云\\交付\\EP001\\合同\\user_character_pack_manifest_20260915.json",
+          "mime": "image/png",
+          "path": "D:\\视频创作\\projects\\张铁铁的沙雕日常\\套件版_接粉风云\\输入\\参考图\\老张-角色包原图.png",
+          "provider_mime": "image/png",
+          "provider_ref": "https://raw.githubusercontent.com/zhangapple21-web/ace-video-assets/main/references/ZHANG_TIETIE_PACK_ORIGINAL.png",
+          "role": "ZHANG_TIETIE",
+          "scope": "project",
+          "sha256": "d2c4701dae2ed3a6ebb5d89f02605cf845fbe27a9affd386882ccdabb2c9ffc9",
+          "size_bytes": 2077351,
+          "transport_sha256": "d2c4701dae2ed3a6ebb5d89f02605cf845fbe27a9affd386882ccdabb2c9ffc9",
+          "version": "user_pack_20260915"
+        }
+      ],
+      "audio_contract": {
+        "candidate_tracks": [],
+        "dialogue_text_authority": "",
+        "dialogue_tracks": [
+          {
+            "duration_seconds": 5,
+            "local_path": "deliveries/EP001/exact_audio/SHOT_E1_018B.wav",
+            "public_url": "https://raw.githubusercontent.com/zhangapple21-web/ace-video-assets/ep001-suite-audio-20260929T133742Z/audio/ep001_suite_20260929T133742Z/E1_L018_WENJI_96a0074793e0.wav",
+            "speaker": "老张",
+            "text": "早就不想上那个破号了。正好甩锅给被盗。",
+            "track_id": "LINE_18B",
+            "track_type": "DIALOGUE"
+          }
+        ],
+        "duration_policy": "AUDIO_DRIVEN_DYNAMIC_WITH_MOTIVATED_ACTION_WINDOW",
+        "lip_sync_intended": false,
+        "master_field": "https://raw.githubusercontent.com/zhangapple21-web/ace-video-assets/ep001-suite-audio-20260929T133742Z/audio/ep001_suite_20260929T133742Z/E1_L018_WENJI_96a0074793e0.wav",
+        "monologue_lip_sync": false,
+        "provider_submission": "NOT_PERFORMED",
+        "schema": "video_kingdom.audio_contract.v1",
+        "status": "MEASURED",
+        "workflow_profile": "FORMAL"
+      },
+      "authored_duration_seconds": 14.0,
+      "camera": {
+        "camera_motion_level": "SUBTLE",
+        "framing": "中近景，机位在老张正前方偏右，把冒烟的桌面右下角带进画面。",
+        "internal_cuts": 0,
+        "motion_reason": "轻微手持；那缕烟在他这边抖，镜头跟着抖一下才像真的有人在场。",
+        "movement": "轻微手持；那缕烟在他这边抖，镜头跟着抖一下才像真的有人在场。"
+      },
+      "character_asset_id": "ZHANG_TIETIE_PACK_ORIGINAL",
+      "character_asset_manifest": {
+        "on_screen_identity_urls": [
+          "https://raw.githubusercontent.com/zhangapple21-web/ace-video-assets/main/references/ZHANG_TIETIE_PACK_ORIGINAL.png"
+        ],
+        "on_screen_reference_urls": [
+          "https://raw.githubusercontent.com/zhangapple21-web/ace-video-assets/main/references/ZHANG_TIETIE_PACK_ORIGINAL.png"
+        ],
+        "on_screen_workspace_urls": [],
+        "path": "D:\\视频创作\\projects\\张铁铁的沙雕日常\\套件版_接粉风云\\交付\\EP001\\合同\\user_character_pack_manifest_20260915.json",
+        "reference_urls": [
+          "https://raw.githubusercontent.com/zhangapple21-web/ace-video-assets/main/references/WENJI_PACK_ORIGINAL.png",
+          "https://raw.githubusercontent.com/zhangapple21-web/ace-video-assets/main/references/ZHANG_TIETIE_PACK_ORIGINAL.png"
+        ],
+        "roles": [
+          "WENJI",
+          "ZHANG_TIETIE"
+        ],
+        "sha256": "0bdd663fb487da72e426626f7b6cd66171e14b91a1b10037cae2f757c9b11453",
+        "workspace_lock": null
+      },
+      "compile_order": {
+        "director_packet_before_prompt": true,
+        "status": "ADVISORY"
+      },
+      "compiled_prompt_file": "SHOT_E1_018B_prompt.txt",
+      "compiled_prompt_sha256": "38ecbc44967633a6ff49d379573c726450a83711b29430817343c7ab266efdc4",
+      "continuity_bridge": {
+        "asset_register": [
+          {
+            "asset_id": "ZHANG_TIETIE_PACK_ORIGINAL",
+            "change": "只允许表演变化，不改变身份",
+            "final": "批准帧待生成",
+            "initial": "锁定身份/场景状态",
+            "kind": "character"
+          }
+        ],
+        "camera_state": "中近景，机位在老张正前方偏右，把冒烟的桌面右下角带进画面。；分段窗口 11–14 秒",
+        "enter_direction": "hold",
+        "evidence_basis": "EP001 剧本.md + 分镜.md + 视频提示词.md；本轮未生成任何实际帧",
+        "exit_direction": "hold",
+        "frame_proof_status": "PENDING",
+        "from_shot": "SHOT_E1_018A",
+        "lighting_state": "9:16 竖屏中近景，机位在人物正前方偏右，桌面右下角入画；不变事实是老张穿深灰色宽松棉质圆领短袖 T 恤、那只泛黄作业",
+        "next_initial_state": "本段第一帧承接同镜上一段（SHOT_E1_018A）在父镜 11 秒处的末帧，本段 0.0 秒即父镜 11 秒：他的左手抬到桌面上方，往自己这边扇了扇烟，扇两下扇不开，烟顺着他的手绕过去继续往上走；机位、景别、光位、持机手与道具位置与该末帧一致，不另起一帧、不重新起幅。批准帧待生成。",
+        "previous_end_frame_state": "前一段（SHOT_E1_018A）批准帧证据尚未产生；本段首帧按其末帧状态从父镜 11 秒处续入：他的左手抬到桌面上方，往自己这边扇了扇烟，扇两下扇不开，烟顺着他的手绕过去继续往上走。",
+        "scene_state": "老张小工作室·深夜",
+        "schema": "video_kingdom.continuity_bridge.v1",
+        "status": "PENDING_FRAME_PROOF",
+        "tail_frame_state": "手停在半空又放下，烟还在冒，他的视线躲回桌面。",
+        "to_shot": "SHOT_E1_018B"
+      },
+      "creative_constraints": {
+        "deferred": [
+          "实际生成后的帧证据",
+          "镜头级口型与身份 QC",
+          "最终拼接与全片 QC"
+        ],
+        "flexible": {
+          "cut_timing": "后期只在信息结束处剪切",
+          "duration": "provider 4–12 秒；本镜/本段 5 秒"
+        },
+        "hard": {
+          "identity_reference": {
+            "rules": [
+              "角色身份只认 ZHANG_TIETIE_PACK_ORIGINAL 原图，身份图只锁身份不锁构图"
+            ],
+            "status": "LOCKED"
+          },
+          "narrative_order": {
+            "rules": [
+              "对白与独白严格按 EP001 剧本.md 顺序，一条台词全片只响一次"
+            ],
+            "status": "LOCKED"
+          },
+          "performance_and_audio": {
+            "rules": [
+              "画内说话者口型只承担本镜剧本台词；内心独白以 VO 轨后期叠且画面人物闭嘴不对口型；无实测音频不得提交 Provider"
+            ],
+            "status": "LOCKED"
+          },
+          "spatial_relationship": {
+            "rules": [
+              "老张与文姬任何一镜不同框、不共享背景与视线轴；本镜地点锁定为 老张小工作室"
+            ],
+            "status": "LOCKED"
+          },
+          "visibility_and_exclusions": {
+            "rules": [
+              "手机屏幕与界面永不入画、永不点亮；不出现耳机/免提/外放；无第二人；无画面分割"
+            ],
+            "status": "LOCKED"
+          }
+        },
+        "negative_constraints_policy": {
+          "evidence": [
+            "motion_evidence.action_beats",
+            "frame_proof_status=PENDING"
+          ],
+          "evidence_required": true,
+          "genre_hard_bans_always_written": true
+        },
+        "negatives": [
+          "禁止音频覆盖静态照片",
+          "禁止首尾帧角色板变形",
+          "禁止静态口播"
+        ],
+        "schema": "video_kingdom.creative_constraints.v1"
+      },
+      "dialogue": [],
+      "director_preflight": {
+        "camera": {
+          "camera_end": "动作信息完成后停在人物反应，不继续新增事件",
+          "camera_motion_level": "SUBTLE",
+          "camera_motion_reason": "轻微手持；那缕烟在他这边抖，镜头跟着抖一下才像真的有人在场。",
+          "main_motion": "缓推/轻微手持",
+          "tracking_subject": "老张、老张·深灰宽松T恤"
+        },
+        "lighting": {
+          "direction": "按场景动机从主体一侧稳定照明",
+          "exposure_lock": true,
+          "key_source": "桌面台灯/小灯串或窗帘缝日光（见静态视觉锚点）",
+          "motivation": "夜间/清晨室内实际灯光（深夜）",
+          "recompute_on_camera_change": true,
+          "white_balance_lock": true
+        },
+        "performance": {
+          "edit_intent": "本段/本镜信息完成后交给后期切点",
+          "end_when_no_new_info": true,
+          "force_and_contact": "不适用",
+          "hold_reason": "信息落地",
+          "listener_expression": "手停在半空又放下，烟还在冒，他的视线躲回桌面。",
+          "monologue_mouth_state": "内心独白以 VO 轨后期叠，画面人物闭嘴不对口型",
+          "pause_points": "按实测音频停顿；信息结束即停",
+          "speaker_action": "他不做口型，左手停在半空又放回桌面，视线躲回桌面；那缕细白烟仍然在冒。；老张这一拍不换新动作：手与道具都停在刚落定的位置，胸口随吸气起了一次又落回去，视线还压在同一个方向。",
+          "visible_event": "他不做口型，左手停在半空又放回桌面，视线躲回桌面；那缕细白烟仍然在冒。；老张这一拍不换新动作：手与道具都停在刚落定的位置，胸口随吸气起了一次又落回去，视线还压在同一个方向。"
+        },
+        "spatial_audit": {
+          "allowed_content": "只允许 老张、老张·深灰宽松T恤 完成本镜可观察动作与剧本台词",
+          "background": "老张小工作室·深夜",
+          "camera_start": "分段窗口首帧承接前段终点状态",
+          "forbidden_additions": "第二人物、第二张脸、画面分割、叠加窗口、任何屏幕界面、无剧本道具",
+          "foreground": "人物手部与必要道具（手机/纸杯/笔/纸卡/纸飞机）位于前景",
+          "locked_shot_no_added_beats": true,
+          "midground": "老张、老张·深灰宽松T恤 位于中景主体",
+          "screen_left_right": "人物按本镜构图在画面中的左右（换机位后须重算）",
+          "subjects_present": true,
+          "world_not_equal_screen": true,
+          "world_position": "老张、老张·深灰宽松T恤 在 老张小工作室 内的固定位置（世界坐标）"
+        }
+      },
+      "duration_authority": "AUDIO_PLAN_MEASURED",
+      "duration_seconds": 5.0,
+      "episode": "接粉风云_EP001",
+      "episode_locks": {
+        "continuity_locks": [
+          {
+            "lock_id": "LOCK-ZHANG-TEE",
+            "name": "老张深灰宽松T恤"
+          },
+          {
+            "lock_id": "LOCK-PAPER-PLANE",
+            "name": "泛黄折皱纸飞机"
+          }
+        ]
+      },
+      "generation_allowed": true,
+      "identity_policy": "ORIGINAL_PACK_ONLY",
+      "inner_monologue": [
+        "早就不想上那个破号了。正好甩锅给被盗。"
+      ],
+      "knowledge_status": {
+        "assumptions": [
+          "11–14 秒"
+        ],
+        "facts": [
+          "EP001 剧本.md 台词与动作",
+          "分镜.md 与 视频提示词.md 的本镜可见事实"
+        ],
+        "unknowns": [
+          "Provider 实际帧表现",
+          "最终拼接切点",
+          "对白实测音频时长"
+        ]
+      },
+      "medium_lock": {
+        "output_medium": "CHARACTER_PERFORMANCE",
+        "schema": "video_kingdom.medium_lock.v1",
+        "signed": true,
+        "signed_by": "contract_compiler",
+        "source_kind": "ORIGINAL_STORY"
+      },
+      "motion_evidence": {
+        "action_beats": [
+          "0–3 秒，他不做口型，左手停在半空又放回桌面，视线躲回桌面；那缕细白烟仍然在冒。",
+          "3–5 秒，老张这一拍不换新动作：手与道具都停在刚落定的位置，胸口随吸气起了一次又落回去，视线还压在同一个方向。"
+        ],
+        "audio_only_animation_forbidden": true,
+        "change_channels": [
+          "hands",
+          "scene"
+        ],
+        "end_state": "手停在半空又放下，烟还在冒，他的视线躲回桌面。",
+        "frame_proof_status": "PENDING",
+        "mode": "NAMED_VISIBLE_PERFORMANCE",
+        "promotion_requires_frame_level_motion_qc": true,
+        "required_for_provider": true,
+        "role_board_as_keyframe_forbidden": true,
+        "schema": "video_kingdom.motion_evidence.v1",
+        "start_state": "本段第一帧承接同镜上一段（SHOT_E1_018A）在父镜 11 秒处的末帧，本段 0.0 秒即父镜 11 秒：他的左手抬到桌面上方，往自己这边扇了扇烟，扇两下扇不开，烟顺着他的手绕过去继续往上走；机位、景别、光位、持机手与道具位置与该末帧一致，不另起一帧、不重新起幅。批准帧待生成。"
+      },
+      "note": "合同由创作五文档编译而来；等审核件（第4轮编剧审核+逐镜导演审核）与实测音频落盘后方可翻 generation_allowed。",
+      "production_submission": "NOT_PERFORMED",
+      "project_id": "zhang_tietie_suite_ep001",
+      "prompt": "主体：老张、老张·深灰宽松T恤；身份由 ZHANG_TIETIE_PACK_ORIGINAL 锁脸型、发型、体态与年龄感，参考图不锁构图；文姬不得入画、不出现第二张脸\n环境：老张小工作室·深夜；道具：纸飞机、老张的旧黑手机\n动作：他不做口型，左手停在半空又放回桌面，视线躲回桌面；那缕细白烟仍然在冒。；老张这一拍不换新动作：手与道具都停在刚落定的位置，胸口随吸气起了一次又落回去，视线还压在同一个方向。\n光线：桌面金属台灯暖光约 3000K 为主光，画外机器的冷光只照亮下半张脸\n镜头：中近景，机位在老张正前方偏右，把冒烟的桌面右下角带进画面。；运镜：轻微手持；那缕烟在他这边抖，镜头跟着抖一下才像真的有人在场。\n风格：真人电影感竖屏摄影，真实皮肤质感与织物褶皱，柔和自然景深，写实非插画\n声音分段：本段是《分镜.md》SHOT-EP001-018 的第 2/2 段（B），父镜时钟 11–14 秒、本段时钟 0.0–5 秒；本段只承担这个窗口内的台词与 VO，以下声音时间线即本段实测主轨，父镜窗口之外的台词由同镜其他段承担，本段一句也不重播。\n竖屏 9:16 中近景，机位在人物正前方偏右，把冒烟的桌面右下角带进画面；真人电影感竖屏摄影，真实皮肤质感与织物褶皱，柔和自然景深，写实非插画。镜头轻微手持，抖量只到那缕烟在画面里晃一下。\n起始：本段第一帧承接同镜上一段（SHOT_E1_018A）在父镜 11 秒处的末帧，本段 0.0 秒即父镜 11 秒：他的左手抬到桌面上方，往自己这边扇了扇烟，扇两下扇不开，烟顺着他的手绕过去继续往上走；机位、景别、光位、持机手与道具位置与该末帧一致，不另起一帧、不重新起幅\n0–3 秒，他不做口型，左手停在半空又放回桌面，视线躲回桌面；那缕细白烟仍然在冒。\n3–5 秒，老张这一拍不换新动作：手与道具都停在刚落定的位置，胸口随吸气起了一次又落回去，视线还压在同一个方向。\n声音时间线，本段实测音频锁定，全镜中文口语，逐句不重叠：0–3.64 秒老张的内心独白以 VO 轨叠在画面上，说：「早就不想上那个破号了。正好甩锅给被盗。」，这条轨在画面上表现为闭嘴、不对口型；3.64–5 秒无人说话，只有房间底声。本段共 1 条人声（含 VO），除此之外只有底声，无非画内配乐；这些台词在本段之外的单元不再重复。\n全镜任何时刻都不生成非画内字幕、caption、对白文字叠加，不生成手机屏幕、界面、通知、火焰或任何可读文字。\n屏幕硬约束：画面内没有任何电子屏幕、显示面或发光面板，桌面上的器物全都不自发光；任何一帧出现屏幕自发光、界面、字符、光标或反光字幕即视为废帧，重新生成；本镜画面内没有任何可读文字，桌角那只电子钟不在本镜登记里、不得被画进任何一帧，数码管与发光数字都不允许出现。\n本镜台词全部来自画外电话或 VO，画内人物在本镜一句也不说：全程不做台词口型、不重复那句话，嘴部只按正文已经写到的笑、吸气、抿嘴这类不出词的动作走，没写到的口部动作一律不加；只用眼神、呼吸与身体接住它；画外说话的人不得进入画面、不得出现第二张嘴。",
+      "provider_seconds": 5,
+      "render": {
+        "aspect_ratio": "9:16",
+        "duration_policy": "AUDIO_DRIVEN_DYNAMIC_WITH_MOTIVATED_ACTION_WINDOW",
+        "flash_mode": "reference",
+        "identity_policy": "ORIGINAL_PACK_ONLY",
+        "max_reference_audio": 3,
+        "max_reference_images": 5,
+        "model": "agnes-video-2.5-flash",
+        "negative_prompt_field": "MODEL_HAS_NO_NEGATIVE_PROMPT_FIELD",
+        "provider_submission": "NOT_PERFORMED",
+        "reference_audio_urls": [
+          "https://raw.githubusercontent.com/zhangapple21-web/ace-video-assets/ep001-suite-audio-20260929T133742Z/audio/ep001_suite_20260929T133742Z/E1_L018_WENJI_96a0074793e0.wav"
+        ],
+        "reference_image_urls": [
+          "https://raw.githubusercontent.com/zhangapple21-web/ace-video-assets/main/references/ZHANG_TIETIE_PACK_ORIGINAL.png"
+        ],
+        "seconds": 5,
+        "size": "720P"
+      },
+      "role_audit": {
+        "production_submission": "NOT_PERFORMED",
+        "profile": "full_audit",
+        "roles": [
+          {
+            "declared_models": [
+              "qwen-max"
+            ],
+            "evaluation": {
+              "status": "PASS"
+            },
+            "model": "qwen-max",
+            "role_id": "outline_structurer",
+            "route_rewritten": false,
+            "status": "COMPLETED"
+          },
+          {
+            "declared_models": [
+              "qwen-max"
+            ],
+            "evaluation": {
+              "status": "PASS"
+            },
+            "model": "qwen-max",
+            "role_id": "ideation_branch",
+            "route_rewritten": false,
+            "status": "COMPLETED"
+          },
+          {
+            "declared_models": [
+              "qwen-max"
+            ],
+            "evaluation": {
+              "status": "PASS"
+            },
+            "model": "qwen-max",
+            "role_id": "primary_writer",
+            "route_rewritten": false,
+            "status": "COMPLETED"
+          },
+          {
+            "declared_models": [
+              "qwen-vl-plus"
+            ],
+            "evaluation": {
+              "status": "PASS"
+            },
+            "model": "qwen-vl-plus",
+            "role_id": "storyboarder",
+            "route_rewritten": false,
+            "status": "COMPLETED"
+          },
+          {
+            "declared_models": [
+              "qwen-max"
+            ],
+            "evaluation": {
+              "status": "PASS"
+            },
+            "model": "qwen-max",
+            "role_id": "contrarian_auditor",
+            "route_rewritten": false,
+            "status": "COMPLETED"
+          },
+          {
+            "declared_models": [
+              "qwen-max"
+            ],
+            "evaluation": {
+              "status": "PASS"
+            },
+            "model": "qwen-max",
+            "role_id": "reality_reviewer",
+            "route_rewritten": false,
+            "status": "COMPLETED"
+          },
+          {
+            "declared_models": [
+              "qwen-max"
+            ],
+            "evaluation": {
+              "status": "PASS"
+            },
+            "model": "qwen-max",
+            "role_id": "continuity_editor",
+            "route_rewritten": false,
+            "status": "COMPLETED"
+          },
+          {
+            "declared_models": [
+              "qwen-max"
+            ],
+            "evaluation": {
+              "status": "PASS"
+            },
+            "model": "qwen-max",
+            "role_id": "format_editor",
+            "route_rewritten": false,
+            "status": "COMPLETED"
+          },
+          {
+            "declared_models": [
+              "qwen-max"
+            ],
+            "evaluation": {
+              "status": "PASS"
+            },
+            "model": "qwen-max",
+            "role_id": "director_convergence",
+            "route_rewritten": false,
+            "status": "COMPLETED"
+          },
+          {
+            "declared_models": [
+              "qwen-max"
+            ],
+            "evaluation": {
+              "status": "PASS"
+            },
+            "model": "qwen-max",
+            "role_id": "arbiter",
+            "route_rewritten": false,
+            "status": "COMPLETED"
+          }
+        ],
+        "schema": "video_kingdom.oneapi_role_room.v2",
+        "status": "COMPLETED"
+      },
+      "run_id": "EP001_SUITE_CONTRACTS_V1",
+      "scene_asset_id": "ZHANG_STUDIO",
+      "schema": "video_kingdom.canonical_shot_contract.v1_rc1",
+      "screenplay_sha256": "287eda6b75361b5deb3415b861cb0ed0963ff52212b03cd88de60a88c29ce380",
+      "screenplay_shot_id": "SHOT-EP001-018",
+      "script_hash": "287eda6b75361b5deb3415b861cb0ed0963ff52212b03cd88de60a88c29ce380",
+      "script_prompt_review": {
+        "prompt_hash": "38ecbc44967633a6ff49d379573c726450a83711b29430817343c7ab266efdc4",
+        "prompt_review": {
+          "comment": "画面描述准确，无高危词，reference 模式配置正确",
+          "conclusion": "合格，可以生成",
+          "distorts_script": false,
+          "hard_rules_complete": true,
+          "high_risk_extras": false,
+          "reasons_for_generation_allowed": "提示词忠实分镜原稿；屏幕守卫已写入且不含高危词；音频已绑定公网 URL",
+          "reviewed_at": "2026-10-01T06:09:48.286437",
+          "role": "导演"
+        },
+        "run_id": "EP001_SUITE_CONTRACTS_V1",
+        "schema": "video_kingdom.script_prompt_review.v1",
+        "script_hash": "287eda6b75361b5deb3415b861cb0ed0963ff52212b03cd88de60a88c29ce380",
+        "script_review": {
+          "comment": "台词与动作符合原著沙雕拌嘴风格，笑点保留完整",
+          "dialogue_order": "台词顺序与剧本一致，VO 按闭嘴处理",
+          "monologue_handling": "独白闭嘴后期叠 VO",
+          "phone_state": "默认启用电话剧情；本集通话均为贴耳手机",
+          "reviewed_at": "2026-10-01T06:09:48.286437",
+          "role": "编剧",
+          "unfilmable_risks": "无",
+          "verdict": "通过"
+        },
+        "shot_id": "SHOT_E1_018B"
+      },
+      "script_version": "EP001-suite-final",
+      "shot_id": "SHOT_E1_018B",
+      "shot_prompt": {
+        "compiled_prompt": "主体：老张、老张·深灰宽松T恤；身份由 ZHANG_TIETIE_PACK_ORIGINAL 锁脸型、发型、体态与年龄感，参考图不锁构图；文姬不得入画、不出现第二张脸\n环境：老张小工作室·深夜；道具：纸飞机、老张的旧黑手机\n动作：他不做口型，左手停在半空又放回桌面，视线躲回桌面；那缕细白烟仍然在冒。；老张这一拍不换新动作：手与道具都停在刚落定的位置，胸口随吸气起了一次又落回去，视线还压在同一个方向。\n光线：桌面金属台灯暖光约 3000K 为主光，画外机器的冷光只照亮下半张脸\n镜头：中近景，机位在老张正前方偏右，把冒烟的桌面右下角带进画面。；运镜：轻微手持；那缕烟在他这边抖，镜头跟着抖一下才像真的有人在场。\n风格：真人电影感竖屏摄影，真实皮肤质感与织物褶皱，柔和自然景深，写实非插画\n声音分段：本段是《分镜.md》SHOT-EP001-018 的第 2/2 段（B），父镜时钟 11–14 秒、本段时钟 0.0–5 秒；本段只承担这个窗口内的台词与 VO，以下声音时间线即本段实测主轨，父镜窗口之外的台词由同镜其他段承担，本段一句也不重播。\n竖屏 9:16 中近景，机位在人物正前方偏右，把冒烟的桌面右下角带进画面；真人电影感竖屏摄影，真实皮肤质感与织物褶皱，柔和自然景深，写实非插画。镜头轻微手持，抖量只到那缕烟在画面里晃一下。\n起始：本段第一帧承接同镜上一段（SHOT_E1_018A）在父镜 11 秒处的末帧，本段 0.0 秒即父镜 11 秒：他的左手抬到桌面上方，往自己这边扇了扇烟，扇两下扇不开，烟顺着他的手绕过去继续往上走；机位、景别、光位、持机手与道具位置与该末帧一致，不另起一帧、不重新起幅\n0–3 秒，他不做口型，左手停在半空又放回桌面，视线躲回桌面；那缕细白烟仍然在冒。\n3–5 秒，老张这一拍不换新动作：手与道具都停在刚落定的位置，胸口随吸气起了一次又落回去，视线还压在同一个方向。\n声音时间线，本段实测音频锁定，全镜中文口语，逐句不重叠：0–3.64 秒老张的内心独白以 VO 轨叠在画面上，说：「早就不想上那个破号了。正好甩锅给被盗。」，这条轨在画面上表现为闭嘴、不对口型；3.64–5 秒无人说话，只有房间底声。本段共 1 条人声（含 VO），除此之外只有底声，无非画内配乐；这些台词在本段之外的单元不再重复。\n全镜任何时刻都不生成非画内字幕、caption、对白文字叠加，不生成手机屏幕、界面、通知、火焰或任何可读文字。\n屏幕硬约束：画面内没有任何电子屏幕、显示面或发光面板，桌面上的器物全都不自发光；任何一帧出现屏幕自发光、界面、字符、光标或反光字幕即视为废帧，重新生成；本镜画面内没有任何可读文字，桌角那只电子钟不在本镜登记里、不得被画进任何一帧，数码管与发光数字都不允许出现。\n本镜台词全部来自画外电话或 VO，画内人物在本镜一句也不说：全程不做台词口型、不重复那句话，嘴部只按正文已经写到的笑、吸气、抿嘴这类不出词的动作走，没写到的口部动作一律不加；只用眼神、呼吸与身体接住它；画外说话的人不得进入画面、不得出现第二张嘴。",
+        "count_constraints": [],
+        "negative_constraints": [
+          "不生成非画内字幕",
+          "不生成手机屏幕",
+          "非画内字幕",
+          "没有任何可读文字",
+          "或任何可读文字"
+        ],
+        "scene_lock": "老张小工作室·深夜；道具：纸飞机、老张的旧黑手机",
+        "style_lock": "真人电影感竖屏摄影，真实皮肤质感与织物褶皱，柔和自然景深，写实非插画",
+        "subject_lock": "老张、老张·深灰宽松T恤；身份由 ZHANG_TIETIE_PACK_ORIGINAL 锁脸型、发型、体态与年龄感，参考图不锁构图；文姬不得入画、不出现第二张脸",
+        "txt_prompt_elements": {
+          "action": "他不做口型，左手停在半空又放回桌面，视线躲回桌面；那缕细白烟仍然在冒。；老张这一拍不换新动作：手与道具都停在刚落定的位置，胸口随吸气起了一次又落回去，视线还压在同一个方向。",
+          "camera": "中近景，机位在老张正前方偏右，把冒烟的桌面右下角带进画面。；运镜：轻微手持；那缕烟在他这边抖，镜头跟着抖一下才像真的有人在场。",
+          "environment": "老张小工作室·深夜；道具：纸飞机、老张的旧黑手机",
+          "lighting": "桌面金属台灯暖光约 3000K 为主光，画外机器的冷光只照亮下半张脸",
+          "style": "真人电影感竖屏摄影，真实皮肤质感与织物褶皱，柔和自然景深，写实非插画",
+          "subject": "老张、老张·深灰宽松T恤；身份由 ZHANG_TIETIE_PACK_ORIGINAL 锁脸型、发型、体态与年龄感，参考图不锁构图；文姬不得入画、不出现第二张脸"
+        }
+      },
+      "shot_rhythm": {
+        "asset_books_binding": "本镜绑定角色身份包；场景按 Scene State 执行",
+        "audio_anchor": "当前轮本地音色参考：输入/声音/老张-音色参考_V1.wav（尚未实测为对白轨）",
+        "camera_motion_level": "SUBTLE",
+        "camera_motion_reason": "轻微手持；那缕烟在他这边抖，镜头跟着抖一下才像真的有人在场。",
+        "color_temperature_k": "UNKNOWN；仅锁定夜/晨暖冷场景关系",
+        "composition_still_role": "lookdev_reference_not_i2v_source",
+        "dramatic_function": "让观众看见他被抓现行以后只能把锅甩给剧情，这是全集最便宜的一句谎。",
+        "duration_policy": "AUDIO_DRIVEN_DYNAMIC_WITH_MOTIVATED_ACTION_WINDOW",
+        "flash_mode_default": "reference",
+        "hold_reason": "信息落地",
+        "identity_policy": "ORIGINAL_PACK_ONLY",
+        "identity_usage": "full_identity_lock_not_i2v_source",
+        "media_role": "identity_reference_not_keyframe",
+        "movement": "named_visible_performance",
+        "movement_motivation": "他不做口型，左手停在半空又放回桌面，视线躲回桌面；那缕细白烟仍然在冒。；老张这一拍不换新动作：手与道具都停在刚落定的位置，胸口随吸气起了一次又落回去，视线还压在同一个方向。",
+        "overflow_policy": "split_or_extend_never_swallow",
+        "performance_beats": {
+          "cut_motivation": "本镜可见信息完成后交给后期切点",
+          "inner_voice_mouth_state": "内心独白以 VO 轨后期叠，画面人物闭嘴不对口型",
+          "listener_reaction": "手停在半空又放下，烟还在冒，他的视线躲回桌面。",
+          "pause_point": "按实测音频停顿；信息结束即停",
+          "speaker_hands_body": "他不做口型，左手停在半空又放回桌面，视线躲回桌面；那缕细白烟仍然在冒。；老张这一拍不换新动作：手与道具都停在刚落定的位置，胸口随吸气起了一次又落回去，视线还压在同一个方向。"
+        },
+        "photography": {
+          "camera_height": "按本镜机位（见景别/机位）",
+          "camera_path": "slow_push",
+          "focal_length": "UNKNOWN；以 Provider 实际构图校验",
+          "focus_handoff": "none",
+          "landing": "人物表演完成后的稳定反应",
+          "speed": "slow"
+        },
+        "requested_seconds": 5.0,
+        "scale": "medium",
+        "scene_prep_policy": "dynamic_scene_state_not_image_library",
+        "schema": "video_kingdom.shot_rhythm_contract.v1",
+        "script_annotations": {
+          "action": "他不做口型，左手停在半空又放回桌面，视线躲回桌面；那缕细白烟仍然在冒。；老张这一拍不换新动作：手与道具都停在刚落定的位置，胸口随吸气起了一次又落回去，视线还压在同一个方向。",
+          "atmosphere": "老张小工作室·深夜",
+          "dialogue": "无",
+          "emotion": "恼火与不服",
+          "inner_voice": "早就不想上那个破号了。正好甩锅给被盗。",
+          "motivation": "让观众看见他被抓现行以后只能把锅甩给剧情，这是全集最便宜的一句谎。",
+          "subtext": "让观众看见他被抓现行以后只能把锅甩给剧情，这是全集最便宜的一句谎。"
+        },
+        "shot_purpose": "让观众看见他被抓现行以后只能把锅甩给剧情，这是全集最便宜的一句谎。",
+        "timing_basis": "AUDIO_DRIVEN",
+        "transition_intent": "分段续接：前段终点状态即本段起点",
+        "underfill_policy": "trim_or_shorten_never_pad",
+        "unit": "shot_not_sequence",
+        "visible_change": "他不做口型，左手停在半空又放回桌面，视线躲回桌面；那缕细白烟仍然在冒。；老张这一拍不换新动作：手与道具都停在刚落定的位置，胸口随吸气起了一次又落回去，视线还压在同一个方向。",
+        "visible_consequence": "手停在半空又放下，烟还在冒，他的视线躲回桌面。"
+      },
+      "source_frame": "身份参考图只锁身份，不作首帧；本单元首帧由提交提示词的「起始：」文字逐字承担。切分后段的首帧等于同镜前一段批准末帧，不另起一帧。《分镜.md》本镜冻结关键帧是中拍/落点构图参照，本集不挂图，供后续 Look Dev 使用。",
+      "speaker": "老张",
+      "state_contract": {
+        "approval_reason": "本轮实际生成帧与连续性证据尚未产生",
+        "approved_for_next_shot": false,
+        "episode_state": {
+          "condition": "深夜",
+          "costume": "老张·深灰宽松T恤",
+          "episode": "接粉风云_EP001",
+          "hair_makeup": "全集不卸妆不换衣",
+          "run_id": "EP001_SUITE_CONTRACTS_V1",
+          "script_version": "EP001-suite-final",
+          "source_authority": "EP001 剧本.md 语义与对白顺序"
+        },
+        "identity_policy": "ORIGINAL_PACK_ONLY",
+        "identity_ref": "ZHANG_TIETIE_PACK_ORIGINAL",
+        "scene_state": {
+          "environment_props": [
+            "纸飞机",
+            "老张的旧黑手机"
+          ],
+          "interaction_surface": "人物实际接触的桌面、手机、纸杯/笔/纸卡/纸飞机等道具承托面",
+          "lighting": "9:16 竖屏中近景，机位在人物正前方偏右，桌面右下角入画；不变事实是老张穿深灰色宽松棉质圆领短袖 T 恤、那只泛黄作业纸折成的纸飞机烧缺机翼并冒烟、金属台灯暖",
+          "location": "老张小工作室",
+          "physical_layout": "真实可进入的工作/居家空间：桌面、座椅/椅背、窗/灯与地面道具承托面",
+          "scene_id": "ZHANG_STUDIO",
+          "scene_mode": "LIVE_DIEGETIC_SPACE",
+          "space": "老张、老张·深灰宽松T恤 所在的独立空间，按本镜动作允许移动",
+          "time": "深夜"
+        },
+        "schema": "video_kingdom.state_contract.v1",
+        "shot_state": {
+          "camera": "中近景，机位在老张正前方偏右，把冒烟的桌面右下角带进画面。；轻微手持；那缕烟在他这边抖，镜头跟着抖一下才像真的有人在场。",
+          "emotion_start_end": "恼火与不服",
+          "end_state": "手停在半空又放下，烟还在冒，他的视线躲回桌面。",
+          "primary_action": "他不做口型，左手停在半空又放回桌面，视线躲回桌面；那缕细白烟仍然在冒。；老张这一拍不换新动作：手与道具都停在刚落定的位置，胸口随吸气起了一次又落回去，视线还压在同一个方向。",
+          "start_pose": "本段第一帧承接同镜上一段（SHOT_E1_018A）在父镜 11 秒处的末帧，本段 0.0 秒即父镜 11 秒：他的左手抬到桌面上方，往自己这边扇了扇烟，扇两下扇不开，烟顺着他的手绕过去继续往上走；机位、景别、光位、持机手与道具位置与该末帧一致，不另起一帧、不重新起幅。批准帧待生成。"
+        }
+      },
+      "status": "READY_FOR_GENERATION",
+      "story_goal": "让观众看见他被抓现行以后只能把锅甩给剧情，这是全集最便宜的一句谎。",
+      "suite_motion_id": "MOTION-EP001-018",
+      "title": "剧情需要",
+      "visual_action": "他不做口型，左手停在半空又放回桌面，视线躲回桌面；那缕细白烟仍然在冒。；老张这一拍不换新动作：手与道具都停在刚落定的位置，胸口随吸气起了一次又落回去，视线还压在同一个方向。",
+      "visual_locks": {
+        "aspect": "9:16",
+        "size": "720P",
+        "style": "真人电影感"
+      },
+      "visual_mode": "FILM_NARRATIVE"
+    },
+    "state": {},
+    "visible_entities": []
+  },
+  "created_at": "2026-10-04T11:47:26Z",
+  "preflight": {
+    "errors": [],
+    "status": "CONTRACT_VALID",
+    "warnings": []
+  },
+  "provider_post_allowed": true,
+  "request_hash": "2ecf0ca16c8f3ca0bc52b3ba9530d03adc55aa1b7619008424a667c358703fbc",
+  "schema": "video_kingdom.provider_admission_receipt.v1",
+  "status": "ADMITTED"
+}

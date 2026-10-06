@@ -13,6 +13,7 @@ import sys
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
+from tools.atomic_io import atomic_write_text
 from runtime.shot_core import _probe, audit_manifest, load_manifest, resolve_artifact_path
 
 sys.stdout.reconfigure(encoding="utf-8")  # Bug #1 fix: prevent UnicodeEncodeError on GBK console
@@ -58,7 +59,7 @@ def main() -> int:
         raise SystemExit(f"assembly output already exists; refusing overwrite: {args.output}")
     args.output.parent.mkdir(parents=True, exist_ok=True)
     concat = args.output.with_suffix(".concat.txt")
-    concat.write_text("\n".join("file '" + str(path).replace("'", "'\\''") + "'" for path in clips) + "\n", encoding="utf-8")
+    atomic_write_text(concat, "\n".join("file '" + str(path).replace("'", "'\\''") + "'" for path in clips) + "\n", encoding="utf-8")
     try:
         subprocess.run(["ffmpeg", "-y", "-f", "concat", "-safe", "0", "-i", str(concat), "-c", "copy", str(args.output)], check=True, timeout=120)
     finally:
@@ -70,7 +71,7 @@ def main() -> int:
         raise SystemExit(f"assembled output failed media probe: {exc}")
     receipt = {"schema": "video_kingdom.shot_core.assembly_receipt.v1", "status": "ASSEMBLY_SELECTED_ONLY", "output": str(args.output), "output_hash": hashlib.sha256(args.output.read_bytes()).hexdigest(), "media": output_media, "manifest_sha256": hashlib.sha256(args.manifest.read_bytes()).hexdigest(), "shots": sources}
     args.receipt.parent.mkdir(parents=True, exist_ok=True)
-    args.receipt.write_text(json.dumps(receipt, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    atomic_write_text(args.receipt, json.dumps(receipt, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     print(json.dumps(receipt, ensure_ascii=False))
     return 0
 

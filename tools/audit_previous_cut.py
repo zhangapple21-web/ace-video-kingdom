@@ -13,6 +13,7 @@ import subprocess
 from pathlib import Path
 from typing import Any
 import sys
+from tools.atomic_io import atomic_write_text
 
 sys.stdout.reconfigure(encoding="utf-8")  # Bug #1 fix: prevent UnicodeEncodeError on GBK console
 
@@ -36,7 +37,7 @@ def _probe(path: Path) -> dict[str, Any]:
         "-of", "json", str(path),
     ]
     try:
-        raw = subprocess.run(command, capture_output=True, text=True, check=True).stdout
+        raw = subprocess.run(command, capture_output=True, text=True, check=True, timeout=300).stdout
         value = json.loads(raw)
     except (OSError, subprocess.CalledProcessError, json.JSONDecodeError) as exc:
         return {"exists": True, "path": str(path), "probe_error": str(exc)}
@@ -111,7 +112,7 @@ def main() -> int:
     args = parser.parse_args()
     result = build(args.root.resolve())
     args.output.parent.mkdir(parents=True, exist_ok=True)
-    args.output.write_text(json.dumps(result, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    atomic_write_text(args.output, json.dumps(result, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     print(f"audited=previous_and_current cuts={len(result['cuts'])} decision={result['decision']}")
     return 0
 

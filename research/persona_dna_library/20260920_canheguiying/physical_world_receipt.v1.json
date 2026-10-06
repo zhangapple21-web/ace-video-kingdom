@@ -1,0 +1,28 @@
+{
+  "schema": "video_kingdom.physical_world_extract_receipt.v1",
+  "layer": "CREATOR_LIVE",
+  "status": "EXTRACTED_PENDING_HUMAN",
+  "production_integration": false,
+  "script_locked": false,
+  "agnes": "NOT_PERFORMED",
+  "created_at": "2026-09-20T01:30:00+08:00",
+  "scenes_extracted": 42,
+  "scene_range": "S11-S52",
+  "prior_middle": "S01-S10",
+  "events": 42,
+  "branches": 12,
+  "change_block_missing": [
+    "S27",
+    "S28",
+    "S29",
+    "S30"
+  ],
+  "files_written": [
+    "research/persona_dna_library/20260920_canheguiying/physical_world.v1.json",
+    "research/persona_dna_library/20260920_canheguiying/live_event_pool.v1.json",
+    "research/persona_dna_library/20260920_canheguiying/character_continuity_audit.v1.json",
+    "research/persona_dna_library/20260920_canheguiying/version_ledger.v1.json",
+    "research/persona_dna_library/20260920_canheguiying/creator_experience.jsonl",
+    "research/persona_dna_library/20260920_canheguiying/next_live_seed.v1.json"
+  ]
+}

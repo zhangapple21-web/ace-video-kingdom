@@ -3,6 +3,7 @@ from __future__ import annotations
 import json, sys
 from pathlib import Path
 import sys
+from tools.atomic_io import atomic_write_text
 
 sys.stdout.reconfigure(encoding="utf-8")  # Bug #1 fix: prevent UnicodeEncodeError on GBK console
 
@@ -21,6 +22,6 @@ def main() -> int:
     # durations; the attach step may later retime each leaf shot independently.
     plan['render_defaults']['seconds'] = 6; plan['render_defaults']['num_frames'] = 49
     plan['acceptance']['duration_window_seconds'] = [24, 38]
-    pp.write_text(json.dumps(plan, ensure_ascii=False, indent=2), encoding='utf-8'); cp.write_text(json.dumps(contract, ensure_ascii=False, indent=2), encoding='utf-8')
+    atomic_write_text(pp, json.dumps(plan, ensure_ascii=False, indent=2), encoding='utf-8'); atomic_write_text(cp, json.dumps(contract, ensure_ascii=False, indent=2), encoding='utf-8')
     print(json.dumps({'status':'CONTRACT_FIXED','planned_seconds':36}, ensure_ascii=False)); return 0
 if __name__ == '__main__': raise SystemExit(main())

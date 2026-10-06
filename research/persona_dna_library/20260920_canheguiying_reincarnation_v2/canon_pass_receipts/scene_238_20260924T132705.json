@@ -1,0 +1,68 @@
+{
+  "schema": "video_kingdom.canon_scene_pass.v1",
+  "at": "2026-09-24T13:26:52+08:00",
+  "lib": "D:\\视频创作\\ace-video-kingdom\\research\\persona_dna_library\\20260920_canheguiying_reincarnation_v2",
+  "next": 238,
+  "quota_used": 1,
+  "max_per_day": 2,
+  "scene": 238,
+  "heading": "第238场｜夜｜外｜荷园·旧水门",
+  "wave": "wave_38",
+  "verdict": "PASS",
+  "fails": [],
+  "reasons": [],
+  "alive": {
+    "q1_person_not_manual": true,
+    "q2_not_ai": true,
+    "q3_will_not_settle": true
+  },
+  "conflict": {
+    "status": "PASS",
+    "errors": [],
+    "notes": [],
+    "scene_class": "B"
+  },
+  "forbidden_hits": [],
+  "quote_count": 8,
+  "packet": {
+    "schema": "video_kingdom.conflict_driven_scene.v1",
+    "scene_class": "B",
+    "goals": {
+      "a": "ask_or_press",
+      "b": "hold_boundary"
+    },
+    "change_at_end": {
+      "kind": "information",
+      "what": "本场变化：世界：戴手套女人第四次现身，空铁匣放上水门闸石，承认取匣、否认按信，点出封口汁后抹、周字面汁先有；锁仍未转。关系：林墨以“界上开锁即成官河赃”逼退开闸，两人未通名、未交钥，守界暂时同盟又互不认。物件：空铁匣留闸石、钥匙仍在女人身边"
+    },
+    "lengthener": false,
+    "speech_intent_readable": true,
+    "completes_in_picture": true
+  },
+  "failure_mode_signals": {
+    "dialogue_density": 0.3333333333333333,
+    "sensory_rate": 0.8333333333333334,
+    "near_dup": 0,
+    "alt_pingpong": 0,
+    "mono_speaker_share": 0.0,
+    "empty_paragraphs": 0,
+    "dialogue_only": 0,
+    "short_dialogue_runs": 1,
+    "lines": 6,
+    "dialogue_turns": 2,
+    "narration_turns": 4
+  },
+  "failure_mode_fails": [],
+  "publish": {
+    "source_chapter": "c238",
+    "completed_scenes": 238,
+    "published_units": 239,
+    "check_only": false
+  },
+  "deploy": {
+    "status": "OK",
+    "code": 0,
+    "stdout": "\n ⛅️ wrangler 4.132.0 (update available 4.137.0)\n───────────────────────────────────────────────\nUploading... (255/258)\nUploading... (256/258)\nUploading... (257/258)\nUploading... (258/258)\n✨ Success! Uploaded 3 files (255 already uploaded) (1.28 sec)\n\n✨ Uploading _headers\n🌎 Deploying...\n✨ Deployment complete! Take a peek over at https://ae2fe09a.tinghe-archive.pages.dev\n",
+    "stderr": ""
+  }
+}

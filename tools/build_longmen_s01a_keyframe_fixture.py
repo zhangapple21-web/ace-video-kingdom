@@ -4,6 +4,7 @@ from __future__ import annotations
 import json
 import sys
 from pathlib import Path
+from tools.atomic_io import atomic_write_text
 
 sys.stdout.reconfigure(encoding="utf-8")  # Bug #1 fix: prevent UnicodeEncodeError on GBK console
 
@@ -28,7 +29,7 @@ def main() -> int:
     fixture["schema"] = "video_kingdom.longmen_shotcore_s01a_keyframe.v1"
     fixture["source_plan"] = "S01A controlled rework; prior takes retained"
     out.mkdir(parents=True, exist_ok=True)
-    (out / "fixture.json").write_text(json.dumps(fixture, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    atomic_write_text((out / "fixture.json"), json.dumps(fixture, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     print(json.dumps({"status": "COMPILED", "fixture": str(out / "fixture.json"), "mode": "keyframe", "first_last_bound": True}, ensure_ascii=False))
     return 0
 

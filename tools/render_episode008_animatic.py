@@ -12,6 +12,7 @@ import tempfile
 from pathlib import Path
 
 from PIL import Image, ImageDraw, ImageFont
+from tools.atomic_io import atomic_write_text
 
 
 W, H, FPS = 704, 1280, 12
@@ -130,16 +131,14 @@ def main() -> int:
         encoded = subprocess.run([
             "ffmpeg", "-y", "-framerate", str(FPS), "-i", str(frames / "f%04d.png"),
             "-c:v", "libx264", "-pix_fmt", "yuv420p", "-movflags", "+faststart", str(args.output),
-        ], check=False, capture_output=True, text=True)
+        ], check=False, capture_output=True, text=True, timeout=300)
         if encoded.returncode:
             raise RuntimeError(encoded.stderr[-2000:])
-    args.srt.write_text(
-        "1\n00:00:00,000 --> 00:00:02,400\n第一眼：系统不替她下结论，只把规则的边界照亮。\n\n"
+    atomic_write_text(args.srt, "1\n00:00:00,000 --> 00:00:02,400\n第一眼：系统不替她下结论，只把规则的边界照亮。\n\n"
         "2\n00:00:02,500 --> 00:00:06,400\n陈岳：签字，完成量到了，就能离开。\n林岚：合同里没有写离开条件。\n\n"
         "3\n00:00:06,500 --> 00:00:10,400\n阿棠：同一天，这张扣费单和我的记录对不上。\n林岚：把承诺、实际、收款，逐项对齐。\n\n"
         "4\n00:00:10,500 --> 00:00:15,000\n阿棠：现在联系公共求助中心，按流程来。\n林岚：让证据推动规则生效。\n",
-        encoding="utf-8",
-    )
+        encoding="utf-8",)
     print(f"{{\"status\":\"ANIMATIC_RENDERED\",\"output\":\"{args.output}\",\"duration_seconds\":15,\"fps\":{FPS}}}")
     return 0
 

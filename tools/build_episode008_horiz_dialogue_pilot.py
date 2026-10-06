@@ -5,6 +5,7 @@ import json
 import subprocess
 from pathlib import Path
 import sys
+from tools.atomic_io import atomic_write_text
 
 sys.stdout.reconfigure(encoding="utf-8")  # Bug #1 fix: prevent UnicodeEncodeError on GBK console
 
@@ -19,10 +20,10 @@ for clip in CLIPS:
         raise SystemExit(f"missing clip: {clip}")
 
 def run(*args: str) -> None:
-    subprocess.run(list(args), check=True)
+    subprocess.run(list(args), check=True, timeout=300)
 
 concat = WORK / "concat.txt"
-concat.write_text("\n".join(f"file '{p}'" for p in CLIPS) + "\n", encoding="utf-8")
+atomic_write_text(concat, "\n".join(f"file '{p}'" for p in CLIPS) + "\n", encoding="utf-8")
 silent = WORK / "silent.mp4"
 run("ffmpeg", "-y", "-hide_banner", "-loglevel", "error", "-f", "concat", "-safe", "0", "-i", str(concat), "-an", "-c:v", "libx264", "-preset", "medium", "-crf", "19", "-pix_fmt", "yuv420p", "-r", "24", str(silent))
 
@@ -35,18 +36,16 @@ lines = [
     "林岚（心声）：我不再和他争谁的声音更大。我只确认一件事：每一个承诺，能不能留下记录。",
 ]
 voice_text = WORK / "voice_text.txt"
-voice_text.write_text("\n".join(lines), encoding="utf-8-sig")
+atomic_write_text(voice_text, "\n".join(lines), encoding="utf-8-sig")
 voice = WORK / "voice.wav"
 ps = WORK / "make_voice.ps1"
-ps.write_text(
-    "$ErrorActionPreference='Stop'; Add-Type -AssemblyName System.Speech; "
+atomic_write_text(ps, "$ErrorActionPreference='Stop'; Add-Type -AssemblyName System.Speech; "
     "$text=Get-Content -Raw -Encoding UTF8 '" + str(voice_text) + "'; "
     "$s=New-Object System.Speech.Synthesis.SpeechSynthesizer; "
     "$v=$s.GetInstalledVoices() | ForEach-Object {$_.VoiceInfo} | Where-Object {$_.Culture.Name -eq 'zh-CN'} | Select-Object -First 1; "
     "if($v){$s.SelectVoice($v.Name)}; $s.Rate=-3; $s.Volume=92; "
     "$s.SetOutputToWaveFile('" + str(voice) + "'); $s.Speak($text); $s.Dispose();",
-    encoding="ascii",
-)
+    encoding="ascii",)
 run("powershell", "-NoProfile", "-ExecutionPolicy", "Bypass", "-File", str(ps))
 
 base = WORK / "episode_008_horiz_dialogue_pilot_16x9.mp4"
@@ -64,14 +63,14 @@ cues = [
 srt_lines = []
 for i, (start, end, text) in enumerate(cues, 1):
     srt_lines += [str(i), f"{start} --> {end}", text, ""]
-srt.write_text("\n".join(srt_lines), encoding="utf-8-sig")
+atomic_write_text(srt, "\n".join(srt_lines), encoding="utf-8-sig")
 
 subtitled = WORK / "episode_008_horiz_dialogue_pilot_16x9_subtitled.mp4"
 subtitle_filter_path = str(srt).replace('\\', '/').replace(':', '\\:')
 run("ffmpeg", "-y", "-hide_banner", "-loglevel", "error", "-i", str(base), "-vf", f"subtitles='{subtitle_filter_path}':force_style='FontName=Microsoft YaHei,FontSize=20,MarginV=36,Alignment=2,Outline=2,Shadow=0'", "-c:v", "libx264", "-preset", "medium", "-crf", "19", "-pix_fmt", "yuv420p", "-c:a", "copy", str(subtitled))
 
 probe = subprocess.check_output(["ffprobe", "-v", "error", "-show_entries", "format=duration:stream=codec_name,width,height,codec_type", "-of", "json", str(subtitled)], text=True)
-(WORK / "ffprobe.json").write_text(probe, encoding="utf-8")
+atomic_write_text((WORK / "ffprobe.json"), probe, encoding="utf-8")
 digest = hashlib.sha256(subtitled.read_bytes()).hexdigest()
-(WORK / "sha256.json").write_text(json.dumps({"sha256": digest, "path": str(subtitled)}, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+atomic_write_text((WORK / "sha256.json"), json.dumps({"sha256": digest, "path": str(subtitled)}, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
 print(subtitled)

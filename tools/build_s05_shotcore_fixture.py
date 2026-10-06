@@ -7,6 +7,7 @@ import hashlib
 import json
 from pathlib import Path
 import sys
+from tools.atomic_io import atomic_write_text
 
 sys.stdout.reconfigure(encoding="utf-8")  # Bug #1 fix: prevent UnicodeEncodeError on GBK console
 
@@ -134,18 +135,16 @@ def main() -> int:
         "asset_gate_receipt": "assets/index/E_S05_asset_gate_receipt.v1.json",
         "shots": [shot],
     }
-    fixture_path.write_text(json.dumps(fixture, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    atomic_write_text(fixture_path, json.dumps(fixture, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     manifest = {"schema": "video_kingdom.e_s05_shotcore_manifest.v1", "shots": {}, "takes": [], "events": [], "manifest_revision": 0}
-    manifest_path.write_text(json.dumps(manifest, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
-    (root / "research" / "E_S05_shotcore_admission_plan.v1.md").write_text(
-        "# E/S05 Shot Core 一次性提交计划\n\n"
+    atomic_write_text(manifest_path, json.dumps(manifest, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    atomic_write_text((root / "research" / "E_S05_shotcore_admission_plan.v1.md"), "# E/S05 Shot Core 一次性提交计划\n\n"
         "- 资产门：READY（任务范围）\n"
         "- 模式：`NEW_ONE_TIME_SUBMISSION`；不恢复旧 S05 video_id\n"
         "- Shot Core：只提交 S05A，9 秒，9:16，reference mode，固定侧后方机位\n"
         "- 资产：identity_lufan_v1 / SCN_MOUNTAIN_GRAVE / PROP_WINE_SINGLE_BOTTLE\n"
         "- 生成后：必须通过画面、动作、摄影、连续性、导演五层门禁；失败停在候选态\n",
-        encoding="utf-8",
-    )
+        encoding="utf-8",)
     print(json.dumps({"fixture": fixture_path.as_posix(), "manifest": manifest_path.as_posix(), "output_dir": out_dir.as_posix(), "shot_id": "S05A"}, ensure_ascii=False))
     return 0
 

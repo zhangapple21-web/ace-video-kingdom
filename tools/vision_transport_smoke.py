@@ -17,6 +17,7 @@ from pathlib import Path
 
 if str(Path(__file__).resolve().parents[1]) not in sys.path:
     sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
+from tools.atomic_io import atomic_write_text
 
 from production_control.model_transport import post_chat_completion
 
@@ -81,7 +82,7 @@ def main(argv: list[str] | None = None) -> int:
         except Exception as exc:
             receipt.update({"status": "FAIL", "error_class": type(exc).__name__, "error": re.sub(r"\s+", " ", str(exc))[:300]})
     args.out.parent.mkdir(parents=True, exist_ok=True)
-    args.out.write_text(json.dumps(receipt, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    atomic_write_text(args.out, json.dumps(receipt, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     print(json.dumps(receipt, ensure_ascii=False))
     return 0 if receipt["status"] == "PASS" else 2
 

@@ -1,0 +1,9 @@
+[world-live] resume start_wave=31 next_scene=184 have_waves=30 closed=False
+[world-live] wave 31/32 start scene~184
+[world-live] primary finish=stop content=4085 reasoning=11835 usage={'completion_tokens': 11779, 'prompt_tokens': 11591, 'total_tokens': 23370}
+[world-live] wave 31 done scenes=6 closed=False
+[world-live] wave 32/32 start scene~190
+[world-live] primary finish=length content=1595 reasoning=9036 usage={'completion_tokens': 8191, 'prompt_tokens': 9093, 'total_tokens': 17284, 'prompt_tokens_details': {'cached_tokens': 3072}}
+[world-live] truncated, continue
+[world-live] wave 32 done scenes=8 closed=False
+OK {"waves": 32, "closed": false, "trace": "b927cd2e62314b88a38e02c54399d945", "full_script": "research\\persona_dna_library\\20260920_canheguiying\\world_live_full_script.v1.md"}

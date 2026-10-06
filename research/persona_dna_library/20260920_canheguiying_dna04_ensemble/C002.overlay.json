@@ -1,0 +1,42 @@
+{
+  "tool": "validate_persona_dna",
+  "production_integration": false,
+  "dna_receipt": {
+    "status": "PASS",
+    "errors": [],
+    "warnings": []
+  },
+  "persona_card_overlay": {
+    "status": "CANDIDATE",
+    "errors": [],
+    "warnings": [],
+    "overlay": {
+      "schema": "video_kingdom.persona_card_overlay.v1",
+      "character_id": "C002",
+      "personality": "夜间按旧习取用园中物产；被质问时先倨傲认主；被触怒就切断往来；认可对方后会主动登门还债、点评对方的作品，再以约定把来访变成仪式；矛盾点：清冷孤高、不承认新主人，却渴望被懂行的人留下，需要借口才能回来",
+      "motivation": "被承认这里曾是我的，并以对等才情被看见，而不是被当怪物驱赶；根意志：故园的名分与记忆优先于后来者的契约；欠下的必须还，天亮必须走",
+      "dna_ref": {
+        "schema": "video_kingdom.persona_dna.v1",
+        "character_id": "C002",
+        "source": "extract",
+        "version": "1"
+      },
+      "missing_production_fields": [
+        "appearance",
+        "catchphrase",
+        "voice_lock",
+        "costume_lock",
+        "makeup_sheet"
+      ],
+      "production_integration": false,
+      "note": "候选 overlay。必须另填 persona_card 视觉/语音锁，并走编剧导演双审，才能进入 video_kingdom_entry。",
+      "creator_variant_id": "dna04_ensemble",
+      "creator_variant_bias": {
+        "ensemble_pressure": "high",
+        "third_party_action": "high",
+        "core_duo_same_scene": "not_required"
+      },
+      "creator_variant_note": "提高第三方和群体的自然行动权：街坊、旧邻、官府、守灵人、孤魂、行旅者可因自身利益和秘密登场、离场；周培与林墨不必每场同场，任何新角色必须自带动机并能改变世界。"
+    }
+  }
+}

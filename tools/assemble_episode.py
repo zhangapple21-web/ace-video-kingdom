@@ -12,6 +12,7 @@ import subprocess
 import tempfile
 from pathlib import Path
 import sys
+from tools.atomic_io import atomic_write_text
 
 sys.stdout.reconfigure(encoding="utf-8")  # Bug #1 fix: prevent UnicodeEncodeError on GBK console
 
@@ -26,7 +27,7 @@ def probe_media(path: Path) -> dict:
     result = subprocess.run([
         "ffprobe", "-v", "error", "-show_entries",
         "format=duration:stream=codec_type,width,height", "-of", "json", str(path),
-    ], check=True, capture_output=True, text=True)
+    ], check=True, capture_output=True, text=True, timeout=300)
     payload = json.loads(result.stdout)
     video = next((item for item in payload.get("streams", []) if item.get("codec_type") == "video"), None)
     if not video:
@@ -128,18 +129,18 @@ def main() -> int:
                     "-vf", ",".join(filters),
                     "-af", (f"atrim=start={args.trim_leading_seconds}" + (f":end={args.trim_leading_seconds + args.clip_seconds}" if args.clip_seconds else "") + ",asetpts=PTS-STARTPTS") if args.trim_leading_seconds > 0 else (f"atrim=duration={args.clip_seconds},asetpts=PTS-STARTPTS" if args.clip_seconds else "anull"),
                     "-c:v", "libx264", "-pix_fmt", "yuv420p", "-c:a", "aac", "-ar", "48000", str(usable_clip),
-                ], check=True)
+                ], check=True, timeout=300)
                 temporary_clips.append(usable_clip)
             handle.write("file '" + str(usable_clip).replace("'", r"'\\''") + "'\n")
     try:
         subprocess.run([
             "ffmpeg", "-y", "-f", "concat", "-safe", "0", "-i", str(concat),
             "-c:v", "libx264", "-c:a", "aac", "-movflags", "+faststart", str(args.output),
-        ], check=True)
+        ], check=True, timeout=300)
         probe = subprocess.run([
             "ffprobe", "-v", "error", "-show_entries", "format=duration",
             "-of", "default=noprint_wrappers=1:nokey=1", str(args.output),
-        ], check=True, capture_output=True, text=True)
+        ], check=True, capture_output=True, text=True, timeout=300)
     finally:
         concat.unlink(missing_ok=True)
         for clip in temporary_clips:
@@ -161,7 +162,7 @@ def main() -> int:
     }
     if args.review_output:
         args.review_output.parent.mkdir(parents=True, exist_ok=True)
-        args.review_output.write_text(json.dumps(review, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+        atomic_write_text(args.review_output, json.dumps(review, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     print(json.dumps(review, ensure_ascii=False))
     return 0
 

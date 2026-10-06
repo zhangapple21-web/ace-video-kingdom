@@ -9,6 +9,7 @@ import uuid
 from pathlib import Path
 from typing import Any
 import sys
+from tools.atomic_io import atomic_write_text
 
 sys.stdout.reconfigure(encoding="utf-8")  # Bug #1 fix: prevent UnicodeEncodeError on GBK console
 
@@ -82,7 +83,7 @@ def main(argv: list[str] | None = None) -> int:
     args = parser.parse_args(argv)
     row = record_failure(json.loads(args.input.read_text(encoding="utf-8")), path=args.path)
     args.out.parent.mkdir(parents=True, exist_ok=True)
-    args.out.write_text(json.dumps(row, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    atomic_write_text(args.out, json.dumps(row, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     print(json.dumps({"replay_id": row["replay_id"], "out": str(args.out)}, ensure_ascii=False))
     return 0
 

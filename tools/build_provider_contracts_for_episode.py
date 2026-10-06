@@ -4,6 +4,7 @@ from __future__ import annotations
 import json
 import sys
 from pathlib import Path
+from tools.atomic_io import atomic_write_text
 
 sys.stdout.reconfigure(encoding="utf-8")  # Bug #1 fix: prevent UnicodeEncodeError on GBK console
 
@@ -37,7 +38,7 @@ def main() -> int:
             "audio_contract": {"status": "NOT_APPLICABLE", "dialogue": []},
             "visible_entities": ["CHAR_SHENQI_FRONT_V1", "PROP_COPPER_TOKEN_V1"],
         }
-        (out / f"{sid}_provider_contract.json").write_text(json.dumps(contract, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+        atomic_write_text((out / f"{sid}_provider_contract.json"), json.dumps(contract, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     print(json.dumps({"status": "READY", "contracts": len(list(out.glob("S*_provider_contract.json"))), "root": str(out)}, ensure_ascii=False, indent=2))
     return 0
 

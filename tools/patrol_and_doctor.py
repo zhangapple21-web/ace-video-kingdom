@@ -14,6 +14,7 @@ from collections import Counter
 from datetime import datetime, timezone
 from pathlib import Path
 import sys
+from tools.atomic_io import atomic_write_text
 
 sys.stdout.reconfigure(encoding="utf-8")  # Bug #1 fix: prevent UnicodeEncodeError on GBK console
 
@@ -177,7 +178,7 @@ def main() -> int:
     report = inspect(args.root.resolve())
     if args.report:
         args.report.parent.mkdir(parents=True, exist_ok=True)
-        args.report.write_text(json.dumps(report, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+        atomic_write_text(args.report, json.dumps(report, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     output = report if args.full else _model_summary(report)
     print(json.dumps(output, ensure_ascii=False, indent=2))
     return 0

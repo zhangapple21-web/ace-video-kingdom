@@ -7,6 +7,7 @@ import re
 import subprocess
 from pathlib import Path
 import sys
+from tools.atomic_io import atomic_write_text
 
 sys.stdout.reconfigure(encoding="utf-8")  # Bug #1 fix: prevent UnicodeEncodeError on GBK console
 
@@ -16,7 +17,7 @@ def probe(path: Path) -> dict:
         ["ffprobe", "-v", "error", "-show_entries",
          "format=duration:stream=codec_type,width,height", "-of", "json", str(path)],
         check=True, capture_output=True, text=True, encoding="utf-8", errors="replace",
-    )
+    timeout=300 )
     data = json.loads(result.stdout)
     video = next((s for s in data.get("streams", []) if s.get("codec_type") == "video"), None)
     audio = next((s for s in data.get("streams", []) if s.get("codec_type") == "audio"), None)
@@ -34,7 +35,7 @@ def scene_cuts(path: Path, threshold: float) -> list[float]:
         ["ffmpeg", "-hide_banner", "-i", str(path), "-filter:v",
          f"select='gt(scene,{threshold})',showinfo", "-f", "null", "NUL"],
         check=False, capture_output=True, text=True, encoding="utf-8", errors="replace",
-    )
+    timeout=300 )
     times: list[float] = []
     for line in (result.stderr or "").splitlines():
         match = re.search(r"pts_time:([0-9.]+)", line)
@@ -118,7 +119,7 @@ def main() -> int:
     }
     if args.output:
         args.output.parent.mkdir(parents=True, exist_ok=True)
-        args.output.write_text(json.dumps(report, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+        atomic_write_text(args.output, json.dumps(report, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     print(json.dumps(report, ensure_ascii=False))
     return 0 if status == "PASS" else 1
 

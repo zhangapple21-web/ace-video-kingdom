@@ -23,6 +23,6 @@ for sid, prompt in repairs.items():
            "--manifest", str(manifest), "--output", str(out/f"{sid}.mp4"),
            "--model", "agnes-video-2.5-flash", "--image", str(ref), "--width", "704", "--height", "1280",
            "--num-frames", "121", "--frame-rate", "24", "--timeout", "600"]
-    result = subprocess.run(cmd, cwd=root, check=False)
+    result = subprocess.run(cmd, cwd=root, check=False, timeout=300)
     if result.returncode:
         raise SystemExit(result.returncode)

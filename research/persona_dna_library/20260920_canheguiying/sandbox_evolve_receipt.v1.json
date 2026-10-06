@@ -1,0 +1,122 @@
+{
+  "schema": "video_kingdom.sandbox_evolve.v1",
+  "status": "FAILED",
+  "production_integration": false,
+  "production_submission": "NOT_PERFORMED",
+  "script_locked": false,
+  "gateway": "http://localhost:3000/v1",
+  "trace_id": "398520559bfc405696f5d3f286dc58d3",
+  "timeout_seconds": 180.0,
+  "miner_models": [
+    "deepseek-v4.1-flash",
+    "glm-4-flash"
+  ],
+  "auditor_models": [
+    "grok-4.6",
+    "deepseek-v4.1-flash"
+  ],
+  "dna_ids": [
+    "C001",
+    "C002"
+  ],
+  "opening": "research\\persona_dna_library\\20260920_canheguiying\\opening_given.v1.md",
+  "seed": "research\\persona_dna_library\\20260920_canheguiying\\sandbox_seed.v1.txt",
+  "created_at": "2026-09-20T12:04:47Z",
+  "steps": [
+    {
+      "role_id": "sandbox_miner_evolve",
+      "status": "COMPLETED",
+      "model": "reused_file",
+      "requested_model": "deepseek-v4.1-flash",
+      "fallback_used": false,
+      "degraded": false
+    },
+    {
+      "role_id": "sandbox_miner_screenplay",
+      "requested_model": "deepseek-v4.1-flash",
+      "status": "COMPLETED",
+      "attempts": [
+        {
+          "model": "deepseek-v4.1-flash",
+          "actual_model": "deepseek-v4.1-flash",
+          "status": "COMPLETED",
+          "latency_ms": 43291,
+          "finish_reason": "length"
+        }
+      ],
+      "model": "deepseek-v4.1-flash",
+      "fallback_used": false,
+      "degraded": false,
+      "latency_ms": 43291,
+      "finish_reason": "length",
+      "usage": {
+        "completion_tokens": 8190,
+        "prompt_tokens": 3462,
+        "total_tokens": 11652,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        }
+      }
+    },
+    {
+      "role_id": "sandbox_auditor",
+      "requested_model": "grok-4.6",
+      "status": "COMPLETED",
+      "attempts": [
+        {
+          "model": "grok-4.6",
+          "actual_model": "grok-4.6",
+          "status": "COMPLETED",
+          "latency_ms": 65635,
+          "finish_reason": "stop"
+        }
+      ],
+      "model": "grok-4.6",
+      "fallback_used": false,
+      "degraded": false,
+      "latency_ms": 65635,
+      "finish_reason": "stop",
+      "usage": {
+        "completion_tokens": 233,
+        "prompt_tokens": 5503,
+        "total_tokens": 9063,
+        "completion_tokens_details": {
+          "accepted_prediction_tokens": 0,
+          "audio_tokens": 0,
+          "reasoning_tokens": 3327,
+          "rejected_prediction_tokens": 0
+        },
+        "prompt_tokens_details": {
+          "audio_tokens": 0,
+          "cached_tokens": 512,
+          "text_tokens": 5503,
+          "image_tokens": 0
+        },
+        "num_sources_used": 0,
+        "cost_in_usd_ticks": 107433200
+      }
+    },
+    {
+      "role_id": "sandbox_miner_rewrite",
+      "requested_model": "deepseek-v4.1-flash",
+      "status": "FAILED",
+      "attempts": [
+        {
+          "model": "deepseek-v4.1-flash",
+          "status": "FAILED",
+          "error": "RuntimeError: EMPTY_CONTENT finish=length"
+        }
+      ],
+      "error": "RuntimeError: EMPTY_CONTENT finish=length"
+    }
+  ],
+  "evolve_reused": true,
+  "audit_verdict": "FAIL",
+  "rewrite_used": false,
+  "files": {
+    "evolve": "research\\persona_dna_library\\20260920_canheguiying\\evolve_candidate.v1.md",
+    "script": "research\\persona_dna_library\\20260920_canheguiying\\script_candidate_sandbox.v1.md",
+    "audit": "research\\persona_dna_library\\20260920_canheguiying\\sandbox_audit.v1.md"
+  },
+  "note": "候选剧本不是锁稿。人未采用前不得进编剧审核，不得开拍。"
+}

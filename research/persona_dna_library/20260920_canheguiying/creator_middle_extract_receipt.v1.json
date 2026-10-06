@@ -1,0 +1,39 @@
+{
+  "schema": "video_kingdom.creator_middle_extract_receipt.v1",
+  "layer": "CREATOR_MIDDLE",
+  "production_integration": false,
+  "not_production_state_contract": true,
+  "overwrite_true_source": false,
+  "agnes": "NOT_PERFORMED",
+  "beat": "NOT_PERFORMED",
+  "shot": "NOT_PERFORMED",
+  "full_script": "NOT_PERFORMED",
+  "true_source": "evolve_candidate.v1.md",
+  "true_source_bytes": 12167,
+  "true_source_overwritten": false,
+  "extracted": {
+    "scenes": 10,
+    "world_state_cards": 10,
+    "current_after_s10": true,
+    "events": 10,
+    "branches": 34,
+    "unknown_register": 16,
+    "human_decision": "ALL_PENDING"
+  },
+  "outputs": [
+    "creator_world_state.v1.json",
+    "creator_event_branch_pool.v1.json",
+    "creator_middle_extract.v1.md",
+    "creator_middle_extract_receipt.v1.json"
+  ],
+  "skipped": [
+    "full_script",
+    "beat",
+    "shot",
+    "agnes",
+    "imagegen",
+    "video_kingdom_entry",
+    "production_state_contract",
+    "new_approval_layer"
+  ]
+}

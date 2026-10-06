@@ -10,6 +10,7 @@ from datetime import datetime, timezone
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
+from tools.atomic_io import atomic_write_text
 from runtime.shot_core import load_manifest, save_manifest
 
 sys.stdout.reconfigure(encoding="utf-8")  # Bug #1 fix: prevent UnicodeEncodeError on GBK console
@@ -88,7 +89,7 @@ def main() -> int:
         },
         "recorded_at": datetime.now(timezone.utc).isoformat(),
     }
-    receipt_path.write_text(json.dumps(receipt, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    atomic_write_text(receipt_path, json.dumps(receipt, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     ledger_path = root / "research" / "E_S05_asset_audit_ledger.v2.json"
     if ledger_path.exists():
         ledger = json.loads(ledger_path.read_text(encoding="utf-8"))
@@ -107,7 +108,7 @@ def main() -> int:
             "five_layer_receipt": receipt_path.relative_to(root).as_posix(),
             "delivery": "STOPPED_CANDIDATE_ONLY",
         }
-        ledger_path.write_text(json.dumps(ledger, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+        atomic_write_text(ledger_path, json.dumps(ledger, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     take.update({
         "status": "CANDIDATE",
         "creative_status": "FAIL",

@@ -23,6 +23,7 @@ import json
 import sys
 from pathlib import Path
 from typing import Any
+from tools.atomic_io import atomic_write_text
 
 sys.stdout.reconfigure(encoding="utf-8")  # Bug #1 fix: prevent UnicodeEncodeError on GBK console
 
@@ -735,7 +736,7 @@ def main(argv: list[str] | None = None) -> int:
     payload = json.dumps(receipt, ensure_ascii=False, indent=2) + "\n"
     if args.output:
         args.output.parent.mkdir(parents=True, exist_ok=True)
-        args.output.write_text(payload, encoding="utf-8")
+        atomic_write_text(args.output, payload, encoding="utf-8")
     print(payload, end="")
     if receipt.get("verdict") == "BLOCKED":
         return 3

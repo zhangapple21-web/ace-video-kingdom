@@ -1,0 +1,146 @@
+{
+  "schema": "tinghe.originals.v1",
+  "title": "原创桌",
+  "note": "独立稿，不是《残荷诡影》正史。人物、地点、因果都不并入荷园。",
+  "canon_work": "残荷诡影",
+  "works": [
+    {
+      "id": "shuangdu",
+      "title": "霜渡",
+      "tone": "清冷规则",
+      "format": "短剧试写",
+      "status": "ep01 对白重写 · 角色包/场景包已拆分 · 男女主定妆 v2",
+      "logline": "封河前夜，渡口规矩是无票不渡、重名不渡、灯亮改名。验票人乔霜发现两张真票写着同一个活人的名字——作废哪一张，都可能把岸上的人写没。",
+      "chars": [
+        "乔霜",
+        "裴渡",
+        "陈三",
+        "陈三姐",
+        "河班老贾"
+      ],
+      "packs": [
+        {
+          "id": "role-pack",
+          "title": "角色包",
+          "glyph": "人",
+          "summary": "定妆、欲望、底线与绑定信物，按人物单独查看。",
+          "count": "5 位角色 · 3 张身份图",
+          "file": "data/originals/shuangdu/role-pack.json"
+        },
+        {
+          "id": "scene-pack",
+          "title": "场景包",
+          "glyph": "景",
+          "summary": "渡口、票棚与信物状态，按空间和拍摄用途分开查看。",
+          "count": "4 个空间 · 3 张场景/道具图",
+          "file": "data/originals/shuangdu/scene-pack.json"
+        }
+      ],
+      "episodes": [
+        {
+          "id": "ep01",
+          "no": 1,
+          "title": "封河前夜",
+          "beat": "规则反噬 · 信物切开",
+          "file": "data/originals/shuangdu/ep01.json"
+        }
+      ],
+      "assets": {
+        "role_pack": "data/originals/shuangdu/role-pack.json",
+        "scene_pack": "data/originals/shuangdu/scene-pack.json",
+        "asset_graph": "data/originals/shuangdu/asset-graph.v1.json",
+        "bible": "data/originals/shuangdu/bible.json",
+        "images": [
+          "assets/originals/shuangdu/qiao-shuang-v2.png",
+          "assets/originals/shuangdu/pei-du-v2.png",
+          "assets/originals/shuangdu/chen-san.png",
+          "assets/originals/shuangdu/jetty-night.png",
+          "assets/originals/shuangdu/ticket-shed.png",
+          "assets/originals/shuangdu/hook-tickets.png"
+        ]
+      }
+    },
+    {
+      "id": "tuixi",
+      "title": "退席",
+      "tone": "冷爽 · 打脸高甜",
+      "format": "竖屏微短剧",
+      "status": "EP01–03 可读",
+      "logline": "冬宴席口，死人被当众请出去。真帖一烫，假帖退席。",
+      "chars": [
+        "沈知晚",
+        "沈知夏",
+        "沈夫人",
+        "顾承川"
+      ],
+      "episodes": [
+        {
+          "id": "ep01",
+          "no": 1,
+          "title": "请出去",
+          "beat": "假死真帖 · 假帖退席",
+          "file": "data/originals/tuixi/ep01.json"
+        },
+        {
+          "id": "ep02",
+          "no": 2,
+          "title": "冬印",
+          "beat": "夏印主印 · 空椅护短",
+          "file": "data/originals/tuixi/ep02.json"
+        },
+        {
+          "id": "ep03",
+          "no": 3,
+          "title": "第三行",
+          "beat": "丧报作废 · 真名归席",
+          "file": "data/originals/tuixi/ep03.json"
+        }
+      ]
+    },
+    {
+      "id": "shigong",
+      "title": "试工",
+      "tone": "冷爽 · 职场错位",
+      "format": "竖屏微短剧",
+      "status": "EP01 可读",
+      "logline": "试工没工资，先刷厕所。招聘表第三行，比店长先开口。",
+      "chars": [
+        "陆小棠",
+        "赵冕",
+        "何川"
+      ],
+      "episodes": [
+        {
+          "id": "ep01",
+          "no": 1,
+          "title": "第三行",
+          "beat": "身份错位 · 招聘表反咬",
+          "file": "data/originals/shigong/ep01.json"
+        }
+      ]
+    },
+    {
+      "id": "bieying",
+      "title": "别应",
+      "tone": "日常异化 · 对话鬼故事",
+      "format": "竖屏微短剧",
+      "status": "ep01 可读",
+      "logline": "夜班护工给 3 床倒水。3 床叫她小名。交班表写着下午已空。杯子却空了。",
+      "chars": [
+        "周晚宁",
+        "3床",
+        "刘姐"
+      ],
+      "episodes": [
+        {
+          "id": "ep01",
+          "no": 1,
+          "title": "3床",
+          "beat": "空床喝水 · 小名别应",
+          "file": "data/originals/bieying/ep01.json"
+        }
+      ]
+    }
+  ]
+}
+

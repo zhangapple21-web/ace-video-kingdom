@@ -18,6 +18,7 @@ import subprocess
 import sys
 from pathlib import Path
 from typing import Any
+from tools.atomic_io import atomic_write_text
 
 sys.stdout.reconfigure(encoding="utf-8")  # Bug #1 fix: prevent UnicodeEncodeError on GBK console
 
@@ -31,7 +32,7 @@ def decode_mono(path: Path) -> array.array:
             "-vn", "-ac", "1", "-ar", str(SAMPLE_RATE), "-f", "s16le", "-",
         ],
         check=True, capture_output=True,
-    )
+    timeout=300 )
     samples = array.array("h")
     samples.frombytes(result.stdout)
     if sys.byteorder == "big":
@@ -88,7 +89,7 @@ def probe_duration(path: Path) -> float:
         ["ffprobe", "-v", "error", "-show_entries", "format=duration",
          "-of", "default=nw=1:nk=1", str(path)],
         check=True, capture_output=True, text=True,
-    )
+    timeout=300 )
     return float(result.stdout.strip())
 
 
@@ -199,7 +200,7 @@ def main() -> int:
         }
         if args.output:
             args.output.parent.mkdir(parents=True, exist_ok=True)
-            args.output.write_text(json.dumps(report, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+            atomic_write_text(args.output, json.dumps(report, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
         print(json.dumps({"status": episode["status"], "stray_runs": len(episode["stray_runs"]), "speech_runs": len(episode["speech_runs"]), "decoder_offset_artifacts": len(episode["decoder_offset_artifacts"])}, ensure_ascii=False))
         for stray in episode["stray_runs"]:
             print(json.dumps({"stray_run": stray}, ensure_ascii=False))
@@ -249,7 +250,7 @@ def main() -> int:
     }
     if args.output:
         args.output.parent.mkdir(parents=True, exist_ok=True)
-        args.output.write_text(json.dumps(report, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+        atomic_write_text(args.output, json.dumps(report, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     print(json.dumps({"status": report["status"], "checked": checked, "failures": len(failures)}, ensure_ascii=False))
     for failure in failures:
         print(json.dumps(failure, ensure_ascii=False))

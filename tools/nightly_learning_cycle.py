@@ -35,7 +35,7 @@ def run(*, limit: int = 5) -> dict[str, object]:
         text=True,
         encoding="utf-8",
         check=False,
-    )
+    timeout=300 )
     if drain.returncode != 0:
         raise RuntimeError(f"task_wall_drain_failed:{drain.returncode}:{drain.stderr[-500:]}")
     try:

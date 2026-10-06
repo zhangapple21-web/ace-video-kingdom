@@ -78,7 +78,7 @@ def main() -> int:
     command = [sys.executable, "tools/run_comedy_episode.py", "--episode", str(args.episode), "--identity-contract", str(args.identity_contract), "--manifest", str(args.manifest), "--media-dir", str(args.media_dir), "--output", str(args.output)]
     if args.review_output:
         command.extend(["--review-output", str(args.review_output)])
-    result = subprocess.run(command)
+    result = subprocess.run(command, timeout=300)
     print(json.dumps({"status": "SHIFT_COMPLETED" if result.returncode == 0 else "SHIFT_FAILED", "returncode": result.returncode, "episode": str(args.episode)}, ensure_ascii=False))
     return result.returncode
 

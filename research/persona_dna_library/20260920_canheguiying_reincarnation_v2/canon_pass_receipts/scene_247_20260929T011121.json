@@ -1,0 +1,68 @@
+{
+  "schema": "video_kingdom.canon_scene_pass.v1",
+  "at": "2026-09-29T01:11:06+08:00",
+  "lib": "D:\\视频创作\\ace-video-kingdom\\research\\persona_dna_library\\20260920_canheguiying_reincarnation_v2",
+  "next": 247,
+  "quota_used": 0,
+  "max_per_day": 2,
+  "scene": 247,
+  "heading": "第247场｜日｜外｜塘北·赵家老屋门前",
+  "wave": "wave_40",
+  "verdict": "PASS",
+  "fails": [],
+  "reasons": [],
+  "alive": {
+    "q1_person_not_manual": true,
+    "q2_not_ai": true,
+    "q3_will_not_settle": true
+  },
+  "conflict": {
+    "status": "PASS",
+    "errors": [],
+    "notes": [],
+    "scene_class": "B"
+  },
+  "forbidden_hits": [],
+  "quote_count": 8,
+  "packet": {
+    "schema": "video_kingdom.conflict_driven_scene.v1",
+    "scene_class": "B",
+    "goals": {
+      "a": "ask_or_press",
+      "b": "hold_boundary"
+    },
+    "change_at_end": {
+      "kind": "choice",
+      "what": "本场变化：世界：赵杏正式叫门，姑姑未应但门内有活气/光移动，赵杏留下蓝布样并约定傍晚再来；老屋异常从“昏光”变成“有人挡光的暖”。关系：赵杏—老屋形成“留样等人”的守候关系，张四划清“只看菜地”的界线但以扁担声表态。物件：蓝布样塞入门槛下、"
+    },
+    "lengthener": false,
+    "speech_intent_readable": true,
+    "completes_in_picture": true
+  },
+  "failure_mode_signals": {
+    "dialogue_density": 0.4444444444444444,
+    "sensory_rate": 0.5555555555555556,
+    "near_dup": 0,
+    "alt_pingpong": 0,
+    "mono_speaker_share": 0.0,
+    "empty_paragraphs": 0,
+    "dialogue_only": 0,
+    "short_dialogue_runs": 2,
+    "lines": 7,
+    "dialogue_turns": 4,
+    "narration_turns": 5
+  },
+  "failure_mode_fails": [],
+  "publish": {
+    "source_chapter": "c247",
+    "completed_scenes": 247,
+    "published_units": 248,
+    "check_only": false
+  },
+  "deploy": {
+    "status": "OK",
+    "code": 0,
+    "stdout": "\n ⛅️ wrangler 4.132.0\n────────────────────\nUploading... (308/311)\nUploading... (309/311)\nUploading... (310/311)\nUploading... (311/311)\n✨ Success! Uploaded 3 files (308 already uploaded) (1.86 sec)\n\n✨ Uploading _headers\n🌎 Deploying...\n✨ Deployment complete! Take a peek over at https://4b35df59.tinghe-archive.pages.dev\n",
+    "stderr": ""
+  }
+}

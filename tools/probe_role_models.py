@@ -8,6 +8,7 @@ import time
 import urllib.request
 from pathlib import Path
 import sys
+from tools.atomic_io import atomic_write_text
 
 sys.stdout.reconfigure(encoding="utf-8")  # Bug #1 fix: prevent UnicodeEncodeError on GBK console
 
@@ -48,7 +49,7 @@ def main():
         for future in concurrent.futures.as_completed([pool.submit(probe, m) for m in models]):
             row = future.result()
             result['models'].append(row)
-            a.out.write_text(json.dumps(result, ensure_ascii=False, indent=2), encoding='utf-8')
+            atomic_write_text(a.out, json.dumps(result, ensure_ascii=False, indent=2), encoding='utf-8')
             print(json.dumps(row), flush=True)
 
 

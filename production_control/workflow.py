@@ -18,6 +18,7 @@ from pathlib import Path
 from typing import Any
 
 from .engine import ProductionControl, WorkflowError, sha256_file
+from tools.atomic_io import atomic_write_text
 
 sys.stdout.reconfigure(encoding="utf-8")  # Bug #1 fix: prevent UnicodeEncodeError on GBK console
 
@@ -46,7 +47,7 @@ def _read_json(path: Path) -> dict[str, Any]:
 
 def _write_json(path: Path, value: Any) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
-    path.write_text(json.dumps(value, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    atomic_write_text(path, json.dumps(value, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
 
 
 def _resolve(root: Path, raw: str | Path) -> Path:

@@ -15,6 +15,7 @@ import subprocess
 from pathlib import Path
 from typing import Any, Callable
 import sys
+from tools.atomic_io import atomic_write_text
 
 sys.stdout.reconfigure(encoding="utf-8")  # Bug #1 fix: prevent UnicodeEncodeError on GBK console
 
@@ -43,7 +44,7 @@ def probe_duration(path: Path) -> float:
         check=True,
         capture_output=True,
         text=True,
-    )
+    timeout=300 )
     return float(result.stdout.strip())
 
 
@@ -258,7 +259,7 @@ def main() -> int:
         path_overrides[shot_id.strip()] = path
     report = build_report(args.contract.resolve(), [path.resolve() for path in args.manifest], aliases=aliases, path_overrides=path_overrides)
     args.output.parent.mkdir(parents=True, exist_ok=True)
-    args.output.write_text(json.dumps(report, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    atomic_write_text(args.output, json.dumps(report, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     print(json.dumps({"status": report["status"], "output": str(args.output), "coverage": report["coverage"]}, ensure_ascii=False))
     return 0 if report["status"] == "PASS" else 1
 

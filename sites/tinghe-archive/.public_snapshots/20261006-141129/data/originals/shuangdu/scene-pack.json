@@ -1,0 +1,6 @@
+{
+  "id": "scene-pack",
+  "work_id": "shuangdu",
+  "title": "场景包",
+  "html": "<div class='note'>《霜渡》场景包。这里锁空间关系、光和信物位置；具体镜头仍由每场的 Scene State 建立，不把空镜当成视频第一帧。</div>\n<h2>空间资产</h2>\n<figure class='env'><img src='assets/originals/shuangdu/jetty-night.png' alt='霜渡口跳板'><figcaption><b>霜渡口·跳板</b><br>薄冰、压桅灯、脚印后半淡。灯是给河看的，末班前空间压力最大。</figcaption></figure>\n<figure class='env'><img src='assets/originals/shuangdu/ticket-shed.png' alt='票棚'><figcaption><b>票棚</b><br>不点灯，只留炉灰与暗匣。三条渡规：无票不渡；重名不渡；灯亮改名。</figcaption></figure>\n<h2>道具与信物</h2>\n<figure class='env prop-hero'><img src='assets/originals/shuangdu/hook-tickets.png' alt='灭灯钩与霜票'><figcaption><b>灭灯钩、霜票、铜铃</b><br>信物每场只动一层：它们是人物选择留下的证据，不是装饰性道具。</figcaption></figure>\n<h2>未出图空间</h2>\n<div class='pack-places'><div><b>船匠坞</b><span>河水浇缝结霜。用于近岸修补、听见船底响。</span></div><div><b>北岸等候棚</b><span>灯被灌灭，粮袋结霜。用于岸上活人的等待与失影反应。</span></div></div>\n<h2>场景连续性锚点</h2>\n<p>身份参考图锁角色，场景包只提供空间参考；拍摄时先写人在空间里做什么，再决定是否需要本镜构图图，禁止把场景图直接当成图生视频首帧。</p>"
+}

@@ -5,6 +5,7 @@ import argparse
 import json
 from pathlib import Path
 import sys
+from tools.atomic_io import atomic_write_text
 
 sys.stdout.reconfigure(encoding="utf-8")  # Bug #1 fix: prevent UnicodeEncodeError on GBK console
 
@@ -63,7 +64,7 @@ def main() -> int:
     report = run(args.output_root)
     args.output_root.mkdir(parents=True, exist_ok=True)
     path = args.output_root / "pilot_receipt.v1.json"
-    path.write_text(json.dumps(report, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    atomic_write_text(path, json.dumps(report, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     print(json.dumps({"status": report["status"], "receipt": str(path)}, ensure_ascii=False))
     return 0 if report["status"] == "PASS" else 1
 

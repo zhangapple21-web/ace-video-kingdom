@@ -4,6 +4,7 @@ import hashlib
 import json
 import sys
 from pathlib import Path
+from tools.atomic_io import atomic_write_text
 
 sys.stdout.reconfigure(encoding="utf-8")  # Bug #1 fix: prevent UnicodeEncodeError on GBK console
 
@@ -55,7 +56,7 @@ def main() -> int:
         "retry_policy": "No duplicate S01/S02 create; resume only by existing video_id or proceed to ungenerated shot IDs.",
     }
     out = root / ".control" / "handoff_recovery_receipt.v1.json"
-    out.write_text(json.dumps(receipt, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    atomic_write_text(out, json.dumps(receipt, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     print(json.dumps({"status": "BLOCKED", "path": str(out), "run_id": run["run_id"], "next_action": receipt["next_action"]}, ensure_ascii=False, indent=2))
     return 0
 

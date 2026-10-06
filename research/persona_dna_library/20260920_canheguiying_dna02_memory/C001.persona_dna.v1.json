@@ -1,0 +1,25 @@
+{
+  "schema": "video_kingdom.persona_dna.v1",
+  "character_id": "C001",
+  "root_will": "先守住自己的拙与静，再谈归属和热闹",
+  "trauma": "长期活在互相表演的社交场里，发现亲近也可以被拿来交易后，对被人看见本身产生厌倦",
+  "desire": "一块不被打扰的清净，能把审美、阅读和收藏安放其中",
+  "fear": "清净之地再次被喧嚣、应酬和虚伪人情侵入",
+  "behavior_pattern": "日常淡泊、回避应酬；面对超常或冒犯不先逃，而是好奇观察、言语试探甚至调侃；一旦被一个懂自己的人勾住，会反复守候、茶饭无心",
+  "personality_conflict": "嘴上厌世避人，却极容易被懂自己审美的人留下，把避世变成守候",
+  "tags": [
+    "隐忍型",
+    "审美型"
+  ],
+  "source": "extract",
+  "parent_ids": [],
+  "version": "1",
+  "production_integration": false,
+  "creator_variant_id": "dna02_memory",
+  "creator_variant_label": "前世记忆版",
+  "creator_variant_bias": {
+    "memory_echo": true,
+    "memory_mode": "object_triggered_fallible"
+  },
+  "creator_variant_note": "周培携带上一世世界的模糊记忆回声。记忆只能被旧物、气味、动作或地点触发；允许错位、遗忘和误判，绝不直接预告主线，不把前世事实当今生事实。"
+}

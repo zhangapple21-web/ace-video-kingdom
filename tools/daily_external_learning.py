@@ -20,6 +20,7 @@ from pathlib import Path
 from typing import Any, Callable
 from zoneinfo import ZoneInfo
 import sys
+from tools.atomic_io import atomic_write_text
 
 sys.stdout.reconfigure(encoding="utf-8")  # Bug #1 fix: prevent UnicodeEncodeError on GBK console
 
@@ -165,7 +166,7 @@ def collect(*, opener: Callable[..., Any] | None = None, now: datetime | None = 
 def persist(result: dict[str, Any], *, out_dir: Path = RUN_DIR) -> Path:
     out_dir.mkdir(parents=True, exist_ok=True)
     out = out_dir / (result["run_id"] + ".json")
-    out.write_text(json.dumps(result, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    atomic_write_text(out, json.dumps(result, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     ledger = _load_json(LEDGER, {"contract_version": "ace.video_kingdom.public_street_learning_ledger.v1", "scope": "FREE_ZONE_RESEARCH_ONLY", "production_integration": False, "entries": []})
     if not isinstance(ledger, dict):
         ledger = {"contract_version": "ace.video_kingdom.public_street_learning_ledger.v1", "scope": "FREE_ZONE_RESEARCH_ONLY", "production_integration": False, "entries": []}
@@ -174,7 +175,7 @@ def persist(result: dict[str, Any], *, out_dir: Path = RUN_DIR) -> Path:
         if entry.get("source_content_key") not in known:
             ledger.setdefault("entries", []).append(entry)
             known.add(str(entry.get("source_content_key")))
-    LEDGER.write_text(json.dumps(ledger, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    atomic_write_text(LEDGER, json.dumps(ledger, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     return out
 
 

@@ -14,6 +14,7 @@ import shutil
 import subprocess
 from pathlib import Path
 import sys
+from tools.atomic_io import atomic_write_text
 
 sys.stdout.reconfigure(encoding="utf-8")  # Bug #1 fix: prevent UnicodeEncodeError on GBK console
 
@@ -34,7 +35,7 @@ def probe_duration(path: Path) -> float:
         check=True,
         capture_output=True,
         text=True,
-    )
+    timeout=300 )
     duration = float(result.stdout.strip())
     if duration <= 0:
         raise ValueError(f"voice track has invalid duration: {path}")
@@ -122,7 +123,7 @@ def main() -> int:
         *_codec_args(args.output),
         str(args.output),
     ]
-    result = subprocess.run(command, capture_output=True, text=True)
+    result = subprocess.run(command, capture_output=True, text=True, timeout=300)
     if result.returncode:
         detail = (result.stderr or "FFmpeg failed").strip()[-1200:]
         raise SystemExit(detail)
@@ -141,7 +142,7 @@ def main() -> int:
     }
     if args.receipt:
         args.receipt.parent.mkdir(parents=True, exist_ok=True)
-        args.receipt.write_text(json.dumps(receipt, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+        atomic_write_text(args.receipt, json.dumps(receipt, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     print(json.dumps(receipt, ensure_ascii=False))
     return 0
 

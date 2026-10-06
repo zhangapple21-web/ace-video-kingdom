@@ -15,6 +15,7 @@ import uuid
 from pathlib import Path
 from typing import Any
 import sys
+from tools.atomic_io import atomic_write_text
 
 sys.stdout.reconfigure(encoding="utf-8")  # Bug #1 fix: prevent UnicodeEncodeError on GBK console
 
@@ -132,7 +133,7 @@ def record_evolution(record: dict[str, Any], *, ledger_path: Path = DEFAULT_LEDG
         row["promoted_events"] = int(row.get("promoted_events", 0)) + 1
         row.setdefault("evidence", []).append({"evolution_id": entry["evolution_id"], "comparison": entry["comparison"]})
         capabilities_path.parent.mkdir(parents=True, exist_ok=True)
-        capabilities_path.write_text(json.dumps(growth, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+        atomic_write_text(capabilities_path, json.dumps(growth, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     return entry
 
 
@@ -144,7 +145,7 @@ def main(argv: list[str] | None = None) -> int:
     record = json.loads(args.record.read_text(encoding="utf-8"))
     result = record_evolution(record)
     args.out.parent.mkdir(parents=True, exist_ok=True)
-    args.out.write_text(json.dumps(result, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    atomic_write_text(args.out, json.dumps(result, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     print(json.dumps({"evolution_id": result["evolution_id"], "decision": result["decision"], "out": str(args.out)}, ensure_ascii=False))
     return 0 if result["decision"] == "PROMOTE" else 2
 

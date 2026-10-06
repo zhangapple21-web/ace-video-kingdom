@@ -1,0 +1,7 @@
+name = "tinghe-dramai-proxy"
+main = "src/index.js"
+compatibility_date = "2026-09-21"
+
+routes = [
+  { pattern = "studio.zhangningjing.com/dramai/*", zone_name = "zhangningjing.com" }
+]

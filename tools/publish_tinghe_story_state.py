@@ -14,6 +14,7 @@ from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
 import sys
+from tools.atomic_io import atomic_write_text
 
 sys.stdout.reconfigure(encoding="utf-8")  # Bug #1 fix: prevent UnicodeEncodeError on GBK console
 
@@ -62,7 +63,7 @@ def publish(check_only: bool = False) -> dict[str, Any]:
     latest_public = state.setdefault("production", {}).setdefault("latest_public", {})
     latest_public.update({"kind": "正式小说场", "label": latest.get("title") or latest["id"], "href": f"#/read/{latest['id']}"})
     if not check_only:
-        STATE.write_text(json.dumps(state, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+        atomic_write_text(STATE, json.dumps(state, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     return {"source_chapter": state["source_chapter"], "completed_scenes": progress["completed_scenes"], "published_units": progress["published_units"], "check_only": check_only}
 
 

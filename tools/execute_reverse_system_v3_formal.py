@@ -4,6 +4,7 @@ import json
 import subprocess
 import sys
 from pathlib import Path
+from tools.atomic_io import atomic_write_text
 
 sys.stdout.reconfigure(encoding="utf-8")  # Bug #1 fix: prevent UnicodeEncodeError on GBK console
 
@@ -26,7 +27,7 @@ def bind_manifest() -> None:
         row["run_id"] = run["run_id"]
         row["action_id"] = ACTION_ID
         row["executor_owner"] = OWNER
-    MANIFEST.write_text(json.dumps(rows, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    atomic_write_text(MANIFEST, json.dumps(rows, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
 
 def main() -> int:
     plan = json.loads(PLAN.read_text(encoding="utf-8"))
@@ -37,7 +38,7 @@ def main() -> int:
         cmd = [sys.executable, str(ROOT / "tools" / "run_short_clip.py"), "--shot-id", shot["shot_id"], "--prompt", shot["prompt"], "--episode-contract", str(PLAN), "--manifest", str(MANIFEST), "--output", str(output), "--timeout", "900", "--model", "agnes-video-2.5-flash", "--seconds", str(shot["render"]["seconds"]), "--size", "720P", "--aspect-ratio", "9:16", "--flash-mode", "reference", "--admission-scope", "production"]
         for url in ordered: cmd += ["--flash-reference-image-url", url]
         print(json.dumps({"status": "SHOT_START", "shot_id": shot["shot_id"]}, ensure_ascii=False), flush=True)
-        code = subprocess.run(cmd, cwd=ROOT).returncode
+        code = subprocess.run(cmd, cwd=ROOT, timeout=300).returncode
         bind_manifest()
         if code:
             print(json.dumps({"status": "STOPPED", "shot_id": shot["shot_id"], "returncode": code}, ensure_ascii=False), flush=True)

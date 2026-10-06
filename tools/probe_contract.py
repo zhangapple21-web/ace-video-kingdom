@@ -4,6 +4,7 @@ from __future__ import annotations
 import json
 from pathlib import Path
 from typing import Iterable, Mapping
+from tools.atomic_io import atomic_write_text
 
 try:
     from tools.medium_lock import character_performance_lock
@@ -44,5 +45,5 @@ def write_probe_contract(path: Path, shots: Iterable[Mapping[str, object]], *, e
         "shots": rows,
     }
     path.parent.mkdir(parents=True, exist_ok=True)
-    path.write_text(json.dumps(document, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    atomic_write_text(path, json.dumps(document, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     return path

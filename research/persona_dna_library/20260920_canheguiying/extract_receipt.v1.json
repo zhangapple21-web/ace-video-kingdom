@@ -1,0 +1,30 @@
+{
+  "schema": "video_kingdom.persona_extract_receipt.v1",
+  "extracted_at": "2026-09-20",
+  "source_work": "user-pasted chapter labeled 莲蓬鬼话 / 残荷诡影",
+  "source_role": "training food for abstract DNA only",
+  "production_integration": false,
+  "copyright_boundary": "Do not put original names, sentences, or plot into production prompts, persona_card appearance, or Agnes. DNA keeps abstract traits. Adaptation/shooting of the source work is not authorized by this extract.",
+  "skipped": [
+    {
+      "label": "old servant",
+      "reason": "insufficient six-dimension evidence"
+    },
+    {
+      "label": "cook",
+      "reason": "insufficient six-dimension evidence"
+    }
+  ],
+  "characters": [
+    {
+      "character_id": "C001",
+      "extract_from": "young painter who fled the city into a quiet garden",
+      "source": "extract"
+    },
+    {
+      "character_id": "C002",
+      "extract_from": "garden-bound revenant who still claims the old estate",
+      "source": "extract"
+    }
+  ]
+}

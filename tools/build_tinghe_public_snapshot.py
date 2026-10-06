@@ -1,6 +1,7 @@
 import json, re
 from pathlib import Path
 import sys
+from tools.atomic_io import atomic_write_text
 
 sys.stdout.reconfigure(encoding="utf-8")  # Bug #1 fix: prevent UnicodeEncodeError on GBK console
 ROOT = Path('D:/') / '\u89c6\u9891\u521b\u4f5c' / 'ace-video-kingdom'
@@ -29,5 +30,5 @@ for p in pp.get('props') or []:
     if len(props)>=80: break
 places=[{'id':p.get('id'),'name':p.get('name'),'status':p.get('status'),'seen':len(p.get('sources') or [])} for p in (pp.get('places') or [])]
 snapshot={'schema':'tinghe.public_snapshot.v1','title':'\u542c\u8377\u8f69\u4e16\u754c\u6863\u6848\u9986','work':'\u6b8b\u8377\u8be1\u5f71','publication_status':'local_preview','source_export':'20260920_canheguiying_reincarnation_v2_v3','unknown_policy':'UNKNOWN kept when source has no evidence','counts':{'characters':len(chars),'relationships':len(rels.get('relationships') or []),'family_relations':len(rels.get('family_relations') or []),'events':len(ev.get('events') or []),'scenes':len(ev.get('scenes') or []),'places':len(places),'props_public':len(props)},'characters':[slim_char(c) for c in chars],'relationships':[slim_rel(r) for r in (rels.get('relationships') or [])],'family_relations':[slim_rel(r) for r in (rels.get('family_relations') or [])],'events':[slim_event(e) for e in (ev.get('events') or [])],'scenes':[slim_scene(s) for s in (ev.get('scenes') or [])],'places':places,'props':props}
-(DST/'data'/'snapshot.v1.json').write_text(json.dumps(snapshot,ensure_ascii=False),encoding='utf-8')
+atomic_write_text((DST/'data'/'snapshot.v1.json'), json.dumps(snapshot,ensure_ascii=False),encoding='utf-8')
 print('wrote', snapshot['counts'])

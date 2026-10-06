@@ -1,0 +1,54 @@
+{
+  "schema": "video_kingdom.canon_scene_pass.v1",
+  "at": "2026-09-22T17:09:10+08:00",
+  "lib": "D:\\视频创作\\ace-video-kingdom\\research\\persona_dna_library\\20260920_canheguiying_reincarnation_v2",
+  "next": 234,
+  "quota_used": 1,
+  "max_per_day": 2,
+  "scene": 234,
+  "heading": "第234场｜夜｜内｜县馆·东屋",
+  "wave": "wave_37",
+  "verdict": "PASS",
+  "fails": [],
+  "reasons": [],
+  "alive": {
+    "q1_person_not_manual": true,
+    "q2_not_ai": true,
+    "q3_will_not_settle": true
+  },
+  "conflict": {
+    "status": "PASS",
+    "errors": [],
+    "notes": [],
+    "scene_class": "B"
+  },
+  "forbidden_hits": [],
+  "quote_count": 11,
+  "packet": {
+    "schema": "video_kingdom.conflict_driven_scene.v1",
+    "scene_class": "B",
+    "goals": {
+      "a": "ask_or_press",
+      "b": "hold_boundary"
+    },
+    "change_at_end": {
+      "kind": "information",
+      "what": "本场变化：世界：丁怀山从陆卷处把“周父光绪二十七年秋寄清江浦的信”与“赵氏女同年典函”对上了日期；他以“冬至前不进园、冬至后折价重丈”施压，把税压力明确转到周家接地的后果上。关系：陆卷只敢透露“信有底、无底稿”，仍守户房边界；丁怀山开始把周"
+    },
+    "lengthener": false,
+    "speech_intent_readable": true,
+    "completes_in_picture": true
+  },
+  "publish": {
+    "source_chapter": "c234",
+    "completed_scenes": 234,
+    "published_units": 235,
+    "check_only": false
+  },
+  "deploy": {
+    "status": "OK",
+    "code": 0,
+    "stdout": "\n ⛅️ wrangler 4.132.0\n────────────────────\nUploading... (250/253)\nUploading... (251/253)\nUploading... (252/253)\nUploading... (253/253)\n✨ Success! Uploaded 3 files (250 already uploaded) (1.30 sec)\n\n✨ Uploading _headers\n🌎 Deploying...\n✨ Deployment complete! Take a peek over at https://3d9d1f52.tinghe-archive.pages.dev\n",
+    "stderr": ""
+  }
+}

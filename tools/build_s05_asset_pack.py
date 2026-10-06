@@ -22,6 +22,7 @@ from typing import Any
 
 from PIL import Image, ImageDraw, ImageFont, ImageOps
 import sys
+from tools.atomic_io import atomic_write_text
 
 sys.stdout.reconfigure(encoding="utf-8")  # Bug #1 fix: prevent UnicodeEncodeError on GBK console
 
@@ -397,7 +398,7 @@ def main() -> int:
 
     def dump(rel: str, value: dict[str, Any]) -> None:
         path = ROOT / rel
-        path.write_text(json.dumps(value, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+        atomic_write_text(path, json.dumps(value, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
 
     char = load("assets/library/characters/identity_lufan_v1/asset_package.v1.json")
     char["package_level"] = "TASK_LOCKED"
@@ -498,7 +499,7 @@ def main() -> int:
         },
         "post_generation": {"required": True, "status": "PENDING", "must_pass": ["picture_no_drift", "action_gate", "camera_gate", "continuity_frame_proof", "director_gate"]},
     }
-    (ROOT / "research" / "E_S05_asset_audit_ledger.v2.json").write_text(json.dumps(ledger, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    atomic_write_text((ROOT / "research" / "E_S05_asset_audit_ledger.v2.json"), json.dumps(ledger, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     task_index_records: list[dict[str, Any]] = []
     for key, path in outputs.items():
         with Image.open(path) as image:
@@ -527,7 +528,7 @@ def main() -> int:
         "stats": {"new_count": len(outputs), "reused_context_count": 2, "rejected_count": 1, "missing_count": 0},
         "rule": "Only this task-scoped index is eligible for E/S05 admission; rejected legacy media remains evidence, not an anchor.",
     }
-    (ROOT / "assets" / "index" / "E_S05_asset_index.v1.json").write_text(json.dumps(task_index, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    atomic_write_text((ROOT / "assets" / "index" / "E_S05_asset_index.v1.json"), json.dumps(task_index, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     task_gate = {
         "schema": "video_kingdom.task_asset_gate_receipt.v1",
         "task_id": "E_S05_HARDENING",
@@ -542,9 +543,8 @@ def main() -> int:
         "post_generation_gate": "PENDING",
         "rule": "READY only authorizes one S05 submission; it does not pass the five-layer video gate.",
     }
-    (ROOT / "assets" / "index" / "E_S05_asset_gate_receipt.v1.json").write_text(json.dumps(task_gate, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
-    (ROOT / "research" / "E_S05_asset_rebuild_20260906.md").write_text(
-        "# E/S05 任务级资产重建记录（2026-09-06）\n\n"
+    atomic_write_text((ROOT / "assets" / "index" / "E_S05_asset_gate_receipt.v1.json"), json.dumps(task_gate, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    atomic_write_text((ROOT / "research" / "E_S05_asset_rebuild_20260906.md"), "# E/S05 任务级资产重建记录（2026-09-06）\n\n"
         "结论：`READY_FOR_ONE_TIME_GENERATION`。这不是视频通过；它只表示资产包已形成、哈希可重建、旧失败品没有被升格复用。\n\n"
         "- 🆕 新建：陆凡三视图/侧后方全身、面部与表情锁、手型、迷彩服背面基准。\n"
         "- 🆕 新建：荒山孤坟全景/侧后方主视角/反打/45°关系、空间比例、日昏夜光源参数。\n"
@@ -553,8 +553,7 @@ def main() -> int:
         "- ✅ 复用但仅作上下文：正面人物图、荒山孤坟参考图、墓碑材质参考。\n"
         "- ❌ 拒绝复用：旧酒图（两瓶/酒杯/鲜花）；旧 S05 video_id 不兼容。\n\n"
         "资产门通过后只允许一次新 S05 生成；不重跑整集、不新增 Scheduler/Router/Provider。\n",
-        encoding="utf-8",
-    )
+        encoding="utf-8",)
     print(json.dumps({"status": "READY_FOR_ONE_TIME_GENERATION", "task_dir": TASK_DIR.relative_to(ROOT).as_posix(), "asset_count": len(outputs)}, ensure_ascii=False))
     return 0
 

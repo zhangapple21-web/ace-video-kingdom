@@ -15,6 +15,7 @@ import subprocess
 from pathlib import Path
 from typing import Any
 import sys
+from tools.atomic_io import atomic_write_text
 
 sys.stdout.reconfigure(encoding="utf-8")  # Bug #1 fix: prevent UnicodeEncodeError on GBK console
 
@@ -24,7 +25,7 @@ def probe_audio(path: Path) -> float:
         ["ffprobe", "-v", "error", "-show_entries", "format=duration",
          "-of", "default=nw=1:nk=1", str(path)],
         check=True, capture_output=True, text=True,
-    )
+    timeout=300 )
     duration = float(result.stdout.strip())
     if duration <= 0:
         raise ValueError(f"audio duration is not positive: {path}")
@@ -58,7 +59,7 @@ def synthesize_windows_speech(text: str, output: Path, *, voice: str | None = No
         "$s.Speak($text); $s.Dispose()"
     )
     output.parent.mkdir(parents=True, exist_ok=True)
-    subprocess.run([shell, "-NoProfile", "-NonInteractive", "-Command", script], check=True, capture_output=True, text=True)
+    subprocess.run([shell, "-NoProfile", "-NonInteractive", "-Command", script], check=True, capture_output=True, text=True, timeout=300)
     return probe_audio(output)
 
 
@@ -148,7 +149,7 @@ def main() -> int:
         raise SystemExit("--shot-id count must match --text count")
     _, manifest = measure_dialogue(list(zip(ids, args.text)), audio_dir=args.audio_dir, synthesize=True, voice=args.voice)
     args.output_manifest.parent.mkdir(parents=True, exist_ok=True)
-    args.output_manifest.write_text(json.dumps(manifest, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    atomic_write_text(args.output_manifest, json.dumps(manifest, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     print(json.dumps(manifest, ensure_ascii=False))
     return 0
 

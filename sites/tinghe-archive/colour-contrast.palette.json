@@ -1,0 +1,89 @@
+{
+  "checks": [
+    {
+      "id": "body-text",
+      "foreground": "#1c2b27",
+      "background": "#f3e8cf",
+      "type": "text-normal",
+      "notes": "正文墨色"
+    },
+    {
+      "id": "secondary-text",
+      "foreground": "#42534c",
+      "background": "#f3e8cf",
+      "type": "text-normal",
+      "notes": "辅助正文"
+    },
+    {
+      "id": "muted-text",
+      "foreground": "#59665d",
+      "background": "#f3e8cf",
+      "type": "text-normal",
+      "notes": "页脚与说明文字"
+    },
+    {
+      "id": "rust-label",
+      "foreground": "#a64938",
+      "background": "#f3e8cf",
+      "type": "text-normal",
+      "notes": "眉题与索引"
+    },
+    {
+      "id": "jade-link",
+      "foreground": "#1f5145",
+      "background": "#fbf4e4",
+      "type": "text-normal",
+      "notes": "链接与按钮文字"
+    },
+    {
+      "id": "primary-button",
+      "foreground": "#fff9ea",
+      "background": "#1f5145",
+      "type": "text-normal",
+      "notes": "主按钮文字"
+    },
+    {
+      "id": "masthead-nav",
+      "foreground": "#dfebdd",
+      "background": "#16372f",
+      "type": "text-normal",
+      "notes": "深色门头导航"
+    },
+    {
+      "id": "masthead-accent",
+      "foreground": "#e7bf7b",
+      "background": "#16372f",
+      "type": "ui",
+      "notes": "门头活动线"
+    },
+    {
+      "id": "focus-ring",
+      "foreground": "#a64938",
+      "background": "#f3e8cf",
+      "type": "ui",
+      "state": "focus",
+      "notes": "键盘焦点"
+    },
+    {
+      "id": "border",
+      "foreground": "#887755",
+      "background": "#f3e8cf",
+      "type": "ui",
+      "notes": "主要分隔线"
+    },
+    {
+      "id": "reference-border",
+      "foreground": "#887755",
+      "background": "#f3e8cf",
+      "type": "ui",
+      "notes": "首页内框"
+    },
+    {
+      "id": "reference-card-border",
+      "foreground": "#887755",
+      "background": "#fff9e8",
+      "type": "ui",
+      "notes": "卡片内框"
+    }
+  ]
+}

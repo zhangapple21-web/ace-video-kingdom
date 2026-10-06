@@ -12,6 +12,7 @@ import json
 from pathlib import Path
 from typing import Any
 import sys
+from tools.atomic_io import atomic_write_text
 
 sys.stdout.reconfigure(encoding="utf-8")  # Bug #1 fix: prevent UnicodeEncodeError on GBK console
 
@@ -157,17 +158,15 @@ def main() -> int:
         raise SystemExit("ASR JSON contains no usable timed subtitle segments")
     args.srt.parent.mkdir(parents=True, exist_ok=True)
     args.ass.parent.mkdir(parents=True, exist_ok=True)
-    args.srt.write_text(render_srt(segments), encoding="utf-8")
-    args.ass.write_text(
-        render_ass(
+    atomic_write_text(args.srt, render_srt(segments), encoding="utf-8")
+    atomic_write_text(args.ass, render_ass(
             segments,
             font_name=args.font_name,
             font_size=args.font_size,
             alignment=args.alignment,
             margin_v=args.margin_v,
         ),
-        encoding="utf-8",
-    )
+        encoding="utf-8",)
     print(json.dumps({"segments": len(segments), "srt": str(args.srt), "ass": str(args.ass)}, ensure_ascii=False))
     return 0
 

@@ -9,6 +9,7 @@ from __future__ import annotations
 import json
 import sys
 from pathlib import Path
+from tools.atomic_io import atomic_write_text
 
 sys.stdout.reconfigure(encoding="utf-8")  # Bug #1 fix: prevent UnicodeEncodeError on GBK console
 
@@ -48,7 +49,7 @@ def main() -> int:
             "语义门通过前，不得将 acceptance_receipt.status 或 delivery_approved 写为 PASS。",
         ],
     }
-    (root / "director_semantic_review.v1.json").write_text(json.dumps(receipt, ensure_ascii=False, indent=2), encoding="utf-8")
+    atomic_write_text((root / "director_semantic_review.v1.json"), json.dumps(receipt, ensure_ascii=False, indent=2), encoding="utf-8")
     gate = {
         "schema": "ace.video_kingdom.delivery_gate.v1",
         "project_id": project,
@@ -60,7 +61,7 @@ def main() -> int:
         "director_semantic_review": "REWORK_REQUIRED",
         "reason": "媒体完整性和节奏通过，但逐镜语义/人物关系不通过。",
     }
-    (root / "delivery_gate.v1.json").write_text(json.dumps(gate, ensure_ascii=False, indent=2), encoding="utf-8")
+    atomic_write_text((root / "delivery_gate.v1.json"), json.dumps(gate, ensure_ascii=False, indent=2), encoding="utf-8")
     acceptance_path = root / "acceptance_receipt.json"
     if acceptance_path.is_file():
         acceptance = json.loads(acceptance_path.read_text(encoding="utf-8"))
@@ -79,7 +80,7 @@ def main() -> int:
             "status": "BLOCKED",
             "receipt": "delivery_gate.v1.json",
         }
-        acceptance_path.write_text(json.dumps(acceptance, ensure_ascii=False, indent=2), encoding="utf-8")
+        atomic_write_text(acceptance_path, json.dumps(acceptance, ensure_ascii=False, indent=2), encoding="utf-8")
     print(json.dumps({"status": "REWORK_REQUIRED", "project": project}, ensure_ascii=False))
     return 0
 

@@ -1,0 +1,48 @@
+{
+  "encoding": "utf-8",
+  "production_integration": false,
+  "items": [
+    {
+      "id": "C001",
+      "dna_status": "PASS",
+      "overlay_status": "CANDIDATE",
+      "dna_utf8": true,
+      "overlay_utf8": true,
+      "dna_nul": 0,
+      "overlay_nul": 0,
+      "dna_bom": false,
+      "overlay_bom": false,
+      "personality_prefix": "日常淡泊、回避应酬；面对超常或冒犯不先逃",
+      "motivation_prefix": "一块不被打扰的清净，能把审美、阅读和收藏",
+      "missing": [
+        "appearance",
+        "catchphrase",
+        "voice_lock",
+        "costume_lock",
+        "makeup_sheet"
+      ],
+      "production_integration": false
+    },
+    {
+      "id": "C002",
+      "dna_status": "PASS",
+      "overlay_status": "CANDIDATE",
+      "dna_utf8": true,
+      "overlay_utf8": true,
+      "dna_nul": 0,
+      "overlay_nul": 0,
+      "dna_bom": false,
+      "overlay_bom": false,
+      "personality_prefix": "夜间按旧习取用园中物产；被质问时先倨傲认",
+      "motivation_prefix": "被承认这里曾是我的，并以对等才情被看见，",
+      "missing": [
+        "appearance",
+        "catchphrase",
+        "voice_lock",
+        "costume_lock",
+        "makeup_sheet"
+      ],
+      "production_integration": false
+    }
+  ]
+}

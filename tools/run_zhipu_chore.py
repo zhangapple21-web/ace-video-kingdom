@@ -20,6 +20,7 @@ import sys
 
 if str(Path(__file__).resolve().parents[1]) not in sys.path:
     sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
+from tools.atomic_io import atomic_write_text
 
 try:
     from runtime.provider_admission import admit_provider_request, assert_admission, build_canonical_generation_request
@@ -153,7 +154,7 @@ def main() -> int:
             receipt["result"] = response_payload
             receipt["status"] = "COMPLETED"
             args.output.parent.mkdir(parents=True, exist_ok=True)
-            args.output.write_text(json.dumps(receipt, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+            atomic_write_text(args.output, json.dumps(receipt, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
             return 0
         transient = status in {0, 408, 425, 429, 500, 502, 503, 504}
         row["transient"] = transient
@@ -167,7 +168,7 @@ def main() -> int:
         row["retry_delay_source"] = "retry_after" if retry_after is not None else "fallback_profile"
         time.sleep(delay)
     args.output.parent.mkdir(parents=True, exist_ok=True)
-    args.output.write_text(json.dumps(receipt, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    atomic_write_text(args.output, json.dumps(receipt, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     return 1
 
 

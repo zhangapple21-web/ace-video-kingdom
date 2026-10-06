@@ -4,6 +4,7 @@ from __future__ import annotations
 import json
 from pathlib import Path
 import sys
+from tools.atomic_io import atomic_write_text
 
 sys.stdout.reconfigure(encoding="utf-8")  # Bug #1 fix: prevent UnicodeEncodeError on GBK console
 
@@ -77,8 +78,8 @@ def main() -> int:
         side.update({"shot_id": shot_id, "source_scene": f"{titles[i]}：{actions[i]}", "script": {"scene_id": f"SC{i+1:02d}", "speaker": speaker, "dialogue_text": dialogue[i], "emotion": "curious" if i < 3 else "restrained", "line_locked": True, "tts_duration_seconds": None, "audio_status": audio_status}, "camera": shot["camera"] | {"first_frame_kind": "scene_action_anchor"}, "edit": {"duration_seconds": None, "render_seconds": 6, "duration_source": "PENDING_TTS", "cut_after_performance": True, "transition_reason": "cut after single action and recovery hold"}, "performance": {"emotion_goal": shot.get("emotion_change", "克制悬念"), "action_beats": shot["action_beats"], "sound_cues": sound_cues}, "shot_contract": shot["shot_contract"], "assets": {"identity_reference": identity, "scene_action_anchor": f"assets/sc{i+1:02d}_anchor.png", "costume": "少年固定深色校服与旧书包；女子固定米白无品牌运动服、低马尾、白软底鞋", "props": ["snow-covered pine ground", "frosted path"], "lighting": "cold blue-grey winter dawn with natural skin tone", "space": "Chinese northern city park pine grove"}})
     plan.update({"title": "《雪晨里的那一口白气》", "source_rights_note": "仅吸收本地小说库《龙蛇演义》开篇的观察/模仿机制；不复用姓名、地名、原句或拳法专名，仅内部研究。", "story": {"root_brief": {"theme": "观察、模仿与未知线索", "relationship_and_conflict": "普通少年与隐藏能力者的短暂相遇", "mainline_events": titles, "source_rights_note": "originalized_mechanism_only", "semantic_anchor_type": "snow_breath_and_footprints"}, "scene_nodes": [{"scene_id": f"SC{i+1:02d}", "title": titles[i]} for i in range(6)]}})
     contract.update({"premise": idea, "causal_chain": titles, "plants": ["女子的身法", "第三串脚印"], "payoffs": ["笔直白气", "留下追踪钩子"], "viewer_knowledge_checkpoints": ["观众看到少年观察", "观众看到模仿失败与白气异常", "观众发现第三串脚印"], "timing_policy": "tts_first; measured dialogue plus 0.6s recovery hold; no character-count timing"})
-    plan_path.write_text(json.dumps(plan, ensure_ascii=False, indent=2), encoding="utf-8")
-    contract_path.write_text(json.dumps(contract, ensure_ascii=False, indent=2), encoding="utf-8")
+    atomic_write_text(plan_path, json.dumps(plan, ensure_ascii=False, indent=2), encoding="utf-8")
+    atomic_write_text(contract_path, json.dumps(contract, ensure_ascii=False, indent=2), encoding="utf-8")
     print(json.dumps({"project": str(root), "shots": 6, "title": plan["title"], "status": "CUSTOM_PLAN_WRITTEN"}, ensure_ascii=False))
     return 0
 

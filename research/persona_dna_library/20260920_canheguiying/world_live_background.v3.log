@@ -1,0 +1,29 @@
+[world-live] resume start_wave=25 next_scene=135 have_waves=24 closed=False
+[world-live] wave 25/32 start scene~135
+[world-live] primary finish=stop content=7091 reasoning=2244 usage={'completion_tokens': 7349, 'prompt_tokens': 15444, 'total_tokens': 22793, 'prompt_tokens_details': {'cached_tokens': 15232}}
+[world-live] wave 25 done scenes=5 closed=False
+[world-live] wave 26/32 start scene~140
+[world-live] primary finish=length content=0 reasoning=11083 usage={'completion_tokens': 8189, 'prompt_tokens': 12388, 'total_tokens': 20577, 'prompt_tokens_details': {'cached_tokens': 3328}}
+[world-live] force_body_1 finish=length content=0 reasoning=10849 usage={'completion_tokens': 8190, 'prompt_tokens': 12440, 'total_tokens': 20630, 'prompt_tokens_details': {'cached_tokens': 12288}}
+[world-live] force_body_2 finish=length content=0 reasoning=10584 usage={'completion_tokens': 8191, 'prompt_tokens': 12440, 'total_tokens': 20631, 'prompt_tokens_details': {'cached_tokens': 12288}}
+[world-live] slim_retry finish=length content=6757 reasoning=4706 usage={'completion_tokens': 8191, 'prompt_tokens': 3536, 'total_tokens': 11727, 'prompt_tokens_details': {'cached_tokens': 384}}
+[world-live] truncated, continue
+[world-live] wave 26 done scenes=0 closed=False
+[world-live] wave 27/32 start scene~140
+[world-live] primary finish=length content=2767 reasoning=7358 usage={'completion_tokens': 8191, 'prompt_tokens': 15214, 'total_tokens': 23405, 'prompt_tokens_details': {'cached_tokens': 3328}}
+[world-live] truncated, continue
+[world-live] wave 27 done scenes=11 closed=False
+[world-live] wave 28/32 start scene~159
+[world-live] primary finish=length content=2514 reasoning=8515 usage={'completion_tokens': 8192, 'prompt_tokens': 11264, 'total_tokens': 19456, 'prompt_tokens_details': {'cached_tokens': 3328}}
+[world-live] truncated, continue
+[world-live] wave 28 done scenes=9 closed=False
+[world-live] wave 29/32 start scene~168
+[world-live] primary finish=length content=3310 reasoning=7135 usage={'completion_tokens': 8188, 'prompt_tokens': 8872, 'total_tokens': 17060, 'prompt_tokens_details': {'cached_tokens': 3328}}
+[world-live] truncated, continue
+[world-live] wave 29 done scenes=11 closed=False
+[world-live] wave 30/32 start scene~179
+[world-live] primary finish=stop content=3554 reasoning=4026 usage={'completion_tokens': 5927, 'prompt_tokens': 13404, 'total_tokens': 19331, 'prompt_tokens_details': {'cached_tokens': 3328}}
+[world-live] wave 30 done scenes=5 closed=False
+[world-live] wave 31/32 start scene~184
+[world-live] primary finish=length content=3276 reasoning=7226 usage={'completion_tokens': 8190, 'prompt_tokens': 10792, 'total_tokens': 18982, 'prompt_tokens_details': {'cached_tokens': 3328}}
+[world-live] truncated, continue

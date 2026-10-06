@@ -12,6 +12,7 @@ import shutil
 from datetime import datetime, timezone
 from pathlib import Path
 import sys
+from tools.atomic_io import atomic_write_text
 
 sys.stdout.reconfigure(encoding="utf-8")  # Bug #1 fix: prevent UnicodeEncodeError on GBK console
 
@@ -70,9 +71,9 @@ def main() -> None:
                 data["composition_reference"] = "待 imagegen 审验通过的傍晚南宁街头/奔驰电动车构图静帧"
         data["render"]["provider_submission"] = "NOT_PERFORMED"
         data["rework_hash"] = hashlib.sha256(json.dumps(data, ensure_ascii=False, sort_keys=True).encode()).hexdigest()
-        path.write_text(json.dumps(data, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+        atomic_write_text(path, json.dumps(data, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
         manifest["shots"].append({"shot_id": data.get("shot_id"), "file": path.name, "status": "REWORK_REQUIRED", "rework_hash": data["rework_hash"]})
-    (ROOT / f"EP01_CONTRACT_REWORK_MANIFEST_{stamp}.json").write_text(json.dumps(manifest, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    atomic_write_text((ROOT / f"EP01_CONTRACT_REWORK_MANIFEST_{stamp}.json"), json.dumps(manifest, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     print(json.dumps({"status": "REWORK_REQUIRED", "shots": len(manifest["shots"]), "backup": str(backup), "manifest": str(ROOT / f"EP01_CONTRACT_REWORK_MANIFEST_{stamp}.json")}, ensure_ascii=False))
 
 

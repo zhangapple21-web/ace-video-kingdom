@@ -2,6 +2,7 @@ from __future__ import annotations
 import hashlib, json, sys
 from pathlib import Path
 import sys
+from tools.atomic_io import atomic_write_text
 
 sys.stdout.reconfigure(encoding="utf-8")  # Bug #1 fix: prevent UnicodeEncodeError on GBK console
 
@@ -15,6 +16,6 @@ def main() -> int:
             p=root/item['reference_path']; item['sha256']=sha(p)
     for shot in plan['shots']:
         shot['render']['image']=shot['render']['image']; shot['render']['fallback_image']=shot['render']['fallback_image']
-    pp.write_text(json.dumps(plan,ensure_ascii=False,indent=2),encoding='utf-8')
+    atomic_write_text(pp, json.dumps(plan,ensure_ascii=False,indent=2),encoding='utf-8')
     print(json.dumps({'status':'HASHES_REFRESHED'},ensure_ascii=False)); return 0
 if __name__=='__main__': raise SystemExit(main())

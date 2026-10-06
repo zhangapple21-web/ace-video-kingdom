@@ -19,6 +19,6 @@ contract_path = write_probe_contract(
 )
 for sid,anchor,prompt in shots:
  cmd=[sys.executable,str(root/"tools/run_short_clip.py"),"--shot-id",sid,"--prompt",prompt,"--episode-contract",str(contract_path),"--admission-scope","production","--manifest",str(manifest),"--output",str(out/f"{sid}.mp4"),"--model","agnes-video-2.5-flash","--width","704","--height","1280","--seconds","5","--aspect-ratio","9:16","--flash-mode","text","--timeout","900"]
- result = subprocess.run(cmd,cwd=root,check=False)
+ result = subprocess.run(cmd,cwd=root,check=False, timeout=300)
  if result.returncode:
   raise SystemExit(result.returncode)

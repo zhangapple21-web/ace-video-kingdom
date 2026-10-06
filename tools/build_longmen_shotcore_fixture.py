@@ -11,6 +11,7 @@ import hashlib
 import json
 import sys
 from pathlib import Path
+from tools.atomic_io import atomic_write_text
 
 sys.stdout.reconfigure(encoding="utf-8")  # Bug #1 fix: prevent UnicodeEncodeError on GBK console
 
@@ -93,7 +94,7 @@ def main() -> int:
         "source_anchor": {"path": str(source), "sha256": "cc0eef87635f1fa5d93203d80ec4a7a4f52249eaea7dca9f1b8248677a7d132d", "line_range": [11, 15]},
     }
     fixture = {"schema": "video_kingdom.longmen_shotcore_s01_pilot.v1", "production_boundary": "CONTROLLED_PRODUCTION_TEST", "provider": "agnes-video-2.5-flash", "source_plan": "novel-longmen-strict-30s-v3 (reused refs only; not delivery)", "shots": [shot]}
-    (out / "fixture.json").write_text(json.dumps(fixture, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    atomic_write_text((out / "fixture.json"), json.dumps(fixture, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     print(json.dumps({"status": "COMPILED", "fixture": str(out / 'fixture.json'), "shot_id": "S01A", "asset_count": len(asset_refs)}, ensure_ascii=False))
     return 0
 

@@ -1,0 +1,41 @@
+{
+  "tool": "validate_persona_dna",
+  "production_integration": false,
+  "dna_receipt": {
+    "status": "PASS",
+    "errors": [],
+    "warnings": []
+  },
+  "persona_card_overlay": {
+    "status": "CANDIDATE",
+    "errors": [],
+    "warnings": [],
+    "overlay": {
+      "schema": "video_kingdom.persona_card_overlay.v1",
+      "character_id": "C002",
+      "personality": "夜间按旧习取用园中物产；被质问时先倨傲认主；被触怒就切断往来；认可对方后会主动登门还债、点评对方的作品，再以约定把来访变成仪式；矛盾点：清冷孤高、不承认新主人，却渴望被懂行的人留下，需要借口才能回来",
+      "motivation": "被承认这里曾是我的，并以对等才情被看见，而不是被当怪物驱赶；根意志：故园的名分与记忆优先于后来者的契约；欠下的必须还，天亮必须走",
+      "dna_ref": {
+        "schema": "video_kingdom.persona_dna.v1",
+        "character_id": "C002",
+        "source": "extract",
+        "version": "1"
+      },
+      "missing_production_fields": [
+        "appearance",
+        "catchphrase",
+        "voice_lock",
+        "costume_lock",
+        "makeup_sheet"
+      ],
+      "production_integration": false,
+      "note": "候选 overlay。必须另填 persona_card 视觉/语音锁，并走编剧导演双审，才能进入 video_kingdom_entry。",
+      "creator_variant_id": "dna02_memory",
+      "creator_variant_bias": {
+        "memory_echo": true,
+        "memory_mode": "object_triggered_fallible"
+      },
+      "creator_variant_note": "周培携带上一世世界的模糊记忆回声。记忆只能被旧物、气味、动作或地点触发；允许错位、遗忘和误判，绝不直接预告主线，不把前世事实当今生事实。"
+    }
+  }
+}

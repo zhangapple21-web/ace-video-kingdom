@@ -4,6 +4,7 @@ from datetime import datetime, timezone
 from pathlib import Path
 from urllib.request import Request, urlopen
 import sys
+from tools.atomic_io import atomic_write_text
 
 sys.stdout.reconfigure(encoding="utf-8")  # Bug #1 fix: prevent UnicodeEncodeError on GBK console
 
@@ -31,15 +32,15 @@ def main() -> int:
         records[asset_id]["provider_url"] = url; records[asset_id]["provider_state"] = "READ_VERIFIED_UGUU" if ok else "READ_FAILED"
         if not ok: receipt["status"] = "BLOCKED"
     registry["status"] = "PROVIDER_REFERENCE_VERIFIED" if receipt["status"] == "PASS" else "BLOCKED"; registry["provider_reference_receipt"] = "provider_reference_transport_receipt_uguu.json"
-    registry_path.write_text(json.dumps(registry, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
-    (PROJECT / "provider_reference_transport_receipt_uguu.json").write_text(json.dumps(receipt, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    atomic_write_text(registry_path, json.dumps(registry, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    atomic_write_text((PROJECT / "provider_reference_transport_receipt_uguu.json"), json.dumps(receipt, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     plan_path = PROJECT / "episode_plan.json"; plan = json.loads(plan_path.read_text(encoding="utf-8"))
     ordered = [URLS["CHAR_LINZHAO_V3"], URLS["SCN_TIDE_STATION_DESK_V3"], URLS["PROP_REVERSED_TICKET_V3"], URLS["PROP_COPPER_TOKEN_V3"]]
     refs = [{"asset_id": aid, "provider_ref": URLS[aid], "sha256": records[aid]["sha256"]} for aid in ["SCN_TIDE_STATION_DESK_V3", "PROP_COPPER_TOKEN_V3", "PROP_REVERSED_TICKET_V3", "CHAR_LINZHAO_V3"]]
     for shot in plan["shots"]:
         shot["render"]["reference_image_urls"] = ordered; shot["asset_refs"] = refs
     plan["status"] = "READY_FOR_FORMAL_RUN" if receipt["status"] == "PASS" else "BLOCKED"; plan["gates"]["provider_reference_gate"] = "PASS_UGUU_DIRECT_URL_HASH" if receipt["status"] == "PASS" else "BLOCKED"; plan["gates"]["formal_run_allowed"] = receipt["status"] == "PASS"; plan["gates"]["reference_probe"]["provider_reference_host"] = "uguu.se"
-    plan_path.write_text(json.dumps(plan, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    atomic_write_text(plan_path, json.dumps(plan, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     print(json.dumps({"status": receipt["status"], "host": "uguu.se", "receipt": str(PROJECT / "provider_reference_transport_receipt_uguu.json")}, ensure_ascii=False, indent=2))
     return 0 if receipt["status"] == "PASS" else 1
 

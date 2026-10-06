@@ -15,6 +15,7 @@ from typing import Any
 
 from PIL import Image, ImageDraw, ImageFilter
 import sys
+from tools.atomic_io import atomic_write_text
 
 sys.stdout.reconfigure(encoding="utf-8")  # Bug #1 fix: prevent UnicodeEncodeError on GBK console
 
@@ -31,7 +32,7 @@ def sha256(path: Path) -> str:
 
 def write_json(path: Path, value: Any) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
-    path.write_text(json.dumps(value, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    atomic_write_text(path, json.dumps(value, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
 
 
 def anchor(path: Path, kind: str, accent: tuple[int, int, int], phase: int) -> None:

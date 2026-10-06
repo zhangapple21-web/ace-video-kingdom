@@ -13,6 +13,7 @@ import os
 import subprocess
 from pathlib import Path
 import sys
+from tools.atomic_io import atomic_write_text
 
 sys.stdout.reconfigure(encoding="utf-8")  # Bug #1 fix: prevent UnicodeEncodeError on GBK console
 
@@ -97,7 +98,7 @@ def main() -> int:
     if validation["status"] != "VALID":
         if args.review_output:
             args.review_output.parent.mkdir(parents=True, exist_ok=True)
-            args.review_output.write_text(json.dumps({"subtitle_validation": validation}, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+            atomic_write_text(args.review_output, json.dumps({"subtitle_validation": validation}, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
         raise SystemExit("subtitle validation failed; refusing to burn an invalid track")
     args.output.parent.mkdir(parents=True, exist_ok=True)
     style = (
@@ -112,7 +113,7 @@ def main() -> int:
         "-c:v", "libx264", "-preset", "medium", "-crf", "18",
         "-pix_fmt", "yuv420p", "-c:a", "aac", "-ar", "48000",
         "-movflags", "+faststart", str(args.output),
-    ], check=True)
+    ], check=True, timeout=300)
     if not args.output.is_file() or args.output.stat().st_size == 0:
         raise SystemExit("ffmpeg produced no output")
     review = {
@@ -126,7 +127,7 @@ def main() -> int:
     }
     if args.review_output:
         args.review_output.parent.mkdir(parents=True, exist_ok=True)
-        args.review_output.write_text(json.dumps(review, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+        atomic_write_text(args.review_output, json.dumps(review, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     print(json.dumps(review, ensure_ascii=False))
     return 0
 

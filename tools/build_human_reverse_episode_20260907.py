@@ -13,6 +13,7 @@ from typing import Any
 
 from PIL import Image, ImageDraw, ImageFilter
 import sys
+from tools.atomic_io import atomic_write_text
 
 sys.stdout.reconfigure(encoding="utf-8")  # Bug #1 fix: prevent UnicodeEncodeError on GBK console
 
@@ -27,7 +28,7 @@ def sha256(path: Path) -> str:
 
 def write_json(path: Path, value: Any) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
-    path.write_text(json.dumps(value, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    atomic_write_text(path, json.dumps(value, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
 
 
 def anchor(path: Path, kind: str, accent: tuple[int, int, int]) -> None:
@@ -155,7 +156,7 @@ def main() -> int:
             screenplay.append(f"**{speaker}**：{text}")
         screenplay += [f"动作完成点：{beat['action']}（完成后保留反应）", f"切镜理由：{beat['cut']}", ""]
     screenplay += ["## 台词验收", "系统台词保持短、冷、带边界；林照每句都在做选择或追问，不念说明书。系统从触发、任务、限制到回执改变她一次关键决策：先保全原件，再走正式核验。"]
-    (OUT / "screenplay.md").write_text("\n".join(screenplay) + "\n", encoding="utf-8")
+    atomic_write_text((OUT / "screenplay.md"), "\n".join(screenplay) + "\n", encoding="utf-8")
     write_json(OUT / "asset_gate_preflight.json", {"status": "READY", "asset_registry": "asset_registry.json", "continuity_edges": len(shot_rows) - 1, "provider_calls": 0, "run_created": False})
     print(json.dumps({"status": "ASSETS_READY", "project_dir": str(OUT), "plan": str(OUT / "episode_plan.json"), "screenplay": str(OUT / "screenplay.md"), "assets": len(records), "shots": len(shot_rows), "continuity_edges": len(shot_rows) - 1}, ensure_ascii=False, indent=2))
     return 0

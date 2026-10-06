@@ -7,6 +7,7 @@ import sys
 from pathlib import Path
 
 from measure_tts import measure_dialogue
+from tools.atomic_io import atomic_write_text
 
 sys.stdout.reconfigure(encoding="utf-8")  # Bug #1 fix: prevent UnicodeEncodeError on GBK console
 
@@ -30,9 +31,9 @@ def main() -> int:
             tmp = wav.with_suffix(".tempo.wav")
             subprocess.run(["ffmpeg", "-y", "-loglevel", "error", "-i", str(wav), "-filter:a", f"atempo={tempo}", str(tmp)], check=True, timeout=60)
             tmp.replace(wav)
-        (root / "tts_measurements.json").write_text(json.dumps(document, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+        atomic_write_text((root / "tts_measurements.json"), json.dumps(document, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
         measured, document = measure_dialogue(pairs, audio_dir=root / "audio", manifest_path=root / "tts_measurements.json", synthesize=False)
-    (root / "tts_measurements.json").write_text(json.dumps(document, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    atomic_write_text((root / "tts_measurements.json"), json.dumps(document, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     by_id = {str(row.get("shot_id")): row for row in contract.get("shots", []) if isinstance(row, dict)}
     for shot in plan.get("shots", []):
         sid = str(shot["shot_id"])
@@ -56,8 +57,8 @@ def main() -> int:
             shot["render"]["num_frames"] = 25
     plan["tts_measurements"] = "tts_measurements.json"
     contract["timing_policy"] = "tts_first; measured dialogue plus 0.6s recovery hold; silent actions use explicit editorial floor"
-    plan_path.write_text(json.dumps(plan, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
-    contract_path.write_text(json.dumps(contract, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    atomic_write_text(plan_path, json.dumps(plan, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    atomic_write_text(contract_path, json.dumps(contract, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     print(json.dumps({"status": "MEASURED", "count": len(measured), "rows": measured}, ensure_ascii=False))
     return 0
 

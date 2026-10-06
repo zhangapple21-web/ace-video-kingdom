@@ -6,6 +6,7 @@ import hashlib
 import json
 from pathlib import Path
 import sys
+from tools.atomic_io import atomic_write_text
 
 sys.stdout.reconfigure(encoding="utf-8")  # Bug #1 fix: prevent UnicodeEncodeError on GBK console
 
@@ -64,7 +65,7 @@ def main() -> int:
     args = parser.parse_args()
     payload = {"schema": "video_kingdom.shot_core_pilot.v1", "production_boundary": "CONTROLLED_PRODUCTION_TEST", "provider": "agnes-video-2.5-flash", "shots": make_shots(args.root)}
     args.output.parent.mkdir(parents=True, exist_ok=True)
-    args.output.write_text(json.dumps(payload, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    atomic_write_text(args.output, json.dumps(payload, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     print(json.dumps({"output": str(args.output), "shots": len(payload["shots"])}, ensure_ascii=False))
     return 0
 

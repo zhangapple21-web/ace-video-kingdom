@@ -11,6 +11,7 @@ import re
 from collections import Counter, defaultdict
 from pathlib import Path
 import sys
+from tools.atomic_io import atomic_write_text
 
 sys.stdout.reconfigure(encoding="utf-8")  # Bug #1 fix: prevent UnicodeEncodeError on GBK console
 
@@ -68,7 +69,7 @@ def main() -> int:
     args = parser.parse_args()
     result = build(args.root.resolve())
     args.output.parent.mkdir(parents=True, exist_ok=True)
-    args.output.write_text(json.dumps(result, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    atomic_write_text(args.output, json.dumps(result, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     print(f"profiled={result['shot_receipt_count']} promotion=NONE_AUTOMATIC")
     return 0
 

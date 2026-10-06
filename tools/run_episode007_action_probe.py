@@ -23,6 +23,6 @@ contract_path = write_probe_contract(
 for sid,prompt,anchor in shots:
     official = "feige_user_reference.png" if sid == "P03_DESK_SLAM" else "alang_user_reference.png"
     cmd=[sys.executable,str(root/"tools/run_short_clip.py"),"--shot-id",sid,"--prompt",prompt,"--episode-contract",str(contract_path),"--admission-scope","production","--manifest",str(manifest),"--output",str(out/f"{sid}.mp4"),"--model","agnes-video-2.5-flash","--image",str(root/"media_staging/episode_007_virtual_data/anchors/user"/official),"--width","704","--height","1280","--num-frames","121","--frame-rate","24","--timeout","600"]
-    result = subprocess.run(cmd,cwd=root,check=False)
+    result = subprocess.run(cmd,cwd=root,check=False, timeout=300)
     if result.returncode:
         raise SystemExit(result.returncode)

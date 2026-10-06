@@ -8,6 +8,7 @@ import json
 import sys
 from pathlib import Path
 from typing import Any
+from tools.atomic_io import atomic_write_text
 
 sys.stdout.reconfigure(encoding="utf-8")  # Bug #1 fix: prevent UnicodeEncodeError on GBK console
 
@@ -99,7 +100,7 @@ def main(argv: list[str] | None = None) -> int:
     receipt = validate(repo_root, index_path)
     if args.write_receipt:
         output = repo_root / "assets" / "index" / "asset_gate_receipt.v1.json"
-        output.write_text(json.dumps(receipt, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+        atomic_write_text(output, json.dumps(receipt, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
         print(f"receipt={output}")
     print(f"status={receipt['status']} packages={receipt['package_count']} gaps={receipt['gap_count']} errors={receipt['error_count']}")
     if receipt["status"] == "BLOCKED":

@@ -1,0 +1,68 @@
+{
+  "schema": "video_kingdom.canon_scene_pass.v1",
+  "at": "2026-09-28T13:24:31+08:00",
+  "lib": "D:\\视频创作\\ace-video-kingdom\\research\\persona_dna_library\\20260920_canheguiying_reincarnation_v2",
+  "next": 245,
+  "quota_used": 0,
+  "max_per_day": 2,
+  "scene": 245,
+  "heading": "第245场｜晨｜外｜县前街·周宅大门",
+  "wave": "wave_39",
+  "verdict": "PASS",
+  "fails": [],
+  "reasons": [],
+  "alive": {
+    "q1_person_not_manual": true,
+    "q2_not_ai": true,
+    "q3_will_not_settle": true
+  },
+  "conflict": {
+    "status": "PASS",
+    "errors": [],
+    "notes": [],
+    "scene_class": "B"
+  },
+  "forbidden_hits": [],
+  "quote_count": 4,
+  "packet": {
+    "schema": "video_kingdom.conflict_driven_scene.v1",
+    "scene_class": "B",
+    "goals": {
+      "a": "ask_or_press",
+      "b": "hold_boundary"
+    },
+    "change_at_end": {
+      "kind": "information",
+      "what": "本场变化：选择：周培拒交影摹页与当票，信未出袖，今日不进户房，改去园里对界；丁怀山空手停在门槛外。关系：丁怀山上门要页被拒，不再等周培自己送进户房。物件：两页仍叠在周培手里，门缝灯未灭。未决：园里旧界能否对上当票；户房午后会不会空口先谈销名"
+    },
+    "lengthener": false,
+    "speech_intent_readable": true,
+    "completes_in_picture": true
+  },
+  "failure_mode_signals": {
+    "dialogue_density": 0.3333333333333333,
+    "sensory_rate": 0.6666666666666666,
+    "near_dup": 0,
+    "alt_pingpong": 5,
+    "mono_speaker_share": 0.0,
+    "empty_paragraphs": 0,
+    "dialogue_only": 0,
+    "short_dialogue_runs": 1,
+    "lines": 15,
+    "dialogue_turns": 5,
+    "narration_turns": 10
+  },
+  "failure_mode_fails": [],
+  "publish": {
+    "source_chapter": "c245",
+    "completed_scenes": 245,
+    "published_units": 246,
+    "check_only": false
+  },
+  "deploy": {
+    "status": "OK",
+    "code": 0,
+    "stdout": "\n ⛅️ wrangler 4.132.0\n────────────────────\nUploading... (306/309)\nUploading... (307/309)\nUploading... (308/309)\nUploading... (309/309)\n✨ Success! Uploaded 3 files (306 already uploaded) (1.24 sec)\n\n✨ Uploading _headers\n🌎 Deploying...\n✨ Deployment complete! Take a peek over at https://b3b4ebce.tinghe-archive.pages.dev\n",
+    "stderr": ""
+  }
+}

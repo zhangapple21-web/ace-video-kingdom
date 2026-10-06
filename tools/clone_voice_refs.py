@@ -16,6 +16,7 @@ ROOT = Path(r"D:\视频创作\runtimes\cosyvoice3")
 os.environ.setdefault("MODELSCOPE_CACHE", str(ROOT / "model_cache"))
 os.environ.setdefault("HF_HOME", str(ROOT / "hf_cache"))
 sys.path.insert(0, str(ROOT / "CosyVoice"))
+from tools.atomic_io import atomic_write_text
 sys.path.insert(0, str(ROOT / "CosyVoice" / "third_party" / "Matcha-TTS"))
 
 import torchaudio  # noqa: E402
@@ -94,7 +95,7 @@ def main() -> int:
         "no_public_upload": True,
         "voices": records,
     }
-    (OUT / "manifest.json").write_text(json.dumps(manifest, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    atomic_write_text((OUT / "manifest.json"), json.dumps(manifest, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     print(json.dumps(manifest, ensure_ascii=False, indent=2))
     return 0
 

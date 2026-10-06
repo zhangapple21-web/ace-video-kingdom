@@ -1,0 +1,68 @@
+{
+  "schema": "video_kingdom.canon_scene_pass.v1",
+  "at": "2026-09-26T01:13:22+08:00",
+  "lib": "D:\\视频创作\\ace-video-kingdom\\research\\persona_dna_library\\20260920_canheguiying_reincarnation_v2",
+  "next": 242,
+  "quota_used": 1,
+  "max_per_day": 2,
+  "scene": 242,
+  "heading": "第242场｜日｜内｜县衙·户房后间",
+  "wave": "wave_39",
+  "verdict": "PASS",
+  "fails": [],
+  "reasons": [],
+  "alive": {
+    "q1_person_not_manual": true,
+    "q2_not_ai": true,
+    "q3_will_not_settle": true
+  },
+  "conflict": {
+    "status": "PASS",
+    "errors": [],
+    "notes": [],
+    "scene_class": "B"
+  },
+  "forbidden_hits": [],
+  "quote_count": 10,
+  "packet": {
+    "schema": "video_kingdom.conflict_driven_scene.v1",
+    "scene_class": "B",
+    "goals": {
+      "a": "ask_or_press",
+      "b": "hold_boundary"
+    },
+    "change_at_end": {
+      "kind": "choice",
+      "what": "本场变化：世界：清江浦税课司主动来函，确认赵氏女为后补，韩九思带着销名的可能进入县衙；丁怀山改令陆卷去官渡截取影摹。关系：韩九思—丁怀山以“补缺”交换效力，陆卷被推到渡口夹层。物件：清江浦回函入田亩册、火筷、窗纸补丁。未决：影摹页能否销名、"
+    },
+    "lengthener": false,
+    "speech_intent_readable": true,
+    "completes_in_picture": true
+  },
+  "failure_mode_signals": {
+    "dialogue_density": 0.2857142857142857,
+    "sensory_rate": 0.8571428571428571,
+    "near_dup": 0,
+    "alt_pingpong": 0,
+    "mono_speaker_share": 0.0,
+    "empty_paragraphs": 0,
+    "dialogue_only": 0,
+    "short_dialogue_runs": 2,
+    "lines": 7,
+    "dialogue_turns": 2,
+    "narration_turns": 5
+  },
+  "failure_mode_fails": [],
+  "publish": {
+    "source_chapter": "c242",
+    "completed_scenes": 242,
+    "published_units": 243,
+    "check_only": false
+  },
+  "deploy": {
+    "status": "OK",
+    "code": 0,
+    "stdout": "\n ⛅️ wrangler 4.132.0 (update available 4.140.0)\n───────────────────────────────────────────────\nUploading... (272/275)\nUploading... (273/275)\nUploading... (274/275)\nUploading... (275/275)\n✨ Success! Uploaded 3 files (272 already uploaded) (1.22 sec)\n\n✨ Uploading _headers\n🌎 Deploying...\n✨ Deployment complete! Take a peek over at https://24305c3d.tinghe-archive.pages.dev\n",
+    "stderr": ""
+  }
+}

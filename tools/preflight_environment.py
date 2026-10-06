@@ -6,6 +6,7 @@ import json
 import shutil
 from pathlib import Path
 import sys
+from tools.atomic_io import atomic_write_text
 
 sys.stdout.reconfigure(encoding="utf-8")  # Bug #1 fix: prevent UnicodeEncodeError on GBK console
 
@@ -87,7 +88,7 @@ def main() -> int:
     rendered = json.dumps(result, ensure_ascii=False, indent=2) + "\n"
     if args.output:
         args.output.parent.mkdir(parents=True, exist_ok=True)
-        args.output.write_text(rendered, encoding="utf-8")
+        atomic_write_text(args.output, rendered, encoding="utf-8")
     print(rendered, end="")
     return 1 if result["status"] == "BLOCKED_ENVIRONMENT" else 0
 

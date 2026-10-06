@@ -1,0 +1,321 @@
+{
+  "schema": "video_kingdom.oneapi_role_room.v2",
+  "status": "FAILED",
+  "profile": "standard",
+  "idea": "题材：志怪温情短剧创作层沙盒，不是都市沙雕日常，不涉及手机或聊天UI。\n硬约束：候选剧情 only；禁止提交图像/视频；禁止外貌/声线/服装锁；女魂明确成年；禁止锁死结局。\nC001：避世画家，被懂画的故园亡魂勾住后会守候，不愿清净地再被文书和改名侵入。\nC002：故园亡魂，倨傲认主，需要借口才能回来；怕被除名。\n种子：夏末，避世画家刚搬进一座荒废荷园。第七夜月下，他看见一个自称故园旧主的成年女魂在池中折莲。他随口说园子可以改名，女魂记下五件信物之债后消失。此后数夜园静无人。今夜她携酒上门，只说还债，并点评了他未完成的画。天将亮，她留下备酒则来的口头约定。园门文书尚未签署，园名未定。\n任务：按DNA从还债夜当下推演候选节拍与冲突，不要预定结局，不要把已有改名清荷稿当成唯一真源。",
+  "gateway": "http://localhost:3000/v1",
+  "trace_id": "fed47f62d8144de381565e8b6725958d",
+  "memory_context": {
+    "sha256": "4a29efc197e10eabb8d7d9fdfb3aeebb26a9496631b2f6a8534618d06f1e87af",
+    "sources": [
+      "memory/L0_invariants.json",
+      "memory/L3_experience.jsonl"
+    ],
+    "project_id": null,
+    "l1_l2_loaded": false
+  },
+  "resumed_from": null,
+  "resume_compatible": null,
+  "roles": [
+    {
+      "role_id": "primary_writer",
+      "span_id": "4948762125044171b77454332c0664dd",
+      "model": "gpt-5.5",
+      "requested_model": "gpt-5.6-terra",
+      "declared_models": [
+        "gpt-5.6-terra",
+        "gpt-5.5"
+      ],
+      "status": "COMPLETED",
+      "attempts": [
+        {
+          "model": "gpt-5.6-terra",
+          "status": "FAILED",
+          "error": "TimeoutError: timed out"
+        },
+        {
+          "model": "gpt-5.5",
+          "actual_model": "gpt-5.5",
+          "status": "PASS",
+          "evaluation": {
+            "role_id": "primary_writer",
+            "status": "PASS",
+            "score": 1.0,
+            "checks": [
+              {
+                "name": "non_empty",
+                "passed": true
+              },
+              {
+                "name": "no_placeholder",
+                "passed": true
+              },
+              {
+                "name": "no_provider_submission",
+                "passed": true
+              }
+            ],
+            "failure_class": null,
+            "repair_hint": null
+          }
+        }
+      ],
+      "route_rewritten": false,
+      "fallback_used": true,
+      "degraded": true,
+      "output": "【候选主方案】\n\n【角色目标与冲突】  \n画家想守住清静，拒绝文书与改名侵入；女魂想证明自己仍是故园之主，借还债取得再入园的理由。冲突在于：他越想界定园子，她越要求他承认园子有记忆。\n\n【断点与待补】  \n已知：女魂记下五件信物之债，今夜携酒来还，园名未定。  \n明确暗示：她懂画，且惧怕被除名。  \n待补：五件信物具体为何、她为何亡故、画家为何避世。不得预定结局。\n\n【节拍】  \n1. 荷池边，她逐件点评未完成的画，只说：“第一债，替你看出败笔。”  \n2. 画室内，她以酒换画，不许他追问来历；他发现画中故园多出一扇不存在的门。  \n3. 回廊上，她指出门的位置，要求他暂缓签文书：“园子若改名，债就无处可还。”  \n4. 天将亮，她放下酒壶，提出口头约定：备酒则来。画家没有答应，却把未干的画移到窗边。门外传来文书人的脚步，女魂是否现身，留作分岔。\n\n【对白】  \n女魂：“你画的是荷，不是这座园子。”  \n画家：“那你想让我画什么？”  \n女魂：“画它还没被你舍弃的样子。”  \n画家：“我没答应守园。”  \n女魂：“你也没答应改名。”\n\n【内心独白（完整原文）】  \n“我以为搬来这里，是把人世关在门外。可她每指出一处败笔，园子就多活一寸。若我签下那张纸，究竟是替自己清静，还是替她抹去姓名？”",
+      "evaluation": {
+        "role_id": "primary_writer",
+        "status": "PASS",
+        "score": 1.0,
+        "checks": [
+          {
+            "name": "non_empty",
+            "passed": true
+          },
+          {
+            "name": "no_placeholder",
+            "passed": true
+          },
+          {
+            "name": "no_provider_submission",
+            "passed": true
+          }
+        ],
+        "failure_class": null,
+        "repair_hint": null
+      }
+    },
+    {
+      "role_id": "storyboarder",
+      "span_id": "8efe7aa7b7714707be51499a2db3497d",
+      "model": "gpt-5.5",
+      "requested_model": "gpt-5.5",
+      "declared_models": [
+        "gpt-5.5",
+        "gpt-5.6-terra"
+      ],
+      "status": "FAILED",
+      "attempts": [
+        {
+          "model": "gpt-5.5",
+          "status": "FAILED",
+          "error": "TimeoutError: timed out"
+        },
+        {
+          "model": "gpt-5.6-terra",
+          "status": "FAILED",
+          "error": "TimeoutError: timed out"
+        }
+      ],
+      "error": "TimeoutError: timed out"
+    },
+    {
+      "role_id": "contrarian_auditor",
+      "span_id": "da73c728be8549eb81f2b344d0e9c4ac",
+      "model": "grok-4.6",
+      "requested_model": "grok-4.6",
+      "declared_models": [
+        "grok-4.6",
+        "gpt-5.5"
+      ],
+      "status": "COMPLETED",
+      "attempts": [
+        {
+          "model": "grok-4.6",
+          "actual_model": "grok-4.6",
+          "status": "PASS",
+          "evaluation": {
+            "role_id": "contrarian_auditor",
+            "status": "PASS",
+            "score": 1.0,
+            "checks": [
+              {
+                "name": "non_empty",
+                "passed": true
+              },
+              {
+                "name": "no_placeholder",
+                "passed": true
+              },
+              {
+                "name": "no_provider_submission",
+                "passed": true
+              }
+            ],
+            "failure_class": null,
+            "repair_hint": null
+          }
+        }
+      ],
+      "route_rewritten": false,
+      "fallback_used": false,
+      "degraded": false,
+      "output": "【断点】\n事实：今夜携酒上门还债、点评未完成的画；黎明口头“备酒则来”；文书未签、园名未定；五件信物之债无物件。\n暗示：懂画、惧除名。\n待补：信物、死因、避世因、文书人是否今夜来。\n不可当既定：画中多出门、以酒换画、败笔=第一债、门外已有脚步。\n\n【挑错】\n连续：开场是上门，不是荷池；未完成画在画室。信物之债被改成看败笔、还债被改成换画，推断写成事实。节拍台词与对白两套，未对齐。独白已当签纸为今夜选项，过长须按镜一句拆。\n镜头：夜至黎明跨池边/画室/回廊，缺准备—发力—惯性与轴线；池边逐件评画难执行。未干画移窗与夏末露水冲突。\n伦理/违规：女魂须保持成年；禁湿身出水、尸相、跳吓、死亡现场；认主禁写成人身占有。禁画中画、悬浮窗、通话/聊天UI。禁锁外貌声线服装。\n文书人抵达只可标分岔，不能写成已发生。移画至窗是候选态度，不是结局。",
+      "evaluation": {
+        "role_id": "contrarian_auditor",
+        "status": "PASS",
+        "score": 1.0,
+        "checks": [
+          {
+            "name": "non_empty",
+            "passed": true
+          },
+          {
+            "name": "no_placeholder",
+            "passed": true
+          },
+          {
+            "name": "no_provider_submission",
+            "passed": true
+          }
+        ],
+        "failure_class": null,
+        "repair_hint": null
+      }
+    },
+    {
+      "role_id": "continuity_editor",
+      "span_id": "6d092a4afca242e586f8bfdc22c95246",
+      "model": "gpt-5.5",
+      "requested_model": "gpt-5.5",
+      "declared_models": [
+        "gpt-5.5",
+        "gpt-5.6-terra"
+      ],
+      "status": "FAILED",
+      "attempts": [
+        {
+          "model": "gpt-5.5",
+          "status": "FAILED",
+          "error": "TimeoutError: timed out"
+        },
+        {
+          "model": "gpt-5.6-terra",
+          "status": "FAILED",
+          "error": "TimeoutError: timed out"
+        }
+      ],
+      "error": "TimeoutError: timed out"
+    },
+    {
+      "role_id": "director_convergence",
+      "span_id": "fba5e028bc224ec884086d85afb66a1c",
+      "model": "gpt-5.6-terra",
+      "requested_model": "gpt-5.6-terra",
+      "declared_models": [
+        "gpt-5.6-terra",
+        "gpt-5.5"
+      ],
+      "status": "FAILED",
+      "attempts": [
+        {
+          "model": "gpt-5.6-terra",
+          "status": "FAILED",
+          "error": "TimeoutError: timed out"
+        },
+        {
+          "model": "gpt-5.5",
+          "status": "FAILED",
+          "error": "TimeoutError: timed out"
+        }
+      ],
+      "error": "TimeoutError: timed out"
+    }
+  ],
+  "feedback_proposals": [
+    {
+      "pattern_id": "role_room_primary_writer_provider_failure",
+      "status": "PROPOSED",
+      "authority": "REVIEW_REQUIRED",
+      "role_id": "primary_writer",
+      "model": "gpt-5.6-terra",
+      "failure_class": "provider_failure",
+      "lesson": "角色 primary_writer 使用 gpt-5.6-terra 时出现 provider_failure；下一轮应先执行同类检查并保留降级记录。",
+      "evidence": {
+        "trace_id": "fed47f62d8144de381565e8b6725958d",
+        "span_id": "4948762125044171b77454332c0664dd"
+      }
+    },
+    {
+      "pattern_id": "role_room_storyboarder_provider_failure",
+      "status": "PROPOSED",
+      "authority": "REVIEW_REQUIRED",
+      "role_id": "storyboarder",
+      "model": "gpt-5.5",
+      "failure_class": "provider_failure",
+      "lesson": "角色 storyboarder 使用 gpt-5.5 时出现 provider_failure；下一轮应先执行同类检查并保留降级记录。",
+      "evidence": {
+        "trace_id": "fed47f62d8144de381565e8b6725958d",
+        "span_id": "8efe7aa7b7714707be51499a2db3497d"
+      }
+    },
+    {
+      "pattern_id": "role_room_storyboarder_provider_failure",
+      "status": "PROPOSED",
+      "authority": "REVIEW_REQUIRED",
+      "role_id": "storyboarder",
+      "model": "gpt-5.6-terra",
+      "failure_class": "provider_failure",
+      "lesson": "角色 storyboarder 使用 gpt-5.6-terra 时出现 provider_failure；下一轮应先执行同类检查并保留降级记录。",
+      "evidence": {
+        "trace_id": "fed47f62d8144de381565e8b6725958d",
+        "span_id": "8efe7aa7b7714707be51499a2db3497d"
+      }
+    },
+    {
+      "pattern_id": "role_room_continuity_editor_provider_failure",
+      "status": "PROPOSED",
+      "authority": "REVIEW_REQUIRED",
+      "role_id": "continuity_editor",
+      "model": "gpt-5.5",
+      "failure_class": "provider_failure",
+      "lesson": "角色 continuity_editor 使用 gpt-5.5 时出现 provider_failure；下一轮应先执行同类检查并保留降级记录。",
+      "evidence": {
+        "trace_id": "fed47f62d8144de381565e8b6725958d",
+        "span_id": "6d092a4afca242e586f8bfdc22c95246"
+      }
+    },
+    {
+      "pattern_id": "role_room_continuity_editor_provider_failure",
+      "status": "PROPOSED",
+      "authority": "REVIEW_REQUIRED",
+      "role_id": "continuity_editor",
+      "model": "gpt-5.6-terra",
+      "failure_class": "provider_failure",
+      "lesson": "角色 continuity_editor 使用 gpt-5.6-terra 时出现 provider_failure；下一轮应先执行同类检查并保留降级记录。",
+      "evidence": {
+        "trace_id": "fed47f62d8144de381565e8b6725958d",
+        "span_id": "6d092a4afca242e586f8bfdc22c95246"
+      }
+    },
+    {
+      "pattern_id": "role_room_director_convergence_provider_failure",
+      "status": "PROPOSED",
+      "authority": "REVIEW_REQUIRED",
+      "role_id": "director_convergence",
+      "model": "gpt-5.6-terra",
+      "failure_class": "provider_failure",
+      "lesson": "角色 director_convergence 使用 gpt-5.6-terra 时出现 provider_failure；下一轮应先执行同类检查并保留降级记录。",
+      "evidence": {
+        "trace_id": "fed47f62d8144de381565e8b6725958d",
+        "span_id": "fba5e028bc224ec884086d85afb66a1c"
+      }
+    },
+    {
+      "pattern_id": "role_room_director_convergence_provider_failure",
+      "status": "PROPOSED",
+      "authority": "REVIEW_REQUIRED",
+      "role_id": "director_convergence",
+      "model": "gpt-5.5",
+      "failure_class": "provider_failure",
+      "lesson": "角色 director_convergence 使用 gpt-5.5 时出现 provider_failure；下一轮应先执行同类检查并保留降级记录。",
+      "evidence": {
+        "trace_id": "fed47f62d8144de381565e8b6725958d",
+        "span_id": "fba5e028bc224ec884086d85afb66a1c"
+      }
+    }
+  ],
+  "production_submission": "NOT_PERFORMED",
+  "created_at": "2026-09-20T11:29:11Z"
+}

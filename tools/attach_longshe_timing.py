@@ -3,6 +3,7 @@ from __future__ import annotations
 import json, math, sys
 from pathlib import Path
 import sys
+from tools.atomic_io import atomic_write_text
 
 sys.stdout.reconfigure(encoding="utf-8")  # Bug #1 fix: prevent UnicodeEncodeError on GBK console
 
@@ -48,8 +49,8 @@ def main() -> int:
             contract['shots'][i]['script']['audio_status'] = 'MEASURED'
         contract['shots'][i]['edit'] = shot['edit'] | {'cut_after_performance': True, 'transition_reason': 'cut after single action and 0.6s recovery hold'}
     plan['render_defaults']['duration_source'] = 'per_shot_tts_measurement'
-    plan_path.write_text(json.dumps(plan, ensure_ascii=False, indent=2), encoding='utf-8')
-    contract_path.write_text(json.dumps(contract, ensure_ascii=False, indent=2), encoding='utf-8')
+    atomic_write_text(plan_path, json.dumps(plan, ensure_ascii=False, indent=2), encoding='utf-8')
+    atomic_write_text(contract_path, json.dumps(contract, ensure_ascii=False, indent=2), encoding='utf-8')
     print(json.dumps({'status':'TIMING_ATTACHED','shots':len(plan['shots'])}, ensure_ascii=False))
     return 0
 if __name__ == '__main__': raise SystemExit(main())

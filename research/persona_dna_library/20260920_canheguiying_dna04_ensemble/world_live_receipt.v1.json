@@ -1,0 +1,4478 @@
+{
+  "schema": "video_kingdom.world_live_receipt.v1",
+  "status": "COMPLETED",
+  "layer": "CREATOR_LIVE",
+  "production_integration": false,
+  "script_locked": false,
+  "agnes": "NOT_PERFORMED",
+  "beat": "NOT_PERFORMED",
+  "shot": "NOT_PERFORMED",
+  "model": "deepseek-v4.1-flash",
+  "gateway": "http://localhost:3000/v1",
+  "trace_id": "bb25ce2952ba429783ff8d550262fc99",
+  "waves_planned": 32,
+  "waves_run": 32,
+  "closed_by_world": false,
+  "elapsed_seconds": 5447.3,
+  "files": {
+    "script": "research/persona_dna_library/20260920_canheguiying_dna04_ensemble/world_live_script.v1.md",
+    "summary": "research/persona_dna_library/20260920_canheguiying_dna04_ensemble/world_live_summary.v1.md",
+    "waves_dir": "research/persona_dna_library/20260920_canheguiying_dna04_ensemble/world_live_waves"
+  },
+  "completed_waves": [
+    {
+      "wave": 1,
+      "status": "COMPLETED",
+      "model": "deepseek-v4.1-flash",
+      "requested_model": "deepseek-v4.1-flash",
+      "finish_reason": "stop",
+      "latency_ms": 53126,
+      "usage": {
+        "completion_tokens": 7424,
+        "prompt_tokens": 5633,
+        "total_tokens": 13057
+      },
+      "file": "research\\persona_dna_library\\20260920_canheguiying_dna04_ensemble\\world_live_waves\\wave_01.md",
+      "closed": false,
+      "scene_headings": [
+        "第11场｜日｜外｜荷园后巷井台",
+        "第12场｜日｜外｜城北郑家巷",
+        "第13场｜日｜外｜荷园前院",
+        "第14场｜夜｜外｜荷园塘东界石边",
+        "第15场｜夜｜外｜荷园后院厨房"
+      ],
+      "attempts": [
+        {
+          "kind": "primary",
+          "finish_reason": "length",
+          "content_len": 2243,
+          "reasoning_len": 8685,
+          "usage": {
+            "completion_tokens": 8189,
+            "prompt_tokens": 11643,
+            "total_tokens": 19832,
+            "prompt_tokens_details": {
+              "cached_tokens": 128
+            }
+          },
+          "latency_ms": 55697,
+          "transport_retries": [],
+          "validation_warnings": []
+        },
+        {
+          "kind": "continue",
+          "finish_reason": "stop",
+          "content_len": 4006,
+          "reasoning_len": 622,
+          "usage": {
+            "completion_tokens": 3562,
+            "prompt_tokens": 3081,
+            "total_tokens": 6643,
+            "prompt_tokens_details": {
+              "cached_tokens": 1152
+            }
+          },
+          "latency_ms": 28448,
+          "transport_retries": [],
+          "validation_warnings": []
+        },
+        {
+          "kind": "structure_repair_1",
+          "finish_reason": "stop",
+          "content_len": 7863,
+          "reasoning_len": 7998,
+          "usage": {
+            "completion_tokens": 11953,
+            "prompt_tokens": 5238,
+            "total_tokens": 17191
+          },
+          "latency_ms": 63038,
+          "transport_retries": [],
+          "validation_warnings": []
+        },
+        {
+          "kind": "structure_repair_2",
+          "finish_reason": "stop",
+          "content_len": 6700,
+          "reasoning_len": 12420,
+          "usage": {
+            "completion_tokens": 14257,
+            "prompt_tokens": 5241,
+            "total_tokens": 19498
+          },
+          "latency_ms": 76352,
+          "transport_retries": [],
+          "validation_warnings": []
+        },
+        {
+          "kind": "structure_repair_3",
+          "finish_reason": "stop",
+          "content_len": 6780,
+          "reasoning_len": 6162,
+          "usage": {
+            "completion_tokens": 10164,
+            "prompt_tokens": 5230,
+            "total_tokens": 15394
+          },
+          "latency_ms": 72102,
+          "transport_retries": [],
+          "validation_warnings": []
+        },
+        {
+          "kind": "forced_structure_fallback",
+          "finish_reason": "stop",
+          "content_len": 4389,
+          "reasoning_len": 5639,
+          "usage": {
+            "completion_tokens": 7424,
+            "prompt_tokens": 5633,
+            "total_tokens": 13057
+          },
+          "latency_ms": 53126,
+          "transport_retries": [],
+          "validation_warnings": []
+        }
+      ],
+      "validation_warnings": []
+    },
+    {
+      "wave": 2,
+      "status": "COMPLETED",
+      "model": "deepseek-v4.1-flash",
+      "requested_model": "deepseek-v4.1-flash",
+      "finish_reason": "stop",
+      "latency_ms": 43921,
+      "usage": {
+        "completion_tokens": 6032,
+        "prompt_tokens": 15020,
+        "total_tokens": 21052
+      },
+      "file": "research\\persona_dna_library\\20260920_canheguiying_dna04_ensemble\\world_live_waves\\wave_02.md",
+      "closed": false,
+      "scene_headings": [
+        "第16场｜日｜外｜城北郑家巷黑漆门前",
+        "第17场｜日｜内｜荷园前院门房",
+        "第18场｜夜｜外｜荷园后堂门外",
+        "第19场｜夜｜外｜荷园塘东界石边",
+        "第20场｜日｜外｜荷园前院"
+      ],
+      "attempts": [
+        {
+          "kind": "primary",
+          "finish_reason": "stop",
+          "content_len": 3414,
+          "reasoning_len": 4170,
+          "usage": {
+            "completion_tokens": 6032,
+            "prompt_tokens": 15020,
+            "total_tokens": 21052
+          },
+          "latency_ms": 43921,
+          "transport_retries": [],
+          "validation_warnings": []
+        }
+      ],
+      "validation_warnings": []
+    },
+    {
+      "wave": 3,
+      "status": "COMPLETED",
+      "model": "deepseek-v4.1-flash",
+      "requested_model": "deepseek-v4.1-flash",
+      "finish_reason": "stop",
+      "latency_ms": 46064,
+      "usage": {
+        "completion_tokens": 6880,
+        "prompt_tokens": 15152,
+        "total_tokens": 22032,
+        "prompt_tokens_details": {
+          "cached_tokens": 14976
+        }
+      },
+      "file": "research\\persona_dna_library\\20260920_canheguiying_dna04_ensemble\\world_live_waves\\wave_03.md",
+      "closed": false,
+      "scene_headings": [
+        "第21场｜夜｜外｜荷园前院门房",
+        "第22场｜日｜外｜清江浦闸口",
+        "第23场｜夜｜外｜荷园塘东界石边",
+        "第24场｜日｜外｜清江浦·窑湾浮桥西岸",
+        "第25场｜夜｜外｜荷园后堂门外"
+      ],
+      "attempts": [
+        {
+          "kind": "primary",
+          "finish_reason": "length",
+          "content_len": 0,
+          "reasoning_len": 20300,
+          "usage": {
+            "completion_tokens": 8192,
+            "prompt_tokens": 15100,
+            "total_tokens": 23292,
+            "prompt_tokens_details": {
+              "cached_tokens": 10112
+            }
+          },
+          "latency_ms": 54816,
+          "transport_retries": [],
+          "validation_warnings": []
+        },
+        {
+          "kind": "force_body_1",
+          "finish_reason": "length",
+          "content_len": 0,
+          "reasoning_len": 11013,
+          "usage": {
+            "completion_tokens": 8192,
+            "prompt_tokens": 15152,
+            "total_tokens": 23344,
+            "prompt_tokens_details": {
+              "cached_tokens": 14976
+            }
+          },
+          "latency_ms": 54654,
+          "transport_retries": [],
+          "validation_warnings": []
+        },
+        {
+          "kind": "force_body_2",
+          "finish_reason": "stop",
+          "content_len": 3856,
+          "reasoning_len": 4775,
+          "usage": {
+            "completion_tokens": 6880,
+            "prompt_tokens": 15152,
+            "total_tokens": 22032,
+            "prompt_tokens_details": {
+              "cached_tokens": 14976
+            }
+          },
+          "latency_ms": 46064,
+          "transport_retries": [],
+          "validation_warnings": []
+        }
+      ],
+      "validation_warnings": []
+    },
+    {
+      "wave": 4,
+      "status": "COMPLETED",
+      "model": "deepseek-v4.1-flash",
+      "requested_model": "deepseek-v4.1-flash",
+      "finish_reason": "stop",
+      "latency_ms": 52517,
+      "usage": {
+        "completion_tokens": 6754,
+        "prompt_tokens": 15407,
+        "total_tokens": 22161,
+        "prompt_tokens_details": {
+          "cached_tokens": 15232
+        }
+      },
+      "file": "research\\persona_dna_library\\20260920_canheguiying_dna04_ensemble\\world_live_waves\\wave_04.md",
+      "closed": false,
+      "scene_headings": [
+        "第26场｜日｜外｜清江浦·窑湾西岸",
+        "第27场｜日｜外｜荷园塘东三丈界外",
+        "第28场｜夜｜外｜城北·郑家巷黑漆门前",
+        "第29场｜日｜外｜荷园后堂廊下",
+        "第30场｜夜｜外｜荷园塘东界石边"
+      ],
+      "attempts": [
+        {
+          "kind": "primary",
+          "finish_reason": "stop",
+          "content_len": 3497,
+          "reasoning_len": 5554,
+          "usage": {
+            "completion_tokens": 6754,
+            "prompt_tokens": 15407,
+            "total_tokens": 22161,
+            "prompt_tokens_details": {
+              "cached_tokens": 15232
+            }
+          },
+          "latency_ms": 52517,
+          "transport_retries": [],
+          "validation_warnings": []
+        }
+      ],
+      "validation_warnings": []
+    },
+    {
+      "wave": 5,
+      "status": "COMPLETED",
+      "model": "deepseek-v4.1-flash",
+      "requested_model": "deepseek-v4.1-flash",
+      "finish_reason": "stop",
+      "latency_ms": 31837,
+      "usage": {
+        "completion_tokens": 4264,
+        "prompt_tokens": 3657,
+        "total_tokens": 7921,
+        "prompt_tokens_details": {
+          "cached_tokens": 1152
+        }
+      },
+      "file": "research\\persona_dna_library\\20260920_canheguiying_dna04_ensemble\\world_live_waves\\wave_05.md",
+      "closed": false,
+      "scene_headings": [
+        "第31场｜日｜内｜县衙户房后间",
+        "第32场｜日｜外｜仓房前院",
+        "第33场｜夜｜外｜荷园前院门房",
+        "第34场｜夜｜内｜城北·郑家黑漆门内院屋",
+        "第35场｜夜｜外｜荷园塘东界石边",
+        "第36场｜日｜外｜城南水月庵",
+        "第37场｜日｜内｜县衙架阁库",
+        "第38场｜夜｜内｜荷园·西厢外廊",
+        "第39场｜夜｜外｜荷园塘东界石边"
+      ],
+      "attempts": [
+        {
+          "kind": "primary",
+          "finish_reason": "length",
+          "content_len": 2833,
+          "reasoning_len": 7905,
+          "usage": {
+            "completion_tokens": 8192,
+            "prompt_tokens": 15033,
+            "total_tokens": 23225,
+            "prompt_tokens_details": {
+              "cached_tokens": 10112
+            }
+          },
+          "latency_ms": 57456,
+          "transport_retries": [],
+          "validation_warnings": []
+        },
+        {
+          "kind": "continue",
+          "finish_reason": "stop",
+          "content_len": 3766,
+          "reasoning_len": 1704,
+          "usage": {
+            "completion_tokens": 4264,
+            "prompt_tokens": 3657,
+            "total_tokens": 7921,
+            "prompt_tokens_details": {
+              "cached_tokens": 1152
+            }
+          },
+          "latency_ms": 31837,
+          "transport_retries": [],
+          "validation_warnings": []
+        }
+      ],
+      "validation_warnings": [
+        "MISSING_RELATION",
+        "MISSING_ONE_LINE"
+      ]
+    },
+    {
+      "wave": 6,
+      "status": "COMPLETED",
+      "model": "deepseek-v4.1-flash",
+      "requested_model": "deepseek-v4.1-flash",
+      "finish_reason": "stop",
+      "latency_ms": 31410,
+      "usage": {
+        "completion_tokens": 3837,
+        "prompt_tokens": 19939,
+        "total_tokens": 23776,
+        "prompt_tokens_details": {
+          "cached_tokens": 10112
+        }
+      },
+      "file": "research\\persona_dna_library\\20260920_canheguiying_dna04_ensemble\\world_live_waves\\wave_06.md",
+      "closed": false,
+      "scene_headings": [
+        "第40场｜日｜外｜城北·郑家黑漆门前",
+        "第41场｜日｜外｜城北·郑家巷口炭铺",
+        "第42场｜日｜外｜南城·绣房前院",
+        "第43场｜夜｜内｜荷园·西厢",
+        "第44场｜夜｜外｜荷园后堂廊下",
+        "第45场｜日｜外｜城西·连氏院门前"
+      ],
+      "attempts": [
+        {
+          "kind": "primary",
+          "finish_reason": "stop",
+          "content_len": 4934,
+          "reasoning_len": 0,
+          "usage": {
+            "completion_tokens": 3837,
+            "prompt_tokens": 19939,
+            "total_tokens": 23776,
+            "prompt_tokens_details": {
+              "cached_tokens": 10112
+            }
+          },
+          "latency_ms": 31410,
+          "transport_retries": [],
+          "validation_warnings": []
+        }
+      ],
+      "validation_warnings": []
+    },
+    {
+      "wave": 7,
+      "status": "COMPLETED",
+      "model": "deepseek-v4.1-flash",
+      "requested_model": "deepseek-v4.1-flash",
+      "finish_reason": "stop",
+      "latency_ms": 51199,
+      "usage": {
+        "completion_tokens": 7228,
+        "prompt_tokens": 6130,
+        "total_tokens": 13358,
+        "prompt_tokens_details": {
+          "cached_tokens": 1152
+        }
+      },
+      "file": "research\\persona_dna_library\\20260920_canheguiying_dna04_ensemble\\world_live_waves\\wave_07.md",
+      "closed": false,
+      "scene_headings": [
+        "第46场｜日｜内｜户房·后架",
+        "第47场｜日｜外｜水月庵·山门内",
+        "第48场｜日｜外｜荷园·塘东界石",
+        "第49场｜日｜内｜城西·连氏院中",
+        "第50场｜夜｜内｜荷园·西厢"
+      ],
+      "attempts": [
+        {
+          "kind": "primary",
+          "finish_reason": "length",
+          "content_len": 3553,
+          "reasoning_len": 12561,
+          "usage": {
+            "completion_tokens": 8192,
+            "prompt_tokens": 18516,
+            "total_tokens": 26708,
+            "prompt_tokens_details": {
+              "cached_tokens": 10112
+            }
+          },
+          "latency_ms": 60787,
+          "transport_retries": [],
+          "validation_warnings": []
+        },
+        {
+          "kind": "continue",
+          "finish_reason": "stop",
+          "content_len": 3395,
+          "reasoning_len": 697,
+          "usage": {
+            "completion_tokens": 3163,
+            "prompt_tokens": 4067,
+            "total_tokens": 7230,
+            "prompt_tokens_details": {
+              "cached_tokens": 1152
+            }
+          },
+          "latency_ms": 26431,
+          "transport_retries": [],
+          "validation_warnings": []
+        },
+        {
+          "kind": "structure_repair_1",
+          "finish_reason": "length",
+          "content_len": 633,
+          "reasoning_len": 10375,
+          "usage": {
+            "completion_tokens": 8191,
+            "prompt_tokens": 5275,
+            "total_tokens": 13466,
+            "prompt_tokens_details": {
+              "cached_tokens": 1152
+            }
+          },
+          "latency_ms": 49125,
+          "transport_retries": [],
+          "validation_warnings": []
+        },
+        {
+          "kind": "continue",
+          "finish_reason": "stop",
+          "content_len": 2923,
+          "reasoning_len": 705,
+          "usage": {
+            "completion_tokens": 2788,
+            "prompt_tokens": 1841,
+            "total_tokens": 4629,
+            "prompt_tokens_details": {
+              "cached_tokens": 1152
+            }
+          },
+          "latency_ms": 25181,
+          "transport_retries": [],
+          "validation_warnings": []
+        },
+        {
+          "kind": "structure_repair_2",
+          "finish_reason": "length",
+          "content_len": 2135,
+          "reasoning_len": 8723,
+          "usage": {
+            "completion_tokens": 8191,
+            "prompt_tokens": 4152,
+            "total_tokens": 12343,
+            "prompt_tokens_details": {
+              "cached_tokens": 1152
+            }
+          },
+          "latency_ms": 47933,
+          "transport_retries": [],
+          "validation_warnings": []
+        },
+        {
+          "kind": "continue",
+          "finish_reason": "stop",
+          "content_len": 4448,
+          "reasoning_len": 3786,
+          "usage": {
+            "completion_tokens": 6368,
+            "prompt_tokens": 3036,
+            "total_tokens": 9404,
+            "prompt_tokens_details": {
+              "cached_tokens": 1152
+            }
+          },
+          "latency_ms": 45719,
+          "transport_retries": [],
+          "validation_warnings": []
+        },
+        {
+          "kind": "structure_repair_3",
+          "finish_reason": "length",
+          "content_len": 1462,
+          "reasoning_len": 9356,
+          "usage": {
+            "completion_tokens": 8192,
+            "prompt_tokens": 5240,
+            "total_tokens": 13432,
+            "prompt_tokens_details": {
+              "cached_tokens": 1152
+            }
+          },
+          "latency_ms": 39811,
+          "transport_retries": [],
+          "validation_warnings": []
+        },
+        {
+          "kind": "continue",
+          "finish_reason": "stop",
+          "content_len": 5417,
+          "reasoning_len": 4178,
+          "usage": {
+            "completion_tokens": 6810,
+            "prompt_tokens": 2471,
+            "total_tokens": 9281,
+            "prompt_tokens_details": {
+              "cached_tokens": 1152
+            }
+          },
+          "latency_ms": 50062,
+          "transport_retries": [],
+          "validation_warnings": []
+        },
+        {
+          "kind": "forced_structure_fallback",
+          "finish_reason": "stop",
+          "content_len": 5466,
+          "reasoning_len": 4087,
+          "usage": {
+            "completion_tokens": 7228,
+            "prompt_tokens": 6130,
+            "total_tokens": 13358,
+            "prompt_tokens_details": {
+              "cached_tokens": 1152
+            }
+          },
+          "latency_ms": 51199,
+          "transport_retries": [],
+          "validation_warnings": []
+        }
+      ],
+      "validation_warnings": []
+    },
+    {
+      "wave": 8,
+      "status": "COMPLETED",
+      "model": "deepseek-v4.1-flash",
+      "requested_model": "deepseek-v4.1-flash",
+      "finish_reason": "stop",
+      "latency_ms": 54591,
+      "usage": {
+        "completion_tokens": 7259,
+        "prompt_tokens": 6171,
+        "total_tokens": 13430,
+        "prompt_tokens_details": {
+          "cached_tokens": 1152
+        }
+      },
+      "file": "research\\persona_dna_library\\20260920_canheguiying_dna04_ensemble\\world_live_waves\\wave_08.md",
+      "closed": false,
+      "scene_headings": [
+        "第51场｜日｜外｜沈宅后巷·侧门",
+        "第52场｜日｜外｜南城绣房巷·巷口茶摊",
+        "第53场｜夜｜内｜荷园·后堂",
+        "第54场｜日｜外｜荷园·塘东界石",
+        "第55场｜夜｜内｜荷园·西厢"
+      ],
+      "attempts": [
+        {
+          "kind": "primary",
+          "finish_reason": "length",
+          "content_len": 2772,
+          "reasoning_len": 7886,
+          "usage": {
+            "completion_tokens": 8192,
+            "prompt_tokens": 16651,
+            "total_tokens": 24843,
+            "prompt_tokens_details": {
+              "cached_tokens": 10112
+            }
+          },
+          "latency_ms": 54523,
+          "transport_retries": [],
+          "validation_warnings": []
+        },
+        {
+          "kind": "continue",
+          "finish_reason": "stop",
+          "content_len": 4495,
+          "reasoning_len": 1993,
+          "usage": {
+            "completion_tokens": 4944,
+            "prompt_tokens": 3459,
+            "total_tokens": 8403,
+            "prompt_tokens_details": {
+              "cached_tokens": 1152
+            }
+          },
+          "latency_ms": 39916,
+          "transport_retries": [],
+          "validation_warnings": []
+        },
+        {
+          "kind": "structure_repair_1",
+          "finish_reason": "length",
+          "content_len": 0,
+          "reasoning_len": 10250,
+          "usage": {
+            "completion_tokens": 8192,
+            "prompt_tokens": 5204,
+            "total_tokens": 13396,
+            "prompt_tokens_details": {
+              "cached_tokens": 1152
+            }
+          },
+          "latency_ms": 56274,
+          "transport_retries": [],
+          "validation_warnings": []
+        },
+        {
+          "kind": "structure_repair_2",
+          "finish_reason": "stop",
+          "content_len": 6690,
+          "reasoning_len": 2331,
+          "usage": {
+            "completion_tokens": 6635,
+            "prompt_tokens": 1414,
+            "total_tokens": 8049,
+            "prompt_tokens_details": {
+              "cached_tokens": 1152
+            }
+          },
+          "latency_ms": 50696,
+          "transport_retries": [],
+          "validation_warnings": []
+        },
+        {
+          "kind": "structure_repair_3",
+          "finish_reason": "length",
+          "content_len": 513,
+          "reasoning_len": 10912,
+          "usage": {
+            "completion_tokens": 8192,
+            "prompt_tokens": 4984,
+            "total_tokens": 13176,
+            "prompt_tokens_details": {
+              "cached_tokens": 1152
+            }
+          },
+          "latency_ms": 47266,
+          "transport_retries": [],
+          "validation_warnings": []
+        },
+        {
+          "kind": "continue",
+          "finish_reason": "stop",
+          "content_len": 3332,
+          "reasoning_len": 1049,
+          "usage": {
+            "completion_tokens": 3207,
+            "prompt_tokens": 1733,
+            "total_tokens": 4940,
+            "prompt_tokens_details": {
+              "cached_tokens": 1152
+            }
+          },
+          "latency_ms": 27527,
+          "transport_retries": [],
+          "validation_warnings": []
+        },
+        {
+          "kind": "forced_structure_fallback",
+          "finish_reason": "stop",
+          "content_len": 6803,
+          "reasoning_len": 2791,
+          "usage": {
+            "completion_tokens": 7259,
+            "prompt_tokens": 6171,
+            "total_tokens": 13430,
+            "prompt_tokens_details": {
+              "cached_tokens": 1152
+            }
+          },
+          "latency_ms": 54591,
+          "transport_retries": [],
+          "validation_warnings": []
+        }
+      ],
+      "validation_warnings": []
+    },
+    {
+      "wave": 9,
+      "status": "COMPLETED",
+      "model": "deepseek-v4.1-flash",
+      "requested_model": "deepseek-v4.1-flash",
+      "finish_reason": "stop",
+      "latency_ms": 47288,
+      "usage": {
+        "completion_tokens": 6118,
+        "prompt_tokens": 17937,
+        "total_tokens": 24055,
+        "prompt_tokens_details": {
+          "cached_tokens": 10112
+        }
+      },
+      "file": "research\\persona_dna_library\\20260920_canheguiying_dna04_ensemble\\world_live_waves\\wave_09.md",
+      "closed": false,
+      "scene_headings": [
+        "第56场｜日｜外｜荷园·塘东界石",
+        "第57场｜日｜外｜荷园·前院门房",
+        "第58场｜夜｜内｜荷园·西厢",
+        "第59场｜日｜外｜南城绣房巷·秦嫂院外",
+        "第60场｜夜｜内｜荷园·西厢"
+      ],
+      "attempts": [
+        {
+          "kind": "primary",
+          "finish_reason": "stop",
+          "content_len": 5268,
+          "reasoning_len": 2977,
+          "usage": {
+            "completion_tokens": 6118,
+            "prompt_tokens": 17937,
+            "total_tokens": 24055,
+            "prompt_tokens_details": {
+              "cached_tokens": 10112
+            }
+          },
+          "latency_ms": 47288,
+          "transport_retries": [],
+          "validation_warnings": []
+        }
+      ],
+      "validation_warnings": []
+    },
+    {
+      "wave": 10,
+      "status": "COMPLETED",
+      "model": "deepseek-v4.1-flash",
+      "requested_model": "deepseek-v4.1-flash",
+      "finish_reason": "stop",
+      "latency_ms": 50328,
+      "usage": {
+        "completion_tokens": 6465,
+        "prompt_tokens": 16718,
+        "total_tokens": 23183,
+        "prompt_tokens_details": {
+          "cached_tokens": 16512
+        }
+      },
+      "file": "research\\persona_dna_library\\20260920_canheguiying_dna04_ensemble\\world_live_waves\\wave_10.md",
+      "closed": false,
+      "scene_headings": [
+        "第61场｜日｜内｜荷园·西厢",
+        "第62场｜日｜外｜荷园·后堂廊下",
+        "第63场｜日｜外｜荷园·塘东界石",
+        "第64场｜日｜内｜县衙户房·后间",
+        "第65场｜夜｜内｜荷园·西厢"
+      ],
+      "attempts": [
+        {
+          "kind": "primary",
+          "finish_reason": "stop",
+          "content_len": 6351,
+          "reasoning_len": 1867,
+          "usage": {
+            "completion_tokens": 6465,
+            "prompt_tokens": 16718,
+            "total_tokens": 23183,
+            "prompt_tokens_details": {
+              "cached_tokens": 16512
+            }
+          },
+          "latency_ms": 50328,
+          "transport_retries": [],
+          "validation_warnings": []
+        }
+      ],
+      "validation_warnings": []
+    },
+    {
+      "wave": 11,
+      "status": "COMPLETED",
+      "model": "deepseek-v4.1-flash",
+      "requested_model": "deepseek-v4.1-flash",
+      "finish_reason": "stop",
+      "latency_ms": 53882,
+      "usage": {
+        "completion_tokens": 7799,
+        "prompt_tokens": 6257,
+        "total_tokens": 14056
+      },
+      "file": "research\\persona_dna_library\\20260920_canheguiying_dna04_ensemble\\world_live_waves\\wave_11.md",
+      "closed": false,
+      "scene_headings": [
+        "第66场｜日｜内｜县衙户房·前堂",
+        "第67场｜夜｜外｜荷园·后堂廊下",
+        "第68场｜日｜外｜荷园·塘东界石",
+        "第69场｜夜｜内｜荷园·前院倒座房",
+        "第70场｜日｜外｜荷园·塘东界石"
+      ],
+      "attempts": [
+        {
+          "kind": "primary",
+          "finish_reason": "length",
+          "content_len": 5761,
+          "reasoning_len": 5293,
+          "usage": {
+            "completion_tokens": 8191,
+            "prompt_tokens": 17597,
+            "total_tokens": 25788,
+            "prompt_tokens_details": {
+              "cached_tokens": 10112
+            }
+          },
+          "latency_ms": 59855,
+          "transport_retries": [],
+          "validation_warnings": []
+        },
+        {
+          "kind": "continue",
+          "finish_reason": "stop",
+          "content_len": 4660,
+          "reasoning_len": 4938,
+          "usage": {
+            "completion_tokens": 6953,
+            "prompt_tokens": 5700,
+            "total_tokens": 12653,
+            "prompt_tokens_details": {
+              "cached_tokens": 1152
+            }
+          },
+          "latency_ms": 54732,
+          "transport_retries": [],
+          "validation_warnings": []
+        },
+        {
+          "kind": "structure_repair_1",
+          "finish_reason": "length",
+          "content_len": 0,
+          "reasoning_len": 11080,
+          "usage": {
+            "completion_tokens": 8192,
+            "prompt_tokens": 5131,
+            "total_tokens": 13323,
+            "prompt_tokens_details": {
+              "cached_tokens": 1152
+            }
+          },
+          "latency_ms": 49900,
+          "transport_retries": [],
+          "validation_warnings": []
+        },
+        {
+          "kind": "structure_repair_2",
+          "finish_reason": "stop",
+          "content_len": 3282,
+          "reasoning_len": 4447,
+          "usage": {
+            "completion_tokens": 5476,
+            "prompt_tokens": 1414,
+            "total_tokens": 6890,
+            "prompt_tokens_details": {
+              "cached_tokens": 1152
+            }
+          },
+          "latency_ms": 35079,
+          "transport_retries": [],
+          "validation_warnings": []
+        },
+        {
+          "kind": "structure_repair_3",
+          "finish_reason": "stop",
+          "content_len": 3379,
+          "reasoning_len": 1176,
+          "usage": {
+            "completion_tokens": 3214,
+            "prompt_tokens": 3693,
+            "total_tokens": 6907
+          },
+          "latency_ms": 17299,
+          "transport_retries": [],
+          "validation_warnings": []
+        },
+        {
+          "kind": "forced_structure_fallback",
+          "finish_reason": "stop",
+          "content_len": 6496,
+          "reasoning_len": 3212,
+          "usage": {
+            "completion_tokens": 7799,
+            "prompt_tokens": 6257,
+            "total_tokens": 14056
+          },
+          "latency_ms": 53882,
+          "transport_retries": [],
+          "validation_warnings": []
+        }
+      ],
+      "validation_warnings": []
+    },
+    {
+      "wave": 12,
+      "status": "COMPLETED",
+      "model": "deepseek-v4.1-flash",
+      "requested_model": "deepseek-v4.1-flash",
+      "finish_reason": "stop",
+      "latency_ms": 47303,
+      "usage": {
+        "completion_tokens": 6857,
+        "prompt_tokens": 18250,
+        "total_tokens": 25107,
+        "prompt_tokens_details": {
+          "cached_tokens": 18048
+        }
+      },
+      "file": "research\\persona_dna_library\\20260920_canheguiying_dna04_ensemble\\world_live_waves\\wave_12.md",
+      "closed": false,
+      "scene_headings": [
+        "第71场｜日｜内｜县衙户房·后间",
+        "第72场｜日｜外｜荷园·塘东界石",
+        "第73场｜夜｜内｜荷园·后堂旧账房",
+        "第74场｜日｜内｜沈家老宅·正房外间",
+        "第75场｜日｜外｜荷园·前院门房"
+      ],
+      "attempts": [
+        {
+          "kind": "primary",
+          "finish_reason": "length",
+          "content_len": 0,
+          "reasoning_len": 11322,
+          "usage": {
+            "completion_tokens": 8191,
+            "prompt_tokens": 18198,
+            "total_tokens": 26389,
+            "prompt_tokens_details": {
+              "cached_tokens": 10112
+            }
+          },
+          "latency_ms": 58399,
+          "transport_retries": [],
+          "validation_warnings": []
+        },
+        {
+          "kind": "force_body_1",
+          "finish_reason": "stop",
+          "content_len": 4395,
+          "reasoning_len": 4136,
+          "usage": {
+            "completion_tokens": 6857,
+            "prompt_tokens": 18250,
+            "total_tokens": 25107,
+            "prompt_tokens_details": {
+              "cached_tokens": 18048
+            }
+          },
+          "latency_ms": 47303,
+          "transport_retries": [],
+          "validation_warnings": []
+        }
+      ],
+      "validation_warnings": []
+    },
+    {
+      "wave": 13,
+      "status": "COMPLETED",
+      "model": "deepseek-v4.1-flash",
+      "requested_model": "deepseek-v4.1-flash",
+      "finish_reason": "stop",
+      "latency_ms": 48968,
+      "usage": {
+        "completion_tokens": 7698,
+        "prompt_tokens": 16514,
+        "total_tokens": 24212,
+        "prompt_tokens_details": {
+          "cached_tokens": 10112
+        }
+      },
+      "file": "research\\persona_dna_library\\20260920_canheguiying_dna04_ensemble\\world_live_waves\\wave_13.md",
+      "closed": false,
+      "scene_headings": [
+        "第76场｜日｜内｜荷园·前院门房",
+        "第77场｜日｜内｜沈家老宅·二房偏院",
+        "第78场｜夜｜内｜荷园·后堂廊下",
+        "第79场｜日｜外｜荷园·塘东界石",
+        "第80场｜夜｜外｜荷园·塘东界石"
+      ],
+      "attempts": [
+        {
+          "kind": "primary",
+          "finish_reason": "stop",
+          "content_len": 3528,
+          "reasoning_len": 6421,
+          "usage": {
+            "completion_tokens": 7698,
+            "prompt_tokens": 16514,
+            "total_tokens": 24212,
+            "prompt_tokens_details": {
+              "cached_tokens": 10112
+            }
+          },
+          "latency_ms": 48968,
+          "transport_retries": [],
+          "validation_warnings": []
+        }
+      ],
+      "validation_warnings": []
+    },
+    {
+      "wave": 14,
+      "status": "COMPLETED",
+      "model": "deepseek-v4.1-flash",
+      "requested_model": "deepseek-v4.1-flash",
+      "finish_reason": "stop",
+      "latency_ms": 36212,
+      "usage": {
+        "completion_tokens": 3284,
+        "prompt_tokens": 15334,
+        "total_tokens": 18618,
+        "prompt_tokens_details": {
+          "cached_tokens": 10112
+        }
+      },
+      "file": "research\\persona_dna_library\\20260920_canheguiying_dna04_ensemble\\world_live_waves\\wave_14.md",
+      "closed": false,
+      "scene_headings": [
+        "第81场｜日｜外｜荷园·前院门房",
+        "第82场｜日｜内｜县衙·户房后间",
+        "第83场｜夜｜内｜荷园·听荷轩",
+        "第84场｜日｜外｜荷园·塘东界石",
+        "第85场｜夜｜内｜荷园·后堂廊下"
+      ],
+      "attempts": [
+        {
+          "kind": "primary",
+          "finish_reason": "stop",
+          "content_len": 4097,
+          "reasoning_len": 0,
+          "usage": {
+            "completion_tokens": 3284,
+            "prompt_tokens": 15334,
+            "total_tokens": 18618,
+            "prompt_tokens_details": {
+              "cached_tokens": 10112
+            }
+          },
+          "latency_ms": 36212,
+          "transport_retries": [],
+          "validation_warnings": []
+        }
+      ],
+      "validation_warnings": []
+    },
+    {
+      "wave": 15,
+      "status": "COMPLETED",
+      "model": "deepseek-v4.1-flash",
+      "requested_model": "deepseek-v4.1-flash",
+      "finish_reason": "stop",
+      "latency_ms": 49072,
+      "usage": {
+        "completion_tokens": 6603,
+        "prompt_tokens": 15732,
+        "total_tokens": 22335,
+        "prompt_tokens_details": {
+          "cached_tokens": 10112
+        }
+      },
+      "file": "research\\persona_dna_library\\20260920_canheguiying_dna04_ensemble\\world_live_waves\\wave_15.md",
+      "closed": false,
+      "scene_headings": [
+        "第86场｜日｜外｜城北·郑家巷黑漆门外",
+        "第87场｜日｜内｜县衙·户房后间",
+        "第88场｜夜｜外｜荷园·西墙外至后堂廊下",
+        "第89场｜日｜内｜沈家老宅·后院佛堂外间",
+        "第90场｜夜｜内｜荷园·听荷轩"
+      ],
+      "attempts": [
+        {
+          "kind": "primary",
+          "finish_reason": "stop",
+          "content_len": 4342,
+          "reasoning_len": 4020,
+          "usage": {
+            "completion_tokens": 6603,
+            "prompt_tokens": 15732,
+            "total_tokens": 22335,
+            "prompt_tokens_details": {
+              "cached_tokens": 10112
+            }
+          },
+          "latency_ms": 49072,
+          "transport_retries": [],
+          "validation_warnings": []
+        }
+      ],
+      "validation_warnings": []
+    },
+    {
+      "wave": 16,
+      "status": "COMPLETED",
+      "model": "deepseek-v4.1-flash",
+      "requested_model": "deepseek-v4.1-flash",
+      "finish_reason": "stop",
+      "latency_ms": 39258,
+      "usage": {
+        "completion_tokens": 5240,
+        "prompt_tokens": 16019,
+        "total_tokens": 21259,
+        "prompt_tokens_details": {
+          "cached_tokens": 10112
+        }
+      },
+      "file": "research\\persona_dna_library\\20260920_canheguiying_dna04_ensemble\\world_live_waves\\wave_16.md",
+      "closed": false,
+      "scene_headings": [
+        "第91场｜日｜外｜荷园·前院门房",
+        "第92场｜日｜外｜城北·小庙山门外",
+        "第93场｜日｜内｜县衙·户房后间",
+        "第94场｜日｜外｜荷园·门房至后堂廊下",
+        "第95场｜夜｜内｜荷园·听荷轩"
+      ],
+      "attempts": [
+        {
+          "kind": "primary",
+          "finish_reason": "stop",
+          "content_len": 4583,
+          "reasoning_len": 1968,
+          "usage": {
+            "completion_tokens": 5240,
+            "prompt_tokens": 16019,
+            "total_tokens": 21259,
+            "prompt_tokens_details": {
+              "cached_tokens": 10112
+            }
+          },
+          "latency_ms": 39258,
+          "transport_retries": [],
+          "validation_warnings": []
+        }
+      ],
+      "validation_warnings": []
+    },
+    {
+      "wave": 17,
+      "status": "COMPLETED",
+      "model": "deepseek-v4.1-flash",
+      "requested_model": "deepseek-v4.1-flash",
+      "finish_reason": "stop",
+      "latency_ms": 64885,
+      "usage": {
+        "completion_tokens": 9971,
+        "prompt_tokens": 16102,
+        "total_tokens": 26073
+      },
+      "file": "research\\persona_dna_library\\20260920_canheguiying_dna04_ensemble\\world_live_waves\\wave_17.md",
+      "closed": false,
+      "scene_headings": [
+        "第96场｜日｜外｜沈家老宅·后巷侧门",
+        "第97场｜日｜外｜城南·水码头",
+        "第98场｜日｜外｜荷园·前院正门",
+        "第99场｜夜｜外｜城北·郑家巷黑漆门外",
+        "第100场｜夜｜外｜荷园·后堂廊下"
+      ],
+      "attempts": [
+        {
+          "kind": "primary",
+          "finish_reason": "stop",
+          "content_len": 5052,
+          "reasoning_len": 13965,
+          "usage": {
+            "completion_tokens": 9971,
+            "prompt_tokens": 16102,
+            "total_tokens": 26073
+          },
+          "latency_ms": 64885,
+          "transport_retries": [],
+          "validation_warnings": []
+        }
+      ],
+      "validation_warnings": []
+    },
+    {
+      "wave": 18,
+      "status": "COMPLETED",
+      "model": "deepseek-v4.1-flash",
+      "requested_model": "deepseek-v4.1-flash",
+      "finish_reason": "stop",
+      "latency_ms": 48504,
+      "usage": {
+        "completion_tokens": 6703,
+        "prompt_tokens": 16259,
+        "total_tokens": 22962,
+        "prompt_tokens_details": {
+          "cached_tokens": 10112
+        }
+      },
+      "file": "research\\persona_dna_library\\20260920_canheguiying_dna04_ensemble\\world_live_waves\\wave_18.md",
+      "closed": false,
+      "scene_headings": [
+        "第101场｜日｜内｜城北·悦来客栈",
+        "第102场｜日｜外｜沈家老宅·正门外",
+        "第103场｜夜｜内｜荷园·听荷轩",
+        "第104场｜日｜外｜城北·小庙山门外",
+        "第105场｜夜｜外｜荷园·塘东界石边"
+      ],
+      "attempts": [
+        {
+          "kind": "primary",
+          "finish_reason": "stop",
+          "content_len": 4837,
+          "reasoning_len": 3880,
+          "usage": {
+            "completion_tokens": 6703,
+            "prompt_tokens": 16259,
+            "total_tokens": 22962,
+            "prompt_tokens_details": {
+              "cached_tokens": 10112
+            }
+          },
+          "latency_ms": 48504,
+          "transport_retries": [],
+          "validation_warnings": []
+        }
+      ],
+      "validation_warnings": []
+    },
+    {
+      "wave": 19,
+      "status": "COMPLETED",
+      "model": "deepseek-v4.1-flash",
+      "requested_model": "deepseek-v4.1-flash",
+      "finish_reason": "stop",
+      "latency_ms": 43209,
+      "usage": {
+        "completion_tokens": 6358,
+        "prompt_tokens": 16170,
+        "total_tokens": 22528,
+        "prompt_tokens_details": {
+          "cached_tokens": 16000
+        }
+      },
+      "file": "research\\persona_dna_library\\20260920_canheguiying_dna04_ensemble\\world_live_waves\\wave_19.md",
+      "closed": false,
+      "scene_headings": [
+        "第106场｜日｜外｜城北·聚文斋",
+        "第107场｜夜｜外｜荷园·后堂廊下",
+        "第108场｜日｜外｜城北·郑家巷黑漆门外",
+        "第109场｜夜｜外｜荷园·塘东界石边",
+        "第110场｜日｜内｜荷园·听荷轩"
+      ],
+      "attempts": [
+        {
+          "kind": "primary",
+          "finish_reason": "stop",
+          "content_len": 4583,
+          "reasoning_len": 3684,
+          "usage": {
+            "completion_tokens": 6358,
+            "prompt_tokens": 16170,
+            "total_tokens": 22528,
+            "prompt_tokens_details": {
+              "cached_tokens": 16000
+            }
+          },
+          "latency_ms": 43209,
+          "transport_retries": [],
+          "validation_warnings": []
+        }
+      ],
+      "validation_warnings": []
+    },
+    {
+      "wave": 20,
+      "status": "COMPLETED",
+      "model": "deepseek-v4.1-flash",
+      "requested_model": "deepseek-v4.1-flash",
+      "finish_reason": "stop",
+      "latency_ms": 37093,
+      "usage": {
+        "completion_tokens": 5930,
+        "prompt_tokens": 3919,
+        "total_tokens": 9849,
+        "prompt_tokens_details": {
+          "cached_tokens": 1280
+        }
+      },
+      "file": "research\\persona_dna_library\\20260920_canheguiying_dna04_ensemble\\world_live_waves\\wave_20.md",
+      "closed": false,
+      "scene_headings": [
+        "第111场｜日｜外｜沈家老宅后巷",
+        "第112场｜夜｜外｜沈家老宅后巷·佛堂西窗外",
+        "第113场｜日｜外｜城北·郑家巷口炭铺",
+        "第114场｜夜｜内｜荷园·听荷轩",
+        "第115场｜夜｜内｜荷园·后院厨房",
+        "第116场｜日｜内｜荷园·前厅",
+        "第117场｜夜｜外｜城北·郑家巷",
+        "第118场｜夜｜内｜荷园·听荷轩"
+      ],
+      "attempts": [
+        {
+          "kind": "primary",
+          "finish_reason": "length",
+          "content_len": 3176,
+          "reasoning_len": 7212,
+          "usage": {
+            "completion_tokens": 8192,
+            "prompt_tokens": 16130,
+            "total_tokens": 24322,
+            "prompt_tokens_details": {
+              "cached_tokens": 10112
+            }
+          },
+          "latency_ms": 54052,
+          "transport_retries": [],
+          "validation_warnings": []
+        },
+        {
+          "kind": "continue",
+          "finish_reason": "stop",
+          "content_len": 2210,
+          "reasoning_len": 5462,
+          "usage": {
+            "completion_tokens": 5930,
+            "prompt_tokens": 3919,
+            "total_tokens": 9849,
+            "prompt_tokens_details": {
+              "cached_tokens": 1280
+            }
+          },
+          "latency_ms": 37093,
+          "transport_retries": [],
+          "validation_warnings": []
+        }
+      ],
+      "validation_warnings": [
+        "MISSING_ONE_LINE"
+      ]
+    },
+    {
+      "wave": 21,
+      "status": "COMPLETED",
+      "model": "deepseek-v4.1-flash",
+      "requested_model": "deepseek-v4.1-flash",
+      "finish_reason": "stop",
+      "latency_ms": 40888,
+      "usage": {
+        "completion_tokens": 6557,
+        "prompt_tokens": 6311,
+        "total_tokens": 12868,
+        "prompt_tokens_details": {
+          "cached_tokens": 1280
+        }
+      },
+      "file": "research\\persona_dna_library\\20260920_canheguiying_dna04_ensemble\\world_live_waves\\wave_21.md",
+      "closed": false,
+      "scene_headings": [
+        "第119场｜日｜内｜沈家老宅·旧账房",
+        "第120场｜夜｜外｜城北·郑家巷",
+        "第121场｜日｜内｜荷园·前厅",
+        "第122场｜夜｜内/外｜荷园·后堂",
+        "第123场｜日｜外｜荷园·门前"
+      ],
+      "attempts": [
+        {
+          "kind": "primary",
+          "finish_reason": "length",
+          "content_len": 2604,
+          "reasoning_len": 7849,
+          "usage": {
+            "completion_tokens": 8192,
+            "prompt_tokens": 17979,
+            "total_tokens": 26171,
+            "prompt_tokens_details": {
+              "cached_tokens": 10112
+            }
+          },
+          "latency_ms": 50231,
+          "transport_retries": [],
+          "validation_warnings": []
+        },
+        {
+          "kind": "continue",
+          "finish_reason": "length",
+          "content_len": 3907,
+          "reasoning_len": 6389,
+          "usage": {
+            "completion_tokens": 8192,
+            "prompt_tokens": 3491,
+            "total_tokens": 11683,
+            "prompt_tokens_details": {
+              "cached_tokens": 1280
+            }
+          },
+          "latency_ms": 54410,
+          "transport_retries": [],
+          "validation_warnings": []
+        },
+        {
+          "kind": "structure_repair_1",
+          "finish_reason": "length",
+          "content_len": 959,
+          "reasoning_len": 9439,
+          "usage": {
+            "completion_tokens": 8192,
+            "prompt_tokens": 5325,
+            "total_tokens": 13517,
+            "prompt_tokens_details": {
+              "cached_tokens": 1280
+            }
+          },
+          "latency_ms": 43808,
+          "transport_retries": [],
+          "validation_warnings": []
+        },
+        {
+          "kind": "continue",
+          "finish_reason": "stop",
+          "content_len": 3835,
+          "reasoning_len": 195,
+          "usage": {
+            "completion_tokens": 3171,
+            "prompt_tokens": 2148,
+            "total_tokens": 5319,
+            "prompt_tokens_details": {
+              "cached_tokens": 1280
+            }
+          },
+          "latency_ms": 26711,
+          "transport_retries": [],
+          "validation_warnings": []
+        },
+        {
+          "kind": "structure_repair_2",
+          "finish_reason": "stop",
+          "content_len": 4987,
+          "reasoning_len": 3888,
+          "usage": {
+            "completion_tokens": 6875,
+            "prompt_tokens": 5225,
+            "total_tokens": 12100,
+            "prompt_tokens_details": {
+              "cached_tokens": 1280
+            }
+          },
+          "latency_ms": 40455,
+          "transport_retries": [],
+          "validation_warnings": []
+        },
+        {
+          "kind": "structure_repair_3",
+          "finish_reason": "length",
+          "content_len": 7284,
+          "reasoning_len": 3422,
+          "usage": {
+            "completion_tokens": 8191,
+            "prompt_tokens": 5339,
+            "total_tokens": 13530,
+            "prompt_tokens_details": {
+              "cached_tokens": 1280
+            }
+          },
+          "latency_ms": 44196,
+          "transport_retries": [],
+          "validation_warnings": []
+        },
+        {
+          "kind": "continue",
+          "finish_reason": "stop",
+          "content_len": 9193,
+          "reasoning_len": 215,
+          "usage": {
+            "completion_tokens": 7254,
+            "prompt_tokens": 6037,
+            "total_tokens": 13291,
+            "prompt_tokens_details": {
+              "cached_tokens": 1280
+            }
+          },
+          "latency_ms": 55819,
+          "transport_retries": [],
+          "validation_warnings": []
+        },
+        {
+          "kind": "forced_structure_fallback",
+          "finish_reason": "stop",
+          "content_len": 3583,
+          "reasoning_len": 4744,
+          "usage": {
+            "completion_tokens": 6557,
+            "prompt_tokens": 6311,
+            "total_tokens": 12868,
+            "prompt_tokens_details": {
+              "cached_tokens": 1280
+            }
+          },
+          "latency_ms": 40888,
+          "transport_retries": [],
+          "validation_warnings": []
+        }
+      ],
+      "validation_warnings": [
+        "MISSING_ONE_LINE"
+      ]
+    },
+    {
+      "wave": 22,
+      "status": "COMPLETED",
+      "model": "deepseek-v4.1-flash",
+      "requested_model": "deepseek-v4.1-flash",
+      "finish_reason": "stop",
+      "latency_ms": 36334,
+      "usage": {
+        "completion_tokens": 4871,
+        "prompt_tokens": 16208,
+        "total_tokens": 21079
+      },
+      "file": "research\\persona_dna_library\\20260920_canheguiying_dna04_ensemble\\world_live_waves\\wave_22.md",
+      "closed": false,
+      "scene_headings": [
+        "第124场｜日｜外｜城北·炭铺后巷",
+        "第125场｜夜｜内｜荷园·后堂",
+        "第126场｜日｜外｜荷园·门前",
+        "第127场｜夜｜外｜城北·郑家巷",
+        "第128场｜夜｜内｜荷园·听荷轩"
+      ],
+      "attempts": [
+        {
+          "kind": "primary",
+          "finish_reason": "stop",
+          "content_len": 4534,
+          "reasoning_len": 1646,
+          "usage": {
+            "completion_tokens": 4871,
+            "prompt_tokens": 16208,
+            "total_tokens": 21079
+          },
+          "latency_ms": 36334,
+          "transport_retries": [],
+          "validation_warnings": []
+        }
+      ],
+      "validation_warnings": []
+    },
+    {
+      "wave": 23,
+      "status": "COMPLETED",
+      "model": "deepseek-v4.1-flash",
+      "requested_model": "deepseek-v4.1-flash",
+      "finish_reason": "stop",
+      "latency_ms": 53791,
+      "usage": {
+        "completion_tokens": 8021,
+        "prompt_tokens": 15640,
+        "total_tokens": 23661
+      },
+      "file": "research\\persona_dna_library\\20260920_canheguiying_dna04_ensemble\\world_live_waves\\wave_23.md",
+      "closed": false,
+      "scene_headings": [
+        "第129场｜日｜外｜荷园·后门",
+        "第130场｜日｜外｜荷园·门前",
+        "第131场｜日｜外｜荷园·后堂廊下",
+        "第132场｜夜｜外｜城北·郑家巷黑漆门外"
+      ],
+      "attempts": [
+        {
+          "kind": "primary",
+          "finish_reason": "stop",
+          "content_len": 3764,
+          "reasoning_len": 6748,
+          "usage": {
+            "completion_tokens": 8021,
+            "prompt_tokens": 15640,
+            "total_tokens": 23661
+          },
+          "latency_ms": 53791,
+          "transport_retries": [],
+          "validation_warnings": []
+        }
+      ],
+      "validation_warnings": []
+    },
+    {
+      "wave": 24,
+      "status": "COMPLETED",
+      "model": "deepseek-v4.1-flash",
+      "requested_model": "deepseek-v4.1-flash",
+      "finish_reason": "stop",
+      "latency_ms": 50229,
+      "usage": {
+        "completion_tokens": 6759,
+        "prompt_tokens": 15003,
+        "total_tokens": 21762
+      },
+      "file": "research\\persona_dna_library\\20260920_canheguiying_dna04_ensemble\\world_live_waves\\wave_24.md",
+      "closed": false,
+      "scene_headings": [
+        "第133场｜日｜外｜荷园·门前",
+        "第134场｜日｜内｜城北·草鞋巷·卫家",
+        "第135场｜夜｜外｜荷园·后堂廊下",
+        "第136场｜日｜内｜荷园·听荷轩",
+        "第137场｜日｜外｜荷园·塘东界石"
+      ],
+      "attempts": [
+        {
+          "kind": "primary",
+          "finish_reason": "stop",
+          "content_len": 4382,
+          "reasoning_len": 4604,
+          "usage": {
+            "completion_tokens": 6759,
+            "prompt_tokens": 15003,
+            "total_tokens": 21762
+          },
+          "latency_ms": 50229,
+          "transport_retries": [],
+          "validation_warnings": []
+        }
+      ],
+      "validation_warnings": []
+    },
+    {
+      "wave": 25,
+      "status": "COMPLETED",
+      "model": "deepseek-v4.1-flash",
+      "requested_model": "deepseek-v4.1-flash",
+      "finish_reason": "stop",
+      "latency_ms": 48841,
+      "usage": {
+        "completion_tokens": 6812,
+        "prompt_tokens": 15549,
+        "total_tokens": 22361
+      },
+      "file": "research\\persona_dna_library\\20260920_canheguiying_dna04_ensemble\\world_live_waves\\wave_25.md",
+      "closed": false,
+      "scene_headings": [
+        "第138场｜日｜外｜荷园·门前",
+        "第139场｜日｜外｜城北·郑家巷·黑漆门外",
+        "第140场｜日｜外｜荷园·门前",
+        "第141场｜夜｜外｜荷园·后堂廊下",
+        "第142场｜日｜内｜荷园·听荷轩"
+      ],
+      "attempts": [
+        {
+          "kind": "primary",
+          "finish_reason": "stop",
+          "content_len": 4616,
+          "reasoning_len": 3962,
+          "usage": {
+            "completion_tokens": 6812,
+            "prompt_tokens": 15549,
+            "total_tokens": 22361
+          },
+          "latency_ms": 48841,
+          "transport_retries": [],
+          "validation_warnings": []
+        }
+      ],
+      "validation_warnings": []
+    },
+    {
+      "wave": 26,
+      "status": "COMPLETED",
+      "model": "deepseek-v4.1-flash",
+      "requested_model": "deepseek-v4.1-flash",
+      "finish_reason": "stop",
+      "latency_ms": 40814,
+      "usage": {
+        "completion_tokens": 5584,
+        "prompt_tokens": 6261,
+        "total_tokens": 11845,
+        "prompt_tokens_details": {
+          "cached_tokens": 1152
+        }
+      },
+      "file": "research\\persona_dna_library\\20260920_canheguiying_dna04_ensemble\\world_live_waves\\wave_26.md",
+      "closed": false,
+      "scene_headings": [
+        "第143场｜日｜内｜沈家祖宅·东厢账房",
+        "第144场｜夜｜外｜荷园·后堂廊下",
+        "第145场｜日｜内｜荷园·听荷轩",
+        "第146场｜日｜外｜城北·郑家巷·黑漆门内",
+        "第147场｜夜｜内｜荷园·听荷轩"
+      ],
+      "attempts": [
+        {
+          "kind": "primary",
+          "finish_reason": "length",
+          "content_len": 1931,
+          "reasoning_len": 9100,
+          "usage": {
+            "completion_tokens": 8192,
+            "prompt_tokens": 16002,
+            "total_tokens": 24194,
+            "prompt_tokens_details": {
+              "cached_tokens": 10112
+            }
+          },
+          "latency_ms": 53467,
+          "transport_retries": [],
+          "validation_warnings": []
+        },
+        {
+          "kind": "continue",
+          "finish_reason": "stop",
+          "content_len": 4906,
+          "reasoning_len": 2548,
+          "usage": {
+            "completion_tokens": 5603,
+            "prompt_tokens": 2827,
+            "total_tokens": 8430,
+            "prompt_tokens_details": {
+              "cached_tokens": 1280
+            }
+          },
+          "latency_ms": 37691,
+          "transport_retries": [],
+          "validation_warnings": []
+        },
+        {
+          "kind": "structure_repair_1",
+          "finish_reason": "length",
+          "content_len": 8911,
+          "reasoning_len": 2110,
+          "usage": {
+            "completion_tokens": 8191,
+            "prompt_tokens": 5206,
+            "total_tokens": 13397,
+            "prompt_tokens_details": {
+              "cached_tokens": 1280
+            }
+          },
+          "latency_ms": 45898,
+          "transport_retries": [],
+          "validation_warnings": []
+        },
+        {
+          "kind": "continue",
+          "finish_reason": "stop",
+          "content_len": 8016,
+          "reasoning_len": 1064,
+          "usage": {
+            "completion_tokens": 6841,
+            "prompt_tokens": 5876,
+            "total_tokens": 12717,
+            "prompt_tokens_details": {
+              "cached_tokens": 1280
+            }
+          },
+          "latency_ms": 48129,
+          "transport_retries": [],
+          "validation_warnings": []
+        },
+        {
+          "kind": "structure_repair_2",
+          "finish_reason": "length",
+          "content_len": 0,
+          "reasoning_len": 11642,
+          "usage": {
+            "completion_tokens": 8192,
+            "prompt_tokens": 5209,
+            "total_tokens": 13401,
+            "prompt_tokens_details": {
+              "cached_tokens": 1280
+            }
+          },
+          "latency_ms": 50798,
+          "transport_retries": [],
+          "validation_warnings": []
+        },
+        {
+          "kind": "structure_repair_3",
+          "finish_reason": "stop",
+          "content_len": 3576,
+          "reasoning_len": 1527,
+          "usage": {
+            "completion_tokens": 3685,
+            "prompt_tokens": 1413,
+            "total_tokens": 5098
+          },
+          "latency_ms": 26440,
+          "transport_retries": [],
+          "validation_warnings": []
+        },
+        {
+          "kind": "forced_structure_fallback",
+          "finish_reason": "stop",
+          "content_len": 4990,
+          "reasoning_len": 2057,
+          "usage": {
+            "completion_tokens": 5584,
+            "prompt_tokens": 6261,
+            "total_tokens": 11845,
+            "prompt_tokens_details": {
+              "cached_tokens": 1152
+            }
+          },
+          "latency_ms": 40814,
+          "transport_retries": [],
+          "validation_warnings": []
+        }
+      ],
+      "validation_warnings": []
+    },
+    {
+      "wave": 27,
+      "status": "COMPLETED",
+      "model": "deepseek-v4.1-flash",
+      "requested_model": "deepseek-v4.1-flash",
+      "finish_reason": "stop",
+      "latency_ms": 56321,
+      "usage": {
+        "completion_tokens": 7991,
+        "prompt_tokens": 16376,
+        "total_tokens": 24367,
+        "prompt_tokens_details": {
+          "cached_tokens": 10112
+        }
+      },
+      "file": "research\\persona_dna_library\\20260920_canheguiying_dna04_ensemble\\world_live_waves\\wave_27.md",
+      "closed": false,
+      "scene_headings": [
+        "第148场｜日｜内｜荷园·听荷轩",
+        "第149场｜夜｜外｜荷园·后堂廊下",
+        "第150场｜日｜内｜荷园·听荷轩",
+        "第151场｜夜｜内｜荷园·听荷轩",
+        "第152场｜日｜内｜荷园·后堂"
+      ],
+      "attempts": [
+        {
+          "kind": "primary",
+          "finish_reason": "stop",
+          "content_len": 5082,
+          "reasoning_len": 5051,
+          "usage": {
+            "completion_tokens": 7991,
+            "prompt_tokens": 16376,
+            "total_tokens": 24367,
+            "prompt_tokens_details": {
+              "cached_tokens": 10112
+            }
+          },
+          "latency_ms": 56321,
+          "transport_retries": [],
+          "validation_warnings": []
+        }
+      ],
+      "validation_warnings": []
+    },
+    {
+      "wave": 28,
+      "status": "COMPLETED",
+      "model": "deepseek-v4.1-flash",
+      "requested_model": "deepseek-v4.1-flash",
+      "finish_reason": "stop",
+      "latency_ms": 44605,
+      "usage": {
+        "completion_tokens": 7340,
+        "prompt_tokens": 16512,
+        "total_tokens": 23852,
+        "prompt_tokens_details": {
+          "cached_tokens": 16256
+        }
+      },
+      "file": "research\\persona_dna_library\\20260920_canheguiying_dna04_ensemble\\world_live_waves\\wave_28.md",
+      "closed": false,
+      "scene_headings": [
+        "第153场｜日｜外｜城西·晏家书铺门外",
+        "第154场｜夜｜内｜荷园·听荷轩",
+        "第155场｜日｜内｜沈家祖宅·正房外间",
+        "第156场｜夜｜外｜荷园·塘东界石边"
+      ],
+      "attempts": [
+        {
+          "kind": "primary",
+          "finish_reason": "stop",
+          "content_len": 3815,
+          "reasoning_len": 5903,
+          "usage": {
+            "completion_tokens": 7340,
+            "prompt_tokens": 16512,
+            "total_tokens": 23852,
+            "prompt_tokens_details": {
+              "cached_tokens": 16256
+            }
+          },
+          "latency_ms": 44605,
+          "transport_retries": [],
+          "validation_warnings": []
+        }
+      ],
+      "validation_warnings": []
+    },
+    {
+      "wave": 29,
+      "status": "COMPLETED",
+      "model": "deepseek-v4.1-flash",
+      "requested_model": "deepseek-v4.1-flash",
+      "finish_reason": "stop",
+      "latency_ms": 49787,
+      "usage": {
+        "completion_tokens": 8743,
+        "prompt_tokens": 6140,
+        "total_tokens": 14883
+      },
+      "file": "research\\persona_dna_library\\20260920_canheguiying_dna04_ensemble\\world_live_waves\\wave_29.md",
+      "closed": false,
+      "scene_headings": [
+        "第157场｜日暮｜内｜荷园·听荷轩",
+        "第158场｜夜｜内｜沈家祖宅·正房外间",
+        "第159场｜夜｜外｜荷园·塘东界石边",
+        "第160场｜夜｜外｜荷园·东墙外至巷口"
+      ],
+      "attempts": [
+        {
+          "kind": "primary",
+          "finish_reason": "length",
+          "content_len": 1069,
+          "reasoning_len": 10187,
+          "usage": {
+            "completion_tokens": 8191,
+            "prompt_tokens": 15315,
+            "total_tokens": 23506,
+            "prompt_tokens_details": {
+              "cached_tokens": 10112
+            }
+          },
+          "latency_ms": 55518,
+          "transport_retries": [],
+          "validation_warnings": []
+        },
+        {
+          "kind": "continue",
+          "finish_reason": "stop",
+          "content_len": 3722,
+          "reasoning_len": 1987,
+          "usage": {
+            "completion_tokens": 4069,
+            "prompt_tokens": 2204,
+            "total_tokens": 6273,
+            "prompt_tokens_details": {
+              "cached_tokens": 1280
+            }
+          },
+          "latency_ms": 30485,
+          "transport_retries": [],
+          "validation_warnings": []
+        },
+        {
+          "kind": "structure_repair_1",
+          "finish_reason": "stop",
+          "content_len": 7695,
+          "reasoning_len": 1997,
+          "usage": {
+            "completion_tokens": 7444,
+            "prompt_tokens": 5085,
+            "total_tokens": 12529,
+            "prompt_tokens_details": {
+              "cached_tokens": 1280
+            }
+          },
+          "latency_ms": 43795,
+          "transport_retries": [],
+          "validation_warnings": []
+        },
+        {
+          "kind": "structure_repair_2",
+          "finish_reason": "length",
+          "content_len": 4156,
+          "reasoning_len": 6895,
+          "usage": {
+            "completion_tokens": 8191,
+            "prompt_tokens": 5386,
+            "total_tokens": 13577,
+            "prompt_tokens_details": {
+              "cached_tokens": 1280
+            }
+          },
+          "latency_ms": 48765,
+          "transport_retries": [],
+          "validation_warnings": []
+        },
+        {
+          "kind": "continue",
+          "finish_reason": "stop",
+          "content_len": 4048,
+          "reasoning_len": 533,
+          "usage": {
+            "completion_tokens": 3413,
+            "prompt_tokens": 4572,
+            "total_tokens": 7985,
+            "prompt_tokens_details": {
+              "cached_tokens": 1280
+            }
+          },
+          "latency_ms": 27240,
+          "transport_retries": [],
+          "validation_warnings": []
+        },
+        {
+          "kind": "structure_repair_3",
+          "finish_reason": "length",
+          "content_len": 0,
+          "reasoning_len": 11379,
+          "usage": {
+            "completion_tokens": 8192,
+            "prompt_tokens": 5187,
+            "total_tokens": 13379,
+            "prompt_tokens_details": {
+              "cached_tokens": 1280
+            }
+          },
+          "latency_ms": 44982,
+          "transport_retries": [],
+          "validation_warnings": []
+        },
+        {
+          "kind": "forced_structure_fallback",
+          "finish_reason": "stop",
+          "content_len": 4129,
+          "reasoning_len": 7449,
+          "usage": {
+            "completion_tokens": 8743,
+            "prompt_tokens": 6140,
+            "total_tokens": 14883
+          },
+          "latency_ms": 49787,
+          "transport_retries": [
+            {
+              "attempt": 1,
+              "retryable": true,
+              "error_type": "TimeoutError",
+              "error": "timed out",
+              "sleep_seconds": 5.0
+            }
+          ],
+          "validation_warnings": []
+        }
+      ],
+      "validation_warnings": []
+    },
+    {
+      "wave": 30,
+      "status": "COMPLETED",
+      "model": "deepseek-v4.1-flash",
+      "requested_model": "deepseek-v4.1-flash",
+      "finish_reason": "stop",
+      "latency_ms": 38254,
+      "usage": {
+        "completion_tokens": 5576,
+        "prompt_tokens": 15636,
+        "total_tokens": 21212,
+        "prompt_tokens_details": {
+          "cached_tokens": 10112
+        }
+      },
+      "file": "research\\persona_dna_library\\20260920_canheguiying_dna04_ensemble\\world_live_waves\\wave_30.md",
+      "closed": false,
+      "scene_headings": [
+        "第161场｜日｜内｜荷园·东厢",
+        "第162场｜日｜外｜荷园·前院门房",
+        "第163场｜日｜内｜荷园·后堂外间",
+        "第164场｜夜｜外｜荷园·塘东涵洞口",
+        "第165场｜夜｜内｜荷园·听荷轩"
+      ],
+      "attempts": [
+        {
+          "kind": "primary",
+          "finish_reason": "stop",
+          "content_len": 4795,
+          "reasoning_len": 2305,
+          "usage": {
+            "completion_tokens": 5576,
+            "prompt_tokens": 15636,
+            "total_tokens": 21212,
+            "prompt_tokens_details": {
+              "cached_tokens": 10112
+            }
+          },
+          "latency_ms": 38254,
+          "transport_retries": [],
+          "validation_warnings": []
+        }
+      ],
+      "validation_warnings": []
+    },
+    {
+      "wave": 31,
+      "status": "COMPLETED",
+      "model": "deepseek-v4.1-flash",
+      "requested_model": "deepseek-v4.1-flash",
+      "finish_reason": "stop",
+      "latency_ms": 31255,
+      "usage": {
+        "completion_tokens": 4321,
+        "prompt_tokens": 16485,
+        "total_tokens": 20806,
+        "prompt_tokens_details": {
+          "cached_tokens": 10112
+        }
+      },
+      "file": "research\\persona_dna_library\\20260920_canheguiying_dna04_ensemble\\world_live_waves\\wave_31.md",
+      "closed": false,
+      "scene_headings": [
+        "第166场｜日｜外｜城西·土地庙后墙",
+        "第167场｜日｜内｜县衙·户房后间",
+        "第168场｜日｜外｜荷园·前院门房",
+        "第169场｜夜｜外｜城西·庙后巷何家后院",
+        "第170场｜夜｜内｜荷园·听荷轩"
+      ],
+      "attempts": [
+        {
+          "kind": "primary",
+          "finish_reason": "stop",
+          "content_len": 4779,
+          "reasoning_len": 619,
+          "usage": {
+            "completion_tokens": 4321,
+            "prompt_tokens": 16485,
+            "total_tokens": 20806,
+            "prompt_tokens_details": {
+              "cached_tokens": 10112
+            }
+          },
+          "latency_ms": 31255,
+          "transport_retries": [],
+          "validation_warnings": []
+        }
+      ],
+      "validation_warnings": []
+    },
+    {
+      "wave": 32,
+      "status": "COMPLETED",
+      "model": "deepseek-v4.1-flash",
+      "requested_model": "deepseek-v4.1-flash",
+      "finish_reason": "stop",
+      "latency_ms": 44394,
+      "usage": {
+        "completion_tokens": 6255,
+        "prompt_tokens": 16630,
+        "total_tokens": 22885,
+        "prompt_tokens_details": {
+          "cached_tokens": 10112
+        }
+      },
+      "file": "research\\persona_dna_library\\20260920_canheguiying_dna04_ensemble\\world_live_waves\\wave_32.md",
+      "closed": false,
+      "scene_headings": [
+        "第171场｜日｜外｜城西·庙后巷香烛铺前",
+        "第172场｜日｜内｜县衙·户房后间",
+        "第173场｜日｜外｜荷园·前院门房",
+        "第174场｜夜｜外｜荷园·塘东涵洞口",
+        "第175场｜夜｜内｜荷园·听荷轩"
+      ],
+      "attempts": [
+        {
+          "kind": "primary",
+          "finish_reason": "stop",
+          "content_len": 5081,
+          "reasoning_len": 3135,
+          "usage": {
+            "completion_tokens": 6255,
+            "prompt_tokens": 16630,
+            "total_tokens": 22885,
+            "prompt_tokens_details": {
+              "cached_tokens": 10112
+            }
+          },
+          "latency_ms": 44394,
+          "transport_retries": [],
+          "validation_warnings": []
+        }
+      ],
+      "validation_warnings": []
+    }
+  ],
+  "waves": [
+    {
+      "wave": 1,
+      "status": "COMPLETED",
+      "model": "deepseek-v4.1-flash",
+      "requested_model": "deepseek-v4.1-flash",
+      "finish_reason": "stop",
+      "latency_ms": 53126,
+      "usage": {
+        "completion_tokens": 7424,
+        "prompt_tokens": 5633,
+        "total_tokens": 13057
+      },
+      "file": "research\\persona_dna_library\\20260920_canheguiying_dna04_ensemble\\world_live_waves\\wave_01.md",
+      "closed": false,
+      "scene_headings": [
+        "第11场｜日｜外｜荷园后巷井台",
+        "第12场｜日｜外｜城北郑家巷",
+        "第13场｜日｜外｜荷园前院",
+        "第14场｜夜｜外｜荷园塘东界石边",
+        "第15场｜夜｜外｜荷园后院厨房"
+      ],
+      "attempts": [
+        {
+          "kind": "primary",
+          "finish_reason": "length",
+          "content_len": 2243,
+          "reasoning_len": 8685,
+          "usage": {
+            "completion_tokens": 8189,
+            "prompt_tokens": 11643,
+            "total_tokens": 19832,
+            "prompt_tokens_details": {
+              "cached_tokens": 128
+            }
+          },
+          "latency_ms": 55697,
+          "transport_retries": [],
+          "validation_warnings": []
+        },
+        {
+          "kind": "continue",
+          "finish_reason": "stop",
+          "content_len": 4006,
+          "reasoning_len": 622,
+          "usage": {
+            "completion_tokens": 3562,
+            "prompt_tokens": 3081,
+            "total_tokens": 6643,
+            "prompt_tokens_details": {
+              "cached_tokens": 1152
+            }
+          },
+          "latency_ms": 28448,
+          "transport_retries": [],
+          "validation_warnings": []
+        },
+        {
+          "kind": "structure_repair_1",
+          "finish_reason": "stop",
+          "content_len": 7863,
+          "reasoning_len": 7998,
+          "usage": {
+            "completion_tokens": 11953,
+            "prompt_tokens": 5238,
+            "total_tokens": 17191
+          },
+          "latency_ms": 63038,
+          "transport_retries": [],
+          "validation_warnings": []
+        },
+        {
+          "kind": "structure_repair_2",
+          "finish_reason": "stop",
+          "content_len": 6700,
+          "reasoning_len": 12420,
+          "usage": {
+            "completion_tokens": 14257,
+            "prompt_tokens": 5241,
+            "total_tokens": 19498
+          },
+          "latency_ms": 76352,
+          "transport_retries": [],
+          "validation_warnings": []
+        },
+        {
+          "kind": "structure_repair_3",
+          "finish_reason": "stop",
+          "content_len": 6780,
+          "reasoning_len": 6162,
+          "usage": {
+            "completion_tokens": 10164,
+            "prompt_tokens": 5230,
+            "total_tokens": 15394
+          },
+          "latency_ms": 72102,
+          "transport_retries": [],
+          "validation_warnings": []
+        },
+        {
+          "kind": "forced_structure_fallback",
+          "finish_reason": "stop",
+          "content_len": 4389,
+          "reasoning_len": 5639,
+          "usage": {
+            "completion_tokens": 7424,
+            "prompt_tokens": 5633,
+            "total_tokens": 13057
+          },
+          "latency_ms": 53126,
+          "transport_retries": [],
+          "validation_warnings": []
+        }
+      ],
+      "validation_warnings": []
+    },
+    {
+      "wave": 2,
+      "status": "COMPLETED",
+      "model": "deepseek-v4.1-flash",
+      "requested_model": "deepseek-v4.1-flash",
+      "finish_reason": "stop",
+      "latency_ms": 43921,
+      "usage": {
+        "completion_tokens": 6032,
+        "prompt_tokens": 15020,
+        "total_tokens": 21052
+      },
+      "file": "research\\persona_dna_library\\20260920_canheguiying_dna04_ensemble\\world_live_waves\\wave_02.md",
+      "closed": false,
+      "scene_headings": [
+        "第16场｜日｜外｜城北郑家巷黑漆门前",
+        "第17场｜日｜内｜荷园前院门房",
+        "第18场｜夜｜外｜荷园后堂门外",
+        "第19场｜夜｜外｜荷园塘东界石边",
+        "第20场｜日｜外｜荷园前院"
+      ],
+      "attempts": [
+        {
+          "kind": "primary",
+          "finish_reason": "stop",
+          "content_len": 3414,
+          "reasoning_len": 4170,
+          "usage": {
+            "completion_tokens": 6032,
+            "prompt_tokens": 15020,
+            "total_tokens": 21052
+          },
+          "latency_ms": 43921,
+          "transport_retries": [],
+          "validation_warnings": []
+        }
+      ],
+      "validation_warnings": []
+    },
+    {
+      "wave": 3,
+      "status": "COMPLETED",
+      "model": "deepseek-v4.1-flash",
+      "requested_model": "deepseek-v4.1-flash",
+      "finish_reason": "stop",
+      "latency_ms": 46064,
+      "usage": {
+        "completion_tokens": 6880,
+        "prompt_tokens": 15152,
+        "total_tokens": 22032,
+        "prompt_tokens_details": {
+          "cached_tokens": 14976
+        }
+      },
+      "file": "research\\persona_dna_library\\20260920_canheguiying_dna04_ensemble\\world_live_waves\\wave_03.md",
+      "closed": false,
+      "scene_headings": [
+        "第21场｜夜｜外｜荷园前院门房",
+        "第22场｜日｜外｜清江浦闸口",
+        "第23场｜夜｜外｜荷园塘东界石边",
+        "第24场｜日｜外｜清江浦·窑湾浮桥西岸",
+        "第25场｜夜｜外｜荷园后堂门外"
+      ],
+      "attempts": [
+        {
+          "kind": "primary",
+          "finish_reason": "length",
+          "content_len": 0,
+          "reasoning_len": 20300,
+          "usage": {
+            "completion_tokens": 8192,
+            "prompt_tokens": 15100,
+            "total_tokens": 23292,
+            "prompt_tokens_details": {
+              "cached_tokens": 10112
+            }
+          },
+          "latency_ms": 54816,
+          "transport_retries": [],
+          "validation_warnings": []
+        },
+        {
+          "kind": "force_body_1",
+          "finish_reason": "length",
+          "content_len": 0,
+          "reasoning_len": 11013,
+          "usage": {
+            "completion_tokens": 8192,
+            "prompt_tokens": 15152,
+            "total_tokens": 23344,
+            "prompt_tokens_details": {
+              "cached_tokens": 14976
+            }
+          },
+          "latency_ms": 54654,
+          "transport_retries": [],
+          "validation_warnings": []
+        },
+        {
+          "kind": "force_body_2",
+          "finish_reason": "stop",
+          "content_len": 3856,
+          "reasoning_len": 4775,
+          "usage": {
+            "completion_tokens": 6880,
+            "prompt_tokens": 15152,
+            "total_tokens": 22032,
+            "prompt_tokens_details": {
+              "cached_tokens": 14976
+            }
+          },
+          "latency_ms": 46064,
+          "transport_retries": [],
+          "validation_warnings": []
+        }
+      ],
+      "validation_warnings": []
+    },
+    {
+      "wave": 4,
+      "status": "COMPLETED",
+      "model": "deepseek-v4.1-flash",
+      "requested_model": "deepseek-v4.1-flash",
+      "finish_reason": "stop",
+      "latency_ms": 52517,
+      "usage": {
+        "completion_tokens": 6754,
+        "prompt_tokens": 15407,
+        "total_tokens": 22161,
+        "prompt_tokens_details": {
+          "cached_tokens": 15232
+        }
+      },
+      "file": "research\\persona_dna_library\\20260920_canheguiying_dna04_ensemble\\world_live_waves\\wave_04.md",
+      "closed": false,
+      "scene_headings": [
+        "第26场｜日｜外｜清江浦·窑湾西岸",
+        "第27场｜日｜外｜荷园塘东三丈界外",
+        "第28场｜夜｜外｜城北·郑家巷黑漆门前",
+        "第29场｜日｜外｜荷园后堂廊下",
+        "第30场｜夜｜外｜荷园塘东界石边"
+      ],
+      "attempts": [
+        {
+          "kind": "primary",
+          "finish_reason": "stop",
+          "content_len": 3497,
+          "reasoning_len": 5554,
+          "usage": {
+            "completion_tokens": 6754,
+            "prompt_tokens": 15407,
+            "total_tokens": 22161,
+            "prompt_tokens_details": {
+              "cached_tokens": 15232
+            }
+          },
+          "latency_ms": 52517,
+          "transport_retries": [],
+          "validation_warnings": []
+        }
+      ],
+      "validation_warnings": []
+    },
+    {
+      "wave": 5,
+      "status": "COMPLETED",
+      "model": "deepseek-v4.1-flash",
+      "requested_model": "deepseek-v4.1-flash",
+      "finish_reason": "stop",
+      "latency_ms": 31837,
+      "usage": {
+        "completion_tokens": 4264,
+        "prompt_tokens": 3657,
+        "total_tokens": 7921,
+        "prompt_tokens_details": {
+          "cached_tokens": 1152
+        }
+      },
+      "file": "research\\persona_dna_library\\20260920_canheguiying_dna04_ensemble\\world_live_waves\\wave_05.md",
+      "closed": false,
+      "scene_headings": [
+        "第31场｜日｜内｜县衙户房后间",
+        "第32场｜日｜外｜仓房前院",
+        "第33场｜夜｜外｜荷园前院门房",
+        "第34场｜夜｜内｜城北·郑家黑漆门内院屋",
+        "第35场｜夜｜外｜荷园塘东界石边",
+        "第36场｜日｜外｜城南水月庵",
+        "第37场｜日｜内｜县衙架阁库",
+        "第38场｜夜｜内｜荷园·西厢外廊",
+        "第39场｜夜｜外｜荷园塘东界石边"
+      ],
+      "attempts": [
+        {
+          "kind": "primary",
+          "finish_reason": "length",
+          "content_len": 2833,
+          "reasoning_len": 7905,
+          "usage": {
+            "completion_tokens": 8192,
+            "prompt_tokens": 15033,
+            "total_tokens": 23225,
+            "prompt_tokens_details": {
+              "cached_tokens": 10112
+            }
+          },
+          "latency_ms": 57456,
+          "transport_retries": [],
+          "validation_warnings": []
+        },
+        {
+          "kind": "continue",
+          "finish_reason": "stop",
+          "content_len": 3766,
+          "reasoning_len": 1704,
+          "usage": {
+            "completion_tokens": 4264,
+            "prompt_tokens": 3657,
+            "total_tokens": 7921,
+            "prompt_tokens_details": {
+              "cached_tokens": 1152
+            }
+          },
+          "latency_ms": 31837,
+          "transport_retries": [],
+          "validation_warnings": []
+        }
+      ],
+      "validation_warnings": [
+        "MISSING_RELATION",
+        "MISSING_ONE_LINE"
+      ]
+    },
+    {
+      "wave": 6,
+      "status": "COMPLETED",
+      "model": "deepseek-v4.1-flash",
+      "requested_model": "deepseek-v4.1-flash",
+      "finish_reason": "stop",
+      "latency_ms": 31410,
+      "usage": {
+        "completion_tokens": 3837,
+        "prompt_tokens": 19939,
+        "total_tokens": 23776,
+        "prompt_tokens_details": {
+          "cached_tokens": 10112
+        }
+      },
+      "file": "research\\persona_dna_library\\20260920_canheguiying_dna04_ensemble\\world_live_waves\\wave_06.md",
+      "closed": false,
+      "scene_headings": [
+        "第40场｜日｜外｜城北·郑家黑漆门前",
+        "第41场｜日｜外｜城北·郑家巷口炭铺",
+        "第42场｜日｜外｜南城·绣房前院",
+        "第43场｜夜｜内｜荷园·西厢",
+        "第44场｜夜｜外｜荷园后堂廊下",
+        "第45场｜日｜外｜城西·连氏院门前"
+      ],
+      "attempts": [
+        {
+          "kind": "primary",
+          "finish_reason": "stop",
+          "content_len": 4934,
+          "reasoning_len": 0,
+          "usage": {
+            "completion_tokens": 3837,
+            "prompt_tokens": 19939,
+            "total_tokens": 23776,
+            "prompt_tokens_details": {
+              "cached_tokens": 10112
+            }
+          },
+          "latency_ms": 31410,
+          "transport_retries": [],
+          "validation_warnings": []
+        }
+      ],
+      "validation_warnings": []
+    },
+    {
+      "wave": 7,
+      "status": "COMPLETED",
+      "model": "deepseek-v4.1-flash",
+      "requested_model": "deepseek-v4.1-flash",
+      "finish_reason": "stop",
+      "latency_ms": 51199,
+      "usage": {
+        "completion_tokens": 7228,
+        "prompt_tokens": 6130,
+        "total_tokens": 13358,
+        "prompt_tokens_details": {
+          "cached_tokens": 1152
+        }
+      },
+      "file": "research\\persona_dna_library\\20260920_canheguiying_dna04_ensemble\\world_live_waves\\wave_07.md",
+      "closed": false,
+      "scene_headings": [
+        "第46场｜日｜内｜户房·后架",
+        "第47场｜日｜外｜水月庵·山门内",
+        "第48场｜日｜外｜荷园·塘东界石",
+        "第49场｜日｜内｜城西·连氏院中",
+        "第50场｜夜｜内｜荷园·西厢"
+      ],
+      "attempts": [
+        {
+          "kind": "primary",
+          "finish_reason": "length",
+          "content_len": 3553,
+          "reasoning_len": 12561,
+          "usage": {
+            "completion_tokens": 8192,
+            "prompt_tokens": 18516,
+            "total_tokens": 26708,
+            "prompt_tokens_details": {
+              "cached_tokens": 10112
+            }
+          },
+          "latency_ms": 60787,
+          "transport_retries": [],
+          "validation_warnings": []
+        },
+        {
+          "kind": "continue",
+          "finish_reason": "stop",
+          "content_len": 3395,
+          "reasoning_len": 697,
+          "usage": {
+            "completion_tokens": 3163,
+            "prompt_tokens": 4067,
+            "total_tokens": 7230,
+            "prompt_tokens_details": {
+              "cached_tokens": 1152
+            }
+          },
+          "latency_ms": 26431,
+          "transport_retries": [],
+          "validation_warnings": []
+        },
+        {
+          "kind": "structure_repair_1",
+          "finish_reason": "length",
+          "content_len": 633,
+          "reasoning_len": 10375,
+          "usage": {
+            "completion_tokens": 8191,
+            "prompt_tokens": 5275,
+            "total_tokens": 13466,
+            "prompt_tokens_details": {
+              "cached_tokens": 1152
+            }
+          },
+          "latency_ms": 49125,
+          "transport_retries": [],
+          "validation_warnings": []
+        },
+        {
+          "kind": "continue",
+          "finish_reason": "stop",
+          "content_len": 2923,
+          "reasoning_len": 705,
+          "usage": {
+            "completion_tokens": 2788,
+            "prompt_tokens": 1841,
+            "total_tokens": 4629,
+            "prompt_tokens_details": {
+              "cached_tokens": 1152
+            }
+          },
+          "latency_ms": 25181,
+          "transport_retries": [],
+          "validation_warnings": []
+        },
+        {
+          "kind": "structure_repair_2",
+          "finish_reason": "length",
+          "content_len": 2135,
+          "reasoning_len": 8723,
+          "usage": {
+            "completion_tokens": 8191,
+            "prompt_tokens": 4152,
+            "total_tokens": 12343,
+            "prompt_tokens_details": {
+              "cached_tokens": 1152
+            }
+          },
+          "latency_ms": 47933,
+          "transport_retries": [],
+          "validation_warnings": []
+        },
+        {
+          "kind": "continue",
+          "finish_reason": "stop",
+          "content_len": 4448,
+          "reasoning_len": 3786,
+          "usage": {
+            "completion_tokens": 6368,
+            "prompt_tokens": 3036,
+            "total_tokens": 9404,
+            "prompt_tokens_details": {
+              "cached_tokens": 1152
+            }
+          },
+          "latency_ms": 45719,
+          "transport_retries": [],
+          "validation_warnings": []
+        },
+        {
+          "kind": "structure_repair_3",
+          "finish_reason": "length",
+          "content_len": 1462,
+          "reasoning_len": 9356,
+          "usage": {
+            "completion_tokens": 8192,
+            "prompt_tokens": 5240,
+            "total_tokens": 13432,
+            "prompt_tokens_details": {
+              "cached_tokens": 1152
+            }
+          },
+          "latency_ms": 39811,
+          "transport_retries": [],
+          "validation_warnings": []
+        },
+        {
+          "kind": "continue",
+          "finish_reason": "stop",
+          "content_len": 5417,
+          "reasoning_len": 4178,
+          "usage": {
+            "completion_tokens": 6810,
+            "prompt_tokens": 2471,
+            "total_tokens": 9281,
+            "prompt_tokens_details": {
+              "cached_tokens": 1152
+            }
+          },
+          "latency_ms": 50062,
+          "transport_retries": [],
+          "validation_warnings": []
+        },
+        {
+          "kind": "forced_structure_fallback",
+          "finish_reason": "stop",
+          "content_len": 5466,
+          "reasoning_len": 4087,
+          "usage": {
+            "completion_tokens": 7228,
+            "prompt_tokens": 6130,
+            "total_tokens": 13358,
+            "prompt_tokens_details": {
+              "cached_tokens": 1152
+            }
+          },
+          "latency_ms": 51199,
+          "transport_retries": [],
+          "validation_warnings": []
+        }
+      ],
+      "validation_warnings": []
+    },
+    {
+      "wave": 8,
+      "status": "COMPLETED",
+      "model": "deepseek-v4.1-flash",
+      "requested_model": "deepseek-v4.1-flash",
+      "finish_reason": "stop",
+      "latency_ms": 54591,
+      "usage": {
+        "completion_tokens": 7259,
+        "prompt_tokens": 6171,
+        "total_tokens": 13430,
+        "prompt_tokens_details": {
+          "cached_tokens": 1152
+        }
+      },
+      "file": "research\\persona_dna_library\\20260920_canheguiying_dna04_ensemble\\world_live_waves\\wave_08.md",
+      "closed": false,
+      "scene_headings": [
+        "第51场｜日｜外｜沈宅后巷·侧门",
+        "第52场｜日｜外｜南城绣房巷·巷口茶摊",
+        "第53场｜夜｜内｜荷园·后堂",
+        "第54场｜日｜外｜荷园·塘东界石",
+        "第55场｜夜｜内｜荷园·西厢"
+      ],
+      "attempts": [
+        {
+          "kind": "primary",
+          "finish_reason": "length",
+          "content_len": 2772,
+          "reasoning_len": 7886,
+          "usage": {
+            "completion_tokens": 8192,
+            "prompt_tokens": 16651,
+            "total_tokens": 24843,
+            "prompt_tokens_details": {
+              "cached_tokens": 10112
+            }
+          },
+          "latency_ms": 54523,
+          "transport_retries": [],
+          "validation_warnings": []
+        },
+        {
+          "kind": "continue",
+          "finish_reason": "stop",
+          "content_len": 4495,
+          "reasoning_len": 1993,
+          "usage": {
+            "completion_tokens": 4944,
+            "prompt_tokens": 3459,
+            "total_tokens": 8403,
+            "prompt_tokens_details": {
+              "cached_tokens": 1152
+            }
+          },
+          "latency_ms": 39916,
+          "transport_retries": [],
+          "validation_warnings": []
+        },
+        {
+          "kind": "structure_repair_1",
+          "finish_reason": "length",
+          "content_len": 0,
+          "reasoning_len": 10250,
+          "usage": {
+            "completion_tokens": 8192,
+            "prompt_tokens": 5204,
+            "total_tokens": 13396,
+            "prompt_tokens_details": {
+              "cached_tokens": 1152
+            }
+          },
+          "latency_ms": 56274,
+          "transport_retries": [],
+          "validation_warnings": []
+        },
+        {
+          "kind": "structure_repair_2",
+          "finish_reason": "stop",
+          "content_len": 6690,
+          "reasoning_len": 2331,
+          "usage": {
+            "completion_tokens": 6635,
+            "prompt_tokens": 1414,
+            "total_tokens": 8049,
+            "prompt_tokens_details": {
+              "cached_tokens": 1152
+            }
+          },
+          "latency_ms": 50696,
+          "transport_retries": [],
+          "validation_warnings": []
+        },
+        {
+          "kind": "structure_repair_3",
+          "finish_reason": "length",
+          "content_len": 513,
+          "reasoning_len": 10912,
+          "usage": {
+            "completion_tokens": 8192,
+            "prompt_tokens": 4984,
+            "total_tokens": 13176,
+            "prompt_tokens_details": {
+              "cached_tokens": 1152
+            }
+          },
+          "latency_ms": 47266,
+          "transport_retries": [],
+          "validation_warnings": []
+        },
+        {
+          "kind": "continue",
+          "finish_reason": "stop",
+          "content_len": 3332,
+          "reasoning_len": 1049,
+          "usage": {
+            "completion_tokens": 3207,
+            "prompt_tokens": 1733,
+            "total_tokens": 4940,
+            "prompt_tokens_details": {
+              "cached_tokens": 1152
+            }
+          },
+          "latency_ms": 27527,
+          "transport_retries": [],
+          "validation_warnings": []
+        },
+        {
+          "kind": "forced_structure_fallback",
+          "finish_reason": "stop",
+          "content_len": 6803,
+          "reasoning_len": 2791,
+          "usage": {
+            "completion_tokens": 7259,
+            "prompt_tokens": 6171,
+            "total_tokens": 13430,
+            "prompt_tokens_details": {
+              "cached_tokens": 1152
+            }
+          },
+          "latency_ms": 54591,
+          "transport_retries": [],
+          "validation_warnings": []
+        }
+      ],
+      "validation_warnings": []
+    },
+    {
+      "wave": 9,
+      "status": "COMPLETED",
+      "model": "deepseek-v4.1-flash",
+      "requested_model": "deepseek-v4.1-flash",
+      "finish_reason": "stop",
+      "latency_ms": 47288,
+      "usage": {
+        "completion_tokens": 6118,
+        "prompt_tokens": 17937,
+        "total_tokens": 24055,
+        "prompt_tokens_details": {
+          "cached_tokens": 10112
+        }
+      },
+      "file": "research\\persona_dna_library\\20260920_canheguiying_dna04_ensemble\\world_live_waves\\wave_09.md",
+      "closed": false,
+      "scene_headings": [
+        "第56场｜日｜外｜荷园·塘东界石",
+        "第57场｜日｜外｜荷园·前院门房",
+        "第58场｜夜｜内｜荷园·西厢",
+        "第59场｜日｜外｜南城绣房巷·秦嫂院外",
+        "第60场｜夜｜内｜荷园·西厢"
+      ],
+      "attempts": [
+        {
+          "kind": "primary",
+          "finish_reason": "stop",
+          "content_len": 5268,
+          "reasoning_len": 2977,
+          "usage": {
+            "completion_tokens": 6118,
+            "prompt_tokens": 17937,
+            "total_tokens": 24055,
+            "prompt_tokens_details": {
+              "cached_tokens": 10112
+            }
+          },
+          "latency_ms": 47288,
+          "transport_retries": [],
+          "validation_warnings": []
+        }
+      ],
+      "validation_warnings": []
+    },
+    {
+      "wave": 10,
+      "status": "COMPLETED",
+      "model": "deepseek-v4.1-flash",
+      "requested_model": "deepseek-v4.1-flash",
+      "finish_reason": "stop",
+      "latency_ms": 50328,
+      "usage": {
+        "completion_tokens": 6465,
+        "prompt_tokens": 16718,
+        "total_tokens": 23183,
+        "prompt_tokens_details": {
+          "cached_tokens": 16512
+        }
+      },
+      "file": "research\\persona_dna_library\\20260920_canheguiying_dna04_ensemble\\world_live_waves\\wave_10.md",
+      "closed": false,
+      "scene_headings": [
+        "第61场｜日｜内｜荷园·西厢",
+        "第62场｜日｜外｜荷园·后堂廊下",
+        "第63场｜日｜外｜荷园·塘东界石",
+        "第64场｜日｜内｜县衙户房·后间",
+        "第65场｜夜｜内｜荷园·西厢"
+      ],
+      "attempts": [
+        {
+          "kind": "primary",
+          "finish_reason": "stop",
+          "content_len": 6351,
+          "reasoning_len": 1867,
+          "usage": {
+            "completion_tokens": 6465,
+            "prompt_tokens": 16718,
+            "total_tokens": 23183,
+            "prompt_tokens_details": {
+              "cached_tokens": 16512
+            }
+          },
+          "latency_ms": 50328,
+          "transport_retries": [],
+          "validation_warnings": []
+        }
+      ],
+      "validation_warnings": []
+    },
+    {
+      "wave": 11,
+      "status": "COMPLETED",
+      "model": "deepseek-v4.1-flash",
+      "requested_model": "deepseek-v4.1-flash",
+      "finish_reason": "stop",
+      "latency_ms": 53882,
+      "usage": {
+        "completion_tokens": 7799,
+        "prompt_tokens": 6257,
+        "total_tokens": 14056
+      },
+      "file": "research\\persona_dna_library\\20260920_canheguiying_dna04_ensemble\\world_live_waves\\wave_11.md",
+      "closed": false,
+      "scene_headings": [
+        "第66场｜日｜内｜县衙户房·前堂",
+        "第67场｜夜｜外｜荷园·后堂廊下",
+        "第68场｜日｜外｜荷园·塘东界石",
+        "第69场｜夜｜内｜荷园·前院倒座房",
+        "第70场｜日｜外｜荷园·塘东界石"
+      ],
+      "attempts": [
+        {
+          "kind": "primary",
+          "finish_reason": "length",
+          "content_len": 5761,
+          "reasoning_len": 5293,
+          "usage": {
+            "completion_tokens": 8191,
+            "prompt_tokens": 17597,
+            "total_tokens": 25788,
+            "prompt_tokens_details": {
+              "cached_tokens": 10112
+            }
+          },
+          "latency_ms": 59855,
+          "transport_retries": [],
+          "validation_warnings": []
+        },
+        {
+          "kind": "continue",
+          "finish_reason": "stop",
+          "content_len": 4660,
+          "reasoning_len": 4938,
+          "usage": {
+            "completion_tokens": 6953,
+            "prompt_tokens": 5700,
+            "total_tokens": 12653,
+            "prompt_tokens_details": {
+              "cached_tokens": 1152
+            }
+          },
+          "latency_ms": 54732,
+          "transport_retries": [],
+          "validation_warnings": []
+        },
+        {
+          "kind": "structure_repair_1",
+          "finish_reason": "length",
+          "content_len": 0,
+          "reasoning_len": 11080,
+          "usage": {
+            "completion_tokens": 8192,
+            "prompt_tokens": 5131,
+            "total_tokens": 13323,
+            "prompt_tokens_details": {
+              "cached_tokens": 1152
+            }
+          },
+          "latency_ms": 49900,
+          "transport_retries": [],
+          "validation_warnings": []
+        },
+        {
+          "kind": "structure_repair_2",
+          "finish_reason": "stop",
+          "content_len": 3282,
+          "reasoning_len": 4447,
+          "usage": {
+            "completion_tokens": 5476,
+            "prompt_tokens": 1414,
+            "total_tokens": 6890,
+            "prompt_tokens_details": {
+              "cached_tokens": 1152
+            }
+          },
+          "latency_ms": 35079,
+          "transport_retries": [],
+          "validation_warnings": []
+        },
+        {
+          "kind": "structure_repair_3",
+          "finish_reason": "stop",
+          "content_len": 3379,
+          "reasoning_len": 1176,
+          "usage": {
+            "completion_tokens": 3214,
+            "prompt_tokens": 3693,
+            "total_tokens": 6907
+          },
+          "latency_ms": 17299,
+          "transport_retries": [],
+          "validation_warnings": []
+        },
+        {
+          "kind": "forced_structure_fallback",
+          "finish_reason": "stop",
+          "content_len": 6496,
+          "reasoning_len": 3212,
+          "usage": {
+            "completion_tokens": 7799,
+            "prompt_tokens": 6257,
+            "total_tokens": 14056
+          },
+          "latency_ms": 53882,
+          "transport_retries": [],
+          "validation_warnings": []
+        }
+      ],
+      "validation_warnings": []
+    },
+    {
+      "wave": 12,
+      "status": "COMPLETED",
+      "model": "deepseek-v4.1-flash",
+      "requested_model": "deepseek-v4.1-flash",
+      "finish_reason": "stop",
+      "latency_ms": 47303,
+      "usage": {
+        "completion_tokens": 6857,
+        "prompt_tokens": 18250,
+        "total_tokens": 25107,
+        "prompt_tokens_details": {
+          "cached_tokens": 18048
+        }
+      },
+      "file": "research\\persona_dna_library\\20260920_canheguiying_dna04_ensemble\\world_live_waves\\wave_12.md",
+      "closed": false,
+      "scene_headings": [
+        "第71场｜日｜内｜县衙户房·后间",
+        "第72场｜日｜外｜荷园·塘东界石",
+        "第73场｜夜｜内｜荷园·后堂旧账房",
+        "第74场｜日｜内｜沈家老宅·正房外间",
+        "第75场｜日｜外｜荷园·前院门房"
+      ],
+      "attempts": [
+        {
+          "kind": "primary",
+          "finish_reason": "length",
+          "content_len": 0,
+          "reasoning_len": 11322,
+          "usage": {
+            "completion_tokens": 8191,
+            "prompt_tokens": 18198,
+            "total_tokens": 26389,
+            "prompt_tokens_details": {
+              "cached_tokens": 10112
+            }
+          },
+          "latency_ms": 58399,
+          "transport_retries": [],
+          "validation_warnings": []
+        },
+        {
+          "kind": "force_body_1",
+          "finish_reason": "stop",
+          "content_len": 4395,
+          "reasoning_len": 4136,
+          "usage": {
+            "completion_tokens": 6857,
+            "prompt_tokens": 18250,
+            "total_tokens": 25107,
+            "prompt_tokens_details": {
+              "cached_tokens": 18048
+            }
+          },
+          "latency_ms": 47303,
+          "transport_retries": [],
+          "validation_warnings": []
+        }
+      ],
+      "validation_warnings": []
+    },
+    {
+      "wave": 13,
+      "status": "COMPLETED",
+      "model": "deepseek-v4.1-flash",
+      "requested_model": "deepseek-v4.1-flash",
+      "finish_reason": "stop",
+      "latency_ms": 48968,
+      "usage": {
+        "completion_tokens": 7698,
+        "prompt_tokens": 16514,
+        "total_tokens": 24212,
+        "prompt_tokens_details": {
+          "cached_tokens": 10112
+        }
+      },
+      "file": "research\\persona_dna_library\\20260920_canheguiying_dna04_ensemble\\world_live_waves\\wave_13.md",
+      "closed": false,
+      "scene_headings": [
+        "第76场｜日｜内｜荷园·前院门房",
+        "第77场｜日｜内｜沈家老宅·二房偏院",
+        "第78场｜夜｜内｜荷园·后堂廊下",
+        "第79场｜日｜外｜荷园·塘东界石",
+        "第80场｜夜｜外｜荷园·塘东界石"
+      ],
+      "attempts": [
+        {
+          "kind": "primary",
+          "finish_reason": "stop",
+          "content_len": 3528,
+          "reasoning_len": 6421,
+          "usage": {
+            "completion_tokens": 7698,
+            "prompt_tokens": 16514,
+            "total_tokens": 24212,
+            "prompt_tokens_details": {
+              "cached_tokens": 10112
+            }
+          },
+          "latency_ms": 48968,
+          "transport_retries": [],
+          "validation_warnings": []
+        }
+      ],
+      "validation_warnings": []
+    },
+    {
+      "wave": 14,
+      "status": "COMPLETED",
+      "model": "deepseek-v4.1-flash",
+      "requested_model": "deepseek-v4.1-flash",
+      "finish_reason": "stop",
+      "latency_ms": 36212,
+      "usage": {
+        "completion_tokens": 3284,
+        "prompt_tokens": 15334,
+        "total_tokens": 18618,
+        "prompt_tokens_details": {
+          "cached_tokens": 10112
+        }
+      },
+      "file": "research\\persona_dna_library\\20260920_canheguiying_dna04_ensemble\\world_live_waves\\wave_14.md",
+      "closed": false,
+      "scene_headings": [
+        "第81场｜日｜外｜荷园·前院门房",
+        "第82场｜日｜内｜县衙·户房后间",
+        "第83场｜夜｜内｜荷园·听荷轩",
+        "第84场｜日｜外｜荷园·塘东界石",
+        "第85场｜夜｜内｜荷园·后堂廊下"
+      ],
+      "attempts": [
+        {
+          "kind": "primary",
+          "finish_reason": "stop",
+          "content_len": 4097,
+          "reasoning_len": 0,
+          "usage": {
+            "completion_tokens": 3284,
+            "prompt_tokens": 15334,
+            "total_tokens": 18618,
+            "prompt_tokens_details": {
+              "cached_tokens": 10112
+            }
+          },
+          "latency_ms": 36212,
+          "transport_retries": [],
+          "validation_warnings": []
+        }
+      ],
+      "validation_warnings": []
+    },
+    {
+      "wave": 15,
+      "status": "COMPLETED",
+      "model": "deepseek-v4.1-flash",
+      "requested_model": "deepseek-v4.1-flash",
+      "finish_reason": "stop",
+      "latency_ms": 49072,
+      "usage": {
+        "completion_tokens": 6603,
+        "prompt_tokens": 15732,
+        "total_tokens": 22335,
+        "prompt_tokens_details": {
+          "cached_tokens": 10112
+        }
+      },
+      "file": "research\\persona_dna_library\\20260920_canheguiying_dna04_ensemble\\world_live_waves\\wave_15.md",
+      "closed": false,
+      "scene_headings": [
+        "第86场｜日｜外｜城北·郑家巷黑漆门外",
+        "第87场｜日｜内｜县衙·户房后间",
+        "第88场｜夜｜外｜荷园·西墙外至后堂廊下",
+        "第89场｜日｜内｜沈家老宅·后院佛堂外间",
+        "第90场｜夜｜内｜荷园·听荷轩"
+      ],
+      "attempts": [
+        {
+          "kind": "primary",
+          "finish_reason": "stop",
+          "content_len": 4342,
+          "reasoning_len": 4020,
+          "usage": {
+            "completion_tokens": 6603,
+            "prompt_tokens": 15732,
+            "total_tokens": 22335,
+            "prompt_tokens_details": {
+              "cached_tokens": 10112
+            }
+          },
+          "latency_ms": 49072,
+          "transport_retries": [],
+          "validation_warnings": []
+        }
+      ],
+      "validation_warnings": []
+    },
+    {
+      "wave": 16,
+      "status": "COMPLETED",
+      "model": "deepseek-v4.1-flash",
+      "requested_model": "deepseek-v4.1-flash",
+      "finish_reason": "stop",
+      "latency_ms": 39258,
+      "usage": {
+        "completion_tokens": 5240,
+        "prompt_tokens": 16019,
+        "total_tokens": 21259,
+        "prompt_tokens_details": {
+          "cached_tokens": 10112
+        }
+      },
+      "file": "research\\persona_dna_library\\20260920_canheguiying_dna04_ensemble\\world_live_waves\\wave_16.md",
+      "closed": false,
+      "scene_headings": [
+        "第91场｜日｜外｜荷园·前院门房",
+        "第92场｜日｜外｜城北·小庙山门外",
+        "第93场｜日｜内｜县衙·户房后间",
+        "第94场｜日｜外｜荷园·门房至后堂廊下",
+        "第95场｜夜｜内｜荷园·听荷轩"
+      ],
+      "attempts": [
+        {
+          "kind": "primary",
+          "finish_reason": "stop",
+          "content_len": 4583,
+          "reasoning_len": 1968,
+          "usage": {
+            "completion_tokens": 5240,
+            "prompt_tokens": 16019,
+            "total_tokens": 21259,
+            "prompt_tokens_details": {
+              "cached_tokens": 10112
+            }
+          },
+          "latency_ms": 39258,
+          "transport_retries": [],
+          "validation_warnings": []
+        }
+      ],
+      "validation_warnings": []
+    },
+    {
+      "wave": 17,
+      "status": "COMPLETED",
+      "model": "deepseek-v4.1-flash",
+      "requested_model": "deepseek-v4.1-flash",
+      "finish_reason": "stop",
+      "latency_ms": 64885,
+      "usage": {
+        "completion_tokens": 9971,
+        "prompt_tokens": 16102,
+        "total_tokens": 26073
+      },
+      "file": "research\\persona_dna_library\\20260920_canheguiying_dna04_ensemble\\world_live_waves\\wave_17.md",
+      "closed": false,
+      "scene_headings": [
+        "第96场｜日｜外｜沈家老宅·后巷侧门",
+        "第97场｜日｜外｜城南·水码头",
+        "第98场｜日｜外｜荷园·前院正门",
+        "第99场｜夜｜外｜城北·郑家巷黑漆门外",
+        "第100场｜夜｜外｜荷园·后堂廊下"
+      ],
+      "attempts": [
+        {
+          "kind": "primary",
+          "finish_reason": "stop",
+          "content_len": 5052,
+          "reasoning_len": 13965,
+          "usage": {
+            "completion_tokens": 9971,
+            "prompt_tokens": 16102,
+            "total_tokens": 26073
+          },
+          "latency_ms": 64885,
+          "transport_retries": [],
+          "validation_warnings": []
+        }
+      ],
+      "validation_warnings": []
+    },
+    {
+      "wave": 18,
+      "status": "COMPLETED",
+      "model": "deepseek-v4.1-flash",
+      "requested_model": "deepseek-v4.1-flash",
+      "finish_reason": "stop",
+      "latency_ms": 48504,
+      "usage": {
+        "completion_tokens": 6703,
+        "prompt_tokens": 16259,
+        "total_tokens": 22962,
+        "prompt_tokens_details": {
+          "cached_tokens": 10112
+        }
+      },
+      "file": "research\\persona_dna_library\\20260920_canheguiying_dna04_ensemble\\world_live_waves\\wave_18.md",
+      "closed": false,
+      "scene_headings": [
+        "第101场｜日｜内｜城北·悦来客栈",
+        "第102场｜日｜外｜沈家老宅·正门外",
+        "第103场｜夜｜内｜荷园·听荷轩",
+        "第104场｜日｜外｜城北·小庙山门外",
+        "第105场｜夜｜外｜荷园·塘东界石边"
+      ],
+      "attempts": [
+        {
+          "kind": "primary",
+          "finish_reason": "stop",
+          "content_len": 4837,
+          "reasoning_len": 3880,
+          "usage": {
+            "completion_tokens": 6703,
+            "prompt_tokens": 16259,
+            "total_tokens": 22962,
+            "prompt_tokens_details": {
+              "cached_tokens": 10112
+            }
+          },
+          "latency_ms": 48504,
+          "transport_retries": [],
+          "validation_warnings": []
+        }
+      ],
+      "validation_warnings": []
+    },
+    {
+      "wave": 19,
+      "status": "COMPLETED",
+      "model": "deepseek-v4.1-flash",
+      "requested_model": "deepseek-v4.1-flash",
+      "finish_reason": "stop",
+      "latency_ms": 43209,
+      "usage": {
+        "completion_tokens": 6358,
+        "prompt_tokens": 16170,
+        "total_tokens": 22528,
+        "prompt_tokens_details": {
+          "cached_tokens": 16000
+        }
+      },
+      "file": "research\\persona_dna_library\\20260920_canheguiying_dna04_ensemble\\world_live_waves\\wave_19.md",
+      "closed": false,
+      "scene_headings": [
+        "第106场｜日｜外｜城北·聚文斋",
+        "第107场｜夜｜外｜荷园·后堂廊下",
+        "第108场｜日｜外｜城北·郑家巷黑漆门外",
+        "第109场｜夜｜外｜荷园·塘东界石边",
+        "第110场｜日｜内｜荷园·听荷轩"
+      ],
+      "attempts": [
+        {
+          "kind": "primary",
+          "finish_reason": "stop",
+          "content_len": 4583,
+          "reasoning_len": 3684,
+          "usage": {
+            "completion_tokens": 6358,
+            "prompt_tokens": 16170,
+            "total_tokens": 22528,
+            "prompt_tokens_details": {
+              "cached_tokens": 16000
+            }
+          },
+          "latency_ms": 43209,
+          "transport_retries": [],
+          "validation_warnings": []
+        }
+      ],
+      "validation_warnings": []
+    },
+    {
+      "wave": 20,
+      "status": "COMPLETED",
+      "model": "deepseek-v4.1-flash",
+      "requested_model": "deepseek-v4.1-flash",
+      "finish_reason": "stop",
+      "latency_ms": 37093,
+      "usage": {
+        "completion_tokens": 5930,
+        "prompt_tokens": 3919,
+        "total_tokens": 9849,
+        "prompt_tokens_details": {
+          "cached_tokens": 1280
+        }
+      },
+      "file": "research\\persona_dna_library\\20260920_canheguiying_dna04_ensemble\\world_live_waves\\wave_20.md",
+      "closed": false,
+      "scene_headings": [
+        "第111场｜日｜外｜沈家老宅后巷",
+        "第112场｜夜｜外｜沈家老宅后巷·佛堂西窗外",
+        "第113场｜日｜外｜城北·郑家巷口炭铺",
+        "第114场｜夜｜内｜荷园·听荷轩",
+        "第115场｜夜｜内｜荷园·后院厨房",
+        "第116场｜日｜内｜荷园·前厅",
+        "第117场｜夜｜外｜城北·郑家巷",
+        "第118场｜夜｜内｜荷园·听荷轩"
+      ],
+      "attempts": [
+        {
+          "kind": "primary",
+          "finish_reason": "length",
+          "content_len": 3176,
+          "reasoning_len": 7212,
+          "usage": {
+            "completion_tokens": 8192,
+            "prompt_tokens": 16130,
+            "total_tokens": 24322,
+            "prompt_tokens_details": {
+              "cached_tokens": 10112
+            }
+          },
+          "latency_ms": 54052,
+          "transport_retries": [],
+          "validation_warnings": []
+        },
+        {
+          "kind": "continue",
+          "finish_reason": "stop",
+          "content_len": 2210,
+          "reasoning_len": 5462,
+          "usage": {
+            "completion_tokens": 5930,
+            "prompt_tokens": 3919,
+            "total_tokens": 9849,
+            "prompt_tokens_details": {
+              "cached_tokens": 1280
+            }
+          },
+          "latency_ms": 37093,
+          "transport_retries": [],
+          "validation_warnings": []
+        }
+      ],
+      "validation_warnings": [
+        "MISSING_ONE_LINE"
+      ]
+    },
+    {
+      "wave": 21,
+      "status": "COMPLETED",
+      "model": "deepseek-v4.1-flash",
+      "requested_model": "deepseek-v4.1-flash",
+      "finish_reason": "stop",
+      "latency_ms": 40888,
+      "usage": {
+        "completion_tokens": 6557,
+        "prompt_tokens": 6311,
+        "total_tokens": 12868,
+        "prompt_tokens_details": {
+          "cached_tokens": 1280
+        }
+      },
+      "file": "research\\persona_dna_library\\20260920_canheguiying_dna04_ensemble\\world_live_waves\\wave_21.md",
+      "closed": false,
+      "scene_headings": [
+        "第119场｜日｜内｜沈家老宅·旧账房",
+        "第120场｜夜｜外｜城北·郑家巷",
+        "第121场｜日｜内｜荷园·前厅",
+        "第122场｜夜｜内/外｜荷园·后堂",
+        "第123场｜日｜外｜荷园·门前"
+      ],
+      "attempts": [
+        {
+          "kind": "primary",
+          "finish_reason": "length",
+          "content_len": 2604,
+          "reasoning_len": 7849,
+          "usage": {
+            "completion_tokens": 8192,
+            "prompt_tokens": 17979,
+            "total_tokens": 26171,
+            "prompt_tokens_details": {
+              "cached_tokens": 10112
+            }
+          },
+          "latency_ms": 50231,
+          "transport_retries": [],
+          "validation_warnings": []
+        },
+        {
+          "kind": "continue",
+          "finish_reason": "length",
+          "content_len": 3907,
+          "reasoning_len": 6389,
+          "usage": {
+            "completion_tokens": 8192,
+            "prompt_tokens": 3491,
+            "total_tokens": 11683,
+            "prompt_tokens_details": {
+              "cached_tokens": 1280
+            }
+          },
+          "latency_ms": 54410,
+          "transport_retries": [],
+          "validation_warnings": []
+        },
+        {
+          "kind": "structure_repair_1",
+          "finish_reason": "length",
+          "content_len": 959,
+          "reasoning_len": 9439,
+          "usage": {
+            "completion_tokens": 8192,
+            "prompt_tokens": 5325,
+            "total_tokens": 13517,
+            "prompt_tokens_details": {
+              "cached_tokens": 1280
+            }
+          },
+          "latency_ms": 43808,
+          "transport_retries": [],
+          "validation_warnings": []
+        },
+        {
+          "kind": "continue",
+          "finish_reason": "stop",
+          "content_len": 3835,
+          "reasoning_len": 195,
+          "usage": {
+            "completion_tokens": 3171,
+            "prompt_tokens": 2148,
+            "total_tokens": 5319,
+            "prompt_tokens_details": {
+              "cached_tokens": 1280
+            }
+          },
+          "latency_ms": 26711,
+          "transport_retries": [],
+          "validation_warnings": []
+        },
+        {
+          "kind": "structure_repair_2",
+          "finish_reason": "stop",
+          "content_len": 4987,
+          "reasoning_len": 3888,
+          "usage": {
+            "completion_tokens": 6875,
+            "prompt_tokens": 5225,
+            "total_tokens": 12100,
+            "prompt_tokens_details": {
+              "cached_tokens": 1280
+            }
+          },
+          "latency_ms": 40455,
+          "transport_retries": [],
+          "validation_warnings": []
+        },
+        {
+          "kind": "structure_repair_3",
+          "finish_reason": "length",
+          "content_len": 7284,
+          "reasoning_len": 3422,
+          "usage": {
+            "completion_tokens": 8191,
+            "prompt_tokens": 5339,
+            "total_tokens": 13530,
+            "prompt_tokens_details": {
+              "cached_tokens": 1280
+            }
+          },
+          "latency_ms": 44196,
+          "transport_retries": [],
+          "validation_warnings": []
+        },
+        {
+          "kind": "continue",
+          "finish_reason": "stop",
+          "content_len": 9193,
+          "reasoning_len": 215,
+          "usage": {
+            "completion_tokens": 7254,
+            "prompt_tokens": 6037,
+            "total_tokens": 13291,
+            "prompt_tokens_details": {
+              "cached_tokens": 1280
+            }
+          },
+          "latency_ms": 55819,
+          "transport_retries": [],
+          "validation_warnings": []
+        },
+        {
+          "kind": "forced_structure_fallback",
+          "finish_reason": "stop",
+          "content_len": 3583,
+          "reasoning_len": 4744,
+          "usage": {
+            "completion_tokens": 6557,
+            "prompt_tokens": 6311,
+            "total_tokens": 12868,
+            "prompt_tokens_details": {
+              "cached_tokens": 1280
+            }
+          },
+          "latency_ms": 40888,
+          "transport_retries": [],
+          "validation_warnings": []
+        }
+      ],
+      "validation_warnings": [
+        "MISSING_ONE_LINE"
+      ]
+    },
+    {
+      "wave": 22,
+      "status": "COMPLETED",
+      "model": "deepseek-v4.1-flash",
+      "requested_model": "deepseek-v4.1-flash",
+      "finish_reason": "stop",
+      "latency_ms": 36334,
+      "usage": {
+        "completion_tokens": 4871,
+        "prompt_tokens": 16208,
+        "total_tokens": 21079
+      },
+      "file": "research\\persona_dna_library\\20260920_canheguiying_dna04_ensemble\\world_live_waves\\wave_22.md",
+      "closed": false,
+      "scene_headings": [
+        "第124场｜日｜外｜城北·炭铺后巷",
+        "第125场｜夜｜内｜荷园·后堂",
+        "第126场｜日｜外｜荷园·门前",
+        "第127场｜夜｜外｜城北·郑家巷",
+        "第128场｜夜｜内｜荷园·听荷轩"
+      ],
+      "attempts": [
+        {
+          "kind": "primary",
+          "finish_reason": "stop",
+          "content_len": 4534,
+          "reasoning_len": 1646,
+          "usage": {
+            "completion_tokens": 4871,
+            "prompt_tokens": 16208,
+            "total_tokens": 21079
+          },
+          "latency_ms": 36334,
+          "transport_retries": [],
+          "validation_warnings": []
+        }
+      ],
+      "validation_warnings": []
+    },
+    {
+      "wave": 23,
+      "status": "COMPLETED",
+      "model": "deepseek-v4.1-flash",
+      "requested_model": "deepseek-v4.1-flash",
+      "finish_reason": "stop",
+      "latency_ms": 53791,
+      "usage": {
+        "completion_tokens": 8021,
+        "prompt_tokens": 15640,
+        "total_tokens": 23661
+      },
+      "file": "research\\persona_dna_library\\20260920_canheguiying_dna04_ensemble\\world_live_waves\\wave_23.md",
+      "closed": false,
+      "scene_headings": [
+        "第129场｜日｜外｜荷园·后门",
+        "第130场｜日｜外｜荷园·门前",
+        "第131场｜日｜外｜荷园·后堂廊下",
+        "第132场｜夜｜外｜城北·郑家巷黑漆门外"
+      ],
+      "attempts": [
+        {
+          "kind": "primary",
+          "finish_reason": "stop",
+          "content_len": 3764,
+          "reasoning_len": 6748,
+          "usage": {
+            "completion_tokens": 8021,
+            "prompt_tokens": 15640,
+            "total_tokens": 23661
+          },
+          "latency_ms": 53791,
+          "transport_retries": [],
+          "validation_warnings": []
+        }
+      ],
+      "validation_warnings": []
+    },
+    {
+      "wave": 24,
+      "status": "COMPLETED",
+      "model": "deepseek-v4.1-flash",
+      "requested_model": "deepseek-v4.1-flash",
+      "finish_reason": "stop",
+      "latency_ms": 50229,
+      "usage": {
+        "completion_tokens": 6759,
+        "prompt_tokens": 15003,
+        "total_tokens": 21762
+      },
+      "file": "research\\persona_dna_library\\20260920_canheguiying_dna04_ensemble\\world_live_waves\\wave_24.md",
+      "closed": false,
+      "scene_headings": [
+        "第133场｜日｜外｜荷园·门前",
+        "第134场｜日｜内｜城北·草鞋巷·卫家",
+        "第135场｜夜｜外｜荷园·后堂廊下",
+        "第136场｜日｜内｜荷园·听荷轩",
+        "第137场｜日｜外｜荷园·塘东界石"
+      ],
+      "attempts": [
+        {
+          "kind": "primary",
+          "finish_reason": "stop",
+          "content_len": 4382,
+          "reasoning_len": 4604,
+          "usage": {
+            "completion_tokens": 6759,
+            "prompt_tokens": 15003,
+            "total_tokens": 21762
+          },
+          "latency_ms": 50229,
+          "transport_retries": [],
+          "validation_warnings": []
+        }
+      ],
+      "validation_warnings": []
+    },
+    {
+      "wave": 25,
+      "status": "COMPLETED",
+      "model": "deepseek-v4.1-flash",
+      "requested_model": "deepseek-v4.1-flash",
+      "finish_reason": "stop",
+      "latency_ms": 48841,
+      "usage": {
+        "completion_tokens": 6812,
+        "prompt_tokens": 15549,
+        "total_tokens": 22361
+      },
+      "file": "research\\persona_dna_library\\20260920_canheguiying_dna04_ensemble\\world_live_waves\\wave_25.md",
+      "closed": false,
+      "scene_headings": [
+        "第138场｜日｜外｜荷园·门前",
+        "第139场｜日｜外｜城北·郑家巷·黑漆门外",
+        "第140场｜日｜外｜荷园·门前",
+        "第141场｜夜｜外｜荷园·后堂廊下",
+        "第142场｜日｜内｜荷园·听荷轩"
+      ],
+      "attempts": [
+        {
+          "kind": "primary",
+          "finish_reason": "stop",
+          "content_len": 4616,
+          "reasoning_len": 3962,
+          "usage": {
+            "completion_tokens": 6812,
+            "prompt_tokens": 15549,
+            "total_tokens": 22361
+          },
+          "latency_ms": 48841,
+          "transport_retries": [],
+          "validation_warnings": []
+        }
+      ],
+      "validation_warnings": []
+    },
+    {
+      "wave": 26,
+      "status": "COMPLETED",
+      "model": "deepseek-v4.1-flash",
+      "requested_model": "deepseek-v4.1-flash",
+      "finish_reason": "stop",
+      "latency_ms": 40814,
+      "usage": {
+        "completion_tokens": 5584,
+        "prompt_tokens": 6261,
+        "total_tokens": 11845,
+        "prompt_tokens_details": {
+          "cached_tokens": 1152
+        }
+      },
+      "file": "research\\persona_dna_library\\20260920_canheguiying_dna04_ensemble\\world_live_waves\\wave_26.md",
+      "closed": false,
+      "scene_headings": [
+        "第143场｜日｜内｜沈家祖宅·东厢账房",
+        "第144场｜夜｜外｜荷园·后堂廊下",
+        "第145场｜日｜内｜荷园·听荷轩",
+        "第146场｜日｜外｜城北·郑家巷·黑漆门内",
+        "第147场｜夜｜内｜荷园·听荷轩"
+      ],
+      "attempts": [
+        {
+          "kind": "primary",
+          "finish_reason": "length",
+          "content_len": 1931,
+          "reasoning_len": 9100,
+          "usage": {
+            "completion_tokens": 8192,
+            "prompt_tokens": 16002,
+            "total_tokens": 24194,
+            "prompt_tokens_details": {
+              "cached_tokens": 10112
+            }
+          },
+          "latency_ms": 53467,
+          "transport_retries": [],
+          "validation_warnings": []
+        },
+        {
+          "kind": "continue",
+          "finish_reason": "stop",
+          "content_len": 4906,
+          "reasoning_len": 2548,
+          "usage": {
+            "completion_tokens": 5603,
+            "prompt_tokens": 2827,
+            "total_tokens": 8430,
+            "prompt_tokens_details": {
+              "cached_tokens": 1280
+            }
+          },
+          "latency_ms": 37691,
+          "transport_retries": [],
+          "validation_warnings": []
+        },
+        {
+          "kind": "structure_repair_1",
+          "finish_reason": "length",
+          "content_len": 8911,
+          "reasoning_len": 2110,
+          "usage": {
+            "completion_tokens": 8191,
+            "prompt_tokens": 5206,
+            "total_tokens": 13397,
+            "prompt_tokens_details": {
+              "cached_tokens": 1280
+            }
+          },
+          "latency_ms": 45898,
+          "transport_retries": [],
+          "validation_warnings": []
+        },
+        {
+          "kind": "continue",
+          "finish_reason": "stop",
+          "content_len": 8016,
+          "reasoning_len": 1064,
+          "usage": {
+            "completion_tokens": 6841,
+            "prompt_tokens": 5876,
+            "total_tokens": 12717,
+            "prompt_tokens_details": {
+              "cached_tokens": 1280
+            }
+          },
+          "latency_ms": 48129,
+          "transport_retries": [],
+          "validation_warnings": []
+        },
+        {
+          "kind": "structure_repair_2",
+          "finish_reason": "length",
+          "content_len": 0,
+          "reasoning_len": 11642,
+          "usage": {
+            "completion_tokens": 8192,
+            "prompt_tokens": 5209,
+            "total_tokens": 13401,
+            "prompt_tokens_details": {
+              "cached_tokens": 1280
+            }
+          },
+          "latency_ms": 50798,
+          "transport_retries": [],
+          "validation_warnings": []
+        },
+        {
+          "kind": "structure_repair_3",
+          "finish_reason": "stop",
+          "content_len": 3576,
+          "reasoning_len": 1527,
+          "usage": {
+            "completion_tokens": 3685,
+            "prompt_tokens": 1413,
+            "total_tokens": 5098
+          },
+          "latency_ms": 26440,
+          "transport_retries": [],
+          "validation_warnings": []
+        },
+        {
+          "kind": "forced_structure_fallback",
+          "finish_reason": "stop",
+          "content_len": 4990,
+          "reasoning_len": 2057,
+          "usage": {
+            "completion_tokens": 5584,
+            "prompt_tokens": 6261,
+            "total_tokens": 11845,
+            "prompt_tokens_details": {
+              "cached_tokens": 1152
+            }
+          },
+          "latency_ms": 40814,
+          "transport_retries": [],
+          "validation_warnings": []
+        }
+      ],
+      "validation_warnings": []
+    },
+    {
+      "wave": 27,
+      "status": "COMPLETED",
+      "model": "deepseek-v4.1-flash",
+      "requested_model": "deepseek-v4.1-flash",
+      "finish_reason": "stop",
+      "latency_ms": 56321,
+      "usage": {
+        "completion_tokens": 7991,
+        "prompt_tokens": 16376,
+        "total_tokens": 24367,
+        "prompt_tokens_details": {
+          "cached_tokens": 10112
+        }
+      },
+      "file": "research\\persona_dna_library\\20260920_canheguiying_dna04_ensemble\\world_live_waves\\wave_27.md",
+      "closed": false,
+      "scene_headings": [
+        "第148场｜日｜内｜荷园·听荷轩",
+        "第149场｜夜｜外｜荷园·后堂廊下",
+        "第150场｜日｜内｜荷园·听荷轩",
+        "第151场｜夜｜内｜荷园·听荷轩",
+        "第152场｜日｜内｜荷园·后堂"
+      ],
+      "attempts": [
+        {
+          "kind": "primary",
+          "finish_reason": "stop",
+          "content_len": 5082,
+          "reasoning_len": 5051,
+          "usage": {
+            "completion_tokens": 7991,
+            "prompt_tokens": 16376,
+            "total_tokens": 24367,
+            "prompt_tokens_details": {
+              "cached_tokens": 10112
+            }
+          },
+          "latency_ms": 56321,
+          "transport_retries": [],
+          "validation_warnings": []
+        }
+      ],
+      "validation_warnings": []
+    },
+    {
+      "wave": 28,
+      "status": "COMPLETED",
+      "model": "deepseek-v4.1-flash",
+      "requested_model": "deepseek-v4.1-flash",
+      "finish_reason": "stop",
+      "latency_ms": 44605,
+      "usage": {
+        "completion_tokens": 7340,
+        "prompt_tokens": 16512,
+        "total_tokens": 23852,
+        "prompt_tokens_details": {
+          "cached_tokens": 16256
+        }
+      },
+      "file": "research\\persona_dna_library\\20260920_canheguiying_dna04_ensemble\\world_live_waves\\wave_28.md",
+      "closed": false,
+      "scene_headings": [
+        "第153场｜日｜外｜城西·晏家书铺门外",
+        "第154场｜夜｜内｜荷园·听荷轩",
+        "第155场｜日｜内｜沈家祖宅·正房外间",
+        "第156场｜夜｜外｜荷园·塘东界石边"
+      ],
+      "attempts": [
+        {
+          "kind": "primary",
+          "finish_reason": "stop",
+          "content_len": 3815,
+          "reasoning_len": 5903,
+          "usage": {
+            "completion_tokens": 7340,
+            "prompt_tokens": 16512,
+            "total_tokens": 23852,
+            "prompt_tokens_details": {
+              "cached_tokens": 16256
+            }
+          },
+          "latency_ms": 44605,
+          "transport_retries": [],
+          "validation_warnings": []
+        }
+      ],
+      "validation_warnings": []
+    },
+    {
+      "wave": 29,
+      "status": "COMPLETED",
+      "model": "deepseek-v4.1-flash",
+      "requested_model": "deepseek-v4.1-flash",
+      "finish_reason": "stop",
+      "latency_ms": 49787,
+      "usage": {
+        "completion_tokens": 8743,
+        "prompt_tokens": 6140,
+        "total_tokens": 14883
+      },
+      "file": "research\\persona_dna_library\\20260920_canheguiying_dna04_ensemble\\world_live_waves\\wave_29.md",
+      "closed": false,
+      "scene_headings": [
+        "第157场｜日暮｜内｜荷园·听荷轩",
+        "第158场｜夜｜内｜沈家祖宅·正房外间",
+        "第159场｜夜｜外｜荷园·塘东界石边",
+        "第160场｜夜｜外｜荷园·东墙外至巷口"
+      ],
+      "attempts": [
+        {
+          "kind": "primary",
+          "finish_reason": "length",
+          "content_len": 1069,
+          "reasoning_len": 10187,
+          "usage": {
+            "completion_tokens": 8191,
+            "prompt_tokens": 15315,
+            "total_tokens": 23506,
+            "prompt_tokens_details": {
+              "cached_tokens": 10112
+            }
+          },
+          "latency_ms": 55518,
+          "transport_retries": [],
+          "validation_warnings": []
+        },
+        {
+          "kind": "continue",
+          "finish_reason": "stop",
+          "content_len": 3722,
+          "reasoning_len": 1987,
+          "usage": {
+            "completion_tokens": 4069,
+            "prompt_tokens": 2204,
+            "total_tokens": 6273,
+            "prompt_tokens_details": {
+              "cached_tokens": 1280
+            }
+          },
+          "latency_ms": 30485,
+          "transport_retries": [],
+          "validation_warnings": []
+        },
+        {
+          "kind": "structure_repair_1",
+          "finish_reason": "stop",
+          "content_len": 7695,
+          "reasoning_len": 1997,
+          "usage": {
+            "completion_tokens": 7444,
+            "prompt_tokens": 5085,
+            "total_tokens": 12529,
+            "prompt_tokens_details": {
+              "cached_tokens": 1280
+            }
+          },
+          "latency_ms": 43795,
+          "transport_retries": [],
+          "validation_warnings": []
+        },
+        {
+          "kind": "structure_repair_2",
+          "finish_reason": "length",
+          "content_len": 4156,
+          "reasoning_len": 6895,
+          "usage": {
+            "completion_tokens": 8191,
+            "prompt_tokens": 5386,
+            "total_tokens": 13577,
+            "prompt_tokens_details": {
+              "cached_tokens": 1280
+            }
+          },
+          "latency_ms": 48765,
+          "transport_retries": [],
+          "validation_warnings": []
+        },
+        {
+          "kind": "continue",
+          "finish_reason": "stop",
+          "content_len": 4048,
+          "reasoning_len": 533,
+          "usage": {
+            "completion_tokens": 3413,
+            "prompt_tokens": 4572,
+            "total_tokens": 7985,
+            "prompt_tokens_details": {
+              "cached_tokens": 1280
+            }
+          },
+          "latency_ms": 27240,
+          "transport_retries": [],
+          "validation_warnings": []
+        },
+        {
+          "kind": "structure_repair_3",
+          "finish_reason": "length",
+          "content_len": 0,
+          "reasoning_len": 11379,
+          "usage": {
+            "completion_tokens": 8192,
+            "prompt_tokens": 5187,
+            "total_tokens": 13379,
+            "prompt_tokens_details": {
+              "cached_tokens": 1280
+            }
+          },
+          "latency_ms": 44982,
+          "transport_retries": [],
+          "validation_warnings": []
+        },
+        {
+          "kind": "forced_structure_fallback",
+          "finish_reason": "stop",
+          "content_len": 4129,
+          "reasoning_len": 7449,
+          "usage": {
+            "completion_tokens": 8743,
+            "prompt_tokens": 6140,
+            "total_tokens": 14883
+          },
+          "latency_ms": 49787,
+          "transport_retries": [
+            {
+              "attempt": 1,
+              "retryable": true,
+              "error_type": "TimeoutError",
+              "error": "timed out",
+              "sleep_seconds": 5.0
+            }
+          ],
+          "validation_warnings": []
+        }
+      ],
+      "validation_warnings": []
+    },
+    {
+      "wave": 30,
+      "status": "COMPLETED",
+      "model": "deepseek-v4.1-flash",
+      "requested_model": "deepseek-v4.1-flash",
+      "finish_reason": "stop",
+      "latency_ms": 38254,
+      "usage": {
+        "completion_tokens": 5576,
+        "prompt_tokens": 15636,
+        "total_tokens": 21212,
+        "prompt_tokens_details": {
+          "cached_tokens": 10112
+        }
+      },
+      "file": "research\\persona_dna_library\\20260920_canheguiying_dna04_ensemble\\world_live_waves\\wave_30.md",
+      "closed": false,
+      "scene_headings": [
+        "第161场｜日｜内｜荷园·东厢",
+        "第162场｜日｜外｜荷园·前院门房",
+        "第163场｜日｜内｜荷园·后堂外间",
+        "第164场｜夜｜外｜荷园·塘东涵洞口",
+        "第165场｜夜｜内｜荷园·听荷轩"
+      ],
+      "attempts": [
+        {
+          "kind": "primary",
+          "finish_reason": "stop",
+          "content_len": 4795,
+          "reasoning_len": 2305,
+          "usage": {
+            "completion_tokens": 5576,
+            "prompt_tokens": 15636,
+            "total_tokens": 21212,
+            "prompt_tokens_details": {
+              "cached_tokens": 10112
+            }
+          },
+          "latency_ms": 38254,
+          "transport_retries": [],
+          "validation_warnings": []
+        }
+      ],
+      "validation_warnings": []
+    },
+    {
+      "wave": 31,
+      "status": "COMPLETED",
+      "model": "deepseek-v4.1-flash",
+      "requested_model": "deepseek-v4.1-flash",
+      "finish_reason": "stop",
+      "latency_ms": 31255,
+      "usage": {
+        "completion_tokens": 4321,
+        "prompt_tokens": 16485,
+        "total_tokens": 20806,
+        "prompt_tokens_details": {
+          "cached_tokens": 10112
+        }
+      },
+      "file": "research\\persona_dna_library\\20260920_canheguiying_dna04_ensemble\\world_live_waves\\wave_31.md",
+      "closed": false,
+      "scene_headings": [
+        "第166场｜日｜外｜城西·土地庙后墙",
+        "第167场｜日｜内｜县衙·户房后间",
+        "第168场｜日｜外｜荷园·前院门房",
+        "第169场｜夜｜外｜城西·庙后巷何家后院",
+        "第170场｜夜｜内｜荷园·听荷轩"
+      ],
+      "attempts": [
+        {
+          "kind": "primary",
+          "finish_reason": "stop",
+          "content_len": 4779,
+          "reasoning_len": 619,
+          "usage": {
+            "completion_tokens": 4321,
+            "prompt_tokens": 16485,
+            "total_tokens": 20806,
+            "prompt_tokens_details": {
+              "cached_tokens": 10112
+            }
+          },
+          "latency_ms": 31255,
+          "transport_retries": [],
+          "validation_warnings": []
+        }
+      ],
+      "validation_warnings": []
+    },
+    {
+      "wave": 32,
+      "status": "COMPLETED",
+      "model": "deepseek-v4.1-flash",
+      "requested_model": "deepseek-v4.1-flash",
+      "finish_reason": "stop",
+      "latency_ms": 44394,
+      "usage": {
+        "completion_tokens": 6255,
+        "prompt_tokens": 16630,
+        "total_tokens": 22885,
+        "prompt_tokens_details": {
+          "cached_tokens": 10112
+        }
+      },
+      "file": "research\\persona_dna_library\\20260920_canheguiying_dna04_ensemble\\world_live_waves\\wave_32.md",
+      "closed": false,
+      "scene_headings": [
+        "第171场｜日｜外｜城西·庙后巷香烛铺前",
+        "第172场｜日｜内｜县衙·户房后间",
+        "第173场｜日｜外｜荷园·前院门房",
+        "第174场｜夜｜外｜荷园·塘东涵洞口",
+        "第175场｜夜｜内｜荷园·听荷轩"
+      ],
+      "attempts": [
+        {
+          "kind": "primary",
+          "finish_reason": "stop",
+          "content_len": 5081,
+          "reasoning_len": 3135,
+          "usage": {
+            "completion_tokens": 6255,
+            "prompt_tokens": 16630,
+            "total_tokens": 22885,
+            "prompt_tokens_details": {
+              "cached_tokens": 10112
+            }
+          },
+          "latency_ms": 44394,
+          "transport_retries": [],
+          "validation_warnings": []
+        }
+      ],
+      "validation_warnings": []
+    }
+  ],
+  "true_source_untouched": "evolve_candidate.v1.md",
+  "note": "活体演化候选。不是锁稿。未进生产。resume-safe。",
+  "summary": {
+    "status": "COMPLETED",
+    "attempt": 1,
+    "model": "deepseek-v4.1-flash",
+    "latency_ms": 13769,
+    "usage": {
+      "completion_tokens": 1296,
+      "prompt_tokens": 14358,
+      "total_tokens": 15654,
+      "prompt_tokens_details": {
+        "cached_tokens": 1280
+      }
+    },
+    "finish_reason": "stop",
+    "prompt_chars": 17162,
+    "transport_retries": [],
+    "attempts": [
+      {
+        "attempt": 1,
+        "model": "deepseek-v4.1-flash",
+        "latency_ms": 13769,
+        "usage": {
+          "completion_tokens": 1296,
+          "prompt_tokens": 14358,
+          "total_tokens": 15654,
+          "prompt_tokens_details": {
+            "cached_tokens": 1280
+          }
+        },
+        "finish_reason": "stop",
+        "prompt_chars": 17162,
+        "content_len": 828,
+        "transport_retries": []
+      }
+    ]
+  }
+}

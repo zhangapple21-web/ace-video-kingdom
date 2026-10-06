@@ -1,0 +1,45 @@
+{
+  "schema": "video_kingdom.character_continuity_audit.v1",
+  "layer": "CREATOR_LIVE",
+  "production_integration": false,
+  "overwrite_true_source": false,
+  "dna_refs": [
+    "research/persona_dna_library/20260920_canheguiying/C001.persona_dna.v1.json",
+    "research/persona_dna_library/20260920_canheguiying/C002.persona_dna.v1.json"
+  ],
+  "hard_locks": [
+    "林墨成年女魂，禁止十六七/少女/未成年形象"
+  ],
+  "findings": [
+    {
+      "id": "C-ZHOU-01",
+      "character": "周培",
+      "verdict": "NO_SPLIT",
+      "evidence": "不签空名、官挖不私吞、识假字、不替林墨做主、问名后答等。与DNA淡泊/守拙/被懂的人勾住后守候一致。"
+    },
+    {
+      "id": "C-LIN-01",
+      "character": "林墨",
+      "verdict": "GROWTH_NOT_SPLIT",
+      "evidence": "倨傲守界、禁写静逸、夜来规则在S46/S49被正文改写为可白日留屋内。属活体选择，不是静默换人设。"
+    },
+    {
+      "id": "C-LIN-02",
+      "character": "林墨/静逸",
+      "verdict": "SOURCE_FORK",
+      "evidence": "opening_given：我姓林，名墨，字静逸。活体S27-S43：静逸为虚五岁走的孩子，气入契，林墨另为认领人。两真源并存，本层不合并、不判哪边是主线。"
+    },
+    {
+      "id": "C-AGE-01",
+      "character": "林墨",
+      "verdict": "LOCK_HELD_IN_LIVE_WAVES",
+      "evidence": "world_live_waves 检索十六七/少女计数为0。opening 校正横幅要求成年。"
+    },
+    {
+      "id": "C-NEW-01",
+      "character": "新登场众人",
+      "verdict": "MOTIVE_PRESENT",
+      "evidence": "孙税管契税、赵九讨藕与旧事、林维则管库后投园、林伯渊索权、守园老沈守棺、沈流/沈守业争谱争池、孙婆还鞋。非无动机工具人。"
+    }
+  ]
+}

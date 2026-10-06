@@ -1,0 +1,10 @@
+{
+  "schema": "video_kingdom.canon_scene_pass.v1",
+  "at": "2026-09-26T22:28:32+08:00",
+  "lib": "D:\\视频创作\\ace-video-kingdom\\research\\persona_dna_library\\20260920_canheguiying_reincarnation_v2",
+  "next": 243,
+  "quota_used": 2,
+  "max_per_day": 2,
+  "verdict": "SKIPPED",
+  "reason": "daily_cap"
+}

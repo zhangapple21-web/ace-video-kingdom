@@ -1,0 +1,2 @@
+2026-09-28 user order: stop paid world_live writing and model liveness probes. Do not delete unless the user explicitly asks to resume.
+2026-09-28 user clarified: keep two passed scenes a day. Daily cap replaces this hard stop. Do not recreate this file as a master switch.

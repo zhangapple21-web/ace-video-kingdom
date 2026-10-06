@@ -5,6 +5,7 @@ import hashlib
 import subprocess
 from pathlib import Path
 import sys
+from tools.atomic_io import atomic_write_text
 
 sys.stdout.reconfigure(encoding="utf-8")  # Bug #1 fix: prevent UnicodeEncodeError on GBK console
 
@@ -15,7 +16,7 @@ SOURCE = ROOT / "media_staging" / "episode_008_rule_seat_system" / "revision_pil
 
 
 def run(*args: str) -> None:
-    subprocess.run(list(args), check=True)
+    subprocess.run(list(args), check=True, timeout=300)
 
 
 def main() -> None:
@@ -40,7 +41,7 @@ def main() -> None:
         paths.append(out)
 
     concat = WORK / "concat.txt"
-    concat.write_text("\n".join(f"file '{p}'" for p in paths) + "\n", encoding="utf-8")
+    atomic_write_text(concat, "\n".join(f"file '{p}'" for p in paths) + "\n", encoding="utf-8")
     silent = WORK / "silent_video.mp4"
     run("ffmpeg", "-y", "-hide_banner", "-loglevel", "error", "-f", "concat", "-safe", "0", "-i", str(concat), "-c", "copy", str(silent))
 
@@ -62,18 +63,16 @@ def main() -> None:
         "林岚（心声）：我不是靠奇迹逃走。我只是把纸张一张张摆正，让证据先走出去。",
     ]
     text_path = WORK / "voice_text.txt"
-    text_path.write_text("\n".join(lines), encoding="utf-8-sig")
+    atomic_write_text(text_path, "\n".join(lines), encoding="utf-8-sig")
     voice = WORK / "episode_008_director_recut_v2_voice.wav"
     ps = WORK / "make_voice_runtime.ps1"
-    ps.write_text(
-        "$ErrorActionPreference='Stop'; Add-Type -AssemblyName System.Speech; "
+    atomic_write_text(ps, "$ErrorActionPreference='Stop'; Add-Type -AssemblyName System.Speech; "
         "$text=Get-Content -Raw -Encoding UTF8 '" + str(text_path) + "'; "
         "$s=New-Object System.Speech.Synthesis.SpeechSynthesizer; "
         "$v=$s.GetInstalledVoices() | ForEach-Object {$_.VoiceInfo} | Where-Object {$_.Culture.Name -eq 'zh-CN'} | Select-Object -First 1; "
         "if($v){$s.SelectVoice($v.Name)}; $s.Rate=0; $s.Volume=92; "
         "$s.SetOutputToWaveFile('" + str(voice) + "'); $s.Speak($text); $s.Dispose();",
-        encoding="ascii",
-    )
+        encoding="ascii",)
     run("powershell", "-NoProfile", "-ExecutionPolicy", "Bypass", "-File", str(ps))
 
     cue_times = [
@@ -91,14 +90,14 @@ def main() -> None:
     for i, ((start, end), line) in enumerate(zip(cue_times, lines), 1):
         subtitle_line = line.replace("。", "。\n", 1) if len(line) > 20 else line
         srt_lines += [str(i), f"{start} --> {end}", subtitle_line, ""]
-    srt.write_text("\n".join(srt_lines), encoding="utf-8-sig")
+    atomic_write_text(srt, "\n".join(srt_lines), encoding="utf-8-sig")
 
     final = WORK / "episode_008_director_recut_v2.mp4"
     run("ffmpeg", "-y", "-hide_banner", "-loglevel", "error", "-i", str(silent), "-i", str(voice), "-filter_complex", "[1:a]apad=pad_dur=2,volume=1.0[a]", "-map", "0:v:0", "-map", "[a]", "-shortest", "-c:v", "copy", "-c:a", "aac", "-b:a", "128k", "-ar", "48000", "-ac", "2", str(final))
     probe = subprocess.check_output(["ffprobe", "-v", "error", "-show_entries", "format=duration:stream=codec_name,width,height,codec_type", "-of", "json", str(final)], text=True)
-    (WORK / "ffprobe.json").write_text(probe, encoding="utf-8")
+    atomic_write_text((WORK / "ffprobe.json"), probe, encoding="utf-8")
     digest = hashlib.sha256(final.read_bytes()).hexdigest()
-    (WORK / "sha256.json").write_text(json.dumps({"sha256": digest, "path": str(final)}, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    atomic_write_text((WORK / "sha256.json"), json.dumps({"sha256": digest, "path": str(final)}, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     print(final)
 
 

@@ -1,0 +1,35 @@
+[world-live] resume start_wave=17 next_scene=101 have_waves=16 closed=False
+[world-live] wave 17/32 start scene~101
+[world-live] primary finish=length content=4532 reasoning=6121 usage={'completion_tokens': 8191, 'prompt_tokens': 11660, 'total_tokens': 19851, 'prompt_tokens_details': {'cached_tokens': 1408}}
+[world-live] truncated, continue
+[world-live] wave 17 done scenes=9 closed=False
+[world-live] wave 18/32 start scene~110
+[world-live] primary finish=length content=541 reasoning=10940 usage={'completion_tokens': 8192, 'prompt_tokens': 17787, 'total_tokens': 25979, 'prompt_tokens_details': {'cached_tokens': 3328}}
+[world-live] truncated, continue
+[world-live] wave 18 done scenes=1 closed=False
+[world-live] wave 19/32 start scene~112
+[world-live] primary finish=stop content=6220 reasoning=7479 usage={'completion_tokens': 10481, 'prompt_tokens': 14945, 'total_tokens': 25426}
+[world-live] wave 19 done scenes=0 closed=False
+[world-live] wave 20/32 start scene~112
+[world-live] primary finish=stop content=4210 reasoning=2706 usage={'completion_tokens': 5220, 'prompt_tokens': 10888, 'total_tokens': 16108}
+[world-live] wave 20 done scenes=0 closed=False
+[world-live] wave 21/32 start scene~112
+[world-live] primary finish=length content=0 reasoning=11234 usage={'completion_tokens': 8192, 'prompt_tokens': 9700, 'total_tokens': 17892, 'prompt_tokens_details': {'cached_tokens': 3328}}
+[world-live] force_body_1 finish=stop content=5634 reasoning=2901 usage={'completion_tokens': 6492, 'prompt_tokens': 9752, 'total_tokens': 16244, 'prompt_tokens_details': {'cached_tokens': 9600}}
+[world-live] wave 21 done scenes=5 closed=False
+[world-live] wave 22/32 start scene~117
+[world-live] primary finish=length content=1975 reasoning=8716 usage={'completion_tokens': 8191, 'prompt_tokens': 10764, 'total_tokens': 18955, 'prompt_tokens_details': {'cached_tokens': 3328}}
+[world-live] truncated, continue
+[world-live] wave 22 done scenes=6 closed=False
+[world-live] wave 23/32 start scene~123
+[world-live] primary finish=length content=5152 reasoning=5958 usage={'completion_tokens': 8192, 'prompt_tokens': 10280, 'total_tokens': 18472, 'prompt_tokens_details': {'cached_tokens': 3328}}
+[world-live] truncated, continue
+[world-live] wave 23 done scenes=7 closed=False
+[world-live] wave 24/32 start scene~130
+[world-live] primary finish=length content=0 reasoning=11618 usage={'completion_tokens': 8192, 'prompt_tokens': 15977, 'total_tokens': 24169, 'prompt_tokens_details': {'cached_tokens': 3328}}
+[world-live] force_body_1 finish=length content=0 reasoning=10931 usage={'completion_tokens': 8191, 'prompt_tokens': 16029, 'total_tokens': 24220, 'prompt_tokens_details': {'cached_tokens': 15872}}
+[world-live] force_body_2 finish=length content=6260 reasoning=4326 usage={'completion_tokens': 8192, 'prompt_tokens': 16029, 'total_tokens': 24221, 'prompt_tokens_details': {'cached_tokens': 15872}}
+[world-live] truncated, continue
+[world-live] wave 24 done scenes=5 closed=False
+[world-live] wave 25/32 start scene~135
+FAIL ConnectionResetError: [WinError 10054] 远程主机强迫关闭了一个现有的连接。

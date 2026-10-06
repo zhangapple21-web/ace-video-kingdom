@@ -23,6 +23,7 @@ from typing import Any, Iterable
 ROOT = Path(__file__).resolve().parents[1]
 if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
+from tools.atomic_io import atomic_write_text
 
 from tools.evolution_ledger import (
     DEFAULT_CAPABILITIES,
@@ -190,7 +191,7 @@ def run(
     }
     receipts_dir.mkdir(parents=True, exist_ok=True)
     receipt_path = receipts_dir / f"{payload['run_id']}.json"
-    receipt_path.write_text(json.dumps(payload, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    atomic_write_text(receipt_path, json.dumps(payload, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     payload["receipt"] = str(receipt_path)
     return payload
 

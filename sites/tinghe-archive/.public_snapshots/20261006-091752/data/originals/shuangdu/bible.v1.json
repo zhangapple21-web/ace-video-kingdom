@@ -1,0 +1,99 @@
+{
+  "schema": "original_desk.bible.v1",
+  "title": "霜渡",
+  "layer": "ORIGINAL_DESK",
+  "never_write_canhe_canon": true,
+  "chars": [
+    {
+      "id": "qiao-shuang",
+      "name": "乔霜",
+      "role": "验票人",
+      "want": "人名还在",
+      "wont": "亮灯救人、作废真票",
+      "prop": "灭灯钩",
+      "img": "assets/originals/shuangdu/qiao-shuang-v2.png"
+    },
+    {
+      "id": "pei-du",
+      "name": "裴渡",
+      "role": "守船",
+      "want": "重名不上船",
+      "wont": "为运粮亮灯",
+      "prop": "铜铃",
+      "img": "assets/originals/shuangdu/pei-du-v2.png"
+    },
+    {
+      "id": "chen-san",
+      "name": "陈三",
+      "role": "同一名两体",
+      "want": "过河、影回来",
+      "wont": "承认自己先没",
+      "prop": "霜票",
+      "img": "assets/originals/shuangdu/chen-san.png"
+    },
+    {
+      "id": "chen-jie",
+      "name": "陈三姐",
+      "role": "来买票的女人",
+      "want": "弟弟回家",
+      "wont": "两个人都过不去",
+      "prop": "热霜票"
+    },
+    {
+      "id": "lao-jia",
+      "name": "老贾",
+      "role": "河班",
+      "want": "末班运粮",
+      "wont": "无灯撞浅滩",
+      "prop": "火折子"
+    }
+  ],
+  "places": [
+    {
+      "id": "jetty",
+      "name": "霜渡口跳板",
+      "note": "薄冰、压灯、脚印后半淡",
+      "img": "assets/originals/shuangdu/jetty-night.png"
+    },
+    {
+      "id": "shed",
+      "name": "票棚",
+      "note": "不点灯，暗匣，三条渡规",
+      "img": "assets/originals/shuangdu/ticket-shed.png"
+    },
+    {
+      "id": "yard",
+      "name": "船匠坞",
+      "note": "河水浇缝结霜"
+    },
+    {
+      "id": "north",
+      "name": "北岸等候棚",
+      "note": "灯被灌灭，粮袋结霜"
+    }
+  ],
+  "props": [
+    {
+      "id": "hook",
+      "name": "灭灯钩",
+      "img": "assets/originals/shuangdu/hook-tickets.png"
+    },
+    {
+      "id": "tickets",
+      "name": "霜票"
+    },
+    {
+      "id": "bell",
+      "name": "铜铃"
+    },
+    {
+      "id": "box",
+      "name": "暗匣"
+    },
+    {
+      "id": "tide-pot",
+      "name": "验潮壶"
+    }
+  ]
+}
+

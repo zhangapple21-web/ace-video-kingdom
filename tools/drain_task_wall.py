@@ -23,6 +23,7 @@ sys.stdout.reconfigure(encoding="utf-8")  # Bug #1 fix: prevent UnicodeEncodeErr
 ROOT = Path(__file__).resolve().parents[1]
 if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
+from tools.atomic_io import atomic_write_text
 QUEUE = ROOT / "research" / "dispatch_queue.v1.json"
 RECEIPTS = ROOT / "research" / "task_wall_triage.v1.jsonl"
 LEARNING_RUNS = ROOT / "research" / "external_learning_runs"
@@ -248,7 +249,7 @@ def drain(*, execute: bool = False, limit: int = 5, queue_path: Path = QUEUE, re
                 card["status"] = action["new_status"]
                 card.setdefault("evidence", {})["task_wall_triage"] = action["receipt"]["triage_id"]
                 card["finished_at"] = action["receipt"]["recorded_at"]
-        queue_path.write_text(json.dumps(queue, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+        atomic_write_text(queue_path, json.dumps(queue, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
         receipt_path.parent.mkdir(parents=True, exist_ok=True)
         for action in actions:
             _append_idempotent_jsonl(receipt_path, action["receipt"], "triage_id")

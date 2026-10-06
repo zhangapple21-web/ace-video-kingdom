@@ -12,6 +12,7 @@ import sys
 import time
 from datetime import datetime, timezone
 from pathlib import Path
+from tools.atomic_io import atomic_write_text
 
 def _transient(text: str) -> bool:
     lowered = text.lower()
@@ -65,22 +66,22 @@ def main() -> int:
     attempts: list[dict] = []
     for number in range(1, args.max_attempts + 1):
         started = datetime.now(timezone.utc).isoformat()
-        result = subprocess.run(command, capture_output=True, text=True)
+        result = subprocess.run(command, capture_output=True, text=True, timeout=300)
         combined = (result.stdout or "") + (result.stderr or "")
         row = {"attempt": number, "started_at": started, "returncode": result.returncode, "transient": result.returncode != 0 and _transient(combined), "output_tail": combined[-2000:]}
         attempts.append(row)
         args.log.parent.mkdir(parents=True, exist_ok=True)
-        args.log.write_text(json.dumps({"command": command, "attempts": attempts, "status": "COMPLETED" if result.returncode == 0 else "RETRYING"}, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+        atomic_write_text(args.log, json.dumps({"command": command, "attempts": attempts, "status": "COMPLETED" if result.returncode == 0 else "RETRYING"}, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
         if result.returncode == 0:
             return 0
         if not row["transient"] or number == args.max_attempts:
-            args.log.write_text(json.dumps({"command": command, "attempts": attempts, "status": "FAILED_FINAL"}, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+            atomic_write_text(args.log, json.dumps({"command": command, "attempts": attempts, "status": "FAILED_FINAL"}, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
             return result.returncode or 1
         provider_delay = _retry_after_seconds(combined)
         delay = min(provider_delay if provider_delay is not None else args.initial_delay * (2 ** (number - 1)), args.max_delay)
         attempts[-1]["retry_delay_source"] = "provider_retry_after" if provider_delay is not None else "provider_profile_fallback"
         attempts[-1]["retry_in_seconds"] = delay
-        args.log.write_text(json.dumps({"command": command, "attempts": attempts, "status": "RETRYING"}, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+        atomic_write_text(args.log, json.dumps({"command": command, "attempts": attempts, "status": "RETRYING"}, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
         time.sleep(delay)
     return 1
 

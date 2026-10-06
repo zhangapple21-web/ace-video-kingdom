@@ -1,0 +1,47 @@
+{
+  "schema": "video_kingdom.canon_pass_quota.v1",
+  "max_per_day": 2,
+  "days": {
+    "2026-09-22": {
+      "passed": 2,
+      "rejected": 0,
+      "skipped": 0
+    },
+    "2026-09-23": {
+      "passed": 2,
+      "rejected": 0,
+      "skipped": 0
+    },
+    "2026-09-24": {
+      "passed": 2,
+      "rejected": 0,
+      "skipped": 0
+    },
+    "2026-09-25": {
+      "passed": 2,
+      "rejected": 5,
+      "skipped": 0
+    },
+    "2026-09-26": {
+      "passed": 2,
+      "rejected": 0,
+      "skipped": 0
+    },
+    "2026-09-27": {
+      "passed": 2,
+      "rejected": 48,
+      "skipped": 0
+    },
+    "2026-09-28": {
+      "passed": 2,
+      "rejected": 0,
+      "skipped": 0
+    },
+    "2026-09-29": {
+      "passed": 1,
+      "rejected": 0,
+      "skipped": 0
+    }
+  },
+  "updated_at": "2026-09-29T01:11:21+08:00"
+}

@@ -1,0 +1,43 @@
+{
+  "schema": "video_kingdom.story_lock.v1",
+  "status": "LOCK_CANDIDATE",
+  "production_integration": false,
+  "title": "莲蓬鬼话·残荷诡影",
+  "source": "author-provided manuscript, completed by sandbox evolution",
+  "dna_refs": [
+    "C001",
+    "C002"
+  ],
+  "aspect_ratio": "PENDING_CONFIRM",
+  "aspect_ratio_suggestion": "16:9",
+  "duration_minutes": [
+    8,
+    10
+  ],
+  "causality": [
+    "周培买下荒废荷园避世",
+    "夜遇林墨折莲，随口说可改周园，她记下五莲之债后消失",
+    "他守候七日，她携酒还债、评画，立下备酒则来之约",
+    "中介留下改名清荷文书，触动她被除名的恐惧，怒断往来",
+    "他拒签、不折荷，并按她的话改画",
+    "她看见园名未改；债还清，天亮仍走；他只把夜里的酒热着",
+    "晨，他落款听荷，不写周园"
+  ],
+  "goals": {
+    "C001": "先守住拙与静；被懂画的人勾住后，用「不改名」证明清净地可以容纳她",
+    "C002": "故园名分不被抹掉；欠债必还；天亮必走；需要借口才能回来"
+  },
+  "dialogue_owners": [
+    "周培",
+    "林墨",
+    "福伯",
+    "吴妈",
+    "陈三"
+  ],
+  "safety": {
+    "linmo_age": "明确成年，亡故时二十四岁上下，禁止写成未成年",
+    "content": "志怪温情，不血腥、不性爱、不恐怖猎奇",
+    "no_agnes_until_script_locked": true,
+    "no_original_sentences_in_provider_prompts": true
+  }
+}

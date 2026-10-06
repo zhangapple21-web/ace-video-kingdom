@@ -12,6 +12,7 @@ import shutil
 from pathlib import Path
 from typing import Any
 import sys
+from tools.atomic_io import atomic_write_text
 
 sys.stdout.reconfigure(encoding="utf-8")  # Bug #1 fix: prevent UnicodeEncodeError on GBK console
 
@@ -23,7 +24,7 @@ OUT = ROOT / "episodes" / "generated" / "reverse_system_human_v3_20260907"
 
 def write_json(path: Path, value: Any) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
-    path.write_text(json.dumps(value, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    atomic_write_text(path, json.dumps(value, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
 
 
 def sha256(path: Path) -> str:
@@ -168,7 +169,7 @@ def main() -> int:
             screenplay.append(f"**{speaker}**：{text}")
         screenplay += [f"动作完成点：{beat['action']}", f"切镜理由：{beat['cut']}", ""]
     screenplay += ["## 台词验收", "林照不念系统说明书：她每句话都在嫌麻烦、顶流程或做决定。系统只说短句，并明确‘还不能叫真相’和‘证据不足’。系统真正改变剧情：林照放弃追传闻，先保全原件并报失。", ""]
-    (OUT / "screenplay.md").write_text("\n".join(screenplay), encoding="utf-8")
+    atomic_write_text((OUT / "screenplay.md"), "\n".join(screenplay), encoding="utf-8")
     write_json(OUT / "asset_gate_preflight.json", {"status": "CONDITIONAL", "local_hashes": len(records), "provider_reference_reads": 0, "continuity_edges": len(shots)-1, "run_created": False})
     print(json.dumps({"status": "ASSETS_CONDITIONAL", "project_dir": str(OUT), "screenplay": str(OUT / "screenplay.md"), "plan": str(OUT / "episode_plan.json"), "assets": len(records), "shots": len(shots)}, ensure_ascii=False, indent=2))
     return 0

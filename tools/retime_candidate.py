@@ -13,6 +13,7 @@ import re
 import subprocess
 from pathlib import Path
 import sys
+from tools.atomic_io import atomic_write_text
 
 sys.stdout.reconfigure(encoding="utf-8")  # Bug #1 fix: prevent UnicodeEncodeError on GBK console
 
@@ -47,7 +48,7 @@ def scale_srt(source: Path, target: Path, factor: float) -> int:
         end = _seconds(match.groups()[4:]) * factor
         output.append("\n".join([lines[0], f"{_stamp(start)} --> {_stamp(end)}", *lines[2:]]))
     target.parent.mkdir(parents=True, exist_ok=True)
-    target.write_text("\n\n".join(output) + ("\n" if output else ""), encoding="utf-8")
+    atomic_write_text(target, "\n\n".join(output) + ("\n" if output else ""), encoding="utf-8")
     return len(output)
 
 
@@ -56,7 +57,7 @@ def probe(path: Path) -> dict:
         "ffprobe", "-v", "error", "-show_entries",
         "format=duration:stream=index,codec_type,codec_name,width,height,sample_rate,channels",
         "-of", "json", str(path),
-    ], check=True, capture_output=True, text=True)
+    ], check=True, capture_output=True, text=True, timeout=300)
     payload = json.loads(result.stdout)
     return {
         "duration_seconds": float(payload.get("format", {}).get("duration", 0) or 0),
@@ -86,7 +87,7 @@ def main() -> int:
         "-c:v", "libx264", "-preset", "medium", "-crf", "18",
         "-pix_fmt", "yuv420p", "-c:a", "aac", "-ar", "48000",
         "-movflags", "+faststart", str(args.output_base),
-    ], check=True)
+    ], check=True, timeout=300)
     cue_count = scale_srt(args.srt, args.output_srt, args.factor)
     result = {
         "contract_version": "ace.video_kingdom.retime_candidate.v1",
@@ -103,7 +104,7 @@ def main() -> int:
         "note": "Playback is slowed with pitch-preserving audio; source is not overwritten and this does not approve dialogue, identity, or acting quality.",
     }
     receipt = args.output_base.with_suffix(".retime_receipt.json")
-    receipt.write_text(json.dumps(result, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    atomic_write_text(receipt, json.dumps(result, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     print(json.dumps(result, ensure_ascii=False))
     return 0
 

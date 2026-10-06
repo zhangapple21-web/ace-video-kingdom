@@ -1,0 +1,25 @@
+{
+  "schema": "video_kingdom.persona_dna.v1",
+  "character_id": "C002",
+  "root_will": "故园的名分与记忆优先于后来者的契约；欠下的必须还，天亮必须走",
+  "trauma": "自己所属的园与身份被时间、后人变卖掏空，人已不在，记忆却被留在原址",
+  "desire": "被承认这里曾是我的，并以对等才情被看见，而不是被当怪物驱赶",
+  "fear": "连故园的名字也被后来者改掉，自己彻底变成无名的闯入者",
+  "behavior_pattern": "夜间按旧习取用园中物产；被质问时先倨傲认主；被触怒就切断往来；认可对方后会主动登门还债、点评对方的作品，再以约定把来访变成仪式",
+  "personality_conflict": "清冷孤高、不承认新主人，却渴望被懂行的人留下，需要借口才能回来",
+  "tags": [
+    "守护型",
+    "孤高型"
+  ],
+  "source": "extract",
+  "parent_ids": [],
+  "version": "1",
+  "production_integration": false,
+  "creator_variant_id": "dna03_empathy",
+  "creator_variant_label": "共情因果版",
+  "creator_variant_bias": {
+    "empathy_cause_weight": "high",
+    "absolute_good_evil": "forbidden"
+  },
+  "creator_variant_note": "提高对每个异常人物的处境、旧债、失去与选择的理解；冲突仍可发生，但优先让行为回应因果，爽点落在看穿、止损、释怀与边界建立，不把对立者脸谱化。"
+}

@@ -1,0 +1,208 @@
+{
+  "schema": "video_kingdom.sandbox_run_receipt.v1",
+  "created_at": "2026-09-20T11:42:55Z",
+  "chapter": "残荷诡影",
+  "production_integration": false,
+  "script_locked": false,
+  "media_submission": "NOT_PERFORMED",
+  "seed_file": "sandbox_seed.v1.txt",
+  "seed_char_count": 134,
+  "seed_status": "PASS",
+  "dna_refs": [
+    "C001",
+    "C002"
+  ],
+  "oneapi_gateway": "http://127.0.0.1:3000/v1",
+  "runs": [
+    {
+      "name": "role_positioning",
+      "profile": "rapid",
+      "timeout_seconds": 120,
+      "status": "COMPLETED",
+      "file": "role_room_positioning.v1.json",
+      "roles": [
+        {
+          "role_id": "outline_structurer",
+          "status": "COMPLETED",
+          "requested_model": "glm-4-flash",
+          "actual_model": "glm-4-flash",
+          "fallback_used": false,
+          "degraded": false,
+          "error": null,
+          "attempts": [
+            {
+              "model": "glm-4-flash",
+              "status": "PASS",
+              "error": null
+            }
+          ]
+        },
+        {
+          "role_id": "primary_writer",
+          "status": "COMPLETED",
+          "requested_model": "gpt-5.6-terra",
+          "actual_model": "gpt-5.6-terra",
+          "fallback_used": false,
+          "degraded": false,
+          "error": null,
+          "attempts": [
+            {
+              "model": "gpt-5.6-terra",
+              "status": "PASS",
+              "error": null
+            }
+          ]
+        },
+        {
+          "role_id": "format_editor",
+          "status": "COMPLETED",
+          "requested_model": "glm-4-flash",
+          "actual_model": "glm-4-flash",
+          "fallback_used": false,
+          "degraded": false,
+          "error": null,
+          "attempts": [
+            {
+              "model": "glm-4-flash",
+              "status": "PASS",
+              "error": null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "sandbox_evolution_first_pass",
+      "profile": "standard",
+      "timeout_seconds": 120,
+      "status": "FAILED",
+      "file": "role_room_sandbox_first_pass.v1.json",
+      "note": "storyboarder/continuity_editor/director_convergence timed out at 120s"
+    },
+    {
+      "name": "sandbox_evolution_resume",
+      "profile": "standard",
+      "timeout_seconds": 180,
+      "status": "FAILED",
+      "file": "role_room_sandbox.v1.json",
+      "resume_compatible": true,
+      "roles": [
+        {
+          "role_id": "primary_writer",
+          "status": "COMPLETED",
+          "requested_model": "gpt-5.6-terra",
+          "actual_model": "gpt-5.5",
+          "fallback_used": true,
+          "degraded": true,
+          "error": null,
+          "attempts": [
+            {
+              "model": "gpt-5.6-terra",
+              "status": "FAILED",
+              "error": "TimeoutError: timed out"
+            },
+            {
+              "model": "gpt-5.5",
+              "status": "PASS",
+              "error": null
+            }
+          ]
+        },
+        {
+          "role_id": "storyboarder",
+          "status": "COMPLETED",
+          "requested_model": "gpt-5.5",
+          "actual_model": "gpt-5.5",
+          "fallback_used": false,
+          "degraded": false,
+          "error": null,
+          "attempts": [
+            {
+              "model": "gpt-5.5",
+              "status": "PASS",
+              "error": null
+            }
+          ]
+        },
+        {
+          "role_id": "contrarian_auditor",
+          "status": "COMPLETED",
+          "requested_model": "grok-4.6",
+          "actual_model": "grok-4.6",
+          "fallback_used": false,
+          "degraded": false,
+          "error": null,
+          "attempts": [
+            {
+              "model": "grok-4.6",
+              "status": "PASS",
+              "error": null
+            }
+          ]
+        },
+        {
+          "role_id": "continuity_editor",
+          "status": "FAILED",
+          "requested_model": "gpt-5.5",
+          "actual_model": "gpt-5.5",
+          "fallback_used": false,
+          "degraded": false,
+          "error": "TimeoutError: timed out",
+          "attempts": [
+            {
+              "model": "gpt-5.5",
+              "status": "FAILED",
+              "error": "TimeoutError: timed out"
+            },
+            {
+              "model": "gpt-5.6-terra",
+              "status": "FAILED",
+              "error": "TimeoutError: timed out"
+            }
+          ]
+        },
+        {
+          "role_id": "director_convergence",
+          "status": "COMPLETED",
+          "requested_model": "gpt-5.6-terra",
+          "actual_model": "gpt-5.5",
+          "fallback_used": true,
+          "degraded": true,
+          "error": null,
+          "attempts": [
+            {
+              "model": "gpt-5.6-terra",
+              "status": "FAILED",
+              "error": "TimeoutError: timed out"
+            },
+            {
+              "model": "gpt-5.5",
+              "status": "PASS",
+              "error": null
+            }
+          ]
+        }
+      ],
+      "note": "continuity_editor still TimeoutError after 180s on gpt-5.5 and gpt-5.6-terra; overall FAILED kept as FAILED"
+    }
+  ],
+  "candidate_differences_vs_lock_candidate": [
+    "LOCK_CANDIDATE 走改名清荷文书冲突后落款听荷",
+    "沙盒主笔把第一债写成看败笔，并推出画中多出门、门外文书人脚步；反例审计标为不可当既定",
+    "导演收敛保留文书人是否出现为分岔，不锁结局"
+  ],
+  "still_missing_for_production": [
+    "user confirm LOCK",
+    "writer script_review",
+    "appearance/voice_lock/costume_lock",
+    "rights receipts",
+    "aspect_ratio",
+    "continuity_editor seat output"
+  ],
+  "skipped": [
+    "video_kingdom_entry",
+    "agnes",
+    "imagegen",
+    "shot_contract"
+  ]
+}

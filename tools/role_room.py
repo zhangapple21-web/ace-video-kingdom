@@ -23,6 +23,7 @@ MATRIX = ROOT / "research" / "oneapi_role_room.v1.json"
 
 if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
+from tools.atomic_io import atomic_write_text
 from production_control.model_transport import post_chat_completion
 
 sys.stdout.reconfigure(encoding="utf-8")  # Bug #1 fix: prevent UnicodeEncodeError on GBK console
@@ -269,7 +270,7 @@ def main(argv: list[str] | None = None) -> int:
     receipt["production_submission"] = "NOT_PERFORMED"
     receipt["created_at"] = time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime())
     args.out.parent.mkdir(parents=True, exist_ok=True)
-    args.out.write_text(json.dumps(receipt, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    atomic_write_text(args.out, json.dumps(receipt, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     print(json.dumps({"status": receipt["status"], "roles": [r["role_id"] for r in receipt["roles"]], "out": str(args.out)}, ensure_ascii=False))
     return 0 if receipt["status"] in {"DRY_RUN", "COMPLETED"} else 2
 

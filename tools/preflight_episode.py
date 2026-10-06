@@ -19,6 +19,7 @@ sys.stdout.reconfigure(encoding="utf-8")  # Bug #1 fix: prevent UnicodeEncodeErr
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
 if str(PROJECT_ROOT) not in sys.path:
     sys.path.insert(0, str(PROJECT_ROOT))
+from tools.atomic_io import atomic_write_text
 
 try:
     from validate_motion_diversity import validate as validate_motion
@@ -486,7 +487,7 @@ def main() -> int:
         "packaging": {"reviewer": "5.6 Luna", "only_after": "an approved review result; no approval or provider authority"}
     }
     args.output.parent.mkdir(parents=True, exist_ok=True)
-    args.output.write_text(json.dumps(report, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    atomic_write_text(args.output, json.dumps(report, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     print(json.dumps({"verdict": verdict, "hard_failures": len(hard_failures), "rework": len(rework), "warnings": len(warnings), "output": str(args.output)}, ensure_ascii=False))
     return 0 if verdict in {"READY", "CONDITIONAL"} else 1
 

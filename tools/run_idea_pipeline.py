@@ -36,6 +36,7 @@ sys.stdout.reconfigure(encoding="utf-8")  # Bug #1 fix: prevent UnicodeEncodeErr
 
 if str(Path(__file__).resolve().parents[1]) not in sys.path:
     sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
+from tools.atomic_io import atomic_write_text
 
 try:
     from measure_tts import measure_dialogue, load_manifest
@@ -442,7 +443,7 @@ def _slug(value: str) -> str:
 
 def _write_json(path: Path, value: Any) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
-    path.write_text(json.dumps(value, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    atomic_write_text(path, json.dumps(value, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
 
 
 def _sha256(path: Path) -> str:
@@ -966,7 +967,7 @@ def _measure_plan_tts(plan: dict[str, Any], project_dir: Path, manifest_path: Pa
 
 
 def _run(cmd: list[str], cwd: Path, output: Path | None = None) -> int:
-    result = subprocess.run(cmd, cwd=cwd, text=True, capture_output=True)
+    result = subprocess.run(cmd, cwd=cwd, text=True, capture_output=True, timeout=300)
     if output:
         _write_json(output, {"returncode": result.returncode, "stdout": result.stdout[-8000:], "stderr": result.stderr[-8000:], "command": cmd})
     return result.returncode

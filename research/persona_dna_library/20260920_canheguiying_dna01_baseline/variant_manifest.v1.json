@@ -1,0 +1,28 @@
+{
+  "schema": "video_kingdom.creator_live_dna_variant_manifest.v1",
+  "variant_id": "dna01_baseline",
+  "label": "基线版",
+  "description": "不增加额外偏置；用于对照。保持当前创者层基调，允许自然涌现。",
+  "created_at": "2026-09-21T10:49:22.873153+08:00",
+  "layer": "CREATOR_LIVE",
+  "base_seed": "20260920_canheguiying_reincarnation_v2 (只取第十场后起点文件)",
+  "prior_life_reference": "research/persona_dna_library/20260920_canheguiying_reincarnation_v2",
+  "prior_life_mode": "REFERENCE_ONLY_NOT_CURRENT_FACT",
+  "world_open": true,
+  "cast_locked": false,
+  "ending_locked": false,
+  "production_integration": false,
+  "model": "deepseek-v4.1-flash",
+  "gateway": "http://127.0.0.1:3000/v1",
+  "dna_bias": {},
+  "comparison_group": "残荷诡影·前世今生DNA对照组",
+  "forbidden": [
+    "agnes",
+    "imagegen",
+    "video_kingdom_entry",
+    "beat",
+    "shot",
+    "lock_script",
+    "overwrite_parent_run"
+  ]
+}

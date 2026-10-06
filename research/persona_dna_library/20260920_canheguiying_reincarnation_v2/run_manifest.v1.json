@@ -1,0 +1,24 @@
+{
+  "schema": "video_kingdom.creator_live_reincarnation_manifest.v1",
+  "run_id": "canheguiying-reincarnation-v2-20260921",
+  "layer": "CREATOR_LIVE",
+  "parent_run": "research/persona_dna_library/20260920_canheguiying",
+  "current_world_seed": "opening_given + evolve_candidate(S01-S10) + creator_world_state.current_after_s10",
+  "prior_life_reference": "research/persona_dna_library/20260920_canheguiying",
+  "prior_life_mode": "REFERENCE_ONLY_NOT_CURRENT_FACT",
+  "style": "残荷诡影创者层基调 V2.0：美中藏诡，情中藏局，局中藏因果",
+  "world_open": true,
+  "cast_locked": false,
+  "ending_locked": false,
+  "production_integration": false,
+  "forbidden": [
+    "agnes",
+    "imagegen",
+    "video_kingdom_entry",
+    "beat",
+    "shot",
+    "lock_script",
+    "overwrite_parent_run"
+  ],
+  "note": "本副本从第十场后的起点重新演化；上一世只提供经验、未解因果和配角推进参考，不作为本轮事实。"
+}
