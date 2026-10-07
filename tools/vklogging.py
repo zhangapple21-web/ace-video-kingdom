@@ -16,6 +16,7 @@ import os
 import sys
 import traceback
 from datetime import datetime, timezone
+from pathlib import Path
 from typing import Any
 
 sys.stderr.reconfigure(encoding="utf-8")  # Bug #1 fix: prevent UnicodeEncodeError on GBK console
