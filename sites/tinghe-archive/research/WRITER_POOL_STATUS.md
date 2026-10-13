@@ -35,3 +35,46 @@
 判据只在**已确认 blocks 未变**时评估——此时"我改好了"按定义就是假的，所以不会
 误伤真正写成功的情况。`test_narrated_no_write.py` 用 nemotron 的真实输出加上限流、
 拒答、正常完成、中文正文做反向验证，12 项全过。
+
+---
+
+## AMD 池（provider `amd`）
+
+六个模型共用一个账户、一个每日额度。2026-10-13 探测全部 OK：
+
+| model id | 探测 |
+| --- | --- |
+| `amd/DeepSeek-V4-Flash-Vision-Exp` | OK |
+| `amd/DeepSeek-V4.1-Flash` | OK |
+| `amd/DeepSeek-V4-Flash` | OK |
+| `amd/Qwen3.8-Flash-Next` | OK |
+| `amd/Qwen3.8-27B` | OK |
+| `amd/MiniCPM5-2B` | OK |
+
+认证走 `AMD_RADEON_TOKEN`（用户级环境变量，`rc-` 前缀），**不需要单独写 API key**。
+
+### 额度够不够：够，而且余量很大
+
+`amd_capacity_calc.py`，按 DeepSeek V4.1 Flash 官方价（2026-10-13 查证：
+off-peak $0.15/1M 输入、$0.60/1M 输出、$0.003/1M 缓存命中；peak 翻倍）：
+
+| 情形 | 每轮成本 | $1 可跑 |
+| --- | --- | --- |
+| 全部未命中缓存 | $0.0082 | 121 轮 |
+| 上下文命中缓存（常态） | $0.0059 | 170 轮 |
+| peak 时段 | $0.0117 | 85 轮 |
+
+每集平均 2 轮（mimo 实测：多数第 1 轮改到、第 2 轮确认），**$1 约可修 85 集**，
+而本项目日更产出是 5 集。有 17 倍余量。
+
+### 更正一条错误推论
+
+先前"AMD 只配干简单活"是**推论错了**：以为 $1 撑不住整集重写。真正唯一未知的
+是「它写得动不动」。
+
+2026-10-11 那次 0/20 撞的是 `Daily usage limit exceeded: maximum $1 per period
+for this OneClick user` —— 那是**额度见底**，不是能力结论。把这两件事混为一谈，
+等于给一个从没被测过的模型判了死刑。
+
+**下一步**：花一次额度做有界实测（一集、一个模型）。成功则 AMD 进池；失败则与
+free 池的 step-5 / ling 并列为"写得不动"的一档。**不要再用估算代替实测。**
