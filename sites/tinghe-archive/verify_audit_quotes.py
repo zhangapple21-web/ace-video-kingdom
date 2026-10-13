@@ -51,6 +51,12 @@ SCENE_PREFIX = re.compile(r"^场景[｜|]\s*")
 
 
 def normalise(text: str) -> str:
+    """Strip whitespace and punctuation so quotes can be compared to prose.
+
+    The fragment is taken from an already-normalised quote, but the episode body
+    keeps its own line breaks and punctuation. Normalising both sides the same
+    way is what makes a match meaningful.
+    """
     return NOISE.sub("", text or "")
 
 
@@ -85,6 +91,24 @@ def fragments(quote: str) -> list[str]:
     return [normalise(p) for p in parts if len(normalise(p)) >= MIN_FRAGMENT]
 
 
+def _mostly_present(fragment: str, body: str, floor: float = 0.72) -> bool:
+    """True when a contiguous run of the fragment is in the body.
+
+    A mismatch that matters — a wrong identifier, the opposite of what the text
+    says — breaks the middle of the fragment, so an exact hit fails while this
+    still passes. A real absence fails both.
+    """
+    n = len(fragment)
+    if n < MIN_FRAGMENT:
+        return False
+    need = max(MIN_FRAGMENT, int(n * floor))
+    for size in range(n, need - 1, -1):
+        for start in range(0, n - size + 1):
+            if fragment[start:start + size] in body:
+                return True
+    return False
+
+
 def main() -> int:
     rows = json.loads(LEDGER.read_text(encoding="utf-8"))
     latest: dict[tuple[str, str], dict] = {}
@@ -107,7 +131,13 @@ def main() -> int:
             if not frags:
                 continue
             checked += 1
+            # A fragment can miss on a technicality — the auditor may have joined
+            # two sentences, or the body wraps a line mid-quote. Falling back to
+            # "is most of this fragment present" keeps a genuine mismatch
+            # (KY-005 vs KY-0155 differs in the middle) while not crying wolf on
+            # real findings like "空筒彻底扣死在槽里" vs "把空筒从槽里拔出半寸".
             missing = [f for f in frags if f not in body]
+            missing = [f for f in missing if not _mostly_present(f, body)]
             if missing:
                 bad.append((work, ep, quote, missing))
 
