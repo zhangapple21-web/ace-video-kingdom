@@ -563,7 +563,17 @@ def confirm_only(work_id: str, ep_id: str, rounds: int = 2) -> str:
                 issues = verdict_mod.issues_of(work_id, ep_id)
                 log(f"    came back FAIL with {len(issues)} issue(s); "
                     f"now it has something to repair")
-            return "STILL_FAILING"
+            # Hand it back to the repair path instead of reporting failure.
+            #
+            # The batch split happens before any audit runs, so an episode whose
+            # hold was "just needs a second PASS" is routed here with no writer
+            # available. When the audit then disagrees, the log said "now it has
+            # something to repair" and returned STILL_FAILING — nothing was
+            # repaired, and the next night re-routed it to corroboration on the
+            # same unchanged text and got the same result. liufang/ep15 sat in
+            # that loop all afternoon. The split is a snapshot; the audit is the
+            # later fact, so the later fact decides.
+            return "NEEDS_REPAIR"
         if verdict_mod.settled_pass(work_id, ep_id):
             log("    settled PASS on unchanged text; hold can be lifted")
             return "PASS"
@@ -809,15 +819,28 @@ def _run_repairs(args, models: list[str], targets: list[tuple[str, str]],
     if not to_confirm and not to_repair:
         log("nothing to do")
     results: dict[str, list[str]] = {"PASS": [], "STILL_FAILING": [], "MISSING": []}
+    # Episodes the auditor overruled during confirmation. The batch split put
+    # them in the no-writer branch, but an audit that disagrees with the ledger
+    # is the later and better fact — send them to a writer now rather than
+    # leaving them to fail the same way again tomorrow.
+    escalated: list[tuple[str, str]] = []
     for work, ep in to_confirm:
-        results.setdefault(confirm_only(work, ep), []).append(f"{work}/{ep}")
+        status = confirm_only(work, ep)
+        if status == "NEEDS_REPAIR":
+            escalated.append((work, ep))
+        else:
+            results.setdefault(status, []).append(f"{work}/{ep}")
 
-    for work, ep in to_repair:
+    if escalated:
+        log(f"{len(escalated)} episode(s) failed corroboration and need real "
+            f"repair: {', '.join(f'{w}/{e}' for w, e in escalated)}")
+
+    for work, ep in list(to_repair) + escalated:
         results.setdefault(repair_one(work, ep, models, args.timeout), []).append(f"{work}/{ep}")
 
     print()
     print("=" * 66)
-    for status in ("PASS", "STILL_FAILING", "MISSING"):
+    for status in ("PASS", "STILL_FAILING", "MISSING", "NEEDS_REPAIR"):
         if results.get(status):
             print(f"{status} ({len(results[status])}):")
             for item in results[status]:

@@ -1,68 +1,16 @@
 {
   "schema": "tinghe.quarantine.v1",
-  "updated_at": "2026-10-13T12:29:39+08:00",
+  "updated_at": "2026-10-13T15:29:23+08:00",
   "note": "Episodes held out of publishing until they carry a settled PASS verdict (consecutive PASSes on unchanged text). Reasons are the auditor's own issue text. An episode is republished by deleting its entry; the authored text stays in originals_source/<work>/work.json either way, so nothing is destroyed by holding it back.",
   "held": [
     {
-      "work": "fanguan",
-      "episode": "ep11",
-      "verdict": "FAIL",
-      "codes": [
-        "SELF_CONTRADICTION"
-      ],
-      "reason": "FAIL (SELF_CONTRADICTION): 复写联位置自相矛盾：顾冬先接过复写联且\"没还\"，后续却仍在卢茨怀里被探向、被拍在柜台上。同一道具不能同时在两人手中且无交接动作。"
-    },
-    {
-      "work": "fanguan",
-      "episode": "ep14",
-      "verdict": "FAIL",
-      "codes": [
-        "CHARACTER_INCONSISTENCY",
-        "CLUE_MISPLACED",
-        "SELF_CONTRADICTION"
-      ],
-      "reason": "FAIL (CHARACTER_INCONSISTENCY, CLUE_MISPLACED, SELF_CONTRADICTION): 主审在ep13结尾明确说「名额今晨不划、联今晨不收、纸明晨带整印来赎」，ep14开头同一时刻同一地点却说「名额今晨划走、联归档、想赎把KY-0155原件也押上」，立场完全反转，无过渡解释。"
-    },
-    {
-      "work": "fanguan",
-      "episode": "ep15",
-      "verdict": "FAIL",
-      "codes": [
-        "TIMELINE_CONFLICT",
-        "CHARACTER_INCONSISTENCY"
-      ],
-      "reason": "FAIL (TIMELINE_CONFLICT, CHARACTER_INCONSISTENCY): 新集称'纸条昨儿赎回'，但ep13中纸条尚未赎回，主审明确说'纸，明晨带整印来赎'。新集与ep13直接冲突。"
-    },
-    {
-      "work": "liufang",
-      "episode": "ep14",
-      "verdict": "FAIL",
-      "codes": [
-        "TIMELINE_CONFLICT",
-        "CLUE_MISPLACED",
-        "SELF_CONTRADICTION"
-      ],
-      "reason": "FAIL (TIMELINE_CONFLICT, CLUE_MISPLACED, SELF_CONTRADICTION): ep13结尾霍泾明确说\"舱，今晚不提了\"、\"提单，我亲自去回\"，ep14开场却改口\"重数三十个数，数完提船\"，完全反悔无过渡。"
-    },
-    {
       "work": "liufang",
       "episode": "ep15",
-      "verdict": "FAIL",
+      "verdict": "PASS_UNSETTLED",
       "codes": [
-        "TIMELINE_CONFLICT",
-        "CLUE_MISPLACED",
-        "OTHER"
+        "PASS_STREAK"
       ],
-      "reason": "FAIL (TIMELINE_CONFLICT, CLUE_MISPLACED, OTHER): 抄件另一半拆开时间与前集矛盾：ep14结尾名册管理员明确说『抄件只拆了一半，另一半，等骨头里那半截出来再拆』，ep15开头却写『抄件另一半昨夜当场拆开，今儿摊在封条边上』，中间缺少交接动作且骨头后半截此时才吐出。"
-    },
-    {
-      "work": "tuiqun",
-      "episode": "ep14",
-      "verdict": "FAIL",
-      "codes": [
-        "CLUE_MISPLACED"
-      ],
-      "reason": "FAIL (CLUE_MISPLACED): 沈铭舟对裴家伯父称「你父亲补字」指代底册补字作者，但事实表明确为沈父（沈铭舟之父）而非裴父。底册在姜迟手中，补字为沈父所写，与裴家底档为两码事。"
+      "reason": "held back; repair scored PASS but not settled (1/2 consecutive PASSes on unchanged text). The auditor's verdict was observed flipping on identical text, so one passing sample does not release it."
     }
   ]
 }
