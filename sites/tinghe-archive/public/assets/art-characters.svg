@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 400" preserveAspectRatio="xMidYMid slice" role="img" aria-label="人物剪影">
+  <defs>
+    <linearGradient id="a" x1="0" y1="0" x2=".6" y2="1">
+      <stop offset="0" stop-color="#20383c"/><stop offset=".6" stop-color="#3c5a54"/><stop offset="1" stop-color="#8d8462"/>
+    </linearGradient>
+  </defs>
+  <rect width="640" height="400" fill="url(#a)"/>
+  <circle cx="530" cy="76" r="54" fill="#f3dfae" opacity=".2"/>
+  <g fill="none" stroke="#cbd8c6" stroke-opacity=".16" stroke-width="2">
+    <path d="M0 322h640"/>
+  </g>
+  <g transform="translate(150 96)">
+    <circle cx="0" cy="46" r="34" fill="#123a31"/>
+    <path d="M-56 200c0-46 25-76 56-76s56 30 56 76Z" fill="#123a31"/>
+    <path d="M-34 42c6-26 24-38 40-34-14 12-18 26-18 40Z" fill="#0d2b24"/>
+    <circle cx="52" cy="182" r="12" fill="#a64938" opacity=".9"/>
+  </g>
+  <g transform="translate(322 84)">
+    <circle cx="0" cy="46" r="30" fill="#1f5145"/>
+    <path d="M-48 200c0-42 21-70 48-70s48 28 48 70Z" fill="#1f5145"/>
+    <path d="M-30 40c10-24 28-32 42-26-16 10-22 22-22 36Z" fill="#2b6a58"/>
+    <path d="M-48 200c0-42 21-70 48-70" fill="none" stroke="#b6814e" stroke-width="3" stroke-opacity=".7"/>
+  </g>
+  <g transform="translate(474 112)">
+    <circle cx="0" cy="42" r="26" fill="#4a5b4e"/>
+    <path d="M-42 200c0-38 19-64 42-64s42 26 42 64Z" fill="#4a5b4e"/>
+    <path d="M-26 36c8-20 24-28 36-22-14 8-20 20-20 32Z" fill="#63705f"/>
+  </g>
+  <g fill="none" stroke="#e3d3a8" stroke-opacity=".3" stroke-width="2.4" stroke-linecap="round">
+    <path d="M198 300c46 26 96 26 142 0"/>
+    <path d="M370 300c40 22 82 22 120 0"/>
+  </g>
+  <g fill="#a64938">
+    <circle cx="262" cy="304" r="5" opacity=".85"/>
+    <circle cx="392" cy="304" r="5" opacity=".85"/>
+  </g>
+</svg>
