@@ -52,8 +52,8 @@ MUST_NOT_MATCH = [
 failures: list[str] = []
 
 
-def check(name: str, cond: bool):
-    print(f"[{'PASS' if cond else 'FAIL'}] {name}")
+def check(name: str, cond: bool, detail: str = ""):
+    print(f"[{'PASS' if cond else 'FAIL'}] {name}" + (f"  {detail}" if detail else ""))
     if not cond:
         failures.append(name)
 
@@ -76,11 +76,19 @@ for t in MUST_NOT_MATCH:
     check(f"not flagged: {t[:34]}", not a and not b)
 
 print()
-print("=== muse 必须不在默认写作池里 ===")
+print("=== 池子必须是活的，不能被一次探测结果永久删掉 ===")
 pool = list(rdt.WRITER_MODELS)
-check("muse removed from WRITER_MODELS",
-      not any("muse-spark" in m for m in pool))
 check("pool is not empty", len(pool) > 0)
+check("no duplicate models in pool", len(pool) == len(set(pool)),
+      f"{len(pool)} entries, {len(set(pool))} unique")
+# muse-spark-1.3 reported "not available in your country" on 2026-10-13 and I
+# removed it from the pool as delisted. It was wrong: the user had temporarily
+# switched to a Hong Kong exit node, and the model works from the normal region.
+# Region and egress changes look exactly like a delisting, and the two call for
+# opposite responses, so the pool must not shed a model on one probe.
+check("muse-spark-1.3 is back in the pool (region change, not a delisting)",
+      any("muse-spark" in m for m in pool),
+      "a region switch must not cost us a working model")
 print(f"     pool order: {[m.split('/')[-1] for m in pool]}")
 
 print()
