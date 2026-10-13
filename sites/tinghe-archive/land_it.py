@@ -75,6 +75,19 @@ def main() -> int:
                  [py, str(HERE / "verify_verdict_evidence.py")])
     if not ok:
         return 1
+    # Ordering is not the same as truth. verify_verdict_evidence asks whether a
+    # verdict cites the future; this asks whether the words it quotes are in the
+    # audited episode at all. On 2026-10-13 an audit reported as MAJOR that a
+    # passing episode "misspelled KY-0155 as KY-005" — the episode contains
+    # KY-0155 once and KY-005 nowhere.
+    #
+    # Reported, NOT blocking. Across 11 quoted issues it catches one real
+    # fabrication, but it also flags the auditor's own labels ("本集钩子：",
+    # "全程重做验印") and loose paraphrases as if they were quotes. A ~9% hit
+    # rate on a paraphrase-heavy stream is not strong enough to stop a deploy;
+    # it is strong enough that a human should look before acting on a verdict.
+    step("report-only: quoted evidence that does not match the text",
+         [py, str(HERE / "verify_audit_quotes.py")])
 
     ok, out = step("derive the hold list from the ledger",
                    [py, str(HERE / "apply_quarantine.py")])
