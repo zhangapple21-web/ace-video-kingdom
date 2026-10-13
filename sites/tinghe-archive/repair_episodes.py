@@ -593,6 +593,17 @@ def repair_one(work_id: str, ep_id: str, models: list[str], timeout: int) -> str
         f"标题《{ep.get('title')}》）。\n\n"
         f"严格按 REPAIR_DIRECTIVE.md 执行：只改这一集的 blocks，不动其他集、不动 facts.json、"
         f"不改集号和标题、不要部署。\n\n"
+        # Where to write. The prompt has always carried the blocks themselves and
+        # the issue list, but never the file they belong to. Measured 2026-10-13:
+        # nemotron burned an attempt on 58 globs and reads hunting for work.json
+        # ("Glob **/fanguan*" -> 0 matches, "Glob **/work.json" -> 10) and then
+        # finished without writing. A model handed the text and no destination
+        # will go looking for one, and the search eats the whole attempt.
+        f"【要改的文件（绝对路径，就改这一个）】\n"
+        f"{work_path}\n"
+        f"它是 UTF-8 JSON，顶层是 episodes 数组；找到 id 为 \"{ep_id}\" 的那一项，"
+        f"改它的 blocks 数组和 beat，其余一律不动。写回这个文件本身——不是新建文件，"
+        f"不是改 context_bundle.md。\n\n"
         f"【本集现有 blocks（JSON）】\n"
         f"{json.dumps(ep.get('blocks'), ensure_ascii=False, indent=2)}\n\n"
         f"【审核判词指出的缺陷】\n{issues_block(audit, hold_reason(work_id, ep_id))}\n\n"
