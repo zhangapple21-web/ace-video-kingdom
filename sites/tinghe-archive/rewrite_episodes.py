@@ -321,9 +321,14 @@ def main() -> int:
             now_data = json.loads(work_path.read_text(encoding="utf-8"))
             now_ep = next((e for e in now_data["episodes"] if e["id"] == eid), None)
             if now_ep is None or now_ep.get("blocks") == ep.get("blocks"):
-                print("    blocks unchanged; restoring and trying the next model")
-                # The reason an edit did not land was being discarded here.
-                print("    model said:", repair.model_said(out))
+                if repair.narrated_an_edit(out):
+                    print("    model described the fix but never wrote it; "
+                          "treating as a persistence failure, not a refusal")
+                    print("    it claimed:", repair.describe_claim(out))
+                else:
+                    print("    blocks unchanged; restoring and trying the next model")
+                    # The reason an edit did not land was being discarded here.
+                    print("    model said:", repair.model_said(out))
                 shutil.copy2(backup, work_path)
                 continue
             if str(now_ep.get("beat") or "").strip() == str(ep.get("beat") or "").strip():

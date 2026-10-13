@@ -355,6 +355,42 @@ def is_rate_limited(text: str) -> bool:
     return bool(RATE_LIMIT_RE.search(text or ""))
 
 
+# "I fixed it" without touching the file. Measured 2026-10-13 on fanguan/ep14:
+# nemotron-3.5-lightning-free produced a full account of four defects it had
+# fixed ("Defect 2 (BEAT_UNFULFILLED): Fixed by modifying the ending hook to…"),
+# and work.json came back byte-identical. Reported as "blocks unchanged" — the
+# same line a model that never wrote anything gets.
+#
+# Those are opposite findings. One model understood the job and failed to
+# persist; the other never engaged. Collapsing them hides which, and it costs
+# the retry logic its evidence: the first is worth another attempt or a human's
+# hands, the second is a pool-ordering fact.
+#
+# Only ever evaluated when blocks are already known unchanged. In that state a
+# claim of having edited is false by construction, so this cannot misfire on a
+# model that genuinely wrote something.
+NARRATED_EDIT_RE = re.compile(
+    r"(缺陷\s*\d|问题\s*\d|Defect\s*\d|Issue\s*\d)"
+    r"|(已?(修改|修复|替换|改写|重写|调整|删除)[了过]?)"
+    r"|(Fixed by|I've (fixed|changed|updated|edited)|I (changed|edited|updated|fixed|replaced))"
+    r"|(现在(已经)?(一致|修复|改好)了)",
+    re.I,
+)
+
+
+def narrated_an_edit(text: str, limit: int = 260) -> bool:
+    """True when the model described an edit but the file says otherwise."""
+    return bool(NARRATED_EDIT_RE.search(text or ""))
+
+
+def describe_claim(text: str, limit: int = 320) -> str:
+    """The model's own account of what it changed, for the log."""
+    out = (text or "").strip()
+    if len(out) > limit:
+        out = "..." + out[-limit:]
+    return " | ".join(l.strip() for l in out.splitlines() if l.strip())
+
+
 # A daily or billing quota is not something a 45-second backoff can wait out.
 # AMD's error is "$1 per period for this OneClick user" — spent for the day, so
 # retrying within the hour is just noise. Only these are worth backing off;
@@ -614,8 +650,17 @@ def repair_one(work_id: str, ep_id: str, models: list[str], timeout: int) -> str
             # The reason an edit did not land used to be thrown away here —
             # five models in a row produced "blocks unchanged" with no way to
             # tell a refusal from an error from a silent CLI.
-            log("    blocks unchanged; trying the next model")
-            log(f"    model said: {model_said(out)}")
+            #
+            # Split the two failures apart. A model that lays out what it fixed
+            # and never touched the file understood the job; one that said nothing
+            # never engaged. Same verdict text, opposite meaning.
+            if narrated_an_edit(out):
+                log("    model described the fix but never wrote it; "
+                    "treating as a persistence failure, not a refusal")
+                log(f"    it claimed: {describe_claim(out)}")
+            else:
+                log("    blocks unchanged; trying the next model")
+                log(f"    model said: {model_said(out)}")
             continue
 
         # The directive says "only this episode". Nothing checked that, and a
