@@ -167,8 +167,46 @@ def load_sources() -> list[dict[str, Any]]:
     return works
 
 
+def load_quarantine() -> dict[tuple[str, str], str]:
+    """Return {(work_id, ep_id): reason} for episodes held back from publishing.
+
+    Quarantine exists because the audit gate was found to have been bypassable
+    (2026-10-07), which left eight episodes live carrying FAIL verdicts. Rather
+    than delete authored work — it is the only copy, and a continuity defect is
+    usually fixable — a failed episode is held out of the published tree and out
+    of ``desk.json`` while staying in ``work.json`` to be repaired. Removing the
+    entry from quarantine republishes it, which keeps the decision reversible and
+    explicit instead of a manual edit someone has to remember to undo.
+
+    A malformed quarantine file is fatal by design: silently publishing what a
+    broken file failed to exclude is the exact failure mode being prevented.
+    """
+    path = ROOT / "quarantine.json"
+    if not path.is_file():
+        return {}
+    try:
+        # utf-8-sig, not utf-8: PowerShell's `Set-Content -Encoding UTF8` writes a
+        # BOM, and a hand-edited control file on Windows is very likely to have
+        # one. Genuinely broken JSON still fails below, which is the case that
+        # matters — refusing to publish is correct there, refusing over a BOM is
+        # just an outage waiting to happen.
+        data = json.loads(path.read_text(encoding="utf-8-sig"))
+    except (OSError, json.JSONDecodeError) as exc:
+        raise SystemExit(f"quarantine.json unreadable ({exc}); refusing to publish "
+                         "while the hold-back list cannot be read") from None
+    entries = data.get("held") if isinstance(data, dict) else data
+    out: dict[tuple[str, str], str] = {}
+    for item in entries or []:
+        work, episode = item.get("work"), item.get("episode")
+        if not work or not episode:
+            raise SystemExit(f"quarantine.json entry missing work/episode: {item!r}")
+        out[(work, episode)] = item.get("reason", "")
+    return out
+
+
 def build(check_only: bool = False) -> dict[str, Any]:
     works = load_sources()
+    quarantine = load_quarantine()
     desk = read_json(DESK)
     existing: dict[str, dict[str, Any]] = {w["id"]: w for w in desk.get("works", [])}
 
@@ -180,6 +218,7 @@ def build(check_only: bool = False) -> dict[str, Any]:
 
     for work in works:
         work_id = work["id"]
+        live_eps = [ep for ep in work["episodes"] if (work_id, ep["id"]) not in quarantine]
         entry: dict[str, Any] = {
             "id": work_id,
             "title": work["title"],
@@ -191,7 +230,7 @@ def build(check_only: bool = False) -> dict[str, Any]:
             "episodes": [
                 {"id": ep["id"], "no": int(ep["no"]), "title": ep["title"], "beat": ep["beat"],
                  "file": f"data/originals/{work_id}/{ep['id']}.json"}
-                for ep in work["episodes"]
+                for ep in live_eps
             ],
         }
         if work.get("packs"):
@@ -201,6 +240,17 @@ def build(check_only: bool = False) -> dict[str, Any]:
 
         written: list[dict[str, Any]] = []
         for ep in work["episodes"]:
+            # A held-back episode is never rendered into public/. An old file may
+            # still be sitting there from before it was quarantined, so remove it
+            # explicitly: leaving it would keep a FAIL episode reachable by direct
+            # URL even though desk.json no longer lists it.
+            if (work_id, ep["id"]) in quarantine:
+                stale = PUBLIC / work_id / f"{ep['id']}.json"
+                if stale.is_file():
+                    if not check_only:
+                        stale.unlink()
+                    written.append({"episode": ep["id"], "action": "QUARANTINED"})
+                continue
             html = render_blocks(ep["blocks"], work, ep)
             payload = {
                 "id": ep["id"],

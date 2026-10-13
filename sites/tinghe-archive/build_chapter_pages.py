@@ -34,6 +34,13 @@ BASE = "https://studio.zhangningjing.com/dramai/"
 SITE = "听荷轩"
 WORK = "残荷诡影"
 
+# Cache-bust for the shared stylesheet. Bumped to match the 2026-10-12 visual
+# pass (floating glass header, 3D cover, denser catalogue). Keep in step with
+# the ?v= in public/index.html — a stale value here serves the old CSS to every
+# one of the 248 static chapter pages, which is how a shipped restyle silently
+# misses on exactly the pages people share.
+CSS_V = "20261012-glass-v16"
+
 # Chapters the reader treats as front/back matter rather than scenes.
 SKIP_IDS = {"c999"}
 
@@ -97,7 +104,7 @@ def page(chapter: dict, prev_id: str | None, next_id: str | None) -> str:
 <meta property="og:description" content="{esc(desc)}"/>
 <meta property="og:image" content="{BASE}assets/og-cover.png"/>
 <meta name="twitter:card" content="summary_large_image"/>
-<link rel="stylesheet" href="../assets/app.css?v=20261004-archive-v12"/>
+<link rel="stylesheet" href="../assets/app.css?v={CSS_V}"/>
 {THEME_BOOTSTRAP}
 </head>
 <body>
@@ -148,7 +155,7 @@ def index_page(chapters: list[dict]) -> str:
 <meta property="og:site_name" content="{esc(SITE)}"/>
 <meta property="og:title" content="卷目目录 · {esc(WORK)}"/>
 <meta property="og:description" content="全部 {len(chapters)} 场，按场次进入。"/>
-<link rel="stylesheet" href="../assets/app.css?v=20261004-archive-v12"/>
+<link rel="stylesheet" href="../assets/app.css?v={CSS_V}"/>
 </head>
 <body>
 <main id="view" class="static-read">

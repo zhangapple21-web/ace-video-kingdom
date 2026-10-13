@@ -12,7 +12,9 @@ Exits:
 from __future__ import annotations
 
 import argparse
+import hashlib
 import json
+import os
 import subprocess
 import sys
 import time
@@ -27,6 +29,23 @@ sys.stdout.reconfigure(encoding="utf-8")
 
 ROOT = Path(__file__).resolve().parent
 OPENCODE = Path(r"C:\Users\Administrator\.local\bin\opencode.exe")
+
+# Ordered by "can it hold ~20 KB of context and judge continuity", not by overall
+# quality. Overridable so the auditor can be pointed elsewhere without editing code.
+AUDIT_MODELS = [
+    m for m in (os.environ.get("TINGHE_AUDIT_MODELS") or "").split(",") if m.strip()
+] or [
+    "opencode/nemotron-3-ultra-free",
+    "opencode/fledge-alpha-free",
+    "opencode/longcat-2.5-preview-free",
+    "opencode/muse-spark-1.3-contributor-free",
+    "opencode/mimo-v2.6-flash-free",
+    "opencode/nemotron-3.5-lightning-free",
+]
+
+
+def audit_models() -> list[str]:
+    return list(AUDIT_MODELS)
 
 
 STYLE_FIELDS = ("words", "visual_points", "pressure_complete", "dialogue_dumps",
@@ -58,6 +77,11 @@ def split_verdict(raw: Any) -> tuple[dict[str, Any], dict[str, Any]]:
         "humor_ok": bool(style.get("humor_ok", True)),
         "violation": bool(style.get("violation", False)),
         "notes": str(style.get("notes", ""))[:200],
+        # AI 味与文采（AUDIT_PROMPT §7a，只记录不拦单）。缺省 True 是深思熟虑的：
+        # 老模型输出的 style 里没有这些键，缺省 False 会把历史数据全标成"有 AI 味"。
+        "ai_taste_ok": bool(style.get("ai_taste_ok", True)),
+        "ai_taste_notes": str(style.get("ai_taste_notes", ""))[:200],
+        "prose_alive": bool(style.get("prose_alive", True)),
     }
     try:
         clean["words"] = int(clean["words"])
@@ -65,6 +89,98 @@ def split_verdict(raw: Any) -> tuple[dict[str, Any], dict[str, Any]]:
     except (TypeError, ValueError):
         clean["words"], clean["visual_points"] = 0, 0
     return fact, clean
+
+
+def extract_json_object(text: str) -> str | None:
+    """Return the outermost balanced `{...}` in `text`, or None.
+
+    Brace counting is string-aware so a `}` inside a quoted description does not
+    end the object early — which is exactly what happens when an issue description
+    contains Chinese quotes or a stray brace.
+    """
+    start = text.find("{")
+    while start != -1:
+        depth = 0
+        in_str = False
+        escape = False
+        for i in range(start, len(text)):
+            ch = text[i]
+            if in_str:
+                if escape:
+                    escape = False
+                elif ch == "\\":
+                    escape = True
+                elif ch == '"':
+                    in_str = False
+                continue
+            if ch == '"':
+                in_str = True
+            elif ch == "{":
+                depth += 1
+            elif ch == "}":
+                depth -= 1
+                if depth == 0:
+                    return text[start:i + 1]
+        # Unbalanced from here; try the next opening brace.
+        start = text.find("{", start + 1)
+    return None
+
+
+def salvage_verdict(text: str) -> dict | None:
+    """Find any embedded object that looks like a verdict and return it.
+
+    Accepts both schemas seen in practice: a bare `{"status":..., "issues":[...]}`
+    and the wrapped `{"fact": {...}, "style": {...}}`. Used only when the outermost
+    object failed to parse — this recovers the auditor's answer instead of
+    discarding it because of surrounding text.
+    """
+    best = None
+    idx = 0
+    while True:
+        start = text.find("{", idx)
+        if start == -1:
+            break
+        idx = start + 1
+        depth = 0
+        in_str = False
+        escape = False
+        end = None
+        for i in range(start, len(text)):
+            ch = text[i]
+            if in_str:
+                if escape:
+                    escape = False
+                elif ch == "\\":
+                    escape = True
+                elif ch == '"':
+                    in_str = False
+                continue
+            if ch == '"':
+                in_str = True
+            elif ch == "{":
+                depth += 1
+            elif ch == "}":
+                depth -= 1
+                if depth == 0:
+                    end = i
+                    break
+        if end is None:
+            continue
+        try:
+            obj = json.loads(text[start:end + 1])
+        except json.JSONDecodeError:
+            continue
+        if not isinstance(obj, dict):
+            continue
+        if "status" in obj and "issues" in obj:
+            return obj
+        for key in ("fact", "audit", "verdict", "result"):
+            inner = obj.get(key)
+            if isinstance(inner, dict) and "status" in inner and "issues" in inner:
+                return inner
+        if best is None:
+            best = obj
+    return best
 
 
 def run_audit(
@@ -85,61 +201,88 @@ def run_audit(
         tf.write(episode_html)
         episode_file = tf.name
 
-    try:
+    def _infra_fail(reason: str) -> tuple[int, dict, dict]:
+        try:
+            Path(episode_file).unlink(missing_ok=True)
+        except Exception:
+            pass
+        return 1, {"status": "FAIL", "issues": [{"type": "OTHER", "severity": "CRITICAL",
+                                                 "episode": ep_id, "description": reason,
+                                                 "evidence_before": "", "evidence_after": ""}]}, {}
+
+    # Rotate models instead of letting `--auto` pick one. On 2026-10-07 auto chose a
+    # model whose upstream was returning 500s, and because an infrastructure error
+    # counts as FAIL by design, one dead endpoint blocked every deployment for as
+    # long as it stayed down. Infrastructure failure is not a verdict about the
+    # episode, so it should cost one model, not the whole pipeline.
+    models = audit_models()
+    last_infra = ""
+    for index, model in enumerate(models, 1):
         cmd = [
-            str(OPENCODE), "run", "--auto",
+            str(OPENCODE), "run", "--model", model,
             "--file", str(context_path),
             "--file", episode_file,
             "--file", str(prompt_path),
             "严格按 AUDIT_PROMPT.md 审核，仅输出一行 JSON。"
         ]
+        try:
+            result = subprocess.run(
+                cmd, capture_output=True, text=True, encoding="utf-8",
+                errors="replace", timeout=timeout_sec
+            )
+        except subprocess.TimeoutExpired:
+            last_infra = f"Audit timeout after {timeout_sec}s on {model}"
+            print(f"  audit: {last_infra}; trying the next model")
+            continue
+        except Exception as exc:
+            last_infra = f"Subprocess error on {model}: {exc}"
+            print(f"  audit: {last_infra}; trying the next model")
+            continue
 
-        result = subprocess.run(
-            cmd, capture_output=True, text=True, encoding="utf-8", timeout=timeout_sec
-        )
-    except subprocess.TimeoutExpired:
+        stdout = result.stdout or ""
+        stderr = result.stderr or ""
+        if result.returncode != 0:
+            last_infra = f"opencode exited {result.returncode} on {model}: {stderr[:300]}"
+            print(f"  audit: {last_infra[:160]}; trying the next model")
+            continue
+
         try:
             Path(episode_file).unlink(missing_ok=True)
         except Exception:
             pass
-        return 1, {"status": "FAIL", "issues": [{"type": "OTHER", "severity": "CRITICAL", "episode": ep_id, "description": f"Audit timeout after {timeout_sec}s", "evidence_before": "", "evidence_after": ""}]}, {}
-    except Exception as exc:
-        try:
-            Path(episode_file).unlink(missing_ok=True)
-        except Exception:
-            pass
-        return 1, {"status": "FAIL", "issues": [{"type": "OTHER", "severity": "CRITICAL", "episode": ep_id, "description": f"Subprocess error: {exc}", "evidence_before": "", "evidence_after": ""}]}, {}
+        break
+    else:
+        # Every model failed for infrastructure reasons. Fail closed — that is the
+        # correct outcome, and now it means "no auditor available", not "this
+        # episode is broken".
+        return _infra_fail(last_infra or "no audit model produced a verdict")
 
-    # Extract JSON from stdout (first line that looks like JSON)
-    stdout = result.stdout or ""
-    stderr = result.stderr or ""
-    if result.returncode != 0:
-        try:
-            Path(episode_file).unlink(missing_ok=True)
-        except Exception:
-            pass
-        return 1, {"status": "FAIL", "issues": [{"type": "OTHER", "severity": "CRITICAL", "episode": ep_id, "description": f"opencode exited {result.returncode}: {stderr[:300]}", "evidence_before": "", "evidence_after": ""}]}, {}
-
-    try:
-        Path(episode_file).unlink(missing_ok=True)
-    except Exception:
-        pass
-
-    # Find first line that starts with {
-    json_line = None
-    for line in stdout.splitlines():
-        line = line.strip()
-        if line.startswith("{") and line.endswith("}"):
-            json_line = line
-            break
+    # Extract the verdict object from whatever the model printed.
+    #
+    # This used to accept only a single line that both started with "{" and ended
+    # with "}", which meant a perfectly good verdict written as pretty-printed
+    # multi-line JSON was thrown away and recorded as FAIL. Measured 2026-10-07:
+    # 12 of 19 failures were this, and three of them contained `"status": "PASS"` —
+    # the auditor had passed the episode and the parser threw the answer away.
+    # Extract the outermost balanced JSON object from the whole output instead,
+    # tolerating line breaks, leading prose and trailing chatter.
+    json_line = extract_json_object(stdout)
 
     if not json_line:
-        return 1, {"status": "FAIL", "issues": [{"type": "OTHER", "severity": "CRITICAL", "episode": ep_id, "description": f"No JSON line in output: {stdout[:300]}", "evidence_before": "", "evidence_after": ""}]}, {}
+        return 1, {"status": "FAIL", "issues": [{"type": "OTHER", "severity": "CRITICAL", "episode": ep_id, "description": f"No JSON object in output: {stdout[:300]}", "evidence_before": "", "evidence_after": ""}]}, {}
 
     try:
         raw = json.loads(json_line)
     except json.JSONDecodeError as exc:
-        return 1, {"status": "FAIL", "issues": [{"type": "OTHER", "severity": "CRITICAL", "episode": ep_id, "description": f"JSON parse error: {exc} in line: {json_line[:200]}", "evidence_before": "", "evidence_after": ""}]}, {}
+        # One retry on the same output, salvaging the last complete inner object.
+        # Models often wrap the verdict in extra keys or prefix it with commentary
+        # that leaves the outer braces unbalanced but the verdict intact.
+        salvaged = salvage_verdict(stdout)
+        if salvaged is not None:
+            raw = salvaged
+            json_line = json.dumps(raw, ensure_ascii=False)
+        else:
+            return 1, {"status": "FAIL", "issues": [{"type": "OTHER", "severity": "CRITICAL", "episode": ep_id, "description": f"JSON parse error: {exc} in: {json_line[:200]}", "evidence_before": "", "evidence_after": ""}]}, {}
 
     # Split the style verdict from the fact verdict. The old single-object
     # schema (bare status/issues) is still accepted, with an empty style.
@@ -177,7 +320,8 @@ def run_audit(
 
 
 def write_audit_failure(work_id: str, ep_id: str, audit: dict[str, Any],
-                        style: dict[str, Any] | None = None) -> Path:
+                        style: dict[str, Any] | None = None,
+                        episode_html: str = '') -> Path:
     """Record an audit verdict in audit_failures.json.
 
     Failures are kept and appended; a PASS supersedes any earlier record for the
@@ -187,10 +331,17 @@ def write_audit_failure(work_id: str, ep_id: str, audit: dict[str, Any],
     as a record; it never decides anything here.
     """
     failures_path = ROOT / "audit_failures.json"
+    # The verdict is produced by a model, so it is not a proof. On 2026-10-07 the
+    # same text of tingjijia/ep05 was audited PASS at 16:25 and FAIL at 16:35.
+    # Recording which text was judged lets a hold-back be lifted only after
+    # several consecutive PASSes *of the same content*; without that, one lucky
+    # verdict is indistinguishable from a settled one.
+    content_sha = hashlib.sha256(episode_html.encode("utf-8")).hexdigest()[:16]
     record = {
         "timestamp": datetime.now(timezone.utc).astimezone().isoformat(timespec="seconds"),
         "work": work_id,
         "episode": ep_id,
+        "content_sha": content_sha,
         "audit": audit,
         "style": style or {},
     }
@@ -206,7 +357,18 @@ def write_audit_failure(work_id: str, ep_id: str, audit: dict[str, Any],
     kept = [r for r in existing
             if not (r.get("work") == work_id and r.get("episode") == ep_id)]
 
+    # How many PASSes in a row have this exact text earned, counting this one.
+    streak = 1
+    if audit.get("status") == "PASS":
+        for row in reversed(same):
+            if row.get("audit", {}).get("status") != "PASS":
+                break
+            if row.get("content_sha") != content_sha:
+                break
+            streak += 1
+    record["pass_streak"] = streak
     if audit.get("status") == "FAIL":
+        record["pass_streak"] = 0
         kept.append(record)
     else:
         # A PASS is the current truth for this episode: record it, and mark any
@@ -241,33 +403,74 @@ def main() -> int:
     if not context_path.is_file():
         print(f"context not found: {context_path}", file=sys.stderr)
         return 2
-    if not episode_json_path.is_file():
-        print(f"episode not found: {episode_json_path}", file=sys.stderr)
-        return 2
     if not args.prompt.is_file():
         print(f"prompt not found: {args.prompt}", file=sys.stderr)
         return 2
 
-    # Extract HTML from episode JSON
-    try:
-        episode_data = json.loads(episode_json_path.read_text(encoding="utf-8"))
-        episode_html = episode_data.get("html", "")
-        if not episode_html:
-            print(f"episode HTML empty: {episode_json_path}", file=sys.stderr)
+    episode_html = ""
+    episode_data: dict = {}
+    if episode_json_path.is_file():
+        try:
+            episode_data = json.loads(episode_json_path.read_text(encoding="utf-8"))
+            episode_html = episode_data.get("html", "")
+        except Exception as exc:
+            print(f"episode JSON parse error: {exc}", file=sys.stderr)
             return 2
-    except Exception as exc:
-        print(f"episode JSON parse error: {exc}", file=sys.stderr)
+    else:
+        # Fall back to the authored source. A quarantined episode is deliberately
+        # absent from public/, which made it unauditable — and an episode that
+        # cannot be audited can never be repaired and re-admitted, so holding one
+        # back would be a permanent exile rather than a pause. Render the same way
+        # the builder does so the audited text matches what a reader would get.
+        print("not in public/ (held back?); auditing the authored source instead")
+        try:
+            sys.path.insert(0, str(ROOT))
+            from build_originals import load_sources, render_blocks
+            work = next((w for w in load_sources() if w["id"] == args.work_id), None)
+            if work is None:
+                print(f"work not found in originals_source: {args.work_id}", file=sys.stderr)
+                return 2
+            episode = next((e for e in work.get("episodes", []) if e["id"] == args.ep_id), None)
+            if episode is None:
+                print(f"episode not found in source: {args.work_id}/{args.ep_id}", file=sys.stderr)
+                return 2
+            episode_data = {"id": episode["id"], "no": episode["no"],
+                            "title": episode["title"]}
+            episode_html = render_blocks(episode["blocks"], work, episode)
+        except Exception as exc:
+            print(f"could not render authored episode: {exc}", file=sys.stderr)
+            return 2
+
+    if not episode_html:
+        print(f"episode HTML empty: {episode_json_path}", file=sys.stderr)
         return 2
 
     print(f"Auditing {args.work_id}/{args.ep_id} …")
-    # The bundle is built from published data, so a draft episode appears in its
-    # own "previous chapters" excerpt. Strip it, or the auditor compares the new
-    # episode against itself and calls it a duplicate retcon.
+    # Prior context must be STRICTLY earlier episodes. The bundle is built per
+    # work and keeps full text for the most recent N chapters, so simply removing
+    # the audited episode left its own sequels behind as "backstory" — that is how
+    # an audit of ep05 ended up arguing that ep05 "comes after ep09 yet regresses
+    # to ep05's progress", and how a quarter of the catalogue was failed and seven
+    # episodes quarantined. prior_context() drops everything numbered >= the
+    # audited episode and labels what remains as backstory.
     sys.path.insert(0, str(ROOT))
-    from build_context_bundle import strip_episode, strip_pending  # noqa: E402
+    from build_context_bundle import prior_context, strip_pending  # noqa: E402
 
-    context_text = strip_pending(
-        strip_episode(context_path.read_text(encoding="utf-8"), args.ep_id))
+    # The episode's number comes from the payload, not the id, so a work whose
+    # ids do not encode the number still gets the right cut.
+    ep_no = episode_data.get("no")
+    if ep_no is None:
+        digits = "".join(ch for ch in args.ep_id if ch.isdigit())
+        ep_no = int(digits) if digits else 0
+
+    raw_context = context_path.read_text(encoding="utf-8")
+    context_text, dropped = prior_context(raw_context, args.ep_id, int(ep_no))
+    if dropped:
+        print(f"  prior context: dropped later episodes {dropped} "
+              f"(kept only text before ep{int(ep_no):02d})")
+    else:
+        print(f"  prior context: nothing later than ep{int(ep_no):02d} was present")
+    context_text = strip_pending(context_text)
     tmp_context = context_path.with_name(context_path.stem + ".audit.md")
     atomic_write_text(tmp_context, context_text, encoding="utf-8")
     try:
@@ -297,13 +500,13 @@ def main() -> int:
     print("STYLE_JSON: " + json.dumps(style, ensure_ascii=False))
 
     if code != 0:
-        path = write_audit_failure(args.work_id, args.ep_id, audit, style)
+        path = write_audit_failure(args.work_id, args.ep_id, audit, style, episode_html)
         print(f"FAIL written to {path}")
         return 1
 
     # Record the PASS too, so the day's verdict for every episode is readable in
     # one place without re-running the auditor.
-    path = write_audit_failure(args.work_id, args.ep_id, audit, style)
+    path = write_audit_failure(args.work_id, args.ep_id, audit, style, episode_html)
     print(f"PASS recorded in {path}")
     return 0
 

@@ -1,0 +1,36 @@
+{
+  "schema": "tinghe.quarantine.v1",
+  "updated_at": "2026-10-13T09:12:09+08:00",
+  "note": "Episodes held out of publishing until they carry a settled PASS verdict (consecutive PASSes on unchanged text). Reasons are the auditor's own issue text. An episode is republished by deleting its entry; the authored text stays in originals_source/<work>/work.json either way, so nothing is destroyed by holding it back.",
+  "held": [
+    {
+      "work": "fanguan",
+      "episode": "ep11",
+      "verdict": "FAIL",
+      "codes": [
+        "CLUE_MISPLACED"
+      ],
+      "reason": "FAIL (CLUE_MISPLACED): 复写联位置与事实表冲突：事实表ep08确立复写联在卢茨手中（顾冬塞给），但ep11中顾冬怀揣复写联称「这联我压了三年」「联我带走」，中间无交接交代"
+    },
+    {
+      "work": "fanguan",
+      "episode": "ep14",
+      "verdict": "FAIL",
+      "codes": [
+        "CHARACTER_INCONSISTENCY",
+        "CLUE_MISPLACED",
+        "SELF_CONTRADICTION"
+      ],
+      "reason": "FAIL (CHARACTER_INCONSISTENCY, CLUE_MISPLACED, SELF_CONTRADICTION): 主审在ep13结尾明确说「名额今晨不划、联今晨不收、纸明晨带整印来赎」，ep14开头同一时刻同一地点却说「名额今晨划走、联归档、想赎把KY-0155原件也押上」，立场完全反转，无过渡解释。"
+    },
+    {
+      "work": "liufang",
+      "episode": "ep14",
+      "verdict": "FAIL",
+      "codes": [
+        "TIMELINE_CONFLICT"
+      ],
+      "reason": "FAIL (TIMELINE_CONFLICT): ep13 结尾霍泾明确下令「舱，今晚不提了」，并扣下章、验通知、带走旧上司；ep14 开场霍泾却反口「三十个数，数完提船」并当场开始倒数「一！」，中间无任何解释或情势变化，直接推翻上集确立的暂停状态。"
+    }
+  ]
+}

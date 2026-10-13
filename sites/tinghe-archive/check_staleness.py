@@ -71,7 +71,28 @@ def fetch_live() -> tuple[dict | None, str]:
 # 15 minutes caused a false STALE on 2026-10-06 (deploy landed 09:31): the two
 # hardest works take three audit-fix rounds each, so ~09:30 finishes are the
 # norm, not the exception. Only a missing lock AND no growth may report STALE.
+#
+# The budget is deliberately generous; what was broken is not its length but its
+# silence (one log line, then nothing for an hour — indistinguishable from a hang)
+# and its inability to tell a live lock from a corpse's. Both fixed below.
 WAIT_BUDGET = 90 * 60
+# Poll interval. A module constant so the wait loop can be exercised quickly by
+# tests instead of being pinned to a hardcoded 60s sleep.
+POLL_SECONDS = 60
+
+
+def _pid_alive(pid: int) -> bool | None:
+    """True/False if the pid can be judged, None if it cannot."""
+    import subprocess
+    try:
+        out = subprocess.run(["tasklist", "/FI", f"PID eq {pid}", "/NH"],
+                             capture_output=True, text=True,
+                             encoding="utf-8", errors="replace", timeout=30).stdout
+        if str(pid) in out:
+            return True
+        return False if out.strip() else None
+    except Exception:
+        return None
 
 
 def wait_for_pipeline() -> None:
@@ -104,24 +125,51 @@ def wait_for_pipeline() -> None:
 
     deadline = time.time() + WAIT_BUDGET
     lock = ROOT / ".writing.lock"
-    waited = False
+    said_waiting = False
+    tick = 0
     while time.time() < deadline:
-        locked = lock.is_file()
+        # Judge the lock by whether its owner is alive, not by whether the file
+        # exists. A lock left behind by a crashed run used to hold this watchdog
+        # for the full budget: on 2026-10-08 the 02:30 repair died holding it and
+        # the 09:00 watch burned its whole wait on a corpse.
+        locked = False
+        if lock.is_file():
+            stamp = lock.read_text(encoding="utf-8", errors="replace").strip()
+            alive = None
+            try:
+                owner = int(stamp.split("pid=")[1].split()[0])
+                alive = _pid_alive(owner)
+            except (IndexError, ValueError):
+                owner = None
+            locked = alive is not False
+            if alive is False:
+                log(f"ignoring lock from dead pid {owner}: {stamp}")
         running = False
         try:
-            lines = LOG.read_text(encoding="utf-8").splitlines()
+            # Tail-based detection, but the window has to be big enough to hold a
+            # whole long run. 200 lines was smaller than a single day's log, so a
+            # run in progress fell out of the window and read as "not running".
+            lines = LOG.read_text(encoding="utf-8").splitlines()[-5000:]
             today = date.today().isoformat()
-            started = any("Daily task started" in l and today in l for l in lines[-200:])
-            finished = any("Daily task finished" in l and today in l for l in lines[-200:])
+            todays = [l for l in lines if today in l]
+            started = any("Daily task started" in l for l in todays)
+            finished = any("Daily task finished" in l for l in todays)
             running = started and not finished and not ghost
         except OSError:
             pass
         if not locked and not running:
             return
-        if not waited:
-            log("pipeline still running (lock or unfinished run); waiting up to 15 min")
-            waited = True
-        time.sleep(60)
+        tick += 1
+        if not said_waiting:
+            log(f"pipeline in progress (lock={locked} running={running}); "
+                f"waiting up to {WAIT_BUDGET // 60} min")
+            said_waiting = True
+        elif tick % 2 == 0:
+            # Say something while waiting. A watchdog that logs once and then goes
+            # quiet for fifteen minutes is indistinguishable from a hung one.
+            left = int((deadline - time.time()) // 60)
+            log(f"still waiting on the pipeline ({left} min left)")
+        time.sleep(min(POLL_SECONDS, max(1, deadline - time.time())))
     log("wait budget spent; judging on current live numbers")
 
 

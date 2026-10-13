@@ -1,5 +1,0 @@
-User-agent: *
-Allow: /
-Disallow: /data/
-
-Sitemap: https://studio.zhangningjing.com/dramai/sitemap.xml

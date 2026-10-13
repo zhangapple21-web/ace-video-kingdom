@@ -1,0 +1,26 @@
+{
+  "checked_at": "2026-10-11T22:16:57+08:00",
+  "measures": {
+    "episodes": 60,
+    "chars": 54006,
+    "reversal_per_1k": 4.41,
+    "comparison_per_1k": 7.7,
+    "procedure_per_1k": 2.43,
+    "action_per_1k": 2.37,
+    "episodes_without_action": 16,
+    "distinct_places": 42,
+    "beat_reversal_share": 0.433,
+    "beat_comparison_share": 0.2,
+    "beats": {
+      "reversal": 26,
+      "comparison": 12,
+      "plain": 22
+    }
+  },
+  "pressure_axis_empty": [],
+  "reference_age_days": 0,
+  "reference_stale": false,
+  "has_baseline": true,
+  "verdict": "REPORT_ONLY",
+  "note": "signals only; instruments are word lists and are not fit to gate publication. See the module docstring."
+}

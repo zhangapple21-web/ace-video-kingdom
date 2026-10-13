@@ -401,15 +401,67 @@ def main() -> int:
     work_ids = list(works.keys())
     total_eps = sum(len(w.get("episodes", [])) for w in works.values())
     print(f"source now: {len(work_ids)} works / {total_eps} episodes")
-    # New episodes are those the authored source has beyond what was published
-    # BEFORE this run's build (see the Gate 1 snapshot). Comparing against the
-    # current public tree would find nothing, because the build just wrote it.
+    # Which episodes count as "new" decides what gets audited, so a wrong answer
+    # here silently disables the audit gate. Three independent baselines are
+    # combined, because each has failed in practice:
+    #
+    #   1. the deploy receipt (.last_deploy.json) — written by the deploy itself,
+    #      so it *is* the definition of what is live. Cannot be clobbered by a
+    #      concurrent run.
+    #   2. the wrapper's pre-write snapshot (.pub_before.json) — single shared
+    #      file, "consumed once"; on 2026-10-07 the 08:00 run and a concurrent
+    #      test raced on it and the test's snapshot won, so the pipeline believed
+    #      the new episode was already published, audited nothing, and deployed a
+    #      FAIL verdict to production.
+    #   3. the Gate 1 snapshot of public/ — already contaminated, because the
+    #      writer self-checks with a real build mid-run.
+    #
+    # They are INTERSECTED, not unioned: an episode counts as already-published
+    # only when every baseline agrees. Unioning was tried first and made things
+    # worse — the most inclusive (i.e. most wrong) baseline wins and empties the
+    # audit set, which is exactly the bug being fixed.
+    deployed: dict[str, int] = {}
+    receipt = HERE / ".last_deploy.json"
+    if receipt.is_file():
+        try:
+            deployed = {k: int(v) for k, v in
+                        (json.loads(receipt.read_text(encoding="utf-8")).get("works") or {}).items()}
+        except (OSError, json.JSONDecodeError, ValueError, TypeError):
+            deployed = {}
+
+    quarantine: set[tuple[str, str]] = set()
+    _qpath = HERE / "quarantine.json"
+    if _qpath.is_file():
+        try:
+            _q = json.loads(_qpath.read_text(encoding="utf-8-sig"))
+            quarantine = {(i.get("work"), i.get("episode"))
+                          for i in ((_q.get("held") if isinstance(_q, dict) else _q) or [])}
+        except (OSError, json.JSONDecodeError) as exc:
+            print(f"[WARN] quarantine.json unreadable ({exc}); treating nothing as held back")
+
     new_episodes = []
     for work_id, work_data in works.items():
-        before = pub_before.get(work_id, set())
-        for ep in work_data.get("episodes", []):
-            if ep["id"] not in before:
-                new_episodes.append((work_id, ep["id"]))
+        # Quarantined episodes are held out of public/ on purpose and will never
+        # ship in this deploy, so they are not part of the "may this deploy go
+        # out" question. Auditing them here failed with "episode not found" —
+        # their file is deliberately absent — and blocked a legitimate deploy.
+        authored_ids = [ep["id"] for ep in work_data.get("episodes", [])
+                        if (work_id, ep["id"]) not in quarantine]
+        # An episode counts as already-published only when EVERY baseline agrees.
+        # Intersecting (not unioning) them is the whole point: one wrong-but-
+        # inclusive baseline must not be able to declare a brand-new episode
+        # "already live" and quietly drop it out of the audit set. Unioning was
+        # tried first and reproduced the exact bug it was meant to prevent —
+        # the poisoned snapshot won and zero episodes were audited.
+        baselines = [set(pub_before.get(work_id, set()))]
+        live_count = deployed.get(work_id)
+        if live_count is not None:
+            # The receipt counts episodes, so anything past that count is new.
+            baselines.append(set(authored_ids[:live_count]))
+        already = set.intersection(*baselines) if baselines else set()
+        for ep_id in authored_ids:
+            if ep_id not in already:
+                new_episodes.append((work_id, ep_id))
 
     if new_episodes:
         print(f"New episodes to audit: {len(new_episodes)}")
@@ -420,6 +472,31 @@ def main() -> int:
             return 2
     else:
         print("No new episodes (all already published)")
+
+    # Second, independent check that does not depend on the "new" set being
+    # right. audit_failures.json is the verdict ledger: a PASS supersedes any
+    # earlier FAIL for the same episode. Every episode in the "new" set must
+    # hold a PASS, or the episode that was just published carries an unresolved
+    # continuity defect — which is exactly how fanguan/ep09 reached production
+    # on 2026-10-07 twenty seconds after the audit flagged it.
+    ledger_verdicts: dict[tuple[str, str], str] = {}
+    ledger_path = HERE / "audit_failures.json"
+    if ledger_path.is_file():
+        try:
+            for row in json.loads(ledger_path.read_text(encoding="utf-8")):
+                key = (row.get("work"), row.get("episode"))
+                ledger_verdicts[key] = (row.get("audit") or {}).get("status", "UNKNOWN")
+        except (OSError, json.JSONDecodeError, AttributeError, TypeError):
+            pass
+
+    unpassed = [(w, e) for (w, e) in new_episodes
+                if ledger_verdicts.get((w, e)) != "PASS"]
+    if unpassed:
+        print(f"[FAIL] {len(unpassed)} episode(s) have no PASS verdict and cannot ship: "
+              + ", ".join(f"{w}/{e}" for w, e in unpassed))
+        record_outcome("AUDIT_UNVERIFIED", works, total_eps, new_episodes, audit_summaries
+                       if new_episodes else [])
+        return 2
 
     print(f"\npublic_dir_ready: true ({PUBLIC})")
 
@@ -459,7 +536,11 @@ def main() -> int:
     # (Per-work, not grand total: the live desk also carries legacy works the
     # local authored count does not include. Comparing totals would fail every
     # run by construction.)
-    expect_works = {wid: len(w.get("episodes", [])) for wid, w in works.items()}
+    expect_works = {
+        wid: len([ep for ep in w.get("episodes", [])
+                  if (wid, ep["id"]) not in quarantine])
+        for wid, w in works.items()
+    }
     live_ok, live_note, receipt_url = verify_live(output, expect_works, new_episodes)
     if receipt_url:
         print(f"receipt: {receipt_url}")

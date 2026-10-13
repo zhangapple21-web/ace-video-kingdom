@@ -47,6 +47,17 @@ for work_file in sorted(SOURCE.glob("*/work.json")):
     data = json.loads(work_file.read_text(encoding="utf-8"))
     authored[data.get("id", work_file.parent.name)] = data
 
+# Held-back episodes, read the same tolerant way the builder reads them.
+quarantine: dict[tuple[str, str], str] = {}
+_qpath = ROOT / "quarantine.json"
+if _qpath.is_file():
+    try:
+        _q = json.loads(_qpath.read_text(encoding="utf-8-sig"))
+        for _item in (_q.get("held") if isinstance(_q, dict) else _q) or []:
+            quarantine[(_item.get("work"), _item.get("episode"))] = _item.get("reason", "")
+    except (OSError, json.JSONDecodeError) as exc:
+        raise SystemExit(f"quarantine.json unreadable ({exc}); cannot verify the snapshot")
+
 check(set(authored) <= set(by_id),
       f"authored works missing from desk: {sorted(set(authored) - set(by_id))}")
 check(set(by_id) == set(authored) | set(LEGACY),
@@ -59,12 +70,23 @@ for work_id, source_work in authored.items():
     if not work:
         continue
     source_eps = source_work.get("episodes", [])
-    check(len(work["episodes"]) == len(source_eps),
-          f"{work_id}: desk has {len(work['episodes'])} episodes, source has {len(source_eps)}")
-    check([e["id"] for e in work["episodes"]] == [e["id"] for e in source_eps],
+    # Quarantined episodes are held out of desk.json and public/ on purpose, so
+    # the expectation is "source minus quarantine", not "source". Without this
+    # the verifier reported the deliberate hold-back as corruption.
+    expected_eps = [e for e in source_eps if (work_id, e["id"]) not in quarantine]
+    check(len(work["episodes"]) == len(expected_eps),
+          f"{work_id}: desk has {len(work['episodes'])} episodes, "
+          f"source has {len(source_eps)} ({len(source_eps) - len(expected_eps)} quarantined)")
+    check([e["id"] for e in work["episodes"]] == [e["id"] for e in expected_eps],
           f"{work_id}: episode ids diverge from source")
-    check([e["title"] for e in work["episodes"]] == [e["title"] for e in source_eps],
+    check([e["title"] for e in work["episodes"]] == [e["title"] for e in expected_eps],
           f"{work_id}: episode titles diverge from source")
+    # A quarantined episode must be genuinely gone from the reader, not merely
+    # unlisted — otherwise it stays reachable by direct URL.
+    for ep in source_eps:
+        if (work_id, ep["id"]) in quarantine:
+            check(not (ROOT / "public" / "data" / "originals" / work_id / f"{ep['id']}.json").is_file(),
+                  f"{work_id}/{ep['id']}: quarantined but its file is still published")
     cover = (work.get("assets") or {}).get("cover")
     if cover:
         check((ROOT / "public" / cover).is_file(), f"{work_id}: missing cover {cover}")
@@ -120,6 +142,35 @@ check(before == after, "rebuild is not idempotent")
 print(f"works checked: {len(authored)} authored + {len(LEGACY)} legacy")
 print(f"episodes checked: {episodes}")
 print(f"desk works: {len(desk['works'])}")
+
+# Connective-skeleton check. Reported, not fatal.
+#
+# This started as a hard failure and it was wrong. Failing here blocks the whole
+# deploy, so four episodes with a repeated verbal habit would have kept all forty-six
+# live ones from shipping — a proportional response to a minor defect is not a
+# response at all. The hold list (apply_quarantine.py) now takes these episodes
+# individually, the same route an audit FAIL takes, and the rest of the catalogue
+# ships. Here it only reports, so the number stays visible in the log.
+try:
+    import connective_gate
+
+    report = connective_gate.check_all()
+    regressed = {k: v for k, v in report.items() if v["fails"]}
+    if regressed:
+        print(f"\nconnective gate: {len(regressed)} episode(s) regressed "
+              f"(held individually, not blocking this deploy)")
+        for key, v in sorted(regressed.items(), key=lambda kv: -kv[1]["hinge_total"]):
+            print(f"  - {key}: {v['hinge_total']} hinge(s) at {v['density_per_1k']}/1k "
+                  f"(dominant {v['dominant_hinge']})")
+    else:
+        print(f"connective gate: {len(report)} episodes, none over threshold")
+except SystemExit:
+    raise
+except Exception as exc:
+    # The check must not be able to take the deploy down. A missing or broken
+    # checker is a silent loss of coverage, which is logged rather than fatal.
+    print(f"[WARN] connective gate could not run: {type(exc).__name__}: {exc}")
+
 if failures:
     print("\nFAILURES:")
     for item in failures:

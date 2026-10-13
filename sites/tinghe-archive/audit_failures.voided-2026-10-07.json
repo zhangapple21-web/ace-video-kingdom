@@ -1,0 +1,1626 @@
+{
+  "voided_at": "2026-10-07T15:42:47",
+  "reason": "Every verdict here was produced with an audit context that contained episodes LATER than the one under audit (build_context_bundle.strip_episode removed only the audited episode). The auditor compared episodes against their own sequels. Archived, not trusted.",
+  "verdict_count": 44,
+  "verdicts": [
+    {
+      "timestamp": "2026-10-05T16:35:37+08:00",
+      "work": "fanguan",
+      "episode": "ep07",
+      "audit": {
+        "status": "FAIL",
+        "issues": [
+          {
+            "type": "TIMELINE_CONFLICT",
+            "severity": "MAJOR",
+            "episode": "ep07",
+            "description": "ep06明确“后天开第二庭”，即取封条/拆蜡封之夜到第二庭隔约两天；ep07却让甄荟当庭说“铁管蜡封前夜由申请人卢茨当众拆开”，且ep06显示卢茨是在封存地夜间秘密取管、直播在线取证，并非“当众”拆封，时间与取证情形均对不上。",
+            "evidence_before": "ep06·卢茨：回去备锅。后天开第二庭，让主审当庭买这块地。",
+            "evidence_after": "ep07·甄荟：铁管蜡封前夜由申请人卢茨当众拆开，取出时封存巡查队在场，撬痕与断口已一并记录。"
+          },
+          {
+            "type": "OTHER",
+            "severity": "MAJOR",
+            "episode": "ep07",
+            "description": "ep07内卢茨对姐姐签发数字自相矛盾：先说姐姐是“浑浊”签发单上写汤色那行数字的人，后又说她落的笔是“汤色清”、清的汤被人写成浑浊，既未交代篡改者与证据链，又与ep05包补倾向冲突的新说法直接并置。",
+            "evidence_before": "ep05·甄荟：浊的那张，签发栏是你的名字，可落笔不是你的手。写数字的人，今天没到。",
+            "evidence_after": "ep07·卢茨：也是三年前那张「浑浊」签发单上，写汤色那行数字的人。…她落的是汤色清。清的汤，被人写成了浑浊。"
+          },
+          {
+            "type": "BEAT_UNFULFILLED",
+            "severity": "MINOR",
+            "episode": "ep07",
+            "description": "结构校验可过，但本集开场未写明从垃圾星农场旧址回帝星的动机与航程，第二庭阶段地点直接跳到帝星听证席，且ep06夜场取证后“备锅、回第二家灶”的筹备动作在ep07未做任何延续或交代。",
+            "evidence_before": "ep06：牛七举着终端直播，专员挥手让巡查队退开两步，卢茨拆开蜡封念地契。",
+            "evidence_after": "ep07：第二庭公开开，旁听席坐满。主审的位置比第一庭高一级。"
+          }
+        ]
+      },
+      "resolved": "2026-10-05T16:38:51+08:00"
+    },
+    {
+      "timestamp": "2026-10-05T16:38:51+08:00",
+      "work": "fanguan",
+      "episode": "ep07",
+      "audit": {
+        "status": "PASS",
+        "issues": [
+          {
+            "type": "TIMELINE_CONFLICT",
+            "severity": "MINOR",
+            "episode": "ep07",
+            "description": "新集甄荟称「铁管蜡封前夜由申请人卢茨当众拆开」，但 ep06 发生在夜、其钩子写「后天开第二庭」，即蜡封实为两夜前拆开，「前夜」与时间线差一日。",
+            "evidence_before": "ep06: 夜 外 … 卢茨把意向书折好揣进怀里：…后天开第二庭，让主审当庭买这块地。",
+            "evidence_after": "新集: 甄荟：…铁管蜡封前夜由申请人卢茨当众拆开，取出时封存巡查队在场，撬痕与断口已一并记录。"
+          }
+        ]
+      },
+      "resolved": false
+    },
+    {
+      "timestamp": "2026-10-05T19:08:51+08:00",
+      "work": "fanguan",
+      "episode": "ep08",
+      "audit": {
+        "status": "FAIL",
+        "issues": [
+          {
+            "type": "CLUE_MISPLACED",
+            "severity": "MAJOR",
+            "episode": "ep08",
+            "description": "总务处门口木牌引文未按事实表逐字引用 ep07 落名版，事实表要求两块木牌引文与落名版逐字一致，新集自行压缩改写。",
+            "evidence_before": "ep07 木牌背面落名：三十亩，二级可耕，按二级可耕价收，收购方主审，落名和编号都在下面。",
+            "evidence_after": "炉前钉了一块木牌，和第二庭证物台那块写法一样：三十亩，二级可耕，主审落名。"
+          },
+          {
+            "type": "TIMELINE_CONFLICT",
+            "severity": "MAJOR",
+            "episode": "ep08",
+            "description": "事实表已确立 ep08 事件含总务处办事员压灶被规则反杀、灶挪至三米零四公分的三米线管理线；新集正文中办事员缺席、无三米线、灶直接摆在门口石阶，与事实表硬约束冲突。",
+            "evidence_before": "facts.json timeline ep08：办事员压灶被规则反杀，主审路过走侧门；三米线：灶挪至三米零四公分。",
+            "evidence_after": "天刚亮，总务处门口的石阶上支起一座便携炉，锅升上去；卫兵围着看，没人敢先动炉。"
+          }
+        ]
+      },
+      "style": {
+        "words": 880,
+        "visual_points": 5,
+        "pressure_complete": true,
+        "dialogue_dumps": false,
+        "hook_open": true,
+        "humor_ok": true,
+        "violation": false,
+        "notes": "压憋破基本完整，木牌与三米线问题外的画面点充足，钩子留白可接。"
+      },
+      "resolved": "2026-10-05T20:02:44+08:00"
+    },
+    {
+      "timestamp": "2026-10-05T20:02:44+08:00",
+      "work": "fanguan",
+      "episode": "ep08",
+      "audit": {
+        "status": "PASS",
+        "issues": []
+      },
+      "style": {
+        "words": 1050,
+        "visual_points": 7,
+        "pressure_complete": true,
+        "dialogue_dumps": false,
+        "hook_open": true,
+        "humor_ok": true,
+        "violation": false,
+        "notes": "卢茨与办事员多轮拉扯形成压憋破，笑点落在贴反整改单与锅口公分；钩子半个印与灯先亮留白具体，六十天开灶构成倒计时。"
+      },
+      "resolved": false
+    },
+    {
+      "timestamp": "2026-10-06T08:21:43+08:00",
+      "work": "liufang",
+      "episode": "ep08",
+      "audit": {
+        "status": "FAIL",
+        "issues": [
+          {
+            "type": "CHARACTER_INCONSISTENCY",
+            "severity": "MAJOR",
+            "episode": "ep08",
+            "description": "铁算盘口吻崩塌：前文他是精算直述的账房型人物（\"F 级沈砺，报废油浸，三万申报\"\"废料归类，第四类。三百星币。\"），新集却突变为押韵胡言（\"你后院有猫？算盘可是条条长尺寸\"\"我那尺子是从骨架雕下来的\"\"骨架是没申报过的一楼\"），人物声口不可辨识。",
+            "evidence_before": "铁算盘 ：F 级沈砺，报废油浸，三万申报。按废料折算。",
+            "evidence_after": "铁算盘 ：你后院有猫？算盘可是条条长尺寸。"
+          },
+          {
+            "type": "OTHER",
+            "severity": "MINOR",
+            "episode": "ep08",
+            "description": "旧上司\"跟着两个带链的押解人下来\"，呈现为被押犯人，与 ep06–ep07 其为勘验队接任、手握移交令的正式身份画面冲突，未作任何解释。",
+            "evidence_before": "接任名单当晚生效——第一个名字，是霍泾入狱前的旧上司。",
+            "evidence_after": "旧上司跟着两个带链的押解人下来了，胸牌上写的是勘验队接任"
+          }
+        ]
+      },
+      "style": {
+        "words": 980,
+        "visual_points": 7,
+        "pressure_complete": true,
+        "dialogue_dumps": false,
+        "hook_open": true,
+        "humor_ok": false,
+        "violation": false,
+        "notes": "对峙拉扯成立、画面点够，但铁算盘的押韵段像数来宝，且正堆在最紧张的对峙处，人物声口失真。"
+      },
+      "resolved": "2026-10-06T09:21:05+08:00"
+    },
+    {
+      "timestamp": "2026-10-06T08:24:27+08:00",
+      "work": "liufang",
+      "episode": "ep08",
+      "audit": {
+        "status": "PASS",
+        "issues": []
+      },
+      "style": {
+        "words": 1620,
+        "visual_points": 8,
+        "pressure_complete": true,
+        "dialogue_dumps": false,
+        "hook_open": true,
+        "humor_ok": false,
+        "violation": false,
+        "notes": "钩子够硬，光影和压盘细节清楚；人物拉扯足，但“猫是隔着你的”一句生造，笑点基本落空。"
+      },
+      "resolved": "2026-10-06T09:21:05+08:00"
+    },
+    {
+      "timestamp": "2026-10-06T09:21:05+08:00",
+      "work": "liufang",
+      "episode": "ep08",
+      "audit": {
+        "status": "PASS",
+        "issues": [
+          {
+            "type": "OTHER",
+            "severity": "MINOR",
+            "episode": "ep08",
+            "description": "铁算盘台词出现无来源“猫”字，疑似错字/口误，不构成剧情矛盾。",
+            "evidence_before": "铁算盘：账和证物，不能放同一个柜。",
+            "evidence_after": "铁算盘：一个人。补完一签的是沈砺，补严名册的是我。猫是隔着你的。"
+          }
+        ]
+      },
+      "style": {
+        "words": 1430,
+        "visual_points": 8,
+        "pressure_complete": true,
+        "dialogue_dumps": false,
+        "hook_open": true,
+        "humor_ok": true,
+        "violation": false,
+        "notes": "压迫到亮牌完整，画面点够，钩子只露半截；一处“猫”疑非前文道具。"
+      },
+      "resolved": false
+    },
+    {
+      "timestamp": "2026-10-06T08:34:51+08:00",
+      "work": "tingjijia",
+      "episode": "ep08",
+      "audit": {
+        "status": "FAIL",
+        "issues": [
+          {
+            "type": "CHARACTER_INCONSISTENCY",
+            "severity": "MAJOR",
+            "episode": "ep08",
+            "description": "清点人归属与事实表/前文冲突：ep06复核官裁定卓砚以清点人身份随队，ep07名单也写清点人卓砚；新集公示栏首行还写清点人卓砚，但裴冷后面自称“清点人，是我”。",
+            "evidence_before": "卓砚，执照吊销期间不得接触证物——但清点随舱物品须有白鲛级机务工龄，全庭只有你一个。你以清点人身份随队。",
+            "evidence_after": "裴冷：随队名单是昨夜贴出的。第七码随队，第三天启程。押运组组长，是采购主官；清点人，是我。你知道的。"
+          },
+          {
+            "type": "TIMELINE_CONFLICT",
+            "severity": "MAJOR",
+            "episode": "ep08",
+            "description": "军需官“请假没露面”的时长前后打架：前文是复核日请假未到、移地仅三日；新集laojiu阿柯说晚班三晚三天没回，卓砚却两次说“七天请假”。",
+            "evidence_before": "军需官 在 请假未到，去向不明（经办人联签缺席）",
+            "evidence_after": "卓砚：我想问他那个章：08 改 03 的那张调件单，章是哪一年烧的。如果它是后来补的，那你就问军需官，这七天请假，请的是什么假。"
+          }
+        ]
+      },
+      "style": {
+        "words": 1320,
+        "visual_points": 7,
+        "pressure_complete": true,
+        "dialogue_dumps": false,
+        "hook_open": true,
+        "humor_ok": false,
+        "violation": false,
+        "notes": "压憋与质问成立，钩子有朱小章线索；画面点够，但全集零笑点且清点人/假期有硬冲突。"
+      },
+      "resolved": "2026-10-06T09:25:14+08:00"
+    },
+    {
+      "timestamp": "2026-10-06T08:37:09+08:00",
+      "work": "tingjijia",
+      "episode": "ep08",
+      "audit": {
+        "status": "PASS",
+        "issues": [
+          {
+            "type": "OTHER",
+            "severity": "MINOR",
+            "episode": "ep08",
+            "description": "钩子段突然出现“化蜡台”，与本集固定场景“三号库门口与军务公示栏”不一致，疑似地点漂移；不构成事实表级冲突。",
+            "evidence_before": "ep07：场景｜帝星 · 三号库 · 第七码机甲停机位",
+            "evidence_after": "裴冷把调件单反过来，放在化蜡台上"
+          }
+        ]
+      },
+      "style": {
+        "words": 1620,
+        "visual_points": 8,
+        "pressure_complete": true,
+        "dialogue_dumps": false,
+        "hook_open": true,
+        "humor_ok": false,
+        "violation": false,
+        "notes": "压憋与章新旧拉扯完整，悬念具体，有一处地点漂移。"
+      },
+      "resolved": "2026-10-06T09:25:14+08:00"
+    },
+    {
+      "timestamp": "2026-10-06T09:25:14+08:00",
+      "work": "tingjijia",
+      "episode": "ep08",
+      "audit": {
+        "status": "PASS",
+        "issues": [
+          {
+            "type": "OTHER",
+            "severity": "MINOR",
+            "episode": "ep08",
+            "description": "钩子段突然出现“化蜡台”，与本集固定场景“三号库门口与军务公示栏”不一致，疑似地点漂移；不构成事实表级冲突。",
+            "evidence_before": "ep07：场景｜帝星 · 三号库 · 第七码机甲停机位",
+            "evidence_after": "裴冷把调件单反过来，放在化蜡台上"
+          }
+        ]
+      },
+      "style": {
+        "words": 1620,
+        "visual_points": 8,
+        "pressure_complete": true,
+        "dialogue_dumps": false,
+        "hook_open": true,
+        "humor_ok": false,
+        "violation": false,
+        "notes": "压憋与章新旧拉扯完整，悬念具体，有一处地点漂移。"
+      },
+      "resolved": false
+    },
+    {
+      "timestamp": "2026-10-06T08:42:34+08:00",
+      "work": "tuiqun",
+      "episode": "ep08",
+      "audit": {
+        "status": "FAIL",
+        "issues": [
+          {
+            "type": "OTHER",
+            "severity": "MAJOR",
+            "episode": "ep08",
+            "description": "新集「未出场」名单列有裴既明，但正文却写「窗外，裴家的车停了。裴既明一个人往受理厅走」，裴既明实为到场；同场景柏父一方也称「他们今天也来，是把底档公示出去」，与在场/未出场栏自相矛盾。",
+            "evidence_before": "**未出场**：裴既明、苏令仪的父亲、文九渊",
+            "evidence_after": "（窗外，裴家的车停了。裴既明一个人往受理厅走，帽子压得很低。）"
+          },
+          {
+            "type": "CLUE_MISPLACED",
+            "severity": "MAJOR",
+            "episode": "ep08",
+            "description": "签名页页角撕口、缺角补封等证据位于第六卷上，ep06已由文九渊宣布「哑带旧档第六卷，收归总署封存」，事实表亦载「第六卷 在 总署」。新集却让受理员在窗口当庭核对「底册卷内的每一页，都对签名页」并讲述签名页撕口，等于受理员手上有第六卷/签名页，与既有监管状态冲突。",
+            "evidence_before": "哑带旧档第六卷，收归总署封存。（ep06）；事实表：第六卷 在 总署（收归封存）",
+            "evidence_after": "受理员：先查重。底册卷内的每一页，都对签名页。签名页的撕口，你知道，是新的。"
+          }
+        ]
+      },
+      "style": {
+        "words": 1000,
+        "visual_points": 7,
+        "pressure_complete": true,
+        "dialogue_dumps": true,
+        "hook_open": true,
+        "humor_ok": false,
+        "violation": false,
+        "notes": "递件钩子接住ep07且留白可接，但裴家涂墨页、令仪补字等信息讲述偏说明；全集零笑点，对白设定句偏多。"
+      },
+      "resolved": "2026-10-06T09:28:35+08:00"
+    },
+    {
+      "timestamp": "2026-10-06T08:44:28+08:00",
+      "work": "tuiqun",
+      "episode": "ep08",
+      "audit": {
+        "status": "PASS",
+        "issues": [
+          {
+            "type": "CHARACTER_INCONSISTENCY",
+            "severity": "MINOR",
+            "episode": "ep08",
+            "description": "新集未出场名单引入“苏令仪的父亲”，事实表无此人，且铁律“封筒补字=沈父≠姜父/苏父”，易造成与沈父补字线索混淆",
+            "evidence_before": "铁律：封筒补字=沈父≠姜父/苏父",
+            "evidence_after": "<b>未出场</b>：裴既明、苏令仪的父亲、文九渊"
+          }
+        ]
+      },
+      "style": {
+        "words": 950,
+        "visual_points": 6,
+        "pressure_complete": true,
+        "dialogue_dumps": false,
+        "hook_open": true,
+        "humor_ok": false,
+        "violation": false,
+        "notes": "公文口压憋完整，钩子留名字悬念，但全程无笑点"
+      },
+      "resolved": "2026-10-06T09:28:35+08:00"
+    },
+    {
+      "timestamp": "2026-10-06T09:28:35+08:00",
+      "work": "tuiqun",
+      "episode": "ep08",
+      "audit": {
+        "status": "PASS",
+        "issues": [
+          {
+            "type": "OTHER",
+            "severity": "MINOR",
+            "episode": "new",
+            "description": "新集内部防水袋状态不一：前段写已“解开/往前推半寸”，钩子又写“她没打开防水袋……袋口结死”，未交代重新封袋，前后矛盾。",
+            "evidence_before": "姜迟把防水袋解开，把那卷底册往前推半寸。沈铭舟没接。",
+            "evidence_after": "她没打开防水袋，三卷底册抱在怀里，袋口结死。"
+          }
+        ]
+      },
+      "style": {
+        "words": 1480,
+        "visual_points": 7,
+        "pressure_complete": true,
+        "dialogue_dumps": false,
+        "hook_open": true,
+        "humor_ok": true,
+        "violation": false,
+        "notes": "受理窗流程拉扯有压有破，“漏一颗章/零件/点头灯值守”有黑色幽默；钩子留成“没说出来的名字”，但风钻声与“跑廊”略跳戏。"
+      },
+      "resolved": false
+    },
+    {
+      "timestamp": "2026-10-06T09:15:47+08:00",
+      "work": "zhenqianjin",
+      "episode": "ep08",
+      "audit": {
+        "status": "FAIL",
+        "issues": [
+          {
+            "type": "CLUE_MISPLACED",
+            "severity": "MAJOR",
+            "episode": "ep08",
+            "description": "出院单背面手写字的字迹匹配对象被改写：ep07 明确「笔迹和册子一样」（即产科薄册，令仪母亲笔迹），新集改为「和转出册页眉处的字一样」，等于把线索指向转出册，和已发布正文冲突。",
+            "evidence_before": "背面一行手写字，笔迹和册子一样。（ep07）",
+            "evidence_after": "签名字迹，和转出册页眉处的字一样。（新集）"
+          }
+        ]
+      },
+      "style": {
+        "words": 980,
+        "visual_points": 5,
+        "pressure_complete": true,
+        "dialogue_dumps": true,
+        "hook_open": true,
+        "humor_ok": false,
+        "violation": false,
+        "notes": "审讯拉扯在，画面点够；但多句超 40 字的设定说明，全集无笑点，钩子倒计时可接。"
+      },
+      "resolved": "2026-10-06T09:30:57+08:00"
+    },
+    {
+      "timestamp": "2026-10-06T09:17:39+08:00",
+      "work": "zhenqianjin",
+      "episode": "ep08",
+      "audit": {
+        "status": "PASS",
+        "issues": []
+      },
+      "style": {
+        "words": 912,
+        "visual_points": 6,
+        "pressure_complete": true,
+        "dialogue_dumps": false,
+        "hook_open": true,
+        "humor_ok": false,
+        "violation": false,
+        "notes": "证据链拉扯完整，画面点足够，全程压审但几乎无笑点。"
+      },
+      "resolved": "2026-10-06T09:30:57+08:00"
+    },
+    {
+      "timestamp": "2026-10-06T09:30:57+08:00",
+      "work": "zhenqianjin",
+      "episode": "ep08",
+      "audit": {
+        "status": "PASS",
+        "issues": []
+      },
+      "style": {
+        "words": 1260,
+        "visual_points": 6,
+        "pressure_complete": true,
+        "dialogue_dumps": true,
+        "hook_open": true,
+        "humor_ok": false,
+        "violation": false,
+        "notes": "证据对证有拉扯，但程序说明偏多，全集笑点偏少。"
+      },
+      "resolved": false
+    },
+    {
+      "timestamp": "2026-10-06T15:45:50+08:00",
+      "work": "liufang",
+      "episode": "ep09",
+      "audit": {
+        "status": "PASS",
+        "issues": []
+      },
+      "style": {
+        "words": 1620,
+        "visual_points": 10,
+        "pressure_complete": true,
+        "dialogue_dumps": false,
+        "hook_open": true,
+        "humor_ok": true,
+        "violation": false,
+        "notes": "压憋有拉扯，笑点到位，钩子留下回执第二行与舱光指向两个疑点。"
+      },
+      "resolved": false
+    },
+    {
+      "timestamp": "2026-10-07T14:40:50+08:00",
+      "work": "fanguan",
+      "episode": "ep09",
+      "audit": {
+        "status": "FAIL",
+        "issues": [
+          {
+            "type": "TIMELINE_CONFLICT",
+            "severity": "MAJOR",
+            "episode": "ep09",
+            "description": "ep08晨卢茨已拆开顾冬交来的存根并发现纸条；新集却推断主审在同日晨才借印写下八字、塞入该存根，时间倒置。",
+            "evidence_before": "卢茨拆开。存根天头一行眉批，铅笔字，八个字：等甄复核，先用旧数。",
+            "evidence_after": "甄荟：借半个印，盖在旧纸上，写八个字『等甄复核，先用旧数』，塞进签发单存根。"
+          },
+          {
+            "type": "CLUE_MISPLACED",
+            "severity": "MAJOR",
+            "episode": "ep09",
+            "description": "ep07明确KY-0155是十五年前的土地取样单；新集称三年前汤色签发单依据其原件的复印件，把证地与证汤的单据混为一份。",
+            "evidence_before": "十五年前这块地的取样单，编号 KY-0155",
+            "evidence_after": "三年前签发单写『浊』，用的不是原件，是复印件。复印件上那行数字，是后来加上去的。"
+          },
+          {
+            "type": "CLUE_MISPLACED",
+            "severity": "MAJOR",
+            "episode": "ep09",
+            "description": "ep07称KY-0155复核等级未被划改；新集展示同一原件的二级栏旁已有红笔改成三级，未交代何时及如何改动。",
+            "evidence_before": "KY-0155 上她复核的等级，和这份地契正本上盖的章，是同一个二级。谁想按三级卖，谁就得先把这两处都划掉。三年了，没人划。",
+            "evidence_after": "等级栏铅笔写的『二级可耕』，旁边红笔改成『三级污染带』"
+          }
+        ]
+      },
+      "style": {
+        "words": 2300,
+        "visual_points": 8,
+        "pressure_complete": false,
+        "dialogue_dumps": true,
+        "hook_open": true,
+        "humor_ok": true,
+        "violation": false,
+        "notes": "画面点充足，钩子具体；管事交出关键证物过于顺利，长段解释削弱交锋。"
+      }
+    },
+    {
+      "timestamp": "2026-10-04T13:41:21+08:00",
+      "work": "fanguan",
+      "episode": "ep06",
+      "audit": {
+        "status": "FAIL",
+        "issues": [
+          {
+            "type": "TIMELINE_CONFLICT",
+            "severity": "CRITICAL",
+            "episode": "ep04",
+            "description": "ep04钩子明确「后天全星食检听证」；新集内甄荟通讯也称「后天第二庭的主审，就是他」，但新集钩子中卢茨却说「明天开第二庭」。同一场第二庭日期在新集内部自相矛盾，并与ep04的后天冲突。",
+            "evidence_before": "后天全星食检听证，你自己来拿。",
+            "evidence_after": "甄荟……后天第二庭的主审，就是他。……明天开第二庭，让主审当庭买这块地。"
+          }
+        ]
+      },
+      "resolved": "2026-10-07T15:12:12+08:00"
+    },
+    {
+      "timestamp": "2026-10-07T15:12:12+08:00",
+      "work": "fanguan",
+      "episode": "ep06",
+      "audit": {
+        "status": "PASS",
+        "issues": []
+      },
+      "style": {
+        "words": 760,
+        "visual_points": 6,
+        "pressure_complete": true,
+        "dialogue_dumps": true,
+        "hook_open": true,
+        "humor_ok": false,
+        "violation": false,
+        "notes": "取管、被围、当场拆蜡封这几拍都兑现了，事实表也对得上；卢茨回怼专员的两句程序说明偏长，全集笑点很弱。"
+      },
+      "resolved": false
+    },
+    {
+      "timestamp": "2026-10-07T15:13:24+08:00",
+      "work": "fanguan",
+      "episode": "ep05",
+      "audit": {
+        "status": "FAIL",
+        "issues": [
+          {
+            "type": "TIMELINE_CONFLICT",
+            "severity": "CRITICAL",
+            "episode": "ep09",
+            "description": "新集接在ep09之后，却退回ep05的听证进度：ep07第二庭已开、ep06地契已取出，新集仍预告后天开第二庭、今晚取地契。",
+            "evidence_before": "第二庭公开开，旁听席坐满。",
+            "evidence_after": "后天开第二庭。有一件事你今晚必须做——把地契原件从原处取出来。"
+          },
+          {
+            "type": "CLUE_MISPLACED",
+            "severity": "MAJOR",
+            "episode": "ep09",
+            "description": "事实表确认第四管已交至听证庭且蜡封已开；新集却写甄荟随身携带、蜡封未开，未交代转移或状态变化。",
+            "evidence_before": "第四管 在 听证庭（ep05 已交出摆桌）（蜡封开，汤色清）",
+            "evidence_after": "甄荟从随身的金属筒里抽出第四支采样管，管身标签是三年前的，蜡封没开。"
+          },
+          {
+            "type": "TIMELINE_CONFLICT",
+            "severity": "MAJOR",
+            "episode": "ep07",
+            "description": "新集把汤色与土地写成同一份三年前的采样记录；事实表确认KY-0155土地取样在十五年前，三年前的是汤色签发单，两份证物不得混同。",
+            "evidence_before": "十五年前这块地的取样单，编号 KY-0155",
+            "evidence_after": "三年前的采样记录，汤色清、土壤清。"
+          },
+          {
+            "type": "OTHER",
+            "severity": "MAJOR",
+            "episode": "ep06",
+            "description": "新集称三十亩土地的检测等级为三级污染带；事实表规定真实检测等级是二级可耕，三级污染带只是供应署备案等级。",
+            "evidence_before": "二级可耕 / 三级污染带 = 真等级 vs 备案等级",
+            "evidence_after": "土壤检测等级是三级污染带"
+          }
+        ]
+      },
+      "style": {
+        "words": 800,
+        "visual_points": 4,
+        "pressure_complete": false,
+        "dialogue_dumps": true,
+        "hook_open": false,
+        "humor_ok": false,
+        "violation": false,
+        "notes": "有证物画面，但主要靠长对白交代信息；钩子直接说尽下一步行动。"
+      }
+    },
+    {
+      "timestamp": "2026-10-07T15:13:49+08:00",
+      "work": "liufang",
+      "episode": "ep06",
+      "audit": {
+        "status": "FAIL",
+        "issues": [
+          {
+            "type": "CLUE_MISPLACED",
+            "severity": "MAJOR",
+            "episode": "ep06",
+            "description": "ep01里，认罪书是沈家逼沈砺本人签的，沈母只是“留下”星舰钢的人。新集却由沈砺说出“我妈签认罪书”，把签认罪书的人从沈砺换成了他母亲，和ep01的设定冲突。",
+            "evidence_before": "祠堂正中摆着一张认罪书……沈砺，你母亲留下的那批星舰钢，我们卖了八十万。你认，还是不认。",
+            "evidence_after": "三型基因舱从处置单上整栏没了。我妈签认罪书，也是那一天。"
+          },
+          {
+            "type": "CHARACTER_INCONSISTENCY",
+            "severity": "MINOR",
+            "episode": "ep06",
+            "description": "事实表规定霍泾没有确立代词，只能用名字或职务指代。铁算盘台词里的“他”先指“让我撕的人”，紧接着一句又把这个人点成了霍泾，等于用代词间接指了霍泾。建议改成“那人”。",
+            "evidence_before": "霍泾（无确立代词，只许用名字/职务指代）",
+            "evidence_after": "让我撕的人穿司法部制服，说那一页占地方。他把撕下来的页压在我算盘底下就走了。霍署长，那天你穿的制服"
+          }
+        ]
+      },
+      "style": {
+        "words": 900,
+        "visual_points": 5,
+        "pressure_complete": true,
+        "dialogue_dumps": true,
+        "hook_open": true,
+        "humor_ok": false,
+        "violation": false,
+        "notes": "施压、拉扯、反打都完整，钩子也接得住后文；全集没有笑点，秦瑰那句冻结规则偏向讲设定。"
+      }
+    },
+    {
+      "timestamp": "2026-10-07T15:14:05+08:00",
+      "work": "tingjijia",
+      "episode": "ep05",
+      "audit": {
+        "status": "FAIL",
+        "issues": [
+          {
+            "type": "TIMELINE_CONFLICT",
+            "severity": "CRITICAL",
+            "episode": "ep06",
+            "description": "新集重演已发布的采购会拆解台和转军法复核，而 ep06–ep08 已写完复核庭裁定、三日后移地和随队名单公示。新集又让军需官在场作证，但事实表写明他请假未到、去向不明，ep08 也说他请假至今没人见过。新集无法放进 ep08 之后的时间线。钩子里的星图和流放星狱坐标也与 ep06 已揭晓的内容重复。",
+            "evidence_before": "军法复核官：传军需官——他今天请假了。裁定：本案三日后移地复核，地点……流放星狱十三号废料场。",
+            "evidence_after": "军需官：卓砚，记录里 08 改成 03 的调件单，是我按令改的。令，是主官下的。"
+          },
+          {
+            "type": "CLUE_MISPLACED",
+            "severity": "MAJOR",
+            "episode": "ep06",
+            "description": "事实表规定机务日志在裴冷的证物袋里，ep06 复核庭已把它收进证物袋。新集却让卓砚从舱里的匣子取出日志，并当众翻阅。新集还让她在采购会上才第一次读出日志内容，与 ep06 复核庭已用日志作证相冲突。",
+            "evidence_before": "裴冷把日志收进证物袋，把星图折好还给卓砚。",
+            "evidence_after": "卓砚把匣子打开，里面是一本薄册。……裴冷：匣子是机务日志。"
+          }
+        ]
+      },
+      "style": {
+        "words": 880,
+        "visual_points": 5,
+        "pressure_complete": true,
+        "dialogue_dumps": false,
+        "hook_open": true,
+        "humor_ok": false,
+        "violation": false,
+        "notes": "压憋破完整、画面点够；但全集无笑点，且整体是前文已发生情节的重复。"
+      }
+    },
+    {
+      "timestamp": "2026-10-07T15:15:00+08:00",
+      "work": "tingjijia",
+      "episode": "ep06",
+      "audit": {
+        "status": "FAIL",
+        "issues": [
+          {
+            "type": "CHARACTER_INCONSISTENCY",
+            "severity": "MAJOR",
+            "episode": "ep07",
+            "description": "ep07确认采购主官当众将退役单08改03并签名；新集复核庭却称退役单签名栏空着。",
+            "evidence_before": "退役单 08 改成 03，是他当众改的号，他自己签的名。",
+            "evidence_after": "退役单一式，编号 TY-L-01 到 08，签名栏空着。"
+          },
+          {
+            "type": "TIMELINE_CONFLICT",
+            "severity": "MAJOR",
+            "episode": "ep06",
+            "description": "ep06复核庭已裁定三日后移地，ep08随队名单已公示；新集再次作出同一裁定，把期限重新起算。",
+            "evidence_before": "时间 ep06：复核庭：回执假；三日后移地；主官请缨随行任押运组组长",
+            "evidence_after": "裁定：本案三日后移地复核，地点，星图坐标，流放星狱十三号废料场。"
+          },
+          {
+            "type": "TIMELINE_CONFLICT",
+            "severity": "MAJOR",
+            "episode": "ep07",
+            "description": "ep07第七码已自上电并收拾好驾驶舱，ep08仍在低转；新集结尾把自上电和收拾驾驶舱写成当晚首次发生。",
+            "evidence_before": "从电话打来到现在，九个钟头。驾驶舱清出来、座椅放平、氧气接到满。",
+            "evidence_after": "当晚三号库打来电话，老机修阿柯的声音在喘：第七码机甲自己上电了，舱盖合拢，生保口开始走气——它把驾驶舱收拾出来了，像要载人。"
+          }
+        ]
+      },
+      "style": {
+        "words": 900,
+        "visual_points": 5,
+        "pressure_complete": false,
+        "dialogue_dumps": true,
+        "hook_open": false,
+        "humor_ok": false,
+        "violation": false,
+        "notes": "证物动作可拍，但大量对白复述既有裁定；结尾把已发生的事件当作新悬念。"
+      }
+    },
+    {
+      "timestamp": "2026-10-07T15:15:57+08:00",
+      "work": "tuiqun",
+      "episode": "ep05",
+      "audit": {
+        "status": "FAIL",
+        "issues": [
+          {
+            "type": "TIMELINE_CONFLICT",
+            "severity": "CRITICAL",
+            "episode": "ep08",
+            "description": "已发布至ep08，待审稿却重演ep06之前的第十一次听证，并把文九渊登场写成首次揭晓，未标明倒叙。",
+            "evidence_before": "ep06：顶灯下的人穿总署黑金制服，肩章九道航纹。",
+            "evidence_after": "钟敲一响，主席台的顶灯全亮了，灯下坐着的，是姜迟没见过的第六个人。"
+          },
+          {
+            "type": "CLUE_MISPLACED",
+            "severity": "MAJOR",
+            "episode": "ep07",
+            "description": "ep07已在哑带启封，待审稿却称同一火漆筒从未打开。",
+            "evidence_before": "蜡软下去，指甲一挑，整张航灯纹连着漆皮翻起来，筒口开了。",
+            "evidence_after": "这是我父亲二十年前留下的原档，火漆没动过。"
+          },
+          {
+            "type": "CLUE_MISPLACED",
+            "severity": "MAJOR",
+            "episode": "ep06",
+            "description": "第六卷已被总署收归封存，待审稿未交代调回过程，就将其摆回听证厅证人席。",
+            "evidence_before": "哑带旧档第六卷，收归总署封存。",
+            "evidence_after": "第六卷摊在证人灯下，纸页发黄。"
+          }
+        ]
+      },
+      "style": {
+        "words": 1050,
+        "visual_points": 6,
+        "pressure_complete": false,
+        "dialogue_dumps": true,
+        "hook_open": true,
+        "humor_ok": false,
+        "violation": false,
+        "notes": "缺角、磨损字迹和顶灯有画面；推理对白偏长，对手尚未真正崩塌。"
+      }
+    },
+    {
+      "timestamp": "2026-10-07T15:16:13+08:00",
+      "work": "tuiqun",
+      "episode": "ep06",
+      "audit": {
+        "status": "FAIL",
+        "issues": [
+          {
+            "type": "TIMELINE_CONFLICT",
+            "severity": "CRITICAL",
+            "episode": "ep07",
+            "description": "新集写的是文九渊拒签调阅令、沈铭舟申请启封、筒交姜迟、三日后复审、今晚子时熄灯。这些事按事实表属于 ep06，ep07 和 ep08 又已把后果写完：ep07 筒已在哑带里开启，ep08 公示件已递交。作为新一集，它把时间线倒回筒未开、灯未熄的状态，和已发布的 ep07、ep08 直接冲突，看起来是重复发布或回放 ep06。",
+            "evidence_before": "姜迟把火漆筒立在膝上，从火漆侧面烤。蜡软下去，指甲一挑，整张航灯纹连着漆皮翻起来，筒口开了。",
+            "evidence_after": "文九渊：启封可以，不在今天。哑带批文三日后复审，复审之前，哑带封航——入口那三个灯，今晚熄。"
+          }
+        ]
+      },
+      "style": {
+        "words": 1000,
+        "visual_points": 6,
+        "pressure_complete": true,
+        "dialogue_dumps": false,
+        "hook_open": true,
+        "humor_ok": false,
+        "violation": false,
+        "notes": "单看这一集，压憋破完整，钩子具体。但全集没有笑点，剧情还和 ep07、ep08 重复。"
+      }
+    },
+    {
+      "timestamp": "2026-10-07T15:33:12+08:00",
+      "work": "fanguan",
+      "episode": "ep01",
+      "audit": {
+        "status": "FAIL",
+        "issues": [
+          {
+            "type": "TIMELINE_CONFLICT",
+            "severity": "MAJOR",
+            "episode": "ep08",
+            "description": "ep08已在帝星开第二家灶；新集未标明倒叙，却回到垃圾星写卢茨初次盘下旧餐厅，时间线无交代。",
+            "evidence_before": "第二天一早，便携炉坐在总务处门口的石阶下，火已经点着。",
+            "evidence_after": "旧餐厅荒了三年。招牌掉了半边，只剩一个「饭」字。"
+          },
+          {
+            "type": "CLUE_MISPLACED",
+            "severity": "MAJOR",
+            "episode": "ep06",
+            "description": "ep06卢茨已持有并使用配方册；新集却把它写成在收银台下首次发现，且未交代这是往事。",
+            "evidence_before": "她摊开配方册最后一页背面的地契图",
+            "evidence_after": "她擦桌子，擦到收银台下面，摸到一个硬东西。是被油浸透的配方册"
+          }
+        ]
+      },
+      "style": {
+        "words": 410,
+        "visual_points": 4,
+        "pressure_complete": false,
+        "dialogue_dumps": true,
+        "hook_open": true,
+        "humor_ok": false,
+        "violation": false,
+        "notes": "破洞漏光、残招牌与焦封面可拍，但冲突缺少拉扯，开店缘由主要靠对白说明。"
+      }
+    },
+    {
+      "timestamp": "2026-10-07T15:33:29+08:00",
+      "work": "fanguan",
+      "episode": "ep02",
+      "audit": {
+        "status": "PASS",
+        "issues": [
+          {
+            "type": "OTHER",
+            "severity": "MINOR",
+            "episode": "ep01",
+            "description": "钩子里的弹幕「和我姐的汤一样」，“我姐”按字面是买家自己的姐姐，而卢茨的姐姐才是汤的来源。这样容易让人误解成两个姐姐，后文最好写成「和卢茨姐姐的汤一样」之类，指明是回头客认出了旧味。",
+            "evidence_before": "事实表：姐姐（她）：已故；KY-0155 复核人，汤色清书写者",
+            "evidence_after": "这个味道，和我姐的汤一样。"
+          }
+        ]
+      },
+      "style": {
+        "words": 520,
+        "visual_points": 5,
+        "pressure_complete": true,
+        "dialogue_dumps": false,
+        "hook_open": true,
+        "humor_ok": true,
+        "violation": false,
+        "notes": "弹幕先骂后喝、回头客认出旧味，节奏顺；钩子有具体线索，但“我姐”指代略含糊。"
+      },
+      "resolved": false
+    },
+    {
+      "timestamp": "2026-10-07T15:33:50+08:00",
+      "work": "fanguan",
+      "episode": "ep03",
+      "audit": {
+        "status": "PASS",
+        "issues": [
+          {
+            "type": "TIMELINE_CONFLICT",
+            "severity": "MINOR",
+            "episode": "ep03",
+            "description": "新集里的封条是顾冬当场撕下、贴上锅盖的，但正文写这张封条落款三年前；钩子里顾冬又说“今天这张封条也是我亲手批的”，自相矛盾。很可能把三年前那张放行单的落款错写到了封条上。ep04 只写到封条“贴了一夜”，指的是当天新贴的封条。",
+            "evidence_before": "ep04：封条在锅盖上贴了一夜，边角翘起。顾冬：卢茨，封条不许动。",
+            "evidence_after": "他撕下检疫封条，贴在锅盖上。落款日期是三年前，签发人一栏写着顾冬。……今天这张封条也是我亲手批的。"
+          }
+        ]
+      },
+      "style": {
+        "words": 560,
+        "visual_points": 4,
+        "pressure_complete": true,
+        "dialogue_dumps": true,
+        "hook_open": true,
+        "humor_ok": false,
+        "violation": false,
+        "notes": "对峙有拉扯，签发人反转有力；顾冬讲检疫放行单那句接近讲设定，全集几乎没有笑点，钩子偏重情绪。"
+      },
+      "resolved": false
+    },
+    {
+      "timestamp": "2026-10-07T15:34:13+08:00",
+      "work": "fanguan",
+      "episode": "ep04",
+      "audit": {
+        "status": "PASS",
+        "issues": [
+          {
+            "type": "OTHER",
+            "severity": "MINOR",
+            "episode": "ep04",
+            "description": "新集里卢茨把三年前的那张单子叫作“放行单”，但同一句后面和前后各集（ep07、ep08 及事实表）都叫“签发单”。同一份证物出现两个名字，后续回指时容易被当成两张单子。",
+            "evidence_before": "ep07：三年前那张写浑浊的签发单，签字的人今天在庭上。",
+            "evidence_after": "卢茨：我申诉的不是复测。是三年前那张放行单。"
+          }
+        ]
+      },
+      "style": {
+        "words": 760,
+        "visual_points": 8,
+        "pressure_complete": false,
+        "dialogue_dumps": false,
+        "hook_open": true,
+        "humor_ok": false,
+        "violation": false,
+        "notes": "重测、撕封条的节拍画面清楚，钩子能接上后面的听证和地契线；但顾冬几乎没反抗就认了，压憋破拉扯不够，全集也没有笑点。"
+      },
+      "resolved": false
+    },
+    {
+      "timestamp": "2026-10-07T15:35:00+08:00",
+      "work": "liufang",
+      "episode": "ep01",
+      "audit": {
+        "status": "FAIL",
+        "issues": [
+          {
+            "type": "TIMELINE_CONFLICT",
+            "severity": "MAJOR",
+            "episode": "ep09",
+            "description": "ep09沈砺仍在星狱第三层；新集没有倒叙标记，却回到帝星祠堂，重演他被流放星狱之前的按印，时间线无法接续。",
+            "evidence_before": "场景｜星狱 · 第三层 · 白鲛骨架舱 · 日 · 巳时",
+            "evidence_after": "场景｜帝星 · 沈家祠堂 · 日 内；你签了，流放星狱"
+          },
+          {
+            "type": "CHARACTER_INCONSISTENCY",
+            "severity": "MAJOR",
+            "episode": "ep09",
+            "description": "新集场景标明沈家二房所有人未出场，正文却写沈砺的二叔在场并押着他的手腕。",
+            "evidence_before": "ep09场景以“在场”“未出场”分别列明人物",
+            "evidence_after": "未出场：沈家二房所有人；押着他手腕的是他自己二叔"
+          },
+          {
+            "type": "OTHER",
+            "severity": "MAJOR",
+            "episode": "ep02",
+            "description": "新集断言星狱物资署按六折收三万申报、应付一万八；ep02同笔油浸申报实际按第四类废料折为三百，价格规则未作区分。",
+            "evidence_before": "废料归类，第四类。三百星币。",
+            "evidence_after": "星狱的物资署按六折收，就是一万八。"
+          }
+        ]
+      },
+      "style": {
+        "words": 610,
+        "visual_points": 6,
+        "pressure_complete": false,
+        "dialogue_dumps": true,
+        "hook_open": true,
+        "humor_ok": false,
+        "violation": false,
+        "notes": "认罪书和冷印泥有画面，但冲突未完成反击，油浸报价对白偏重设定说明。"
+      }
+    },
+    {
+      "timestamp": "2026-10-07T15:35:25+08:00",
+      "work": "liufang",
+      "episode": "ep02",
+      "audit": {
+        "status": "FAIL",
+        "issues": [
+          {
+            "type": "CHARACTER_INCONSISTENCY",
+            "severity": "MAJOR",
+            "episode": "ep10",
+            "description": "ep03到ep09里，铁算盘和沈砺已经一起勘验，在第三层同进同出。新集却写铁算盘第一次正眼看沈砺，还要靠问话来试探他，把老搭档写成了陌生人，人物关系退回到初识。",
+            "evidence_before": "ep07：铁算盘提着备用灯在门口拦住他，把灯塞给沈砺……有人问起第三层今晚有谁，你就说只有我两个",
+            "evidence_after": "铁算盘的算盘停了。他抬眼，第一次看这个 F 级学徒的脸。"
+          },
+          {
+            "type": "TIMELINE_CONFLICT",
+            "severity": "MAJOR",
+            "episode": "ep10",
+            "description": "ep09结束于巳时，第三层白鲛骨架舱里有五个人。新集直接跳到物资署兑换窗口，只剩两个人，没有任何转场。旧上司、柳湄、名册管理员突然消失，地点和时间都接不上。",
+            "evidence_before": "ep09：星狱 · 第三层 · 白鲛骨架舱 · 日 · 巳时……在场：沈砺、旧上司、铁算盘、名册管理员、柳湄",
+            "evidence_after": "场景｜星狱 · 物资署兑换窗口 · 日 内……在场：沈砺、铁算盘"
+          },
+          {
+            "type": "CLUE_MISPLACED",
+            "severity": "MAJOR",
+            "episode": "ep10",
+            "description": "ep09留下的回执背面第二行、掐舱电的人、X 7-11-03、舱头一回冲着铁算盘的位置，这几条钩子新集一条都没接。新集反而开了一条“报废油浸三万申报”的新线，跟事实表里的未回收钩子脱节。",
+            "evidence_before": "ep09钩子：掐电的不在舱里，在这张回执上……舱头一回冲着的方向，是他自己站的位置。",
+            "evidence_after": "铁算盘：F 级沈砺，报废油浸，三万申报。按废料折算。"
+          },
+          {
+            "type": "CHARACTER_INCONSISTENCY",
+            "severity": "MINOR",
+            "episode": "ep10",
+            "description": "事实表里沈砺的身份是F级犯人，没有工牌，也没有级别。新集叫他“F 级学徒”，身份说法不一致。",
+            "evidence_before": "事实表：沈砺（他）：F 级犯人，白鲛沈家；花名册上有名，无工牌无级别",
+            "evidence_after": "第一次看这个 F 级学徒的脸"
+          },
+          {
+            "type": "OTHER",
+            "severity": "MINOR",
+            "episode": "ep10",
+            "description": "正文写“他按下第二个手印”，但前面从没写过第一个手印。另外，这一集的内容更像缺失的ep02被放错到了ep09之后。",
+            "evidence_before": "沈砺：算我的。所以我现在签一张作业风险单，按手印。",
+            "evidence_after": "他按下第二个手印。"
+          }
+        ]
+      },
+      "style": {
+        "words": 620,
+        "visual_points": 5,
+        "pressure_complete": true,
+        "dialogue_dumps": false,
+        "hook_open": true,
+        "humor_ok": true,
+        "violation": false,
+        "notes": "讨价还价的过程完整，有拉扯，钩子也留了白。问题是情节和人物关系都退回到初识阶段，看起来像ep02被错放到了ep09之后。"
+      }
+    },
+    {
+      "timestamp": "2026-10-07T15:35:47+08:00",
+      "work": "liufang",
+      "episode": "ep03",
+      "audit": {
+        "status": "FAIL",
+        "issues": [
+          {
+            "type": "TIMELINE_CONFLICT",
+            "severity": "CRITICAL",
+            "episode": "ep05",
+            "description": "新集写沈砺“分到第三层第一天”，首次发现白鲛骨架和三型基因舱，并首次提出申报。前文已发生这些事：ep04 已完成三型舱申报，ep05 已在白鲛骨架舱勘验并指出第七道龙骨，ep07–09 已在第三层按舱、补签、移交。新集像把已发生的发现戏重演，与 ep09 之后的时间线不兼容。",
+            "evidence_before": "ep04：你要申报白鲛骨架里的三型基因舱。手续我提醒一遍",
+            "evidence_after": "沈砺分到第三层第一天。他踩着骨架往下走，鞋底碰到一块钢板，钢板响了一声。"
+          },
+          {
+            "type": "CHARACTER_INCONSISTENCY",
+            "severity": "MAJOR",
+            "episode": "ep05",
+            "description": "铁算盘在 ep04–05 已知晓并陪同勘验白鲛骨架里的三型舱，新集却让他像初次听说，还认为骨架烂透、碰了算偷。沈砺的申报资格（三年工龄）在 ep04 已被核验，新集又当新信息抛出。",
+            "evidence_before": "ep05：授权已签，勘验开始。沈砺，你说舱在骨架里，指给我看。",
+            "evidence_after": "别按了。那一整片是二十年前的联邦护卫舰残骸，蒙皮早烂透了，一碰掉渣。"
+          },
+          {
+            "type": "OTHER",
+            "severity": "MINOR",
+            "episode": "ep10",
+            "description": "新集内部年代矛盾：铁算盘说残骸是“二十年前”的联邦护卫舰，沈砺说缝制记号是“三十年前”的。另外“你一个 F 级申报，三十什么”一句语义断裂。新集也没有接 ep09 未回收的钩子（回执背面第二行、掐舱电的人、舱头一回冲向铁算盘的位置）。",
+            "evidence_before": "ep09：舱头一回冲着的方向，是他自己站的位置。",
+            "evidence_after": "三十年前联邦护卫舰的缝制记号就是这个。"
+          }
+        ]
+      },
+      "style": {
+        "words": 900,
+        "visual_points": 4,
+        "pressure_complete": false,
+        "dialogue_dumps": false,
+        "hook_open": true,
+        "humor_ok": false,
+        "violation": false,
+        "notes": "钢板发声的意象不错，钩子有实体。但铁算盘让步太快，几乎没有笑点，情节也在重演旧事。"
+      }
+    },
+    {
+      "timestamp": "2026-10-07T15:36:12+08:00",
+      "work": "liufang",
+      "episode": "ep04",
+      "audit": {
+        "status": "FAIL",
+        "issues": [
+          {
+            "type": "TIMELINE_CONFLICT",
+            "severity": "CRITICAL",
+            "episode": "ep10",
+            "description": "ep09 结尾停在巳时的白鲛骨架舱，柳湄已露馅，回执背面第二行还没念完。新集却跳回物资署申报台，从头写申报三型舱、签勘验授权。这些事 ep05 已经发生（授权已签，勘验开始），而且新集完全没有接住 ep09 的钩子。",
+            "evidence_before": "秦瑰：授权已签，勘验开始。沈砺，你说舱在骨架里，指给我看。",
+            "evidence_after": "秦瑰：我需要一份现场勘验授权。签了，我带人下第三层，把舱的位置标出来。沈砺：我签。"
+          },
+          {
+            "type": "CHARACTER_INCONSISTENCY",
+            "severity": "CRITICAL",
+            "episode": "ep10",
+            "description": "事实表写明秦瑰的调令在 ep07 当晚生效、天亮就走，ep08 和 ep09 都列为未出场。新集里秦瑰却又在星狱现身办案，还说沈砺的发现是“昨天”的事，和她已经调离冲突。",
+            "evidence_before": "秦瑰：我的调令今晚生效，天亮就走。天亮之前第三层交给你一个人。",
+            "evidence_after": "秦瑰穿着司法部便服走进来，手里还是那个记录板。秦瑰：沈砺。你昨天在废料场第三层发现的东西"
+          },
+          {
+            "type": "CLUE_MISPLACED",
+            "severity": "MAJOR",
+            "episode": "ep10",
+            "description": "事实表和 ep07–ep09 都写定算盘压在第三层白鲛骨架上，铁算盘盯着不动。新集里算盘却被推回申报台抽屉，还压着被撕的登记页，没有交代谁把它从骨架上拿走。",
+            "evidence_before": "铁算盘把算盘往白鲛骨架上一压，整个人站到铁梯第二格。",
+            "evidence_after": "铁算盘没答，只把算盘推回抽屉。抽屉里，那张被撕的登记页正压在他的算盘底下"
+          },
+          {
+            "type": "CHARACTER_INCONSISTENCY",
+            "severity": "MAJOR",
+            "episode": "ep10",
+            "description": "事实表规定沈砺是 F 级，无工牌无级别，花名册上只有名字。新集却让他拿出维修工种三年工龄证明并申报成立，相当于给了他一份在册的工种资质，和设定冲突。",
+            "evidence_before": "沈砺（他）：F 级犯人，白鲛沈家；花名册上有名，无工牌无级别",
+            "evidence_after": "申报人须持任一维修工种三年工龄。沈砺：三年，一天没落，档案在册。他把工龄证明推过去。"
+          }
+        ]
+      },
+      "style": {
+        "words": 760,
+        "visual_points": 6,
+        "pressure_complete": false,
+        "dialogue_dumps": false,
+        "hook_open": true,
+        "humor_ok": false,
+        "violation": false,
+        "notes": "结构完整，钩子落在实物上；但冲突一推就过，签授权没有拉扯，全集没有笑点，剧情像倒回了 ep04 的旧稿。"
+      }
+    },
+    {
+      "timestamp": "2026-10-07T15:36:35+08:00",
+      "work": "liufang",
+      "episode": "ep05",
+      "audit": {
+        "status": "FAIL",
+        "issues": [
+          {
+            "type": "TIMELINE_CONFLICT",
+            "severity": "CRITICAL",
+            "episode": "ep10",
+            "description": "新集回到“勘验开始”、第一次发现舱的时间点，并且写成夜里。但在ep08–ep09里，旧上司已经接任第三层，沈砺也已经按过舱上的按钮。新集没有任何过渡说明，时间线倒退了。",
+            "evidence_before": "ep09：他把手伸进第七道龙骨夹层，按下舱盖上那颗等了三年的按钮。",
+            "evidence_after": "秦瑰：授权已签，勘验开始。沈砺，你说舱在骨架里，指给我看。"
+          },
+          {
+            "type": "CHARACTER_INCONSISTENCY",
+            "severity": "CRITICAL",
+            "episode": "ep10",
+            "description": "事实表和ep07都写明秦瑰的调令当晚生效、天亮就走，ep08–ep09她都不在场。新集里她却在第三层主持勘验，“未出场”名单里也没写她，没有回场说明。",
+            "evidence_before": "ep07 秦瑰：我的调令今晚生效，天亮就走。天亮之前第三层交给你一个人。",
+            "evidence_after": "在场：沈砺、秦瑰、铁算盘；未出场：沈崇"
+          },
+          {
+            "type": "CLUE_MISPLACED",
+            "severity": "MAJOR",
+            "episode": "ep10",
+            "description": "ep09已经交代三型舱电池见底，下次上电要等它自己充三个月，这是外挂的代价。新集却说独立蓄电能撑二十年，而且一直在上电，和事实表里的“充仨月”冲突。",
+            "evidence_before": "ep09：电池见底了，下一次上电，得等它自己充仨月。",
+            "evidence_after": "沈砺：三型舱有独立蓄电，退役后没拆，蓄电能撑二十年。它一直在给一个东西上电。"
+          },
+          {
+            "type": "CLUE_MISPLACED",
+            "severity": "MAJOR",
+            "episode": "ep10",
+            "description": "ep01里被押着要在认罪书上认罪的是沈砺本人，母亲只是留下了那批星舰钢。新集把签认罪书的人改成了沈砺的母亲，篡改了开篇的事实。",
+            "evidence_before": "ep01 沈崇：沈砺，你母亲留下的那批星舰钢，我们卖了八十万。你认，还是不认。",
+            "evidence_after": "页脚日期，是你母亲签认罪书的同一天。沈砺，你母亲那天，签的不止一张纸。"
+          },
+          {
+            "type": "CLUE_MISPLACED",
+            "severity": "MAJOR",
+            "episode": "ep10",
+            "description": "新集新增了舱编号SK-Ⅲ-07，又让铁算盘承认登记页是他撕的、撕页的人现在管物资署。这和事实表里的X 7-11-03编号线、旧上司和霍泾的分工对不上，同时也绕开了ep09那张回执的钩子，没有接住。",
+            "evidence_before": "事实表：X 7-11-03 = 三型舱吐出的纸条编号；霍泾：物资署；旧上司：勘验队接任首名",
+            "evidence_after": "铁算盘说：他现在管物资署，是你们的上级。他今天，就在勘验队的名单上"
+          },
+          {
+            "type": "BEAT_UNFULFILLED",
+            "severity": "MAJOR",
+            "episode": "ep10",
+            "description": "ep09留下的钩子都没有回应：回执背面第二行、柳湄露馅、旧上司追问。柳湄、旧上司、名册管理员也全部没有出场。",
+            "evidence_before": "ep09 钩子：掐电的不在舱里，在这张回执上……舱头一回冲着的方向，是他自己站的位置。",
+            "evidence_after": "下来的不是勘验队，是沈家的车标。"
+          }
+        ]
+      },
+      "style": {
+        "words": 900,
+        "visual_points": 5,
+        "pressure_complete": false,
+        "dialogue_dumps": true,
+        "hook_open": true,
+        "humor_ok": false,
+        "violation": false,
+        "notes": "画面点还够，但沈砺好几句台词都在讲舱体设定，全集没有笑点，像是旧稿重写，和前文接不上。"
+      }
+    },
+    {
+      "timestamp": "2026-10-07T15:37:12+08:00",
+      "work": "liufang",
+      "episode": "ep07",
+      "audit": {
+        "status": "FAIL",
+        "issues": [
+          {
+            "type": "CHARACTER_INCONSISTENCY",
+            "severity": "CRITICAL",
+            "episode": "new_episode",
+            "description": "事实表明确沈砺没有工牌；本集却让他说“不带牌”，结尾又称胸口是“本该挂工牌的位置”，暗示他原本有牌。",
+            "evidence_before": "沈砺（他）：F 级犯人，白鲛沈家；花名册上有名，无工牌无级别",
+            "evidence_after": "所以我去的时候不带牌。"
+          },
+          {
+            "type": "TIMELINE_CONFLICT",
+            "severity": "MAJOR",
+            "episode": "new_episode",
+            "description": "ep09已到次日巳时，本集未标明倒叙，却回到秦瑰调令尚未生效的前一夜，重演补签，时间顺序无法直接衔接。",
+            "evidence_before": "ep09 巳时：沈砺按键，舱只念到『签发人』即哑；柳湄到场露馅",
+            "evidence_after": "我的调令今晚生效，天亮就走。"
+          },
+          {
+            "type": "CLUE_MISPLACED",
+            "severity": "MAJOR",
+            "episode": "new_episode",
+            "description": "ep08确认沈砺已补签、抄件天亮前已送出；本集未标明倒叙，却写第二签仍空着、抄件尚待制作。",
+            "evidence_before": "天亮前我已抄了一份。你要查活口，活口不在柜里。",
+            "evidence_after": "现在这个还没签。所以那一行一直空着——空了三年。"
+          },
+          {
+            "type": "CLUE_MISPLACED",
+            "severity": "MAJOR",
+            "episode": "new_episode",
+            "description": "事实表规定铁算盘算盘不离身、压在骨架上由他盯着；本集写他带灯到名册室门口拦人，算盘仍留在骨架上。",
+            "evidence_before": "铁算盘（他）：第三层，算盘不离身（压在白鲛骨架上）",
+            "evidence_after": "铁算盘提着备用灯在门口拦住他，把灯塞给沈砺。算盘还压在白鲛骨架上"
+          }
+        ]
+      },
+      "style": {
+        "words": 1400,
+        "visual_points": 7,
+        "pressure_complete": false,
+        "dialogue_dumps": true,
+        "hook_open": true,
+        "humor_ok": false,
+        "violation": false,
+        "notes": "翻册、补签有画面，但阻力很快化解，数句对白集中交代设定。"
+      }
+    },
+    {
+      "timestamp": "2026-10-07T15:37:29+08:00",
+      "work": "tingjijia",
+      "episode": "ep01",
+      "audit": {
+        "status": "FAIL",
+        "issues": [
+          {
+            "type": "CHARACTER_INCONSISTENCY",
+            "severity": "MAJOR",
+            "episode": "ep03",
+            "description": "新集里吊销执照的是军需官，裴冷未出场。ep03 裴冷却自称“今天上午吊销你执照的那位”。两处对不上，需统一：要么把 ep03 改成裴冷只是经手或转达，要么新集让裴冷出场或签章。",
+            "evidence_before": "裴冷：我是今天上午吊销你执照的那位。",
+            "evidence_after": "军需官：执照吊销。理由：擅自为未登记机体加装非标改件。"
+          }
+        ]
+      },
+      "style": {
+        "words": 820,
+        "visual_points": 5,
+        "pressure_complete": true,
+        "dialogue_dumps": false,
+        "hook_open": true,
+        "humor_ok": false,
+        "violation": false,
+        "notes": "拉扯完整，熔线证据和待编区开机的钩子都很具体；几乎没有笑点。"
+      }
+    },
+    {
+      "timestamp": "2026-10-07T15:37:56+08:00",
+      "work": "tingjijia",
+      "episode": "ep02",
+      "audit": {
+        "status": "FAIL",
+        "issues": [
+          {
+            "type": "TIMELINE_CONFLICT",
+            "severity": "CRITICAL",
+            "episode": "ep07",
+            "description": "新集把剧情倒回到前期：第七码空舱开机、生保口没断，都被写成第一次发现。卓砚还在向阿柯解释生保口的作用。可是ep07里阿柯自己就讲过生保气，驾驶舱也已清好、生保灯已转绿。ep04到ep08的进展（打开舱盖、工龄证、随队名单）全被抹掉了",
+            "evidence_before": "老机修阿柯：卓工，扶手别扶。第七码的生保气是给活人预备的，压着人就不放。……驾驶舱清出来、座椅放平、氧气接到满。",
+            "evidence_after": "待编的舰，生保口是断的，断了就上不了人。这台两个口都在供电。"
+          },
+          {
+            "type": "CHARACTER_INCONSISTENCY",
+            "severity": "MAJOR",
+            "episode": "ep08",
+            "description": "事实表写明军需官请假未到、去向不明，这是一条还没回收的钩子。新集却让他直接用广播下令、落锁，没交代他在哪、怎么回来的，钩子被绕过去了",
+            "evidence_before": "道具 军需官 在 请假未到，去向不明（经办人联签缺席）",
+            "evidence_after": "广播里响起军需官的声音：待编区禁止人员进入。三号库门从外面落锁。"
+          },
+          {
+            "type": "BEAT_UNFULFILLED",
+            "severity": "MAJOR",
+            "episode": "ep08",
+            "description": "新集完全没接已有的进度：三日后移地的倒计时、主官划不划掉押运组组长、工龄证由阿柯代压、经办章新旧刀痕。全集停在ep02、ep03那个阶段，前文的承接点一个都没兑现",
+            "evidence_before": "卓砚说：刀更深的那一枚，说明这张章是后来刻的。裴冷问：后来刻的章，是谁刻的？卓砚没有回答。",
+            "evidence_after": "卓砚：三短两长一短是过峡信号。一次长两短一次长不是信号，是一个数。第三码。第三台。"
+          },
+          {
+            "type": "EMPTY_HOOK",
+            "severity": "MAJOR",
+            "episode": "ep03",
+            "description": "结尾钩子“库门落锁，外面也有人没走”和ep03开头已经接住、解决过的情节一样（锁落之后裴冷在门外）。等于把旧钩子重放一遍，下一集没有新问题可接",
+            "evidence_before": "锁落了三分钟，门外的人开始敲门。……裴冷（门外）：卓砚。我知道你在里面。",
+            "evidence_after": "库门外，锁扣响了两声——外面也有人没走。"
+          },
+          {
+            "type": "CHARACTER_INCONSISTENCY",
+            "severity": "MINOR",
+            "episode": "ep07",
+            "description": "事实表要求老机修阿柯只用全名称呼。新集卓砚在对白里用简称“阿柯”称呼对方",
+            "evidence_before": "老机修阿柯（无确立代词，只许用名字/职务指代）：三号库机修。只用全名",
+            "evidence_after": "卓砚：阿柯，你知道 TY-L-08 是哪台舰的件吗。"
+          }
+        ]
+      },
+      "style": {
+        "words": 760,
+        "visual_points": 5,
+        "pressure_complete": false,
+        "dialogue_dumps": false,
+        "hook_open": true,
+        "humor_ok": false,
+        "violation": false,
+        "notes": "画面和节奏感还行，但剧情是早期集数的重写，没有人顶回来，也没有笑点，钩子还是旧的。"
+      }
+    },
+    {
+      "timestamp": "2026-10-07T15:38:27+08:00",
+      "work": "tingjijia",
+      "episode": "ep03",
+      "audit": {
+        "status": "FAIL",
+        "issues": [
+          {
+            "type": "CHARACTER_INCONSISTENCY",
+            "severity": "MAJOR",
+            "episode": "ep01",
+            "description": "ep01吊销执照时裴冷未出场，宣告吊销的是军需官；新集让裴冷自称是吊销执照的人。",
+            "evidence_before": "在场：卓砚、军需官、老机修阿柯 未出场：裴冷……军需官：执照吊销。",
+            "evidence_after": "裴冷：我是今天上午吊销你执照的那位。"
+          },
+          {
+            "type": "TIMELINE_CONFLICT",
+            "severity": "MAJOR",
+            "episode": "ep08",
+            "description": "ep08已在采购会及复核庭之后，随队名单也已公示；新集却称采购会在明早、第七码将在会上拆卖，倒退到此前时间线。",
+            "evidence_before": "时间 ep05：采购会：笔迹对出，转复核；时间 ep08 白天：随队名单公示",
+            "evidence_after": "裴冷（门外）：卓砚，明早军方采购会，第七码机甲在名单上。它会被拆成零件，卖给三个买家。"
+          },
+          {
+            "type": "CLUE_MISPLACED",
+            "severity": "MAJOR",
+            "episode": "ep04",
+            "description": "ep04卓砚已开舱并取出姐姐留下的合金匣；新集结尾却将舱内之物写成三年来无人看见、尚待打开。",
+            "evidence_before": "她一使劲，把舱盖推开。舱里没有人，只有一只小小合金匣，卡在生保口内侧。",
+            "evidence_after": "舱里的东西，你姐留了三年没让任何人看见。她要你今天打开它，还是等明天——"
+          },
+          {
+            "type": "TIMELINE_CONFLICT",
+            "severity": "MAJOR",
+            "episode": "ep07",
+            "description": "ep07已是卓砚被吊照的第二天，ep08又进入随后白天；新集却把吊照说成当天上午。",
+            "evidence_before": "裴冷：卓砚，别跟着它说话。你被吊照的第二天就进舱，这是把柄。",
+            "evidence_after": "裴冷：我是今天上午吊销你执照的那位。"
+          }
+        ]
+      },
+      "style": {
+        "words": 750,
+        "visual_points": 5,
+        "pressure_complete": false,
+        "dialogue_dumps": true,
+        "hook_open": true,
+        "humor_ok": false,
+        "violation": false,
+        "notes": "敲门、装甲震动与半合的舱盖有画面，但对白集中交代设定；未提供DAILY_DIRECTIVE.md，无法核对指定beat。"
+      }
+    },
+    {
+      "timestamp": "2026-10-07T15:38:57+08:00",
+      "work": "tingjijia",
+      "episode": "ep04",
+      "audit": {
+        "status": "FAIL",
+        "issues": [
+          {
+            "type": "CHARACTER_INCONSISTENCY",
+            "severity": "MAJOR",
+            "episode": "ep07",
+            "description": "ep07明确采购主官当众将08改成03并签名；新集却让军需官自认改号，改号人冲突。",
+            "evidence_before": "退役单 08 改成 03，是他当众改的号，他自己签的名。",
+            "evidence_after": "……改号是我改的。可令不是我下的。"
+          },
+          {
+            "type": "TIMELINE_CONFLICT",
+            "severity": "MAJOR",
+            "episode": "ep08",
+            "description": "ep08时采购会和复核均已发生，新集三号库夜间却仍说采购会在明天。",
+            "evidence_before": "复核那天我送回执时，他说他在家。",
+            "evidence_after": "开了，里面是什么，明天采购会上就由不得你说了。"
+          },
+          {
+            "type": "TIMELINE_CONFLICT",
+            "severity": "MAJOR",
+            "episode": "ep08",
+            "description": "ep08确认第七码随队、第三天启程；新集广播却宣布今天当场拆解，未交代裁定为何失效。",
+            "evidence_before": "第七码随队，第三天启程。",
+            "evidence_after": "第七码机甲，编号 TY-L-03，今天当场拆解。"
+          },
+          {
+            "type": "OTHER",
+            "severity": "MAJOR",
+            "episode": "ep07",
+            "description": "TY-L-08是退役单编号，第八码下落不明；新集将其写成第七码机甲主轴编号，混淆证物与机甲。",
+            "evidence_before": "退役单 08 改成 03，是他当众改的号，他自己签的名。",
+            "evidence_after": "第七码机甲主轴，编号 TY-L-08 改成 03，是谁改的。"
+          }
+        ]
+      },
+      "style": {
+        "words": 540,
+        "visual_points": 6,
+        "pressure_complete": false,
+        "dialogue_dumps": true,
+        "hook_open": true,
+        "humor_ok": false,
+        "violation": false,
+        "notes": "卡片、合金匣与磨损字迹可拍，但军需官认账过快，悬念依赖改写既有事实。"
+      }
+    },
+    {
+      "timestamp": "2026-10-07T15:39:20+08:00",
+      "work": "tingjijia",
+      "episode": "ep07",
+      "audit": {
+        "status": "PASS",
+        "issues": [
+          {
+            "type": "CLUE_MISPLACED",
+            "severity": "MINOR",
+            "episode": "ep08",
+            "description": "本集结尾卓砚把工龄证收进内袋，随后阿柯说“这张证我替你压三天”，但没有写交接动作。事实表和 ep08 都要求证由阿柯代压，卓砚身上没有。",
+            "evidence_before": "工龄证那几天由老机修阿柯代压，压在生保口底下，事先写明三天。",
+            "evidence_after": "卓砚把工龄证收进内袋……老机修阿柯听完，转身把生保口的锁重新拧紧：卓工，这张证我替你压三天。"
+          }
+        ]
+      },
+      "style": {
+        "words": 1500,
+        "visual_points": 6,
+        "pressure_complete": true,
+        "dialogue_dumps": true,
+        "hook_open": false,
+        "humor_ok": false,
+        "violation": false,
+        "notes": "画面点足够，生保灯转绿和勾出工龄证都能拍。阿柯有一句台词讲钥匙设定，钩子把卓砚的计划说得太满，全集几乎没有笑点。"
+      },
+      "resolved": false
+    },
+    {
+      "timestamp": "2026-10-07T15:39:43+08:00",
+      "work": "tuiqun",
+      "episode": "ep01",
+      "audit": {
+        "status": "FAIL",
+        "issues": [
+          {
+            "type": "TIMELINE_CONFLICT",
+            "severity": "MAJOR",
+            "episode": "ep09",
+            "description": "ep04退婚已成立，ep08公示件也已登记；新集却未经倒叙标记，重演退婚签字，无法作为后续剧情衔接。",
+            "evidence_before": "退婚已经成立，不用谈。",
+            "evidence_after": "她拿起笔，在退婚书上签了名。签完，把册子合上，推回托盘。"
+          },
+          {
+            "type": "TIMELINE_CONFLICT",
+            "severity": "MAJOR",
+            "episode": "ep09",
+            "description": "ep04明确二十三次离泊中只有十九次未报备；新集把二十三次全写成无备案，并称它们发生在注销当天，与近期案事实不符。",
+            "evidence_before": "二十三次里，十九次没有向联盟报备。",
+            "evidence_after": "三月初七到三月二十九，共二十三次无备案离泊。姜家牌照注销那天，裴家泊位在姜家的航道上走了二十三次。"
+          }
+        ]
+      },
+      "style": {
+        "words": 490,
+        "visual_points": 5,
+        "pressure_complete": false,
+        "dialogue_dumps": true,
+        "hook_open": false,
+        "humor_ok": false,
+        "violation": false,
+        "notes": "签字与对账有可拍动作，但冲突拉扯偏短；哑带已在前文使用，结尾缺少新的悬念。"
+      }
+    },
+    {
+      "timestamp": "2026-10-07T15:40:09+08:00",
+      "work": "tuiqun",
+      "episode": "ep02",
+      "audit": {
+        "status": "FAIL",
+        "issues": [
+          {
+            "type": "TIMELINE_CONFLICT",
+            "severity": "CRITICAL",
+            "episode": "ep08",
+            "description": "新集是哑带航线批文申请和第一趟出航之前的戏，与已发布的时间线倒置。ep03已跑完第一趟，ep07已在哑带开筒，ep08已递第四类公示件。新集仍写成首次申请，并说“第一趟我上”，无法接在ep08之后。",
+            "evidence_before": "哑带入口那三个灯明灭得很慢……你的船过入口，看什么。（ep03）；一开盘……姜迟抱着防水袋第一个进。（ep08）",
+            "evidence_after": "哑带的批文申请摆在最后一号窗，队伍里只剩她一个。……第一趟我上。"
+          },
+          {
+            "type": "CHARACTER_INCONSISTENCY",
+            "severity": "MAJOR",
+            "episode": "ep07",
+            "description": "沈铭舟在钩子里问姜迟的母亲是否在那十七艘里，像是刚得知。但ep04、ep07和事实表已确立母亲是过哑带的四艘之一，签名页上排第二，沈铭舟也已亲历听证和开筒。他此时不应再不知情。",
+            "evidence_before": "四个名字，四个进哑带的舰。签名页上我母亲排第二。（ep07）；母亲（她）：已故；四艘整编过哑带",
+            "evidence_after": "姜小姐，你母亲二十年前是哑带那十七艘里的一艘吗。姜迟的手指在批文边上停住。"
+          },
+          {
+            "type": "CLUE_MISPLACED",
+            "severity": "MAJOR",
+            "episode": "ep06",
+            "description": "事实表规定“三短两长一短”就是哑带航灯纹，也就是沈父私印；ep03称之为黑船规格灯语。新集把它改成旧联邦的过峡信号，说已废止四十年，还说是姜迟提议的新灯，改写了这条线索的来源。",
+            "evidence_before": "数字 三短两长一短 = 哑带航灯纹 = 沈父私印（ep06）；三短两长一短的黑船规格灯语（ep03）",
+            "evidence_after": "三短两长一短，是旧联邦的过峡信号。这个信号在航务局的现行灯语表里已经废止四十年了。"
+          },
+          {
+            "type": "TIMELINE_CONFLICT",
+            "severity": "MAJOR",
+            "episode": "ep04",
+            "description": "新集说哑带“上个月刚被判死路”，又说二十年前舰队迷航后哑带就被标成死信标，两处自相矛盾。它也和事实表冲突：死信标是二十年前设的，姜家航道是三个月前注销的。",
+            "evidence_before": "时间 二十年前：第十一航次；四艘过哑带；沈父封筒；死信标",
+            "evidence_after": "哑带上个月刚被判死路，全联盟三十七家船队报了避让。"
+          },
+          {
+            "type": "BEAT_UNFULFILLED",
+            "severity": "MAJOR",
+            "episode": "ep08",
+            "description": "未回收的钩子一条都没接：三日后复审、火漆筒由谁当庭启封、公示件里被涂墨的那一页、九个死船号谁在跑、“令仪已看过”。三卷底册和防水袋这两件道具也完全没出现。",
+            "evidence_before": "三天后的复审，火漆筒由谁当庭启封。苏令仪只看了她一眼——那一眼里，是还没说出来的名字。（ep08）",
+            "evidence_after": "批文上写申请人，不写航线员姓名，这样它不是谁的家产，是一条公开的线。"
+          },
+          {
+            "type": "EMPTY_HOOK",
+            "severity": "MAJOR",
+            "episode": "ep07",
+            "description": "钩子悬念落在“母亲是否在十七艘里”，这个问题前文已经回答（四艘之一），下一集没有真正需要回答的新问题，按已发布剧情等于空钩。",
+            "evidence_before": "写这行字的人是当年那四艘之一，她知道这十三个船号后来会被划掉（ep07）",
+            "evidence_after": "那我批的不是航线，我批的是一份不该由我批的东西"
+          }
+        ]
+      },
+      "style": {
+        "words": 880,
+        "visual_points": 5,
+        "pressure_complete": true,
+        "dialogue_dumps": false,
+        "hook_open": true,
+        "humor_ok": false,
+        "violation": false,
+        "notes": "单场对峙的拉扯完整、对白利落，但几乎没有笑点；整集像早期集重写，接不上ep08。"
+      }
+    },
+    {
+      "timestamp": "2026-10-07T15:40:46+08:00",
+      "work": "tuiqun",
+      "episode": "ep03",
+      "audit": {
+        "status": "FAIL",
+        "issues": [
+          {
+            "type": "CLUE_MISPLACED",
+            "severity": "MAJOR",
+            "episode": "ep06",
+            "description": "事实表确认“三短两长一短”是沈父封筒私印的航灯纹；新集开头将其写成黑船规格灯语，改变了线索归属。",
+            "evidence_before": "数字 三短两长一短 = 哑带航灯纹 = 沈父私印（ep06）",
+            "evidence_after": "三短两长一短的黑船规格灯语"
+          },
+          {
+            "type": "TIMELINE_CONFLICT",
+            "severity": "MAJOR",
+            "episode": "ep07",
+            "description": "前文确认第十一航次的十三艘未进入哑带、四艘完整通过；新集却称二十年前舰队因看灯而在哑带迷路。",
+            "evidence_before": "只有四艘整编完好过了哑带。另外十三艘没进来。",
+            "evidence_after": "二十年前舰队迷路，是因为他们看的是灯。"
+          },
+          {
+            "type": "TIMELINE_CONFLICT",
+            "severity": "MAJOR",
+            "episode": "ep04",
+            "description": "十九次未报备离泊属于航道三个月前注销后的近期案；钩子称姜迟父亲“当年”替裴家压下这十九次对账，将近期记录写成旧事。",
+            "evidence_before": "二十三次里，十九次没有向联盟报备。",
+            "evidence_after": "这十九次在航道联盟的例行审计里从来没出现过，因为她爸当年替裴家压下了对账"
+          },
+          {
+            "type": "OTHER",
+            "severity": "MINOR",
+            "episode": "ep04",
+            "description": "新集钩子中姜迟递出证物后称呼“姜迟”，形成自称与受话人沈铭舟错位。",
+            "evidence_before": "沈铭舟：第十一次听证，案由：裴氏船坞在姜家航道注销期间的离泊合法性。",
+            "evidence_after": "姜迟把那份公开的离泊册子副本放在沈铭舟的审查桌上：姜迟，这是第十一次听证的证物，你可以先看。"
+          }
+        ]
+      },
+      "style": {
+        "words": 750,
+        "visual_points": 5,
+        "pressure_complete": false,
+        "dialogue_dumps": true,
+        "hook_open": true,
+        "humor_ok": false,
+        "violation": false,
+        "notes": "沫流转舵有可拍画面，但旧案解释集中在对白中，人物交锋不足。"
+      }
+    }
+  ]
+}

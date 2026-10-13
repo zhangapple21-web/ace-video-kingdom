@@ -1,0 +1,629 @@
+[
+  {
+    "narration_chars": 709,
+    "hinge_total": 11,
+    "hinge_detail": {
+      "虽然…但是/可/却": 11
+    },
+    "dominant": "虽然…但是/可/却",
+    "density_per_1k": 15.5,
+    "banned_hits": [],
+    "skeletal": true,
+    "work": "zhenqianjin",
+    "ep": "ep11"
+  },
+  {
+    "narration_chars": 948,
+    "hinge_total": 9,
+    "hinge_detail": {
+      "虽然…但是/可/却": 9
+    },
+    "dominant": "虽然…但是/可/却",
+    "density_per_1k": 9.5,
+    "banned_hits": [],
+    "skeletal": true,
+    "work": "tuiqun",
+    "ep": "ep11"
+  },
+  {
+    "narration_chars": 741,
+    "hinge_total": 6,
+    "hinge_detail": {
+      "虽然…但是/可/却": 6
+    },
+    "dominant": "虽然…但是/可/却",
+    "density_per_1k": 8.1,
+    "banned_hits": [],
+    "skeletal": true,
+    "work": "fanguan",
+    "ep": "ep11"
+  },
+  {
+    "narration_chars": 731,
+    "hinge_total": 6,
+    "hinge_detail": {
+      "虽然…但是/可/却": 6
+    },
+    "dominant": "虽然…但是/可/却",
+    "density_per_1k": 8.2,
+    "banned_hits": [],
+    "skeletal": true,
+    "work": "tingjijia",
+    "ep": "ep11"
+  },
+  {
+    "narration_chars": 914,
+    "hinge_total": 2,
+    "hinge_detail": {
+      "虽然…但是/可/却": 2
+    },
+    "dominant": "虽然…但是/可/却",
+    "density_per_1k": 2.2,
+    "banned_hits": [],
+    "skeletal": false,
+    "work": "liufang",
+    "ep": "ep11"
+  },
+  {
+    "narration_chars": 739,
+    "hinge_total": 2,
+    "hinge_detail": {
+      "虽然…但是/可/却": 2
+    },
+    "dominant": "虽然…但是/可/却",
+    "density_per_1k": 2.7,
+    "banned_hits": [],
+    "skeletal": false,
+    "work": "tingjijia",
+    "ep": "ep10"
+  },
+  {
+    "narration_chars": 393,
+    "hinge_total": 1,
+    "hinge_detail": {
+      "虽然…但是/可/却": 1
+    },
+    "dominant": "虽然…但是/可/却",
+    "density_per_1k": 2.5,
+    "banned_hits": [],
+    "skeletal": false,
+    "work": "fanguan",
+    "ep": "ep10"
+  },
+  {
+    "narration_chars": 687,
+    "hinge_total": 1,
+    "hinge_detail": {
+      "虽然…但是/可/却": 1
+    },
+    "dominant": "虽然…但是/可/却",
+    "density_per_1k": 1.5,
+    "banned_hits": [],
+    "skeletal": false,
+    "work": "tingjijia",
+    "ep": "ep02"
+  },
+  {
+    "narration_chars": 166,
+    "hinge_total": 1,
+    "hinge_detail": {
+      "不是…而是": 1
+    },
+    "dominant": "不是…而是",
+    "density_per_1k": 6.0,
+    "banned_hits": [],
+    "skeletal": false,
+    "work": "zhenqianjin",
+    "ep": "ep04"
+  },
+  {
+    "narration_chars": 506,
+    "hinge_total": 1,
+    "hinge_detail": {
+      "虽然…但是/可/却": 1
+    },
+    "dominant": "虽然…但是/可/却",
+    "density_per_1k": 2.0,
+    "banned_hits": [],
+    "skeletal": false,
+    "work": "zhenqianjin",
+    "ep": "ep05"
+  },
+  {
+    "narration_chars": 745,
+    "hinge_total": 1,
+    "hinge_detail": {
+      "虽然…但是/可/却": 1
+    },
+    "dominant": "虽然…但是/可/却",
+    "density_per_1k": 1.3,
+    "banned_hits": [],
+    "skeletal": false,
+    "work": "zhenqianjin",
+    "ep": "ep10"
+  },
+  {
+    "narration_chars": 132,
+    "hinge_total": 0,
+    "hinge_detail": {},
+    "dominant": null,
+    "density_per_1k": 0.0,
+    "banned_hits": [],
+    "skeletal": false,
+    "work": "fanguan",
+    "ep": "ep01"
+  },
+  {
+    "narration_chars": 206,
+    "hinge_total": 0,
+    "hinge_detail": {},
+    "dominant": null,
+    "density_per_1k": 0.0,
+    "banned_hits": [],
+    "skeletal": false,
+    "work": "fanguan",
+    "ep": "ep02"
+  },
+  {
+    "narration_chars": 457,
+    "hinge_total": 0,
+    "hinge_detail": {},
+    "dominant": null,
+    "density_per_1k": 0.0,
+    "banned_hits": [],
+    "skeletal": false,
+    "work": "fanguan",
+    "ep": "ep03"
+  },
+  {
+    "narration_chars": 211,
+    "hinge_total": 0,
+    "hinge_detail": {},
+    "dominant": null,
+    "density_per_1k": 0.0,
+    "banned_hits": [],
+    "skeletal": false,
+    "work": "fanguan",
+    "ep": "ep04"
+  },
+  {
+    "narration_chars": 230,
+    "hinge_total": 0,
+    "hinge_detail": {},
+    "dominant": null,
+    "density_per_1k": 0.0,
+    "banned_hits": [],
+    "skeletal": false,
+    "work": "fanguan",
+    "ep": "ep05"
+  },
+  {
+    "narration_chars": 658,
+    "hinge_total": 0,
+    "hinge_detail": {},
+    "dominant": null,
+    "density_per_1k": 0.0,
+    "banned_hits": [],
+    "skeletal": false,
+    "work": "fanguan",
+    "ep": "ep06"
+  },
+  {
+    "narration_chars": 513,
+    "hinge_total": 0,
+    "hinge_detail": {},
+    "dominant": null,
+    "density_per_1k": 0.0,
+    "banned_hits": [],
+    "skeletal": false,
+    "work": "fanguan",
+    "ep": "ep07"
+  },
+  {
+    "narration_chars": 658,
+    "hinge_total": 0,
+    "hinge_detail": {},
+    "dominant": null,
+    "density_per_1k": 0.0,
+    "banned_hits": [],
+    "skeletal": false,
+    "work": "fanguan",
+    "ep": "ep08"
+  },
+  {
+    "narration_chars": 573,
+    "hinge_total": 0,
+    "hinge_detail": {},
+    "dominant": null,
+    "density_per_1k": 0.0,
+    "banned_hits": [],
+    "skeletal": false,
+    "work": "fanguan",
+    "ep": "ep09"
+  },
+  {
+    "narration_chars": 233,
+    "hinge_total": 0,
+    "hinge_detail": {},
+    "dominant": null,
+    "density_per_1k": 0.0,
+    "banned_hits": [],
+    "skeletal": false,
+    "work": "liufang",
+    "ep": "ep01"
+  },
+  {
+    "narration_chars": 176,
+    "hinge_total": 0,
+    "hinge_detail": {},
+    "dominant": null,
+    "density_per_1k": 0.0,
+    "banned_hits": [],
+    "skeletal": false,
+    "work": "liufang",
+    "ep": "ep02"
+  },
+  {
+    "narration_chars": 517,
+    "hinge_total": 0,
+    "hinge_detail": {},
+    "dominant": null,
+    "density_per_1k": 0.0,
+    "banned_hits": [],
+    "skeletal": false,
+    "work": "liufang",
+    "ep": "ep03"
+  },
+  {
+    "narration_chars": 200,
+    "hinge_total": 0,
+    "hinge_detail": {},
+    "dominant": null,
+    "density_per_1k": 0.0,
+    "banned_hits": [],
+    "skeletal": false,
+    "work": "liufang",
+    "ep": "ep04"
+  },
+  {
+    "narration_chars": 334,
+    "hinge_total": 0,
+    "hinge_detail": {},
+    "dominant": null,
+    "density_per_1k": 0.0,
+    "banned_hits": [],
+    "skeletal": false,
+    "work": "liufang",
+    "ep": "ep05"
+  },
+  {
+    "narration_chars": 209,
+    "hinge_total": 0,
+    "hinge_detail": {},
+    "dominant": null,
+    "density_per_1k": 0.0,
+    "banned_hits": [],
+    "skeletal": false,
+    "work": "liufang",
+    "ep": "ep06"
+  },
+  {
+    "narration_chars": 473,
+    "hinge_total": 0,
+    "hinge_detail": {},
+    "dominant": null,
+    "density_per_1k": 0.0,
+    "banned_hits": [],
+    "skeletal": false,
+    "work": "liufang",
+    "ep": "ep07"
+  },
+  {
+    "narration_chars": 445,
+    "hinge_total": 0,
+    "hinge_detail": {},
+    "dominant": null,
+    "density_per_1k": 0.0,
+    "banned_hits": [],
+    "skeletal": false,
+    "work": "liufang",
+    "ep": "ep08"
+  },
+  {
+    "narration_chars": 949,
+    "hinge_total": 0,
+    "hinge_detail": {},
+    "dominant": null,
+    "density_per_1k": 0.0,
+    "banned_hits": [],
+    "skeletal": false,
+    "work": "liufang",
+    "ep": "ep09"
+  },
+  {
+    "narration_chars": 763,
+    "hinge_total": 0,
+    "hinge_detail": {},
+    "dominant": null,
+    "density_per_1k": 0.0,
+    "banned_hits": [],
+    "skeletal": false,
+    "work": "liufang",
+    "ep": "ep10"
+  },
+  {
+    "narration_chars": 182,
+    "hinge_total": 0,
+    "hinge_detail": {},
+    "dominant": null,
+    "density_per_1k": 0.0,
+    "banned_hits": [],
+    "skeletal": false,
+    "work": "tingjijia",
+    "ep": "ep01"
+  },
+  {
+    "narration_chars": 522,
+    "hinge_total": 0,
+    "hinge_detail": {},
+    "dominant": null,
+    "density_per_1k": 0.0,
+    "banned_hits": [],
+    "skeletal": false,
+    "work": "tingjijia",
+    "ep": "ep03"
+  },
+  {
+    "narration_chars": 615,
+    "hinge_total": 0,
+    "hinge_detail": {},
+    "dominant": null,
+    "density_per_1k": 0.0,
+    "banned_hits": [],
+    "skeletal": false,
+    "work": "tingjijia",
+    "ep": "ep04"
+  },
+  {
+    "narration_chars": 226,
+    "hinge_total": 0,
+    "hinge_detail": {},
+    "dominant": null,
+    "density_per_1k": 0.0,
+    "banned_hits": [],
+    "skeletal": false,
+    "work": "tingjijia",
+    "ep": "ep05"
+  },
+  {
+    "narration_chars": 254,
+    "hinge_total": 0,
+    "hinge_detail": {},
+    "dominant": null,
+    "density_per_1k": 0.0,
+    "banned_hits": [],
+    "skeletal": false,
+    "work": "tingjijia",
+    "ep": "ep06"
+  },
+  {
+    "narration_chars": 456,
+    "hinge_total": 0,
+    "hinge_detail": {},
+    "dominant": null,
+    "density_per_1k": 0.0,
+    "banned_hits": [],
+    "skeletal": false,
+    "work": "tingjijia",
+    "ep": "ep07"
+  },
+  {
+    "narration_chars": 434,
+    "hinge_total": 0,
+    "hinge_detail": {},
+    "dominant": null,
+    "density_per_1k": 0.0,
+    "banned_hits": [],
+    "skeletal": false,
+    "work": "tingjijia",
+    "ep": "ep08"
+  },
+  {
+    "narration_chars": 466,
+    "hinge_total": 0,
+    "hinge_detail": {},
+    "dominant": null,
+    "density_per_1k": 0.0,
+    "banned_hits": [],
+    "skeletal": false,
+    "work": "tingjijia",
+    "ep": "ep09"
+  },
+  {
+    "narration_chars": 214,
+    "hinge_total": 0,
+    "hinge_detail": {},
+    "dominant": null,
+    "density_per_1k": 0.0,
+    "banned_hits": [],
+    "skeletal": false,
+    "work": "tuiqun",
+    "ep": "ep01"
+  },
+  {
+    "narration_chars": 188,
+    "hinge_total": 0,
+    "hinge_detail": {},
+    "dominant": null,
+    "density_per_1k": 0.0,
+    "banned_hits": [],
+    "skeletal": false,
+    "work": "tuiqun",
+    "ep": "ep02"
+  },
+  {
+    "narration_chars": 249,
+    "hinge_total": 0,
+    "hinge_detail": {},
+    "dominant": null,
+    "density_per_1k": 0.0,
+    "banned_hits": [],
+    "skeletal": false,
+    "work": "tuiqun",
+    "ep": "ep03"
+  },
+  {
+    "narration_chars": 176,
+    "hinge_total": 0,
+    "hinge_detail": {},
+    "dominant": null,
+    "density_per_1k": 0.0,
+    "banned_hits": [],
+    "skeletal": false,
+    "work": "tuiqun",
+    "ep": "ep04"
+  },
+  {
+    "narration_chars": 272,
+    "hinge_total": 0,
+    "hinge_detail": {},
+    "dominant": null,
+    "density_per_1k": 0.0,
+    "banned_hits": [],
+    "skeletal": false,
+    "work": "tuiqun",
+    "ep": "ep05"
+  },
+  {
+    "narration_chars": 370,
+    "hinge_total": 0,
+    "hinge_detail": {},
+    "dominant": null,
+    "density_per_1k": 0.0,
+    "banned_hits": [],
+    "skeletal": false,
+    "work": "tuiqun",
+    "ep": "ep06"
+  },
+  {
+    "narration_chars": 697,
+    "hinge_total": 0,
+    "hinge_detail": {},
+    "dominant": null,
+    "density_per_1k": 0.0,
+    "banned_hits": [],
+    "skeletal": false,
+    "work": "tuiqun",
+    "ep": "ep07"
+  },
+  {
+    "narration_chars": 555,
+    "hinge_total": 0,
+    "hinge_detail": {},
+    "dominant": null,
+    "density_per_1k": 0.0,
+    "banned_hits": [],
+    "skeletal": false,
+    "work": "tuiqun",
+    "ep": "ep08"
+  },
+  {
+    "narration_chars": 749,
+    "hinge_total": 0,
+    "hinge_detail": {},
+    "dominant": null,
+    "density_per_1k": 0.0,
+    "banned_hits": [],
+    "skeletal": false,
+    "work": "tuiqun",
+    "ep": "ep09"
+  },
+  {
+    "narration_chars": 601,
+    "hinge_total": 0,
+    "hinge_detail": {},
+    "dominant": null,
+    "density_per_1k": 0.0,
+    "banned_hits": [],
+    "skeletal": false,
+    "work": "tuiqun",
+    "ep": "ep10"
+  },
+  {
+    "narration_chars": 160,
+    "hinge_total": 0,
+    "hinge_detail": {},
+    "dominant": null,
+    "density_per_1k": 0.0,
+    "banned_hits": [],
+    "skeletal": false,
+    "work": "zhenqianjin",
+    "ep": "ep01"
+  },
+  {
+    "narration_chars": 239,
+    "hinge_total": 0,
+    "hinge_detail": {},
+    "dominant": null,
+    "density_per_1k": 0.0,
+    "banned_hits": [],
+    "skeletal": false,
+    "work": "zhenqianjin",
+    "ep": "ep02"
+  },
+  {
+    "narration_chars": 157,
+    "hinge_total": 0,
+    "hinge_detail": {},
+    "dominant": null,
+    "density_per_1k": 0.0,
+    "banned_hits": [],
+    "skeletal": false,
+    "work": "zhenqianjin",
+    "ep": "ep03"
+  },
+  {
+    "narration_chars": 320,
+    "hinge_total": 0,
+    "hinge_detail": {},
+    "dominant": null,
+    "density_per_1k": 0.0,
+    "banned_hits": [],
+    "skeletal": false,
+    "work": "zhenqianjin",
+    "ep": "ep06"
+  },
+  {
+    "narration_chars": 610,
+    "hinge_total": 0,
+    "hinge_detail": {},
+    "dominant": null,
+    "density_per_1k": 0.0,
+    "banned_hits": [],
+    "skeletal": false,
+    "work": "zhenqianjin",
+    "ep": "ep07"
+  },
+  {
+    "narration_chars": 369,
+    "hinge_total": 0,
+    "hinge_detail": {},
+    "dominant": null,
+    "density_per_1k": 0.0,
+    "banned_hits": [],
+    "skeletal": false,
+    "work": "zhenqianjin",
+    "ep": "ep08"
+  },
+  {
+    "narration_chars": 747,
+    "hinge_total": 0,
+    "hinge_detail": {},
+    "dominant": null,
+    "density_per_1k": 0.0,
+    "banned_hits": [],
+    "skeletal": false,
+    "work": "zhenqianjin",
+    "ep": "ep09"
+  }
+]
