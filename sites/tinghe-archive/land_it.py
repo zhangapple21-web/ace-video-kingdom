@@ -102,6 +102,15 @@ def main() -> int:
     if not step("status strings must match what is readable",
                 [py, str(HERE / "test_status_truthful.py")])[0]:
         return 1
+    # Runs AFTER apply_quarantine, and checks something different from it.
+    # apply_quarantine builds the hold list; this proves the result is complete.
+    # On 2026-10-13 three published episodes carried a FAIL verdict without being
+    # held, because their audit landed after the deploy chain had already stopped —
+    # the hold list was never wrong, it was never recomputed. Readers were served
+    # three broken episodes. That combination must not pass quietly again.
+    if not step("no published episode carries an unheld non-PASS verdict",
+                [py, str(HERE / "test_no_leaked_failures.py")])[0]:
+        return 1
 
     ok, out = step("deploy", [py, str(HERE / "run_daily_task.py"), "--no-write"])
     deployed = "deploy_pending:  false" in out

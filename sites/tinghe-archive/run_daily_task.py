@@ -158,16 +158,20 @@ def append_daily_log(summary: dict) -> None:
 # answers "is this slot still real?" in seconds instead of a failed run a day later.
 #
 # 2026-10-13 实测后重排。muse-spark-1.3 被提供商按地区下架
-# （"This model is not available in your country"），已从池中移除——它排在第一位
-# 时每集都要白烧一次尝试。step-5 成为主力，其余按实测可用性排列。
-# 顺序不是锁死：任何一个挂了就把下一个顶上，用 probe_pools.py 复测。
+# （"This model is not available in your country"），已从池中移除。
+#
+# mimo 排第一不是偏好，是实测：2026-10-13 修 fanguan/ep11 时，
+# step-5 与 ling 各跑满 480s 一个字没写出来（两次 8 分钟空烧），
+# mimo 160s 改完并直接拿到 audit PASS。探测只说明池子通，
+# 写得动整集是另一回事，只有真跑过一集才知道。
+# 其余按实测可用性排列；任何一个挂了下一个顶上，用 probe_pools.py 复测。
 #
 # Override without editing code:
-#   set TINGHE_WRITER_MODELS=opencode/step-5-preview-free,opencode/amd-model
+#   set TINGHE_WRITER_MODELS=opencode/mimo-v2.6-flash-free,opencode/amd-model
 WRITER_MODELS = [
+    "opencode/mimo-v2.6-flash-free",
     "opencode/step-5-preview-free",
     "opencode/ling-3.1-flash-free",
-    "opencode/mimo-v2.6-flash-free",
     "opencode/nemotron-3.5-lightning-free",
     "opencode/longcat-2.5-preview-free",
 ]
