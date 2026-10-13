@@ -267,6 +267,26 @@ def issues_block(audit: dict, reason: str | None = None) -> str:
                     + reason)
         return "(审核没有给出 issues，但判词不是 PASS —— 重新审核一遍再修。)"
     lines = []
+    # Decide the mode here and say so out loud. Measured 2026-10-13: with four to
+    # five cross-episode issues (a verdict reversed between episodes, a reveal
+    # done two different ways, a prop with no source) three models each read the
+    # whole issue list, understood it, and left the episode alone. They were not
+    # being stubborn — REPAIR_DIRECTIVE §1b reserves "rewrite the spine" for the
+    # case where the whole episode was written wrong, which is not what these
+    # episodes look like, so every model took the narrow reading and tried to
+    # patch lines that cannot be patched one at a time.
+    if len(issues) >= 3:
+        lines.append(
+            f"【这一集是重写型修复，不是小修】一共 {len(issues)} 条判词，横跨时间线、"
+            "人物、道具或立场，且互相咬合——**逐条打补丁改不动，改一处会撞上另一处**。"
+            "按 REPAIR_DIRECTIVE §1b：读上下文包里的压力轴，按 DAILY_DIRECTIVE §8b "
+            "重写这一集的脊梁（谁在压 → 压力怎么升 → 她怎么当场翻回来 → 余震与新钩子），"
+            "让上面每一条判词都不再成立。保留已经成立的细节（人物关系、已确立事实、"
+            "道具归属），换掉导致矛盾的场面与节拍。\n")
+    else:
+        lines.append(
+            "【这一集按判词小修】只需让下面每一条判词不再成立，"
+            "不要重写整集气质，不要动已经成立的剧情与人物。\n")
     for i, issue in enumerate(issues, 1):
         lines.append(f"### 缺陷 {i}：{issue.get('type')} / {issue.get('severity')}")
         lines.append(f"- 判定说明：{issue.get('description', '')}")
