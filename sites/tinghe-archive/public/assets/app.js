@@ -74,7 +74,7 @@
     }
   };
   applyFont(FONTS.includes(readStore(KEY.font, "m")) ? readStore(KEY.font, "m") : "m");
-  applyTheme(readStore(KEY.theme, "day") === "night" ? "night" : "day");
+  applyTheme(readStore(KEY.theme, "night") === "day" ? "day" : "night");
 
   /* ---------- chrome ---------- */
 
@@ -157,12 +157,12 @@
   /* ---------- home ---------- */
 
   const ENTRIES = [
-    { id: "read", no: "01", glyph: "阅", cls: "entry-read", title: "继续阅读", art: "art-read.svg" },
-    { id: "catalog", no: "02", glyph: "卷", cls: "entry-catalog", title: "卷目目录", art: "art-catalog.svg" },
-    { id: "characters", no: "03", glyph: "人", cls: "entry-characters", title: "人物簿", art: "art-characters.svg" },
-    { id: "places", no: "04", glyph: "地", cls: "entry-places", title: "地点簿", art: "art-places.svg" },
-    { id: "events", no: "05", glyph: "事", cls: "entry-events", title: "事件簿", art: "art-events.svg" },
-    { id: "props", no: "06", glyph: "物", cls: "entry-props", title: "物件簿", art: "art-props.svg" },
+    { id: "read", no: "01", glyph: "阅", cls: "entry-read", title: "继续阅读" },
+    { id: "catalog", no: "02", glyph: "卷", cls: "entry-catalog", title: "卷目目录" },
+    { id: "characters", no: "03", glyph: "人", cls: "entry-characters", title: "人物簿" },
+    { id: "places", no: "04", glyph: "地", cls: "entry-places", title: "地点簿" },
+    { id: "events", no: "05", glyph: "事", cls: "entry-events", title: "事件簿" },
+    { id: "props", no: "06", glyph: "物", cls: "entry-props", title: "物件簿" },
   ];
 
   function entryCards(resume, counts) {
@@ -303,7 +303,7 @@
         <figure class="hero-figure">
           <p class="hero-vertical" aria-hidden="true">残荷诡影</p>
           <div class="hero-cover">
-            <img src="assets/cover.svg" alt="月下荷园，残荷与水面映出的朦胧人影" width="660" height="880">
+            <img src="assets/cover-hero.jpg" alt="月下荷园，残荷与水面映出的朦胧人影" width="600" height="900">
             <figcaption>听荷轩藏</figcaption>
           </div>
         </figure>

@@ -10,7 +10,7 @@ from pathlib import Path
 
 from PIL import Image, ImageDraw, ImageFilter, ImageFont
 
-OUT = Path(__file__).resolve().parent / "public" / "assets" / "og-cover.png"
+OUT = Path(__file__).resolve().parent / "public" / "assets" / "og-cover.jpg"
 W, H = 1200, 630
 
 INK = (18, 58, 49)

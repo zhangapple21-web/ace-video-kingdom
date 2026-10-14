@@ -39,7 +39,7 @@ WORK = "残荷诡影"
 # the ?v= in public/index.html — a stale value here serves the old CSS to every
 # one of the 248 static chapter pages, which is how a shipped restyle silently
 # misses on exactly the pages people share.
-CSS_V = "20261012-glass-v16"
+CSS_V = "20261014-tokens-v18"
 
 # Chapters the reader treats as front/back matter rather than scenes.
 SKIP_IDS = {"c999"}
@@ -102,7 +102,7 @@ def page(chapter: dict, prev_id: str | None, next_id: str | None) -> str:
 <meta property="og:url" content="{BASE}read/{cid}"/>
 <meta property="og:title" content="{esc(title)}"/>
 <meta property="og:description" content="{esc(desc)}"/>
-<meta property="og:image" content="{BASE}assets/og-cover.png"/>
+<meta property="og:image" content="{BASE}assets/og-cover.jpg"/>
 <meta name="twitter:card" content="summary_large_image"/>
 <link rel="stylesheet" href="../assets/app.css?v={CSS_V}"/>
 {THEME_BOOTSTRAP}
