@@ -136,6 +136,34 @@ def main() -> int:
             code = issue.get("type") or issue.get("severity") or "ISSUE"
             if code not in codes:
                 codes.append(code)
+
+        # GENRE_DRIFT is the one criterion held back for corroboration rather
+        # than acted on immediately. A single reading of "this episode is an
+        # investigation, not a turnaround" is not enough to send an episode to a
+        # writer: the auditor's verdict has been observed flipping on identical
+        # text, and a wrong call here costs a rewrite. It holds the episode and
+        # waits for a second reading on the same bytes — the same shape as an
+        # unsettled PASS, which also holds rather than releases.
+        #
+        # Anything else in the issue list means there is a concrete defect, and
+        # corroboration is not required for those.
+        non_drift = [i for i in issues
+                     if str(i.get("type", "")).upper() != verdict.DRIFT_TYPE]
+        if issues and not non_drift and not verdict.drift_confirmed(work, ep):
+            first = " ".join(str(issues[0].get("description", "")).split())
+            if len(first) > 200:
+                first = first[:197] + "..."
+            held.append({
+                "work": work, "episode": ep, "verdict": "DRIFT_UNSETTLED",
+                "codes": ["GENRE_DRIFT"],
+                "reason": ("held back; one audit named GENRE_DRIFT and the text is "
+                           "unchanged. The auditor's verdict has been observed flipping "
+                           "on identical text, so one reading does not send this to a "
+                           "writer — a second reading on the same bytes is required. "
+                           + first),
+            })
+            continue
+
         first = str(issues[0].get("description", "")).strip() if issues else ""
         first = " ".join(first.split())
         if len(first) > 220:

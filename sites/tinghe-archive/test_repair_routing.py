@@ -102,6 +102,15 @@ def main() -> int:
     m.subprocess.run = stub_run
 
     class FakeVerdict:
+        # The stub has to carry the full surface confirm_only touches. It grew
+        # on 2026-10-14: the genre gate added DRIFT_TYPE, DRIFT_CONFIRMATIONS and
+        # drift_confirmed, and confirm_only now reads them on the FAIL path. A
+        # partial stub fails with AttributeError before any assertion runs, which
+        # looks like the routing broke rather than the stub going stale.
+        DRIFT_TYPE = "GENRE_DRIFT"
+        DRIFT_CONFIRMATIONS = 2
+        STABLE_PASSES = 2
+
         @staticmethod
         def status_of(w, e):
             return "PASS"
@@ -113,6 +122,10 @@ def main() -> int:
         @staticmethod
         def settled_pass(w, e, required=2):
             return True
+
+        @staticmethod
+        def drift_confirmed(w, e):
+            return False
 
     real_verdict = sys.modules.get("verdict")
     sys.modules["verdict"] = FakeVerdict
@@ -133,6 +146,10 @@ def main() -> int:
     calls2: list[list[str]] = []
 
     class FailingVerdict:
+        DRIFT_TYPE = "GENRE_DRIFT"
+        DRIFT_CONFIRMATIONS = 2
+        STABLE_PASSES = 2
+
         @staticmethod
         def status_of(w, e):
             return "FAIL"
@@ -146,6 +163,10 @@ def main() -> int:
         def settled_pass(w, e, required=2):
             return False
 
+        @staticmethod
+        def drift_confirmed(w, e):
+            return False
+
     m.subprocess.run = lambda cmd, **kw: (calls2.append(list(cmd)), Result(0))[1]
     sys.modules["verdict"] = FailingVerdict
     try:
@@ -154,7 +175,21 @@ def main() -> int:
         sys.modules["verdict"] = real_verdict
         m.subprocess.run = original
 
-    check(out2 == "STILL_FAILING", f"a FAIL returns STILL_FAILING (got {out2})")
+    # A FAIL returns NEEDS_REPAIR, not STILL_FAILING.
+    #
+    # It used to return STILL_FAILING. That was the bug that kept liufang/ep15
+    # in a loop all afternoon: the batch split routes an episode to the
+    # confirmation branch with no writer attached, the audit disagreed, the log
+    # said "now it has something to repair" — and the function returned failure
+    # to a caller that had nothing to do with it but print a summary. The next
+    # run routed the same unchanged text the same way and got the same answer.
+    #
+    # The later fact is the audit, so the audit decides: NEEDS_REPAIR tells
+    # _run_repairs to hand the episode to a writer in this same run. The
+    # assertion below about stopping at the first FAIL is the one that carries
+    # the original intent — repeating an audit that already said FAIL cannot
+    # produce a different verdict, it only spends another model.
+    check(out2 == "NEEDS_REPAIR", f"a FAIL returns NEEDS_REPAIR for escalation (got {out2})")
     check(len(calls2) == 1, f"it stops at the first FAIL ({len(calls2)} audit(s)), "
                             f"since repeating cannot help")
 

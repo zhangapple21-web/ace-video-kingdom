@@ -107,3 +107,77 @@ def pass_streak(work: str, episode: str) -> int:
             break
         streak += 1
     return streak
+
+
+# --- genre drift: the mirror of settled_pass -------------------------------
+#
+# GENRE_DRIFT is the one criterion that used to be explicitly forbidden from
+# failing anything, on the sound grounds that a single verdict flips. The
+# consequence was zero enforcement: across 342 audit records genre_drift appeared
+# as an issue zero times, while the procedural-to-payoff ratio went from 5.5 to
+# 6.1. The writer already receives §8b every run; the prompt was never the
+# missing piece.
+#
+# A keyword gate cannot replace it. Two attempts on 2026-10-14 scored 80/80 and
+# left 60% of beats unclassified, and the same instruments calibrated 45% to 45%
+# on 2026-10-11, which is chance. So the block has to come from the auditor's
+# reading, made safe by requiring agreement rather than by counting words.
+#
+# Mirroring settled_pass exactly: two consecutive FAILs naming GENRE_DRIFT on
+# unchanged content. The sha requirement is what makes this agreement about the
+# same text rather than about two versions of it.
+
+DRIFT_TYPE = "GENRE_DRIFT"
+DRIFT_CONFIRMATIONS = 2
+
+
+def _names_drift(row: dict) -> bool:
+    for issue in ((row.get("audit") or {}).get("issues") or []):
+        if str(issue.get("type", "")).upper() == DRIFT_TYPE:
+            return True
+    return False
+
+
+def drift_confirmed(work: str, episode: str, required: int = DRIFT_CONFIRMATIONS) -> bool:
+    """True after `required` consecutive audits all named GENRE_DRIFT on the
+    same, unchanged content.
+
+    Returns False whenever stability cannot be proven — no record, no
+    ``content_sha``, or a PASS or other-issue verdict in between. That is
+    deliberate: a criterion that only blocks when it is certain is the right
+    shape for one whose failure mode is a writer-pool outage, so a day when
+    generation is down quarantines nothing.
+    """
+    if not LEDGER.is_file():
+        return False
+    try:
+        rows = json.loads(LEDGER.read_text(encoding="utf-8"))
+    except json.JSONDecodeError:
+        return False
+    same = [r for r in rows if r.get("work") == work and r.get("episode") == episode]
+    if not same:
+        return False
+    same.sort(key=lambda r: r.get("timestamp", ""))
+
+    latest = same[-1]
+    sha = latest.get("content_sha")
+    if not sha or not _names_drift(latest):
+        return False
+
+    streak = 0
+    for row in reversed(same):
+        if row.get("content_sha") != sha:
+            break
+        if not _names_drift(row):
+            break
+        streak += 1
+    return streak >= required
+
+
+def drift_description(work: str, episode: str) -> str:
+    """The latest GENRE_DRIFT wording, for handing to a repairer."""
+    row = verdicts().get((work, episode))
+    for issue in ((row or {}).get("audit") or {}).get("issues") or []:
+        if str(issue.get("type", "")).upper() == DRIFT_TYPE:
+            return str(issue.get("description", "")).strip()
+    return ""

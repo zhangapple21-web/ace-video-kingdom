@@ -275,7 +275,26 @@ def issues_block(audit: dict, reason: str | None = None) -> str:
     # case where the whole episode was written wrong, which is not what these
     # episodes look like, so every model took the narrow reading and tried to
     # patch lines that cannot be patched one at a time.
-    if len(issues) >= 3:
+    # A genre verdict is about the spine, not about lines. Sending a writer the
+    # generic small-repair instruction would produce exactly the failure §1b
+    # describes — models read "make this one verdict no longer hold", patch a
+    # sentence, and the episode is still an investigation.
+    only_drift = all(str(i.get("type", "")).upper() == "GENRE_DRIFT" for i in issues)
+    if only_drift:
+        lines.append(
+            "【这一集是结构问题，不是句子问题】判词是 GENRE_DRIFT：本集整体读起来是"
+            "「她又查了一堆东西」，而不是「她当场翻回来」。这不是改几句台词能解决的——"
+            "**必须重写这一集的脊梁**：\n"
+            "  1. 先写清这一集谁在压她、手上有什么、谁在看（要具体的人和具体的筹码）；\n"
+            "  2. 让压力在这一集里**升**一次——换筹码、换对手、换期限，不要原地重复；\n"
+            "  3. 她**自己提前埋的东西**成为翻盘工具，并且**当着人**翻回来；\n"
+            "  4. 余震：围观的人改变态度，她赢下来的东西变成下一集被压得更狠的原因。\n"
+            "**查证可以出现，但它必须是她翻盘用的东西，不是本集要完成的任务。**\n"
+            "禁用这个模板：线索A → 结论 → 觉得不对 → 线索B推翻 → 更大的秘密。\n"
+            "另外：本集最好有一个**不可解释的东西在场**——不是查出来的怪事，是怪事本身"
+            "发生（凭空、凝成、缠上、慢了半拍、比她先动、渗出来、睁开眼）。"
+            "这一项五部作品长期接近于零，别再写纯程序集。\n")
+    elif len(issues) >= 3:
         lines.append(
             f"【这一集是重写型修复，不是小修】一共 {len(issues)} 条判词，横跨时间线、"
             "人物、道具或立场，且互相咬合——**逐条打补丁改不动，改一处会撞上另一处**。"
@@ -533,19 +552,54 @@ def needs_corroboration(work_id: str, ep_id: str) -> bool:
     These must not be handed to a writer. Told that an episode is held and needs
     fixing, with nothing actually wrong, a writer has only two moves: do nothing
     (wasting the attempt) or invent an edit to a chapter that passed.
+
+    DRIFT_UNSETTLED belongs here too, and for the same reason: one reading of
+    "this is an investigation rather than a turnaround" is not yet an agreed
+    defect. It holds and waits for a second reading on the same bytes, exactly
+    as an unsettled PASS holds and waits.
+
+    A confirmed GENRE_DRIFT is NOT in this category. It has been agreed twice on
+    unchanged text, so there is something real to work from — see
+    ``confirmed_drift`` below, which routes it straight to a writer.
     """
-    return "PASS_STREAK" in hold_codes(work_id, ep_id)
+    codes = hold_codes(work_id, ep_id)
+    if "DRIFT_UNSETTLED" in codes:
+        return not confirmed_drift(work_id, ep_id)
+    if "PASS_STREAK" not in codes:
+        return False
+    return not confirmed_drift(work_id, ep_id)
+
+
+def confirmed_drift(work_id: str, ep_id: str) -> bool:
+    """True when two consecutive audits named GENRE_DRIFT on the same text.
+
+    This is the one defect that is both real and new. It goes to a writer
+    immediately rather than through the confirmation branch: waiting for another
+    audit would either confirm it a third time or, if the auditor happened to
+    disagree this time, quietly drop a defect that had already been agreed —
+    which is the same loop that burned liufang/ep15 all afternoon.
+    """
+    import verdict as verdict_mod
+    return bool(verdict_mod.drift_confirmed(work_id, ep_id))
 
 
 def confirm_only(work_id: str, ep_id: str, rounds: int = 2) -> str:
-    """Re-audit an unchanged episode until its PASS settles, or it fails for real.
+    """Re-audit an unchanged episode until its verdict settles one way or the other.
 
-    Returns PASS when the second consecutive PASS lands on identical text, and
-    STILL_FAILING otherwise. A FAIL here is useful rather than a dead end: it
-    carries issues, so the next repair round has something concrete to work from.
+    Three ways out, and they mean different things:
+
+      PASS            two consecutive PASSes on identical text — release it
+      NEEDS_REPAIR    the audit disagreed, and a writer should now see the reason
+      STILL_FAILING   the audits did not run, so nothing was learned; try again
+                       tomorrow rather than burning a writer on a guess
+
+    The last one exists because a day when the model pool is down produces no
+    audit at all. Reporting that as failure used to send episodes down the repair
+    path with nothing to repair.
     """
     import verdict as verdict_mod
 
+    ran_any = False
     for i in range(1, rounds + 1):
         log(f"  {work_id}/{ep_id}: no defect recorded; audit {i}/{rounds} on unchanged text")
         try:
@@ -556,13 +610,24 @@ def confirm_only(work_id: str, ep_id: str, rounds: int = 2) -> str:
         except subprocess.TimeoutExpired:
             log(f"    audit {i} timed out")
             continue
+        ran_any = True
         status = verdict_mod.status_of(work_id, ep_id)
         log(f"    audit {i}: exit={proc.returncode} verdict={status}")
         if status != "PASS":
             if status != "NO_VERDICT":
                 issues = verdict_mod.issues_of(work_id, ep_id)
-                log(f"    came back FAIL with {len(issues)} issue(s); "
-                    f"now it has something to repair")
+                if issues and all(
+                        str(x.get("type", "")).upper() == verdict_mod.DRIFT_TYPE
+                        for x in issues):
+                    log(f"    named GENRE_DRIFT again on unchanged text; "
+                        f"corroboration {verdict_mod.DRIFT_CONFIRMATIONS} needed")
+                    if not verdict_mod.drift_confirmed(work_id, ep_id):
+                        # Agreed once, not twice. Hold and look again rather than
+                        # acting on a judgement that has been measured flipping.
+                        return "DRIFT_UNSETTLED"
+                else:
+                    log(f"    came back FAIL with {len(issues)} issue(s); "
+                        f"now it has something to repair")
             # Hand it back to the repair path instead of reporting failure.
             #
             # The batch split happens before any audit runs, so an episode whose
@@ -577,6 +642,12 @@ def confirm_only(work_id: str, ep_id: str, rounds: int = 2) -> str:
         if verdict_mod.settled_pass(work_id, ep_id):
             log("    settled PASS on unchanged text; hold can be lifted")
             return "PASS"
+    if not ran_any:
+        # Every attempt died before producing a verdict. That is a model-pool
+        # outage, not a finding about the text, and the only honest thing to
+        # report is that nothing was learned.
+        log("    no audit completed; nothing was learned, staying held")
+        return "NO_AUDIT"
     log("    still not settled; stays held")
     return "STILL_FAILING"
 
@@ -783,12 +854,17 @@ def main() -> int:
 
     # Split by what the hold is actually for. An episode held for want of a
     # second audit has nothing to repair; sending it to a writer spends the
-    # attempt and risks an edit to a chapter that passed.
+    # attempt and risks an edit to a chapter that passed. A confirmed
+    # GENRE_DRIFT is the exception: it has been agreed twice, so it repairs.
+    drifting = [t for t in targets if confirmed_drift(*t)]
     to_confirm = [t for t in targets if needs_corroboration(*t)]
     to_repair = [t for t in targets if t not in to_confirm]
     if to_confirm:
         log(f"{len(to_confirm)} held episode(s) await corroboration, not repair: "
             f"{', '.join(f'{w}/{e}' for w, e in to_confirm)}")
+    if drifting:
+        log(f"{len(drifting)} episode(s) have a corroborated genre drift and go to a "
+            f"writer this run: {', '.join(f'{w}/{e}' for w, e in drifting)}")
 
     if not args.no_lock and not acquire_lock():
         return 0
@@ -818,7 +894,14 @@ def _run_repairs(args, models: list[str], targets: list[tuple[str, str]],
             f"{', '.join(models)}")
     if not to_confirm and not to_repair:
         log("nothing to do")
-    results: dict[str, list[str]] = {"PASS": [], "STILL_FAILING": [], "MISSING": []}
+    results: dict[str, list[str]] = {
+        "PASS": [], "STILL_FAILING": [], "MISSING": [],
+        # Agreed once, not twice. Holds and looks again tomorrow — it has not
+        # yet earned a writer.
+        "DRIFT_UNSETTLED": [],
+        # No audit completed at all. The pool is down; nothing was learned.
+        "NO_AUDIT": [],
+    }
     # Episodes the auditor overruled during confirmation. The batch split put
     # them in the no-writer branch, but an audit that disagrees with the ledger
     # is the later and better fact — send them to a writer now rather than
@@ -834,13 +917,22 @@ def _run_repairs(args, models: list[str], targets: list[tuple[str, str]],
     if escalated:
         log(f"{len(escalated)} episode(s) failed corroboration and need real "
             f"repair: {', '.join(f'{w}/{e}' for w, e in escalated)}")
+    if results.get("NO_AUDIT"):
+        log(f"{len(results['NO_AUDIT'])} episode(s) could not be audited at all "
+            f"(no verdict produced). The pool is down, not the text: "
+            f"{', '.join(results['NO_AUDIT'])}")
+    if results.get("DRIFT_UNSETTLED"):
+        log(f"{len(results['DRIFT_UNSETTLED'])} episode(s) named genre drift once on "
+            f"unchanged text and await a second reading: "
+            f"{', '.join(results['DRIFT_UNSETTLED'])}")
 
     for work, ep in list(to_repair) + escalated:
         results.setdefault(repair_one(work, ep, models, args.timeout), []).append(f"{work}/{ep}")
 
     print()
     print("=" * 66)
-    for status in ("PASS", "STILL_FAILING", "MISSING", "NEEDS_REPAIR"):
+    for status in ("PASS", "STILL_FAILING", "MISSING", "NEEDS_REPAIR",
+                   "DRIFT_UNSETTLED", "NO_AUDIT"):
         if results.get(status):
             print(f"{status} ({len(results[status])}):")
             for item in results[status]:
