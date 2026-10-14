@@ -78,6 +78,27 @@ baseUrl: "https://www.zhangningjing.com/api/ai"
 ## 复现
 
 ```powershell
-py -3 probe_site_image.py      # 探测画布那 8 个模型，产出 research/site_image_probe.json
-py -3 build_entry_covers.py    # 生成六张封面，产出 research/entry_covers_receipt.json
+py -3 probe_site_image.py         # 探测画布那 8 个模型，产出 research/site_image_probe.json
+py -3 build_entry_covers.py       # 生成六张封面，产出 research/entry_covers_receipt.json
+py -3 audit_cover_freshness.py    # 比对线上与本地封面，并报告 CDN age
 ```
+
+## ⚠ 重新生成封面后，线上可能一周不变
+
+CDN 对静态资源发 `Cache-Control: public, s-maxage=604800`（**7 天**）。
+
+- `app.css` / `app.js` 带 `?v=` 版本串，改版时 bump 一下就绕过了
+- **`assets/entry/*.jpg` 不带版本串** —— 同一路径换图不会让 CDN 失效
+
+2026-10-14 实测：删掉 `cover.svg` 并部署之后，它的 URL 仍然返回 200，
+`age` 已经 23.7 小时 —— 源站已经没有这个文件了，边缘还在发。
+
+`audit_cover_freshness.py` 现在会同时报告字节哈希和 `age`：
+- **哈希相同**说明线上就是本地那份
+- **`age` 很大**说明这是缓存副本，将来换图时它会「赖着不走」
+
+**下次重生成封面时，两个办法二选一：**
+1. 换文件名（例如 `read.v2.jpg`），并在 CSS 里同步改路径 —— 最省事
+2. 在 Cloudflare 控制台对该路径做 purge —— 干净但要手动
+
+不要假设「重新部署 = 线上立刻变了」。
