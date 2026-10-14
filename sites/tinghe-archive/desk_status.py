@@ -24,7 +24,7 @@ from __future__ import annotations
 import argparse
 import json
 import sys
-from datetime import date, datetime
+from datetime import date, datetime, timezone
 from pathlib import Path
 
 HERE = Path(__file__).resolve().parent
@@ -221,6 +221,24 @@ def genre_block() -> dict:
     empty = data.get("pressure_axis_empty") or []
     if empty:
         parts.append(f"{len(empty)} 部作品压力轴未填（缺升级阶梯，剧情易退回解谜）")
+
+    # A dead monitor and a healthy one leave the same file on disk. The only
+    # difference is the timestamp, and until now nothing read it: genre_check was
+    # exiting 112 from 2026-10-13 15:10 — it ran as LOCAL SYSTEM, where `py -3`
+    # cannot see the Python under the Administrator profile — and this block went
+    # on rendering the previous day's numbers with no indication they were a day
+    # old. A signal that cannot report its own death is the one failure a signal
+    # must not have, so the age is now checked and said out loud.
+    #
+    # The check runs daily, so two days is one missed run. Not stale at one day:
+    # the task fires at 15:10 and the site builds after that, and a build in the
+    # morning legitimately reads yesterday's check.
+    age_days = _checked_age_days(data.get("checked_at", ""))
+    if age_days is None:
+        parts.append("题材监测时间戳不可读，无法确认数据新鲜度")
+    elif age_days >= 2:
+        parts.append(f"题材监测已 {age_days} 天未更新（监测任务可能已停）")
+
     if data.get("reference_stale"):
         age = data.get("reference_age_days")
         parts.append(f"外部工艺资料已 {age} 天未更新")
@@ -243,12 +261,40 @@ def genre_block() -> dict:
             parts.append(extra)
 
     state = "GENRE_WARN" if empty or data.get("reference_stale") else "OK"
+    if age_days is None or age_days >= 2:
+        # A monitor that has not reported cannot vouch for anything, so this is
+        # a warning even when every measured signal is fine. The alternative is a
+        # green badge over numbers nobody has refreshed.
+        state = "GENRE_WARN"
     note = "；".join(parts) if parts else "题材监测正常。"
     return {
         "state": state,
         "note": note,
         "checked_at": data.get("checked_at", ""),
+        "age_days": age_days,
     }
+
+
+def _checked_age_days(stamp: str) -> int | None:
+    """Whole days since genre_check last ran, or None if it cannot be read.
+
+    Returns None rather than 0 for a missing or unparseable stamp. Guessing 0
+    would mean "just checked", which is the one answer that must never be
+    invented.
+    """
+    if not stamp:
+        return None
+    try:
+        when = datetime.fromisoformat(stamp.strip())
+    except (TypeError, ValueError):
+        return None
+    # A naive timestamp is read as local time. astimezone() already does that,
+    # and the first version of this called timezone.now().tzinfo — which does not
+    # exist, so any stamp written without an offset raised AttributeError and took
+    # the whole site build down rather than degrading to GENRE_UNKNOWN. Caught by
+    # test_monitor_freshness, which feeds it a naive stamp on purpose.
+    delta = datetime.now(timezone.utc) - when.astimezone(timezone.utc)
+    return max(0, delta.days)
 
 
 def main() -> int:
