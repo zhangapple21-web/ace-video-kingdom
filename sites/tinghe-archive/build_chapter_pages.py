@@ -39,7 +39,7 @@ WORK = "残荷诡影"
 # the ?v= in public/index.html — a stale value here serves the old CSS to every
 # one of the 248 static chapter pages, which is how a shipped restyle silently
 # misses on exactly the pages people share.
-CSS_V = "20261014-corners-v20"
+CSS_V = "20261014-theme-v21"
 
 # Chapters the reader treats as front/back matter rather than scenes.
 SKIP_IDS = {"c999"}

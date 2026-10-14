@@ -67,11 +67,14 @@
   const applyTheme = theme => {
     document.documentElement.dataset.theme = theme;
     localStorage.setItem(KEY.theme, theme);
-    const btn = $("[data-tool=\"theme\"]");
-    if (btn) {
+    // Two toggles, one state: the reader toolbar's and the header's. They must
+    // never disagree — a header showing "night" while the page is in day is the
+    // kind of small wrongness that reads as a broken site.
+    document.querySelectorAll("[data-tool=\"theme\"], #theme-open").forEach(btn => {
       btn.setAttribute("aria-pressed", String(theme === "night"));
       btn.title = theme === "night" ? "回到日间" : "夜间阅读";
-    }
+      btn.setAttribute("aria-label", theme === "night" ? "切换到日间阅读" : "切换到夜间阅读");
+    });
   };
   applyFont(FONTS.includes(readStore(KEY.font, "m")) ? readStore(KEY.font, "m") : "m");
   applyTheme(readStore(KEY.theme, "night") === "day" ? "day" : "night");
@@ -977,6 +980,13 @@
     input.addEventListener("input", () => draw(input.value));
     overlay.addEventListener("click", event => { if (event.target === overlay) close(); });
     $("#search-open").addEventListener("click", open);
+    // The header's theme toggle lives outside #view, so the delegated handler
+    // in wireChrome() never sees it — it is bound here instead.
+    const themeOpen = $("#theme-open");
+    if (themeOpen) {
+      themeOpen.addEventListener("click", () =>
+        applyTheme(document.documentElement.dataset.theme === "night" ? "day" : "night"));
+    }
     document.addEventListener("keydown", event => {
       if ((event.metaKey || event.ctrlKey) && event.key.toLowerCase() === "k") {
         event.preventDefault();

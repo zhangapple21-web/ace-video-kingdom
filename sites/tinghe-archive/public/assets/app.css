@@ -273,6 +273,34 @@ html[data-theme="night"] .starfield { display: block; }
   transition: border-color .18s ease, color .18s ease, box-shadow .18s ease, transform .18s ease;
 }
 .nav-search-icon { font-size: .95rem; line-height: 1; opacity: .75; }
+
+/* The header's theme toggle. It is a round icon button rather than a labelled
+   pill because it sits next to the search pill and the "全面升级" link, and the
+   bar is already dense at narrow widths. aria-pressed carries the state, so the
+   icon is decorative and can show the theme you would switch TO rather than the
+   one you are in — which is why it reads ☾ in day and ☀ in night. */
+.nav-theme {
+  display: inline-grid; place-items: center; flex: none;
+  width: 2.1rem; height: 2.1rem; margin-left: .1rem;
+  color: var(--ink-2); cursor: pointer;
+  background: color-mix(in srgb, var(--card) 70%, transparent);
+  border: 1px solid var(--glass-edge); border-radius: 50%;
+  box-shadow: inset 0 1px 0 color-mix(in srgb, #fff 50%, transparent);
+  transition: border-color .18s ease, color .18s ease, box-shadow .18s ease,
+              transform .18s ease, background .18s ease;
+}
+.nav-theme-icon { font-size: .86rem; line-height: 1; opacity: .82; }
+.nav-theme:hover {
+  color: var(--jade-deep);
+  border-color: color-mix(in srgb, var(--jade) 52%, transparent);
+  box-shadow: var(--glow-soft); transform: translateY(-1px);
+}
+.nav-theme:active { transform: translateY(0); }
+/* Show the theme you would switch TO: moon while in day, sun while in night.
+   aria-pressed on the button already carries the real state for assistive tech;
+   this is only the visible glyph. */
+.nav-theme[aria-pressed="false"] .nav-theme-icon::before { content: "\263D"; }
+.nav-theme[aria-pressed="true"]  .nav-theme-icon::before { content: "\2600"; }
 .nav-search:hover {
   color: var(--jade-deep); border-color: color-mix(in srgb, var(--jade) 45%, transparent);
   box-shadow: var(--glow-soft); transform: translateY(-1px);
