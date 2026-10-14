@@ -99,10 +99,10 @@ try:
     check("无 content_sha 不确认", m.drift_confirmed("w", "ep01") is False,
           "沿用 settled_pass 的老规矩")
 
-    # 7. a pool outage must not quarantine anything
+    # 7. a pool outage must not fabricate a genre verdict
     m = with_ledger([], tmp)
     check("空账本不拦单", m.drift_confirmed("w", "ep01") is False,
-          "模型池挂掉时不得扣留任何集")
+          "范围：漂移判据不拦。OTHER 类故障仍会扣留，那是既有的 fail-closed 设计")
     m = with_ledger([row("w", "ep01", "shaA", [])], tmp)
     check("PASS 记录不拦单", m.drift_confirmed("w", "ep01") is False)
 
