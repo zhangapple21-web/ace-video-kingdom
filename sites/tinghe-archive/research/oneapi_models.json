@@ -1,0 +1,27 @@
+{
+  "base": "http://127.0.0.1:3000/v1",
+  "count": 21,
+  "ids": [
+    "ace-auto",
+    "ace-auto-ds",
+    "ace-auto-gpt",
+    "ace-auto-grok",
+    "ace-smart",
+    "deepseek-v4.1-flash",
+    "fledge-alpha-free",
+    "glm-4-flash",
+    "gpt-5.5",
+    "gpt-5.6-terra",
+    "gpt-6-astra",
+    "gpt-6-sol",
+    "grok-4.5",
+    "grok-4.6",
+    "grok-4.7",
+    "longcat-2.5-preview-free",
+    "mimo-v2.6-flash-free",
+    "muse-spark-1.3-contributor-free",
+    "nemotron-3-ultra-free",
+    "nemotron-3.5-lightning-free",
+    "opencode-free"
+  ]
+}

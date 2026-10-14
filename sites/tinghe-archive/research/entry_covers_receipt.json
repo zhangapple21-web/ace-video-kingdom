@@ -1,6 +1,6 @@
 {
   "schema": "ace.entry_covers_receipt.v1",
-  "generated_at": "2026-10-14T09:59:41+08:00",
+  "generated_at": "2026-10-14T10:33:50+08:00",
   "route": "https://www.zhangningjing.com/api/ai/images/generations",
   "route_note": "site-owned proxy; real credentials stay server-side",
   "advertised_models": [
@@ -42,33 +42,27 @@
     },
     {
       "entry": "places",
-      "status": "FAILED",
-      "tried": [
-        {
-          "model": "agnes-image-2.5-flash",
-          "size": "1536x1024"
-        }
-      ]
+      "model": "agnes-image-2.5-flash",
+      "size": "1536x1024",
+      "status": "OK",
+      "file": "places.jpg",
+      "bytes": 108928
     },
     {
       "entry": "events",
-      "status": "FAILED",
-      "tried": [
-        {
-          "model": "agnes-image-2.5-flash",
-          "size": "1536x1024"
-        }
-      ]
+      "model": "agnes-image-2.5-flash",
+      "size": "1536x1024",
+      "status": "OK",
+      "file": "events.jpg",
+      "bytes": 107982
     },
     {
       "entry": "props",
-      "status": "FAILED",
-      "tried": [
-        {
-          "model": "agnes-image-2.5-flash",
-          "size": "1536x1024"
-        }
-      ]
+      "model": "agnes-image-2.5-flash",
+      "size": "1536x1024",
+      "status": "OK",
+      "file": "props.jpg",
+      "bytes": 67864
     }
   ]
 }

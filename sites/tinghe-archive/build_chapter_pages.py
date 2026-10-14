@@ -1,4 +1,4 @@
-﻿"""Emit crawlable static pages for every published scene.
+"""Emit crawlable static pages for every published scene.
 
 The reader is a hash-routed SPA, so a search engine only ever sees one URL per
 site: ``/#/read/c198`` is indistinguishable from ``/#/read/c001``. Every scene is

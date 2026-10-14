@@ -130,4 +130,4 @@ print("桌面的十张作品封面是照片级素材，本来就不是问题，�
 if failures:
     print(f"\nFAILED {len(failures)} check(s)")
     sys.exit(1)
-print("\nRESULT: 六张封面是抽象渐变合成，剪贴画不会回来")
+print("\nRESULT: 六张封面都是真实图像且文件齐备；剪贴画和渐变花纹都不会再回来")

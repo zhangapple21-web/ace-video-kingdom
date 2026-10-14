@@ -251,7 +251,8 @@ def main() -> int:
                         records.append({"entry": key, "model": model, "size": size,
                                         "status": "OK", "file": target.name,
                                         "bytes": target.stat().st_size})
-                        ok = made = True
+                        ok = True
+                        made += 1
                         break
 
                     print(f"      {how[:110]}", flush=True)

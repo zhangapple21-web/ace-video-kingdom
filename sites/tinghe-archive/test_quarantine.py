@@ -1,4 +1,4 @@
-﻿#!/usr/bin/env python3
+#!/usr/bin/env python3
 """Prove quarantine holds an episode back without destroying it.
 
 Added 2026-10-07 after eight published episodes were found carrying FAIL
