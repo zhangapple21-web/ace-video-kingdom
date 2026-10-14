@@ -1,0 +1,74 @@
+{
+  "schema": "ace.entry_covers_receipt.v1",
+  "generated_at": "2026-10-14T09:59:41+08:00",
+  "route": "https://www.zhangningjing.com/api/ai/images/generations",
+  "route_note": "site-owned proxy; real credentials stay server-side",
+  "advertised_models": [
+    "agnes-image-2.5-flash",
+    "agnes-image-2.1-flash",
+    "agnes-image-2.0-flash",
+    "gpt-image-2",
+    "gpt-image-2.5-flare",
+    "gpt-image-2.5-sunburst",
+    "grok-imagine-image",
+    "grok-imagine-image-quality"
+  ],
+  "credential_recorded": false,
+  "size": "1200x675",
+  "covers": [
+    {
+      "entry": "read",
+      "model": "agnes-image-2.5-flash",
+      "size": "1536x1024",
+      "status": "OK",
+      "file": "read.jpg",
+      "bytes": 65077
+    },
+    {
+      "entry": "catalog",
+      "model": "agnes-image-2.5-flash",
+      "size": "1536x1024",
+      "status": "OK",
+      "file": "catalog.jpg",
+      "bytes": 71319
+    },
+    {
+      "entry": "characters",
+      "model": "agnes-image-2.5-flash",
+      "size": "1536x1024",
+      "status": "OK",
+      "file": "characters.jpg",
+      "bytes": 68233
+    },
+    {
+      "entry": "places",
+      "status": "FAILED",
+      "tried": [
+        {
+          "model": "agnes-image-2.5-flash",
+          "size": "1536x1024"
+        }
+      ]
+    },
+    {
+      "entry": "events",
+      "status": "FAILED",
+      "tried": [
+        {
+          "model": "agnes-image-2.5-flash",
+          "size": "1536x1024"
+        }
+      ]
+    },
+    {
+      "entry": "props",
+      "status": "FAILED",
+      "tried": [
+        {
+          "model": "agnes-image-2.5-flash",
+          "size": "1536x1024"
+        }
+      ]
+    }
+  ]
+}

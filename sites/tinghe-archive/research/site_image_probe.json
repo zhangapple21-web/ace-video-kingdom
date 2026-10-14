@@ -1,0 +1,50 @@
+{
+  "endpoint": "https://www.zhangningjing.com/api/ai",
+  "results": [
+    {
+      "model": "gpt-image-2",
+      "status": "ERROR",
+      "detail": "IncompleteRead: IncompleteRead(2 bytes read)"
+    },
+    {
+      "model": "gpt-image-2.5-flare",
+      "status": "NO_IMAGE",
+      "detail": "{\"error\": {\"message\": \"\\u4e0a\\u6e38\\u8fd4\\u56de\\u65e0\\u6548\\u54cd\\u5e94\\u3002\"}}"
+    },
+    {
+      "model": "gpt-image-2.5-sunburst",
+      "status": "NO_IMAGE",
+      "detail": "{\"error\": {\"message\": \"\\u4e0a\\u6e38\\u8fd4\\u56de\\u65e0\\u6548\\u54cd\\u5e94\\u3002\"}}"
+    },
+    {
+      "model": "grok-imagine-image",
+      "status": "NO_IMAGE",
+      "detail": "{\"error\": {\"message\": \"No eligible Grok media accounts\"}}"
+    },
+    {
+      "model": "grok-imagine-image-quality",
+      "status": "NO_IMAGE",
+      "detail": "{\"error\": {\"message\": \"No eligible Grok media accounts\"}}"
+    },
+    {
+      "model": "agnes-image-2.5-flash",
+      "status": "PASS",
+      "bytes": 735933,
+      "response": "b64_json",
+      "file": "_probe_agnes-image-2.5-flash.png"
+    },
+    {
+      "model": "agnes-image-2.1-flash",
+      "status": "ERROR",
+      "detail": "IncompleteRead: IncompleteRead(524215 bytes read)"
+    },
+    {
+      "model": "agnes-image-2.0-flash",
+      "status": "NO_IMAGE",
+      "detail": "{\"error\": {\"message\": \"\\u8be5\\u514d\\u8d39\\u6a21\\u578b\\u5f53\\u524d\\u8bf7\\u6c42\\u8fc7\\u4e8e\\u9891\\u7e41\\uff0c\\u8bf7\\u7ea6 607 \\u79d2\\u540e\\u91cd\\u8bd5\\uff0c\\u6216\\u5148\\u6539\\u7528\\u"
+    }
+  ],
+  "working": [
+    "agnes-image-2.5-flash"
+  ]
+}

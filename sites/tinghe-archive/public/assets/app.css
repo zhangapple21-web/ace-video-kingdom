@@ -573,87 +573,43 @@ main:focus { outline: 0; }
 }
 
 /* ---------- six archive entries: cover art ---------- */
-/* 2026-10-13: the six covers were literal clip art — a <circle> for the moon,
-   flat rectangles for an open book, coloured rules for text. It read as
-   children's-book illustration no matter how the card around it was styled,
-   because that is what the art was.
+/* 2026-10-13, second pass. The first pass drew these covers in CSS — layered
+   gradients, repeating contour rings, a ledger grid, a grain pass. It looked
+   like a texture error rather than a picture: the 13px repeating gradient reads
+   as moire and the grid as a broken render. CSS gradients are right for a
+   background wash and wrong for cover art.
 
-   Replaced with abstract compositions built from layered gradients: no image
-   requests, no scaling artefacts, and each one inherits the theme so it flips
-   with the surface. Literal objects were the problem; an editorial cover does
-   not need to depict anything.
+   So the covers are generated images now, one per entry, on the same routing
+   the hero and the desk covers use (build_entry_covers.py → gpt-image-2).
+   Each entry keeps its own accent tint for the number badge and the glyph.
 
-   They share one language: a deep base wash, a single accent light source, fine
-   structural line work, and a grain pass over the top so the gradients do not
-   band on a wide display. */
+   The fallback behind each url() is a plain dark wash, not a pattern. If an
+   image is ever missing the card shows a clean empty panel rather than
+   decorative noise that looks like a bug. */
 
+.entry-art { position: relative; aspect-ratio: 16 / 9; overflow: hidden; background: var(--paper-3); }
 .entry-art::before {
-  background-blend-mode: screen, screen, screen, normal, normal;
-  background-color: #070d11;
+  background-image:
+    url("entry/read.jpg"),
+    linear-gradient(150deg, #10242c, #07131a);
+  background-size: cover;
+  background-position: center;
+  transition: transform .45s cubic-bezier(.2, .7, .3, 1), filter .45s ease;
 }
-/* grain: one inline filter, applied to every cover */
+.entry-card:hover .entry-art::before { transform: scale(1.06); filter: brightness(1.1); }
+
+/* a gentle top-down scrim so the number badge stays legible over any image */
 .entry-art::after {
-  content: ""; position: absolute; inset: 0; pointer-events: none; z-index: 1;
-  background:
-    linear-gradient(180deg, rgba(10, 20, 24, .28), transparent 46%),
-    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-  background-size: auto, 160px 160px;
-  opacity: .5; mix-blend-mode: overlay;
+  content: ""; position: absolute; inset: 0; z-index: 1; pointer-events: none;
+  background: linear-gradient(180deg, rgba(6, 12, 16, .5), transparent 38%);
 }
 
-/* 01 继续阅读 — light falling through water */
-.entry-read .entry-art::before {
-  background-image:
-    radial-gradient(120% 84% at 76% 14%, rgba(63, 220, 168, .30), transparent 58%),
-    repeating-linear-gradient(177deg, transparent 0 13px, rgba(233, 241, 248, .055) 13px 14px, transparent 14px 29px),
-    linear-gradient(198deg, #0e232c, #06121a 72%);
-}
-/* 02 卷目目录 — a ledger, one cell lit */
-.entry-catalog .entry-art::before {
-  background-image:
-    radial-gradient(84% 70% at 22% 12%, rgba(242, 194, 116, .24), transparent 62%),
-    linear-gradient(90deg, transparent 0 18%, rgba(242, 194, 116, .18) 18% 32%, transparent 32%),
-    repeating-linear-gradient(90deg, transparent 0 37px, rgba(233, 241, 248, .06) 37px 38px),
-    repeating-linear-gradient(0deg, transparent 0 29px, rgba(233, 241, 248, .045) 29px 30px),
-    linear-gradient(158deg, #17212b, #090f16 78%);
-}
-/* 03 人物志 — a network of people, not a row of portraits */
-.entry-characters .entry-art::before {
-  background-image:
-    radial-gradient(circle at 28% 38%, rgba(255, 127, 102, .85) 0 2.6px, transparent 3.4px),
-    radial-gradient(circle at 61% 63%, rgba(255, 127, 102, .6) 0 2px, transparent 2.8px),
-    radial-gradient(circle at 79% 26%, rgba(233, 241, 248, .7) 0 2.2px, transparent 3px),
-    radial-gradient(circle at 44% 78%, rgba(233, 241, 248, .45) 0 1.8px, transparent 2.6px),
-    linear-gradient(38deg, transparent 0 49.4%, rgba(255, 127, 102, .3) 49.4% 49.8%, transparent 49.8%),
-    linear-gradient(-14deg, transparent 0 59.4%, rgba(233, 241, 248, .16) 59.4% 59.7%, transparent 59.7%),
-    radial-gradient(70% 80% at 40% 40%, rgba(255, 127, 102, .16), transparent 62%),
-    linear-gradient(160deg, #1a1319, #0b0709 76%);
-}
-/* 04 地方志 — topographic contours */
-.entry-places .entry-art::before {
-  background-image:
-    repeating-radial-gradient(circle at 34% 128%, transparent 0 27px, rgba(63, 220, 168, .17) 27px 28px),
-    repeating-radial-gradient(circle at 78% 150%, transparent 0 33px, rgba(63, 220, 168, .1) 33px 34px),
-    radial-gradient(96% 80% at 28% 116%, rgba(63, 220, 168, .26), transparent 58%),
-    linear-gradient(168deg, #0c2226, #050f12 74%);
-}
-/* 05 事件簿 — something already happened: streaks */
-.entry-events .entry-art::before {
-  background-image:
-    linear-gradient(116deg, transparent 0 40%, rgba(242, 194, 116, .30) 44.5%, transparent 51%),
-    linear-gradient(116deg, transparent 0 56%, rgba(242, 194, 116, .17) 59.5%, transparent 64%),
-    linear-gradient(116deg, transparent 0 71%, rgba(242, 194, 116, .10) 73.5%, transparent 77%),
-    radial-gradient(66% 88% at 86% 6%, rgba(255, 127, 102, .26), transparent 58%),
-    linear-gradient(148deg, #1d1610, #0a0806 76%);
-}
-/* 06 物件录 — fragments laid out on a surface */
-.entry-props .entry-art::before {
-  background-image:
-    linear-gradient(90deg, transparent 0 11%, rgba(233, 241, 248, .13) 11% 25%, transparent 25% 39%, rgba(242, 194, 116, .1) 39% 49%, transparent 49%),
-    linear-gradient(0deg, transparent 0 17%, rgba(233, 241, 248, .09) 17% 33%, transparent 33% 52%, rgba(233, 241, 248, .05) 52% 62%, transparent 62%),
-    radial-gradient(58% 66% at 74% 72%, rgba(242, 194, 116, .16), transparent 60%),
-    linear-gradient(138deg, #161e26, #070c11 76%);
-}
+.entry-read .entry-art::before     { background-image: url("entry/read.jpg"),     linear-gradient(150deg, #10242c, #07131a); }
+.entry-catalog .entry-art::before  { background-image: url("entry/catalog.jpg"),  linear-gradient(150deg, #1d1a12, #0c0a06); }
+.entry-characters .entry-art::before { background-image: url("entry/characters.jpg"), linear-gradient(150deg, #241318, #0d0709); }
+.entry-places .entry-art::before   { background-image: url("entry/places.jpg"),   linear-gradient(150deg, #10262a, #06100f); }
+.entry-events .entry-art::before   { background-image: url("entry/events.jpg"),   linear-gradient(150deg, #221710, #0b0805); }
+.entry-props .entry-art::before    { background-image: url("entry/props.jpg"),    linear-gradient(150deg, #171f26, #070b0f); }
 
 .entry-read .entry-glyph { color: #8ff0cd; }
 .entry-catalog .entry-glyph { color: #f2c274; }

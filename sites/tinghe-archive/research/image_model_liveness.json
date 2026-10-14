@@ -1,0 +1,72 @@
+{
+  "schema": "ace.image.model_liveness.v1",
+  "checked_at": "2026-10-14T09:52:01+08:00",
+  "probe": "one real 256x256 generation per model; PASS means bytes arrived",
+  "results": [
+    {
+      "model": "gpt-image-2",
+      "base_url": "https://api.shenwenai.com/v1",
+      "credential_source": "SHENWEN_IMAGE_API_KEY",
+      "status": "HTTP_ERROR",
+      "http_status": 502,
+      "detail": "{\"error\":{\"message\":\"Upstream service temporarily unavailable\",\"type\":\"upstream_error\"}}"
+    },
+    {
+      "model": "gpt-image-2.5-flare",
+      "base_url": "https://api.shenwenai.com/v1",
+      "credential_source": "SHENWEN_IMAGE_API_KEY",
+      "status": "HTTP_ERROR",
+      "http_status": 502,
+      "detail": "{\"error\":{\"message\":\"Upstream service temporarily unavailable\",\"type\":\"upstream_error\"}}"
+    },
+    {
+      "model": "gpt-image-2.5-sunburst",
+      "base_url": "https://api.shenwenai.com/v1",
+      "credential_source": "SHENWEN_IMAGE_API_KEY",
+      "status": "HTTP_ERROR",
+      "http_status": 502,
+      "detail": "{\"error\":{\"message\":\"Upstream service temporarily unavailable\",\"type\":\"upstream_error\"}}"
+    },
+    {
+      "model": "grok-imagine-image",
+      "base_url": "https://api.shenwenai.com/v1",
+      "credential_source": "SHENWEN_GROK_API_KEY",
+      "status": "HTTP_ERROR",
+      "http_status": 503,
+      "detail": "{\"error\":{\"message\":\"No eligible Grok media accounts\",\"type\":\"grok_media_no_eligible_account\"}}"
+    },
+    {
+      "model": "grok-imagine-image-quality",
+      "base_url": "https://api.shenwenai.com/v1",
+      "credential_source": "SHENWEN_GROK_API_KEY",
+      "status": "HTTP_ERROR",
+      "http_status": 503,
+      "detail": "{\"error\":{\"message\":\"No eligible Grok media accounts\",\"type\":\"grok_media_no_eligible_account\"}}"
+    },
+    {
+      "model": "agnes-image-2.5-flash",
+      "base_url": "https://api.shenwenai.com/v1",
+      "credential_source": "AGNES_API_KEY",
+      "status": "HTTP_ERROR",
+      "http_status": 401,
+      "detail": "{\"error\":{\"message\":\"Invalid bearer token. Report this issue: https://shenwenai.com\",\"type\":\"authentication_error\",\"param\":null}}"
+    },
+    {
+      "model": "agnes-image-2.1-flash",
+      "base_url": "https://api.shenwenai.com/v1",
+      "credential_source": "AGNES_API_KEY",
+      "status": "HTTP_ERROR",
+      "http_status": 401,
+      "detail": "{\"error\":{\"message\":\"Invalid bearer token. Report this issue: https://shenwenai.com\",\"type\":\"authentication_error\",\"param\":null}}"
+    },
+    {
+      "model": "agnes-image-2.0-flash",
+      "base_url": "https://api.shenwenai.com/v1",
+      "credential_source": "AGNES_API_KEY",
+      "status": "HTTP_ERROR",
+      "http_status": 401,
+      "detail": "{\"error\":{\"message\":\"Invalid bearer token. Report this issue: https://shenwenai.com\",\"type\":\"authentication_error\",\"param\":null}}"
+    }
+  ],
+  "working": []
+}
