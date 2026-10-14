@@ -36,6 +36,7 @@ import base64
 import json
 import os
 import pathlib
+import re
 import sys
 import time
 import urllib.error
@@ -120,6 +121,23 @@ SCENES: dict[str, str] = {
 }
 
 RETRYABLE = ("IncompleteRead", "TimeoutError", "RemoteDisconnected", "502", "503", "504")
+RATE_LIMITED = "当前请求过于频繁"
+# The free tier states its own cooldown: "请约 47 秒后重试". That number is the
+# thing to wait, not a fixed guess — a 900s blanket sleep either wastes ten
+# minutes or gives up before the window opens, and reading it is the difference
+# between finishing the batch and reporting the same failure four times.
+WAIT_SECONDS = re.compile(r"约\s*(\d+)\s*秒")
+
+
+def cooldown_seconds(detail: str) -> int:
+    m = WAIT_SECONDS.search(detail)
+    if m:
+        return int(m.group(1)) + 5          # a little past the stated edge
+    return 0
+
+
+def is_rate_limited(detail: str) -> bool:
+    return RATE_LIMITED in detail
 
 
 def call(model: str, prompt: str, size: str, timeout: int = 300) -> tuple[bytes | None, str]:
@@ -189,7 +207,7 @@ def main() -> int:
     ap = argparse.ArgumentParser()
     ap.add_argument("--force", action="store_true")
     ap.add_argument("--only", default="")
-    ap.add_argument("--attempts", type=int, default=3)
+    ap.add_argument("--attempts", type=int, default=6)
     args = ap.parse_args()
 
     keys = [k.strip() for k in args.only.split(",") if k.strip()] or list(SCENES)
@@ -235,9 +253,17 @@ def main() -> int:
                                         "bytes": target.stat().st_size})
                         ok = made = True
                         break
-                    transient = any(t in how for t in RETRYABLE)
+
                     print(f"      {how[:110]}", flush=True)
-                    if not transient:
+                    if is_rate_limited(how):
+                        wait = cooldown_seconds(how)
+                        if wait and attempt < args.attempts:
+                            print(f"      rate limited — waiting {wait}s as instructed",
+                                  flush=True)
+                            time.sleep(wait)
+                            continue
+                        break
+                    if not any(t in how for t in RETRYABLE):
                         break
                     time.sleep(8 * attempt)
                 if ok:

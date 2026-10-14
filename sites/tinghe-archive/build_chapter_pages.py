@@ -1,4 +1,4 @@
-"""Emit crawlable static pages for every published scene.
+﻿"""Emit crawlable static pages for every published scene.
 
 The reader is a hash-routed SPA, so a search engine only ever sees one URL per
 site: ``/#/read/c198`` is indistinguishable from ``/#/read/c001``. Every scene is
@@ -39,7 +39,7 @@ WORK = "残荷诡影"
 # the ?v= in public/index.html — a stale value here serves the old CSS to every
 # one of the 248 static chapter pages, which is how a shipped restyle silently
 # misses on exactly the pages people share.
-CSS_V = "20261014-covers-v19"
+CSS_V = "20261014-corners-v20"
 
 # Chapters the reader treats as front/back matter rather than scenes.
 SKIP_IDS = {"c999"}
