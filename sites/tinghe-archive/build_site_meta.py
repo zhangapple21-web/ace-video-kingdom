@@ -117,21 +117,36 @@ def clip(value, limit: int) -> str:
 
 
 def build_search_index() -> dict:
-    """A compact name index so header search never needs the 514KB snapshot."""
+    """A compact name index so header search never needs the 514KB snapshot.
+
+    Two sources, because the site is two things. The canon fiction has an archive
+    of named people, places, objects and events; the originals desk has five
+    ongoing works with 80 episodes between them. Indexing only the first meant the
+    header search could not find 垃圾星第一饭馆 or 挖矿 — the site-wide search
+    returned nothing for the entire daily output.
+
+    The originals entries carry `h`, the hash route to the episode, because every
+    other kind of row points at #/world and a 剧目 row pointing at the world
+    archive would be a dead end for the reader who searched for it.
+    """
     snap = read_json(DATA / "snapshot.v1.json")
     entries: list[dict] = []
 
-    def push(kind: str, glyph: str, item: dict, name: str, detail: str) -> None:
+    def push(kind: str, glyph: str, item: dict, name: str, detail: str,
+             href: str | None = None) -> None:
         if not name or name == "UNKNOWN":
             return
         # Normalise the long "stated_from…/wave_N" strings down to a badge-sized
         # status so the search rows do not leak truncated English.
         raw = str(item.get("status") or "").strip()
         status = "stated" if raw.startswith("stated") or not raw else clip(raw, 12)
-        entries.append({
+        row = {
             "t": kind, "g": glyph, "n": clip(name, 32),
             "d": clip(detail, 40), "s": status,
-        })
+        }
+        if href:
+            row["h"] = href
+        entries.append(row)
 
     for item in snap.get("characters", []):
         seen = len(item.get("appearances") or [])
@@ -147,7 +162,42 @@ def build_search_index() -> dict:
         who = " · ".join(item.get("participants") or [])
         push("relationships", "缘", item, who, clip(item.get("statement"), 28))
 
+    originals = build_originals_index(entries, push)
+    print(f"search-index.json: originals contributed {originals} entries")
+
     return {"schema": "tinghe.search_index.v1", "entries": entries}
+
+
+def build_originals_index(entries: list[dict], push) -> int:
+    """Index the originals desk: every work, then every episode of each.
+
+    Reads desk.json rather than work.json, because desk.json is what the reader's
+    browser loads and what the route is built from. Returns how many rows it
+    added, so the caller can say so instead of the number silently growing.
+    """
+    desk_path = DATA / "originals" / "desk.json"
+    if not desk_path.is_file():
+        return 0
+    added = 0
+    for work in read_json(desk_path).get("works") or []:
+        wid = str(work.get("id") or "")
+        if not wid:
+            continue
+        eps = work.get("episodes") or []
+        push("originals", "剧", {},
+             work.get("title") or wid,
+             f"{len(eps)} 集 · 原创桌",
+             f"#/desk/{wid}")
+        added += 1
+        for ep in eps:
+            eid = str(ep.get("id") or "")
+            if not eid:
+                continue
+            detail = " · ".join(x for x in (ep.get("beat"), ep.get("title")) if x)
+            push("originals", "集", {}, ep.get("title") or eid, detail,
+                 f"#/desk/{wid}/{eid}")
+            added += 1
+    return added
 
 
 def write(path: Path, text: str, check_only: bool) -> bool:

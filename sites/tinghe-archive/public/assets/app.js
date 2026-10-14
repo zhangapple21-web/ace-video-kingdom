@@ -954,12 +954,16 @@
         })]);
       }
       if (index) {
-        const byType = { characters: "人物", places: "地点", props: "物件", events: "事件", relationships: "关系" };
-        const glyphOf = { characters: "人", places: "地", props: "物", events: "事", relationships: "缘" };
+        const byType = { originals: "剧目", characters: "人物", places: "地点", props: "物件", events: "事件", relationships: "关系" };
+        const glyphOf = { originals: "剧", characters: "人", places: "地", props: "物", events: "事", relationships: "缘" };
         for (const [type, label] of Object.entries(byType)) {
           const hits = index.filter(e => e.t === type && (!needle || `${e.n} ${e.d}`.toLowerCase().includes(needle))).slice(0, needle ? 5 : 3);
           if (hits.length) groups.push([label, hits.map(e => ({
-            glyph: glyphOf[type], tag: statusCn(e.s), name: e.n, detail: e.d, href: "#/world",
+            // 剧目 rows carry their own route; everything else belongs to the
+            // canon archive and goes to the world pages. Sending a search for a
+            // work to #/world would land the reader somewhere they did not ask
+            // for.
+            glyph: glyphOf[type], tag: statusCn(e.s), name: e.n, detail: e.d, href: e.h || "#/world",
           }))]);
         }
       }

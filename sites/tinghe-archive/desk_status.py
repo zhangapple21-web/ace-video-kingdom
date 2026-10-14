@@ -260,6 +260,20 @@ def genre_block() -> dict:
         if extra:
             parts.append(extra)
 
+        # 鬼物异象 is reported next to action because the user asked for both and
+        # they have failed in opposite directions — action went 0.81 → 2.29 per
+        # thousand, uncanny events stayed at 0.10 for five works. Showing only the
+        # one that improved is how a flat line survives a rebuild.
+        #
+        # Until 2026-10-14 genre_check.py measured no such thing at all, so this
+        # could not be reported even though check_genre_trend.py had been
+        # counting it all along.
+        fan1k = measures.get("fantasy_per_1k")
+        no_fan = measures.get("episodes_without_fantasy")
+        if fan1k is not None:
+            parts.append(f"异象 {fan1k:.2f}/千字、无异象集 {no_fan}/{total}"
+                         if no_fan is not None else f"异象 {fan1k:.2f}/千字")
+
     state = "GENRE_WARN" if empty or data.get("reference_stale") else "OK"
     if age_days is None or age_days >= 2:
         # A monitor that has not reported cannot vouch for anything, so this is

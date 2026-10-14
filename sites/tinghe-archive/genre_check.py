@@ -73,6 +73,27 @@ ACTION = (
     "按住", "扳", "踉跄", "闪身", "砸过去", "掀翻", "血",
 )
 
+# Something inexplicable actually happening — not "she discovered something odd".
+#
+# This list is the same one check_genre_trend.py has been using, imported rather
+# than copied, because having two of them is how the directive and the meter end
+# up measuring different things. They already had: §8b 五 asked for 奇幻事件 and
+# defined it as her ability exceeding the ordinary, while this list counts the
+# uncanny thing being *present* — 凭空, 凝成, 缠上, 渗出, 睁开眼. The directive
+# could be followed to the letter and the number still would not move, which is
+# what 0.10 per thousand across five works looks like from the inside.
+#
+# genre_check.py had no such list at all, so the daily check that feeds the site
+# was reporting action and reversal but not this, while the user named 鬼物/异象
+# explicitly on 2026-10-11 and again on 2026-10-14.
+#
+# Same caveat as every list in this file: self-written, direction only, never a
+# gate. Its job is to make a flat line visible, not to decide anything.
+FANTASY = re.compile(
+    r"(凭空|倏|霎|蓦|无声无息|凝成|结成|化开|吞了|吸干|冻住|烧穿|裂开|"
+    r"渗出|爬上|爬满|缠上|钻进|钻出来|冒出来|长出|生出|睁开|睁开眼|"
+    r"影子先|慢了半拍|慢了一拍|比她快)")
+
 STALE_DAYS = 60
 
 
@@ -82,9 +103,10 @@ def narration(ep: dict) -> str:
 
 
 def measure() -> dict:
-    chars = rev = comp = proc = act = 0
+    chars = rev = comp = proc = act = fan = 0
     beats_rev = beats_cmp = beats_plain = 0
     eps_without_action = 0
+    eps_without_fantasy = 0
     places: set[str] = set()
     per_ep: list[dict] = []
     for wid in DOMAIN:
@@ -100,12 +122,16 @@ def measure() -> dict:
             m = sum(text.count(w) for w in COMPARISON)
             p = sum(text.count(w) for w in PROCEDURE)
             a = sum(text.count(w) for w in ACTION)
+            f = len(FANTASY.findall(text))
             rev += r
             comp += m
             proc += p
             act += a
+            fan += f
             if not a:
                 eps_without_action += 1
+            if not f:
+                eps_without_fantasy += 1
             for b in ep.get("blocks") or []:
                 if isinstance(b, dict) and b.get("k") == "scene":
                     place = str(b.get("place") or "").strip()
@@ -129,6 +155,7 @@ def measure() -> dict:
                 "chars": c, "reversal_per_1k": round(r / c * 1000, 2),
                 "comparison_per_1k": round(m / c * 1000, 2),
                 "action_per_1k": round(a / c * 1000, 2),
+                "fantasy_per_1k": round(f / c * 1000, 2),
                 "beat_shape": shape,
             })
 
@@ -141,7 +168,9 @@ def measure() -> dict:
         "comparison_per_1k": round(comp / chars * 1000, 2) if chars else 0.0,
         "procedure_per_1k": round(proc / chars * 1000, 2) if chars else 0.0,
         "action_per_1k": round(act / chars * 1000, 2) if chars else 0.0,
+        "fantasy_per_1k": round(fan / chars * 1000, 2) if chars else 0.0,
         "episodes_without_action": eps_without_action,
+        "episodes_without_fantasy": eps_without_fantasy,
         "distinct_places": len(places),
         "beat_reversal_share": round(beats_rev / beats_total, 3),
         "beat_comparison_share": round(beats_cmp / beats_total, 3),
@@ -169,6 +198,7 @@ def compare(now: dict, before: dict | None) -> list[str]:
         ("reversal_per_1k", "reversal words per 1k", "down"),
         ("beat_reversal_share", "share of beats shaped like a reversal", "down"),
         ("action_per_1k", "action words per 1k", "down"),
+        ("fantasy_per_1k", "uncanny-event hits per 1k", "down"),
     ):
         a, b = before.get(key), now.get(key)
         if a is None or b is None:
@@ -194,6 +224,7 @@ def compare(now: dict, before: dict | None) -> list[str]:
         notes.append(note)
     for key, label, worse_when in (
         ("episodes_without_action", "episodes with no action words", "up"),
+        ("episodes_without_fantasy", "episodes with no uncanny event", "up"),
         ("distinct_places", "distinct scene places", "down"),
     ):
         a, b = before.get(key), now.get(key)
@@ -229,6 +260,8 @@ def main() -> int:
     print(f"  procedure words /1k      : {now['procedure_per_1k']}")
     print(f"  action words /1k         : {now['action_per_1k']}   "
           f"(episodes with none: {now['episodes_without_action']}/{now['episodes']})")
+    print(f"  uncanny events /1k       : {now['fantasy_per_1k']}   "
+          f"(episodes with none: {now['episodes_without_fantasy']}/{now['episodes']})")
     print(f"  distinct scene places    : {now['distinct_places']}")
     print(f"  beats shaped as reversal : {now['beat_reversal_share']:.0%} "
           f"({now['beats']['reversal']})")

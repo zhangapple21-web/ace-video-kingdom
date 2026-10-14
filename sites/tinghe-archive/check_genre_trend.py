@@ -36,10 +36,29 @@ ACTION = re.compile(
     r"(一拳|一脚|抬手|扑|摔|撞|砸|掐住|揪住|掀|踹|劈|拧|抡|挥拳|出手|"
     r"躲开|闪身|侧身|按住|扭住|拽住|掀翻|掀桌|抄起|抓起|抡起|"
     r"血|疼|痛|闷响|骨节|喉咙|手腕|后背|肩膀)")
-FANTASY = re.compile(
-    r"(凭空|倏|霎|蓦|无声无息|凝成|结成|化开|吞了|吸干|冻住|烧穿|裂开|"
-    r"渗出|爬上|爬满|缠上|钻进|钻出来|冒出来|长出|生出|睁开|睁开眼|"
-    r"影子先|慢了半拍|慢了一拍|比她快)")
+
+# The uncanny-event vocabulary now lives in genre_check.py, which is the module
+# the daily task runs and the site reads. It was duplicated here for months while
+# this file was the only one measuring it, and genre_check.py — the one that
+# actually feeds anything a reader sees — reported no such measure at all.
+#
+# Two copies of a vocabulary is how a directive and a meter end up disagreeing
+# about what is being counted: §8b 五 asked for 奇幻事件 and defined it as her
+# ability exceeding the ordinary, while this list counts the uncanny thing being
+# present. The directive was satisfiable to the letter and the number sat at 0.10
+# for five works.
+#
+# Imported rather than copied, so the next edit to the vocabulary moves both.
+sys.path.insert(0, str(HERE))
+try:
+    from genre_check import FANTASY  # noqa: F401
+except Exception as _exc:  # pragma: no cover - keeps the script runnable alone
+    print(f"could not import FANTASY from genre_check ({_exc}); "
+          f"falling back to the local copy")
+    FANTASY = re.compile(
+        r"(凭空|倏|霎|蓦|无声无息|凝成|结成|化开|吞了|吸干|冻住|烧穿|裂开|"
+        r"渗出|爬上|爬满|缠上|钻进|钻出来|冒出来|长出|生出|睁开|睁开眼|"
+        r"影子先|慢了半拍|慢了一拍|比她快)")
 
 # §8b 五 and 六 landed 2026-10-11. Episodes are numbered per work; the split is
 # by index because the corpus is contiguous from ep01.

@@ -34,12 +34,16 @@ BASE = "https://studio.zhangningjing.com/dramai/"
 SITE = "听荷轩"
 WORK = "残荷诡影"
 
-# Cache-bust for the shared stylesheet. Bumped to match the 2026-10-12 visual
-# pass (floating glass header, 3D cover, denser catalogue). Keep in step with
-# the ?v= in public/index.html — a stale value here serves the old CSS to every
-# one of the 248 static chapter pages, which is how a shipped restyle silently
-# misses on exactly the pages people share.
-CSS_V = "20261014-theme-v21"
+# Cache-bust for the shared assets. Bumped to 20261014-search-v22 when app.js
+# gained the 剧目 search group: the header search previously indexed only the canon
+# archive, so the entire daily output — five works, 80 episodes — was unfindable.
+# app.js is served with s-maxage=604800, so without this bump every browser keeps
+# the old bundle for seven days and the change silently does nothing.
+#
+# Keep in step with the ?v= in public/index.html — a stale value here serves the
+# old CSS to every one of the 248 static chapter pages, which is how a shipped
+# restyle silently misses on exactly the pages people share.
+CSS_V = "20261014-search-v22"
 
 # Chapters the reader treats as front/back matter rather than scenes.
 SKIP_IDS = {"c999"}

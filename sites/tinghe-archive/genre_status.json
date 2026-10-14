@@ -1,5 +1,5 @@
 {
-  "checked_at": "2026-10-14T15:10:01+08:00",
+  "checked_at": "2026-10-14T15:48:39+08:00",
   "measures": {
     "episodes": 80,
     "chars": 72934,
@@ -7,7 +7,9 @@
     "comparison_per_1k": 7.42,
     "procedure_per_1k": 2.36,
     "action_per_1k": 2.8,
+    "fantasy_per_1k": 0.12,
     "episodes_without_action": 16,
+    "episodes_without_fantasy": 72,
     "distinct_places": 53,
     "beat_reversal_share": 0.5,
     "beat_comparison_share": 0.188,
