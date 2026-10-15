@@ -28,6 +28,7 @@ import json
 import subprocess
 import sys
 import time
+import urllib.request
 from datetime import datetime, timezone
 from pathlib import Path
 
@@ -41,6 +42,12 @@ DAILY_LOG = ROOT / "daily_log.md"
 RUN = ROOT / "run_daily_task.py"
 WAIT_SECONDS = 20 * 60      # give an in-flight run time to finish before retrying
 OK_STATUSES = ("DEPLOYED", "GATES_OK")
+#: Written by the deploy itself, not by the run that asked for it. That
+#: independence is the point: a run can die after its episodes are live but
+#: before it writes a receipt (2026-10-15: the writer published three episodes
+#: at 13:40 and the deploy landed at 15:11, while the last receipt still said
+#: BUILD_FAILED from 13:09). No receipt is not the same as no delivery.
+DEPLOY_RECEIPT = ROOT / ".last_deploy.json"
 
 
 def now() -> datetime:
@@ -93,7 +100,42 @@ def delivered_episodes(row: dict) -> int | None:
     return None
 
 
-def day_delivered(receipts: list[dict]) -> tuple[bool, str]:
+def deploy_landed_today(date: str) -> tuple[int, str] | None:
+    """(episode total, deploy time) when the deploy receipt names today, else None.
+
+    Used only when the receipts say the day failed. A receipt records what a
+    *run* did; the deploy receipt records what *reached the site*, and the two
+    can disagree when a run dies between publishing and recording. Trusting the
+    receipt alone then reports a delivered day as permanently failed, which is
+    what makes the catch-up skip (`desk_status` already sees UPDATED_TODAY) while
+    this checker keeps raising a failure banner the reader can see.
+
+    Deliberately narrow: it only ever turns "failed" into "delivered", never the
+    reverse, and it requires the deploy timestamp to be on the same local day.
+    An empty date returns None rather than matching every timestamp, so a caller
+    that forgets the argument degrades to the old behaviour instead of silently
+    accepting any day's deploy.
+    """
+    if not date:
+        return None
+    try:
+        receipt = json.loads(DEPLOY_RECEIPT.read_text(encoding="utf-8"))
+    except (OSError, ValueError):
+        return None
+    stamped = str(receipt.get("time") or "")
+    if not stamped.startswith(date):
+        return None
+    works = receipt.get("works")
+    if not isinstance(works, dict) or not works:
+        return None
+    try:
+        total = sum(int(v) for v in works.values())
+    except (TypeError, ValueError):
+        return None
+    return total, stamped
+
+
+def day_delivered(receipts: list[dict], date: str = "") -> tuple[bool, str]:
     """Has today actually shipped new content? Scans EVERY receipt for the day.
 
     Looking only at the newest receipt is wrong in both directions. A later
@@ -121,6 +163,11 @@ def day_delivered(receipts: list[dict]) -> tuple[bool, str]:
             return True, (f"{published} episode(s) live, from a {row.get('mode')} "
                           f"run at {row.get('finished_at')}")
     if authored:
+        landed = deploy_landed_today(date) if date else None
+        if landed is not None:
+            total, stamped = landed
+            return True, (f"{total} episode(s) live per the deploy receipt at "
+                          f"{stamped} (the run's own receipt was never written)")
         return False, (f"{authored} episode(s) were written today but none reached "
                        f"the site — the deploy did not complete")
     if not receipts:
@@ -143,6 +190,62 @@ def run_in_progress() -> bool:
         log(f"lock is {age / 3600:.1f}h old; treating it as abandoned")
         return False
     return True
+
+
+def deployed_banner_state() -> str | None:
+    """The state the production domain is currently serving, or None if unknown.
+
+    The banner the reader sees is the *deployed* copy, and it can disagree with
+    the local file: on 2026-10-15 the local file was corrected at 20:21 while the
+    domain kept serving SYNC_FAILED, because nothing deployed the correction. Any
+    check that only reads the local file calls that fixed.
+    """
+    url = "https://studio.zhangningjing.com/dramai/data/desk-update.json"
+    # The proxy header is load-bearing: without it this hostname returns 403 for
+    # the archive routes (the sibling app claims paths out from under the proxy).
+    req = urllib.request.Request(url, headers={"User-Agent": "tinghe-sync-check/1.0"})
+    try:
+        with urllib.request.urlopen(req, timeout=60) as resp:
+            return json.loads(resp.read().decode("utf-8")).get("state")
+    except Exception:                              # noqa: BLE001 - offline is
+        return None                                # not evidence of staleness
+
+
+def refresh_stale_banner() -> None:
+    """Clear a failure banner the site is still showing for a delivered day.
+
+    Deliberately conditional, and it compares against the *deployed* banner
+    rather than the local file. Re-deriving and deploying on every healthy run
+    would put a deploy in the path of a working day for no reason, so this acts
+    only when the domain is actually serving a failure for a day this checker has
+    already established as delivered. If it cannot read the deployed state it
+    does nothing: a network failure must never trigger a deploy.
+    """
+    live = deployed_banner_state()
+    if live is None:
+        log("could not read the deployed banner; leaving it alone")
+        return
+    if live != "SYNC_FAILED":
+        return
+    try:
+        subprocess.run([sys.executable, str(ROOT / "desk_status.py")],
+                       cwd=ROOT, capture_output=True, timeout=300)
+    except (OSError, subprocess.SubprocessError) as exc:
+        log(f"could not re-derive the banner: {exc}")
+        return
+    try:
+        derived = json.loads(STATUS_FILE.read_text(encoding="utf-8"))
+    except (OSError, json.JSONDecodeError):
+        return
+    if derived.get("state") == "SYNC_FAILED":
+        log("the deployed failure banner still matches the derived state; leaving it")
+        return
+    log(f"the domain is serving a stale failure banner; the day is delivered "
+        f"({derived.get('state')}) - deploying the correction")
+    try:
+        deploy_status_file()
+    except Exception as exc:                       # noqa: BLE001 - a banner
+        log(f"could not deploy the corrected banner: {exc}")   # is not the job
 
 
 def publish_failure(state: str, detail: str) -> None:
@@ -197,7 +300,15 @@ def deploy_status_file() -> None:
         log(f"deploying the banner failed (exit {proc.returncode}); it stays local only")
         log(tail)
         return
-    log("deployed; the failure banner is now live")
+    # Name the state that actually shipped. This helper is used both to raise a
+    # failure banner and to clear one, and the old wording ("the failure banner is
+    # now live") was wrong for the second case - it announced a failure on a run
+    # that had just cleared one.
+    try:
+        shipped = json.loads(STATUS_FILE.read_text(encoding="utf-8")).get("state", "?")
+    except (OSError, json.JSONDecodeError):
+        shipped = "?"
+    log(f"deployed; the reader now sees state={shipped}")
 
 
 def append_daily_log(status: str, detail: str) -> None:
@@ -229,9 +340,17 @@ def main() -> int:
     # `--no-write` reconcile carries no new content and would otherwise overwrite a
     # stalled morning and read as success, while a morning that really delivered
     # would be forgotten because something followed it.
-    served, why = day_delivered(receipts)
+    served, why = day_delivered(receipts, date)
     if served:
         log(f"{date}: delivered — {why}")
+        # A delivered day still has to clear a banner an earlier failure raised.
+        # On 2026-10-15 the 13:09 BUILD_FAILED deployed SYNC_FAILED to the reader;
+        # the content shipped at 13:40 and this checker correctly reported the day
+        # as delivered from 20:11 on — but every later run returned here, so the
+        # false banner stayed live on the production domain while the local file
+        # was correct. Re-derive and ship it, the same way the recovery path
+        # below does, and only when the deployed copy disagrees.
+        refresh_stale_banner()
         return 0
     log(f"{date}: nothing delivered yet ({why})")
 
@@ -243,7 +362,7 @@ def main() -> int:
             if not run_in_progress():
                 break
             receipts = todays_receipts(date)
-            served, why = day_delivered(receipts)
+            served, why = day_delivered(receipts, date)
             if served:
                 log(f"{date}: the in-flight run delivered while waiting — {why}")
                 return 0

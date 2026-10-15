@@ -91,6 +91,41 @@ def main() -> int:
     served, why = m.day_delivered([receipt(mode="no-write", delivered_episodes=0)])
     check(not served, "only no-write runs means nothing was delivered")
 
+    # 3rd real bug (2026-10-15): a run died after its episodes went live but
+    # before it wrote a receipt, so the only receipt for the day said BUILD_FAILED
+    # while the deploy receipt and the reader's copy both showed the day shipped.
+    # The checker raised a failure banner for a delivered day, and because
+    # desk_status correctly saw UPDATED_TODAY the catch-up skipped too - so the
+    # false banner could never be cleared by the retry meant to clear it.
+    print("\n--- a dead run that still shipped (deploy receipt is evidence) ---")
+    real = pathlib.Path(m.DEPLOY_RECEIPT)
+    saved = real.read_bytes() if real.is_file() else None
+    try:
+        real.parent.mkdir(parents=True, exist_ok=True)
+        real.write_text(
+            '{"url": "https://example.pages.dev", "time": "2026-10-15T15:11:25",'
+            ' "works": {"fanguan": 17, "liufang": 17}}', encoding="utf-8")
+        failed = [receipt(date="2026-10-15", status="BUILD_FAILED", ok=False,
+                          mode="catchup", delivered_episodes=1,
+                          finished_at="2026-10-15T13:09:59+08:00")]
+        served, why = m.day_delivered(failed, "2026-10-15")
+        check(served, "a failed receipt with a same-day deploy landing counts as served")
+        check("deploy receipt" in why, f"the reason cites the real evidence: {why}")
+
+        # ...and the reverse must not happen: a deploy from another day proves nothing.
+        served, why = m.day_delivered(failed, "2026-10-16")
+        check(not served, "a deploy receipt from a different day does not serve today")
+        check("none reached" in why, f"still reports the real failure: {why}")
+
+        # No date means no evidence, never "every timestamp matches".
+        check(m.deploy_landed_today("") is None,
+              "an empty date does not match an arbitrary deploy")
+    finally:
+        if saved is None:
+            real.unlink(missing_ok=True)
+        else:
+            real.write_bytes(saved)
+
     print()
     if failures:
         print(f"FAILED {len(failures)} check(s):")
