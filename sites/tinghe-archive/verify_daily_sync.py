@@ -217,15 +217,24 @@ def refresh_stale_banner() -> None:
     Deliberately conditional, and it compares against the *deployed* banner
     rather than the local file. Re-deriving and deploying on every healthy run
     would put a deploy in the path of a working day for no reason, so this acts
-    only when the domain is actually serving a failure for a day this checker has
-    already established as delivered. If it cannot read the deployed state it
-    does nothing: a network failure must never trigger a deploy.
+    only when the domain is serving an older, worse story than the numbers now
+    support. If it cannot read the deployed state it does nothing: a network
+    failure must never trigger a deploy.
+
+    Ordering note: only states that UNDERSTATE the day are cleared. The day is
+    already established as delivered before this runs, so any "not yet" banner a
+    reader still sees is stale by construction. A SYNC_FAILED banner stays if the
+    freshly derived state is also SYNC_FAILED, because then it is still true.
     """
     live = deployed_banner_state()
     if live is None:
         log("could not read the deployed banner; leaving it alone")
         return
-    if live != "SYNC_FAILED":
+    # SYNC_FAILED is a claimed failure; PENDING_PUBLISH only says "not live yet".
+    # Both are stale once the day is known delivered, and both are cleared here.
+    # UPDATED_TODAY and NO_NEW_CONTENT_TODAY are already correct or neutral, and
+    # anything unrecognised is left alone rather than guessed at.
+    if live not in ("SYNC_FAILED", "PENDING_PUBLISH"):
         return
     try:
         subprocess.run([sys.executable, str(ROOT / "desk_status.py")],
@@ -240,7 +249,10 @@ def refresh_stale_banner() -> None:
     if derived.get("state") == "SYNC_FAILED":
         log("the deployed failure banner still matches the derived state; leaving it")
         return
-    log(f"the domain is serving a stale failure banner; the day is delivered "
+    if derived.get("state") == live:
+        log(f"the deployed banner still matches the derived state ({live}); leaving it")
+        return
+    log(f"the domain is serving a stale banner ({live}); the day is delivered "
         f"({derived.get('state')}) - deploying the correction")
     try:
         deploy_status_file()

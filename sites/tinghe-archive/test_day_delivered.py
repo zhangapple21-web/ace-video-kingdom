@@ -16,6 +16,7 @@ The cases below use the actual receipt shapes recorded on 2026-10-08.
 from __future__ import annotations
 
 import importlib.util
+import json
 import pathlib
 import sys
 
@@ -125,6 +126,79 @@ def main() -> int:
             real.unlink(missing_ok=True)
         else:
             real.write_bytes(saved)
+
+    # 4th case (2026-10-16): the same dead-run pattern, but the stale banner was
+    # PENDING_PUBLISH rather than SYNC_FAILED - "written but not live yet" left
+    # over from before the 09:20 deploy. It understates a delivered day exactly
+    # as SYNC_FAILED does, so it is cleared too. The guard must not swing the
+    # other way either: a banner that a fresh derivation still agrees with is
+    # real and must survive.
+    print("\n--- which stale banners may be cleared ---")
+    saved_state = m.STATUS_FILE.read_bytes() if m.STATUS_FILE.is_file() else None
+    saved_live = m.deployed_banner_state
+    saved_run = m.subprocess.run
+    try:
+        m.STATUS_FILE.parent.mkdir(parents=True, exist_ok=True)
+        deployed = {"value": "SYNC_FAILED"}
+        m.deployed_banner_state = lambda: deployed["value"]
+
+        # refresh_stale_banner() re-derives by RUNNING desk_status.py, which would
+        # overwrite the file this test is staging. Stub that one call so the test
+        # controls the derived state; the real script is exercised separately by
+        # test_desk_status.py.
+        def fake_run(cmd, *a, **k):
+            state = derived["value"]
+            m.STATUS_FILE.write_text(json.dumps({"state": state}), encoding="utf-8")
+
+            class _Done:
+                returncode = 0
+                stdout = ""
+                stderr = ""
+            return _Done()
+
+        derived = {"value": "UPDATED_TODAY"}
+        m.subprocess.run = fake_run
+
+        def staged(live, now_true):
+            deployed["value"] = live
+            derived["value"] = now_true
+
+        # The two states that understate a delivered day are the ones acted on.
+        for stale in ("SYNC_FAILED", "PENDING_PUBLISH"):
+            calls = []
+            m.deploy_status_file = lambda *a, **k: calls.append(1)
+            staged(stale, "UPDATED_TODAY")
+            m.refresh_stale_banner()
+            check(bool(calls), f"a stale {stale} banner on a delivered day is cleared")
+
+        # A still-true failure is not touched, however the run got here.
+        calls = []
+        m.deploy_status_file = lambda *a, **k: calls.append(1)
+        staged("SYNC_FAILED", "SYNC_FAILED")
+        m.refresh_stale_banner()
+        check(not calls, "a SYNC_FAILED banner that is still true is left standing")
+
+        # An already-correct banner costs no deploy.
+        calls = []
+        m.deploy_status_file = lambda *a, **k: calls.append(1)
+        staged("UPDATED_TODAY", "UPDATED_TODAY")
+        m.refresh_stale_banner()
+        check(not calls, "a correct banner is not re-deployed")
+
+        # Unreadable deployed state must never trigger a deploy.
+        calls = []
+        m.deploy_status_file = lambda *a, **k: calls.append(1)
+        derived["value"] = "UPDATED_TODAY"
+        m.deployed_banner_state = lambda: None
+        m.refresh_stale_banner()
+        check(not calls, "an unreadable banner is not treated as staleness")
+    finally:
+        m.deployed_banner_state = saved_live
+        m.subprocess.run = saved_run
+        if saved_state is None:
+            m.STATUS_FILE.unlink(missing_ok=True)
+        else:
+            m.STATUS_FILE.write_bytes(saved_state)
 
     print()
     if failures:
