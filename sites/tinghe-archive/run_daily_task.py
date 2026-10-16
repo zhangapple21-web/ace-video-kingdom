@@ -157,6 +157,19 @@ def append_daily_log(summary: dict) -> None:
 # "Model unavailable". Verify the pool whenever it is edited — probe_pool_health.py
 # answers "is this slot still real?" in seconds instead of a failed run a day later.
 #
+# step-5-preview-free and ling-3.1-flash-free were REMOVED on 2026-10-16 by the
+# same rule as fledge. probe_pool_health.py reports both [DEAD] with
+# "[not listed]" and "Model unavailable"; neither appears anywhere in the 139
+# models `opencode models` returns, and neither produces the regional signature
+# described below. That distinguishes them from muse-spark-1.3 (kept): a
+# delisting removes the entry, a region change only needs a re-probe, and the
+# two look alike from a single sample.
+#
+# Cost of leaving them: each is tried once per episode at a 120s timeout, so two
+# dead slots burn 240s of a run that already shares its budget with five audits.
+# test_writer_pool.py pinned this: the pool must only name models the provider
+# still offers.
+#
 # 2026-10-13 探测后重排。
 #
 # 关于 muse-spark-1.3 的更正：13:13 探测报
@@ -170,14 +183,14 @@ def append_daily_log(summary: dict) -> None:
 #
 # 顺序按"真跑过一整集"的实测排，不按探测排：2026-10-13 修 fanguan/ep11 时，
 # step-5 与 ling 各跑满 480s 一个字没写出来，mimo 160s 改完并直接 audit PASS。
+# （step-5 与 ling 已于 2026-10-16 因下架移除，见上；这次实测是它们当时仍在
+#  池内的排序依据，保留作为"顺序按实测排"的出处。）
 #
 # Override without editing code:
 #   set TINGHE_WRITER_MODELS=opencode/muse-spark-1.3-contributor-free,opencode/amd-model
 WRITER_MODELS = [
     "opencode/mimo-v2.6-flash-free",
     "opencode/muse-spark-1.3-contributor-free",
-    "opencode/step-5-preview-free",
-    "opencode/ling-3.1-flash-free",
     "opencode/nemotron-3.5-lightning-free",
     "opencode/longcat-2.5-preview-free",
 ]

@@ -37,6 +37,15 @@ check(len(set(pool)) == len(pool), "no duplicate models in pool")
 for m in pool:
     print(f"    {m}")
 
+# Two models were removed on 2026-10-16 for the reason the source documents:
+# `opencode models` no longer lists them and the provider answers "Model
+# unavailable" - the same evidence that removed fledge-alpha-free. This pins
+# that a delisted model stays out, so a future edit cannot quietly reintroduce
+# a slot that costs a 120s timeout on every episode.
+DELISTED = ("opencode/step-5-preview-free", "opencode/ling-3.1-flash-free")
+stale = [m for m in DELISTED if m in pool]
+check(not stale, f"delisted models stay out of the pool (found: {stale or 'none'})")
+
 print("\n--- env override ---")
 os.environ["TINGHE_WRITER_MODELS"] = "opencode/muse-spark-1.3-contributor-free,opencode/exo-free"
 check(mod.writer_models() == ["opencode/muse-spark-1.3-contributor-free", "opencode/exo-free"],
