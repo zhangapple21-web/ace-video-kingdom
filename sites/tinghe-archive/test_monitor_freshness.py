@@ -14,9 +14,16 @@ surface must not have, and it is what these checks pin down.
 
 The staleness threshold is 2 days, not 1: the task fires at 15:10 and the site
 builds afterwards, so a morning build legitimately shows yesterday's check.
+
+The timestamps below are computed RELATIVE to today. They were absolute dates
+("2026-10-14" meaning fresh) until 2026-10-16, when the calendar caught up with
+them: the same file that pinned a working threshold started failing two days
+later without anything about the monitor changing. A test about staleness that
+itself goes stale is the least useful possible version of this test.
 """
 from __future__ import annotations
 
+import datetime
 import json
 import pathlib
 import sys
@@ -24,6 +31,16 @@ import types
 
 HERE = pathlib.Path(__file__).resolve().parent
 failures: list[str] = []
+
+
+def days_ago(n: int, at: str = "14:22:04") -> str:
+    """A local timestamp n days before today, in the shape desk_status parses.
+
+    n=0 is "just checked", which is what the fresh case needs regardless of what
+    day the suite runs on.
+    """
+    day = datetime.datetime.now().astimezone().date() - datetime.timedelta(days=n)
+    return f"{day.isoformat()}T{at}+08:00"
 
 
 def check(name: str, cond: bool, detail: str = ""):
@@ -71,18 +88,21 @@ try:
         sys.exit(1)
 
     # 1. fresh: no complaint, and the age is reported so a reader can see it
-    r = with_checked_at("2026-10-14T14:22:04+08:00")
+    r = with_checked_at(days_ago(0))
     check("刚跑过时 age_days = 0", r["age_days"] == 0, f"got {r['age_days']}")
     check("刚跑过时不算过期", "未更新" not in r["note"], r["note"])
-    check("checked_at 仍然带出去", r["checked_at"].startswith("2026-10-14"))
+    check("checked_at 仍然带出去",
+          r["checked_at"].startswith(days_ago(0)[:10]), r["checked_at"])
 
     # 2. one day: the task fires at 15:10 and the build follows it, so a morning
     #    build showing yesterday's check is normal and must not raise a warning
-    r = with_checked_at("2026-10-13T15:10:04+08:00")
+    r = with_checked_at(days_ago(1, "15:10:04"))
     check("1 天前不算过期", "未更新" not in r["note"], r["note"])
 
-    # 3. three days: the monitor is dead and the page has to say so
-    r = with_checked_at("2026-10-11T15:10:04+08:00")
+    # 3. the threshold itself is 2 days (see the module docstring). Three days is
+    #    used here because it is unambiguously past it, whichever way the local
+    #    day boundary falls at run time.
+    r = with_checked_at(days_ago(3, "15:10:04"))
     check("3 天前报出未更新", "未更新" in r["note"], r["note"])
     check("3 天前强制 GENRE_WARN", r["state"] == "GENRE_WARN", r["state"])
     check("未更新时说明可能是任务停了",
@@ -105,7 +125,8 @@ try:
     check("_checked_age_days 对空串返回 None",
           ds._checked_age_days("") is None)
     check("_checked_age_days 处理无时区的 ISO",
-          ds._checked_age_days("2026-10-14T14:22:04") is not None)
+          ds._checked_age_days("2030-01-01T00:00:00") is not None,
+          "parses a naive ISO stamp rather than returning None")
 
     # 6. a future timestamp must not be able to fake a healthy monitor forever
     r = with_checked_at("2099-01-01T00:00:00+08:00")
