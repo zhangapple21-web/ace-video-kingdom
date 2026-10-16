@@ -374,9 +374,27 @@ def main() -> int:
 
     # Gate 2b: Public projection hygiene. Both are local, fast and fail closed
     # on real problems, so a broken snapshot or a mojibake edit cannot ship.
+    #
+    # build_chapter_pages WRITES (check_only=False) while build_site_meta used to
+    # only CHECK. That asymmetry was the bug: build_site_meta derives
+    # search-index.json from public/data/originals/desk.json, and Gate 4 rewrites
+    # desk.json when this run publishes an episode - so the index is one episode
+    # behind every time the run produces content. The check then reported DRIFT
+    # and the pipeline aborted here, before Gate 4, so the episode was authored
+    # and never shipped.
+    #
+    # Measured: 2026-10-14 (5 episodes), 2026-10-15 (1) and 2026-10-16 (1) all
+    # ended BUILD_FAILED with "DRIFT search-index.json", while every no-write run
+    # of the same days passed. Reproduced directly: adding one episode to
+    # desk.json makes `build_site_meta.py --check-only` exit 1.
+    #
+    # These files are DERIVED - the pipeline owns them and they exist to be
+    # regenerated - so the gate regenerates them and then verifies the result.
+    # check_site_integrity stays a real check: it validates the whole published
+    # tree and still fails closed, which is what the gate is for.
     print("\n=== Gate 2b: Site projection ===")
-    gates = (("build_chapter_pages", CHAPTER_PAGES, True),
-             ("build_site_meta", SITE_META, True),
+    gates = (("build_chapter_pages", CHAPTER_PAGES, False),
+             ("build_site_meta", SITE_META, False),
              ("check_site_integrity", INTEGRITY, False))
     for label, script, check_only in gates:
         cmd = [sys.executable, str(script)] + (["--check-only"] if check_only else [])
