@@ -97,6 +97,25 @@ def _quota_exhausted(manifest: Path, shot_id: str) -> bool:
     )
 
 
+def _load_episode_records(manifest: Path) -> dict[str, dict]:
+    """Read the durable manifest into ``{shot_id: record}``.
+
+    Tolerant by design: a missing or unreadable manifest yields an empty map so
+    the artifact lane reports NOT_PROVEN per shot and blocks delivery, instead of
+    crashing a run that was already blocked for other reasons.
+    """
+    try:
+        data = json.loads(manifest.read_text(encoding="utf-8"))
+    except (OSError, ValueError):
+        return {}
+    rows = data if isinstance(data, list) else [data]
+    return {
+        row["shot_id"]: row
+        for row in rows
+        if isinstance(row, dict) and row.get("shot_id")
+    }
+
+
 def _verify_shot_artifact(manifest: Path, shot_id: str) -> dict:
     """Stop unless this shot's artifact exists and still matches its hash.
 
@@ -633,6 +652,16 @@ def main() -> int:
             (item.get("script", {}).get("audio_status") in {"MEASURED", "NO_DIALOGUE"})
             for item in contract_sidecars
         ) else "UNKNOWN"
+        # Artifact availability is now a delivery-gate lane, not something a
+        # human has to remember to check. The blocked-run path already carried
+        # an "artifact" lane; the success path had none, so six passing QC lanes
+        # could approve an episode whose source media was never verified.
+        _records = _load_episode_records(args.manifest)
+        artifact_lane, artifact_detail = artifact_facts.availability_lane_for_shots(
+            _records, list(shot_ids),
+            manifest_dir=Path(args.manifest).resolve().parent,
+            roots=[Path(args.manifest).resolve().parent, Path(__file__).resolve().parents[1]],
+        )
         delivery = delivery_gate({
             "media_integrity": "PASS" if final_report.get("status") == "PASS" else "FAIL",
             "continuity": continuity_review,
@@ -640,6 +669,7 @@ def main() -> int:
             "subtitle": episode.get("subtitle_status", "UNKNOWN"),
             "audio": episode.get("audio_status", audio_status),
             "creative": episode.get("creative_status", "UNKNOWN"),
+            "artifact": artifact_lane,
         })
         acceptance = {
             "contract_version": "ace.video_kingdom.acceptance_receipt.v1",
@@ -652,6 +682,11 @@ def main() -> int:
             "subtitle": delivery["statuses"]["subtitle"],
             "audio": delivery["statuses"]["audio"],
             "creative": delivery["statuses"]["creative"],
+            "artifact": {
+                "lane": artifact_lane,
+                "shots": artifact_detail,
+                "note": "availability only; it says whether the source media is present and hash-verified right now, not whether it is any good",
+            },
             "delivery_gate": delivery,
             "rule_summary": [
                 "每镜必须通过 audit_video_pacing（内部切镜0、音频存在、TTS覆盖）",

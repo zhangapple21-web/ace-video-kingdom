@@ -106,6 +106,63 @@ def _resolve(path_value: Any, roots: Sequence[Path]) -> tuple[Path | None, Path 
     return candidates[0], None
 
 
+def availability_lane(
+    record: Mapping[str, Any],
+    *,
+    manifest_dir: Path | None = None,
+    roots: Sequence[Path] | None = None,
+    verify_hash: bool = True,
+) -> str:
+    """Express artifact availability as a delivery-gate lane value.
+
+    The blocked-run path in ``tools/record_blocked_run_evidence.py`` already
+    carries an ``"artifact": "NOT_PROVEN"`` lane, but the episode success path
+    in ``tools/run_comedy_episode.py`` had no artifact lane at all. So a run
+    whose six QC lanes all passed could still be approved without ever stating
+    whether the source media was actually present and verified.
+
+    ``PASS`` requires a currently verified local file. ``NOT_PROVEN`` means the
+    record cannot answer, and ``delivery_gate`` treats it as blocking — so an
+    absent answer never becomes an approval.
+    """
+    assessment = assess(record, manifest_dir=manifest_dir, roots=roots, verify_hash=verify_hash)
+    if assessment["local"]["state"] == LOCAL_VERIFIED and assessment["generation"]["generated"]:
+        return "PASS"
+    if assessment["local"]["state"] in {LOCAL_ABSENT, LOCAL_MISMATCH}:
+        return "FAIL"
+    return "NOT_PROVEN"
+
+
+def availability_lane_for_shots(
+    records: Mapping[str, Mapping[str, Any]],
+    shot_ids: Sequence[str],
+    *,
+    manifest_dir: Path | None = None,
+    roots: Sequence[Path] | None = None,
+) -> tuple[str, dict[str, Any]]:
+    """Worst-lane-wins across an episode's shots. Returns ``(lane, detail)``."""
+    order = {"PASS": 0, "NOT_PROVEN": 1, "FAIL": 2}
+    detail: dict[str, Any] = {}
+    worst = "PASS"
+    for shot_id in shot_ids:
+        record = records.get(shot_id)
+        if record is None:
+            detail[shot_id] = {"lane": "NOT_PROVEN", "reason": "no durable manifest record"}
+            worst = "NOT_PROVEN" if order[worst] < order["NOT_PROVEN"] else worst
+            continue
+        lane = availability_lane(record, manifest_dir=manifest_dir, roots=roots)
+        assessment = assess(record, manifest_dir=manifest_dir, roots=roots)
+        detail[shot_id] = {
+            "lane": lane,
+            "local": assessment["local"]["state"],
+            "recoverable": assessment["recoverable"],
+            "reason": delivery_block_reason(assessment),
+        }
+        if order[lane] > order[worst]:
+            worst = lane
+    return worst, detail
+
+
 def record_generation_fact(
     record: dict[str, Any],
     *,

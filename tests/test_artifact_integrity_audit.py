@@ -317,3 +317,111 @@ def test_absent_and_searched_and_still_gone_counts_as_unrecoverable(tmp_path):
     receipt = audit_artifact_integrity.audit([manifest], roots=[root], search_roots=[empty])
     assert receipt["totals"]["generated_but_unrecoverable"] == 1
     assert receipt["totals"]["recovered_offline"] == 0
+
+
+# --------------------------------------------------------------------------- #
+# the automatic gate: availability is a lane, so nobody has to remember to check
+# --------------------------------------------------------------------------- #
+
+def _record_for(path, sha, status="COMPLETED"):
+    return {"shot_id": "S01", "status": status, "artifact_path": str(path), "artifact_sha256": sha}
+
+
+def test_availability_lane_passes_a_verified_artifact(tmp_path):
+    artifact = tmp_path / "ok.mp4"
+    artifact.write_bytes(PAYLOAD)
+    sha = hashlib.sha256(PAYLOAD).hexdigest()
+    assert artifact_facts.availability_lane(_record_for(artifact, sha)) == "PASS"
+
+
+def test_availability_lane_fails_a_missing_artifact(tmp_path):
+    sha = hashlib.sha256(PAYLOAD).hexdigest()
+    assert artifact_facts.availability_lane(_record_for(tmp_path / "gone.mp4", sha)) == "FAIL"
+
+
+def test_availability_lane_fails_a_tampered_artifact(tmp_path):
+    artifact = tmp_path / "bad.mp4"
+    artifact.write_bytes(b"substituted")
+    sha = hashlib.sha256(PAYLOAD).hexdigest()
+    assert artifact_facts.availability_lane(_record_for(artifact, sha)) == "FAIL"
+
+
+def test_availability_lane_is_not_proven_without_a_generation_fact():
+    """A record that claims nothing verifiable cannot claim a pass either."""
+    assert artifact_facts.availability_lane({"shot_id": "S01", "status": "CREATING"}) == "NOT_PROVEN"
+    assert artifact_facts.availability_lane({"shot_id": "S01"}) == "NOT_PROVEN"
+
+
+def test_availability_lane_is_worst_wins_across_shots(tmp_path):
+    good = tmp_path / "good.mp4"
+    good.write_bytes(PAYLOAD)
+    sha = hashlib.sha256(PAYLOAD).hexdigest()
+    records = {
+        "S01": _record_for(good, sha),
+        "S02": _record_for(tmp_path / "gone.mp4", sha),
+        "S03": {"shot_id": "S03"},
+    }
+    lane, detail = artifact_facts.availability_lane_for_shots(records, ["S01", "S02", "S03"])
+    assert lane == "FAIL"
+    assert detail["S01"]["lane"] == "PASS"
+    assert detail["S02"]["lane"] == "FAIL"
+    assert detail["S03"]["lane"] == "NOT_PROVEN"
+
+    lane, _ = artifact_facts.availability_lane_for_shots({"S01": _record_for(good, sha)}, ["S01"])
+    assert lane == "PASS"
+
+
+def test_a_shot_with_no_record_at_all_blocks_rather_than_passes():
+    lane, detail = artifact_facts.availability_lane_for_shots({}, ["S01"])
+    assert lane == "NOT_PROVEN"
+    assert "no durable manifest record" in detail["S01"]["reason"]
+
+
+def test_six_passing_qc_lanes_cannot_approve_unverified_media(tmp_path):
+    """The exact hole: all quality lanes green, artifact never verified."""
+    from runtime.provider_admission import delivery_gate
+
+    perfect_qc = {
+        "media_integrity": "PASS",
+        "continuity": "PASS",
+        "repetition": "PASS",
+        "subtitle": "PASS",
+        "audio": "PASS",
+        "creative": "PASS",
+    }
+    sha = hashlib.sha256(PAYLOAD).hexdigest()
+    records = {"S01": _record_for(tmp_path / "never_verified.mp4", sha)}
+    lane, _ = artifact_facts.availability_lane_for_shots(records, ["S01"])
+    assert lane == "FAIL"
+
+    without_lane = delivery_gate(perfect_qc)
+    assert without_lane["delivery_approved"] is True  # the old behaviour
+
+    with_lane = delivery_gate({**perfect_qc, "artifact": lane})
+    assert with_lane["delivery_approved"] is False
+    assert with_lane["status"] == "BLOCKED"
+    assert "artifact" in with_lane["blocking"]
+
+
+def test_unproven_artifact_lane_is_review_required_not_pass(tmp_path):
+    from runtime.provider_admission import delivery_gate
+
+    gate = delivery_gate({
+        "media_integrity": "PASS", "continuity": "PASS", "repetition": "PASS",
+        "subtitle": "PASS", "audio": "PASS", "creative": "PASS", "artifact": "NOT_PROVEN",
+    })
+    assert gate["delivery_approved"] is False
+    assert gate["status"] == "REVIEW_REQUIRED"
+
+
+def test_episode_records_loader_tolerates_a_broken_manifest(tmp_path):
+    from tools.run_comedy_episode import _load_episode_records
+
+    broken = tmp_path / "broken.json"
+    broken.write_text("{not json", encoding="utf-8")
+    assert _load_episode_records(broken) == {}
+    missing = _load_episode_records(tmp_path / "absent.json")
+    assert missing == {}
+    # A broken manifest must block via the lane, never by crashing the run.
+    lane, detail = artifact_facts.availability_lane_for_shots(missing, ["S01"])
+    assert lane == "NOT_PROVEN"
