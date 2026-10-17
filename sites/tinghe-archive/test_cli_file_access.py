@@ -18,7 +18,12 @@ import tempfile
 
 ROOT = pathlib.Path(__file__).resolve().parent
 CLI = pathlib.Path(os.environ.get("USERPROFILE", "")) / ".local" / "bin" / "opencode.exe"
-MODEL = "opencode/muse-spark-1.3-contributor-free"
+# This file tests whether the CLI can read a bundle, not which model is best, so
+# it only needs a model that actually answers. It named muse-spark-1.3, which was
+# delisted on 2026-10-17 ("Model unavailable" on 6 of 6 real calls), so all three
+# access checks failed as though file access were broken - the test blamed the
+# thing it was measuring for a fault in its own fixture.
+MODEL = "opencode/mimo-v2.6-flash-free"
 
 failures: list[str] = []
 

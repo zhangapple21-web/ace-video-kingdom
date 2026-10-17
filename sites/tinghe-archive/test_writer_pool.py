@@ -42,7 +42,15 @@ for m in pool:
 # unavailable" - the same evidence that removed fledge-alpha-free. This pins
 # that a delisted model stays out, so a future edit cannot quietly reintroduce
 # a slot that costs a 120s timeout on every episode.
-DELISTED = ("opencode/step-5-preview-free", "opencode/ling-3.1-flash-free")
+#
+# muse-spark-1.3 joined this list on 2026-10-17: 6 of 6 real calls from the
+# project directory returned "Model unavailable" and it was absent from
+# `opencode models` there. Deliberately NOT treated as the region case - a
+# region error reads "not available in your country" and must not cost a working
+# model (see test_pool_unavailable.py). One call from C:\tmp answered hours
+# earlier, which is why a single probe is never enough to decide.
+DELISTED = ("opencode/step-5-preview-free", "opencode/ling-3.1-flash-free",
+            "opencode/muse-spark-1.3-contributor-free")
 stale = [m for m in DELISTED if m in pool]
 check(not stale, f"delisted models stay out of the pool (found: {stale or 'none'})")
 

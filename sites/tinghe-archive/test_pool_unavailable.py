@@ -86,9 +86,23 @@ check("no duplicate models in pool", len(pool) == len(set(pool)),
 # switched to a Hong Kong exit node, and the model works from the normal region.
 # Region and egress changes look exactly like a delisting, and the two call for
 # opposite responses, so the pool must not shed a model on one probe.
-check("muse-spark-1.3 is back in the pool (region change, not a delisting)",
-      any("muse-spark" in m for m in pool),
-      "a region switch must not cost us a working model")
+#
+# The lesson still stands, but the specific assertion below no longer can. On
+# 2026-10-17 muse-spark answered "Model unavailable" on 6 of 6 real calls from the
+# project directory and was absent from `opencode models` there, while
+# test_writer_pool.py independently failed on exactly that absence. Keeping it in
+# the pool meant one dead slot burning a 120s timeout per episode - the very
+# failure this file's docstring describes.
+#
+# So the check now pins the PRINCIPLE instead of the model: whatever is in the
+# pool must be justified, and an empty or single-entry pool is still suspicious.
+# Shedding a model is allowed when evidence says it is gone; it is not allowed to
+# go looking for reasons to shed one.
+check("pool keeps several routes", len(pool) >= 3,
+      f"a pool that collapses to {len(pool)} route(s) has lost its redundancy")
+check("pool entries are provider-qualified",
+      all("/" in m for m in pool),
+      "every entry must name provider/model so routing cannot guess")
 print(f"     pool order: {[m.split('/')[-1] for m in pool]}")
 
 print()

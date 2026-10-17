@@ -187,10 +187,9 @@ def append_daily_log(summary: dict) -> None:
 #  池内的排序依据，保留作为"顺序按实测排"的出处。）
 #
 # Override without editing code:
-#   set TINGHE_WRITER_MODELS=opencode/muse-spark-1.3-contributor-free,opencode/amd-model
+#   set TINGHE_WRITER_MODELS=opencode/nemotron-3.5-lightning-free,opencode/amd-model
 WRITER_MODELS = [
     "opencode/mimo-v2.6-flash-free",
-    "opencode/muse-spark-1.3-contributor-free",
     "opencode/nemotron-3.5-lightning-free",
     "opencode/longcat-2.5-preview-free",
 ]
