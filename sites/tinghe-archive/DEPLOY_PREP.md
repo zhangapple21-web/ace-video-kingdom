@@ -478,7 +478,7 @@ py -3 build_site_meta.py                # 写入
 py -3 check_site_integrity.py
 ```
 
-`build_og_image.py` 用 PIL 画 `public/assets/og-cover.png`（社交平台不渲染 SVG 做 `og:image`）。产物已入库，只在标题或配色变化时重跑。
+`build_og_image.py` 用 PIL 画 `public/assets/og-cover.jpg`（社交平台不渲染 SVG 做 `og:image`）。产物已入库，只在标题或配色变化时重跑。
 
 ### 已知数据缺口
 

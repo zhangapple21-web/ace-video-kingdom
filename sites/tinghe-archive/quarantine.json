@@ -1,6 +1,6 @@
 {
   "schema": "tinghe.quarantine.v1",
-  "updated_at": "2026-10-13T16:28:54+08:00",
+  "updated_at": "2026-10-14T16:04:01+08:00",
   "note": "Episodes held out of publishing until they carry a settled PASS verdict (consecutive PASSes on unchanged text). Reasons are the auditor's own issue text. An episode is republished by deleting its entry; the authored text stays in originals_source/<work>/work.json either way, so nothing is destroyed by holding it back.",
   "held": []
 }

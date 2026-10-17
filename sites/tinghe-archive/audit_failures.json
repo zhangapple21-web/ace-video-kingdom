@@ -8256,74 +8256,6 @@
     "resolved": false
   },
   {
-    "timestamp": "2026-10-13T14:21:05+08:00",
-    "work": "tuiqun",
-    "episode": "ep15",
-    "content_sha": "97f5eb809b775df8",
-    "audit": {
-      "status": "FAIL",
-      "issues": [
-        {
-          "type": "CLUE_MISPLACED",
-          "severity": "MAJOR",
-          "episode": "ep15",
-          "description": "裴家伯父位置突变无交代：ep13 末尾他在离港坪岸上（递函、被嘲讽‘下回赶早’），ep15 船已进哑带半程，他却已在船上手持底档全卷、压着船单、欲代签组长。中间无上船动作、无许可交代、核验员 ep13 仅确认沈铭舟上船。",
-          "evidence_before": "裴家伯父从排队人群外走进来，手里托着第十一航次底档全卷...核验员：经办人沈铭舟，晕船也上船。苏令仪：伯父，函留着吧。下回，赶早。",
-          "evidence_after": "伯父那张新函还被船单压着...伯父把底档全卷往船单一拍...伯父代签的那只手，停在半空，笔帽没拔。"
-        }
-      ]
-    },
-    "style": {
-      "words": 2100,
-      "visual_points": 12,
-      "pressure_complete": true,
-      "dialogue_dumps": false,
-      "hook_open": true,
-      "humor_ok": true,
-      "violation": false,
-      "notes": "对白有身份感（裴家算账逻辑、苏令仪嘲讽墨钱、姜迟看沫认路），动作可视化强，钩子留白扎实（组长缺位、页未交、暖灯真假）。裴家伯父上船逻辑跳跃是唯一硬伤。",
-      "ai_taste_ok": true,
-      "ai_taste_notes": "",
-      "prose_alive": true
-    },
-    "pass_streak": 0,
-    "resolved": "2026-10-13T14:23:55+08:00"
-  },
-  {
-    "timestamp": "2026-10-13T14:23:55+08:00",
-    "work": "tuiqun",
-    "episode": "ep15",
-    "content_sha": "97f5eb809b775df8",
-    "audit": {
-      "status": "PASS",
-      "issues": [
-        {
-          "type": "SELF_CONTRADICTION",
-          "severity": "MINOR",
-          "episode": "ep15",
-          "description": "苏令仪「按住姜迟手腕」动作在 ep13 梯口与 ep15 船上重复出现，中间无交代是否为同一连续动作或刻意呼应，易读作连续性疏漏",
-          "evidence_before": "苏令仪按住姜迟的手腕，怀里三卷底册，一页没动（ep13 尾声）",
-          "evidence_after": "苏令仪按住姜迟的手腕，怀里三卷底册，一页没动（ep15 中段）"
-        }
-      ]
-    },
-    "style": {
-      "words": 1800,
-      "visual_points": 10,
-      "pressure_complete": true,
-      "dialogue_dumps": false,
-      "hook_open": true,
-      "humor_ok": true,
-      "violation": false,
-      "notes": "压憋破拉扯完整、画面点密集、钩子留白精准、人味对白无 AI 机械感、暖灯接船/诱船悬念强",
-      "ai_taste_ok": true,
-      "ai_taste_notes": "",
-      "prose_alive": true
-    },
-    "pass_streak": 1,
-    "resolved": false
-  },
-  {
     "timestamp": "2026-10-12T08:44:09+08:00",
     "work": "zhenqianjin",
     "episode": "ep13",
@@ -8643,195 +8575,6 @@
     "resolved": false
   },
   {
-    "timestamp": "2026-10-13T14:53:32+08:00",
-    "work": "fanguan",
-    "episode": "ep14",
-    "content_sha": "0e304e4170d6c2a7",
-    "audit": {
-      "status": "FAIL",
-      "issues": [
-        {
-          "type": "OTHER",
-          "severity": "CRITICAL",
-          "episode": "ep14",
-          "description": "opencode exited 1 on opencode/nemotron-3.5-lightning-free: \u001b[91m\u001b[1mError: \u001b[0mFile not found: D:\\视频创作\\ace-video-kingdom\\sites\\tinghe-archive\\originals_source\\fanguan\\context_bundle.audit.md\n",
-          "evidence_before": "",
-          "evidence_after": ""
-        }
-      ]
-    },
-    "style": {},
-    "pass_streak": 0,
-    "resolved": "2026-10-13T15:00:32+08:00"
-  },
-  {
-    "timestamp": "2026-10-13T14:57:43+08:00",
-    "work": "fanguan",
-    "episode": "ep14",
-    "content_sha": "0e304e4170d6c2a7",
-    "audit": {
-      "status": "PASS",
-      "issues": [
-        {
-          "type": "TIMELINE_CONFLICT",
-          "severity": "MINOR",
-          "episode": "ep13",
-          "description": "ep13主审原话「明晨带整印来赎」表达为次日约定，ep14主审却说「昨儿应的，今晨办」将其表述为前一日已达成应允，两者表述不合；动作上主审带印赴约一致，仅表述侧写差异。",
-          "evidence_before": "纸，明晨带整印来赎",
-          "evidence_after": "昨儿应的，今晨办"
-        }
-      ]
-    },
-    "style": {
-      "words": 1600,
-      "visual_points": 16,
-      "pressure_complete": true,
-      "dialogue_dumps": false,
-      "hook_open": true,
-      "humor_ok": true,
-      "violation": false,
-      "notes": "赎纸高潮落地工号对上三万人见证，新钩子软底鞋指向印章室内鬼，张力升级不散场。",
-      "ai_taste_ok": true,
-      "ai_taste_notes": "",
-      "prose_alive": true
-    },
-    "pass_streak": 1,
-    "resolved": "2026-10-13T15:00:32+08:00"
-  },
-  {
-    "timestamp": "2026-10-13T15:00:32+08:00",
-    "work": "fanguan",
-    "episode": "ep14",
-    "content_sha": "0e304e4170d6c2a7",
-    "audit": {
-      "status": "PASS",
-      "issues": []
-    },
-    "style": {
-      "words": 1150,
-      "visual_points": 5,
-      "pressure_complete": true,
-      "dialogue_dumps": false,
-      "hook_open": true,
-      "humor_ok": true,
-      "violation": false,
-      "notes": "程序撞程序的压力升级有效，章盒—登记簿—收据合契三连画面扎实，软底鞋钩子具体可接。",
-      "ai_taste_ok": true,
-      "ai_taste_notes": "",
-      "prose_alive": true
-    },
-    "pass_streak": 2,
-    "resolved": false
-  },
-  {
-    "timestamp": "2026-10-13T14:55:09+08:00",
-    "work": "fanguan",
-    "episode": "ep15",
-    "content_sha": "7d3066773764d9be",
-    "audit": {
-      "status": "FAIL",
-      "issues": [
-        {
-          "type": "TIMELINE_CONFLICT",
-          "severity": "CRITICAL",
-          "episode": "ep13→ep15",
-          "description": "ep13 结尾在新楼印章室门口，主审转身进印章室，钩子为「明晨带整印来赎」；ep15 次晨却直接在旧楼四楼文书房开场，主审已早到守在柜门前，且完成「纸条赎回、联入柜、开收据」全流程。两地跨度未交代，灯灭四回事件明确发生在新楼印章室（ep11-13 反复确认），ep15 却让主审在旧楼四楼声称「灯，是我替他看的」，时空逻辑断裂。",
-          "evidence_before": "主审转身进印章室，红灯灭了，又亮了。卢茨把联揣回怀里……新楼那盏灯昨夜灭了第四回，值班的人到今晨还没露面（ep13 结尾）",
-          "evidence_after": "场景｜供应署旧楼 · 四楼文书房 · 晨内……主审比他们早到，手搭在最里排柜门上……主审：灯，是我替他看的（ep15 开头）"
-        },
-        {
-          "type": "BEAT_UNFULFILLED",
-          "severity": "MAJOR",
-          "episode": "ep13→ep15",
-          "description": "ep13 双钩子之一：复写联背面「旧工号后半截，主审只让看一眼，没让认全」，卢茨明言「工号后半截，明天到新楼再认」；ep15 全集未提工号、未去新楼、未认后半截，旧钩子被静默丢弃。",
-          "evidence_before": "旧工号后半截，主审只让看一眼，没让认全……工号后半截，明天到新楼再认（ep12 钩子、ep13 钩子）",
-          "evidence_after": "ep15 正文与钩子均无「工号」「旧工号」「后半截」等词，仅以「这规矩是谁立的」收尾"
-        },
-        {
-          "type": "SELF_CONTRADICTION",
-          "severity": "MAJOR",
-          "episode": "ep15",
-          "description": "老连自称「白天我在这儿抄纸，夜里没来」，指旧楼四楼白天抄纸、夜里未去新楼印章室值班；主审却称「人，我支去抄纸了。灯，是我替他看的」——主审若整夜在新楼印章室看灯，翌晨却能早于众人到达旧楼四楼守柜门，中间无任何移动/休息交代，且两地在设定中为旧楼/新楼两栋楼（ep09 旧楼电梯废、ep13 新楼印章室）。单集内部时空自洽性崩塌。",
-          "evidence_before": "代班员老连：白天我在这儿抄纸，夜里没来。主审：人，我支去抄纸了。灯，是我替他看的（ep15 中段）",
-          "evidence_after": "主审比他们早到，手搭在最里排柜门上……联进了四楼的柜，柜门咔哒落锁（ep15 同一上午）"
-        },
-        {
-          "type": "CHARACTER_INCONSISTENCY",
-          "severity": "MINOR",
-          "episode": "ep11-13→ep15",
-          "description": "前三集（ep11-13）刻意将「值班人」作为匿名悬念（仅称「值班的人」「那位」「值班表上那位」），事实表亦未登记该角色；ep15 突然引入具名配角「代班员老连」并给出完整动机与鞋底纸毛物证，虽非硬性冲突，但改变了谜题性质，属人设突变。",
-          "evidence_before": "值班表我托人看了一眼。今晚那位，请假条三天前就交了……值班的人，今晚没来，印却盖了（ep12、ep13 仅用职务/指代）",
-          "evidence_after": "代班员老连：鞋是我的。人可不是灯灭那晚的人——假条三天前就交了，白天我在这儿抄纸（ep15 引入具名角色）"
-        }
-      ]
-    },
-    "style": {
-      "words": 1850,
-      "visual_points": 8,
-      "pressure_complete": true,
-      "dialogue_dumps": false,
-      "hook_open": true,
-      "humor_ok": true,
-      "violation": false,
-      "notes": "画面感强（鞋印/白汽/纸毛/副联滑出/白汽熏印），压憋破拉扯完整，钩子具备 3 天倒计时与规矩追溯双悬念；但跨集时空断裂与旧钩子弃用为硬伤。",
-      "ai_taste_ok": true,
-      "ai_taste_notes": "",
-      "prose_alive": true
-    },
-    "pass_streak": 0,
-    "resolved": "2026-10-13T15:09:28+08:00"
-  },
-  {
-    "timestamp": "2026-10-13T15:01:20+08:00",
-    "work": "fanguan",
-    "episode": "ep15",
-    "content_sha": "7d3066773764d9be",
-    "audit": {
-      "status": "PASS",
-      "issues": []
-    },
-    "style": {
-      "words": 980,
-      "visual_points": 5,
-      "pressure_complete": true,
-      "dialogue_dumps": false,
-      "hook_open": true,
-      "humor_ok": true,
-      "violation": false,
-      "notes": "鞋认条认灯认三连翻当场兑现，纸毛对印可拍，三天后换联留白得当。",
-      "ai_taste_ok": true,
-      "ai_taste_notes": "",
-      "prose_alive": true
-    },
-    "pass_streak": 1,
-    "resolved": "2026-10-13T15:09:28+08:00"
-  },
-  {
-    "timestamp": "2026-10-13T15:09:28+08:00",
-    "work": "fanguan",
-    "episode": "ep15",
-    "content_sha": "7d3066773764d9be",
-    "audit": {
-      "status": "PASS",
-      "issues": []
-    },
-    "style": {
-      "words": 1800,
-      "visual_points": 22,
-      "pressure_complete": true,
-      "dialogue_dumps": false,
-      "hook_open": true,
-      "humor_ok": true,
-      "violation": false,
-      "notes": "四楼文书房硬碰硬，鞋底纸毛/副联双锤落地，主审被迫公开归档开收据，三日后换联悬念具体有力；人物口吻稳，画面点密，无AI味。",
-      "ai_taste_ok": true,
-      "ai_taste_notes": "",
-      "prose_alive": true
-    },
-    "pass_streak": 2,
-    "resolved": false
-  },
-  {
     "timestamp": "2026-10-13T14:18:31+08:00",
     "work": "tuiqun",
     "episode": "ep14",
@@ -9017,109 +8760,2040 @@
     "resolved": false
   },
   {
-    "timestamp": "2026-10-13T15:32:49+08:00",
-    "work": "test_work",
-    "episode": "ep99",
-    "content_sha": "2295bccc8922907e",
+    "timestamp": "2026-10-13T16:33:19+08:00",
+    "work": "fanguan",
+    "episode": "ep14",
+    "content_sha": "0e304e4170d6c2a7",
     "audit": {
       "status": "FAIL",
       "issues": [
         {
-          "type": "INJURY_VANISHED",
-          "severity": "CRITICAL",
-          "episode": "ep03",
-          "description": "ep01确立沈砺右腿旧伤未愈、微微跛行，ep02未提及康复，ep03直接奔跑跳跃、毫无跛行，且自称'早好了'无任何医疗/恢复桥段",
-          "evidence_before": "右腿旧伤未愈，走路微微跛行",
-          "evidence_after": "奔跑着冲向废料堆，翻身跃上集装箱顶，动作利落干脆，毫无跛行之态。沈砺回头笑：什么腿？我这腿早好了。"
+          "type": "CHARACTER_INCONSISTENCY",
+          "severity": "MAJOR",
+          "episode": "ep14",
+          "description": "档案管事在事实表中无确立代词（仅列为职务），新集旁白却用「她」指代（\"她押纸那格还没开\"），违反「只许用名字/职务指代」规则。",
+          "evidence_before": "事实表人物列表：档案管事无代词条目；ep13未出场名单含档案管事",
+          "evidence_after": "档案管事刚把柜门开到一半……她押纸那格还没开"
         },
         {
-          "type": "EMPTY_HOOK",
-          "severity": "MAJOR",
-          "episode": "ep03",
-          "description": "结尾钩子为元审核语言而非叙事悬念，包含集号引用与跨集对比，非下一集可接住的实体/线索/反转/倒计时/选择",
-          "evidence_before": "<b>钩子</b>：ep01 明确写",
-          "evidence_after": "无任何医疗/恢复桥段。"
+          "type": "TIMELINE_CONFLICT",
+          "severity": "CRITICAL",
+          "episode": "ep14",
+          "description": "ep13结尾在新楼印章室，主审进印章室、约定「明晨带整印来赎」；ep14开场却在旧楼四楼文书房「晨内」，主审已带整印到场并当场办完赎纸。地点、时间、主审行踪与上集钩子矛盾，且新楼值班人「到今晨还没露面」却能凑齐整印。",
+          "evidence_before": "主审转身进印章室，红灯灭了，又亮了……纸，明晨带整印来赎。新楼那盏灯昨夜灭了第四回，值班的人到今晨还没露面",
+          "evidence_after": "场景｜供应署旧楼 · 四楼文书房 · 晨内 · 赎纸的最后期限……主审捏着章盒走在前……昨儿应的，今晨办。整印我带来了。赎纸，办完。"
         }
       ]
     },
     "style": {
-      "words": 220,
-      "visual_points": 4,
-      "pressure_complete": false,
+      "words": 2200,
+      "visual_points": 15,
+      "pressure_complete": true,
       "dialogue_dumps": false,
-      "hook_open": false,
-      "humor_ok": false,
+      "hook_open": true,
+      "humor_ok": true,
       "violation": false,
-      "notes": "伤势凭空消失且无桥段，钩子为审核元语言而非叙事悬念，文字功能性尚可但被结构性硬伤拖累",
-      "ai_taste_ok": false,
-      "ai_taste_notes": "钩子处出现'ep01 明确写/ep02 未提及康复/ep03 却直接/无任何医疗/恢复桥段'等审核元语言，属裁判腔与书面连接词堆叠",
-      "prose_alive": false
+      "notes": "画面点密集、压憋破完整、钩子具体（半只软底鞋），文笔有立场；但时间线断裂为硬伤。",
+      "ai_taste_ok": true,
+      "ai_taste_notes": "",
+      "prose_alive": true
     },
-    "pass_streak": 0
+    "pass_streak": 0,
+    "resolved": "2026-10-13T16:37:28+08:00"
   },
   {
-    "timestamp": "2026-10-13T15:33:06+08:00",
+    "timestamp": "2026-10-13T16:37:28+08:00",
+    "work": "fanguan",
+    "episode": "ep14",
+    "content_sha": "0e304e4170d6c2a7",
+    "audit": {
+      "status": "PASS",
+      "issues": []
+    },
+    "style": {
+      "words": 2200,
+      "visual_points": 18,
+      "pressure_complete": true,
+      "dialogue_dumps": false,
+      "hook_open": true,
+      "humor_ok": true,
+      "violation": false,
+      "notes": "程序博弈层层递进，细节质感强，钩子精准指向软底鞋线索",
+      "ai_taste_ok": true,
+      "ai_taste_notes": "",
+      "prose_alive": true
+    },
+    "pass_streak": 1,
+    "resolved": false
+  },
+  {
+    "timestamp": "2026-10-13T16:46:49+08:00",
+    "work": "fanguan",
+    "episode": "ep15",
+    "content_sha": "7d3066773764d9be",
+    "audit": {
+      "status": "FAIL",
+      "issues": [
+        {
+          "type": "TIMELINE_CONFLICT",
+          "severity": "MAJOR",
+          "episode": "ep14",
+          "description": "ep14结尾主审下令：'明晨新人来点柜，你去抄纸房报到'（档案管事次日去抄纸房），但ep15开场代班员老连称'假条三天前就交了，白天我在这儿抄纸'，且档案管事直接缺席未见其去抄纸房报到。人员交接时间线与上集明确指令冲突。",
+          "evidence_before": "主审：押柜的。柜空了，人也换换。明晨新人来点柜，你去抄纸房报到。档案管事：抄就抄。",
+          "evidence_after": "代班员老连：假条三天前就交了，白天我在这儿抄纸，夜里没来。主审：人，我支去抄纸了。"
+        }
+      ]
+    },
+    "style": {
+      "words": 1460,
+      "visual_points": 34,
+      "pressure_complete": true,
+      "dialogue_dumps": false,
+      "hook_open": true,
+      "humor_ok": true,
+      "violation": false,
+      "notes": "压力升级：对手直指主审（承认替看灯四次），筹码从联归档转为三日后换联+追问立规矩者；爽感延伸：鞋/条/印三重当场锤实，围观者从看热闹变施压；赢得代价成下一轮压力：联在柜里，三日后须凭纸条+收据赎回，且主审掌握印章。文笔活，画面点密，钩子留白清晰。",
+      "ai_taste_ok": true,
+      "ai_taste_notes": "",
+      "prose_alive": true
+    },
+    "pass_streak": 0,
+    "resolved": "2026-10-13T16:50:34+08:00"
+  },
+  {
+    "timestamp": "2026-10-13T16:50:34+08:00",
+    "work": "fanguan",
+    "episode": "ep15",
+    "content_sha": "7d3066773764d9be",
+    "audit": {
+      "status": "PASS",
+      "issues": [
+        {
+          "type": "TIMELINE_CONFLICT",
+          "severity": "MINOR",
+          "episode": "ep15",
+          "description": "ep14与ep15均声称为ep13次日晨「赎纸之晨」，ep14已完整呈现赎纸流程并以「明晨新人来点柜」为钩子，ep15却又以「今晨就是他说的那个明晨」开场并继续处理复写联归档，两集时间定位重叠易混淆",
+          "evidence_before": "ep14钩子：明晨新人来点柜，你去抄纸房报到",
+          "evidence_after": "ep15开场：昨儿在新楼……今晨就是他说的那个明晨，话没落空——印落了，纸条赎回来了"
+        }
+      ]
+    },
+    "style": {
+      "words": 1980,
+      "visual_points": 6,
+      "pressure_complete": true,
+      "dialogue_dumps": false,
+      "hook_open": true,
+      "humor_ok": true,
+      "violation": false,
+      "notes": "鞋底纸毛遇蒸汽显印、请假条空栏咬住主审、副联袖中滑出等画面强；甄荟「交了个寂寞」牛七「屏开着呢」泄压到位；三天期限与规矩追溯双钩并行，爽感延伸明确",
+      "ai_taste_ok": true,
+      "ai_taste_notes": "",
+      "prose_alive": true
+    },
+    "pass_streak": 1,
+    "resolved": false
+  },
+  {
+    "timestamp": "2026-10-13T16:25:35+08:00",
     "work": "liufang",
     "episode": "ep15",
-    "content_sha": "9afafd860650b898",
+    "content_sha": "729c5ea90ad56a75",
+    "audit": {
+      "status": "FAIL",
+      "issues": [
+        {
+          "type": "SELF_CONTRADICTION",
+          "severity": "MAJOR",
+          "episode": "ep15",
+          "description": "柳湄袖子状态自相矛盾：前文明确说'袖子空了、回执在封条里躺着'，后文却写'柳湄袖口烫得拿不住，回执滑出来'并被沈砺按住手腕，中间无交接动作解释回执为何又回到袖中。",
+          "evidence_before": "烫圈还在，袖子空了。回执在封条里躺着。后半截不出来，封条我可不敢再开第二回。",
+          "evidence_after": "柳湄袖口烫得拿不住，回执滑出来。沈砺一把按住她手腕，没让纸掉地上。"
+        }
+      ],
+      "style": {
+        "words": 2100,
+        "visual_points": 15,
+        "pressure_complete": true,
+        "dialogue_dumps": false,
+        "hook_open": true,
+        "humor_ok": true,
+        "violation": false,
+        "notes": "压力轴升级清晰：霍泾由数数施压转为掌握证物袋控制权；沈砺以体温焐纸、当场对质歪章反制；铁算盘记账逼霍泾认账两行，爽感延伸且留代价（第四行半角、珠子在缝、袋在霍泾手里）给下一集。文字有立场，铁算盘心疼珠子、柳湄烫圈、沈砺贴骨头焐纸皆为具体意象。钩子含第四行半角、签通知那只手、珠子/袋/骨头三方博弈等可接要素。"
+      }
+    },
+    "style": {
+      "words": 0,
+      "visual_points": 0,
+      "pressure_complete": true,
+      "dialogue_dumps": false,
+      "hook_open": true,
+      "humor_ok": true,
+      "violation": false,
+      "notes": "",
+      "ai_taste_ok": true,
+      "ai_taste_notes": "",
+      "prose_alive": true
+    },
+    "pass_streak": 0,
+    "resolved": "2026-10-13T16:53:32+08:00"
+  },
+  {
+    "timestamp": "2026-10-13T16:26:17+08:00",
+    "work": "liufang",
+    "episode": "ep15",
+    "content_sha": "729c5ea90ad56a75",
+    "audit": {
+      "status": "PASS",
+      "issues": [
+        {
+          "type": "OTHER",
+          "severity": "MINOR",
+          "episode": "ep15",
+          "description": "骨缝暗红印泥显字机制变更：ep12-13确立为算盘珠静电+蓝光拓印/顶出，ep15改为沈砺体温焐化墨迹吐纸，未在文中说明两种机制共存或转换逻辑。",
+          "evidence_before": "静电噼啪一响，骨缝里暗红印泥被顶出来半截（ep13）；珠子磨出的电引着蓝光，往骨缝底那块暗红印泥上一打（ep12）",
+          "evidence_after": "骨缝里暗红印泥被体温一焐，化开半分，门牌后半截往外吐（ep15）"
+        }
+      ]
+    },
+    "style": {
+      "words": 1800,
+      "visual_points": 9,
+      "pressure_complete": true,
+      "dialogue_dumps": false,
+      "hook_open": true,
+      "humor_ok": true,
+      "violation": false,
+      "notes": "机制切换处未显性过渡，但人声、体感、账目拉扯均在场，爽感延伸清晰。",
+      "ai_taste_ok": true,
+      "ai_taste_notes": "",
+      "prose_alive": true
+    },
+    "pass_streak": 1,
+    "resolved": "2026-10-13T16:53:32+08:00"
+  },
+  {
+    "timestamp": "2026-10-13T16:28:18+08:00",
+    "work": "liufang",
+    "episode": "ep15",
+    "content_sha": "729c5ea90ad56a75",
+    "audit": {
+      "status": "PASS",
+      "issues": []
+    },
+    "style": {
+      "words": 1800,
+      "visual_points": 10,
+      "pressure_complete": true,
+      "dialogue_dumps": false,
+      "hook_open": true,
+      "humor_ok": true,
+      "violation": false,
+      "notes": "体温焐字、珠子换纸、歪章咬人等动作极具画面感，多方博弈张力足，钩子留足第四行半角与签名之手两条线。",
+      "ai_taste_ok": true,
+      "ai_taste_notes": "",
+      "prose_alive": true
+    },
+    "pass_streak": 2,
+    "resolved": "2026-10-13T16:53:32+08:00"
+  },
+  {
+    "timestamp": "2026-10-13T16:32:11+08:00",
+    "work": "liufang",
+    "episode": "ep15",
+    "content_sha": "d1878e6216792bee",
+    "audit": {
+      "status": "PASS",
+      "issues": []
+    },
+    "style": {
+      "words": 1476,
+      "visual_points": 6,
+      "pressure_complete": true,
+      "dialogue_dumps": false,
+      "hook_open": true,
+      "humor_ok": true,
+      "violation": false,
+      "notes": "连续性完美衔接ep14，压力轴升级（证物入袋+四行门牌悬而未决），骨头认珠不认数、体温焐印泥等具象动作强，钩子极具体（第四行半角、签通知那只手、珠子在缝里、下回还得拿热乎的换），无AI机械习气，文字活。",
+      "ai_taste_ok": true,
+      "ai_taste_notes": "",
+      "prose_alive": true
+    },
+    "pass_streak": 1,
+    "resolved": "2026-10-13T16:53:32+08:00"
+  },
+  {
+    "timestamp": "2026-10-13T16:53:32+08:00",
+    "work": "liufang",
+    "episode": "ep15",
+    "content_sha": "d1878e6216792bee",
+    "audit": {
+      "status": "PASS",
+      "issues": []
+    },
+    "style": {
+      "words": 2800,
+      "visual_points": 12,
+      "pressure_complete": true,
+      "dialogue_dumps": false,
+      "hook_open": true,
+      "humor_ok": true,
+      "violation": false,
+      "notes": "骨头认珠子不认数、体温焐纸、账本式对白、烫圈与缺珠双重代价同步推进，压力轴从计数对峙升级为证物袋与骨缝剩半行的双重拉扯，钩子第四行门后之手与签通知之人精准接住下一轮。",
+      "ai_taste_ok": true,
+      "ai_taste_notes": "",
+      "prose_alive": true
+    },
+    "pass_streak": 2,
+    "resolved": false
+  },
+  {
+    "timestamp": "2026-10-13T14:21:05+08:00",
+    "work": "tuiqun",
+    "episode": "ep15",
+    "content_sha": "97f5eb809b775df8",
+    "audit": {
+      "status": "FAIL",
+      "issues": [
+        {
+          "type": "CLUE_MISPLACED",
+          "severity": "MAJOR",
+          "episode": "ep15",
+          "description": "裴家伯父位置突变无交代：ep13 末尾他在离港坪岸上（递函、被嘲讽‘下回赶早’），ep15 船已进哑带半程，他却已在船上手持底档全卷、压着船单、欲代签组长。中间无上船动作、无许可交代、核验员 ep13 仅确认沈铭舟上船。",
+          "evidence_before": "裴家伯父从排队人群外走进来，手里托着第十一航次底档全卷...核验员：经办人沈铭舟，晕船也上船。苏令仪：伯父，函留着吧。下回，赶早。",
+          "evidence_after": "伯父那张新函还被船单压着...伯父把底档全卷往船单一拍...伯父代签的那只手，停在半空，笔帽没拔。"
+        }
+      ]
+    },
+    "style": {
+      "words": 2100,
+      "visual_points": 12,
+      "pressure_complete": true,
+      "dialogue_dumps": false,
+      "hook_open": true,
+      "humor_ok": true,
+      "violation": false,
+      "notes": "对白有身份感（裴家算账逻辑、苏令仪嘲讽墨钱、姜迟看沫认路），动作可视化强，钩子留白扎实（组长缺位、页未交、暖灯真假）。裴家伯父上船逻辑跳跃是唯一硬伤。",
+      "ai_taste_ok": true,
+      "ai_taste_notes": "",
+      "prose_alive": true
+    },
+    "pass_streak": 0,
+    "resolved": "2026-10-13T16:55:20+08:00"
+  },
+  {
+    "timestamp": "2026-10-13T14:23:55+08:00",
+    "work": "tuiqun",
+    "episode": "ep15",
+    "content_sha": "97f5eb809b775df8",
+    "audit": {
+      "status": "PASS",
+      "issues": [
+        {
+          "type": "SELF_CONTRADICTION",
+          "severity": "MINOR",
+          "episode": "ep15",
+          "description": "苏令仪「按住姜迟手腕」动作在 ep13 梯口与 ep15 船上重复出现，中间无交代是否为同一连续动作或刻意呼应，易读作连续性疏漏",
+          "evidence_before": "苏令仪按住姜迟的手腕，怀里三卷底册，一页没动（ep13 尾声）",
+          "evidence_after": "苏令仪按住姜迟的手腕，怀里三卷底册，一页没动（ep15 中段）"
+        }
+      ]
+    },
+    "style": {
+      "words": 1800,
+      "visual_points": 10,
+      "pressure_complete": true,
+      "dialogue_dumps": false,
+      "hook_open": true,
+      "humor_ok": true,
+      "violation": false,
+      "notes": "压憋破拉扯完整、画面点密集、钩子留白精准、人味对白无 AI 机械感、暖灯接船/诱船悬念强",
+      "ai_taste_ok": true,
+      "ai_taste_notes": "",
+      "prose_alive": true
+    },
+    "pass_streak": 1,
+    "resolved": "2026-10-13T16:55:20+08:00"
+  },
+  {
+    "timestamp": "2026-10-13T16:55:20+08:00",
+    "work": "tuiqun",
+    "episode": "ep15",
+    "content_sha": "97f5eb809b775df8",
+    "audit": {
+      "status": "PASS",
+      "issues": []
+    },
+    "style": {
+      "words": 1480,
+      "visual_points": 8,
+      "pressure_complete": true,
+      "dialogue_dumps": false,
+      "hook_open": true,
+      "humor_ok": true,
+      "violation": false,
+      "notes": "压-爽-代价链条完整，汗显字/沫认路/笔停半空三个强画面，令仪嘲讽伯父代签一笔活，暖灯诱船悬念留足。",
+      "ai_taste_ok": true,
+      "ai_taste_notes": "",
+      "prose_alive": true
+    },
+    "pass_streak": 2,
+    "resolved": false
+  },
+  {
+    "timestamp": "2026-10-14T09:00:23+08:00",
+    "work": "fanguan",
+    "episode": "ep16",
+    "content_sha": "d6d3d0add3d1373f",
     "audit": {
       "status": "FAIL",
       "issues": [
         {
           "type": "TIMELINE_CONFLICT",
           "severity": "CRITICAL",
-          "episode": "ep14",
-          "description": "换锁器数字直接冲突：ep14 明确写『换锁器红字停在三十上』，ep15 开头写『换锁器红字定在三上』并称『重数的三十个数，头三个数出去』，同一设备同一时刻读数不一致。",
-          "evidence_before": "换锁器红字停在三十上，护送队两个人按着拨轮，拨不下去（ep14 场景行）",
-          "evidence_after": "换锁器红字定在三上：重数的三十个数，头三个数出去，剩下二十七个数被护送队两个人按着拨轮（ep15 场景行+括号动作）"
+          "episode": "ep15",
+          "description": "复写联位置矛盾：ep15结尾主审将复写联锁进四楼柜（\"联进了四楼的柜，柜门咔哒落锁\")，ep16开头柜格却开着且空着（\"押联那格开着，格底一层灰，灰上一个方方的空印子\"),主审又称联\"昨夜随四楼的档装箱，今晨头班上交\"。柜门何时被开、联何时从锁柜转入箱子、谁操作的，全无交代。",
+          "evidence_before": "联进了四楼的柜，柜门咔哒落锁（ep15正文）",
+          "evidence_after": "押联那格开着，格底一层灰……主审：联在箱里——昨夜随四楼的档装箱，今晨头班上交（ep16开头及主审首句）"
         },
         {
-          "type": "BEAT_UNFULFILLED",
-          "severity": "MAJOR",
-          "episode": "ep14",
-          "description": "ep14 结尾铁算盘已『撕开封着抄件另一半的封条，当场拆开』，ep15 开头又写铁算盘『当众撕开封条，把抄件另一半拆了』，同一关键动作重复发生，未衔接上集尾钩子。",
-          "evidence_before": "铁算盘撕开封着抄件另一半的封条，当场拆开——收件人那栏的字迹，和接任通知上的歪章，同一个歪法（ep14 正文倒数第3段）",
-          "evidence_after": "骨头吐出那半行字的当口，铁算盘当众撕开封条，把抄件另一半拆了——那半张就摊在封条边上（ep15 第1个括号动作）"
+          "type": "CHARACTER_INCONSISTENCY",
+          "severity": "CRITICAL",
+          "episode": "ep15",
+          "description": "主审自相矛盾：ep15当众承诺\"三天后，拿纸条和收据来，换联\"，ep16却称联已于\"昨夜\"装箱、\"今晨头班上交\"，三天期限未到先行发货，且拒不兑现换联承诺。",
+          "evidence_before": "三天后，拿纸条和收据来，换联（ep15主审台词）",
+          "evidence_after": "三天到了。联在箱里——昨夜随四楼的档装箱，今晨头班上交（ep16主审首句）"
         },
         {
           "type": "CLUE_MISPLACED",
           "severity": "MAJOR",
-          "episode": "ep14",
-          "description": "柳湄袖子/回执状态断层：ep14 写『回执滑出来半角』在柳湄手边，ep15 写『柳湄把空袖口翻出来给全场看……回执在封条里躺着』，袖子从有回执变空、回执从手边变封条里，中间无交接。",
-          "evidence_before": "柳湄袖口烫得拿不住，回执滑出来半角（ep14 倒数第4段）",
-          "evidence_after": "柳湄把空袖口翻出来给全场看……回执在封条里躺着（ep15 柳湄首句台词）"
+          "episode": "ep15",
+          "description": "四楼柜门状态断层：ep15末尾\"柜门咔哒落了锁\"，ep16伊始\"押联那格开着\"，中间缺失开柜动作、人员、时间，押柜账本（老连\"从柜底抽出\")本应在锁柜内，何时可取未说明。",
+          "evidence_before": "柜门咔哒落了锁（ep15钩子）",
+          "evidence_after": "押联那格开着，格底一层灰……老连从柜底抽出押柜账（ep16开头及中段）"
         },
         {
           "type": "SELF_CONTRADICTION",
           "severity": "MAJOR",
-          "episode": "ep15",
-          "description": "本集内部抄件另一半状态自相矛盾：开头括号动作写『铁算盘当众撕开封条，把抄件另一半拆了——那半张就摊在封条边上』（进行时），后文特写段却写『摊在封条边上的抄件另一半』（已完成态），中间无时间流逝标记。",
-          "evidence_before": "铁算盘当众撕开封条，把抄件另一半拆了——那半张就摊在封条边上（ep15 第1个括号动作）",
-          "evidence_after": "摊在封条边上的抄件另一半，收件人那栏三个字，字字都歪（ep15 【特写】段）"
+          "episode": "ep16",
+          "description": "主审称箱子\"今晨头班上交\"已发往新楼，但押运员仍在门口（\"两个押运的人扶着杠子等\"),甄荟称\"新楼印章室照例不收\"，结尾木箱\"搁回押物那排最里格，封条一点没动\"——箱子根本未离开四楼，主审陈述与现场物理状态冲突。",
+          "evidence_before": "主审：联在箱里——昨夜随四楼的档装箱，今晨头班上交",
+          "evidence_after": "押运员：画押栏空着，这箱我们不推……木箱从柜面过，搁回押物那排最里格，封条一点没动"
         },
         {
           "type": "SELF_CONTRADICTION",
-          "severity": "MAJOR",
-          "episode": "ep15",
-          "description": "铁算盘台词前后打架：先说『后半截，得拿热乎的换』（未换），随后又说『原件这会儿躺在封条里，换都换完了』（已换），同一场连续台词无过渡。",
-          "evidence_before": "后半截，得拿热乎的换（ep15 铁算盘第2句台词）",
-          "evidence_after": "原件这会儿躺在封条里，换都换完了。一颗珠子换一张纸，不亏（ep15 铁算盘第4句台词）"
+          "severity": "MINOR",
+          "episode": "ep16",
+          "description": "代班员老连称\"白天是我……夜里没来\"（ep15/ep16一致），但出箱登记栏外压着半只软底鞋湿印，老连自认\"这印儿是软底的\"，且ep15确立老连穿软底鞋——同一集内人证与物证指向矛盾，虽可作悬念但未在本集给出任一解释。",
+          "evidence_before": "代班员老连：白天是我。抄纸捎带看柜面",
+          "evidence_after": "老连凑近看了一眼：这印儿是软底的，四楼夜里没人穿软底鞋。卢茨：昨夜来装箱的，不止他一个（ep16钩子）"
         }
       ]
     },
     "style": {
-      "words": 980,
-      "visual_points": 11,
+      "words": 920,
+      "visual_points": 12,
       "pressure_complete": true,
-      "dialogue_dumps": true,
+      "dialogue_dumps": false,
       "hook_open": true,
       "humor_ok": true,
       "violation": false,
-      "notes": "关键数字与关键动作与上集硬冲突，内部抄件状态与台词自打架；对白密集（铁算盘连4句、霍泾连2句）存在 dialogue_dumps；钩子留白合格（第四行半角、珠子在缝、袋在霍泾手里），爽文压-爽-代价结构完整。",
+      "notes": "爽感完整：压（主审提前发货/程序拖延）→ 翻（卢茨抓账本/半印/押运员拒运）→ 代价留次（主审拒销账+重核六十天批）。画面点密集，对白带身份，钩子具体（软底鞋印指向第三人）。无AI机械习气。",
+      "ai_taste_ok": true,
+      "ai_taste_notes": "",
+      "prose_alive": true
+    },
+    "pass_streak": 0,
+    "resolved": "2026-10-14T09:30:10+08:00"
+  },
+  {
+    "timestamp": "2026-10-14T09:04:21+08:00",
+    "work": "fanguan",
+    "episode": "ep16",
+    "content_sha": "d6d3d0add3d1373f",
+    "audit": {
+      "status": "PASS",
+      "issues": []
+    },
+    "style": {
+      "words": 1480,
+      "visual_points": 7,
+      "pressure_complete": true,
+      "dialogue_dumps": false,
+      "hook_open": true,
+      "humor_ok": true,
+      "violation": false,
+      "notes": "连续性完好，压力轴升级（跨署调令卡六十天），爽点延伸（空栏连环套+押运员拒运），胜成新压（重核开灶批+鞋印疑云扩大）。文笔活、画面足、钩子实。",
+      "ai_taste_ok": true,
+      "ai_taste_notes": "",
+      "prose_alive": true
+    },
+    "pass_streak": 1,
+    "resolved": "2026-10-14T09:30:10+08:00"
+  },
+  {
+    "timestamp": "2026-10-14T09:04:38+08:00",
+    "work": "fanguan",
+    "episode": "ep16",
+    "content_sha": "d6d3d0add3d1373f",
+    "audit": {
+      "status": "PASS",
+      "issues": []
+    },
+    "style": {
+      "words": 1500,
+      "visual_points": 5,
+      "pressure_complete": true,
+      "dialogue_dumps": false,
+      "hook_open": true,
+      "humor_ok": true,
+      "violation": false,
+      "notes": "连续性完整：三天期限兑现、押柜账与出箱单前后呼应、半印章边与软底鞋印串联旧案；压力轴升级（主审改走跨署调拨、六十天批文悬而未决），爽点落在账本拦箱与押运员拒运，钩子指向夜间装箱的第三人。无AI机械习气，人物口吻稳定。",
+      "ai_taste_ok": true,
+      "ai_taste_notes": "",
+      "prose_alive": true
+    },
+    "pass_streak": 2,
+    "resolved": "2026-10-14T09:30:10+08:00"
+  },
+  {
+    "timestamp": "2026-10-14T09:30:10+08:00",
+    "work": "fanguan",
+    "episode": "ep16",
+    "content_sha": "d6d3d0add3d1373f",
+    "audit": {
+      "status": "PASS",
+      "issues": []
+    },
+    "style": {
+      "words": 1500,
+      "visual_points": 5,
+      "pressure_complete": true,
+      "dialogue_dumps": false,
+      "hook_open": true,
+      "humor_ok": true,
+      "violation": false,
+      "notes": "压力升级为程序围猎，卢茨用账本硬扣流程漏洞，钩子直指装箱之谜",
+      "ai_taste_ok": true,
+      "ai_taste_notes": "",
+      "prose_alive": true
+    },
+    "pass_streak": 3,
+    "resolved": false
+  },
+  {
+    "timestamp": "2026-10-14T09:08:16+08:00",
+    "work": "liufang",
+    "episode": "ep16",
+    "content_sha": "4fb5bc5e06f8bb47",
+    "audit": {
+      "status": "FAIL",
+      "issues": [
+        {
+          "type": "CLUE_MISPLACED",
+          "severity": "MAJOR",
+          "episode": "ep16",
+          "description": "ep15结尾转押令/接任通知已装入证物袋、袋口扎紧、护送队举高；ep16开头霍泾手里直接拿着转押令翻面垫写，中间缺失‘从护送队手中取回证物袋、取出转押令’的动作交代，且钩子仍称证物袋在护送队手里举着，道具位置跳跃。",
+          "evidence_before": "霍泾把接任通知、封条连纸带回执一起装进证物袋，袋口一扎。护送队把证物袋举高（ep15结尾）",
+          "evidence_after": "霍泾把转押令翻过来垫在旁边，笔尖压着那行门牌，抄一行，念一行（ep16开头）；护送队手里那只证物袋还举着，没人放下来（ep16钩子）"
+        }
+      ]
+    },
+    "style": {
+      "words": 1500,
+      "visual_points": 10,
+      "pressure_complete": true,
+      "dialogue_dumps": false,
+      "hook_open": true,
+      "humor_ok": true,
+      "violation": false,
+      "notes": "压力轴：压升级(红字倒计时+架人)、爽延伸(反夺机器熨骨逼出承接人沈)、代价留存(手心烫泡/红字仍走/袋在对手手里)；genre_drift=当场翻回来；角色声纹分明，画面点充足，钩子含第四行后半字/红字倒计时/证物袋归属三重悬念。",
+      "ai_taste_ok": true,
+      "ai_taste_notes": "",
+      "prose_alive": true
+    },
+    "pass_streak": 0,
+    "resolved": "2026-10-14T09:32:28+08:00"
+  },
+  {
+    "timestamp": "2026-10-14T09:11:30+08:00",
+    "work": "liufang",
+    "episode": "ep16",
+    "content_sha": "4fb5bc5e06f8bb47",
+    "audit": {
+      "status": "PASS",
+      "issues": []
+    },
+    "style": {
+      "words": 1050,
+      "visual_points": 7,
+      "pressure_complete": true,
+      "dialogue_dumps": false,
+      "hook_open": true,
+      "humor_ok": true,
+      "violation": false,
+      "notes": "压力轴延续自然：霍泾借地址填单施压→沈砺以换锁器熨骨反制→铁算盘/柳湄双线夹击→沈砺手心起泡为代价，第四行承接人悬而未决、红字倒计时十、证物袋仍在对手手中，钩子具体可接。人称、道具、机制（骨头怕冷不怕热/回执三份联动烫/算盘珠静电/压电发热）全链贯通。铁算盘记账口吻自洽（四笔/两行/统共六行=ep14/15/16各两行）。无违禁词、无内部矛盾、对白有声有色。",
+      "ai_taste_ok": true,
+      "ai_taste_notes": "",
+      "prose_alive": true
+    },
+    "pass_streak": 1,
+    "resolved": "2026-10-14T09:32:28+08:00"
+  },
+  {
+    "timestamp": "2026-10-14T09:32:28+08:00",
+    "work": "liufang",
+    "episode": "ep16",
+    "content_sha": "4fb5bc5e06f8bb47",
+    "audit": {
+      "status": "PASS",
+      "issues": []
+    },
+    "style": {
+      "words": 1650,
+      "visual_points": 7,
+      "pressure_complete": true,
+      "dialogue_dumps": false,
+      "hook_open": true,
+      "humor_ok": true,
+      "violation": false,
+      "notes": "延续ep15体温焐骨高潮，改用换锁器压电热熨骨缝逼出第四行承接人，压力升级为军港封存物移交+加刑，爽感在当场拖延与围观施压，钩子留住承接人全名、红字倒数、手心起泡、证物袋悬而未决四重悬念，节奏紧凑无废笔。",
+      "ai_taste_ok": true,
+      "ai_taste_notes": "",
+      "prose_alive": true
+    },
+    "pass_streak": 2,
+    "resolved": false
+  },
+  {
+    "timestamp": "2026-10-14T09:15:37+08:00",
+    "work": "tingjijia",
+    "episode": "ep16",
+    "content_sha": "97918a5c510387b9",
+    "audit": {
+      "status": "FAIL",
+      "issues": [
+        {
+          "type": "TIMELINE_CONFLICT",
+          "severity": "MAJOR",
+          "episode": "ep15-ep16",
+          "description": "ep15 结尾钩子已描写『换班哨第二声，炉口红光腾起来半人高』作为当下发生动作，ep16 正文开头却写『换班哨还有两刻』、炉口仍在『预热』，同一事件时间点前后矛盾。",
+          "evidence_before": "换班哨第二声，炉口红光腾起来半人高（ep15 钩子括号内）",
+          "evidence_after": "换班哨还有两刻。主官那只手还粘在气闸门的钥匙上……炉坪那头，炉口暗红，预热的热浪把扬尘顶起半人高（ep16 开头）"
+        }
+      ]
+    },
+    "style": {
+      "words": 1350,
+      "visual_points": 29,
+      "pressure_complete": true,
+      "dialogue_dumps": false,
+      "hook_open": true,
+      "humor_ok": true,
+      "violation": false,
+      "notes": "时间线冲突为硬伤，需修正 ep15 钩子或 ep16 开头的哨声/炉口状态；其余事实链闭环扎实，第八码应名、军需官藏舱、登船牌同痕章三重反转完成度高，画面张力足。",
+      "ai_taste_ok": true,
+      "ai_taste_notes": "",
+      "prose_alive": true
+    },
+    "pass_streak": 0,
+    "resolved": "2026-10-14T09:34:23+08:00"
+  },
+  {
+    "timestamp": "2026-10-14T09:21:48+08:00",
+    "work": "tingjijia",
+    "episode": "ep16",
+    "content_sha": "97918a5c510387b9",
+    "audit": {
+      "status": "PASS",
+      "issues": []
+    },
+    "style": {
+      "words": 1850,
+      "visual_points": 8,
+      "pressure_complete": true,
+      "dialogue_dumps": false,
+      "hook_open": true,
+      "humor_ok": true,
+      "violation": false,
+      "notes": "压力升级（主官逼炉+班头场规+军需官露面），爽点延伸（老雷撕单入炉、围观炸锅、登船牌锤死军需官旧底），代价转嫁（第八码最后一格气烧尽、证招数用第二回但换了靶机）、钩子实体化（绿灯抖灭、两枚章对碰、炉子等人）。",
+      "ai_taste_ok": true,
+      "ai_taste_notes": "",
+      "prose_alive": true
+    },
+    "pass_streak": 1,
+    "resolved": "2026-10-14T09:34:23+08:00"
+  },
+  {
+    "timestamp": "2026-10-14T09:27:33+08:00",
+    "work": "tingjijia",
+    "episode": "ep16",
+    "content_sha": "5772c8deadcb6eee",
+    "audit": {
+      "status": "PASS",
+      "issues": []
+    },
+    "style": {
+      "words": 1800,
+      "visual_points": 7,
+      "pressure_complete": true,
+      "dialogue_dumps": false,
+      "hook_open": true,
+      "humor_ok": true,
+      "violation": false,
+      "notes": "连续性完整，压力轴升级（场规+炉子倒计时双重压制），爽点延伸（第八码应名、老雷撕单、军需官暴露、登船牌实锤），代价明确（第八码仅剩一格绿灯用完即灭），钩子精准指向下一集炉子开启前的身份对决。文笔有具体意象（证角硌手、白布缠牌、湿印子），无AI机械习气。",
+      "ai_taste_ok": true,
+      "ai_taste_notes": "",
+      "prose_alive": true
+    },
+    "pass_streak": 1,
+    "resolved": "2026-10-14T09:34:23+08:00"
+  },
+  {
+    "timestamp": "2026-10-14T09:34:23+08:00",
+    "work": "tingjijia",
+    "episode": "ep16",
+    "content_sha": "5772c8deadcb6eee",
+    "audit": {
+      "status": "PASS",
+      "issues": []
+    },
+    "style": {
+      "words": 1600,
+      "visual_points": 12,
+      "pressure_complete": true,
+      "dialogue_dumps": false,
+      "hook_open": true,
+      "humor_ok": true,
+      "violation": false,
+      "notes": "连续性无硬伤，压力轴由争气/章升级为争第八码归属与军需官身份，爽感延伸为围观者倒戈与铁证甩出，下一集压力明确指向军需官三年往事与炉子等待者。文字有立场、对白像人话、画面点充足。",
+      "ai_taste_ok": true,
+      "ai_taste_notes": "",
+      "prose_alive": true
+    },
+    "pass_streak": 2,
+    "resolved": false
+  },
+  {
+    "timestamp": "2026-10-14T08:45:53+08:00",
+    "work": "tuiqun",
+    "episode": "ep16",
+    "content_sha": "df4165225f6deb02",
+    "audit": {
+      "status": "FAIL",
+      "issues": [
+        {
+          "type": "CLUE_MISPLACED",
+          "severity": "CRITICAL",
+          "episode": "ep14",
+          "description": "火漆筒在ep14-15明确卡在离港坪卡槽且扣死未退，ep16却从苏令仪防水袋中抽出同一筒盖印，且正文同时承认\"卡槽里那只空筒还扣死着\"，关键道具同时存在于两地且无交接说明",
+          "evidence_before": "空筒彻底扣死在槽里，不退了...筒没退出槽，还扣死在原处(ep14) / 筒重新扣死(ep15)",
+          "evidence_after": "姜迟从苏令仪怀里的防水袋抽出火漆筒...卡槽里那只空筒还扣死着，没人动它(ep16)"
+        }
+      ]
+    },
+    "style": {
+      "words": 1500,
+      "visual_points": 6,
+      "pressure_complete": true,
+      "dialogue_dumps": false,
+      "hook_open": true,
+      "humor_ok": true,
+      "violation": false,
+      "notes": "印章压湿墨转文书、双联单同纸裁出、灯油尽灭收尾，画面感强，张力足",
+      "ai_taste_ok": true,
+      "ai_taste_notes": "",
+      "prose_alive": true
+    },
+    "pass_streak": 0,
+    "resolved": "2026-10-14T09:37:08+08:00"
+  },
+  {
+    "timestamp": "2026-10-14T08:49:47+08:00",
+    "work": "tuiqun",
+    "episode": "ep16",
+    "content_sha": "dc9decfba054ee32",
+    "audit": {
+      "status": "PASS",
+      "issues": []
+    },
+    "style": {
+      "words": 1900,
+      "visual_points": 13,
+      "pressure_complete": true,
+      "dialogue_dumps": false,
+      "hook_open": true,
+      "humor_ok": true,
+      "violation": false,
+      "notes": "以筒口航灯纹蘸湿墨压印制造甲级文书，化解总署封航令，动作链完整，悬念落在同纸双联裁口上。",
+      "ai_taste_ok": true,
+      "ai_taste_notes": "",
+      "prose_alive": true
+    },
+    "pass_streak": 1,
+    "resolved": "2026-10-14T09:37:08+08:00"
+  },
+  {
+    "timestamp": "2026-10-14T08:52:32+08:00",
+    "work": "tuiqun",
+    "episode": "ep16",
+    "content_sha": "7498afaa8b88e81e",
+    "audit": {
+      "status": "PASS",
+      "issues": []
+    },
+    "style": {
+      "words": 1850,
+      "visual_points": 11,
+      "pressure_complete": true,
+      "dialogue_dumps": false,
+      "hook_open": true,
+      "humor_ok": true,
+      "violation": false,
+      "notes": "强钩强压，印章博弈落笔利落，双联单伏笔回收漂亮，暖灯身份揭示兑现双钩",
+      "ai_taste_ok": true,
+      "ai_taste_notes": "",
+      "prose_alive": true
+    },
+    "pass_streak": 1,
+    "resolved": "2026-10-14T09:37:08+08:00"
+  },
+  {
+    "timestamp": "2026-10-14T09:13:30+08:00",
+    "work": "tuiqun",
+    "episode": "ep16",
+    "content_sha": "dc9decfba054ee32",
+    "audit": {
+      "status": "PASS",
+      "issues": []
+    },
+    "style": {
+      "words": 1600,
+      "visual_points": 11,
+      "pressure_complete": true,
+      "dialogue_dumps": false,
+      "hook_open": true,
+      "humor_ok": true,
+      "violation": false,
+      "notes": "当场用筒口封纹制造甲级件钉船逼庭，爽点落地；文九渊亲临升级压力，双联单同纸裁边埋伏笔；视觉点密集，对白有声有色。",
+      "ai_taste_ok": true,
+      "ai_taste_notes": "",
+      "prose_alive": true
+    },
+    "pass_streak": 1,
+    "resolved": "2026-10-14T09:37:08+08:00"
+  },
+  {
+    "timestamp": "2026-10-14T09:25:21+08:00",
+    "work": "tuiqun",
+    "episode": "ep16",
+    "content_sha": "dc9decfba054ee32",
+    "audit": {
+      "status": "PASS",
+      "issues": []
+    },
+    "style": {
+      "words": 2200,
+      "visual_points": 18,
+      "pressure_complete": true,
+      "dialogue_dumps": false,
+      "hook_open": true,
+      "humor_ok": true,
+      "violation": false,
+      "notes": "ep16 连续性完好：筒口航灯纹作印、甲级件抗扣押、两联单同纸裁切均顺承前文机制；文九渊亲临施压升级、姜迟就地反制、围观工人喊庭、苏令仪泄压到位，爽感密度达标；钩子以实物切口对应揭示署长预谋，半截留白极强。",
+      "ai_taste_ok": true,
+      "ai_taste_notes": "",
+      "prose_alive": true
+    },
+    "pass_streak": 2,
+    "resolved": "2026-10-14T09:37:08+08:00"
+  },
+  {
+    "timestamp": "2026-10-14T09:37:08+08:00",
+    "work": "tuiqun",
+    "episode": "ep16",
+    "content_sha": "dc9decfba054ee32",
+    "audit": {
+      "status": "PASS",
+      "issues": [
+        {
+          "type": "OTHER",
+          "severity": "MINOR",
+          "episode": "ep16",
+          "description": "压力轴记录「七十三艘」船，本集写作「七十三趟」航次，数字单位不一致（艘/趟），虽指代可能不同但易混淆。",
+          "evidence_before": "三天后通了七十三艘（压力轴）",
+          "evidence_after": "跑这条线的七十三趟，一笔勾销（ep16 文九渊台词）"
+        }
+      ]
+    },
+    "style": {
+      "words": 1700,
+      "visual_points": 18,
+      "pressure_complete": true,
+      "dialogue_dumps": false,
+      "hook_open": true,
+      "humor_ok": true,
+      "violation": false,
+      "notes": "甲级件反制极其干净利落，筒口缺口蘸墨压印一笔化解双重围堵，视觉点密集（灯芯缩/湿印随灯闪/袖口裁边），钩子精准指向庭审与印源同源之谜。",
+      "ai_taste_ok": true,
+      "ai_taste_notes": "",
+      "prose_alive": true
+    },
+    "pass_streak": 3,
+    "resolved": false
+  },
+  {
+    "timestamp": "2026-10-14T08:47:52+08:00",
+    "work": "zhenqianjin",
+    "episode": "ep16",
+    "content_sha": "8e1542efdae6be34",
+    "audit": {
+      "status": "PASS",
+      "issues": []
+    },
+    "style": {
+      "words": 2500,
+      "visual_points": 20,
+      "pressure_complete": true,
+      "dialogue_dumps": false,
+      "hook_open": true,
+      "humor_ok": true,
+      "violation": false,
+      "notes": "压力升级(引入护卫/证筒/封场)，爽点延伸(规矩反制/当众开箱/围观者态度逆转)，赢下的名单成下一轮去井底对册的筹码；画面点密集、对白有身份、钩子具体悬念指向井底底册。",
+      "ai_taste_ok": true,
+      "ai_taste_notes": "",
+      "prose_alive": true
+    },
+    "pass_streak": 1,
+    "resolved": "2026-10-14T09:39:56+08:00"
+  },
+  {
+    "timestamp": "2026-10-14T08:51:44+08:00",
+    "work": "zhenqianjin",
+    "episode": "ep16",
+    "content_sha": "8e1542efdae6be34",
+    "audit": {
+      "status": "PASS",
+      "issues": [
+        {
+          "type": "OTHER",
+          "severity": "MINOR",
+          "episode": "ep16",
+          "description": "ep15末尾备用钥匙明确「攥在手里」，ep16全程未交代钥匙去向（是否仍攥、收怀、或用于开箱），道具连续性细节缺失。",
+          "evidence_before": "备用钥匙还攥在手里，油纸拼完即碎，齿形露在外。",
+          "evidence_after": "青梧没拦，指头一下一下敲着押条上的红戳... 青梧松开采购的手，转身把配电箱那半扇门又拉开一点... 青梧把闸一拉到底"
+        }
+      ]
+    },
+    "style": {
+      "words": 1500,
+      "visual_points": 12,
+      "pressure_complete": true,
+      "dialogue_dumps": false,
+      "hook_open": true,
+      "humor_ok": true,
+      "violation": false,
+      "notes": "压力升级到官方移交，爽点在拉闸弹箱当场取证，钩子精准指向井底底册对名。",
+      "ai_taste_ok": true,
+      "ai_taste_notes": "",
+      "prose_alive": true
+    },
+    "pass_streak": 2,
+    "resolved": "2026-10-14T09:39:56+08:00"
+  },
+  {
+    "timestamp": "2026-10-14T08:53:35+08:00",
+    "work": "zhenqianjin",
+    "episode": "ep16",
+    "content_sha": "57bd942a90f16f92",
+    "audit": {
+      "status": "PASS",
+      "issues": []
+    },
+    "style": {
+      "words": 1900,
+      "visual_points": 18,
+      "pressure_complete": true,
+      "dialogue_dumps": false,
+      "hook_open": true,
+      "humor_ok": true,
+      "violation": false,
+      "notes": "压力升级（护卫/硬截止/认领条），爽文式翻盘（拉闸开全排箱、当众作废认领条、夺走蜡纸包），围观者态度翻转，赢下的单子变成下井对底册的新筹码；画面点密集，对白有声有态，钩子具体可接。",
+      "ai_taste_ok": true,
+      "ai_taste_notes": "",
+      "prose_alive": true
+    },
+    "pass_streak": 1,
+    "resolved": "2026-10-14T09:39:56+08:00"
+  },
+  {
+    "timestamp": "2026-10-14T09:18:06+08:00",
+    "work": "zhenqianjin",
+    "episode": "ep16",
+    "content_sha": "57bd942a90f16f92",
+    "audit": {
+      "status": "PASS",
+      "issues": []
+    },
+    "style": {
+      "words": 980,
+      "visual_points": 22,
+      "pressure_complete": true,
+      "dialogue_dumps": false,
+      "hook_open": true,
+      "humor_ok": true,
+      "violation": false,
+      "notes": "压-爽-代价链条完整，拉闸弹箱一气呵成，认领条当场作废，围观矿工倒戈，令仪噗笑解压，半张手环单进怀贴黑牌，护卫终端报待复，井口亮井底黑，下一集井底对底册钩子扎实。",
+      "ai_taste_ok": true,
+      "ai_taste_notes": "",
+      "prose_alive": true
+    },
+    "pass_streak": 2,
+    "resolved": "2026-10-14T09:39:56+08:00"
+  },
+  {
+    "timestamp": "2026-10-14T09:28:12+08:00",
+    "work": "zhenqianjin",
+    "episode": "ep16",
+    "content_sha": "57bd942a90f16f92",
+    "audit": {
+      "status": "PASS",
+      "issues": []
+    },
+    "style": {
+      "words": 1800,
+      "visual_points": 8,
+      "pressure_complete": true,
+      "dialogue_dumps": false,
+      "hook_open": true,
+      "humor_ok": true,
+      "violation": false,
+      "notes": "井口断电弹箱一招鲜，矿规变攻势；采购四连跪、兆麟笔不悬、令仪捧哏，节奏紧凑有笑点；钩子直指井底底册，下集必下井。",
+      "ai_taste_ok": true,
+      "ai_taste_notes": "",
+      "prose_alive": true
+    },
+    "pass_streak": 3,
+    "resolved": "2026-10-14T09:39:56+08:00"
+  },
+  {
+    "timestamp": "2026-10-14T09:39:56+08:00",
+    "work": "zhenqianjin",
+    "episode": "ep16",
+    "content_sha": "57bd942a90f16f92",
+    "audit": {
+      "status": "PASS",
+      "issues": []
+    },
+    "style": {
+      "words": 1800,
+      "visual_points": 12,
+      "pressure_complete": true,
+      "dialogue_dumps": false,
+      "hook_open": true,
+      "humor_ok": true,
+      "violation": false,
+      "notes": "压憋破节奏紧凑，断电弹箱呼应早埋规矩，蜡纸包盐粒细节与前文汗盐显影呼应，钩子精准指向井底底册对证。",
+      "ai_taste_ok": true,
+      "ai_taste_notes": "",
+      "prose_alive": true
+    },
+    "pass_streak": 4,
+    "resolved": false
+  },
+  {
+    "timestamp": "2026-10-15T13:48:43+08:00",
+    "work": "fanguan",
+    "episode": "ep17",
+    "content_sha": "11fbbb3cb55927e8",
+    "audit": {
+      "status": "PASS",
+      "issues": []
+    },
+    "style": {
+      "words": 1380,
+      "visual_points": 11,
+      "pressure_complete": true,
+      "dialogue_dumps": false,
+      "hook_open": true,
+      "humor_ok": true,
+      "violation": false,
+      "notes": "对手升级为供应署巡查专员、赌注锁定第六十天开灶批与灶位、卢茨当场按住牌子顶回、甄荟精准击中转押栏空栏、专员被迫给三日宽限并预告明天升级；钩子双线并行（三米线被挪+四楼软底鞋印关联），压力轴完整闭环，无事实冲突、无人称错误、无结构缺项。",
+      "ai_taste_ok": true,
+      "ai_taste_notes": "",
+      "prose_alive": true
+    },
+    "pass_streak": 1,
+    "resolved": "2026-10-15T14:51:30+08:00"
+  },
+  {
+    "timestamp": "2026-10-15T14:51:30+08:00",
+    "work": "fanguan",
+    "episode": "ep17",
+    "content_sha": "11fbbb3cb55927e8",
+    "audit": {
+      "status": "PASS",
+      "issues": []
+    },
+    "style": {
+      "words": 980,
+      "visual_points": 5,
+      "pressure_complete": true,
+      "dialogue_dumps": false,
+      "hook_open": true,
+      "humor_ok": true,
+      "violation": false,
+      "notes": "空栏翻盘三连完整，牌火皆保代价转三日会签与挪线悬念，画面口吻接前文。",
+      "ai_taste_ok": true,
+      "ai_taste_notes": "",
+      "prose_alive": true
+    },
+    "pass_streak": 2,
+    "resolved": false
+  },
+  {
+    "timestamp": "2026-10-15T13:53:26+08:00",
+    "work": "liufang",
+    "episode": "ep17",
+    "content_sha": "b9edc62d4ce9c308",
+    "audit": {
+      "status": "FAIL",
+      "issues": [
+        {
+          "type": "CLUE_MISPLACED",
+          "severity": "MAJOR",
+          "episode": "ep17",
+          "description": "柳湄的回执在ep16结尾已被霍泾装进证物袋扎口（ep16正文：\"霍泾把接任通知、封条连纸带回执一起装进证物袋，袋口一扎\")，新集开头证物袋落在舱盖上，但柳湄却\"在袖口下垫着回执写\"，道具位置直接冲突，中间无交接说明。",
+          "evidence_before": "霍泾把接任通知、封条连纸带回执一起装进证物袋，袋口一扎。（ep16正文）",
+          "evidence_after": "柳湄（在袖口下垫着回执写）：架人？我这儿一行一行记着呢——（ep17正文）"
+        },
+        {
+          "type": "EMPTY_HOOK",
+          "severity": "MINOR",
+          "episode": "ep17",
+          "description": "新集钩子与ep16钩子完全逐字重复（含标点），核心悬念\"凭（ ）取件\"零推进，无新增信息或反转，结构上等于原地踏步。",
+          "evidence_before": "第四行末尾那半格字，借着顶灯露出来一半：凭（ ）取件。括号里那个字泡烂了，认不出。铁算盘捏着缺珠那处空档，半天才说：上头让你凭东西取，你凭哪一件——明儿上船之前，把这句话想清楚。（ep16钩子）",
+          "evidence_after": "第四行末尾那半格字，借着顶灯露出来一半：凭（ ）取件。括号里那个字泡烂了，认不出。沈砺把手心的水泡在裤缝上按了按：承接人是我，签字也是我，可凭东西取件，我连块能掏出来的牌子都没有。铁算盘捏着缺珠那处空档，半天才说：上头让你凭东西取，你凭哪一件——明儿上船之前，把这句话想清楚。（ep17钩子）"
+        }
+      ]
+    },
+    "style": {
+      "words": 1850,
+      "visual_points": 9,
+      "pressure_complete": true,
+      "dialogue_dumps": false,
+      "hook_open": true,
+      "humor_ok": true,
+      "violation": false,
+      "notes": "翻盘动作完整（逼出完整承接人名、军港监交员被迫认单），压力升级引入军港方与时间限制，代价留存（红字异常停二、袖口烫、凭证缺失）；但回执位置硬冲突、钩子原文复用扣分。",
+      "ai_taste_ok": true,
+      "ai_taste_notes": "",
+      "prose_alive": true
+    },
+    "pass_streak": 0,
+    "resolved": "2026-10-15T14:54:30+08:00"
+  },
+  {
+    "timestamp": "2026-10-15T14:07:28+08:00",
+    "work": "liufang",
+    "episode": "ep17",
+    "content_sha": "3c7c16f573b25c16",
+    "audit": {
+      "status": "PASS",
+      "issues": []
+    },
+    "style": {
+      "words": 1180,
+      "visual_points": 6,
+      "pressure_complete": true,
+      "dialogue_dumps": false,
+      "hook_open": true,
+      "humor_ok": true,
+      "violation": false,
+      "notes": "承接人翻盘干净，红字自跳留异象，钩子「凭（ ）取件」接得住。",
+      "ai_taste_ok": true,
+      "ai_taste_notes": "",
+      "prose_alive": true
+    },
+    "pass_streak": 1,
+    "resolved": "2026-10-15T14:54:30+08:00"
+  },
+  {
+    "timestamp": "2026-10-15T14:54:30+08:00",
+    "work": "liufang",
+    "episode": "ep17",
+    "content_sha": "3c7c16f573b25c16",
+    "audit": {
+      "status": "PASS",
+      "issues": []
+    },
+    "style": {
+      "words": 1850,
+      "visual_points": 7,
+      "pressure_complete": true,
+      "dialogue_dumps": false,
+      "hook_open": true,
+      "humor_ok": true,
+      "violation": false,
+      "notes": "ep17 完成度高：军港到场压迫升级、承接人身份当场翻盘、红字异跳与袖口同瞬烫构成双异象、三个吊点卡住吊运、钩子直指「凭（ ）取件」与明日第七桩点交。人物口吻、道具位置、红字计数、伤势延续均与 ep15-16 无冲突。",
+      "ai_taste_ok": true,
+      "ai_taste_notes": "",
+      "prose_alive": true
+    },
+    "pass_streak": 2,
+    "resolved": false
+  },
+  {
+    "timestamp": "2026-10-15T13:56:16+08:00",
+    "work": "tingjijia",
+    "episode": "ep17",
+    "content_sha": "7a41e4d6b77f1a1e",
+    "audit": {
+      "status": "PASS",
+      "issues": []
+    },
+    "style": {
+      "words": 1800,
+      "visual_points": 10,
+      "pressure_complete": true,
+      "dialogue_dumps": false,
+      "hook_open": true,
+      "humor_ok": true,
+      "violation": false,
+      "notes": "气格转移的「搬家」意象极强，老雷掰指头数规矩、阿柯物理接管子、绿格流动全程可视；主官笔墨未干、军需官颤抖盖章、登船牌砸单压印泥，动作链条紧凑；钩子直指天亮军务处到场与号码磨除真凶，悬念具体可接。",
+      "ai_taste_ok": true,
+      "ai_taste_notes": "",
+      "prose_alive": true
+    },
+    "pass_streak": 1,
+    "resolved": "2026-10-15T15:00:55+08:00"
+  },
+  {
+    "timestamp": "2026-10-15T15:00:55+08:00",
+    "work": "tingjijia",
+    "episode": "ep17",
+    "content_sha": "7a41e4d6b77f1a1e",
+    "audit": {
+      "status": "PASS",
+      "issues": []
+    },
+    "style": {
+      "words": 1200,
+      "visual_points": 5,
+      "pressure_complete": true,
+      "dialogue_dumps": false,
+      "hook_open": true,
+      "humor_ok": true,
+      "violation": false,
+      "notes": "借气翻盘干净利落，号自亮自灭留悬念，场工口语增色，压力轴升级到位",
+      "ai_taste_ok": true,
+      "ai_taste_notes": "",
+      "prose_alive": true
+    },
+    "pass_streak": 2,
+    "resolved": false
+  },
+  {
+    "timestamp": "2026-10-15T14:18:18+08:00",
+    "work": "tuiqun",
+    "episode": "ep17",
+    "content_sha": "88a7ef23606f74c3",
+    "audit": {
+      "status": "PASS",
+      "issues": []
+    },
+    "style": {
+      "words": 1250,
+      "visual_points": 10,
+      "pressure_complete": true,
+      "dialogue_dumps": false,
+      "hook_open": true,
+      "humor_ok": true,
+      "violation": false,
+      "notes": "压→承→翻→代价完整闭环；姜迟以规则反制规则当场翻盘，围观者态度转变可见；三日庭期与沫异象双重悬念留足下集张力；零 AI 味、文字有立场有温度。",
+      "ai_taste_ok": true,
+      "ai_taste_notes": "",
+      "prose_alive": true
+    },
+    "pass_streak": 1,
+    "resolved": "2026-10-15T15:03:02+08:00"
+  },
+  {
+    "timestamp": "2026-10-15T15:03:02+08:00",
+    "work": "tuiqun",
+    "episode": "ep17",
+    "content_sha": "88a7ef23606f74c3",
+    "audit": {
+      "status": "PASS",
+      "issues": []
+    },
+    "style": {
+      "words": 1800,
+      "visual_points": 8,
+      "pressure_complete": true,
+      "dialogue_dumps": false,
+      "hook_open": true,
+      "humor_ok": true,
+      "violation": false,
+      "notes": "接上集无缝衔接，姜迟以令反令把署长袖口裁边强行纳入封存件，压力轴完成「压→翻→代价」闭环；画面点密集（探照/铜袋/三步尺/筒槽/单背/袖口/封存袋/黑水沫），钩子含庭期倒计时与沫向谜题，对白有身份无说教。",
+      "ai_taste_ok": true,
+      "ai_taste_notes": "",
+      "prose_alive": true
+    },
+    "pass_streak": 2,
+    "resolved": false
+  },
+  {
+    "timestamp": "2026-10-15T15:06:32+08:00",
+    "work": "zhenqianjin",
+    "episode": "ep17",
+    "content_sha": "e2f5815482dc4c7d",
+    "audit": {
+      "status": "FAIL",
+      "issues": [
+        {
+          "type": "TIMELINE_CONFLICT",
+          "severity": "MAJOR",
+          "episode": "ep16",
+          "description": "ep16结尾钩子明确写『明儿拿井底底册来对』（次日对账），且正文末尾青梧已在井口钟响时『贴梯往上爬』；ep17却设定在『黎明前·井口移交前的空当』，青梧说『趁移交前这一个钟头，对完就上去』，两集时间顺序倒置，且ep16承诺的『明儿』对账变成同夜提前完成，打破跨集钩子兑现。",
+          "evidence_before": "明儿拿井底底册来对……她贴梯往上爬，爬到半途，梯口那盏轨道灯灭了",
+          "evidence_after": "黎明前·井口移交前的空当……趁移交前这一个钟头，对完就上去"
+        },
+        {
+          "type": "BEAT_UNFULFILLED",
+          "severity": "MAJOR",
+          "episode": "ep16",
+          "description": "ep16钩子将『底册对单子』作为下一集（明儿）的核心动作悬念，ep17虽完成了对账动作，但时间点被压缩到同夜移交前，导致『明儿』这一时间承诺落空，跨集节奏被压扁。",
+          "evidence_before": "明儿拿井底底册来对",
+          "evidence_after": "趁移交前这一个钟头，对完就上去"
+        }
+      ]
+    },
+    "style": {
+      "words": 1680,
+      "visual_points": 7,
+      "pressure_complete": true,
+      "dialogue_dumps": false,
+      "hook_open": true,
+      "humor_ok": true,
+      "violation": false,
+      "notes": "对账高潮扎实、异象（底册自翻、手环影子）入场自然、令仪嘲讽与老工压阵都有声味；唯结构上跨集时间倒置削弱了ep16钩子张力。",
+      "ai_taste_ok": true,
+      "ai_taste_notes": "",
+      "prose_alive": true
+    },
+    "pass_streak": 0,
+    "resolved": "2026-10-15T15:11:09+08:00"
+  },
+  {
+    "timestamp": "2026-10-15T15:11:09+08:00",
+    "work": "zhenqianjin",
+    "episode": "ep17",
+    "content_sha": "e2f5815482dc4c7d",
+    "audit": {
+      "status": "PASS",
+      "issues": []
+    },
+    "style": {
+      "words": 1800,
+      "visual_points": 7,
+      "pressure_complete": true,
+      "dialogue_dumps": false,
+      "hook_open": true,
+      "humor_ok": true,
+      "violation": false,
+      "notes": "本集为翻盘型爽文节奏：当场对账揭示签发人苏兆麟、空格对空格、底册自翻异象、铅笔线立证、灯灭悬念；压力轴延伸为档案异象与物理威胁双线。",
+      "ai_taste_ok": true,
+      "ai_taste_notes": "",
+      "prose_alive": true
+    },
+    "pass_streak": 1,
+    "resolved": false
+  },
+  {
+    "timestamp": "2026-10-16T08:35:25+08:00",
+    "work": "fanguan",
+    "episode": "ep18",
+    "content_sha": "29cc15fa01ab5b7b",
+    "audit": {
+      "status": "PASS",
+      "issues": [
+        {
+          "type": "OTHER",
+          "severity": "MINOR",
+          "episode": "ep18",
+          "description": "压力轴明确要求下一轮对手须为「四回灭灯的值班人」或「四楼眉批主人」，本集引入的新对手霍秉为「新楼重核官」，虽属换人换层级，但未命中压力轴点名的两个具体角色，属轻微偏离。",
+          "evidence_before": "压力轴：接下来必须不同的：对手要换人或换层级：四回灭灯的值班人、四楼眉批主人，不能再是又一份底册或又一条眉批。",
+          "evidence_after": "新楼重核官霍秉：新楼重核官，霍秉。第六十天开灶批，今儿重核。"
+        }
+      ]
+    },
+    "style": {
+      "words": 2800,
+      "visual_points": 9,
+      "pressure_complete": true,
+      "dialogue_dumps": false,
+      "hook_open": true,
+      "humor_ok": true,
+      "violation": false,
+      "notes": "翻盘节奏利落，灰烬鉴识成爽点，回放钩子悬念具体；口语感强，AI 味极轻。",
+      "ai_taste_ok": true,
+      "ai_taste_notes": "",
+      "prose_alive": true
+    },
+    "pass_streak": 1,
+    "resolved": "2026-10-16T08:56:33+08:00"
+  },
+  {
+    "timestamp": "2026-10-16T08:56:33+08:00",
+    "work": "fanguan",
+    "episode": "ep18",
+    "content_sha": "29cc15fa01ab5b7b",
+    "audit": {
+      "status": "PASS",
+      "issues": []
+    },
+    "style": {
+      "words": 2600,
+      "visual_points": 13,
+      "pressure_complete": true,
+      "dialogue_dumps": false,
+      "hook_open": true,
+      "humor_ok": true,
+      "violation": false,
+      "notes": "以漆料溯源反制越线单，现场翻盘利落；软底鞋跨集串联四楼与灶台，钩子悬念具体且可接。",
+      "ai_taste_ok": true,
+      "ai_taste_notes": "",
+      "prose_alive": true
+    },
+    "pass_streak": 2,
+    "resolved": false
+  },
+  {
+    "timestamp": "2026-10-16T08:38:23+08:00",
+    "work": "liufang",
+    "episode": "ep18",
+    "content_sha": "858864c05b8245d4",
+    "audit": {
+      "status": "PASS",
+      "issues": [
+        {
+          "type": "CLUE_MISPLACED",
+          "severity": "MINOR",
+          "episode": "ep18",
+          "description": "军港监交员手中的移交单/点交单，ep17在军港监交员手里，ep18开场守桩人直接捏着那张单子看，中间无交接动作或说明。",
+          "evidence_before": "军港监交员（把纸接到灯下看）：承接人沈砺，监交物资署——那收货章得他盖。",
+          "evidence_after": "桩区守桩人（捏着那张单子看了两遍）：单上写着你。守则上没写着让F级踩桩。"
+        }
+      ]
+    },
+    "style": {
+      "words": 2100,
+      "visual_points": 15,
+      "pressure_complete": true,
+      "dialogue_dumps": false,
+      "hook_open": true,
+      "humor_ok": true,
+      "violation": false,
+      "notes": "沈砺敲桩验空、铁算盘算账关联SK钢材，翻盘干净利落；钩子悬停与桩号SK双重悬念强，代价留到都尉令与下一集。",
+      "ai_taste_ok": true,
+      "ai_taste_notes": "",
+      "prose_alive": true
+    },
+    "pass_streak": 1,
+    "resolved": "2026-10-16T09:00:06+08:00"
+  },
+  {
+    "timestamp": "2026-10-16T09:00:06+08:00",
+    "work": "liufang",
+    "episode": "ep18",
+    "content_sha": "858864c05b8245d4",
+    "audit": {
+      "status": "PASS",
+      "issues": [
+        {
+          "type": "CLUE_MISPLACED",
+          "severity": "MINOR",
+          "episode": "ep18",
+          "description": "柳湄袖口状态描述易歧义：ep17 确立「袖口那圈暗红」，ep18 写「把空袖口翻出来半寸」，未明示是翻出监抄纸还是袖口本身无物，极易误读为伤势/道具消失。",
+          "evidence_before": "柳湄袖口那圈暗红烫了一下，她嘶地一缩手（ep17）",
+          "evidence_after": "柳湄（把空袖口翻出来半寸）：架人？我这儿一行一行记着呢（ep18）"
+        },
+        {
+          "type": "CLUE_MISPLACED",
+          "severity": "MINOR",
+          "episode": "ep18",
+          "description": "铁算盘算盘 ep14 确立「缺一珠」（珠楔吐纸代价），ep18 写「拨着算盘，珠子越拨越快」，未交代缺珠后如何仍能高速拨动，道具状态连续性存疑。",
+          "evidence_before": "代价算盘缺一珠（ep14 事实表）",
+          "evidence_after": "铁算盘（拨着算盘，珠子越拨越快）：我算一笔（ep18）"
+        },
+        {
+          "type": "CLUE_MISPLACED",
+          "severity": "MINOR",
+          "episode": "ep18",
+          "description": "换锁器 ep17 末尾在沈砺手中「红字卡在二上」，ep18 全集未提换锁器去向（沈砺敲桩、按裤缝均双手空置），关键道具无交接说明。",
+          "evidence_before": "沈砺把手心的水泡在裤缝上按了按……换锁器红字卡在二上（ep17 尾声）",
+          "evidence_after": "屈起指节在桩身上敲了三下……把手心在裤缝上按了按（ep18 无换锁器踪迹）"
+        }
+      ]
+    },
+    "style": {
+      "words": 1200,
+      "visual_points": 9,
+      "pressure_complete": true,
+      "dialogue_dumps": false,
+      "hook_open": true,
+      "humor_ok": true,
+      "violation": false,
+      "notes": "翻盘爽感完整：拦人→旧例→当场敲桩验空→算账对上→围观者态度反转→诡异空钩→SK号钢关联，压力升级且代价留下一集。",
+      "ai_taste_ok": true,
+      "ai_taste_notes": "",
+      "prose_alive": true
+    },
+    "pass_streak": 2,
+    "resolved": false
+  },
+  {
+    "timestamp": "2026-10-16T08:40:20+08:00",
+    "work": "tingjijia",
+    "episode": "ep18",
+    "content_sha": "5a65f71ed3215461",
+    "audit": {
+      "status": "PASS",
+      "issues": []
+    },
+    "style": {
+      "words": 1800,
+      "visual_points": 9,
+      "pressure_complete": true,
+      "dialogue_dumps": false,
+      "hook_open": true,
+      "humor_ok": true,
+      "violation": false,
+      "notes": "压力升级到军务处封存令，卓砚当场逼出第八码自报编号、老雷见证造册、扣下登船牌、第七码吐出机务长名牌且磨痕同源，翻盘完整、代价明确（三步禁令+回帝星候审），钩子扣紧同一只手跨三年两地。",
+      "ai_taste_ok": true,
+      "ai_taste_notes": "",
+      "prose_alive": true
+    },
+    "pass_streak": 1,
+    "resolved": "2026-10-16T09:02:52+08:00"
+  },
+  {
+    "timestamp": "2026-10-16T09:02:52+08:00",
+    "work": "tingjijia",
+    "episode": "ep18",
+    "content_sha": "5a65f71ed3215461",
+    "audit": {
+      "status": "PASS",
+      "issues": [
+        {
+          "type": "CLUE_MISPLACED",
+          "severity": "MINOR",
+          "episode": "ep18",
+          "description": "第八码在ep17已将仅剩一格生保气通过验气管转给第七码，随后整台黑回去（屏黑、气归零）；ep18天亮时卓砚喊“报号”，第八码黑屏却自行亮起TY-L-08。无电源状态下屏幕自亮、自报编号，与前文确立的“气归零即彻底熄火”设定冲突，属于异象而非硬错误，但需在后续集给出机理暗示。",
+          "evidence_before": "第八码整台黑回去，白布角被风掀起一点又落下（ep17结尾）",
+          "evidence_after": "第八码整台黑着的屏，自己亮了。TY-L-08 四个字符一个一个浮上来（ep18正文）"
+        }
+      ]
+    },
+    "style": {
+      "words": 1100,
+      "visual_points": 10,
+      "pressure_complete": true,
+      "dialogue_dumps": false,
+      "hook_open": true,
+      "humor_ok": true,
+      "violation": false,
+      "notes": "压力轴升级：军务处清账官以封存令压制场规，卓砚以造册、自报号、证人手印、扣留登船牌四招翻盘，代价是封存期禁近三步、人机分离回帝星候审；第八码无电自亮屏属异象，强化磨号者悬念；画面点密集、对白带身份、钩子含实体线索。",
+      "ai_taste_ok": true,
+      "ai_taste_notes": "",
+      "prose_alive": true
+    },
+    "pass_streak": 2,
+    "resolved": false
+  },
+  {
+    "timestamp": "2026-10-16T08:46:49+08:00",
+    "work": "tuiqun",
+    "episode": "ep18",
+    "content_sha": "a0f4ac1f1e10a7ba",
+    "audit": {
+      "status": "PASS",
+      "issues": []
+    },
+    "style": {
+      "words": 1432,
+      "visual_points": 25,
+      "pressure_complete": true,
+      "dialogue_dumps": false,
+      "hook_open": true,
+      "humor_ok": true,
+      "violation": false,
+      "notes": "翻盘爽感强，物理对抗与规则博弈并进，钩子悬念具体指向戊九号航标之谜",
+      "ai_taste_ok": true,
+      "ai_taste_notes": "",
+      "prose_alive": true
+    },
+    "pass_streak": 1,
+    "resolved": "2026-10-16T09:06:10+08:00"
+  },
+  {
+    "timestamp": "2026-10-16T09:06:10+08:00",
+    "work": "tuiqun",
+    "episode": "ep18",
+    "content_sha": "a0f4ac1f1e10a7ba",
+    "audit": {
+      "status": "PASS",
+      "issues": []
+    },
+    "style": {
+      "words": 1800,
+      "visual_points": 12,
+      "pressure_complete": true,
+      "dialogue_dumps": false,
+      "hook_open": true,
+      "humor_ok": true,
+      "violation": false,
+      "notes": "爽文引擎转得顺：压力升级（总署押运+裴家强拖）→ 姜迟反向开船进死路→ 当场验出水下热源/戊九号航标→ 拖轮缆崩断/总署艇退避→ 代价落下一集（劫档罪名+庭期赶不上+未知水域）。视觉点密、钩子硬、苏令仪账房口吻解压到位、无AI机械味。",
+      "ai_taste_ok": true,
+      "ai_taste_notes": "",
+      "prose_alive": true
+    },
+    "pass_streak": 2,
+    "resolved": false
+  },
+  {
+    "timestamp": "2026-10-16T08:52:05+08:00",
+    "work": "zhenqianjin",
+    "episode": "ep18",
+    "content_sha": "28ed37d4849bfadd",
+    "audit": {
+      "status": "PASS",
+      "issues": []
+    },
+    "style": {
+      "words": 2100,
+      "visual_points": 12,
+      "pressure_complete": true,
+      "dialogue_dumps": false,
+      "hook_open": true,
+      "humor_ok": true,
+      "violation": false,
+      "notes": "翻盘节奏紧凑，井口井底双场景切换流畅，红灯异象钩子强，老工/令仪嘴炮解压到位。",
+      "ai_taste_ok": true,
+      "ai_taste_notes": "",
+      "prose_alive": true
+    },
+    "pass_streak": 1,
+    "resolved": "2026-10-16T09:20:40+08:00"
+  },
+  {
+    "timestamp": "2026-10-16T09:20:40+08:00",
+    "work": "zhenqianjin",
+    "episode": "ep18",
+    "content_sha": "28ed37d4849bfadd",
+    "audit": {
+      "status": "PASS",
+      "issues": []
+    },
+    "style": {
+      "words": 758,
+      "visual_points": 7,
+      "pressure_complete": true,
+      "dialogue_dumps": false,
+      "hook_open": true,
+      "humor_ok": true,
+      "violation": false,
+      "notes": "标准翻盘：铅笔线对齐+夹层手环当场入册，移交暂停；钩子红灯升井延续ep17轨道灯异象，伏笔兑现且新悬念具体可接。",
+      "ai_taste_ok": true,
+      "ai_taste_notes": "",
+      "prose_alive": true
+    },
+    "pass_streak": 2,
+    "resolved": false
+  },
+  {
+    "timestamp": "2026-10-16T10:41:15+08:00",
+    "work": "test_work",
+    "episode": "ep99",
+    "content_sha": "3d8536ae20321b7b",
+    "audit": {
+      "status": "FAIL",
+      "issues": [
+        {
+          "type": "TIMELINE_CONFLICT",
+          "severity": "CRITICAL",
+          "episode": "ep03",
+          "description": "ep02 设定在星狱物资署（白天），ep03 却在同一天夜里出现在帝星老宅，星狱到帝星需穿梭航班 6 小时且需通行码，新集完全缺失移动/审批/穿梭桥段。新集自带的钩子明文承认该矛盾。",
+          "evidence_before": "场景：星狱 · 物资署兑换窗口 · 日 内",
+          "evidence_after": "场景：帝星 · 沈家老宅 · 夜 内 ... 钩子：ep02 还在星狱物资署（白天），ep03 却在同一天夜里出现在帝星老宅，星狱到帝星需穿梭航班 6 小时且需通行码，无任何移动/审批/穿梭桥段。"
+        },
+        {
+          "type": "EMPTY_HOOK",
+          "severity": "MAJOR",
+          "episode": "ep03",
+          "description": "结尾钩子不是下一集可接住的悬念/冲突/反转，而是对本集与上集时间线矛盾的元叙事吐槽，无实体/线索/倒计时/选择等可接要素。",
+          "evidence_before": "沈崇放下笔：好，今晚就查。",
+          "evidence_after": "钩子：ep02 还在星狱物资署（白天），ep03 却在同一天夜里出现在帝星老宅，星狱到帝星需穿梭航班 6 小时且需通行码，无任何移动/审批/穿梭桥段。"
+        }
+      ]
+    },
+    "style": {
+      "words": 120,
+      "visual_points": 2,
+      "pressure_complete": false,
+      "dialogue_dumps": false,
+      "hook_open": false,
+      "humor_ok": false,
+      "violation": false,
+      "notes": "仅两个画面点（书房暖光/端茶/放笔），压憋破缺失（大哥秒答无拉扯），钩子反向指向上集错误而非下集悬念，全篇平铺直叙无异象无爽感。",
       "ai_taste_ok": true,
       "ai_taste_notes": "",
       "prose_alive": true
     },
     "pass_streak": 0
+  },
+  {
+    "timestamp": "2026-10-17T12:10:15+08:00",
+    "work": "fanguan",
+    "episode": "ep19",
+    "content_sha": "b9aad68e52a7978b",
+    "audit": {
+      "status": "PASS",
+      "issues": []
+    },
+    "style": {
+      "words": 1900,
+      "visual_points": 9,
+      "pressure_complete": true,
+      "dialogue_dumps": false,
+      "hook_open": true,
+      "humor_ok": true,
+      "violation": false,
+      "notes": "压力轴升级换人(采购课谭九如)、筹码变(重划线/记名单)、爽点延伸(规则反制/歪线反制/顾冬配合/押名单/许诺查灰二场)、代价留下轮(会签剩一日/旧漆线自爬/鞋未现)；异象在场(线自己爬)；结构完整、对白活、画面点足、钩子留白有实体反转。",
+      "ai_taste_ok": true,
+      "ai_taste_notes": "",
+      "prose_alive": true
+    },
+    "pass_streak": 1,
+    "resolved": false
+  },
+  {
+    "timestamp": "2026-10-17T12:30:04+08:00",
+    "work": "liufang",
+    "episode": "ep19",
+    "content_sha": "4c215daee71f6c03",
+    "audit": {
+      "status": "PASS",
+      "issues": []
+    },
+    "style": {
+      "words": 2200,
+      "visual_points": 6,
+      "pressure_complete": true,
+      "dialogue_dumps": false,
+      "hook_open": true,
+      "humor_ok": true,
+      "violation": false,
+      "notes": "压力轴升级：对手从霍泾/军港转为沈崇/沈家，筹码从船权变桩基钢权；磁锚验桩、空钩三停、承接人二签、三方开桩令齐落笔，爽感延伸且留下「钩认人还是认钢」异象钩子。文字有立场、有意象、有节奏。",
+      "ai_taste_ok": true,
+      "ai_taste_notes": "",
+      "prose_alive": true
+    },
+    "pass_streak": 1,
+    "resolved": "2026-10-17T12:44:33+08:00"
+  },
+  {
+    "timestamp": "2026-10-17T12:33:00+08:00",
+    "work": "liufang",
+    "episode": "ep19",
+    "content_sha": "4c215daee71f6c03",
+    "audit": {
+      "status": "PASS",
+      "issues": []
+    },
+    "style": {
+      "words": 1320,
+      "visual_points": 5,
+      "pressure_complete": true,
+      "dialogue_dumps": false,
+      "hook_open": true,
+      "humor_ok": true,
+      "violation": false,
+      "notes": "压轴升级到沈家亲自下场撬牌，磁锚枪验桩是漂亮的当场翻盘；钩子停在接缝正上方续上ep18异象，钩认人还是认钢留得好。",
+      "ai_taste_ok": true,
+      "ai_taste_notes": "",
+      "prose_alive": true
+    },
+    "pass_streak": 2,
+    "resolved": "2026-10-17T12:44:33+08:00"
+  },
+  {
+    "timestamp": "2026-10-17T12:44:33+08:00",
+    "work": "liufang",
+    "episode": "ep19",
+    "content_sha": "4c215daee71f6c03",
+    "audit": {
+      "status": "PASS",
+      "issues": [
+        {
+          "type": "SELF_CONTRADICTION",
+          "severity": "MINOR",
+          "episode": "ep19",
+          "description": "桩区守桩人目睹沈砺演示磁锚枪在四尺接缝处脱落，自己复测后却称「六年这枪在第七桩上没走过半寸，整根桩吸力一样」，前后陈述在同一场次内打架。",
+          "evidence_before": "枪口贴上桩身三尺处，绿灯亮，吸得死紧。他一路往下挪，三尺五，绿；到离地四尺那道接缝，枪口一滑，啪嗒掉在栈桥上",
+          "evidence_after": "桩区守桩人（接过枪，从头贴到尾，脸慢慢沉下去）：……我在这根桩上守了六年。六年，这枪在第七桩上没走过半寸。整根桩，吸力一样。"
+        }
+      ]
+    },
+    "style": {
+      "words": 3600,
+      "visual_points": 12,
+      "pressure_complete": true,
+      "dialogue_dumps": false,
+      "hook_open": true,
+      "humor_ok": true,
+      "violation": false,
+      "notes": "磁测反转干净利落，钩子三停呼应前文，账目与人名同步入单，压力轴推进到三方验账节点；守桩人口径微矛盾不伤大局。",
+      "ai_taste_ok": true,
+      "ai_taste_notes": "",
+      "prose_alive": true
+    },
+    "pass_streak": 3,
+    "resolved": false
+  },
+  {
+    "timestamp": "2026-10-17T12:33:13+08:00",
+    "work": "tingjijia",
+    "episode": "ep19",
+    "content_sha": "60fb9f5a126ff339",
+    "audit": {
+      "status": "PASS",
+      "issues": []
+    },
+    "style": {
+      "words": 1300,
+      "visual_points": 7,
+      "pressure_complete": true,
+      "dialogue_dumps": false,
+      "hook_open": true,
+      "humor_ok": true,
+      "violation": false,
+      "notes": "翻盘结构完整：清账官加压→卓砚以磨痕数顶回→第七码再吐半块牌，钩子「第三个应过名的」具体可接。",
+      "ai_taste_ok": true,
+      "ai_taste_notes": "",
+      "prose_alive": true
+    },
+    "pass_streak": 1,
+    "resolved": "2026-10-17T12:48:51+08:00"
+  },
+  {
+    "timestamp": "2026-10-17T12:36:09+08:00",
+    "work": "tingjijia",
+    "episode": "ep19",
+    "content_sha": "60fb9f5a126ff339",
+    "audit": {
+      "status": "PASS",
+      "issues": []
+    },
+    "style": {
+      "words": 2000,
+      "visual_points": 7,
+      "pressure_complete": true,
+      "dialogue_dumps": false,
+      "hook_open": true,
+      "humor_ok": true,
+      "violation": false,
+      "notes": "磨痕计数锁档案、机甲吐半牌露第三应，压爽代价环环相扣，活文有声。",
+      "ai_taste_ok": true,
+      "ai_taste_notes": "",
+      "prose_alive": true
+    },
+    "pass_streak": 2,
+    "resolved": "2026-10-17T12:48:51+08:00"
+  },
+  {
+    "timestamp": "2026-10-17T12:48:51+08:00",
+    "work": "tingjijia",
+    "episode": "ep19",
+    "content_sha": "60fb9f5a126ff339",
+    "audit": {
+      "status": "PASS",
+      "issues": []
+    },
+    "style": {
+      "words": 1300,
+      "visual_points": 6,
+      "pressure_complete": true,
+      "dialogue_dumps": false,
+      "hook_open": true,
+      "humor_ok": true,
+      "violation": false,
+      "notes": "翻盘干净，钩子具体，文笔活着。",
+      "ai_taste_ok": true,
+      "ai_taste_notes": "",
+      "prose_alive": true
+    },
+    "pass_streak": 3,
+    "resolved": false
+  },
+  {
+    "timestamp": "2026-10-17T12:34:44+08:00",
+    "work": "tuiqun",
+    "episode": "ep19",
+    "content_sha": "712b5e193f86f194",
+    "audit": {
+      "status": "PASS",
+      "issues": []
+    },
+    "style": {
+      "words": 1850,
+      "visual_points": 9,
+      "pressure_complete": true,
+      "dialogue_dumps": false,
+      "hook_open": true,
+      "humor_ok": true,
+      "violation": false,
+      "notes": "守灯人登场破局利落，甲级件压制规则精准，灯座自亮异象落地有声，钩子指向船身记忆悬念强。",
+      "ai_taste_ok": true,
+      "ai_taste_notes": "",
+      "prose_alive": true
+    },
+    "pass_streak": 1,
+    "resolved": "2026-10-17T12:51:21+08:00"
+  },
+  {
+    "timestamp": "2026-10-17T12:37:53+08:00",
+    "work": "tuiqun",
+    "episode": "ep19",
+    "content_sha": "712b5e193f86f194",
+    "audit": {
+      "status": "PASS",
+      "issues": []
+    },
+    "style": {
+      "words": 1800,
+      "visual_points": 7,
+      "pressure_complete": true,
+      "dialogue_dumps": false,
+      "hook_open": true,
+      "humor_ok": true,
+      "violation": false,
+      "notes": "以规则博弈破局，灯座自亮形成异象悬念，爽感与悬念并进，人物口吻稳定，无连续性硬伤",
+      "ai_taste_ok": true,
+      "ai_taste_notes": "",
+      "prose_alive": true
+    },
+    "pass_streak": 2,
+    "resolved": "2026-10-17T12:51:21+08:00"
+  },
+  {
+    "timestamp": "2026-10-17T12:51:21+08:00",
+    "work": "tuiqun",
+    "episode": "ep19",
+    "content_sha": "712b5e193f86f194",
+    "audit": {
+      "status": "PASS",
+      "issues": []
+    },
+    "style": {
+      "words": 1200,
+      "visual_points": 6,
+      "pressure_complete": true,
+      "dialogue_dumps": false,
+      "hook_open": true,
+      "humor_ok": true,
+      "violation": false,
+      "notes": "守灯人来压，姜迟用甲级件顶回去，坐标页翻盘，灯座自亮开路——翻盘完整，异象在场但不越界。",
+      "ai_taste_ok": true,
+      "ai_taste_notes": "",
+      "prose_alive": true
+    },
+    "pass_streak": 3,
+    "resolved": false
+  },
+  {
+    "timestamp": "2026-10-17T12:44:51+08:00",
+    "work": "zhenqianjin",
+    "episode": "ep19",
+    "content_sha": "fbaa552d2addbf63",
+    "audit": {
+      "status": "FAIL",
+      "issues": [
+        {
+          "type": "CLUE_MISPLACED",
+          "severity": "MAJOR",
+          "episode": "ep19",
+          "description": "采购念宗亲会令状「铜环一只、残纸半张，即日交宗亲会封存」，但配手环的半张单子自 ep17 结尾起一直由青梧贴身保管（折好按进怀里），ep18 采购扑夺未果，ep18 清点官造册仅记录手环。新集未交代单子如何从青梧身上变成令状查封对象，也未解释宗亲会如何知晓残纸半张的存在；青梧未交出，采购也只命令「接环」未索单子。",
+          "evidence_before": "ep17：青梧把单子折好按进怀里 / ep18：采购扑过来夺她怀里的单子，青梧侧身把那只手腕按在井口栏杆上",
+          "evidence_after": "ep19：采购「铜环一只、残纸半张，即日交宗亲会封存。护卫，接环。」——环在清点官案上，单子下落与宗亲会知情来源均未交代"
+        }
+      ]
+    },
+    "style": {
+      "words": 1380,
+      "visual_points": 6,
+      "pressure_complete": true,
+      "dialogue_dumps": false,
+      "hook_open": true,
+      "humor_ok": true,
+      "violation": false,
+      "notes": "翻盘干净利落，矿规顶回灌浆令状有拉扯有代价；红灯三夜钩子具体可接。唯一硬伤是单子去向断档。",
+      "ai_taste_ok": true,
+      "ai_taste_notes": "",
+      "prose_alive": true
+    },
+    "pass_streak": 0,
+    "resolved": "2026-10-17T13:00:18+08:00"
+  },
+  {
+    "timestamp": "2026-10-17T12:47:43+08:00",
+    "work": "zhenqianjin",
+    "episode": "ep19",
+    "content_sha": "fbaa552d2addbf63",
+    "audit": {
+      "status": "PASS",
+      "issues": []
+    },
+    "style": {
+      "words": 850,
+      "visual_points": 6,
+      "pressure_complete": true,
+      "dialogue_dumps": false,
+      "hook_open": true,
+      "humor_ok": true,
+      "violation": false,
+      "notes": "翻盘干净利落，老工拉汽笛、碑文抹灰、红灯三夜递进，压力升级且钩子具体。",
+      "ai_taste_ok": true,
+      "ai_taste_notes": "",
+      "prose_alive": true
+    },
+    "pass_streak": 1,
+    "resolved": "2026-10-17T13:00:18+08:00"
+  },
+  {
+    "timestamp": "2026-10-17T13:00:18+08:00",
+    "work": "zhenqianjin",
+    "episode": "ep19",
+    "content_sha": "fbaa552d2addbf63",
+    "audit": {
+      "status": "PASS",
+      "issues": []
+    },
+    "style": {
+      "words": 1800,
+      "visual_points": 12,
+      "pressure_complete": true,
+      "dialogue_dumps": false,
+      "hook_open": true,
+      "humor_ok": true,
+      "violation": false,
+      "notes": "压力升级清晰（除名→灌浆封井），当场用矿规翻盘（见红不封→鸣笛→护卫倒戈→灌浆车退），爽文节奏完整；异象在场（红灯三亮、井底应声），钩子具体留白（明儿谁先下井请人），文字有立场有温度。",
+      "ai_taste_ok": true,
+      "ai_taste_notes": "",
+      "prose_alive": true
+    },
+    "pass_streak": 2,
+    "resolved": false
   }
 ]

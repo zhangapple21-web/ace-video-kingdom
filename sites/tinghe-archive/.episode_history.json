@@ -68,5 +68,45 @@
       "tuiqun": 15,
       "zhenqianjin": 15
     }
+  },
+  "2026-10-14": {
+    "total": 80,
+    "per_work": {
+      "fanguan": 16,
+      "liufang": 16,
+      "tingjijia": 16,
+      "tuiqun": 16,
+      "zhenqianjin": 16
+    }
+  },
+  "2026-10-15": {
+    "total": 85,
+    "per_work": {
+      "fanguan": 17,
+      "liufang": 17,
+      "tingjijia": 17,
+      "tuiqun": 17,
+      "zhenqianjin": 17
+    }
+  },
+  "2026-10-16": {
+    "total": 90,
+    "per_work": {
+      "fanguan": 18,
+      "liufang": 18,
+      "tingjijia": 18,
+      "tuiqun": 18,
+      "zhenqianjin": 18
+    }
+  },
+  "2026-10-17": {
+    "total": 91,
+    "per_work": {
+      "fanguan": 19,
+      "liufang": 18,
+      "tingjijia": 18,
+      "tuiqun": 18,
+      "zhenqianjin": 18
+    }
   }
 }

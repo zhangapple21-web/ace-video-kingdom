@@ -79,7 +79,16 @@ check("cover-float 无限循环", "infinite" in cover,
 check("cover-float 是位移动画", "margin-top" in keyframes("cover-float"))
 
 primary = rule(".hero-actions .btn-primary", DESKTOP)
-check("主按钮是渐变胶囊", "border-radius: 999px" in primary and "linear-gradient" in primary)
+# The pill radius moved into a token during the 2026-10-13 redesign, so this
+# checks that the rule *uses* a pill and that the token resolves to one — not
+# that the literal "999px" is spelled out, which is how a test outlives the
+# reason it was written and then fails on an improvement.
+pill = re.search(r"--r-pill:\s*([^;]+)", DESKTOP)
+pill_val = pill.group(1).strip() if pill else ""
+uses_pill = "var(--r-pill)" in primary or "999px" in primary
+check("主按钮是渐变胶囊",
+      "linear-gradient" in primary and uses_pill and pill_val.startswith("999"),
+      f"pill token = {pill_val or '?'}, rule uses it = {uses_pill}")
 # The sheen lives on the ::after pseudo-element, not on the button rule itself,
 # so looking for the animation name in `primary` will always miss.
 sheen = rule(".hero-actions .btn-primary::after", DESKTOP)

@@ -182,3 +182,21 @@ research/external_learning_runs/EL-2026*.json
 # 一次性运维脚本，等稳定后再决定是否入仓。
 run_tasks.ps1
 run_tasks_hidden.vbs
+
+# ---- tinghe-archive：可再生的运行残留 ----
+# 下面这些都由脚本写出且没有任何代码读回，或者是整树备份。
+# 依据：verify_audit_quotes.py 只写 .audit_quote_check.*.json 不读回；
+# rewrite_episodes.py/dump_for_review.py 只写 backup_rewrite/；
+# repair_episodes.py 写 work.json.bak-*；bench_models.py 只写 _bench/；
+# originals_source.bak-before-pressure 全仓零引用。
+sites/tinghe-archive/*.err
+sites/tinghe-archive/*.rc
+sites/tinghe-archive/.audit_quote_check.*.json
+sites/tinghe-archive/backup_rewrite/
+sites/tinghe-archive/_bench/
+sites/tinghe-archive/originals_source.bak-before-pressure/
+sites/tinghe-archive/originals_source/*/work.json.bak-*
+
+# 注意：quarantine.json 是 apply_quarantine.py 写出的活控制文件，决定哪些集
+# 被扣住不发布。它绝不能被忽略或删除，否则等于取消扣留。
+# originals_source/<work>/work.json 是人工撰写的正本，仓内唯一副本，必须跟踪。
