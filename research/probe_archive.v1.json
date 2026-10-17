@@ -1,0 +1,31 @@
+{
+  "schema": "vk_probe.archive.v1",
+  "entries": {
+    "agnes::task_11pNnYJT6GxmL79mafdvbpXmE518B3hC": {
+      "provider": "agnes",
+      "task_ref": {
+        "kind": "task_id",
+        "value": "task_11pNnYJT6GxmL79mafdvbpXmE518B3hC"
+      },
+      "first_observed_at": "2026-10-17T04:38:55Z",
+      "last_observed_at": "2026-10-17T04:39:24Z",
+      "normalized": {
+        "error": "404: task not found (request id: 20261017043926490989977DnXg0zWJ)"
+      },
+      "history": [
+        {
+          "observed_at": "2026-10-17T04:38:55Z",
+          "normalized": {
+            "error": "{'code': 404, 'message': 'task not found (request id: 202610170438575489928362gebrTFA)'}"
+          }
+        },
+        {
+          "observed_at": "2026-10-17T04:39:24Z",
+          "normalized": {
+            "error": "404: task not found (request id: 20261017043926490989977DnXg0zWJ)"
+          }
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,61 @@
+{
+  "schema": "vk_probe.provider_descriptor.v1",
+  "provider": "agnes",
+  "capability": "video.generate",
+  "description": "Agnes video task status endpoint. Read-only: GET only, never creates or re-submits work.",
+  "endpoint": "https://apihub.agnes-ai.com/agnesapi",
+  "method": "GET",
+  "credential_env": "AGNES_API_KEY",
+  "auth_header": "Bearer {credential}",
+  "task_id_param": "video_id",
+  "extra_params": {
+    "model_name": "agnes-video-2.5-flash"
+  },
+  "terminal_states": ["completed", "complete", "succeeded", "success", "done", "failed", "failure", "error", "cancelled", "canceled", "rejected", "expired"],
+  "field_map": {
+    "task_id": {
+      "paths": ["video_id", "id"],
+      "transform": "str"
+    },
+    "state": {
+      "paths": ["status", "internal_status", "state"],
+      "transform": "lower"
+    },
+    "artifact_url": {
+      "paths": ["url", "video_url", "output_url", "metadata.url"],
+      "transform": "str"
+    },
+    "duration_seconds": {
+      "paths": ["duration", "metadata.duration", "video.duration", "videoDuration"],
+      "transform": "float"
+    },
+    "width": {
+      "paths": ["width", "video.width"],
+      "transform": "int"
+    },
+    "height": {
+      "paths": ["height", "video.height"],
+      "transform": "int"
+    },
+    "fps": {
+      "paths": ["fps", "frame_rate", "video.fps"],
+      "transform": "float"
+    },
+    "has_audio": {
+      "paths": ["has_audio", "audio_present"],
+      "transform": "bool"
+    },
+    "error": {
+      "paths": ["error", "message"],
+      "transform": "message"
+    }
+  },
+  "drift_watched_fields": [
+    "state",
+    "duration_seconds",
+    "width",
+    "height",
+    "fps",
+    "has_audio"
+  ]
+}

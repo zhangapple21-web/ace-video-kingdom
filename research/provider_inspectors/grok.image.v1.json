@@ -1,0 +1,17 @@
+{
+  "schema": "vk_probe.provider_descriptor.v1",
+  "provider": "grok-imagine-image",
+  "capability": "image.generate",
+  "description": "Image variants share one endpoint and return synchronously, so there is no task to poll. Declared so the field vocabulary is consistent and the gap is explicit rather than silent.",
+  "endpoint": null,
+  "method": null,
+  "credential_env": "SHENWEN_GROK_API_KEY",
+  "auth_header": "Bearer {credential}",
+  "task_id_param": null,
+  "extra_params": {},
+  "terminal_states": [],
+  "field_map": {},
+  "drift_watched_fields": [],
+  "introspection_supported": false,
+  "introspection_gap": "grok-imagine-image resolves in the create response; there is no separate task endpoint to inspect. Probe a task only after the image generate path begins persisting a task id."
+}

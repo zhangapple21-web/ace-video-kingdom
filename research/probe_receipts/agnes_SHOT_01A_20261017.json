@@ -1,0 +1,101 @@
+{
+  "schema": "vk_probe.receipt.v1",
+  "probe_id": "probe-12dddda8a5fa486d",
+  "inspected_at": "2026-10-17T04:38:55Z",
+  "status": "UNREACHABLE",
+  "evidence_tier": "REMOTE_ONLY",
+  "provider": "agnes",
+  "capability": "video.generate",
+  "task_ref": {
+    "kind": "task_id",
+    "value": "task_11pNnYJT6GxmL79mafdvbpXmE518B3hC"
+  },
+  "request": {
+    "endpoint": "https://apihub.agnes-ai.com/agnesapi",
+    "method": "GET",
+    "http_status": 404,
+    "param_map_applied": {
+      "model_name": "agnes-video-2.5-flash"
+    },
+    "response_sha256": "6d4a5e66a10866bb06b2629a8fe441c6564b71b7d3395a827873383a88688aa2",
+    "response_top_level_keys": [
+      "error"
+    ]
+  },
+  "normalized": {
+    "error": "{'code': 404, 'message': 'task not found (request id: 202610170438575489928362gebrTFA)'}"
+  },
+  "unmapped_fields": [
+    "artifact_url",
+    "duration_seconds",
+    "fps",
+    "has_audio",
+    "height",
+    "state",
+    "task_id",
+    "width"
+  ],
+  "retry_after_seconds": null,
+  "evidence_limits": {
+    "remote_answerable": [
+      "task_id",
+      "state",
+      "artifact_url",
+      "duration_seconds",
+      "width",
+      "height",
+      "fps",
+      "has_audio",
+      "error"
+    ],
+    "requires_local_media": [
+      "internal_cuts",
+      "black_frames",
+      "freeze_tail",
+      "frame_continuity",
+      "subtitle_coverage",
+      "audio_alignment"
+    ]
+  },
+  "error_class": "HTTP_404",
+  "contract_check": {
+    "verdict": "NOT_PROVEN",
+    "approval_capable": false,
+    "evidence_tier": "REMOTE_ONLY",
+    "drifted_fields": [],
+    "not_proven_fields": [
+      "duration_seconds",
+      "width",
+      "height"
+    ],
+    "checks": {
+      "duration": {
+        "expected": 12.0,
+        "actual": null,
+        "verdict": "NOT_PROVEN",
+        "tolerance_seconds": 0.75
+      },
+      "width": {
+        "expected": 1080,
+        "actual": null,
+        "verdict": "NOT_PROVEN"
+      },
+      "height": {
+        "expected": 1920,
+        "actual": null,
+        "verdict": "NOT_PROVEN"
+      },
+      "requires_local_media:internal_cuts": "NOT_PROVEN",
+      "requires_local_media:black_frames": "NOT_PROVEN",
+      "requires_local_media:freeze_tail": "NOT_PROVEN"
+    },
+    "note": "WITHIN_CONTRACT covers only facts this probe could read remotely; it is not a delivery or creative approval."
+  },
+  "archive": {
+    "archive_path": "D:\\视频创作\\ace-video-kingdom\\research\\probe_archive.v1.json",
+    "archive_key": "agnes::task_11pNnYJT6GxmL79mafdvbpXmE518B3hC",
+    "first_probe": true,
+    "previous_observed_at": null,
+    "provider_contract_drift": null
+  }
+}

@@ -269,3 +269,25 @@
 - 吸收：定版资产与故事板先行；3–5 镜小批次预览；Producer/编剧/分镜/配音/视觉/剪辑职责分离但共享结构化项目包；动作因果链和环境反馈；dry-run、结构化错误、轮询和 MP4 读回。
 - 本地落地：`tools/validate_story_action.py`、`tools/validate_creative_slice.py`、`assets/templates/creative_slice.v1.json`、`governance/story_action_gate.v1.json`；试拍批处理在参考图失效时 fail-fast，缺三拍创作收据不扩批。
 - 不吸收：外部平台 CLI、模型、额度、首帧槽位和人工确认方式；不替换 `video_kingdom_entry.py`、Agnes 或 ACE 路由。所有候选仍需两次独立实验和 painful review 才能晋升。
+
+## 参考层 D：`yt-dlp/yt-dlp`（2026-10-17，只借形状，不接功能）
+
+来源：https://github.com/yt-dlp/yt-dlp ；Unlicense；稳定版 `2026.08.19`（stable / nightly / master 三通道）。层标记：**参考层**。不安装为运行时依赖，不进 `preflight_environment.py`，不改入口、默认 Provider 或五关收据。
+
+**为什么不接它的功能**：它是下载器，本项目不缺下载。接了反而撞两条硬门——下载的 BGM/音效权利不明，不得进公开成片（音频版权门）；他人成片抽帧不得当身份锚图或 `input_images`（参考图传输门 + 肖像/版权）。
+
+**吸收的是它的形状**，因为本项目得的正是它治的那个病：
+
+| yt-dlp 的设计 | 本项目的病 | 吸收后的落点 |
+| --- | --- | --- |
+| 站点 = 数据描述符，加站点不动核心 | 加一个 Provider 要改 4 处代码 + 1 处数据：`capability_registry.v2.json`、`*.ps1` shim allowlist、`run_short_clip.py` argparse choices 与 payload 分支、`video_kingdom_entry.py` 模型硬校验 | `research/provider_inspectors/*.json`；加 Provider = 丢一个 JSON，`tools/vk_probe.py` 引擎不变 |
+| 查询是接口，不是 schema（`--print`） | 每个消费方都得认识 JSON 形状 | `--print "%(state)s %(duration_seconds)s"` |
+| 声明式选择表达式（`-f`）而非 if/elif 分支 | 归一化散在各适配器里 | `field_map`：归一字段 → 有序 JSON 路径，首个命中者胜 |
+| INSPECT / FETCH 分离（`-J` 不下载） | 不下载就无法问 Provider 任何事，漂移在付了字节费和哈希之后才发现（`longmen_s01a_t03_receipt_20260905.md` 即此形态） | `vk_probe` 只有 INSPECT，`evidence_tier=REMOTE_ONLY`；**故意不做 `--fetch`**，否则它会变成绕过 `video_kingdom_entry.py` 的第二条生产路径 |
+| `--download-archive`：问过的不再问 | 已完成的 task 被反复重新核对 | `--archive`；并升级为同一 task 的**时间维度漂移证据**——把 `FUTURE_RISK_REGISTER` 的 R002 从假设变成实测 |
+
+**诚实边界**：远端内省回答不了 `internal_cuts` / `black_frames` / `freeze_tail` / 帧连续性 / 字幕覆盖率——这些必须要字节。收据用 `REQUIRES_LOCAL_MEDIA` 显式列出，`contract_check.verdict` 为 `NOT_PROVEN` 时 `approval_capable=false`，**`NOT_PROVEN` 永不等于通过**。
+
+落地：`tools/vk_probe.py`、`research/provider_inspectors/`、`tests/test_vk_probe.py`（16 项）、真实探测收据 `research/probe_receipts/`。本轮实证发现见 `research/provider_probe_finding_20261017.md`。
+
+不吸收：`-f` 全套选择语法、PostProcessor 插件框架、cookies/账号态、子标题与 DASH 合并、安装为依赖、自动更新（`-U`）——滚动 nightly 与本项目「锁定 + 收据可复现」相反。
