@@ -166,10 +166,19 @@ sites/tinghe-archive/writer_pool_probe.json
 sites/tinghe-archive/*.lock
 sites/tinghe-archive/.repair_out_*.log
 sites/tinghe-archive/.genre_snapshots/
-
-# ---- 运行时产物：不进版本库（每次运行都变，会淹没真改动）----
-# 心跳、部署收据、审核日志、额度探测、锁、单次模型输出。
-# 生成物，不是源码。
 sites/tinghe-archive/genre_check.log
 sites/tinghe-archive/stale_task.log
 sites/tinghe-archive/repair_task.log
+
+# 每日外部学习运行收据：每日新增、内容重复（同一模板反复重跑，15 份的 promotion
+# 全为 NONE、production_integration 全为 false）、不含本地路径。已跟踪的两份是
+# 有实质 ledger 变更的那次，作为样本证据保留。完整历史在本地，本目录体积极小。
+research/external_learning_runs/EL-2026*.json
+
+# 本地 harness 任务定义与 Cloudflare 本地状态，不是项目真源。
+.opencode/
+.wrangler/
+
+# 一次性运维脚本，等稳定后再决定是否入仓。
+run_tasks.ps1
+run_tasks_hidden.vbs
