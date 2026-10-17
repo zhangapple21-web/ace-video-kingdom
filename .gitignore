@@ -220,3 +220,12 @@ sites/tinghe-archive/analyze.ps1
 # tools/run_patrol.py 硬编码本机绝对路径，且只是 tools/patrol_and_doctor.py
 # 的重复包装，不进版本库。
 /tools/run_patrol.py
+
+# context_bundle.md 是 build_context_bundle.py 从 work.json 生成的投影，
+# daily_originals.generate_context_bundles() 在每日流程里先用后读。它等同于
+# 编译产物：跟踪它只会让每次守护进程运行都产生永久改动，淹没真改动。
+# 正本是 work.json（已跟踪）。
+sites/tinghe-archive/originals_source/*/context_bundle.md
+# 注意：.episode_history.json（desk_status.py 的每日基线）与 daily_receipts.jsonl
+# （verify_daily_sync.py 读取的每日收据）是守护进程的真实状态，必须继续跟踪；
+# 忽略它们会重置基线并造成假的「新增集」告警。
