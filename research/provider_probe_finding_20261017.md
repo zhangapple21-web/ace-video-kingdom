@@ -10,16 +10,32 @@
 
 初次核查只抽查了第 1 镜三段，因此本文件初版写的是「三个」。用
 `tools/audit_artifact_integrity.py` 全量扫描 `experiments/agnes_tasks.json` 后，
-真实范围是：
+真实范围如下。判定方式：**按记录的内容哈希在 `D:\视频创作` 与 `C:\tmp` 全盘查找**，
+不是按文件名——文件名在归档或重新导出时会被改写，同名文件不能证明什么，
+改名后的文件却可能正是原件。
 
-| | 数量 |
-| --- | --- |
-| 记录总数 | 21 |
-| 本地在且哈希校验通过（`VERIFIED_LOCAL`） | 7 |
-| 本地已不在且无回收路径（`ABSENT_LOCAL`） | **14** |
+| | 数量 | 说明 |
+| --- | --- | --- |
+| 记录总数 | 21 | |
+| 本地在且哈希校验通过（`VERIFIED_LOCAL`） | 7 | episode_002_shot_004–010 |
+| 记录路径失效、但**内容可寻回** | 1 | `episode-002-full` |
+| **确实无处可寻** | **13** | 见下 |
 
-也就是说第 1 镜三段只是被撞见的那三个，**实际有 14 条 `COMPLETED` 记录
-背后没有可交付的媒体**。初版按抽样下的结论偏小，在此更正。
+### 三类必须分开，不能都叫「丢了」
+
+1. **`episode-002-full`（可寻回，不是丢失）**
+   记录里的 `artifact_path` 指向 `C:\tmp\ace_video_kingdom_git\media_staging\...`，
+   该目录已不存在；但**同样的字节**在三处：
+   `ace-video-kingdom/media_staging/`、`ace-video-corpus/removed_from_public_history/head/media_staging/`、
+   `archive/T-01/export_clone/media_staging/`，SHA-256 与记录完全一致。
+   这是**路径失效**，不是媒体消失。
+
+2. **`episode_002_shot_003`（确实不在）**
+   同目录下 004–010 都在，唯独 003 的字节在 `D:\视频创作` 与 `C:\tmp` 全盘找不到。
+
+3. **12 条 `SHOT_*` 记录（确实不在）**
+   `SHOT_01A/01B/01C`（含 `_V3`、`_V4`、`_V5` 各版本）与 `SHOT_02C_ZHANG_D03`。
+   全盘哈希搜索无命中，且 Provider 侧同时 404。
 
 ### 同时更正一个差点误报的技术问题
 
@@ -79,8 +95,8 @@
 - 探测收据：`research/probe_receipts/agnes_SHOT_01A_20261017.json`（`status: UNREACHABLE`，`contract_check.verdict: NOT_PROVEN`，`approval_capable: false`，未下载任何字节）。
 - 观察档案：`research/probe_archive.v1.json`（schema `vk_probe.archive.v1`）。
 - 决策记录：`research/decision_records/agnes_SHOT_01A_20261017.json`；经 `tools/validate_decision_record.py` 校验为 `RESULT_RECORDED`，并由 `tools/emit_ace_result_bridge.py` 发出（`decision_verdict=BLOCKED`、`delivery_approved=false`）。
-- 全量体检：`tools/audit_artifact_integrity.py`，收据 `research/artifact_integrity_audit_20261017.json`。
-- 闭环：14 条 `ABSENT_LOCAL` 现在会被 `run_comedy_episode.py` 的逐镜门与 `assemble_episode.py` 拦下，不会进入配音/节奏/连续性/合成链。
+- 全量体检：`tools/audit_artifact_integrity.py`，收据 `research/artifact_integrity_audit_20261017.json`（含 `--search-root` 的按内容哈希寻回结果）。
+- 闭环：13 条确实无处可寻的记录，现在会被 `run_comedy_episode.py` 的逐镜门与 `assemble_episode.py` 拦下，不会进入配音/节奏/连续性/合成链；`episode-002-full` 则被标为可寻回而不是丢失。
 
 对同一 task 二次探测：档案识别为非首次，`drift` 字段报「watched fields unchanged」——因为两条都同样 404，没有可比较字段。**这说明档案在 Provider 还活着时才有意义；必须在还能问的时候问。**
 

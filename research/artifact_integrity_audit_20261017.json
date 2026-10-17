@@ -6,7 +6,8 @@
     "records": 21,
     "delivery_ready": 7,
     "not_delivery_ready": 14,
-    "generated_but_unrecoverable": 14
+    "generated_but_unrecoverable": 13,
+    "recovered_offline": 1
   },
   "local_states": {
     "ABSENT_LOCAL": 14,
@@ -14,6 +15,10 @@
   },
   "searched_roots": [
     "D:\\视频创作\\ace-video-kingdom"
+  ],
+  "content_search_roots": [
+    "D:\\视频创作",
+    "C:\\tmp"
   ],
   "not_delivery_ready": [
     {
@@ -26,7 +31,13 @@
       "remote": "UNKNOWN_REMOTE",
       "recoverable": false,
       "delivery_ready": false,
-      "block_reason": "generated once and verified, but the local file is absent; re-fetch or investigate before delivery"
+      "block_reason": "generated once and verified, but the local file is absent; re-fetch or investigate before delivery",
+      "recoverable_offline": true,
+      "recovery_locations": [
+        "D:\\视频创作\\ace-video-corpus\\removed_from_public_history\\head\\media_staging\\episode_002_the_last_guest.mp4",
+        "D:\\视频创作\\ace-video-kingdom\\media_staging\\episode_002_the_last_guest.mp4",
+        "D:\\视频创作\\archive\\T-01\\export_clone\\media_staging\\episode_002_the_last_guest.mp4"
+      ]
     },
     {
       "shot_id": "episode_002_shot_003",
@@ -38,7 +49,8 @@
       "remote": "UNKNOWN_REMOTE",
       "recoverable": false,
       "delivery_ready": false,
-      "block_reason": "generated once and verified, but the local file is absent; re-fetch or investigate before delivery"
+      "block_reason": "generated once and verified, but the local file is absent; re-fetch or investigate before delivery",
+      "recoverable_offline": false
     },
     {
       "shot_id": "SHOT_01A_ZHANG_CONNECTED",
@@ -50,7 +62,8 @@
       "remote": "UNKNOWN_REMOTE",
       "recoverable": false,
       "delivery_ready": false,
-      "block_reason": "generated once and verified, but the local file is absent; re-fetch or investigate before delivery"
+      "block_reason": "generated once and verified, but the local file is absent; re-fetch or investigate before delivery",
+      "recoverable_offline": false
     },
     {
       "shot_id": "SHOT_01B_WENJI_HAODA",
@@ -62,7 +75,8 @@
       "remote": "UNKNOWN_REMOTE",
       "recoverable": false,
       "delivery_ready": false,
-      "block_reason": "generated once and verified, but the local file is absent; re-fetch or investigate before delivery"
+      "block_reason": "generated once and verified, but the local file is absent; re-fetch or investigate before delivery",
+      "recoverable_offline": false
     },
     {
       "shot_id": "SHOT_01C_WENJI_PUTDOWN",
@@ -74,7 +88,8 @@
       "remote": "UNKNOWN_REMOTE",
       "recoverable": false,
       "delivery_ready": false,
-      "block_reason": "generated once and verified, but the local file is absent; re-fetch or investigate before delivery"
+      "block_reason": "generated once and verified, but the local file is absent; re-fetch or investigate before delivery",
+      "recoverable_offline": false
     },
     {
       "shot_id": "SHOT_01A_ZHANG_CALL_V3",
@@ -86,7 +101,8 @@
       "remote": "UNKNOWN_REMOTE",
       "recoverable": false,
       "delivery_ready": false,
-      "block_reason": "generated once and verified, but the local file is absent; re-fetch or investigate before delivery"
+      "block_reason": "generated once and verified, but the local file is absent; re-fetch or investigate before delivery",
+      "recoverable_offline": false
     },
     {
       "shot_id": "SHOT_01B_WENJI_ARC_V3",
@@ -98,7 +114,8 @@
       "remote": "UNKNOWN_REMOTE",
       "recoverable": false,
       "delivery_ready": false,
-      "block_reason": "generated once and verified, but the local file is absent; re-fetch or investigate before delivery"
+      "block_reason": "generated once and verified, but the local file is absent; re-fetch or investigate before delivery",
+      "recoverable_offline": false
     },
     {
       "shot_id": "SHOT_01C_WENJI_VO_V3",
@@ -110,7 +127,8 @@
       "remote": "UNKNOWN_REMOTE",
       "recoverable": false,
       "delivery_ready": false,
-      "block_reason": "generated once and verified, but the local file is absent; re-fetch or investigate before delivery"
+      "block_reason": "generated once and verified, but the local file is absent; re-fetch or investigate before delivery",
+      "recoverable_offline": false
     },
     {
       "shot_id": "SHOT_01B_WENJI_HOME_V4",
@@ -122,7 +140,8 @@
       "remote": "UNKNOWN_REMOTE",
       "recoverable": false,
       "delivery_ready": false,
-      "block_reason": "generated once and verified, but the local file is absent; re-fetch or investigate before delivery"
+      "block_reason": "generated once and verified, but the local file is absent; re-fetch or investigate before delivery",
+      "recoverable_offline": false
     },
     {
       "shot_id": "SHOT_01C_WENJI_HOME_VO_V4",
@@ -134,7 +153,8 @@
       "remote": "UNKNOWN_REMOTE",
       "recoverable": false,
       "delivery_ready": false,
-      "block_reason": "generated once and verified, but the local file is absent; re-fetch or investigate before delivery"
+      "block_reason": "generated once and verified, but the local file is absent; re-fetch or investigate before delivery",
+      "recoverable_offline": false
     },
     {
       "shot_id": "SHOT_01A_ZHANG_CAM_V5",
@@ -146,7 +166,8 @@
       "remote": "UNKNOWN_REMOTE",
       "recoverable": false,
       "delivery_ready": false,
-      "block_reason": "generated once and verified, but the local file is absent; re-fetch or investigate before delivery"
+      "block_reason": "generated once and verified, but the local file is absent; re-fetch or investigate before delivery",
+      "recoverable_offline": false
     },
     {
       "shot_id": "SHOT_01B_WENJI_CAM_V5",
@@ -158,7 +179,8 @@
       "remote": "UNKNOWN_REMOTE",
       "recoverable": false,
       "delivery_ready": false,
-      "block_reason": "generated once and verified, but the local file is absent; re-fetch or investigate before delivery"
+      "block_reason": "generated once and verified, but the local file is absent; re-fetch or investigate before delivery",
+      "recoverable_offline": false
     },
     {
       "shot_id": "SHOT_01C_WENJI_CAM_VO_V5",
@@ -170,7 +192,8 @@
       "remote": "UNKNOWN_REMOTE",
       "recoverable": false,
       "delivery_ready": false,
-      "block_reason": "generated once and verified, but the local file is absent; re-fetch or investigate before delivery"
+      "block_reason": "generated once and verified, but the local file is absent; re-fetch or investigate before delivery",
+      "recoverable_offline": false
     },
     {
       "shot_id": "SHOT_02C_ZHANG_D03",
@@ -182,10 +205,182 @@
       "remote": "UNKNOWN_REMOTE",
       "recoverable": false,
       "delivery_ready": false,
-      "block_reason": "generated once and verified, but the local file is absent; re-fetch or investigate before delivery"
+      "block_reason": "generated once and verified, but the local file is absent; re-fetch or investigate before delivery",
+      "recoverable_offline": false
     }
   ],
   "generated_but_unrecoverable": [
+    {
+      "shot_id": "episode_002_shot_003",
+      "manifest": "experiments\\agnes_tasks.json",
+      "status": "COMPLETED",
+      "generation": true,
+      "generation_source": "legacy_flat_fields",
+      "local": "ABSENT_LOCAL",
+      "remote": "UNKNOWN_REMOTE",
+      "recoverable": false,
+      "delivery_ready": false,
+      "block_reason": "generated once and verified, but the local file is absent; re-fetch or investigate before delivery",
+      "recoverable_offline": false
+    },
+    {
+      "shot_id": "SHOT_01A_ZHANG_CONNECTED",
+      "manifest": "experiments\\agnes_tasks.json",
+      "status": "COMPLETED",
+      "generation": true,
+      "generation_source": "legacy_flat_fields",
+      "local": "ABSENT_LOCAL",
+      "remote": "UNKNOWN_REMOTE",
+      "recoverable": false,
+      "delivery_ready": false,
+      "block_reason": "generated once and verified, but the local file is absent; re-fetch or investigate before delivery",
+      "recoverable_offline": false
+    },
+    {
+      "shot_id": "SHOT_01B_WENJI_HAODA",
+      "manifest": "experiments\\agnes_tasks.json",
+      "status": "COMPLETED",
+      "generation": true,
+      "generation_source": "legacy_flat_fields",
+      "local": "ABSENT_LOCAL",
+      "remote": "UNKNOWN_REMOTE",
+      "recoverable": false,
+      "delivery_ready": false,
+      "block_reason": "generated once and verified, but the local file is absent; re-fetch or investigate before delivery",
+      "recoverable_offline": false
+    },
+    {
+      "shot_id": "SHOT_01C_WENJI_PUTDOWN",
+      "manifest": "experiments\\agnes_tasks.json",
+      "status": "COMPLETED",
+      "generation": true,
+      "generation_source": "legacy_flat_fields",
+      "local": "ABSENT_LOCAL",
+      "remote": "UNKNOWN_REMOTE",
+      "recoverable": false,
+      "delivery_ready": false,
+      "block_reason": "generated once and verified, but the local file is absent; re-fetch or investigate before delivery",
+      "recoverable_offline": false
+    },
+    {
+      "shot_id": "SHOT_01A_ZHANG_CALL_V3",
+      "manifest": "experiments\\agnes_tasks.json",
+      "status": "COMPLETED",
+      "generation": true,
+      "generation_source": "legacy_flat_fields",
+      "local": "ABSENT_LOCAL",
+      "remote": "UNKNOWN_REMOTE",
+      "recoverable": false,
+      "delivery_ready": false,
+      "block_reason": "generated once and verified, but the local file is absent; re-fetch or investigate before delivery",
+      "recoverable_offline": false
+    },
+    {
+      "shot_id": "SHOT_01B_WENJI_ARC_V3",
+      "manifest": "experiments\\agnes_tasks.json",
+      "status": "COMPLETED",
+      "generation": true,
+      "generation_source": "legacy_flat_fields",
+      "local": "ABSENT_LOCAL",
+      "remote": "UNKNOWN_REMOTE",
+      "recoverable": false,
+      "delivery_ready": false,
+      "block_reason": "generated once and verified, but the local file is absent; re-fetch or investigate before delivery",
+      "recoverable_offline": false
+    },
+    {
+      "shot_id": "SHOT_01C_WENJI_VO_V3",
+      "manifest": "experiments\\agnes_tasks.json",
+      "status": "COMPLETED",
+      "generation": true,
+      "generation_source": "legacy_flat_fields",
+      "local": "ABSENT_LOCAL",
+      "remote": "UNKNOWN_REMOTE",
+      "recoverable": false,
+      "delivery_ready": false,
+      "block_reason": "generated once and verified, but the local file is absent; re-fetch or investigate before delivery",
+      "recoverable_offline": false
+    },
+    {
+      "shot_id": "SHOT_01B_WENJI_HOME_V4",
+      "manifest": "experiments\\agnes_tasks.json",
+      "status": "COMPLETED",
+      "generation": true,
+      "generation_source": "legacy_flat_fields",
+      "local": "ABSENT_LOCAL",
+      "remote": "UNKNOWN_REMOTE",
+      "recoverable": false,
+      "delivery_ready": false,
+      "block_reason": "generated once and verified, but the local file is absent; re-fetch or investigate before delivery",
+      "recoverable_offline": false
+    },
+    {
+      "shot_id": "SHOT_01C_WENJI_HOME_VO_V4",
+      "manifest": "experiments\\agnes_tasks.json",
+      "status": "COMPLETED",
+      "generation": true,
+      "generation_source": "legacy_flat_fields",
+      "local": "ABSENT_LOCAL",
+      "remote": "UNKNOWN_REMOTE",
+      "recoverable": false,
+      "delivery_ready": false,
+      "block_reason": "generated once and verified, but the local file is absent; re-fetch or investigate before delivery",
+      "recoverable_offline": false
+    },
+    {
+      "shot_id": "SHOT_01A_ZHANG_CAM_V5",
+      "manifest": "experiments\\agnes_tasks.json",
+      "status": "COMPLETED",
+      "generation": true,
+      "generation_source": "legacy_flat_fields",
+      "local": "ABSENT_LOCAL",
+      "remote": "UNKNOWN_REMOTE",
+      "recoverable": false,
+      "delivery_ready": false,
+      "block_reason": "generated once and verified, but the local file is absent; re-fetch or investigate before delivery",
+      "recoverable_offline": false
+    },
+    {
+      "shot_id": "SHOT_01B_WENJI_CAM_V5",
+      "manifest": "experiments\\agnes_tasks.json",
+      "status": "COMPLETED",
+      "generation": true,
+      "generation_source": "legacy_flat_fields",
+      "local": "ABSENT_LOCAL",
+      "remote": "UNKNOWN_REMOTE",
+      "recoverable": false,
+      "delivery_ready": false,
+      "block_reason": "generated once and verified, but the local file is absent; re-fetch or investigate before delivery",
+      "recoverable_offline": false
+    },
+    {
+      "shot_id": "SHOT_01C_WENJI_CAM_VO_V5",
+      "manifest": "experiments\\agnes_tasks.json",
+      "status": "COMPLETED",
+      "generation": true,
+      "generation_source": "legacy_flat_fields",
+      "local": "ABSENT_LOCAL",
+      "remote": "UNKNOWN_REMOTE",
+      "recoverable": false,
+      "delivery_ready": false,
+      "block_reason": "generated once and verified, but the local file is absent; re-fetch or investigate before delivery",
+      "recoverable_offline": false
+    },
+    {
+      "shot_id": "SHOT_02C_ZHANG_D03",
+      "manifest": "experiments\\agnes_tasks.json",
+      "status": "COMPLETED",
+      "generation": true,
+      "generation_source": "legacy_flat_fields",
+      "local": "ABSENT_LOCAL",
+      "remote": "UNKNOWN_REMOTE",
+      "recoverable": false,
+      "delivery_ready": false,
+      "block_reason": "generated once and verified, but the local file is absent; re-fetch or investigate before delivery",
+      "recoverable_offline": false
+    }
+  ],
+  "recovered_offline": [
     {
       "shot_id": "episode-002-full",
       "manifest": "experiments\\agnes_tasks.json",
@@ -196,163 +391,13 @@
       "remote": "UNKNOWN_REMOTE",
       "recoverable": false,
       "delivery_ready": false,
-      "block_reason": "generated once and verified, but the local file is absent; re-fetch or investigate before delivery"
-    },
-    {
-      "shot_id": "episode_002_shot_003",
-      "manifest": "experiments\\agnes_tasks.json",
-      "status": "COMPLETED",
-      "generation": true,
-      "generation_source": "legacy_flat_fields",
-      "local": "ABSENT_LOCAL",
-      "remote": "UNKNOWN_REMOTE",
-      "recoverable": false,
-      "delivery_ready": false,
-      "block_reason": "generated once and verified, but the local file is absent; re-fetch or investigate before delivery"
-    },
-    {
-      "shot_id": "SHOT_01A_ZHANG_CONNECTED",
-      "manifest": "experiments\\agnes_tasks.json",
-      "status": "COMPLETED",
-      "generation": true,
-      "generation_source": "legacy_flat_fields",
-      "local": "ABSENT_LOCAL",
-      "remote": "UNKNOWN_REMOTE",
-      "recoverable": false,
-      "delivery_ready": false,
-      "block_reason": "generated once and verified, but the local file is absent; re-fetch or investigate before delivery"
-    },
-    {
-      "shot_id": "SHOT_01B_WENJI_HAODA",
-      "manifest": "experiments\\agnes_tasks.json",
-      "status": "COMPLETED",
-      "generation": true,
-      "generation_source": "legacy_flat_fields",
-      "local": "ABSENT_LOCAL",
-      "remote": "UNKNOWN_REMOTE",
-      "recoverable": false,
-      "delivery_ready": false,
-      "block_reason": "generated once and verified, but the local file is absent; re-fetch or investigate before delivery"
-    },
-    {
-      "shot_id": "SHOT_01C_WENJI_PUTDOWN",
-      "manifest": "experiments\\agnes_tasks.json",
-      "status": "COMPLETED",
-      "generation": true,
-      "generation_source": "legacy_flat_fields",
-      "local": "ABSENT_LOCAL",
-      "remote": "UNKNOWN_REMOTE",
-      "recoverable": false,
-      "delivery_ready": false,
-      "block_reason": "generated once and verified, but the local file is absent; re-fetch or investigate before delivery"
-    },
-    {
-      "shot_id": "SHOT_01A_ZHANG_CALL_V3",
-      "manifest": "experiments\\agnes_tasks.json",
-      "status": "COMPLETED",
-      "generation": true,
-      "generation_source": "legacy_flat_fields",
-      "local": "ABSENT_LOCAL",
-      "remote": "UNKNOWN_REMOTE",
-      "recoverable": false,
-      "delivery_ready": false,
-      "block_reason": "generated once and verified, but the local file is absent; re-fetch or investigate before delivery"
-    },
-    {
-      "shot_id": "SHOT_01B_WENJI_ARC_V3",
-      "manifest": "experiments\\agnes_tasks.json",
-      "status": "COMPLETED",
-      "generation": true,
-      "generation_source": "legacy_flat_fields",
-      "local": "ABSENT_LOCAL",
-      "remote": "UNKNOWN_REMOTE",
-      "recoverable": false,
-      "delivery_ready": false,
-      "block_reason": "generated once and verified, but the local file is absent; re-fetch or investigate before delivery"
-    },
-    {
-      "shot_id": "SHOT_01C_WENJI_VO_V3",
-      "manifest": "experiments\\agnes_tasks.json",
-      "status": "COMPLETED",
-      "generation": true,
-      "generation_source": "legacy_flat_fields",
-      "local": "ABSENT_LOCAL",
-      "remote": "UNKNOWN_REMOTE",
-      "recoverable": false,
-      "delivery_ready": false,
-      "block_reason": "generated once and verified, but the local file is absent; re-fetch or investigate before delivery"
-    },
-    {
-      "shot_id": "SHOT_01B_WENJI_HOME_V4",
-      "manifest": "experiments\\agnes_tasks.json",
-      "status": "COMPLETED",
-      "generation": true,
-      "generation_source": "legacy_flat_fields",
-      "local": "ABSENT_LOCAL",
-      "remote": "UNKNOWN_REMOTE",
-      "recoverable": false,
-      "delivery_ready": false,
-      "block_reason": "generated once and verified, but the local file is absent; re-fetch or investigate before delivery"
-    },
-    {
-      "shot_id": "SHOT_01C_WENJI_HOME_VO_V4",
-      "manifest": "experiments\\agnes_tasks.json",
-      "status": "COMPLETED",
-      "generation": true,
-      "generation_source": "legacy_flat_fields",
-      "local": "ABSENT_LOCAL",
-      "remote": "UNKNOWN_REMOTE",
-      "recoverable": false,
-      "delivery_ready": false,
-      "block_reason": "generated once and verified, but the local file is absent; re-fetch or investigate before delivery"
-    },
-    {
-      "shot_id": "SHOT_01A_ZHANG_CAM_V5",
-      "manifest": "experiments\\agnes_tasks.json",
-      "status": "COMPLETED",
-      "generation": true,
-      "generation_source": "legacy_flat_fields",
-      "local": "ABSENT_LOCAL",
-      "remote": "UNKNOWN_REMOTE",
-      "recoverable": false,
-      "delivery_ready": false,
-      "block_reason": "generated once and verified, but the local file is absent; re-fetch or investigate before delivery"
-    },
-    {
-      "shot_id": "SHOT_01B_WENJI_CAM_V5",
-      "manifest": "experiments\\agnes_tasks.json",
-      "status": "COMPLETED",
-      "generation": true,
-      "generation_source": "legacy_flat_fields",
-      "local": "ABSENT_LOCAL",
-      "remote": "UNKNOWN_REMOTE",
-      "recoverable": false,
-      "delivery_ready": false,
-      "block_reason": "generated once and verified, but the local file is absent; re-fetch or investigate before delivery"
-    },
-    {
-      "shot_id": "SHOT_01C_WENJI_CAM_VO_V5",
-      "manifest": "experiments\\agnes_tasks.json",
-      "status": "COMPLETED",
-      "generation": true,
-      "generation_source": "legacy_flat_fields",
-      "local": "ABSENT_LOCAL",
-      "remote": "UNKNOWN_REMOTE",
-      "recoverable": false,
-      "delivery_ready": false,
-      "block_reason": "generated once and verified, but the local file is absent; re-fetch or investigate before delivery"
-    },
-    {
-      "shot_id": "SHOT_02C_ZHANG_D03",
-      "manifest": "experiments\\agnes_tasks.json",
-      "status": "COMPLETED",
-      "generation": true,
-      "generation_source": "legacy_flat_fields",
-      "local": "ABSENT_LOCAL",
-      "remote": "UNKNOWN_REMOTE",
-      "recoverable": false,
-      "delivery_ready": false,
-      "block_reason": "generated once and verified, but the local file is absent; re-fetch or investigate before delivery"
+      "block_reason": "generated once and verified, but the local file is absent; re-fetch or investigate before delivery",
+      "recoverable_offline": true,
+      "recovery_locations": [
+        "D:\\视频创作\\ace-video-corpus\\removed_from_public_history\\head\\media_staging\\episode_002_the_last_guest.mp4",
+        "D:\\视频创作\\ace-video-kingdom\\media_staging\\episode_002_the_last_guest.mp4",
+        "D:\\视频创作\\archive\\T-01\\export_clone\\media_staging\\episode_002_the_last_guest.mp4"
+      ]
     }
   ],
   "unreadable_manifests": [],

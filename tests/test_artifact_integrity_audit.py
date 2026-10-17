@@ -233,3 +233,87 @@ def test_assembler_accepts_the_same_shot_the_audit_calls_ready(tmp_path, monkeyp
         assemble_episode.main()
     assert "missing completed artifact" not in str(caught.value)
     assert "artifact hash mismatch" not in str(caught.value)
+
+
+# --------------------------------------------------------------------------- #
+# "absent" only means gone once the recorded bytes have been looked for
+# --------------------------------------------------------------------------- #
+
+def test_find_by_hash_matches_content_not_filename(tmp_path):
+    archive = tmp_path / "archive"
+    archive.mkdir()
+    renamed = archive / "totally_different_name_v2.mp4"
+    renamed.write_bytes(PAYLOAD)
+    assert audit_artifact_integrity.find_by_hash(hashlib.sha256(PAYLOAD).hexdigest(), [archive]) == [str(renamed)]
+
+
+def test_find_by_hash_ignores_a_different_file(tmp_path):
+    archive = tmp_path / "archive"
+    archive.mkdir()
+    (archive / "other.mp4").write_bytes(b"re-encoded, different bytes")
+    assert audit_artifact_integrity.find_by_hash(hashlib.sha256(PAYLOAD).hexdigest(), [archive]) == []
+
+
+def test_find_by_hash_skips_by_size_before_hashing(tmp_path):
+    archive = tmp_path / "archive"
+    archive.mkdir()
+    candidate = archive / "sized.mp4"
+    candidate.write_bytes(PAYLOAD)
+    # A wrong size hint must not produce a match even though content would.
+    assert audit_artifact_integrity.find_by_hash(
+        hashlib.sha256(PAYLOAD).hexdigest(), [archive], size_hint=len(PAYLOAD) + 99,
+    ) == []
+    assert audit_artifact_integrity.find_by_hash(
+        hashlib.sha256(PAYLOAD).hexdigest(), [archive], size_hint=len(PAYLOAD),
+    ) == [str(candidate)]
+
+
+def test_find_by_hash_does_not_move_or_edit_anything(tmp_path):
+    archive = tmp_path / "archive"
+    archive.mkdir()
+    keep = archive / "keep.mp4"
+    keep.write_bytes(PAYLOAD)
+    before = sorted(p.name for p in archive.iterdir())
+    audit_artifact_integrity.find_by_hash(hashlib.sha256(PAYLOAD).hexdigest(), [archive])
+    assert sorted(p.name for p in archive.iterdir()) == before
+    assert keep.read_bytes() == PAYLOAD
+
+
+def test_missing_artifact_found_elsewhere_is_recoverable_not_unrecoverable(tmp_path):
+    """A moved file must not be reported as lost."""
+    root = tmp_path / "repo"
+    (root / "experiments").mkdir(parents=True)
+    archive = root / "archive_copy"
+    archive.mkdir()
+    (archive / "renamed_on_the_way.mp4").write_bytes(PAYLOAD)
+    sha = hashlib.sha256(PAYLOAD).hexdigest()
+    manifest = root / "experiments" / "tasks.json"
+    manifest.write_text(json.dumps([
+        {"shot_id": "moved", "status": "COMPLETED", "artifact_path": "media_staging/moved.mp4",
+         "artifact_sha256": sha, "bytes": len(PAYLOAD)},
+    ]), encoding="utf-8")
+
+    receipt = audit_artifact_integrity.audit([manifest], roots=[root], search_roots=[archive])
+    shot = receipt["not_delivery_ready"][0]
+    assert shot["recoverable_offline"] is True
+    assert shot["recovery_locations"] == [str(archive / "renamed_on_the_way.mp4")]
+    assert receipt["totals"]["generated_but_unrecoverable"] == 0
+    assert receipt["totals"]["recovered_offline"] == 1
+    # Still not delivery-ready: the bytes are somewhere else, not here.
+    assert shot["delivery_ready"] is False
+
+
+def test_absent_and_searched_and_still_gone_counts_as_unrecoverable(tmp_path):
+    root = tmp_path / "repo"
+    (root / "experiments").mkdir(parents=True)
+    empty = root / "nowhere"
+    empty.mkdir()
+    manifest = root / "experiments" / "tasks.json"
+    manifest.write_text(json.dumps([
+        {"shot_id": "gone", "status": "COMPLETED", "artifact_path": "media_staging/gone.mp4",
+         "artifact_sha256": hashlib.sha256(PAYLOAD).hexdigest(), "bytes": len(PAYLOAD)},
+    ]), encoding="utf-8")
+
+    receipt = audit_artifact_integrity.audit([manifest], roots=[root], search_roots=[empty])
+    assert receipt["totals"]["generated_but_unrecoverable"] == 1
+    assert receipt["totals"]["recovered_offline"] == 0
