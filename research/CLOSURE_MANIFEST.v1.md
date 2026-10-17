@@ -192,3 +192,59 @@ A6 五项全过：辨识句 5×3 refs = 0 命中；密钥扫描重写后 ⊆ 重
 - 已登记 `gpt-image-2.5-flare` 和 `gpt-image-2.5-sunburst` 两个新增入口。
 - 保留 `gpt-image-2` 为默认主路由；两个新增模型必须显式 `--model` 选择，且当前状态为 `REGISTERED_UNPROBED`。
 - 证据与边界见 `research/shenwen_image_model_update_20260914.json`。
+
+## 2026-10-17：生成收据的五件事分离 + 产物可用性入交付门
+
+### 一句话
+
+一次 `COMPLETED` 记录同时回答了五个不同的问题。本单把它们拆开，并让「媒体在不在、验没验」成为交付门里一条**不靠人记得**的 lane。全过程未生成、未发布任何成片。
+
+### 参考来源与借鉴边界
+
+- 来源：`yt-dlp/yt-dlp`（Unlicense，稳定版 `2026.08.19`）。只借**形状**，不接功能：它是下载器，本项目不缺下载；接了反而撞音频版权门与参考图传输门。登记见 `research/REFERENCE_MINES.md` 参考层 D。
+- 真正被借用的四条：站点即数据描述符（加 Provider = 丢一个 JSON，引擎不变）、查询即接口（`--print`）、INSPECT/FETCH 分离、已问过的不再问（同一 task 的时间维度漂移）。
+- **如实说明**：上述思维模式产出的是更好的工具，**不是**那两个 bug 的诊断来源。诊断来自读代码与在旧代码上跑反例。模式唯一无可替代之处是让「问 Provider 一句」零成本，从而 404 才浮得出来。
+
+### 已证实的旧行为缺陷（反例在旧提交 `13309bd` 上实跑）
+
+1. **被篡改/截断的素材报成成功。** 本地文件内容与记录的 `artifact_sha256` 不符时，旧代码仍输出 `"status": "COMPLETED"`、退出码 0。
+2. **404 产生自相矛盾的收据。** Provider 侧 404 后，旧代码把记录改成 `PROVIDER_FAILED`，却把 `artifact_sha256`／`bytes`／`artifact_path` 留在同一条记录里——同一条收据同时说「Provider 失败」和「这是已验证产物」，而该文件并不存在。
+3. **`artifact_url` 与 `download_content_type` 从不记录。** 文件一旦丢失即无路可回；`runtime/shot_core.py` 本来就记了这两个字段。
+
+### 本单改动
+
+- `tools/artifact_facts.py`：生成／本地／远端／可恢复／可交付五问分离；生成事实**只写一次**；`delivery_ready` fail-closed（须同时有生成事实与当前校验通过的本地文件）。
+- `tools/audit_artifact_integrity.py`：按记录内容哈希在指定根全盘查找，区分「路径失效」与「字节消失」；只读，不回写任何记录。
+- `run_short_clip.py`：记录 `artifact_url`／`download_content_type`；404 不再改写既有成功；重取字节与原始哈希不符判为完整性失败。
+- `run_comedy_episode.py`：逐镜进入后处理前先验产物；**交付门新增 `artifact` lane**（`PASS`/`FAIL`/`NOT_PROVEN`，整集取最差，无 manifest 记录记 `NOT_PROVEN`）。
+- `assemble_episode.py`：改用同一事实层，不再内联重写同一规则；保留每镜 manifest 归属（合并时曾丢失，导致相对路径解析错误）。
+- 图像适配器 `tools/imagegen_shenwen.ps1`：模型清单与每模型 `credential_env` 只认 `research/capability_registry.v2.json`，原本同一事实写了两遍（硬编码数组 + `grok-*` 前缀判断）；registry 读不到则 fail-closed。
+- `sites/tinghe-archive`：231 项按依赖检查归类，工作树归零（仅余守护进程的两个真实状态文件）。`quarantine.json` 与 `work.json` 已在 `.gitignore` 内写明禁止被优化掉。
+
+### 真实体检结果（`experiments/agnes_tasks.json`，21 条）
+
+| | 数量 |
+| --- | --- |
+| 本地在且哈希校验通过 | 7 |
+| 记录路径失效、**内容仍可寻回** | 1（`episode-002-full`，字节见于三处） |
+| **确实无处可寻** | **13** |
+
+- 更正：初版按抽样写作「三个丢失」，全量后为 13 条。
+- 更正：全量扫描第一版曾把 21 条全报成缺失——**是工具的错**（相对路径按仓库根写，只按 manifest 目录解析）。修正后顺带暴露 `run_short_clip.py` 原幂等短路的同一处既有隐患。
+- `episode_002_shot_003` 单点缺失，同目录 004–010 均在且字节一致，不似批量清理。
+
+### 边界与未做
+
+- **没有让任何一个镜头更好看。** 节奏、表演、运镜、剧本质量零改善。本单全部是记录不说谎与不交付坏东西。
+- 产物可用性 lane 只管**可用**，不管**可看**；已验证素材仍须过创作门。
+- `vk_probe` 只验证过一个 Provider、一类事故，且无调度消费者；决策记录通路可跑但生产流程不自动调用。
+- 视频 Provider 的模型硬锁**刻意不动**：那是「固定单模型、不设 fallback」的政策，改成注册表插件是削弱门禁而非修缺陷。
+- 13 条无媒体的记录**不回改**。按规则作废留作历史；要重开按既有链从编剧审核重跑，不拿旧 `COMPLETED` 顶替。
+- 一处既有隐患（相对路径解析）是我自己在新代码上撞出来的，**未在旧代码上实证**，故不计入已证实缺陷。
+- 图像适配器以提交状态无法被 Windows PowerShell 解析已证实；但无任何生产代码以 subprocess 调用它，故**不声称图像生成一直损坏**。
+
+### 验收
+
+- 全套测试 `706 passed`；`tools/audit_workflow_integrity.py` = `PASS`。
+- 交付门实证：同一组六条 QC 全绿，不带 `artifact` lane → `approved=true`；带上真实 shot-01 三镜（`FAIL`）→ `BLOCKED`。
+- 变更全部已推 `origin/main`。
