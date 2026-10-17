@@ -35,6 +35,7 @@ from tools.video_kingdom_entry import (
 )
 from tools.validate_continuity_bridge import validate_bridge
 from tools.validate_director_manifest import validate_manifest as validate_director_manifest
+from tools import artifact_facts
 from tools.validate_shot_prompt import validate_prompt
 from tools.production_shot_gate import validate_production_shot
 
@@ -870,12 +871,30 @@ def main() -> int:
     if not key:
         raise SystemExit("AGNES_API_KEY is not available")
     if existing and existing.get("status") == "COMPLETED" and existing.get("artifact_path"):
-        artifact = Path(existing["artifact_path"])
-        if not artifact.is_absolute():
-            artifact = (args.manifest.parent / artifact).resolve()
-        if artifact.is_file():
+        # Re-derive the artifact facts from the filesystem instead of trusting
+        # the recorded status and path.  A previous version only asked
+        # ``Path.is_file()``, so a file whose content no longer matched the
+        # recorded hash was short-circuited and reported as complete.
+        existing_facts = artifact_facts.assess(existing, manifest_dir=args.manifest.parent)
+        existing["artifact_assessment"] = existing_facts
+        if existing_facts["delivery_ready"]:
             print(json.dumps(existing, ensure_ascii=False))
             return 0
+        if existing_facts["local"]["state"] == artifact_facts.LOCAL_MISMATCH:
+            # Content disagrees with the hash we recorded at generation time.
+            # Re-fetching is the only honest recovery, and the generation fact
+            # is kept so a mismatch is visible rather than overwritten.
+            print(json.dumps({
+                "status": "ARTIFACT_HASH_MISMATCH",
+                "shot_id": args.shot_id,
+                "expected_sha256": existing_facts["local"]["expected_sha256"],
+                "actual_sha256": existing_facts["local"]["actual_sha256"],
+                "artifact_assessment": existing_facts,
+            }, ensure_ascii=False))
+            raise SystemExit(
+                "local artifact content does not match the recorded generation hash; "
+                "refusing to report this shot complete"
+            )
     if existing and existing.get("model_id") != args.model and existing.get("status") != "COMPLETED":
         history = list(existing.get("fallback_history", []))
         history.append({
@@ -1010,6 +1029,24 @@ def main() -> int:
             delay = min(max(delay * 2, wait), 60)
             continue
         if query.status_code >= 300:
+            artifact_facts.record_remote_probe(
+                record, reachable=False, http_status=query.status_code, error_class="PROVIDER_TASK_UNRESOLVABLE",
+            )
+            if record.get("generation_fact") or record.get("artifact_sha256"):
+                # This is the branch a provider-side task eviction actually
+                # takes: the task existed, the record was kept, and the poll
+                # now 404s. Reporting ``PROVIDER_FAILED`` here asserted the
+                # generation failed while artifact_sha256/bytes/artifact_path
+                # stayed in the same record. Keep the fact, flag reconciliation,
+                # and let artifact_assessment carry availability.
+                record.update({
+                    "error_class": "PROVIDER_TASK_UNRESOLVABLE",
+                    "error_body_excerpt": str(getattr(query, "text", ""))[:500],
+                    "reconcile_required": True,
+                    "artifact_assessment": artifact_facts.assess(record, manifest_dir=args.manifest.parent),
+                })
+                _persist_record(args.manifest, record)
+                return 1
             record.update({"status": "PROVIDER_FAILED", "error_class": "HTTP_POLL_ERROR", "error_body_excerpt": str(getattr(query, "text", ""))[:500]})
             break
         if normalized["status"] == "COMPLETED":
@@ -1034,17 +1071,82 @@ def main() -> int:
                     os.replace(temp_name, args.output)
                 finally:
                     Path(temp_name).unlink(missing_ok=True)
-                record.update({"status": "COMPLETED", "artifact_sha256": hashlib.sha256(artifact.content).hexdigest(), "bytes": len(artifact.content), "artifact_path": str(args.output)})
+                artifact_sha256 = hashlib.sha256(artifact.content).hexdigest()
+                record.update({"status": "COMPLETED", "artifact_sha256": artifact_sha256, "bytes": len(artifact.content), "artifact_path": str(args.output)})
+                # The remote handle is the only thing that can outlive this
+                # machine. ``runtime/shot_core.py`` already records it; this
+                # runner used to discard it, which left a lost file with no
+                # path back to the provider.
+                record.update({
+                    "artifact_url": url,
+                    "download_http_status": artifact.status_code,
+                    "download_content_type": artifact.headers.get("content-type", ""),
+                })
+                artifact_facts.record_remote_probe(
+                    record, reachable=True, artifact_url=url, http_status=artifact.status_code,
+                )
+                prior_fact = artifact_facts.record_generation_fact(
+                    record, path=args.output, sha256=artifact_sha256,
+                    bytes_count=len(artifact.content), video_id=video_id, artifact_url=url,
+                )
+                # Re-fetched bytes that disagree with the original generation
+                # hash are an integrity event, not a success.
+                if prior_fact.get("sha256") and prior_fact["sha256"] != artifact_sha256:
+                    record.update({
+                        "status": "DOWNLOAD_FAILED",
+                        "error_class": "REFETCH_SHA256_MISMATCH",
+                        "error_body_excerpt": f"recorded {prior_fact['sha256']} refetched {artifact_sha256}",
+                        "artifact_assessment": artifact_facts.assess(record, manifest_dir=args.manifest.parent),
+                    })
+                    _persist_record(args.manifest, record)
+                    return 1
+                record["artifact_assessment"] = artifact_facts.assess(record, manifest_dir=args.manifest.parent)
+                if not record["artifact_assessment"]["delivery_ready"]:
+                    # Bytes were written, so this should not happen; if the
+                    # local verification disagrees, do not claim completion.
+                    record.update({
+                        "status": "DOWNLOAD_FAILED",
+                        "error_class": "LOCAL_VERIFICATION_FAILED",
+                    })
+                    _persist_record(args.manifest, record)
+                    return 1
                 # Do not carry a stale error from an earlier failed attempt
                 # into a terminally completed receipt.
                 for key in ("error_class", "error_body_excerpt", "retry_after", "last_create_error_class", "last_create_error"):
                     record.pop(key, None)
                 _persist_record(args.manifest, record)
                 return 0
+            artifact_facts.record_remote_probe(
+                record, reachable=True, artifact_url=url, http_status=artifact.status_code,
+            )
             record.update({"status": "DOWNLOAD_FAILED", "error_class": "DOWNLOAD_HTTP_OR_CONTENT_TYPE", "download_http_status": artifact.status_code, "download_content_type": artifact.headers.get("content-type", "")})
             break
         if normalized["status"] == "FAILED":
-            record.update({"status": "PROVIDER_FAILED", "error_class": "PROVIDER_TERMINAL", "error_body_excerpt": str(normalized.get("error") or data.get("error") or data.get("message") or state)[:500]})
+            error_text = str(normalized.get("error") or data.get("error") or data.get("message") or state)[:500]
+            artifact_facts.record_remote_probe(
+                record, reachable=False, http_status=query.status_code, error_class="PROVIDER_TASK_UNRESOLVABLE",
+            )
+            if (record.get("generation_fact") or {}).get("generated") or record.get("artifact_sha256"):
+                # This task was generated and hash-verified once. The provider
+                # no longer resolving it says nothing about that, so the
+                # generation fact stands and the status is not rewritten to a
+                # failure. Mirrors ``runtime/shot_core.py``'s
+                # ``reconcile_required`` vocabulary. The old code set
+                # ``PROVIDER_FAILED`` here and left artifact_sha256/bytes/
+                # artifact_path in place, producing a record that asserted
+                # both "provider failed" and "here is the verified artifact".
+                # The check reads the assessment rather than ``generation_fact``
+                # so receipts written before that field existed — which is most
+                # of the current history — are protected too.
+                record.update({
+                    "error_class": "PROVIDER_TASK_UNRESOLVABLE",
+                    "error_body_excerpt": error_text,
+                    "reconcile_required": True,
+                    "artifact_assessment": artifact_facts.assess(record, manifest_dir=args.manifest.parent),
+                })
+                _persist_record(args.manifest, record)
+                return 1
+            record.update({"status": "PROVIDER_FAILED", "error_class": "PROVIDER_TERMINAL", "error_body_excerpt": error_text})
             break
         time.sleep(delay)
         delay = min(delay * 2, 60)

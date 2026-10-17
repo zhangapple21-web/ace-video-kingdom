@@ -1,3 +1,4 @@
+import json
 from pathlib import Path
 
 from production_control.media_routing import classify_media_intent, route_media_demand
@@ -39,9 +40,19 @@ def test_project_discovery_is_canonical_and_hashed():
 
 
 def test_image_wrapper_locks_production_model():
-    wrapper = (Path(__file__).resolve().parents[1] / "tools" / "imagegen_shenwen.ps1").read_text(encoding="utf-8")
+    root = Path(__file__).resolve().parents[1]
+    wrapper = (root / "tools" / "imagegen_shenwen.ps1").read_text(encoding="utf-8-sig")
     assert "MODEL_OVERRIDE_REJECTED" in wrapper
-    assert "gpt-image-2" in wrapper
+    # The locked model used to be a literal inside the wrapper, which meant the
+    # same fact lived in the wrapper and the registry. It now lives only in the
+    # registry, so the invariant is asserted where it is declared, and the
+    # wrapper is asserted to read it rather than carry its own copy.
+    registry = json.loads((root / "research" / "capability_registry.v2.json").read_text(encoding="utf-8"))
+    capability = next(cap for cap in registry["capabilities"] if cap["id"] == "image.generate")
+    assert capability["model"] == "gpt-image-2"
+    assert capability["production_eligible"] is True
+    assert "capability_registry.v2.json" in wrapper
+    assert "gpt-image-2" not in wrapper
 
 
 def test_media_executor_closes_route_artifact_receipt(tmp_path: Path):

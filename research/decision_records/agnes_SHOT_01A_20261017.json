@@ -1,0 +1,70 @@
+{
+  "record_id": "VK-PROBE-agnes-task_11pNnYJT6GxmL79mafdvbpXmE518B3hC",
+  "episode_id": "provider-introspection",
+  "scope_ref": "provider_introspection",
+  "source_realm": "CONTROLLED_ORIGIN",
+  "admission": {
+    "status": "NOT_REQUIRED"
+  },
+  "lifecycle": "RESULT_RECORDED",
+  "evidence": [
+    {
+      "evidence_id": "probe-receipt",
+      "kind": "provider_probe",
+      "path": "research/probe_receipts/agnes_SHOT_01A_20261017.json",
+      "sha256": "121fa1bba5aa600fb7765c6bad1acdea301b85bf6ecdd65bdc296365696870d7"
+    }
+  ],
+  "opinions": [
+    {
+      "opinion_id": "provider-introspection",
+      "role": "utility",
+      "model": "agnes",
+      "verdict": "UNKNOWN",
+      "evidence_refs": [
+        "probe-receipt"
+      ],
+      "findings": [
+        "task task_11pNnYJT6GxmL79mafdvbpXmE518B3hC: provider state NA",
+        "evidence_tier REMOTE_ONLY; no media was downloaded by this probe",
+        "contract verdict NOT_PROVEN"
+      ],
+      "uncertainties": [
+        "requires local media: internal_cuts, black_frames, freeze_tail, frame_continuity, subtitle_coverage, audio_alignment"
+      ]
+    },
+    {
+      "opinion_id": "provider-introspection-decider",
+      "role": "final_decider",
+      "model": "agnes",
+      "verdict": "UNKNOWN",
+      "evidence_refs": [
+        "probe-receipt"
+      ],
+      "findings": [
+        "NOT_PROVEN: duration_seconds; a remote probe cannot approve a shot and must not be read as a pass"
+      ],
+      "uncertainties": [
+        "this record cannot produce a PASS by construction; approval still requires locally verified media"
+      ]
+    }
+  ],
+  "decision": {
+    "verdict": "BLOCKED",
+    "decider_opinion_id": "provider-introspection-decider",
+    "basis_evidence_refs": [
+      "probe-receipt"
+    ],
+    "reason": "NOT_PROVEN: duration_seconds; a remote probe cannot approve a shot and must not be read as a pass",
+    "repair_scope": [],
+    "expected_gain": "",
+    "cost_class": "FREE_ZONE_RESEARCH_ONLY"
+  },
+  "result": {
+    "status": "FAILED",
+    "observed_evidence_refs": [
+      "probe-receipt"
+    ],
+    "summary": "NOT_PROVEN: duration_seconds; a remote probe cannot approve a shot and must not be read as a pass"
+  }
+}

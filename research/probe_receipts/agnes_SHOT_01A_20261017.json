@@ -1,7 +1,7 @@
 {
   "schema": "vk_probe.receipt.v1",
-  "probe_id": "probe-12dddda8a5fa486d",
-  "inspected_at": "2026-10-17T04:38:55Z",
+  "probe_id": "probe-db388cf2c6024b8d",
+  "inspected_at": "2026-10-17T05:45:31Z",
   "status": "UNREACHABLE",
   "evidence_tier": "REMOTE_ONLY",
   "provider": "agnes",
@@ -17,13 +17,13 @@
     "param_map_applied": {
       "model_name": "agnes-video-2.5-flash"
     },
-    "response_sha256": "6d4a5e66a10866bb06b2629a8fe441c6564b71b7d3395a827873383a88688aa2",
+    "response_sha256": "b2606091a7b725a2c76b7382723b08cbd916eb9ac96b5f0dfc30a661da2ce446",
     "response_top_level_keys": [
       "error"
     ]
   },
   "normalized": {
-    "error": "{'code': 404, 'message': 'task not found (request id: 202610170438575489928362gebrTFA)'}"
+    "error": "404: task not found (request id: 20261017054533790947446xEtevIoE)"
   },
   "unmapped_fields": [
     "artifact_url",
@@ -64,9 +64,7 @@
     "evidence_tier": "REMOTE_ONLY",
     "drifted_fields": [],
     "not_proven_fields": [
-      "duration_seconds",
-      "width",
-      "height"
+      "duration_seconds"
     ],
     "checks": {
       "duration": {
@@ -75,16 +73,6 @@
         "verdict": "NOT_PROVEN",
         "tolerance_seconds": 0.75
       },
-      "width": {
-        "expected": 1080,
-        "actual": null,
-        "verdict": "NOT_PROVEN"
-      },
-      "height": {
-        "expected": 1920,
-        "actual": null,
-        "verdict": "NOT_PROVEN"
-      },
       "requires_local_media:internal_cuts": "NOT_PROVEN",
       "requires_local_media:black_frames": "NOT_PROVEN",
       "requires_local_media:freeze_tail": "NOT_PROVEN"
@@ -92,10 +80,21 @@
     "note": "WITHIN_CONTRACT covers only facts this probe could read remotely; it is not a delivery or creative approval."
   },
   "archive": {
-    "archive_path": "D:\\视频创作\\ace-video-kingdom\\research\\probe_archive.v1.json",
+    "archive_path": "research\\probe_archive.v1.json",
     "archive_key": "agnes::task_11pNnYJT6GxmL79mafdvbpXmE518B3hC",
-    "first_probe": true,
-    "previous_observed_at": null,
-    "provider_contract_drift": null
+    "first_probe": false,
+    "previous_observed_at": "2026-10-17T04:39:24Z",
+    "provider_contract_drift": {
+      "watched_fields": [
+        "state",
+        "duration_seconds",
+        "width",
+        "height",
+        "fps",
+        "has_audio"
+      ],
+      "changed_fields": {},
+      "artifact_url_changed": false
+    }
   }
 }

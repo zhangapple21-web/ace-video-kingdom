@@ -8,9 +8,9 @@
         "value": "task_11pNnYJT6GxmL79mafdvbpXmE518B3hC"
       },
       "first_observed_at": "2026-10-17T04:38:55Z",
-      "last_observed_at": "2026-10-17T04:39:24Z",
+      "last_observed_at": "2026-10-17T05:45:31Z",
       "normalized": {
-        "error": "404: task not found (request id: 20261017043926490989977DnXg0zWJ)"
+        "error": "404: task not found (request id: 20261017054533790947446xEtevIoE)"
       },
       "history": [
         {
@@ -23,6 +23,12 @@
           "observed_at": "2026-10-17T04:39:24Z",
           "normalized": {
             "error": "404: task not found (request id: 20261017043926490989977DnXg0zWJ)"
+          }
+        },
+        {
+          "observed_at": "2026-10-17T05:45:31Z",
+          "normalized": {
+            "error": "404: task not found (request id: 20261017054533790947446xEtevIoE)"
           }
         }
       ]

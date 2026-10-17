@@ -558,6 +558,138 @@ def render_template(template: str, receipt: Mapping[str, Any]) -> str:
 # CLI
 # --------------------------------------------------------------------------- #
 
+def _receipt_sha256(path: Path) -> str:
+    digest = hashlib.sha256()
+    with path.open("rb") as handle:
+        for chunk in iter(lambda: handle.read(1 << 20), b""):
+            digest.update(chunk)
+    return digest.hexdigest()
+
+
+def build_decision_record(
+    receipt: Mapping[str, Any],
+    *,
+    receipt_path: Path,
+    root: Path,
+    record_id: str,
+    episode_id: str,
+    scope_ref: str,
+) -> dict[str, Any]:
+    """Turn a probe receipt into a Decision Record the existing ACE loop accepts.
+
+    Why this shape
+    --------------
+    A tool that only writes its own JSON is an orphan.  The project already has
+    a learning entry point — ``tools/validate_decision_record.py`` plus
+    ``tools/emit_ace_result_bridge.py`` — and it already contains the exact
+    guard this work needs: a ``PASS`` requires evidence whose kind is one of
+    ``media_integrity`` / ``visual_review`` / ``subtitle_receipt``
+    (``validate_decision_record.py:103``).  A remote-only probe can never
+    supply those, so a ``NOT_PROVEN`` observation is structurally incapable of
+    being promoted to success.  We reuse that guard rather than inventing a
+    second one, and this function never emits ``PASS`` either.
+
+    Verdict mapping:
+
+    * within contract, nothing violated -> ``CONDITIONAL``.  Nothing is wrong,
+      but remote-only evidence cannot approve anything, and CONDITIONAL is the
+      honest state for that.
+    * drift detected                     -> ``REWORK`` with a bounded scope.
+    * not proven / unreachable           -> ``BLOCKED`` pending investigation.
+    """
+    root = root.resolve()
+    relative = receipt_path.resolve().relative_to(root).as_posix()
+    contract = dict(receipt.get("contract_check") or {})
+    verdict = str(contract.get("verdict") or "NOT_PROVEN")
+    normalized = dict(receipt.get("normalized") or {})
+    task_id = str((receipt.get("task_ref") or {}).get("value") or "unknown")
+
+    if verdict == "DRIFT_DETECTED":
+        opinion_verdict, decision_verdict = "REWORK", "REWORK"
+        repair_scope = [f"reconcile provider output for {task_id} against the shot contract"]
+        expected_gain = "the next attempt carries a provider output that matches the contract, or the mismatch is recorded as known"
+        reason = f"provider output drifted on: {', '.join(contract.get('drifted_fields') or []) or 'unspecified'}"
+    elif verdict == "WITHIN_CONTRACT":
+        opinion_verdict, decision_verdict = "SUPPORT", "CONDITIONAL"
+        repair_scope = []
+        expected_gain = ""
+        reason = (
+            "the provider's own claims matched the contract, but this is remote-only evidence: "
+            "it watched no media, so internal cuts, black frames, freeze and frame continuity remain unproven"
+        )
+    else:
+        opinion_verdict, decision_verdict = "UNKNOWN", "BLOCKED"
+        repair_scope = []
+        expected_gain = ""
+        unproven = ", ".join(contract.get("not_proven_fields") or []) or "the provider did not answer"
+        reason = f"NOT_PROVEN: {unproven}; a remote probe cannot approve a shot and must not be read as a pass"
+
+    return {
+        "record_id": record_id,
+        "episode_id": episode_id,
+        "scope_ref": scope_ref,
+        "source_realm": "CONTROLLED_ORIGIN",
+        "admission": {"status": "NOT_REQUIRED"},
+        "lifecycle": "RESULT_RECORDED",
+        "evidence": [
+            {
+                "evidence_id": "probe-receipt",
+                # Deliberately not one of media_integrity / visual_review /
+                # subtitle_receipt: that is what keeps PASS unreachable here.
+                "kind": "provider_probe",
+                "path": relative,
+                "sha256": _receipt_sha256(receipt_path),
+            }
+        ],
+        "opinions": [
+            {
+                "opinion_id": "provider-introspection",
+                "role": "utility",
+                "model": str(receipt.get("provider") or "unknown"),
+                "verdict": opinion_verdict,
+                "evidence_refs": ["probe-receipt"],
+                "findings": [
+                    f"task {task_id}: provider state {normalized.get('state', 'NA')}",
+                    f"evidence_tier {receipt.get('evidence_tier')}; no media was downloaded by this probe",
+                    f"contract verdict {verdict}",
+                ],
+                "uncertainties": [
+                    f"requires local media: {', '.join(REQUIRES_LOCAL_MEDIA)}",
+                ],
+            },
+            {
+                "opinion_id": "provider-introspection-decider",
+                "role": "final_decider",
+                "model": str(receipt.get("provider") or "unknown"),
+                "verdict": opinion_verdict,
+                "evidence_refs": ["probe-receipt"],
+                "findings": [reason],
+                "uncertainties": [
+                    "this record cannot produce a PASS by construction; approval still requires locally verified media",
+                ],
+            },
+        ],
+        "decision": {
+            "verdict": decision_verdict,
+            "decider_opinion_id": "provider-introspection-decider",
+            "basis_evidence_refs": ["probe-receipt"],
+            "reason": reason,
+            "repair_scope": repair_scope,
+            "expected_gain": expected_gain,
+            "cost_class": "FREE_ZONE_RESEARCH_ONLY",
+        },
+        "result": {
+            "status": "COMPLETED" if receipt.get("status") == "PROBED" else "FAILED",
+            "observed_evidence_refs": ["probe-receipt"],
+            "summary": reason,
+        },
+    }
+
+
+# --------------------------------------------------------------------------- #
+# CLI
+# --------------------------------------------------------------------------- #
+
 def _summarize(receipt: Mapping[str, Any]) -> str:
     normalized = dict(receipt.get("normalized") or {})
     lines = [
@@ -621,6 +753,10 @@ def main(argv: Sequence[str] | None = None) -> int:
     inspect.add_argument("--poll-delay", type=float, default=2)
     inspect.add_argument("--max-delay", type=float, default=60)
     inspect.add_argument("--receipt", type=Path, help="write the vk_probe.receipt.v1 envelope here")
+    inspect.add_argument("--decision-record", type=Path, help="write a Decision Record for the existing ACE loop (requires --receipt)")
+    inspect.add_argument("--root", type=Path, default=ROOT, help="project root the decision record's evidence path is relative to")
+    inspect.add_argument("--episode-id", default="provider-introspection")
+    inspect.add_argument("--scope-ref", default="provider_introspection")
     inspect.add_argument("--archive", type=Path, help="persist observations and report drift over time")
     inspect.add_argument("--print", dest="template", default="", help='template, e.g. "%(state)s %(duration_seconds)s"')
     inspect.add_argument("--json", action="store_true", help="print the full envelope to stdout")
@@ -691,6 +827,20 @@ def main(argv: Sequence[str] | None = None) -> int:
     if args.receipt:
         atomic_write_json(args.receipt, receipt)
         print(f"receipt written: {args.receipt}")
+
+    if args.decision_record:
+        if not args.receipt:
+            raise SystemExit("--decision-record requires --receipt: the record's evidence must exist on disk to be hashed")
+        record = build_decision_record(
+            receipt,
+            receipt_path=args.receipt,
+            root=args.root,
+            record_id=f"VK-PROBE-{args.provider}-{str((receipt.get('task_ref') or {}).get('value') or 'unknown')}"[:96],
+            episode_id=args.episode_id,
+            scope_ref=args.scope_ref,
+        )
+        atomic_write_json(args.decision_record, record)
+        print(f"decision record written: {args.decision_record} (verdict {record['decision']['verdict']})")
 
     return 0 if receipt.get("status") in {"PROBED", "POLL_TIMEOUT"} else 1
 

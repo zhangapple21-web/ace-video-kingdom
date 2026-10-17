@@ -7,10 +7,14 @@ same way ``tests/test_video_kingdom_entry.py`` injects one.
 from __future__ import annotations
 
 import json
+import sys
 
 import pytest
 
 from tools import vk_probe
+
+# Bug #1: a GBK console raises UnicodeEncodeError on this file's CJK output.
+sys.stdout.reconfigure(encoding="utf-8")
 
 
 class _Response:
@@ -182,3 +186,118 @@ def test_cli_blocks_when_credential_is_missing(monkeypatch, capsys):
     monkeypatch.delenv("AGNES_API_KEY", raising=False)
     with pytest.raises(SystemExit, match="AGNES_API_KEY"):
         vk_probe.main(["inspect", "agnes", "--task-id", "v1"])
+
+
+# --------------------------------------------------------------------------- #
+# P1: the probe must be consumable by the existing ACE loop, not an orphan
+# --------------------------------------------------------------------------- #
+
+def _write_probe_files(tmp_path, receipt):
+    receipt_path = tmp_path / "research" / "probe_receipt.json"
+    receipt_path.parent.mkdir(parents=True, exist_ok=True)
+    receipt_path.write_text(json.dumps(receipt, ensure_ascii=False), encoding="utf-8")
+    return receipt_path
+
+
+def _probe_variants():
+    """Every verdict a probe can produce, so none of them can silently pass."""
+    base = {"provider": "agnes", "evidence_tier": "REMOTE_ONLY", "task_ref": {"kind": "task_id", "value": "task_x"}}
+    return [
+        {**base, "status": "PROBED", "normalized": {"state": "completed"},
+         "contract_check": {"verdict": "NOT_PROVEN", "approval_capable": False, "not_proven_fields": ["duration_seconds"], "drifted_fields": []}},
+        {**base, "status": "PROBED", "normalized": {"state": "completed", "duration_seconds": 20.0},
+         "contract_check": {"verdict": "DRIFT_DETECTED", "approval_capable": False, "not_proven_fields": [], "drifted_fields": ["duration_seconds"]}},
+        {**base, "status": "PROBED", "normalized": {"state": "completed", "duration_seconds": 10.0},
+         "contract_check": {"verdict": "WITHIN_CONTRACT", "approval_capable": True, "not_proven_fields": [], "drifted_fields": []}},
+        {**base, "status": "UNREACHABLE", "normalized": {}, "error_class": "HTTP_404"},
+    ]
+
+
+@pytest.mark.parametrize("receipt", _probe_variants())
+def test_a_probe_decision_record_passes_the_real_validator(receipt, tmp_path):
+    """It must be a first-class citizen of the existing loop, not a new format."""
+    from tools.validate_decision_record import validate
+
+    root = tmp_path
+    receipt_path = _write_probe_files(tmp_path, receipt)
+    record = vk_probe.build_decision_record(
+        receipt, receipt_path=receipt_path, root=root,
+        record_id="VK-PROBE-test", episode_id="e1", scope_ref="provider_introspection",
+    )
+    validate(record, root)  # raises SystemExit if the contract rejects it
+
+
+@pytest.mark.parametrize("receipt", _probe_variants())
+def test_no_probe_outcome_can_become_a_pass(receipt, tmp_path):
+    """NOT_PROVEN must stay unproven through the learning and approval path."""
+    from tools.validate_decision_record import validate
+
+    root = tmp_path
+    receipt_path = _write_probe_files(tmp_path, receipt)
+    record = vk_probe.build_decision_record(
+        receipt, receipt_path=receipt_path, root=root,
+        record_id="VK-PROBE-test", episode_id="e1", scope_ref="provider_introspection",
+    )
+    assert record["decision"]["verdict"] != "PASS"
+    # And the existing validator agrees, independently of our own code: a
+    # provider_probe evidence kind cannot satisfy the PASS requirement.
+    hacked = json.loads(json.dumps(record))
+    hacked["decision"]["verdict"] = "PASS"
+    with pytest.raises(SystemExit, match="PASS requires media evidence"):
+        validate(hacked, root)
+
+
+def test_unproven_probe_is_blocked_rather_than_approved(tmp_path):
+    receipt = {"provider": "agnes", "evidence_tier": "REMOTE_ONLY", "status": "PROBED",
+               "task_ref": {"kind": "task_id", "value": "task_x"}, "normalized": {"state": "completed"},
+               "contract_check": {"verdict": "NOT_PROVEN", "approval_capable": False, "not_proven_fields": ["duration_seconds"], "drifted_fields": []}}
+    receipt_path = _write_probe_files(tmp_path, receipt)
+    record = vk_probe.build_decision_record(
+        receipt, receipt_path=receipt_path, root=tmp_path,
+        record_id="VK-PROBE-test", episode_id="e1", scope_ref="provider_introspection",
+    )
+    assert record["decision"]["verdict"] == "BLOCKED"
+    assert record["opinions"][0]["verdict"] == "UNKNOWN"
+    assert "NOT_PROVEN" in record["decision"]["reason"]
+
+
+def test_drift_probe_becomes_bounded_rework(tmp_path):
+    receipt = {"provider": "agnes", "evidence_tier": "REMOTE_ONLY", "status": "PROBED",
+               "task_ref": {"kind": "task_id", "value": "task_x"},
+               "normalized": {"state": "completed", "duration_seconds": 20.0},
+               "contract_check": {"verdict": "DRIFT_DETECTED", "approval_capable": False, "not_proven_fields": [], "drifted_fields": ["duration_seconds"]}}
+    receipt_path = _write_probe_files(tmp_path, receipt)
+    record = vk_probe.build_decision_record(
+        receipt, receipt_path=receipt_path, root=tmp_path,
+        record_id="VK-PROBE-test", episode_id="e1", scope_ref="provider_introspection",
+    )
+    assert record["decision"]["verdict"] == "REWORK"
+    assert record["decision"]["repair_scope"]
+    assert record["decision"]["expected_gain"]
+
+
+def test_cli_wires_the_decision_record_end_to_end(monkeypatch, tmp_path):
+    monkeypatch.setenv("AGNES_API_KEY", "test-key")
+    monkeypatch.setattr(vk_probe, "probe_once", lambda *a, **k: {
+        "schema": vk_probe.RECEIPT_SCHEMA, "status": "PROBED", "evidence_tier": "REMOTE_ONLY",
+        "provider": "agnes", "capability": "video.generate",
+        "task_ref": {"kind": "task_id", "value": "task_x"},
+        "normalized": {"state": "completed", "duration_seconds": 10.0},
+    })
+    receipt_path = tmp_path / "r.json"
+    record_path = tmp_path / "d.json"
+    code = vk_probe.main([
+        "inspect", "agnes", "--task-id", "task_x", "--expect-seconds", "10",
+        "--receipt", str(receipt_path), "--decision-record", str(record_path), "--root", str(tmp_path),
+    ])
+    assert code == 0
+    saved = json.loads(record_path.read_text(encoding="utf-8"))
+    assert saved["decision"]["verdict"] == "CONDITIONAL"
+    assert saved["evidence"][0]["kind"] == "provider_probe"
+
+
+def test_decision_record_requires_a_receipt_to_hash(monkeypatch, tmp_path):
+    monkeypatch.setenv("AGNES_API_KEY", "test-key")
+    monkeypatch.setattr(vk_probe, "probe_once", lambda *a, **k: {"status": "PROBED", "provider": "agnes", "normalized": {}})
+    with pytest.raises(SystemExit, match="requires --receipt"):
+        vk_probe.main(["inspect", "agnes", "--task-id", "x", "--decision-record", str(tmp_path / "d.json")])
