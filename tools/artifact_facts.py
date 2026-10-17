@@ -72,14 +72,38 @@ def sha256_file(path: Path, *, chunk: int = 1 << 20) -> str:
     return digest.hexdigest()
 
 
-def _resolve(path_value: Any, manifest_dir: Path | None = None) -> Path | None:
+def _resolve_candidates(path_value: Any, roots: Sequence[Path]) -> list[Path]:
+    """Candidate locations for a recorded path, most specific first.
+
+    A recorded relative ``artifact_path`` is ambiguous: records in this project
+    have been written with paths relative to the manifest directory *and* to
+    the repository root (``media_staging/episode_002_shot_004.mp4``), depending
+    on which manifest was in use. Resolving against a single assumed root turns
+    present media into a false ABSENT_LOCAL, which is worse than no answer
+    because it blocks delivery on good footage. So every plausible root is
+    tried, and the one that matched is recorded.
+    """
     if not path_value:
-        return None
+        return []
     candidate = Path(str(path_value))
     if candidate.is_absolute():
-        return candidate
-    base = manifest_dir or Path.cwd()
-    return (base / candidate).resolve()
+        return [candidate]
+    ordered: list[Path] = []
+    for root in roots:
+        resolved = (Path(root) / candidate).resolve()
+        if resolved not in ordered:
+            ordered.append(resolved)
+    return ordered
+
+
+def _resolve(path_value: Any, roots: Sequence[Path]) -> tuple[Path | None, Path | None]:
+    candidates = _resolve_candidates(path_value, roots)
+    if not candidates:
+        return None, None
+    for resolved in candidates:
+        if resolved.is_file():
+            return resolved, Path(roots[0]) if roots else None
+    return candidates[0], None
 
 
 def record_generation_fact(
@@ -121,6 +145,7 @@ def classify_local(
     record: Mapping[str, Any],
     *,
     manifest_dir: Path | None = None,
+    roots: Sequence[Path] | None = None,
     verify_hash: bool = True,
     observed_at: str | None = None,
 ) -> dict[str, Any]:
@@ -133,6 +158,9 @@ def classify_local(
     path_value = fact.get("path") or record.get("artifact_path")
     expected = fact.get("sha256") or record.get("artifact_sha256")
     checked_at = observed_at or _now()
+    search_roots = list(roots) if roots else ([manifest_dir] if manifest_dir else [])
+    if manifest_dir and manifest_dir not in search_roots:
+        search_roots.insert(0, manifest_dir)
     result: dict[str, Any] = {
         "state": LOCAL_UNKNOWN,
         "path": str(path_value) if path_value else None,
@@ -141,14 +169,17 @@ def classify_local(
         "bytes": None,
         "checked_at": checked_at,
         "hash_verified": False,
+        "resolved_path": None,
+        "searched_roots": [str(root) for root in search_roots],
     }
-    resolved = _resolve(path_value, manifest_dir)
+    resolved, _ = _resolve(path_value, search_roots)
     if resolved is None:
         result["state"] = LOCAL_UNKNOWN if not path_value else LOCAL_ABSENT
         return result
+    result["resolved_path"] = str(resolved)
     if not resolved.is_file():
-        # A path was recorded and the file is not there.  That is a real,
-        # checkable statement — not an unknown.
+        # A path was recorded and the file is not under any candidate root.
+        # That is a real, checkable statement — not an unknown.
         result["state"] = LOCAL_ABSENT
         return result
     try:
@@ -204,6 +235,7 @@ def assess(
     record: Mapping[str, Any],
     *,
     manifest_dir: Path | None = None,
+    roots: Sequence[Path] | None = None,
     verify_hash: bool = True,
 ) -> dict[str, Any]:
     """Return the five separated facts plus the derived recovery answers.
@@ -212,7 +244,7 @@ def assess(
     counts, and a remote URL only counts once a check has actually confirmed
     it resolves.  A recorded-but-unconfirmed URL is not a recovery path.
     """
-    local = classify_local(record, manifest_dir=manifest_dir, verify_hash=verify_hash)
+    local = classify_local(record, manifest_dir=manifest_dir, roots=roots, verify_hash=verify_hash)
     remote = classify_remote(record)
     fact = record.get("generation_fact") if isinstance(record.get("generation_fact"), Mapping) else {}
     generated = bool(fact.get("generated")) or bool(record.get("artifact_sha256"))
@@ -235,14 +267,22 @@ def assess(
     }
 
 
-def delivery_ready(record: Mapping[str, Any], *, manifest_dir: Path | None = None, verify_hash: bool = True) -> bool:
+def delivery_ready(
+    record: Mapping[str, Any],
+    *,
+    manifest_dir: Path | None = None,
+    roots: Sequence[Path] | None = None,
+    verify_hash: bool = True,
+) -> bool:
     """The single question the delivery chain must ask. Fail-closed.
 
     ``True`` requires a generation fact *and* a currently verified local file.
     A ``COMPLETED`` status on its own is not enough — that is the exact gap
     this module was written to close.
     """
-    return bool(assess(record, manifest_dir=manifest_dir, verify_hash=verify_hash)["delivery_ready"])
+    return bool(
+        assess(record, manifest_dir=manifest_dir, roots=roots, verify_hash=verify_hash)["delivery_ready"]
+    )
 
 
 def delivery_block_reason(assessment: Mapping[str, Any]) -> str | None:

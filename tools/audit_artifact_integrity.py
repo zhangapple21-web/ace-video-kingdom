@@ -1,0 +1,138 @@
+"""Report, per shot, which artifact facts still hold — and which do not.
+
+Why this exists
+---------------
+``tools/artifact_facts.py`` can answer five separate questions about a
+generation record, and the renderer and assembler now enforce the answer. But
+nothing looked across the whole project and said which shots are actually
+deliverable. That gap is how three ``COMPLETED`` records sat in
+``experiments/agnes_tasks.json`` whose files were gone and whose provider tasks
+had been evicted: correct per-shot behaviour, invisible aggregate state.
+
+This is a read-only inspection. It never downloads, never calls a provider and
+never edits a record. Its verdict is about artifact availability only and
+approves nothing.
+"""
+
+from __future__ import annotations
+
+import argparse
+import json
+import sys
+from pathlib import Path
+
+sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
+from tools.atomic_io import atomic_write_json
+from tools import artifact_facts
+
+ROOT = Path(__file__).resolve().parents[1]
+
+sys.stdout.reconfigure(encoding="utf-8")  # Bug #1 fix: prevent UnicodeEncodeError on GBK console
+
+RECEIPT_SCHEMA = "video_kingdom.artifact_integrity_audit.v1"
+
+
+def load_records(path: Path) -> list[dict]:
+    data = json.loads(path.read_text(encoding="utf-8"))
+    rows = data if isinstance(data, list) else [data]
+    return [row for row in rows if isinstance(row, dict) and row.get("shot_id")]
+
+
+def audit(manifests: list[Path], *, verify_hash: bool = True, roots: list[Path] | None = None) -> dict:
+    """Assess every record in every manifest. Fails closed on unreadable input."""
+    search_roots = list(roots or [ROOT])
+    shots: list[dict] = []
+    unreadable: list[str] = []
+    for manifest in manifests:
+        try:
+            rows = load_records(manifest)
+        except (OSError, ValueError) as error:
+            unreadable.append(f"{manifest}: {error}")
+            continue
+        for record in rows:
+            assessment = artifact_facts.assess(
+                record,
+                manifest_dir=manifest.resolve().parent,
+                roots=search_roots,
+                verify_hash=verify_hash,
+            )
+            shots.append({
+                "shot_id": record.get("shot_id"),
+                "manifest": str(manifest),
+                "status": record.get("status"),
+                "generation": assessment["generation"]["generated"],
+                "generation_source": assessment["generation"]["source"],
+                "local": assessment["local"]["state"],
+                "remote": assessment["remote"]["state"],
+                "recoverable": assessment["recoverable"],
+                "delivery_ready": assessment["delivery_ready"],
+                "block_reason": artifact_facts.delivery_block_reason(assessment),
+            })
+
+    not_ready = [shot for shot in shots if not shot["delivery_ready"]]
+    unrecoverable = [shot for shot in shots if shot["generation"] and not shot["recoverable"]]
+    by_local: dict[str, int] = {}
+    for shot in shots:
+        by_local[shot["local"]] = by_local.get(shot["local"], 0) + 1
+
+    if unreadable:
+        verdict = "BLOCKED"
+    elif not_ready:
+        verdict = "REVIEW_REQUIRED"
+    else:
+        verdict = "PASS"
+
+    return {
+        "schema": RECEIPT_SCHEMA,
+        "verdict": verdict,
+        "approves_delivery": False,
+        "totals": {
+            "records": len(shots),
+            "delivery_ready": len(shots) - len(not_ready),
+            "not_delivery_ready": len(not_ready),
+            "generated_but_unrecoverable": len(unrecoverable),
+        },
+        "local_states": by_local,
+        "searched_roots": [str(root) for root in search_roots],
+        "not_delivery_ready": not_ready,
+        "generated_but_unrecoverable": unrecoverable,
+        "unreadable_manifests": unreadable,
+        "note": (
+            "Artifact availability only. A delivery_ready shot still requires the creative, "
+            "continuity, audio and delivery gates; this audit approves nothing."
+        ),
+    }
+
+
+def main(argv: list[str] | None = None) -> int:
+    parser = argparse.ArgumentParser(description="Read-only artifact availability audit across generation manifests.")
+    parser.add_argument("--manifest", type=Path, action="append", required=True, help="manifest to audit; repeatable")
+    parser.add_argument("--output", type=Path, help="write the receipt here")
+    parser.add_argument("--no-hash", action="store_true", help="skip content hashing; reports presence only")
+    parser.add_argument("--quiet", action="store_true", help="print the receipt JSON only")
+    args = parser.parse_args(argv)
+
+    receipt = audit(args.manifest, verify_hash=not args.no_hash)
+    if args.output:
+        atomic_write_json(args.output, receipt)
+    if args.quiet:
+        print(json.dumps(receipt, ensure_ascii=False, indent=2, sort_keys=True))
+    else:
+        totals = receipt["totals"]
+        print(f"verdict              {receipt['verdict']}")
+        print(f"records              {totals['records']}")
+        print(f"delivery ready       {totals['delivery_ready']}")
+        print(f"not delivery ready   {totals['not_delivery_ready']}")
+        print(f"generated, no way back {totals['generated_but_unrecoverable']}")
+        print(f"local states         {receipt['local_states']}")
+        for shot in receipt["not_delivery_ready"]:
+            print(f"  - {shot['shot_id']}: {shot['block_reason']}")
+        for note in receipt["unreadable_manifests"]:
+            print(f"  ! {note}")
+        if args.output:
+            print(f"receipt written: {args.output}")
+    return 0 if receipt["verdict"] == "PASS" else 1
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())

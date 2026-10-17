@@ -15,6 +15,7 @@ import tempfile
 import time
 from tools.atomic_io import atomic_write_json
 from tools.vklogging import vklog
+from tools import artifact_facts
 from pathlib import Path
 
 try:
@@ -94,6 +95,36 @@ def _quota_exhausted(manifest: Path, shot_id: str) -> bool:
         record.get("error_class") == "HTTP_CREATE_ERROR"
         and "insufficient_user_quota" in str(record.get("error_body_excerpt", ""))
     )
+
+
+def _verify_shot_artifact(manifest: Path, shot_id: str) -> dict:
+    """Stop unless this shot's artifact exists and still matches its hash.
+
+    Fail-closed on purpose: a shot whose bytes cannot be verified must never
+    enter the audio, pacing, continuity or assembly chain, because every one of
+    those stages would otherwise report a downstream symptom instead of the
+    cause.
+    """
+    rows = json.loads(manifest.read_text(encoding="utf-8"))
+    if not isinstance(rows, list):
+        rows = [rows]
+    record = next(
+        (row for row in rows if isinstance(row, dict) and row.get("shot_id") == shot_id),
+        None,
+    )
+    if record is None:
+        raise SystemExit(f"artifact integrity blocked: {shot_id} has no durable manifest record")
+    assessment = artifact_facts.assess(
+        record,
+        manifest_dir=manifest.resolve().parent,
+        roots=[manifest.resolve().parent, Path(__file__).resolve().parents[1]],
+    )
+    if not assessment["delivery_ready"]:
+        raise SystemExit(
+            f"artifact integrity blocked for {shot_id}: "
+            f"{artifact_facts.delivery_block_reason(assessment)}"
+        )
+    return assessment
 
 
 def _run_pacing_audit(
@@ -472,6 +503,13 @@ def main() -> int:
         # deliverable audio policy.  Apply the contract-owned external master
         # (or strip audio for an explicitly silent shot) before any pacing/QC
         # or episode assembly reads the artifact.
+        # Nothing verified the artifact between the renderer and the post
+        # chain. A missing or tampered file previously surfaced as an opaque
+        # ffmpeg failure inside the audio-master step, or as a pacing audit
+        # defaulting to FAIL, which hid the real cause. The shot is checked
+        # here, before any of that, using the same fact layer the renderer and
+        # the assembler consult.
+        _verify_shot_artifact(args.manifest, shot_id)
         audio_contract_shot = dict(contract_shots.get(str(shot_id), {}))
         audio_contract_shot.update(shot)
         try:

@@ -6,6 +6,35 @@
 
 这三镜的媒体目前**从任何一侧都取不回来**。
 
+## 范围更正（同日补测，重要）
+
+初次核查只抽查了第 1 镜三段，因此本文件初版写的是「三个」。用
+`tools/audit_artifact_integrity.py` 全量扫描 `experiments/agnes_tasks.json` 后，
+真实范围是：
+
+| | 数量 |
+| --- | --- |
+| 记录总数 | 21 |
+| 本地在且哈希校验通过（`VERIFIED_LOCAL`） | 7 |
+| 本地已不在且无回收路径（`ABSENT_LOCAL`） | **14** |
+
+也就是说第 1 镜三段只是被撞见的那三个，**实际有 14 条 `COMPLETED` 记录
+背后没有可交付的媒体**。初版按抽样下的结论偏小，在此更正。
+
+### 同时更正一个差点误报的技术问题
+
+全量扫描第一版曾把 21 条全部报成 `ABSENT_LOCAL`，这是**工具的错**，不是媒体的错：
+这些记录的 `artifact_path` 形如 `media_staging/episode_002_shot_004.mp4`，是
+**相对仓库根目录**写的，而 `artifact_facts` 一度只按 manifest 所在目录解析，
+于是把确实存在的文件报成缺失（`episode_002_shot_004/005/...` 实际在
+`D:\视频创作\ace-video-kingdom\media_staging\`）。
+
+已改为候选根目录依次尝试（manifest 目录 → 仓库根），并记录实际命中的根。
+`tools/artifact_facts.py` 的旧行为与 `run_short_clip.py` 原有的
+`(args.manifest.parent / artifact)` 短路的假设一致，所以这也是一处**既有隐患**：
+那些记录若触发幂等短路，本来也会找不到文件而白白重下一次。
+
+
 ## 已核实的一手证据
 
 三个 task 均来自 `experiments/agnes_tasks.json`，收据自述：
@@ -49,7 +78,11 @@
 
 - 探测收据：`research/probe_receipts/agnes_SHOT_01A_20261017.json`（`status: UNREACHABLE`，`contract_check.verdict: NOT_PROVEN`，`approval_capable: false`，未下载任何字节）。
 - 观察档案：`research/probe_archive.v1.json`（schema `vk_probe.archive.v1`）。
-- 对同一 task 二次探测：档案识别为非首次，`drift` 字段报「watched fields unchanged」——因为两条都同样 404，没有可比较字段。**这说明档案在 Provider 还活着时才有意义；必须在还能问的时候问。**
+- 决策记录：`research/decision_records/agnes_SHOT_01A_20261017.json`；经 `tools/validate_decision_record.py` 校验为 `RESULT_RECORDED`，并由 `tools/emit_ace_result_bridge.py` 发出（`decision_verdict=BLOCKED`、`delivery_approved=false`）。
+- 全量体检：`tools/audit_artifact_integrity.py`，收据 `research/artifact_integrity_audit_20261017.json`。
+- 闭环：14 条 `ABSENT_LOCAL` 现在会被 `run_comedy_episode.py` 的逐镜门与 `assemble_episode.py` 拦下，不会进入配音/节奏/连续性/合成链。
+
+对同一 task 二次探测：档案识别为非首次，`drift` 字段报「watched fields unchanged」——因为两条都同样 404，没有可比较字段。**这说明档案在 Provider 还活着时才有意义；必须在还能问的时候问。**
 
 ## 建议（未自动执行，等用户决定）
 

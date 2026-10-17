@@ -200,3 +200,23 @@ sites/tinghe-archive/originals_source/*/work.json.bak-*
 # 注意：quarantine.json 是 apply_quarantine.py 写出的活控制文件，决定哪些集
 # 被扣住不发布。它绝不能被忽略或删除，否则等于取消扣留。
 # originals_source/<work>/work.json 是人工撰写的正本，仓内唯一副本，必须跟踪。
+
+# ---- tinghe-archive：已确认无消费者的残留 ----
+# 下面每一类都查过：没有任何代码读取或引用它们。
+# ep*_blocks.json / ep*_corrected_blocks.json：未采纳的「错字修复」候选集，形状与
+#   inspect_stray_fixes.py 里的 _ep14_fix.json 同族（单个 episode 的 blocks），
+#   与 work.json 无关；正本是 work.json，候选不是真源。
+# _pending*.json：待办队列快照，零引用。
+# _*_dump.txt / _peek_*.txt / *_out.txt：一次性文本转储，零引用。
+# analyze.ps1：一次性扫描脚本，其输入文件 tmpylz4_trd.html 已不存在，脚本无法再运行。
+sites/tinghe-archive/originals_source/*/ep*_blocks.json
+sites/tinghe-archive/ep*_corrected_blocks.json
+sites/tinghe-archive/_pending*.json
+sites/tinghe-archive/_*_dump.txt
+sites/tinghe-archive/_peek_*.txt
+sites/tinghe-archive/audit_*_out.txt
+sites/tinghe-archive/analyze.ps1
+
+# tools/run_patrol.py 硬编码本机绝对路径，且只是 tools/patrol_and_doctor.py
+# 的重复包装，不进版本库。
+/tools/run_patrol.py

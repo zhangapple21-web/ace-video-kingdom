@@ -23,6 +23,8 @@ from urllib.parse import quote, urlparse
 if str(Path(__file__).resolve().parents[1]) not in sys.path:
     sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
+ROOT = Path(__file__).resolve().parents[1]
+
 import requests
 from PIL import Image
 
@@ -875,7 +877,11 @@ def main() -> int:
         # the recorded status and path.  A previous version only asked
         # ``Path.is_file()``, so a file whose content no longer matched the
         # recorded hash was short-circuited and reported as complete.
-        existing_facts = artifact_facts.assess(existing, manifest_dir=args.manifest.parent)
+        existing_facts = artifact_facts.assess(
+            existing,
+            manifest_dir=args.manifest.parent,
+            roots=[args.manifest.parent, ROOT],
+        )
         existing["artifact_assessment"] = existing_facts
         if existing_facts["delivery_ready"]:
             print(json.dumps(existing, ensure_ascii=False))

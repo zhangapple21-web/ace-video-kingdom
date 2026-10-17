@@ -12,7 +12,10 @@ import subprocess
 import tempfile
 from pathlib import Path
 import sys
+
+sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 from tools.atomic_io import atomic_write_text
+from tools import artifact_facts
 
 sys.stdout.reconfigure(encoding="utf-8")  # Bug #1 fix: prevent UnicodeEncodeError on GBK console
 
@@ -59,11 +62,18 @@ def main() -> int:
     args = parser.parse_args()
 
     records: dict[str, dict] = {}
+    # Keep each shot's own manifest directory. Merging manifests throws away
+    # that provenance, and a relative artifact_path is only resolvable relative
+    # to the manifest that recorded it.
+    record_dirs: dict[str, Path] = {}
     for manifest in args.manifest:
-        overlap = set(records).intersection(load_records(manifest))
+        rows = load_records(manifest)
+        overlap = set(records).intersection(rows)
         if overlap:
             raise SystemExit(f"duplicate shot IDs across manifests: {', '.join(sorted(overlap))}")
-        records.update(load_records(manifest))
+        records.update(rows)
+        for shot_id in rows:
+            record_dirs[shot_id] = manifest.resolve().parent
     # Explicit repair branches are allowed to replace a shot without mutating
     # the baseline manifest.  The override remains hash-bound and is visible
     # in the review receipt; accidental duplicates in the base manifests still
@@ -80,18 +90,30 @@ def main() -> int:
                 + ", ".join(unknown)
             )
         records.update(overrides)
+        for shot_id in overrides:
+            record_dirs[shot_id] = manifest.resolve().parent
     clips: list[Path] = []
     source_review: list[dict] = []
     for shot_id in args.shot_ids:
         record = records.get(shot_id, {})
-        artifact = Path(record.get("artifact_path", ""))
-        if record.get("status") != "COMPLETED" or not artifact.is_file():
+        # One implementation of the rule, shared with the renderer and the
+        # integrity audit. It used to be re-implemented inline here, so the
+        # same "verified locally" question had two answers that could drift.
+        assessment = artifact_facts.assess(
+            record,
+            manifest_dir=record_dirs.get(shot_id, Path.cwd()),
+            roots=[record_dirs.get(shot_id, Path.cwd()), Path(__file__).resolve().parents[1]],
+        )
+        local_state = assessment["local"]["state"]
+        if record.get("status") != "COMPLETED" or local_state in (
+            artifact_facts.LOCAL_ABSENT,
+            artifact_facts.LOCAL_UNKNOWN,
+        ):
             raise SystemExit(f"missing completed artifact for {shot_id}")
-        artifact = artifact.resolve()
-        actual_hash = hashlib.sha256(artifact.read_bytes()).hexdigest()
-        expected_hash = record.get("artifact_sha256")
-        if not expected_hash or actual_hash != expected_hash:
+        if not assessment["local"]["hash_verified"]:
             raise SystemExit(f"artifact hash mismatch for {shot_id}")
+        artifact = Path(assessment["local"]["path"]).resolve()
+        actual_hash = assessment["local"]["actual_sha256"]
         media = probe_media(artifact)
         source_review.append({"shot_id": shot_id, "path": str(artifact), "sha256": actual_hash, **media})
         clips.append(artifact)
